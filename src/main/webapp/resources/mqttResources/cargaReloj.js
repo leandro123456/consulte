@@ -114,7 +114,7 @@ function onMessageArrived(message) {
 
 	try {	
 	
-var dataObj = JSON.parse(inputAll)
+	var dataObj = JSON.parse(inputAll)
 	var state = dataObj.tempC; 
     document.getElementById("messages").innerHTML += '<span>Topic: ' + message.destinationName + '  | ' + inputAll + '</span><br/>';
 
@@ -125,7 +125,11 @@ var dataObj = JSON.parse(inputAll)
 	var gaugeDataTempF = {'data': dataObj.tempF}
 	var gaugeDataHiF = {'data': dataObj.hiF}
 
-
+	var progreso =  animateprogress("humedad",dataObj.hum);
+	var progreso =  animateprogress("temperaturac",dataObj.tempC);
+	var progreso =  animateprogress("sensacionc",dataObj.hiC);
+	var progreso =  animateprogress("temperaturaf",dataObj.tempF);
+	var progreso =  animateprogress("sensacionf",dataObj.hiF);
 	// create a chart and set options
 	// note that via the c3.js API we bind the chart to the element with id equal to chart1
 	
@@ -227,5 +231,37 @@ catch(err) {
 
 }
 
+function animateprogress (id, val){		
+	var getRequestAnimationFrame = function () {  /* <------- Declaro getRequestAnimationFrame intentando obtener la máxima compatibilidad con todos los navegadores */
+		return window.requestAnimationFrame ||
+		window.webkitRequestAnimationFrame ||   
+		window.mozRequestAnimationFrame ||
+		window.oRequestAnimationFrame ||
+		window.msRequestAnimationFrame ||
+		function ( callback ){
+			window.setTimeout(enroute, 1 / 60 * 1000);
+		};
+		
+	};
+	
+	var fpAnimationFrame = getRequestAnimationFrame();   
+	var i = 0.0;
+	var animacion = function () {
+		
+	if (i<=val) 
+		{
+			var valorr = i+"%";
+			var titulo = id+"s";
+			document.getElementById(id).style.width = valorr;
+			var paragraph = document.getElementById(titulo);
+			paragraph.innerHTML = id+"<span class='float-right'>"+val+"</span>";     /* <---- Incremento el porcentaje y lo muestro en la etiqueta span */
+			i++;
+			fpAnimationFrame(animacion);          /* <------------------ Mientras que el contador no llega al porcentaje fijado la función vuelve a llamarse con fpAnimationFrame     */
+		}
+										
+	}
 
+		fpAnimationFrame(animacion);   /*  <---- Llamo la función animación por primera vez usando fpAnimationFrame para que se ejecute a 60fps  */
+				
+}
 

@@ -54,8 +54,8 @@ public class LoginController{
     
     @GetMapping("/signup")
     public String signup(Model model) {
-    	loadSingUp(model);
-        return "signup";
+    	//loadSingUp(model);
+        return "register";
     }
     
 	@PostMapping("/signup")
