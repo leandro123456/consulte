@@ -272,8 +272,8 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${usuario.firstName}</span>
+                <img class="img-profile rounded-circle" src="https://source.unsplash.com/60x60/?computer">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -478,7 +478,8 @@
                 </div>
 		<div class="form-group row">
 			<b>Topic:</b>
-			<input id="topic" type="text" class="form-control form-control-user" name="topic" value="FRST2019012/state" placeholder="Topic">
+<!-- 			<input id="topic" type="text" class="form-control form-control-user" name="topic" value="FRST2019012/state" placeholder="Topic"> -->
+					<input id="topic" type="text" class="form-control form-control-user" name="topic" value="WTHUSB000000001/state" placeholder="Topic">
 		</div>
 
                 <hr>

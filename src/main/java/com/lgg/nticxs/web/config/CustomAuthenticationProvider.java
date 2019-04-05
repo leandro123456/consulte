@@ -14,12 +14,12 @@ import org.springframework.stereotype.Component;
 import com.lgg.nticxs.web.utils.EncryptorPassword;
 import com.lgg.nticxs.web.DAO.AdminDAO;
 import com.lgg.nticxs.web.DAO.AdministrativoDAO;
-import com.lgg.nticxs.web.DAO.AlumnoDAO;
+import com.lgg.nticxs.web.DAO.UserDAO;
 import com.lgg.nticxs.web.DAO.DocenteDAO;
 import com.lgg.nticxs.web.DAO.PadreDAO;
 import com.lgg.nticxs.web.model.Admin;
 import com.lgg.nticxs.web.model.Administrativo;
-import com.lgg.nticxs.web.model.Alumno;
+import com.lgg.nticxs.web.model.User;
 import com.lgg.nticxs.web.model.Docente;
 import com.lgg.nticxs.web.model.Padre;
 
@@ -30,7 +30,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
-		AlumnoDAO alumdao = new AlumnoDAO();
+		UserDAO alumdao = new UserDAO();
 		PadreDAO padredao = new PadreDAO();
 		AdminDAO admindao = new AdminDAO();
 		AdministrativoDAO administrativodao = new AdministrativoDAO();
@@ -39,12 +39,14 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		String name = authentication.getName();
 		String password = authentication.getCredentials().toString();
 
-		Alumno alumno = alumdao.retrieveByName(name);
+		
+		User alumno = alumdao.retrieveByName(name);
 		if(alumno != null){
 			try {
-				if (name.equals(alumno.getName()) && password.equals(EncryptorPassword.decrypt(alumno.getPassword())) && alumno.getRole().equals(alumno.ROLE_ALUMNO)) {
+				if (name.equals(alumno.getName()) && password.equals(EncryptorPassword.decrypt(alumno.getPassword()))) {
 					List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 					authorities.add(new SimpleGrantedAuthority(alumno.getRole()));
+					System.out.println("llego al return");
 					return new UsernamePasswordAuthenticationToken(alumno.getName(),alumno.getPassword(), authorities);
 				} else {
 					System.out.println("Login failed"+ "Invalid date. User name = " + alumno.getName());

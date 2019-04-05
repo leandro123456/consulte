@@ -42,14 +42,14 @@
               <form class="user" action="<c:url value='signup'/>" method="post" enctype="multipart/form-data" autocomplete="off">
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="First Name">
+                    <input type="text" class="form-control form-control-user" id="firstName" name= "firstName" placeholder="First Name">
                   </div>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Last Name">
+                    <input type="text" class="form-control form-control-user" id="lastName" name ="LastName" placeholder="Last Name">
                   </div>
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-user" id="selectName" name="selectName" placeholder="Email Address">
+                  <input type="email" class="form-control form-control-user" id="email" name="email" placeholder="Email Address">
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
@@ -59,9 +59,8 @@
                     <input type="password" class="form-control form-control-user" id="confirmNewPassword" name="newPass2" placeholder="Repeat Password">
                   </div>
                 </div>
-                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                  Register Account
-                </a>
+                
+                <button type="submit" name="action" value="save" class="btn btn-primary btn-user btn-block">Register Account</button>
               </form>
               <hr>
               <div class="text-center">

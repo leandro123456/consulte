@@ -11,7 +11,7 @@ import org.eclipse.persistence.nosql.annotations.NoSql;
 
 @Entity
 @NoSql(dataFormat=DataFormatType.MAPPED)
-public class Alumno{
+public class User{
      static final public String ROLE_ALUMNO = "ALUMNO";
 
 	@Id
@@ -30,6 +30,12 @@ public class Alumno{
 	
 	@Field (name = "email")
 	private String email;
+	
+	@Field (name = "firstName")
+	private String firstName;
+	
+	@Field (name = "lastName")
+	private String lastName;
 	
 	@Field (name = "cuenta_iniciada")
 	private Boolean cuenta_iniciada;
@@ -62,7 +68,7 @@ public class Alumno{
 	}
 
 
-	public Alumno(){
+	public User(){
 		this.setRole(ROLE_ALUMNO);
 		cuenta_iniciada=false;
 		this.setDelete(false);
@@ -110,6 +116,26 @@ public class Alumno{
 
 	public Boolean getDelete() {
 		return delete;
+	}
+
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+
+	public String getLastName() {
+		return lastName;
+	}
+
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 

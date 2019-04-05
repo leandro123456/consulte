@@ -12,7 +12,7 @@ import org.eclipse.persistence.nosql.annotations.DataFormatType;
 import org.eclipse.persistence.nosql.annotations.Field;
 import org.eclipse.persistence.nosql.annotations.NoSql;
 
-import com.lgg.nticxs.web.DAO.AlumnoDAO;
+import com.lgg.nticxs.web.DAO.UserDAO;
 
 @Entity
 @NoSql(dataFormat=DataFormatType.MAPPED)
@@ -46,9 +46,9 @@ public class Padre{
 	}
 	
 	public Padre(ArrayList<String> alumnos){
-		AlumnoDAO alumnodao = new AlumnoDAO();
+		UserDAO alumnodao = new UserDAO();
 		for(String alum: alumnos){
-			Alumno estudiante = alumnodao.retrieveByName(alum);
+			User estudiante = alumnodao.retrieveByName(alum);
 			if(estudiante != null)
 				alumno.add(estudiante.getName());
 		}

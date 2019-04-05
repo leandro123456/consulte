@@ -36,13 +36,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.lgg.nticxs.web.utils.Utils;
 import com.lgg.nticxs.web.DAO.AdminDAO;
 import com.lgg.nticxs.web.DAO.AdministrativoDAO;
-import com.lgg.nticxs.web.DAO.AlumnoDAO;
+import com.lgg.nticxs.web.DAO.UserDAO;
 import com.lgg.nticxs.web.DAO.AsistenciaDAO;
 import com.lgg.nticxs.web.DAO.DocenteDAO;
 import com.lgg.nticxs.web.DAO.DocumentoDAO;
 import com.lgg.nticxs.web.DAO.NotaDAO;
 import com.lgg.nticxs.web.DAO.PadreDAO;
-import com.lgg.nticxs.web.model.Alumno;
+import com.lgg.nticxs.web.model.User;
 import com.lgg.nticxs.web.model.Asistencia;
 import com.lgg.nticxs.web.model.Documento;
 import com.lgg.nticxs.web.model.Materia;
@@ -54,7 +54,7 @@ import com.lgg.nticxs.web.model.SimpleAlumno;
 public class HomeController {
 	DocumentoDAO docdao = new DocumentoDAO();
 	PadreDAO padredao = new PadreDAO();
-	AlumnoDAO alumdao = new AlumnoDAO();
+	UserDAO userdao = new UserDAO();
 	DocenteDAO docentedoa = new DocenteDAO();
 	AdminDAO admindao = new AdminDAO();
 	NotaDAO notasdao = new NotaDAO();
@@ -88,34 +88,12 @@ public class HomeController {
 	
 	@RequestMapping("/home")
 	public String books(@RequestParam("role") String role,@RequestParam("usuario") String usuario, Model model){
-	   Map<String, Materia> asociacionMAt= new HashMap<>();
-		if(role.equals("PADRE")){
-	    	System.out.println("nombre de padre: "+ usuario);
-	    	try {
-	    		Padre padre =padredao.retrieveByName(usuario);
-		    	List<SimpleAlumno> infoHijoMateria  = new ArrayList<SimpleAlumno>();
-		    	for (String hijo : padre.getAlumno()) {
-					System.out.println("nombreHijo: "+ hijo);
-					Alumno alumno = alumdao.retrieveByName(hijo);
-					//asociacionMAt
-					List<Materia.materia> mat= alumno.getCiclolectivo().getMaterias().getMateria();
-					for(Materia.materia mate :mat){
-						SimpleAlumno estudiante = new SimpleAlumno(alumno.getName(), mate.getName());
-						infoHijoMateria.add(estudiante);
-					}
-				}
-		    	model.addAttribute("hijoMateria", infoHijoMateria);
-		    	model.addAttribute("hijos", padre.getAlumno());
-			} catch (Exception e) {
-				System.out.println("ERROR: "+ e.getMessage());
-				e.printStackTrace();
-			}
-	    }else{ //SERIA ALUMNO
-	    	
+		if(role.equals("SUPERADMIN")){
+			User user =userdao.retrieveByName(usuario);
+			model.addAttribute("usuario", user);
+	    }else{ //SERIA UNO MENOR
 	    }
-		model.addAttribute("usuario", usuario);
 	    model.addAttribute("role", role);
-	    
 	    return "origin";
 	}
 	
@@ -198,7 +176,7 @@ public class HomeController {
 	}
 	
 	private void loadPagePadreAlumno(Model model, String materia, String alumnoName) {
-		Alumno alumno = alumdao.retrieveByName(alumnoName);
+		User alumno = userdao.retrieveByName(alumnoName);
 		List<Nota> notas = notasdao.retrieveByAlumno(alumno.getId());
 		List<Asistencia> asistencias = asistenciadao.retrieveByAlumno(alumno.getId());
 		Double promediotareas = promedio(notas,Nota.ACTIVIDADES);
