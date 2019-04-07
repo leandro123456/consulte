@@ -31,7 +31,11 @@
 
       <div class="col-xl-10 col-lg-12 col-md-9">
 		
-		<form class="login100-form validate-form">
+		
+		
+        <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-0">
+          <form class="login100-form validate-form">
 					<span class="login100-form-logo">
 						<i class="zmdi zmdi-landscape"></i>
 					</span>
@@ -63,9 +67,6 @@
                     	</div>
                     </c:if>
                     </form>
-		
-        <div class="card o-hidden border-0 shadow-lg my-5">
-          <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
             <div class="row">
               <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>

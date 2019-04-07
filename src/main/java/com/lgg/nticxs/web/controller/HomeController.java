@@ -36,13 +36,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.lgg.nticxs.web.utils.Utils;
 import com.lgg.nticxs.web.DAO.AdminDAO;
 import com.lgg.nticxs.web.DAO.AdministrativoDAO;
-import com.lgg.nticxs.web.DAO.AlumnoDAO;
+import com.lgg.nticxs.web.DAO.UserDAO;
 import com.lgg.nticxs.web.DAO.AsistenciaDAO;
 import com.lgg.nticxs.web.DAO.DocenteDAO;
 import com.lgg.nticxs.web.DAO.DocumentoDAO;
 import com.lgg.nticxs.web.DAO.NotaDAO;
 import com.lgg.nticxs.web.DAO.PadreDAO;
-import com.lgg.nticxs.web.model.Alumno;
+import com.lgg.nticxs.web.model.User;
 import com.lgg.nticxs.web.model.Asistencia;
 import com.lgg.nticxs.web.model.Documento;
 import com.lgg.nticxs.web.model.Materia;
@@ -54,13 +54,13 @@ import com.lgg.nticxs.web.model.SimpleAlumno;
 public class HomeController {
 	DocumentoDAO docdao = new DocumentoDAO();
 	PadreDAO padredao = new PadreDAO();
-	AlumnoDAO alumdao = new AlumnoDAO();
+	UserDAO userdao = new UserDAO();
 	DocenteDAO docentedoa = new DocenteDAO();
 	AdminDAO admindao = new AdminDAO();
 	NotaDAO notasdao = new NotaDAO();
 	AsistenciaDAO asistenciadao = new AsistenciaDAO();
 	AdministrativoDAO administdao = new AdministrativoDAO();
-	Integer trimestreActual = Utils.TrimestreActual();
+	//Integer trimestreActual = Utils.TrimestreActual();
 	
 	@GetMapping("homepage/")
     public ModelAndView pageLoad(HttpServletRequest request, ModelMap model) {
@@ -87,35 +87,22 @@ public class HomeController {
     }
 	
 	@RequestMapping("/home")
-	public String books(@RequestParam("role") String role,@RequestParam("usuario") String usuario, Model model){
-	   Map<String, Materia> asociacionMAt= new HashMap<>();
-		if(role.equals("PADRE")){
-	    	System.out.println("nombre de padre: "+ usuario);
-	    	try {
-	    		Padre padre =padredao.retrieveByName(usuario);
-		    	List<SimpleAlumno> infoHijoMateria  = new ArrayList<SimpleAlumno>();
-		    	for (String hijo : padre.getAlumno()) {
-					System.out.println("nombreHijo: "+ hijo);
-					Alumno alumno = alumdao.retrieveByName(hijo);
-					//asociacionMAt
-					List<Materia.materia> mat= alumno.getCiclolectivo().getMaterias().getMateria();
-					for(Materia.materia mate :mat){
-						SimpleAlumno estudiante = new SimpleAlumno(alumno.getName(), mate.getName());
-						infoHijoMateria.add(estudiante);
-					}
-				}
-		    	model.addAttribute("hijoMateria", infoHijoMateria);
-		    	model.addAttribute("hijos", padre.getAlumno());
-			} catch (Exception e) {
-				System.out.println("ERROR: "+ e.getMessage());
-				e.printStackTrace();
-			}
-	    }else{ //SERIA ALUMNO
-	    	
-	    }
-		model.addAttribute("usuario", usuario);
-	    model.addAttribute("role", role);
-	    
+	public String books(HttpServletRequest request, Model model){
+		String role= "";
+		try {
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			@SuppressWarnings("unchecked")
+			Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) authentication.getAuthorities();
+		    for (GrantedAuthority grantedAuthority : authorities) {
+		    	role=grantedAuthority.getAuthority();
+		    	model.addAttribute("role", role);
+		    }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String nombre = request.getUserPrincipal().getName();
+		User user = userdao.retrieveByMail(nombre);
+		model.addAttribute("user", user);
 	    return "origin";
 	}
 	
@@ -154,32 +141,6 @@ public class HomeController {
 		return "home";
 	}
 	
-//    @RequestMapping("home/download/documento")
-//    public void playMerged( @PathVariable("name") String nombre, HttpServletRequest request,
-//            HttpServletResponse response) {
-//            String mergedAudioPath = service.getMergedAudio(nombre);
-//            MultipartFileSender.fromPath(Paths.get(mergedAudioPath)).with(request).with(response).serveResource();
-//   }
-    
-    
-//	public void store(MultipartFile file){
-//		try {
-//            Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
-//        } catch (Exception e) {
-//        	throw new RuntimeException("FAIL!");
-//        }
-//	}
-	
- 
- 
-    
-//	@GetMapping("home/download/documento")
-//	public ResponseEntity<Resource> getFile(@RequestParam("name") String filename) {
-//		Resource file = loadFile(filename);
-//		return ResponseEntity.ok()
-//				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
-//				.body(file);
-//	}
 	
 	@GetMapping( "home/download/document/{docId}")
 	public String downloadDocument(@PathVariable String docId, HttpServletResponse response) 
@@ -198,7 +159,7 @@ public class HomeController {
 	}
 	
 	private void loadPagePadreAlumno(Model model, String materia, String alumnoName) {
-		Alumno alumno = alumdao.retrieveByName(alumnoName);
+		User alumno = userdao.retrieveByMail(alumnoName);
 		List<Nota> notas = notasdao.retrieveByAlumno(alumno.getId());
 		List<Asistencia> asistencias = asistenciadao.retrieveByAlumno(alumno.getId());
 		Double promediotareas = promedio(notas,Nota.ACTIVIDADES);
@@ -244,12 +205,12 @@ public class HomeController {
 		Integer cantidad = 0;
 		
 		if (notas != null) {
-			for(Nota nota : notas){
-				if(nota.getTrimestre() == trimestreActual && nota.getTipo().equals(tipo)){
-					cantidad +=1;
-					total=total+nota.getValor();
-				}
-			}
+//			for(Nota nota : notas){
+//				if(nota.getTrimestre() == trimestreActual && nota.getTipo().equals(tipo)){
+//					cantidad +=1;
+//					total=total+nota.getValor();
+//				}
+//			}
 		}
 		if(cantidad != 0)
 		promedio = (double) (total/cantidad);

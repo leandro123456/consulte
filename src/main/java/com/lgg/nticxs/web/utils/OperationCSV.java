@@ -2,10 +2,10 @@ package com.lgg.nticxs.web.utils;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.lgg.nticxs.web.DAO.AlumnoDAO;
+import com.lgg.nticxs.web.DAO.UserDAO;
 import com.lgg.nticxs.web.DAO.AsistenciaDAO;
 import com.lgg.nticxs.web.DAO.NotaDAO;
-import com.lgg.nticxs.web.model.Alumno;
+import com.lgg.nticxs.web.model.User;
 import com.lgg.nticxs.web.model.Asistencia;
 import com.lgg.nticxs.web.model.Nota;
 
@@ -19,10 +19,9 @@ public class OperationCSV {
             String[] lineas = completeData.split("\n");
             System.out.println("cantidad de alumnos a cargar: "+ lineas.length);
             int valor = 0;
-            AlumnoDAO alumdao = new AlumnoDAO();
+            UserDAO alumdao = new UserDAO();
             for(String linea: lineas) {
-            	Alumno alumno = new Alumno();
-            	alumno.setName(linea);
+            	User alumno = new User();
             	alumdao.create(alumno);
             	valor +=1;
             }

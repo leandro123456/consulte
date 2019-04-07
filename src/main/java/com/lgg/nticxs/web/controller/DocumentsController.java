@@ -14,11 +14,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.lgg.nticxs.web.utils.OperationCSV;
 import com.lgg.nticxs.web.utils.Utils;
-import com.lgg.nticxs.web.DAO.AlumnoDAO;
+import com.lgg.nticxs.web.DAO.UserDAO;
 import com.lgg.nticxs.web.DAO.DocenteDAO;
 import com.lgg.nticxs.web.DAO.DocumentoDAO;
 import com.lgg.nticxs.web.helper.SRHelper;
-import com.lgg.nticxs.web.model.Alumno;
+import com.lgg.nticxs.web.model.User;
 import com.lgg.nticxs.web.model.Docente;
 import com.lgg.nticxs.web.model.Documento;
 
@@ -28,7 +28,7 @@ public class DocumentsController {
 	 SRHelper srHelper= new SRHelper();
 	 DocumentoDAO docdao = new DocumentoDAO();
 	 DocenteDAO docentedao = new DocenteDAO();
-	 AlumnoDAO alumdao = new AlumnoDAO();
+	 UserDAO alumdao = new UserDAO();
 	 	 
     @GetMapping("home/{materia}/explorer/document")
     public String  provisioninga(Model model,

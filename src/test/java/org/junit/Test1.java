@@ -18,13 +18,13 @@ import com.lgg.nticxs.web.utils.Utils;
 
 //import org.junit.jupiter.api.Test;
 
-import com.lgg.nticxs.web.DAO.AlumnoDAO;
+import com.lgg.nticxs.web.DAO.UserDAO;
 import com.lgg.nticxs.web.DAO.AsistenciaDAO;
 import com.lgg.nticxs.web.DAO.CiclolectivoDAO;
 import com.lgg.nticxs.web.DAO.DocenteDAO;
 import com.lgg.nticxs.web.DAO.DocumentoDAO;
 import com.lgg.nticxs.web.DAO.NotaDAO;
-import com.lgg.nticxs.web.model.Alumno;
+import com.lgg.nticxs.web.model.User;
 import com.lgg.nticxs.web.model.Asistencia;
 import com.lgg.nticxs.web.model.Ciclolectivo;
 import com.lgg.nticxs.web.model.Docente;
@@ -63,9 +63,9 @@ public class Test1 {
 	
 	//@Test
 	public void testMakeAlumno(){
-		AlumnoDAO alumdao = new AlumnoDAO();
-		Alumno alumno = new Alumno();
-		alumno.setName("pablo");
+		UserDAO alumdao = new UserDAO();
+		User alumno = new User();
+//		alumno.setName("pablo");
 
 		Ciclolectivo ciclo = new Ciclolectivo();
 		ciclo.setAnio(2019);
@@ -87,7 +87,6 @@ public class Test1 {
 		ciclo.setMaterias(materia);
 		
 		
-		alumno.setCiclolectivo(ciclo);
 		alumno.setEmail("pablo.bilbao@hotmail.com");
 		alumdao.create(alumno);
 		System.out.println("termino");

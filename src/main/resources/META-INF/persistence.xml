@@ -9,7 +9,7 @@
 			<property name="eclipselink.nosql.connection-spec" value="org.eclipse.persistence.nosql.adapters.mongo.MongoConnectionSpec" />
 			<property name="eclipselink.nosql.property.mongo.port" value="27017" />
 			<property name="eclipselink.nosql.property.mongo.host" value="localhost" />
-			<property name="eclipselink.nosql.property.mongo.db" value="Da-Vinci-Nticxs" />
+			<property name="eclipselink.nosql.property.mongo.db" value="MQTT-Manager" />
 			<property name="eclipselink.logging.level" value="INFO" /> <!-- FINEST -->
 			<property name="eclipselink.cache.shared.default" value="false"/>
 			<property name="eclipselink.cache.size.default" value="0"/>
