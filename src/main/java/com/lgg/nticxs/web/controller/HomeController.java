@@ -60,7 +60,7 @@ public class HomeController {
 	NotaDAO notasdao = new NotaDAO();
 	AsistenciaDAO asistenciadao = new AsistenciaDAO();
 	AdministrativoDAO administdao = new AdministrativoDAO();
-	Integer trimestreActual = Utils.TrimestreActual();
+	//Integer trimestreActual = Utils.TrimestreActual();
 	
 	@GetMapping("homepage/")
     public ModelAndView pageLoad(HttpServletRequest request, ModelMap model) {
@@ -87,13 +87,22 @@ public class HomeController {
     }
 	
 	@RequestMapping("/home")
-	public String books(@RequestParam("role") String role,@RequestParam("usuario") String usuario, Model model){
-		if(role.equals("SUPERADMIN")){
-			User user =userdao.retrieveByName(usuario);
-			model.addAttribute("usuario", user);
-	    }else{ //SERIA UNO MENOR
-	    }
-	    model.addAttribute("role", role);
+	public String books(HttpServletRequest request, Model model){
+		String role= "";
+		try {
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			@SuppressWarnings("unchecked")
+			Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) authentication.getAuthorities();
+		    for (GrantedAuthority grantedAuthority : authorities) {
+		    	role=grantedAuthority.getAuthority();
+		    	model.addAttribute("role", role);
+		    }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String nombre = request.getUserPrincipal().getName();
+		User user = userdao.retrieveByMail(nombre);
+		model.addAttribute("user", user);
 	    return "origin";
 	}
 	
@@ -132,32 +141,6 @@ public class HomeController {
 		return "home";
 	}
 	
-//    @RequestMapping("home/download/documento")
-//    public void playMerged( @PathVariable("name") String nombre, HttpServletRequest request,
-//            HttpServletResponse response) {
-//            String mergedAudioPath = service.getMergedAudio(nombre);
-//            MultipartFileSender.fromPath(Paths.get(mergedAudioPath)).with(request).with(response).serveResource();
-//   }
-    
-    
-//	public void store(MultipartFile file){
-//		try {
-//            Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
-//        } catch (Exception e) {
-//        	throw new RuntimeException("FAIL!");
-//        }
-//	}
-	
- 
- 
-    
-//	@GetMapping("home/download/documento")
-//	public ResponseEntity<Resource> getFile(@RequestParam("name") String filename) {
-//		Resource file = loadFile(filename);
-//		return ResponseEntity.ok()
-//				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
-//				.body(file);
-//	}
 	
 	@GetMapping( "home/download/document/{docId}")
 	public String downloadDocument(@PathVariable String docId, HttpServletResponse response) 
@@ -176,7 +159,7 @@ public class HomeController {
 	}
 	
 	private void loadPagePadreAlumno(Model model, String materia, String alumnoName) {
-		User alumno = userdao.retrieveByName(alumnoName);
+		User alumno = userdao.retrieveByMail(alumnoName);
 		List<Nota> notas = notasdao.retrieveByAlumno(alumno.getId());
 		List<Asistencia> asistencias = asistenciadao.retrieveByAlumno(alumno.getId());
 		Double promediotareas = promedio(notas,Nota.ACTIVIDADES);
@@ -222,12 +205,12 @@ public class HomeController {
 		Integer cantidad = 0;
 		
 		if (notas != null) {
-			for(Nota nota : notas){
-				if(nota.getTrimestre() == trimestreActual && nota.getTipo().equals(tipo)){
-					cantidad +=1;
-					total=total+nota.getValor();
-				}
-			}
+//			for(Nota nota : notas){
+//				if(nota.getTrimestre() == trimestreActual && nota.getTipo().equals(tipo)){
+//					cantidad +=1;
+//					total=total+nota.getValor();
+//				}
+//			}
 		}
 		if(cantidad != 0)
 		promedio = (double) (total/cantidad);

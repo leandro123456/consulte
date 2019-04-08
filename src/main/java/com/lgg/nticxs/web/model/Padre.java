@@ -48,9 +48,9 @@ public class Padre{
 	public Padre(ArrayList<String> alumnos){
 		UserDAO alumnodao = new UserDAO();
 		for(String alum: alumnos){
-			User estudiante = alumnodao.retrieveByName(alum);
-			if(estudiante != null)
-				alumno.add(estudiante.getName());
+//			User estudiante = alumnodao.retrieveByName(alum);
+//			if(estudiante != null)
+//				alumno.add(estudiante.getName());
 		}
 	}
 

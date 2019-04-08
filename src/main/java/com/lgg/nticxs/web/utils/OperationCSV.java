@@ -22,7 +22,6 @@ public class OperationCSV {
             UserDAO alumdao = new UserDAO();
             for(String linea: lineas) {
             	User alumno = new User();
-            	alumno.setName(linea);
             	alumdao.create(alumno);
             	valor +=1;
             }

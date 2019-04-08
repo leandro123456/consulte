@@ -33,10 +33,10 @@ public class UserDAO extends JPADAO<User>{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public User retrieveByName(String name) {
-		String sql = "SELECT u FROM User u WHERE u.name = :name and u.delete=false";
+	public User retrieveByMail(String email) {
+		String sql = "SELECT u FROM User u WHERE u.email = :email and u.delete=false";
 		Query query = getEntityManager().createQuery(sql);
-		query.setParameter("name", name);
+		query.setParameter("email", email);
 		List<User> list = query.getResultList();
 		if (list != null && list.size() > 0) {
 			return list.get(0);

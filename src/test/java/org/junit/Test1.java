@@ -65,7 +65,8 @@ public class Test1 {
 	public void testMakeAlumno(){
 		UserDAO alumdao = new UserDAO();
 		User alumno = new User();
-		alumno.setName("pablo");
+
+//		alumno.setName("pablo");
 
 		Ciclolectivo ciclo = new Ciclolectivo();
 		ciclo.setAnio(2019);
@@ -87,7 +88,6 @@ public class Test1 {
 		ciclo.setMaterias(materia);
 		
 		
-		alumno.setCiclolectivo(ciclo);
 		alumno.setEmail("pablo.bilbao@hotmail.com");
 		alumdao.create(alumno);
 		System.out.println("termino");

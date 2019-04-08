@@ -43,8 +43,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	        http.authorizeRequests()
 	        .antMatchers("/").permitAll()
 	        .antMatchers("/signup").permitAll()
-	        .antMatchers("/homepage/").access(access.substring(0, (access.length() - 4)))
-	        .and().formLogin().defaultSuccessUrl("/homepage/").loginPage("/login")
+	        .antMatchers("/home/").access(access.substring(0, (access.length() - 4)))
+	        .and().formLogin().defaultSuccessUrl("/home/").loginPage("/login")
             .usernameParameter("user").passwordParameter("password")
 	        .and().exceptionHandling().accessDeniedPage ("/logoutsession")
 	        .and().csrf().disable();

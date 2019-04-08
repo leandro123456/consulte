@@ -1,6 +1,5 @@
 package com.lgg.nticxs.web.model;
 
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,15 +11,20 @@ import org.eclipse.persistence.nosql.annotations.NoSql;
 @Entity
 @NoSql(dataFormat=DataFormatType.MAPPED)
 public class User{
-     static final public String ROLE_ALUMNO = "ALUMNO";
+     static final public String ROLE_SUPERADMIN = "SUPERADMIN";
+     static final public String ROLE_ADMIN = "ADMIN";
+     static final public String ROLE_USER = "USER";
 
 	@Id
 	@GeneratedValue
 	@Field(name = "_id")
 	private String id;
 	
-	@Field (name = "name")
-	private String name;
+	@Field (name = "firstname")
+	private String firstname;
+	
+	@Field (name = "lastname")
+	private String lastname;
 	
 	@Field (name = "password")
 	private byte[] password;
@@ -39,10 +43,6 @@ public class User{
 	
 	@Field (name = "cuenta_iniciada")
 	private Boolean cuenta_iniciada;
-	
-	@Embedded
-	@Field(name="ciclolectivo")
-	private Ciclolectivo ciclolectivo;
 
 	@Field (name = "role")
 	private String role;
@@ -57,19 +57,7 @@ public class User{
 		this.email = email;
 	}
 
-
-	public Ciclolectivo getCiclolectivo() {
-		return ciclolectivo;
-	}
-
-
-	public void setCiclolectivo(Ciclolectivo ciclolectivo) {
-		this.ciclolectivo = ciclolectivo;
-	}
-
-
 	public User(){
-		this.setRole(ROLE_ALUMNO);
 		cuenta_iniciada=false;
 		this.setDelete(false);
 	}
@@ -95,13 +83,23 @@ public class User{
 	}
 
 
-	public String getName() {
-		return name;
+	public String getFirstname() {
+		return firstname;
 	}
 
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+
+	public String getLastname() {
+		return lastname;
+	}
+
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
 

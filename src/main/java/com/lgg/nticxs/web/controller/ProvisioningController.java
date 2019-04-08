@@ -128,7 +128,6 @@ public class ProvisioningController {
     		@RequestParam("name") String name) {
         try {
         	User alumno = new User();
-        	alumno.setName(name);
             alumdao.create(alumno);
             model.addAttribute("msg", "Carga exitosa del alumno.");
 		} catch (Exception e) {
