@@ -18,6 +18,7 @@
       <script src='<c:url value="/resources/mqttResources/d3.v3.min.js" />'></script>
 	  <script src='<c:url value="/resources/mqttResources/c3.min.js" />'></script>
 	  <script src='<c:url value="/resources/mqttResources/demo.js" />'></script>
+	  <script src='<c:url value="/resources/mqttResources/cargarElementos.js" />'></script>
 	  <script src='<c:url value="/resources/mqttResources/progreso.js" />'></script>
 	  <script src='<c:url value="/resources/mqttResources/cargaReloj.js" />'></script>	
 
@@ -394,7 +395,7 @@
           </div>
 
 <!-- Content Row -->
-          <div class="row">
+          <div class="row" id ="cargadora">
           <div class="col-12"> 
 			<div class="card shadow mb-4">
 		         <div class="card-header py-3">
@@ -429,36 +430,7 @@
            </div>
 
 
-          <div class="col-lg-6 mb-4"> 
-              <!-- Project Card Example -->
-              <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Sensor de Temperatura Y Humedad</h6>
-                </div>
-                <div class="card-body">
-                  <h4 id="humedads" class="small font-weight-bold"></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar" id="humedad" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <h4 id="temperaturacs" class="small font-weight-bold">Temperatura °C</h4>
-                  <div class="progress mb-4">
-                    <div id="temperaturac" class="progress-bar bg-info" role="progressbar" aria-valuemin="0" aria-valuemax="70"></div>
-                  </div>
-                  <h4 id="sensacioncs" class="small font-weight-bold">Sensacion Termica °C</h4>
-                  <div class="progress mb-4">
-                    <div id="sensacionc" class="progress-bar  bg-info" role="progressbar" aria-valuemin="0" aria-valuemax="70"></div>
-                  </div>
-                  <h4 id="temperaturafs" class="small font-weight-bold">Temperatura °F</h4>
-                  <div class="progress mb-4">
-                    <div id="temperaturaf" class="progress-bar bg-info" role="progressbar" aria-valuemin="0" aria-valuemax="140"></div>
-                  </div>
-                  <h4 id="sensacionfs" class="small font-weight-bold">Sensacion Termica °F</h4>
-                  <div class="progress">
-                    <div id="sensacionf" class="progress-bar bg-info" role="progressbar" aria-valuemin="0" aria-valuemax="140"></div>
-                  </div>
-                </div>
-              </div>
-			</div>
+          
             
             <div class="col-lg-6 mb-4">
               <!-- Illustrations -->
@@ -560,9 +532,17 @@
 
 </body>
 
+<script type="text/javascript">
+	$(document).ready(function() {
+		cargarDivs();
+	})	
+</script>
+
+
 
 <script type="text/javascript">
 	$(document).ready(function(){
+				sleep(2000);
                 updateWiget();
                 animateprogress("humedad",50);
 		startConnect();

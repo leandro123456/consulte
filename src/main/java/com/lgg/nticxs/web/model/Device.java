@@ -2,6 +2,7 @@ package com.lgg.nticxs.web.model;
 
 import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,7 +13,7 @@ import org.eclipse.persistence.nosql.annotations.NoSql;
 
 @Entity
 @NoSql(dataFormat=DataFormatType.MAPPED)
-public class Administrativo {
+public class Device {
 	@Id
 	@GeneratedValue
 	@Field(name = "_id")
@@ -20,6 +21,12 @@ public class Administrativo {
 	
 	@Field (name = "name")
 	private String name;
+	
+	@Field (name = "serialnumber")
+	private String serialnumber;
+	
+	@Field (name = "description")
+	private String description;
 	
 	@Field (name = "password")
 	private byte[] password;
@@ -32,6 +39,13 @@ public class Administrativo {
 
 	@Field (name = "role")
 	private String role;
+	
+	@Field (name = "usedefaultbrocker")
+	private Boolean usedefaultbrocker;
+	
+	@ElementCollection //es una lista, en la posicion 0 esta el default
+	@Field(name="topic")
+	private List<Topic> topic;
 
 	public String getId() {
 		return id;
@@ -79,6 +93,22 @@ public class Administrativo {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public String getSerialnumber() {
+		return serialnumber;
+	}
+
+	public void setSerialnumber(String serialnumber) {
+		this.serialnumber = serialnumber;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	

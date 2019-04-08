@@ -1,5 +1,8 @@
 package com.lgg.nticxs.web.model;
 
+import java.util.List;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -34,19 +37,16 @@ public class User{
 	
 	@Field (name = "email")
 	private String email;
-	
-	@Field (name = "firstName")
-	private String firstName;
-	
-	@Field (name = "lastName")
-	private String lastName;
-	
+		
 	@Field (name = "cuenta_iniciada")
 	private Boolean cuenta_iniciada;
 
 	@Field (name = "role")
 	private String role;
 	
+	@ElementCollection
+	@Field(name="device")
+	private List<SimpleDevice> device;
 	
 	public String getEmail() {
 		return email;
@@ -114,26 +114,6 @@ public class User{
 
 	public Boolean getDelete() {
 		return delete;
-	}
-
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-
-	public String getLastName() {
-		return lastName;
-	}
-
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 
 

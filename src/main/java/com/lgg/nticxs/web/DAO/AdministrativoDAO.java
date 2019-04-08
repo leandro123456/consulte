@@ -5,16 +5,16 @@ import java.util.List;
 import javax.persistence.Query;
 
 import com.lgg.nticxs.web.jpa.JPADAO;
-import com.lgg.nticxs.web.model.Administrativo;
+import com.lgg.nticxs.web.model.Device;
 
-public class AdministrativoDAO extends JPADAO<Administrativo>{
+public class AdministrativoDAO extends JPADAO<Device>{
 
 
 	@SuppressWarnings("unchecked")
-	public List<Administrativo> retrieveAll() {
+	public List<Device> retrieveAll() {
 		String sql = "SELECT u FROM Administrativo u WHERE u.delete=false";
 		Query query = getEntityManager().createQuery(sql);
-		List<Administrativo> list = query.getResultList();
+		List<Device> list = query.getResultList();
 		if (list != null && list.size() > 0) {
 			return list;
 		}
@@ -22,11 +22,11 @@ public class AdministrativoDAO extends JPADAO<Administrativo>{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Administrativo retrieveById(String userId) {
+	public Device retrieveById(String userId) {
 		String sql = "SELECT u FROM Administrativo u WHERE u.id = :id";
 		Query query = getEntityManager().createQuery(sql);
 		query.setParameter("id", userId);
-		List<Administrativo> list = query.getResultList();
+		List<Device> list = query.getResultList();
 		if (list != null && list.size() > 0) {
 			return list.get(0);
 		}
@@ -34,11 +34,11 @@ public class AdministrativoDAO extends JPADAO<Administrativo>{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Administrativo retrieveByName(String name) {
+	public Device retrieveByName(String name) {
 		String sql = "SELECT u FROM Administrativo u WHERE u.name = :name and u.delete=false";
 		Query query = getEntityManager().createQuery(sql);
 		query.setParameter("name", name);
-		List<Administrativo> list = query.getResultList();
+		List<Device> list = query.getResultList();
 		if (list != null && list.size() > 0) {
 			return list.get(0);
 		}
@@ -50,7 +50,7 @@ public class AdministrativoDAO extends JPADAO<Administrativo>{
 		String sql = "SELECT u FROM Administrativo u WHERE u.id = :id";
 		Query query = getEntityManager().createQuery(sql);
 		query.setParameter("id", id);
-		List<Administrativo> list = query.getResultList();
+		List<Device> list = query.getResultList();
 		list.get(0).setDelete(true);
 		update(list.get(0));
 	}

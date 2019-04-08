@@ -16,7 +16,7 @@ import com.lgg.nticxs.web.utils.EncryptorPassword;
 import com.lgg.nticxs.web.utils.WSLogger;
 
 import com.lgg.nticxs.web.model.Role;
-import com.lgg.nticxs.web.model.SimpleCard;
+import com.lgg.nticxs.web.model.SimpleDevice;
 import com.lgg.nticxs.web.model.SimpleIpp;
 
 
