@@ -1,5 +1,6 @@
 package com.lgg.nticxs.web.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.ElementCollection;
@@ -44,9 +45,9 @@ public class User{
 	@Field (name = "role")
 	private String role;
 	
-	@ElementCollection
-	@Field(name="device")
-	private List<SimpleDevice> device;
+	@ElementCollection 
+	@Field(name="deviceserialnumber")
+	private List<String> deviceserialnumber;
 	
 	public String getEmail() {
 		return email;
@@ -127,5 +128,19 @@ public class User{
 
 	public void setCuenta_iniciada(Boolean cuenta_iniciada) {
 		this.cuenta_iniciada = cuenta_iniciada;
-	}	
+	}
+
+
+	public List<String> getDeviceserialnumber() {
+		if(deviceserialnumber == null)
+			deviceserialnumber = new ArrayList<>();
+		return deviceserialnumber;
+	}
+
+
+	public void setDeviceserialnumber(List<String> deviceserialnumber) {
+		this.deviceserialnumber = deviceserialnumber;
+	}
+
+	
 }

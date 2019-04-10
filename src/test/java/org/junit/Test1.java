@@ -1,32 +1,25 @@
 package org.junit;
 
-import java.security.MessageDigest;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
-
-import javax.crypto.Cipher;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
-
-import com.lgg.nticxs.web.utils.Utils;
-
-//import org.junit.jupiter.api.Test;
-
 import com.lgg.nticxs.web.DAO.UserDAO;
+import com.lgg.nticxs.web.DAO.helper.MongoDBRemove;
+
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONObject;
+
 import com.lgg.nticxs.web.DAO.AsistenciaDAO;
 import com.lgg.nticxs.web.DAO.CiclolectivoDAO;
+import com.lgg.nticxs.web.DAO.DeviceDAO;
 import com.lgg.nticxs.web.DAO.DocenteDAO;
 import com.lgg.nticxs.web.DAO.DocumentoDAO;
 import com.lgg.nticxs.web.DAO.NotaDAO;
 import com.lgg.nticxs.web.model.User;
 import com.lgg.nticxs.web.model.Asistencia;
 import com.lgg.nticxs.web.model.Ciclolectivo;
+import com.lgg.nticxs.web.model.Device;
+import com.lgg.nticxs.web.model.DeviceConfiguration;
 import com.lgg.nticxs.web.model.Docente;
 import com.lgg.nticxs.web.model.Documento;
 import com.lgg.nticxs.web.model.Materia;
@@ -35,31 +28,100 @@ import com.lgg.nticxs.web.model.Nota;
 
 public class Test1 {
 	
-//	@Test
-//	public void testCreateCiclolectivo(){
-//		CiclolectivoDAO ciclodao = new CiclolectivoDAO();
-//		Ciclolectivo ciclo = new Ciclolectivo();
-//		ciclo.setAnio(2019);
-//		
-//		Materia materia = new Materia();
-//		List<Materia.materia> listMaterias = new ArrayList<>();
-//		
-//		Materia.materia matParticular = new materia();
-//		matParticular.setAnio(2019);
-//		matParticular.setIdentifier("01MAT");	
-//		listMaterias.add(matParticular);
-//		
-//		matParticular.setAnio(2019);
-//		matParticular.setIdentifier("01LENG");
-//		listMaterias.add(matParticular);
-//
-//		materia.setMateria(listMaterias);
-//		
-//		ciclo.setMaterias(materia);
-//		ciclodao.create(ciclo);
-//		System.out.println("termino bien");
-//	}
 	
+	//@Test
+	public void testDelete(){
+		try {
+			MongoDBRemove.removeSingleDoc("MQTT-Manager", "DEVICE", "serialnumber", "4564dsd");
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+//		DeviceDAO devicedao = new DeviceDAO();
+//		Device device = devicedao.retrieveBySerialNumber("4564dsd");
+//		devicedao.delete(device);
+		System.out.println("borro");
+	}
+	
+	//@Test
+	public void testMakeDevicesOnUser(){
+		try {
+			DeviceDAO devicedao = new DeviceDAO();
+			Device device = devicedao.retrieveBySerialNumber("4564dsd");
+			if(device == null){
+				device = new Device();
+				device.setDescription("description");
+				device.setName("nombre");
+				device.setSerialnumber("4564dsd");
+				device.setUserowner("t@tes");	
+				DeviceConfiguration deviceconfiguration = new DeviceConfiguration();
+				deviceconfiguration.setIphost("ip");
+				deviceconfiguration.setName("default");
+				deviceconfiguration.setPass("pass");
+				deviceconfiguration.setPort("port");
+				deviceconfiguration.setTopicescribir("topicescribir");
+				deviceconfiguration.setTopicescribirremote("topicescribirremote");
+				deviceconfiguration.setTopicescuchar("topicescuchar");
+				deviceconfiguration.setTopicescucharremote("topicescucharremote");
+				deviceconfiguration.setUser("user");
+				deviceconfiguration.setUsessl(false);
+				device.getDeviceconfiguration().add(deviceconfiguration);
+				device.getAdmins().add("pepe@test");
+				device.getUsers().add("juli@test");
+				devicedao.create(device);
+				
+				String vista = "<div class=\"col-lg-6 mb-4\"><div class=\"card shadow mb-4\"><div class=\"card-header py-3\"><h6 class=\"m-0 font-weight-bold text-primary\">Sensor de Temperatura Y Humedad</h6></div><div class=\"card-body\"><h4 id=\"humedads\" class=\"small font-weight-bold\"></h4><div class=\"progress mb-4\"><div class=\"progress-bar\" id=\"humedad\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div></div><h4 id=\"temperaturacs\" class=\"small font-weight-bold\">Temperatura °C</h4><div class=\"progress mb-4\"><div id=\"temperaturac\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"70\"></div></div><h4 id=\"sensacioncs\" class=\"small font-weight-bold\">Sensacion Termica °C</h4><div class=\"progress mb-4\"><div id=\"sensacionc\" class=\"progress-bar  bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"70\"></div></div><h4 id=\"temperaturafs\" class=\"small font-weight-bold\">Temperatura °F</h4><div class=\"progress mb-4\"><div id=\"temperaturaf\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"140\"></div></div><h4 id=\"sensacionfs\" class=\"small font-weight-bold\">Sensacion Termica °F</h4><div class=\"progress\"><div id=\"sensacionf\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"140\"></div></div></div></div></div>";
+				String indicadores2 = "<div class=\"col-lg-6 mb-4\"><div class=\"card shadow mb-4\"><div class=\"card-header py-3\">        <h6 class=\"m-0 font-weight-bold text-primary\">Widget of Status</h6></div><div class=\"card-body\"><form class=\"user\" id=\"connection-information-form\">      <div class=\"form-group row\"><b>Hostname or IP Address</b> 	<input type=\"text\" class=\"form-control form-control-user\" id=\"host\" value=\"gw001.iotek.space\" placeholder=\"Hostname\"></div><div class=\"form-group row\">	<b>Port</b>  	<input type=\"text\" class=\"form-control form-control-user\" id=\"port\" value=\"8883\" placeholder=\"Port\">      </div><div class=\"form-group row\"><b>Topic:</b><input id=\"topic\" type=\"text\" class=\"form-control form-control-user\" name=\"topic\" value=\"WTHUSB000000001/state\" placeholder=\"Topic\"></div><hr><input type=\"button\" class=\"btn btn-primary btn-user btn-block\" onclick=\"startConnect()\" value=\"Connect\"><input type=\"button\" class=\"btn btn-primary btn-user btn-block\" onclick=\"startDisconnect()\" value=\"Disconnect\">    </form><div id=\"messages\"></div></div></div></div>";
+				device.getVista().put(device.getUserowner(), vista);
+				device.getVista().put("pepe@test", indicadores2);
+				
+				String jsonstring = "{"
+						+ "parametername:"+"'TempC'"+","
+						+ "tipodedato:"+"'Number'"+","
+						+ "vista:"+"'barrahorizontal'"+","
+						+ "parametername:"+"'Hum'"+","
+						+ "tipodedato:"+"'Number'"+","
+						+ "vista:"+"'barrahorizontal'"
+						+ "}";
+				
+				device.getVistaporusuario().put("t@tes", jsonstring);
+				
+				devicedao.update(device);
+			}
+			
+			UserDAO userdao = new UserDAO();
+			User user =userdao.retrieveByMail("t@tes");
+			if(user != null && !user.getDeviceserialnumber().contains(device.getSerialnumber())){
+			user.getDeviceserialnumber().add(device.getSerialnumber());
+			userdao.update(user);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@Test
+	public void searchVistas(){
+		UserDAO userdao = new UserDAO();
+		DeviceDAO devicedao = new DeviceDAO();
+		User user = userdao.retrieveByMail("t@tes");
+		Device device = devicedao.retrieveBySerialNumber(user.getDeviceserialnumber().get(0));
+//		System.out.println(device.getDescription());
+//		System.out.println("esta es la vista: "+ device.getVista().get("t@tes"));
+		
+		String allenvelope=device.getVistaporusuario().get("t@tes");
+		System.out.println("original: "+allenvelope);
+		String pattern = "parametername";
+		String[] vector = allenvelope.split(pattern);
+		System.out.println(vector.length);
+		for(int i=1; i<vector.length; i++){
+			String json = "{parametername"+vector[i].substring(0, vector[i].length()-1)+"}";
+			JSONObject jsonRequest = new JSONObject(json);
+			String campo= jsonRequest.getString("parametername");
+			System.out.println("valor de "+i+" : "+campo);
+		}
+		
+	}
 	
 	//@Test
 	public void testMakeAlumno(){

@@ -8,7 +8,7 @@ import org.eclipse.persistence.nosql.annotations.NoSql;
 
 @Embeddable
 @NoSql(dataFormat=DataFormatType.MAPPED)
-public class Topic {
+public class DeviceConfiguration {
 	
 	@Field (name = "name")
 	private String name;
@@ -39,6 +39,11 @@ public class Topic {
 	
 	@Field (name = "topicescribirremote")
 	private String topicescribirremote;
+
+	
+	
+	public DeviceConfiguration() {
+	}
 
 	public String getName() {
 		return name;

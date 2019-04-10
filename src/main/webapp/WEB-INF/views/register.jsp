@@ -42,16 +42,6 @@
               <form class="user" action="<c:url value='signup'/>" method="post" enctype="multipart/form-data" autocomplete="off">
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-<<<<<<< HEAD
-                    <input type="text" class="form-control form-control-user" id="firstName" name= "firstName" placeholder="First Name">
-                  </div>
-                  <div class="col-sm-6">
-                    <input type="text" class="form-control form-control-user" id="lastName" name ="LastName" placeholder="Last Name">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <input type="email" class="form-control form-control-user" id="email" name="email" placeholder="Email Address">
-=======
                     <input type="text" class="form-control form-control-user" id="firsName" name="firsName" placeholder="First Name">
                   </div>
                   <div class="col-sm-6">
@@ -60,7 +50,6 @@
                 </div>
                 <div class="form-group">
                   <input type="email" class="form-control form-control-user" id="selectName" name="email" placeholder="Email Address">
->>>>>>> a35f14a60156c0b0821fb64ef9e45121ab839d5c
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
@@ -70,12 +59,7 @@
                     <input type="password" class="form-control form-control-user" id="confirmNewPassword" name="newPass2" placeholder="Repeat Password">
                   </div>
                 </div>
-<<<<<<< HEAD
-                
-                <button type="submit" name="action" value="save" class="btn btn-primary btn-user btn-block">Register Account</button>
-=======
                 <button class="btn btn-primary btn-user btn-block" type="submit" id="sign">Register Account</button>
->>>>>>> a35f14a60156c0b0821fb64ef9e45121ab839d5c
               </form>
               <hr>
               <div class="text-center">

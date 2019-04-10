@@ -14,6 +14,7 @@
 	 
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.min.js" type="text/javascript"></script>
+      <script src='<c:url value="/resources/js/jquery.js" />'></script>	
       
       <script src='<c:url value="/resources/mqttResources/d3.v3.min.js" />'></script>
 	  <script src='<c:url value="/resources/mqttResources/c3.min.js" />'></script>
@@ -292,7 +293,7 @@
                   Activity Log
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="login" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
                 </a>
@@ -428,43 +429,7 @@
 		           </div>
 		     </div>
            </div>
-
-
-          
-            
-            <div class="col-lg-6 mb-4">
-              <!-- Illustrations -->
-              <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Widget of Status</h6>
-                </div>
-                <div class="card-body">
-
-		<form class="user" id="connection-information-form">
-                <div class="form-group row">
-			<b>Hostname or IP Address</b> 
-		    	<input type="text" class="form-control form-control-user" id="host" value="gw001.iotek.space" placeholder="Hostname">
-		</div>
-		<div class="form-group row">
-			<b>Port</b>
-		    	<input type="text" class="form-control form-control-user" id="port" value="8883" placeholder="Port">
-                </div>
-		<div class="form-group row">
-			<b>Topic:</b>
-<!-- 			<input id="topic" type="text" class="form-control form-control-user" name="topic" value="FRST2019012/state" placeholder="Topic"> -->
-					<input id="topic" type="text" class="form-control form-control-user" name="topic" value="WTHUSB000000001/state" placeholder="Topic">
-		</div>
-
-                <hr>
-		<input type="button" class="btn btn-primary btn-user btn-block" onclick="startConnect()" value="Connect">
-		<input type="button" class="btn btn-primary btn-user btn-block" onclick="startDisconnect()" value="Disconnect">
-              </form>
-		<div id="messages"></div>
-
-
-                </div>
-              </div>
-            </div>
+           
           </div>
         </div>
         <!-- /.container-fluid -->
@@ -534,7 +499,21 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		cargarDivs();
+		//cargarDivs();
+		var user = request.getParameter("user");
+		function getElements() {
+			var _url = $(location).attr('pathname') +user.email +"/elements";
+			$.ajax({ url : _url,
+				contentType: "application/json",
+				dataType: 'json',
+				success: function(data){
+					for(var i = 0; i < data.divvalue.length ; i++){
+						var item = data.divvalue[i];
+						$("cargadora").append(item);
+					}
+				}
+			});
+		}   
 	})	
 </script>
 

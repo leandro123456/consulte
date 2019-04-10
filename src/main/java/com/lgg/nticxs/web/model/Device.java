@@ -1,5 +1,7 @@
 package com.lgg.nticxs.web.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.ElementCollection;
@@ -19,8 +21,11 @@ public class Device {
 	@Field(name = "_id")
 	private String id;
 	
-	@Field (name = "name")
+	@Field(name = "name")
 	private String name;
+	
+	@Field (name = "userowner")
+	private String userowner;
 	
 	@Field (name = "serialnumber")
 	private String serialnumber;
@@ -44,8 +49,57 @@ public class Device {
 	private Boolean usedefaultbrocker;
 	
 	@ElementCollection //es una lista, en la posicion 0 esta el default
-	@Field(name="topic")
-	private List<Topic> topic;
+	@Field(name="deviceconfiguration")
+	private List<DeviceConfiguration> deviceconfiguration;
+	
+	@Field (name = "vista")
+	private HashMap<String, String> vista;
+	
+	@Field (name = "vistaporusuario")
+	private HashMap<String, String> vistaporusuario;
+	
+	@ElementCollection 
+	@Field(name="users")
+	private List<String> users;
+	
+	@ElementCollection 
+	@Field(name="admins")
+	private List<String> admins;
+
+	
+	public Device() {
+		usedefaultbrocker = true;
+		delete = false;
+		deviceconfiguration = new ArrayList<>();
+		users = new  ArrayList<>();
+		admins = new ArrayList<>();
+		vista = new HashMap<>();
+		vistaporusuario = new HashMap<>();
+	}
+
+	public String getUserowner() {
+		return userowner;
+	}
+
+	public void setUserowner(String userowner) {
+		this.userowner = userowner;
+	}
+
+	public Boolean getUsedefaultbrocker() {
+		return usedefaultbrocker;
+	}
+
+	public void setUsedefaultbrocker(Boolean usedefaultbrocker) {
+		this.usedefaultbrocker = usedefaultbrocker;
+	}
+
+	public List<DeviceConfiguration> getDeviceconfiguration() {
+		return deviceconfiguration;
+	}
+
+	public void setDeviceconfiguration(List<DeviceConfiguration> deviceconfiguration) {
+		this.deviceconfiguration = deviceconfiguration;
+	}
 
 	public String getId() {
 		return id;
@@ -109,6 +163,38 @@ public class Device {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public HashMap<String, String> getVista() {
+		return vista;
+	}
+
+	public void setVista(HashMap<String, String> vista) {
+		this.vista = vista;
+	}
+
+	public List<String> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<String> users) {
+		this.users = users;
+	}
+
+	public List<String> getAdmins() {
+		return admins;
+	}
+
+	public void setAdmins(List<String> admins) {
+		this.admins = admins;
+	}
+
+	public HashMap<String, String> getVistaporusuario() {
+		return vistaporusuario;
+	}
+
+	public void setVistaporusuario(HashMap<String, String> vistaporusuario) {
+		this.vistaporusuario = vistaporusuario;
 	}
 	
 	
