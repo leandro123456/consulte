@@ -12,9 +12,13 @@
 	<link rel="stylesheet" type="text/css" href='<c:url value="/resources/mqttResources/style.css" />'>
 	  <link rel="stylesheet" type="text/css" href='<c:url value="/resources/mqttResources/c3.min.css" />'>
 	 
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.min.js" type="text/javascript"></script>
-      <script src='<c:url value="/resources/js/jquery.js" />'></script>	
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.min.js" type="text/javascript"></script>
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+      
+      <script src='<c:url value="/resources/vendor/jquery/jquery.js" />'></script>
+      <script src='<c:url value="/resources/vendor/jquery/jquery.min.js" />'></script>
+      
       
       <script src='<c:url value="/resources/mqttResources/d3.v3.min.js" />'></script>
 	  <script src='<c:url value="/resources/mqttResources/c3.min.js" />'></script>
@@ -293,7 +297,7 @@
                   Activity Log
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="login" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="/login" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
                 </a>
@@ -479,7 +483,6 @@
 
  
   <!-- Bootstrap core JavaScript-->
-  <script src='<c:url value="/resources/vendor/jquery/jquery.min.js" />'></script>
   <script src='<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js" />'></script>
 
   <!-- Core plugin JavaScript-->
@@ -500,15 +503,17 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		//cargarDivs();
-		var user = request.getParameter("user");
+		getElements();
 		function getElements() {
-			var _url = $(location).attr('pathname') +user.email +"/elements";
+			var mail = "${user.email}";
+			var _url = $(location).attr('pathname') +mail+"/elements";
 			$.ajax({ url : _url,
 				contentType: "application/json",
 				dataType: 'json',
 				success: function(data){
-					for(var i = 0; i < data.divvalue.length ; i++){
-						var item = data.divvalue[i];
+					for(var i = 0; i < data.devicename ; i++){
+						var item=data.devicename[i];
+						alert("valor del div: "+"'"+item+"'");
 						$("cargadora").append(item);
 					}
 				}
@@ -521,15 +526,15 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-				sleep(2000);
+				sleep(10000);
                 updateWiget();
                 animateprogress("humedad",50);
-		startConnect();
+		//startConnect();
 	});
 	
-	document.querySelector ('#boton').addEventListener ('click', function() { 
-		animateprogress("humedad",49);   
-	});
+	//document.querySelector ('#boton').addEventListener ('click', function() { 
+//		animateprogress("humedad",49);   
+// 	});
 </script>
 
 

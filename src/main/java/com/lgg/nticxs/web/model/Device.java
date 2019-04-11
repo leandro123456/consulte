@@ -1,6 +1,7 @@
 package com.lgg.nticxs.web.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -195,6 +196,17 @@ public class Device {
 
 	public void setVistaporusuario(HashMap<String, String> vistaporusuario) {
 		this.vistaporusuario = vistaporusuario;
+	}
+
+	public String getUserRole(String userTarget) {
+		if(userowner.equals(userTarget))
+			return User.ROLE_SUPERADMIN;
+		if(users.contains(userTarget))
+			return User.ROLE_USER;
+		if(admins.contains(userTarget))
+			return User.ROLE_ADMIN;
+		else
+			return "fallo";
 	}
 	
 	

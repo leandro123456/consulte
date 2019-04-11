@@ -1,6 +1,8 @@
 package com.lgg.nticxs.web.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -21,13 +23,22 @@ public class DashboardController {
 	@GetMapping( "home/{usermail}/elements")
 	@ResponseBody
 	public String downloadDocument(@PathVariable String usermail)throws IOException {
-		System.out.println("llego");
 		User user = userdao.retrieveByMail(usermail);
         JSONObject json = new JSONObject();
+        List<String> vistascompletas = new ArrayList<>();
+        int j=0;
 		for(String deviceseria : user.getDeviceserialnumber()){
+			System.out.println("serialnmber: "+ deviceseria);
 			Device device = devicedao.retrieveBySerialNumber(deviceseria);
-			json.put("divvalue", device.getVista().get(usermail));
+			if(device!= null){
+				vistascompletas.add(device.getVista().get(usermail));
+				json.put("devicename", vistascompletas);
+				json.put("device"+j, device.getSerialnumber());
+				json.put("role"+device.getSerialnumber(), device.getUserRole(usermail));
+			}
+			j+=j;
 		}
+		json.put("quantity", user.getDeviceserialnumber().size());
 		System.out.println("salio");
         return json.toString();
 	}

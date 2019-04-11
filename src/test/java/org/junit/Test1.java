@@ -99,8 +99,18 @@ public class Test1 {
 		}
 	}
 	
+	//@Test
+	public void testUpdateVista(){
+		DeviceDAO devicedao = new DeviceDAO();
+		Device device = devicedao.retrieveBySerialNumber("111FFF");
+		//device.getVista().clear();
+		String indicadores2 = "<div class=\"col-lg-6 mb-4\"><div class=\"card shadow mb-4\"><div class=\"card-header py-3\">        <h6 class=\"m-0 font-weight-bold text-primary\">Widget of Status</h6></div><div class=\"card-body\"><form class=\"user\" id=\"connection-information-form\">      <div class=\"form-group row\"><b>Hostname or IP Address</b> 	<input type=\"text\" class=\"form-control form-control-user\" id=\"host\" value=\"gw001.iotek.space\" placeholder=\"Hostname\"></div><div class=\"form-group row\">	<b>Port</b>  	<input type=\"text\" class=\"form-control form-control-user\" id=\"port\" value=\"8883\" placeholder=\"Port\">      </div><div class=\"form-group row\"><b>Topic:</b><input id=\"topic\" type=\"text\" class=\"form-control form-control-user\" name=\"topic\" value=\"WTHUSB000000001/state\" placeholder=\"Topic\"></div><hr><input type=\"button\" class=\"btn btn-primary btn-user btn-block\" onclick=\"startConnect()\" value=\"Connect\"><input type=\"button\" class=\"btn btn-primary btn-user btn-block\" onclick=\"startDisconnect()\" value=\"Disconnect\">    </form><div id=\"messages\"></div></div></div></div>";
+		device.getVista().put("t@tes", indicadores2);
+		devicedao.update(device);
+		
+	}
 	
-	@Test
+	//@Test
 	public void searchVistas(){
 		UserDAO userdao = new UserDAO();
 		DeviceDAO devicedao = new DeviceDAO();
