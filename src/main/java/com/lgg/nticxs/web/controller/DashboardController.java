@@ -2,7 +2,9 @@ package com.lgg.nticxs.web.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -24,21 +26,21 @@ public class DashboardController {
 	@ResponseBody
 	public String downloadDocument(@PathVariable String usermail)throws IOException {
 		User user = userdao.retrieveByMail(usermail);
+        List<String> mymap;
         JSONObject json = new JSONObject();
-        List<String> vistascompletas = new ArrayList<>();
-        int j=0;
-		for(String deviceseria : user.getDeviceserialnumber()){
-			System.out.println("serialnmber: "+ deviceseria);
-			Device device = devicedao.retrieveBySerialNumber(deviceseria);
+
+        
+   		for(String deviceserial : user.getDeviceserialnumber()){
+			System.out.println("serialnumber: "+ deviceserial);
+			Device device = devicedao.retrieveBySerialNumber(deviceserial);
 			if(device!= null){
-				vistascompletas.add(device.getVista().get(usermail));
-				json.put("devicename", vistascompletas);
-				json.put("device"+j, device.getSerialnumber());
-				json.put("role"+device.getSerialnumber(), device.getUserRole(usermail));
+				mymap = new ArrayList<>();
+				mymap.add(device.getUserRole(usermail));
+				mymap.add(device.getVista().get(usermail));
+				json.put(deviceserial, mymap);
 			}
-			j+=j;
 		}
-		json.put("quantity", user.getDeviceserialnumber().size());
+   		json.put("deviceserial", user.getDeviceserialnumber());
 		System.out.println("salio");
         return json.toString();
 	}

@@ -511,9 +511,15 @@
 				contentType: "application/json",
 				dataType: 'json',
 				success: function(data){
-					for(var i = 0; i < data.devicename ; i++){
-						var item=data.devicename[i];
-						alert("valor del div: "+"'"+item+"'");
+					for(var i = 0; i < data.deviceserial.length ; i++){
+						var item=data.deviceserial[i];
+						console.log(item);
+						var vara = String(data.deviceserial[i]);
+						console.log(data.vara);
+						for(var j=0; j< data.vara.length; j++){
+							var conjunto = data.item[j];
+							 console.log(conjunto);
+						}
 						$("cargadora").append(item);
 					}
 				}
