@@ -38,12 +38,14 @@ import com.lgg.nticxs.web.DAO.AdminDAO;
 import com.lgg.nticxs.web.DAO.AdministrativoDAO;
 import com.lgg.nticxs.web.DAO.UserDAO;
 import com.lgg.nticxs.web.DAO.AsistenciaDAO;
+import com.lgg.nticxs.web.DAO.DeviceDAO;
 import com.lgg.nticxs.web.DAO.DocenteDAO;
 import com.lgg.nticxs.web.DAO.DocumentoDAO;
 import com.lgg.nticxs.web.DAO.NotaDAO;
 import com.lgg.nticxs.web.DAO.PadreDAO;
 import com.lgg.nticxs.web.model.User;
 import com.lgg.nticxs.web.model.Asistencia;
+import com.lgg.nticxs.web.model.Device;
 import com.lgg.nticxs.web.model.Documento;
 import com.lgg.nticxs.web.model.Materia;
 import com.lgg.nticxs.web.model.Nota;
@@ -60,6 +62,7 @@ public class HomeController {
 	NotaDAO notasdao = new NotaDAO();
 	AsistenciaDAO asistenciadao = new AsistenciaDAO();
 	AdministrativoDAO administdao = new AdministrativoDAO();
+	private DeviceDAO devicedao = new DeviceDAO();
 	//Integer trimestreActual = Utils.TrimestreActual();
 	
 	@GetMapping("homepage/")
@@ -103,6 +106,19 @@ public class HomeController {
 		String nombre = request.getUserPrincipal().getName();
 		User user = userdao.retrieveByMail(nombre);
 		model.addAttribute("user", user);
+		//CARGAR LAS PANTALLAS
+		model.addAttribute("deviceserial", user.getDeviceserialnumber());
+        List<String> mymap;
+   		for(String deviceserial : user.getDeviceserialnumber()){
+			System.out.println("serialnumber: "+ deviceserial);
+			Device device = devicedao.retrieveBySerialNumber(deviceserial);
+			if(device!= null){
+				mymap = new ArrayList<>();
+				mymap.add(device.getUserRole(nombre));
+				mymap.add(device.getVista().get(nombre));
+				model.addAttribute(deviceserial, mymap);
+			}
+		}
 	    return "origin";
 	}
 	

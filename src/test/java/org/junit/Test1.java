@@ -46,12 +46,12 @@ public class Test1 {
 	public void testMakeDevicesOnUser(){
 		try {
 			DeviceDAO devicedao = new DeviceDAO();
-			Device device = devicedao.retrieveBySerialNumber("4564dsd");
+			Device device = devicedao.retrieveBySerialNumber("111FFF");
 			if(device == null){
 				device = new Device();
 				device.setDescription("description");
 				device.setName("nombre");
-				device.setSerialnumber("4564dsd");
+				device.setSerialnumber("111FFF");
 				device.setUserowner("t@tes");	
 				DeviceConfiguration deviceconfiguration = new DeviceConfiguration();
 				deviceconfiguration.setIphost("ip");

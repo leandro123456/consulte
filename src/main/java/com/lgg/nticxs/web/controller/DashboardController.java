@@ -25,11 +25,12 @@ public class DashboardController {
 	@GetMapping( "home/{usermail}/elements")
 	@ResponseBody
 	public String downloadDocument(@PathVariable String usermail)throws IOException {
+		System.out.println("empezo");
 		User user = userdao.retrieveByMail(usermail);
         List<String> mymap;
         JSONObject json = new JSONObject();
-
-        
+        System.out.println("llego a dashboard document");
+        System.out.println("user.getDeviceserialnumber()"+ user.getDeviceserialnumber().size());
    		for(String deviceserial : user.getDeviceserialnumber()){
 			System.out.println("serialnumber: "+ deviceserial);
 			Device device = devicedao.retrieveBySerialNumber(deviceserial);

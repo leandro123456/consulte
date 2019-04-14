@@ -513,19 +513,29 @@
 				success: function(data){
 					for(var i = 0; i < data.deviceserial.length ; i++){
 						var item=data.deviceserial[i];
-						console.log(item);
+// 						console.log(item);
 						var vara = String(data.deviceserial[i]);
-						console.log(data.vara);
-						for(var j=0; j< data.vara.length; j++){
-							var conjunto = data.item[j];
-							 console.log(conjunto);
-						}
+// 						console.log("hello: "+ vara);
+// 						var vara = '4564dsd';
+// 						console.log(data.item[0]);
+// 						for(var j=0; j< data."4564dsd".length; j++){
+// 							var conjunto = data.item[j];
+// 							 console.log(conjunto);
+// 						}
+						var item = "${deviceserial[0]}";
+						console.log("item: "+item);
+						var valor = "${item}";
+						console.log("valor: "+valor);
 						$("cargadora").append(item);
 					}
 				}
 			});
 		}   
 	})	
+	
+	function test(a) {
+		console.log(data.a.length);
+	}
 </script>
 
 
