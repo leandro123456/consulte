@@ -90,7 +90,7 @@ public class HomeController {
     }
 	
 	@RequestMapping("/home")
-	public String books(HttpServletRequest request, Model model){
+	public ModelAndView books(HttpServletRequest request, ModelMap model){
 		String role= "";
 		try {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -108,18 +108,25 @@ public class HomeController {
 		model.addAttribute("user", user);
 		//CARGAR LAS PANTALLAS
 		model.addAttribute("deviceserial", user.getDeviceserialnumber());
-        List<String> mymap;
+        List<String> mymap= new ArrayList<>();
+        int i =0;
    		for(String deviceserial : user.getDeviceserialnumber()){
 			System.out.println("serialnumber: "+ deviceserial);
 			Device device = devicedao.retrieveBySerialNumber(deviceserial);
 			if(device!= null){
-				mymap = new ArrayList<>();
-				mymap.add(device.getUserRole(nombre));
+//				mymap = new ArrayList<>();
+//				mymap.add(device.getUserRole(nombre));
+//				mymap.add(device.getVista().get(nombre));
+//				model.addAttribute(deviceserial, mymap);
+//				System.out.println("armo este: "+ deviceserial);
+//				System.out.println("armo2: "+mymap.get(1));
+				model.addAttribute("uno"+i, device.getVista().get(nombre));
 				mymap.add(device.getVista().get(nombre));
-				model.addAttribute(deviceserial, mymap);
+				i+=1;
 			}
 		}
-	    return "origin";
+   		model.addAttribute("vistas", mymap);
+   		return new ModelAndView("origin", model);
 	}
 	
 	@PostMapping("home/")

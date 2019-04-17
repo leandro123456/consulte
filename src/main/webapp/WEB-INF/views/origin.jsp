@@ -434,6 +434,19 @@
 		     </div>
            </div>
            
+           <c:set var = "serial" value="${deviceserial[0]}"/>
+<%--            <c:set var = "roleAndNameCompleteSubA" value="${fn:substringAfter(roleAndNameComplete, '[')}"/> --%>
+<%--            <c:set var = "roleAndNameCompleteSubB" value="${fn:substringBefore(roleAndNameCompleteSubA, ']')}"/> --%>
+           
+<%--            <c:set var = "compra" value="${primero}"/> --%>
+           
+<%--            <% String variable = "${deviceserial}"; %> --%>
+<%--            <div>valor:<%= session.getAttribute("serial") %></div> --%>
+            
+           <c:forEach items="${vistas}" var="vista">
+                ${vista}
+          </c:forEach>
+           
           </div>
         </div>
         <!-- /.container-fluid -->
@@ -514,7 +527,7 @@
 					for(var i = 0; i < data.deviceserial.length ; i++){
 						var item=data.deviceserial[i];
 // 						console.log(item);
-						var vara = String(data.deviceserial[i]);
+// 						var vara = "${vistas[i]}";
 // 						console.log("hello: "+ vara);
 // 						var vara = '4564dsd';
 // 						console.log(data.item[0]);
@@ -522,11 +535,11 @@
 // 							var conjunto = data.item[j];
 // 							 console.log(conjunto);
 // 						}
-						var item = "${deviceserial[0]}";
-						console.log("item: "+item);
-						var valor = "${item}";
-						console.log("valor: "+valor);
-						$("cargadora").append(item);
+// 						var item = "${deviceserial[0]}";
+// 						console.log("item: "+item);
+// 						var valor = "${item}";
+// 						console.log("valor: "+valor);
+// 						$("cargadora").append(vara);
 					}
 				}
 			});
