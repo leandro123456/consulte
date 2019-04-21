@@ -1,32 +1,115 @@
 package org.junit;
 
 import com.lgg.nticxs.web.DAO.UserDAO;
+import com.lgg.nticxs.web.DAO.VistaDAO;
 import com.lgg.nticxs.web.DAO.helper.MongoDBRemove;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.json.JSONObject;
 
-import com.lgg.nticxs.web.DAO.AsistenciaDAO;
-import com.lgg.nticxs.web.DAO.CiclolectivoDAO;
 import com.lgg.nticxs.web.DAO.DeviceDAO;
-import com.lgg.nticxs.web.DAO.DocenteDAO;
-import com.lgg.nticxs.web.DAO.DocumentoDAO;
-import com.lgg.nticxs.web.DAO.NotaDAO;
 import com.lgg.nticxs.web.model.User;
-import com.lgg.nticxs.web.model.Asistencia;
+import com.lgg.nticxs.web.model.Vista;
 import com.lgg.nticxs.web.model.Ciclolectivo;
 import com.lgg.nticxs.web.model.Device;
 import com.lgg.nticxs.web.model.DeviceConfiguration;
-import com.lgg.nticxs.web.model.Docente;
-import com.lgg.nticxs.web.model.Documento;
 import com.lgg.nticxs.web.model.Materia;
 import com.lgg.nticxs.web.model.Materia.materia;
-import com.lgg.nticxs.web.model.Nota;
 
 public class Test1 {
+	
+	
+	//@Test
+	public void testSearchVista(){
+		DeviceDAO devicedao= new DeviceDAO();
+		VistaDAO vistadao= new VistaDAO();
+
+		UserDAO userdao = new UserDAO();
+		User user = userdao.retrieveByMail("t@tes");
+
+		for(String deviceserial : user.getDeviceserialnumber()){
+			System.out.println("serialnumber: "+ deviceserial);
+			Device device = devicedao.retrieveBySerialNumber(deviceserial);
+			String valor = device.getVista().get("t@tes");
+			System.out.println(valor);
+			String[] a = valor.split(";");
+			System.out.println(a.length);
+			for(int i=0; i<a.length; i++) {
+				System.out.println(a[i]);
+			}
+			Vista vista = vistadao.retrieveByName(a[0]);
+			String contenidototal="";
+			for(int i=1; i<a.length; i++) {
+				String value = vista.getContenido().get(a[i]);
+				contenidototal=contenidototal+value;
+			}
+			String vistatotal = vista.getInicio()+contenidototal+vista.getFin();
+			System.out.println(vistatotal);
+		}
+	}
+	
+	
+	//@Test
+	public void testMakeAllViews() {
+		String inicio= "<div class=\"col-lg-6 mb-4\"><div class=\"card shadow mb-4\"><div class=\"card-header py-3\"><h6 class=\"m-0 font-weight-bold text-primary\">Sensor de Temperatura Y Humedad</h6></div>";
+		String humedad="<div class=\"card-body\"><h4 id=\"humedads\" class=\"small font-weight-bold\">Humedad</h4><div class=\"progress mb-4\"><div class=\"progress-bar\" id=\"humedad\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div></div>";
+		String tempC= "<h4 id=\"temperaturacs\" class=\"small font-weight-bold\">Temperatura °C</h4><div class=\"progress mb-4\"><div id=\"temperaturac\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"70\"></div></div>";
+		String sensC= "<h4 id=\"sensacioncs\" class=\"small font-weight-bold\">Sensacion Termica °C</h4><div class=\"progress mb-4\"><div id=\"sensacionc\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"70\"></div></div>";
+		String tempF= "<h4 id=\"temperaturafs\" class=\"small font-weight-bold\">Temperatura °F</h4><div class=\"progress mb-4\"><div id=\"temperaturaf\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"140\"></div></div>";
+		String sensF= "<h4 id=\"sensacionfs\" class=\"small font-weight-bold\">Sensacion Termica °F</h4><div class=\"progress mb-4\"><div id=\"sensacionf\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"140\"></div></div>";
+		String fin= "</div></div></div>";
+		
+		VistaDAO vistadao = new VistaDAO();
+		Vista vista= new Vista();
+		vista.setName("temperatura_horizontal");
+		vista.setInicio(inicio);
+		vista.setFin(fin);
+		Map<String, String> elem= new HashMap<>();
+		elem.put("Hum",humedad);
+		elem.put("tempC", tempC);
+		elem.put("sensC", sensC);
+		elem.put("tempF", tempF);
+		elem.put("sensF", sensF);
+		vista.setContenido(elem);
+		vistadao.create(vista);
+		System.out.println("termino vista horizontal");
+		
+		inicio= "<div class=\"col-12\"> <div class=\"card shadow mb-4\"><div class=\"card-header py-3\"><h6 class=\"m-0 font-weight-bold text-primary\">Sensor de Temperatura Y Humedad</h6></div>";
+		humedad= "<div class=\"card border-left-primary shadow h-20 py-2\"> <div class=\"card-body\"> <div class=\"row no-gutters align-items-center\"> <div class=\"col-12\"><div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\">Humedad</div> </div><div class=\"col-12\" id=\"chartHum\"> <i class=\"fas fa-calendar fa-2x text-gray-300\"></i> </div> </div> </div></div>";
+		String indiceTemp="<div class=\"card border-left-primary shadow h-70 py-2\"><div class=\"card-body\"><div class=\"row no-gutters align-items-center\"><div class=\"col-12\"><div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\">Temperatura</div></div>";
+		tempC= "<div class=\"col-6\" id=\"chartTempC\"></div>";
+		sensC= "<div class=\"col-6\" id=\"chartHiC\"></div>";
+		tempF= "<div class=\"col-6\" id=\"chartTempF\"></div>";
+		sensF= "<div class=\"col-6\" id=\"chartHiF\"></div>";
+		String finTemp="</div></div></div>";
+		fin= "</div></div>";
+		
+		vistadao = new VistaDAO();
+		vista= new Vista();
+		vista.setName("temperatura_reloj");
+		vista.setInicio(inicio);
+		vista.setFin(fin);
+		elem= new HashMap<>();
+		elem.put("Hum",humedad);
+		elem.put("tempC", tempC);
+		elem.put("sensC", sensC);
+		elem.put("tempF", tempF);
+		elem.put("sensF", sensF);
+		elem.put("indiceTemp", indiceTemp);
+		elem.put("finTemp", finTemp);
+		vista.setContenido(elem);
+		vistadao.create(vista);
+		System.out.println("termino vista reloj");
+	}
+	
+	
 	
 	
 	//@Test
@@ -42,7 +125,7 @@ public class Test1 {
 		System.out.println("borro");
 	}
 	
-	//@Test
+//	@Test
 	public void testMakeDevicesOnUser(){
 		try {
 			DeviceDAO devicedao = new DeviceDAO();
@@ -69,9 +152,13 @@ public class Test1 {
 				device.getUsers().add("juli@test");
 				devicedao.create(device);
 				
-				String vista = "<div class=\"col-lg-6 mb-4\"><div class=\"card shadow mb-4\"><div class=\"card-header py-3\"><h6 class=\"m-0 font-weight-bold text-primary\">Sensor de Temperatura Y Humedad</h6></div><div class=\"card-body\"><h4 id=\"humedads\" class=\"small font-weight-bold\"></h4><div class=\"progress mb-4\"><div class=\"progress-bar\" id=\"humedad\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div></div><h4 id=\"temperaturacs\" class=\"small font-weight-bold\">Temperatura °C</h4><div class=\"progress mb-4\"><div id=\"temperaturac\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"70\"></div></div><h4 id=\"sensacioncs\" class=\"small font-weight-bold\">Sensacion Termica °C</h4><div class=\"progress mb-4\"><div id=\"sensacionc\" class=\"progress-bar  bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"70\"></div></div><h4 id=\"temperaturafs\" class=\"small font-weight-bold\">Temperatura °F</h4><div class=\"progress mb-4\"><div id=\"temperaturaf\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"140\"></div></div><h4 id=\"sensacionfs\" class=\"small font-weight-bold\">Sensacion Termica °F</h4><div class=\"progress\"><div id=\"sensacionf\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"140\"></div></div></div></div></div>";
+				//String vista = "<div class=\"col-lg-6 mb-4\"><div class=\"card shadow mb-4\"><div class=\"card-header py-3\"><h6 class=\"m-0 font-weight-bold text-primary\">Sensor de Temperatura Y Humedad</h6></div><div class=\"card-body\"><h4 id=\"humedads\" class=\"small font-weight-bold\"></h4><div class=\"progress mb-4\"><div class=\"progress-bar\" id=\"humedad\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div></div><h4 id=\"temperaturacs\" class=\"small font-weight-bold\">Temperatura °C</h4><div class=\"progress mb-4\"><div id=\"temperaturac\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"70\"></div></div><h4 id=\"sensacioncs\" class=\"small font-weight-bold\">Sensacion Termica °C</h4><div class=\"progress mb-4\"><div id=\"sensacionc\" class=\"progress-bar  bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"70\"></div></div><h4 id=\"temperaturafs\" class=\"small font-weight-bold\">Temperatura °F</h4><div class=\"progress mb-4\"><div id=\"temperaturaf\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"140\"></div></div><h4 id=\"sensacionfs\" class=\"small font-weight-bold\">Sensacion Termica °F</h4><div class=\"progress\"><div id=\"sensacionf\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"140\"></div></div></div></div></div>";
 				String indicadores2 = "<div class=\"col-lg-6 mb-4\"><div class=\"card shadow mb-4\"><div class=\"card-header py-3\">        <h6 class=\"m-0 font-weight-bold text-primary\">Widget of Status</h6></div><div class=\"card-body\"><form class=\"user\" id=\"connection-information-form\">      <div class=\"form-group row\"><b>Hostname or IP Address</b> 	<input type=\"text\" class=\"form-control form-control-user\" id=\"host\" value=\"gw001.iotek.space\" placeholder=\"Hostname\"></div><div class=\"form-group row\">	<b>Port</b>  	<input type=\"text\" class=\"form-control form-control-user\" id=\"port\" value=\"8883\" placeholder=\"Port\">      </div><div class=\"form-group row\"><b>Topic:</b><input id=\"topic\" type=\"text\" class=\"form-control form-control-user\" name=\"topic\" value=\"WTHUSB000000001/state\" placeholder=\"Topic\"></div><hr><input type=\"button\" class=\"btn btn-primary btn-user btn-block\" onclick=\"startConnect()\" value=\"Connect\"><input type=\"button\" class=\"btn btn-primary btn-user btn-block\" onclick=\"startDisconnect()\" value=\"Disconnect\">    </form><div id=\"messages\"></div></div></div></div>";
-				device.getVista().put(device.getUserowner(), vista);
+				
+				
+				String vistareloj="temperatura_reloj;Hum;indiceTemp;tempC;sensC;finTemp";
+				
+				device.getVista().put(device.getUserowner(), vistareloj);
 				device.getVista().put("pepe@test", indicadores2);
 				
 				String jsonstring = "{"
@@ -81,10 +168,7 @@ public class Test1 {
 						+ "parametername:"+"'Hum'"+","
 						+ "tipodedato:"+"'Number'"+","
 						+ "vista:"+"'barrahorizontal'"
-						+ "}";
-				
-				device.getVistaporusuario().put("t@tes", jsonstring);
-				
+						+ "}";				
 				devicedao.update(device);
 			}
 			
@@ -102,10 +186,10 @@ public class Test1 {
 	//@Test
 	public void testUpdateVista(){
 		DeviceDAO devicedao = new DeviceDAO();
-		Device device = devicedao.retrieveBySerialNumber("111FFF");
-		//device.getVista().clear();
-		String indicadores2 = "<div class=\"col-lg-6 mb-4\"><div class=\"card shadow mb-4\"><div class=\"card-header py-3\">        <h6 class=\"m-0 font-weight-bold text-primary\">Widget of Status</h6></div><div class=\"card-body\"><form class=\"user\" id=\"connection-information-form\">      <div class=\"form-group row\"><b>Hostname or IP Address</b> 	<input type=\"text\" class=\"form-control form-control-user\" id=\"host\" value=\"gw001.iotek.space\" placeholder=\"Hostname\"></div><div class=\"form-group row\">	<b>Port</b>  	<input type=\"text\" class=\"form-control form-control-user\" id=\"port\" value=\"8883\" placeholder=\"Port\">      </div><div class=\"form-group row\"><b>Topic:</b><input id=\"topic\" type=\"text\" class=\"form-control form-control-user\" name=\"topic\" value=\"WTHUSB000000001/state\" placeholder=\"Topic\"></div><hr><input type=\"button\" class=\"btn btn-primary btn-user btn-block\" onclick=\"startConnect()\" value=\"Connect\"><input type=\"button\" class=\"btn btn-primary btn-user btn-block\" onclick=\"startDisconnect()\" value=\"Disconnect\">    </form><div id=\"messages\"></div></div></div></div>";
-		device.getVista().put("t@tes", indicadores2);
+		Device device = devicedao.retrieveBySerialNumber("ASERAS");
+		//String vista = "<div class=\"col-lg-6 mb-4\"><div class=\"card shadow mb-4\"><div class=\"card-header py-3\"><h6 class=\"m-0 font-weight-bold text-primary\">Sensor de Temperatura Y Humedad</h6></div><div class=\"card-body\"><h4 id=\"humedads\" class=\"small font-weight-bold\"></h4><div class=\"progress mb-4\"><div class=\"progress-bar\" id=\"humedad\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div></div><h4 id=\"temperaturacs\" class=\"small font-weight-bold\">Temperatura °C</h4><div class=\"progress mb-4\"><div id=\"temperaturac\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"70\"></div></div><h4 id=\"sensacioncs\" class=\"small font-weight-bold\">Sensacion Termica °C</h4><div class=\"progress mb-4\"><div id=\"sensacionc\" class=\"progress-bar  bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"70\"></div></div><h4 id=\"temperaturafs\" class=\"small font-weight-bold\">Temperatura °F</h4><div class=\"progress mb-4\"><div id=\"temperaturaf\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"140\"></div></div><h4 id=\"sensacionfs\" class=\"small font-weight-bold\">Sensacion Termica °F</h4><div class=\"progress\"><div id=\"sensacionf\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"140\"></div></div></div></div></div>";
+		String vista="temperatura_horizontal;Hum;tempC;sensC";
+		device.getVista().put("t@tes", vista);
 		devicedao.update(device);
 		
 	}
@@ -119,7 +203,7 @@ public class Test1 {
 //		System.out.println(device.getDescription());
 //		System.out.println("esta es la vista: "+ device.getVista().get("t@tes"));
 		
-		String allenvelope=device.getVistaporusuario().get("t@tes");
+		String allenvelope=device.getVista().get("t@tes");
 		System.out.println("original: "+allenvelope);
 		String pattern = "parametername";
 		String[] vector = allenvelope.split(pattern);

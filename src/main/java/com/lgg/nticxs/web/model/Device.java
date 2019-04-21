@@ -1,7 +1,6 @@
 package com.lgg.nticxs.web.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -56,8 +55,8 @@ public class Device {
 	@Field (name = "vista")
 	private HashMap<String, String> vista;
 	
-	@Field (name = "vistaporusuario")
-	private HashMap<String, String> vistaporusuario;
+//	@Field (name = "vistaporusuario")
+//	private HashMap<String, String> vistaporusuario;
 	
 	@ElementCollection 
 	@Field(name="users")
@@ -75,7 +74,7 @@ public class Device {
 		users = new  ArrayList<>();
 		admins = new ArrayList<>();
 		vista = new HashMap<>();
-		vistaporusuario = new HashMap<>();
+//		vistaporusuario = new HashMap<>();
 	}
 
 	public String getUserowner() {
@@ -190,13 +189,6 @@ public class Device {
 		this.admins = admins;
 	}
 
-	public HashMap<String, String> getVistaporusuario() {
-		return vistaporusuario;
-	}
-
-	public void setVistaporusuario(HashMap<String, String> vistaporusuario) {
-		this.vistaporusuario = vistaporusuario;
-	}
 
 	public String getUserRole(String userTarget) {
 		if(userowner.equals(userTarget))

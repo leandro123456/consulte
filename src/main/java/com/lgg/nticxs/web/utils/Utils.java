@@ -7,18 +7,29 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Random;
 import java.util.TimeZone;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
+import com.lgg.nticxs.web.DAO.DeviceDAO;
+import com.lgg.nticxs.web.DAO.UserDAO;
+import com.lgg.nticxs.web.DAO.VistaDAO;
+import com.lgg.nticxs.web.model.Device;
 import com.lgg.nticxs.web.model.Nota;
+import com.lgg.nticxs.web.model.User;
+import com.lgg.nticxs.web.model.Vista;
 
 public class Utils {
+	private static DeviceDAO devicedao= new DeviceDAO();
+	private static VistaDAO vistadao= new VistaDAO();
+	private static UserDAO userdao = new UserDAO();
 	
 	public static byte[] incByteArray(byte[] value) {
 		byte[] result = new byte[value.length];
@@ -429,5 +440,59 @@ public class Utils {
 			return null;
 		}
 	
+		public static List<String> vistas(String nombre){
+			List<String> lista = new ArrayList<>();
+			User user = userdao.retrieveByMail(nombre);
+			for(String deviceserial : user.getDeviceserialnumber()){
+				Device device = devicedao.retrieveBySerialNumber(deviceserial);
+				String valor = device.getVista().get(nombre);
+				String[] a = valor.split(";");
+				String vistatotal = armarVista(a,a[0]);
+				lista.add(vistatotal);
+			}
+			return lista;
+		}
 
+		private static String armarVista(String[] a, String nombre) {
+			Vista vista = vistadao.retrieveByName(nombre);
+			String contenidototal="";
+			for(int i=1;i<a.length;i++) {
+				switch (nombre) {
+				case "temperatura_reloj":
+					if(a[i].equals("Hum"))
+						contenidototal= contenidototal+vista.getContenido().get("Hum");
+					if(a[i].equals("indiceTemp"))
+						contenidototal= contenidototal+vista.getContenido().get("indiceTemp");
+					if(a[i].equals("tempC"))
+						contenidototal= contenidototal+vista.getContenido().get("tempC");
+					if(a[i].equals("sensC"))
+						contenidototal= contenidototal+vista.getContenido().get("sensC");
+					if(a[i].equals("tempF" ))
+						contenidototal= contenidototal+vista.getContenido().get("tempF");
+					if(a[i].equals("sensF" ))
+						contenidototal= contenidototal+vista.getContenido().get("sensF");
+					if(a[i].equals("finTemp"))
+						contenidototal= contenidototal+vista.getContenido().get("finTemp");
+					break;
+				case "temperatura_horizontal":
+					if(a[i].equals("Hum"))
+						contenidototal= contenidototal+vista.getContenido().get("Hum");
+					if(a[i].equals("tempC"))
+						contenidototal= contenidototal+vista.getContenido().get("tempC");
+					if(a[i].equals("sensC"))
+						contenidototal= contenidototal+vista.getContenido().get("sensC");
+					if(a[i].equals("tempF"))
+						contenidototal= contenidototal+vista.getContenido().get("tempF");
+					if(a[i].equals("sensF"))
+						contenidototal= contenidototal+vista.getContenido().get("sensF");
+					break;
+				default:
+					break;
+				}
+			}
+			String vistatotal = vista.getInicio()+contenidototal+vista.getFin();
+			System.out.println("salio de la vsta total");
+			return vistatotal;
+		}
+		
 }

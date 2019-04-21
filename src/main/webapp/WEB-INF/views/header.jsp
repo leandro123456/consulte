@@ -2,221 +2,214 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
-<!-- <!DOCTYPE html> -->
-<!-- <html lang="en"> -->
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-<head>
+      <!-- Sidebar - Brand -->
+      
+		<form role="form" action="<c:url value="/home"/>" method="get" enctype="multipart/form-data">
+		      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="javascript:;" onclick="parentNode.submit();">
+		        <div class="sidebar-brand-icon rotate-n-15">
+		          <i class="fas fa-laugh-wink"></i>
+		        </div>
+		        <div class="sidebar-brand-text mx-3">Dashboard <sup>*</sup></div>
+		      </a>
+		</form>
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item active">
+	      <form role="form" action="<c:url value="/home"/>" method="get" enctype="multipart/form-data">
+	        <a class="nav-link" href="javascript:;" onclick="parentNode.submit();">
+	          <i class="fas fa-fw fa-tachometer-alt"></i>
+	          <span>Dashboard</span></a>
+		  </form>
+      </li>
 
-    <title>MQTT managment</title>
+      <!-- Divider -->
+      <hr class="sidebar-divider">
 
-    <!-- Favicon -->
-    <link rel='shortcut icon' href='<c:url value="/resources/images/favicon.ico" />' type="image/x-icon"/>
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Interface
+      </div>
 
-    <!-- Bootstrap Core CSS -->
-    <link href='<c:url value="/resources/css/bootstrap.min.css" />' rel="stylesheet">
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-cog"></i>
+          <span>Components</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Custom Components:</h6>
+            <a class="collapse-item" href="buttons.html">My own</a>
+            <a class="collapse-item" href="cards.html">Shared with me</a>
+          </div>
+        </div>
+      </li>
 
-    <!-- Custom CSS -->
-	<link href='<c:url value="/resources/css/demo.css" />' rel="stylesheet">
-	
-    <!-- Custom Fonts -->
-    <link href='<c:url value="/resources/font-awesome/css/font-awesome.min.css" />' rel="stylesheet" type="text/css">
+      <!-- Nav Item - Utilities Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fas fa-fw fa-wrench"></i>
+          <span>Tools</span>
+        </a>
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Debug Utilities:</h6>
+            <a class="collapse-item" href="utilities-color.html">My own</a>
+            <a class="collapse-item" href="utilities-border.html">Shared with me</a>
+          </div>
+        </div>
+      </li>
 
-	<!-- Custom jQuery -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
 
- <link href='<c:url value="/resources/css/bootstrap.min.css" />' rel="stylesheet">
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
 
-   
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
- 
+    </ul>
+    <!-- End of Sidebar -->
 
-   <link href='<c:url value="/resources/css/all.min.css"/>' rel="stylesheet" type="text/css">
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
 
-<!-- Custom CSS -->
-    <link href='<c:url value="/resources/css/sb-admin-2.min.css" />' rel="stylesheet">
+      <!-- Main Content -->
+      <div id="content">
 
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-</head>
+          <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
 
-<body>
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ml-auto">
 
-    <div id="wrapper">
+            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+            <li class="nav-item dropdown no-arrow d-sm-none">
+              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-search fa-fw"></i>
+              </a>
+            </li>
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="<c:url value='/home/' />"><img alt="Nticxs" width="50%" src='<c:url value="/resources/images/logo.png" />'></a>
-            </div>
-            <!-- Top Menu Items -->
-            <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
-                    <c:set var = "roleAndNameComplete" value="${pageContext.request.userPrincipal.authorities}"/>
-                    <c:set var = "roleAndNameCompleteSubA" value="${fn:substringAfter(roleAndNameComplete, '[')}"/>
-                    <c:set var = "roleAndNameCompleteSubB" value="${fn:substringBefore(roleAndNameCompleteSubA, ']')}"/>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>
-                    ${pageContext.request.userPrincipal.name} ROLE: ${roleAndNameCompleteSubB}
-                    <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <!--<li>
-                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        </li>
-                        <li class="divider"></li>-->
-                        <li>
-                            <a href="<c:url value="/logoutsession" />"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <li id="provisioning">
-                        <a href="<c:url value='/home/provisioning' />" data-toggle="tooltip" title="Profile templates and output files upload"><i class="fa fa-fw fa-plus-square-o"></i> Aprovisionamiento</a>
-                    </li>
+            <!-- Nav Item - Alerts -->
+            <li class="nav-item dropdown no-arrow mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bell fa-fw"></i>
+                <!-- Counter - Alerts SE MUESTRA CUANDO TIENE MENSAJES-->
+<!--                 <span class="badge badge-danger badge-counter">3+</span> -->
+              </a>
+              <!-- Dropdown - Alerts -->
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+                <h6 class="dropdown-header">
+                  Alerts Center
+                </h6>              
+<!--                 <a class="dropdown-item d-flex align-items-center" href="#"> -->
+<!--                   <div class="mr-3"> -->
+<!--                     <div class="icon-circle bg-warning"> -->
+<!--                       <i class="fas fa-exclamation-triangle text-white"></i> -->
+<!--                     </div> -->
+<!--                   </div> -->
+<!--                   <div> -->
+<!--                     <div class="small text-gray-500">December 2, 2019</div> -->
+<!--                     Spending Alert: We've noticed unusually high spending for your account. -->
+<!--                   </div> -->
+<!--                 </a> -->
+                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+              </div>
+            </li>
 
-		            <li id="documentExplorer">
-		                <a href="<c:url value="/home/" />${materia}/explorer/document"  data-toggle="tooltip" title="Edit template parameters" ><i class="fa fa-fw fa-file-text-o"></i> Documentos</a>
-		            </li>
+            <!-- Nav Item - Messages -->
+            <li class="nav-item dropdown no-arrow mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-envelope fa-fw"></i>
+                <!-- Counter - Messages SE MUETRA CUAND TIENE MENSAJES-->
+<!--                 <span class="badge badge-danger badge-counter">7</span> -->
+              </a>
+              <!-- Dropdown - Messages -->
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
+                <h6 class="dropdown-header">
+                  Message Center
+                </h6>
+<!--                 <a class="dropdown-item d-flex align-items-center" href="#"> -->
+<!--                   <div class="dropdown-list-image mr-3"> -->
+<!--                     <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt=""> -->
+<!--                     <div class="status-indicator bg-success"></div> -->
+<!--                   </div> -->
+<!--                   <div class="font-weight-bold"> -->
+<!--                     <div class="text-truncate">Hi there! I am wondering if you can help me with a problem I've been having.</div> -->
+<!--                     <div class="small text-gray-500">Emily Fowler · 58m</div> -->
+<!--                   </div> -->
+<!--                 </a> -->
+                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+              </div>
+            </li>
 
-		            <li id="documentExplorer">
-		                <a href="<c:url value="/home/" />${materia}/explorer/notes"  data-toggle="tooltip" title="Edit template parameters" ><i class="fa fa-fw fa-file-text-o"></i> Notas</a>
-		            </li>
+            <div class="topbar-divider d-none d-sm-block"></div>
 
-		           <li id="documentExplorer">
-		                <a href="<c:url value="/home/" />${materia}/explorer/assistence"  data-toggle="tooltip" title="Edit template parameters" ><i class="fa fa-fw fa-file-text-o"></i> Asistencias</a>
-		            </li>
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<%--                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">"${usuario.firstname}"</span> --%>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${user.firstname}</span>
+                <img class="img-profile rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60">
+              </a>
+              <!-- Dropdown - User Information -->
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Profile
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Settings
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Activity Log
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/login" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Logout
+                </a>
+              </div>
+            </li>
 
+          </ul>
 
-                    <li id="amdDP">
-                        <a href="<c:url value='/home/amddp' />"><i class="fa fa-fw fa-arrows-alt"  data-toggle="tooltip" title="SM-SRs"></i> AMD DP</a>
-                    </li>
-
-		            <li id="generalConfiguration">
-		                <a href="<c:url value='/home/general/configuration' />" data-toggle="tooltip" title="General settings"><i class="fa fa-fw fa-cogs"></i> General Configuration</a>
-		            </li>
-	                	
-                    <script src='<c:url value="/resources/js/jqueryHeader.js" />'></script>
-                    
-                    <c:if test="${not empty pageContext.request.userPrincipal}">
-                        <c:if test="${pageContext.request.isUserInRole('SUPERADMIN')}">
-                            <li>
-                                <a href="<c:url value='/home/send/command' />" data-toggle="tooltip" title="Profile templates and output files upload"><i class="fa fa-fw fa-paper-plane-o"></i> Send Command</a>
-                            </li>   
-                            <li>
-                                <a href="<c:url value='/home/view/instance/logs' />" data-toggle="tooltip" title="Profile templates and output files upload"><i class="fa fa-fw fa-building-o"></i> Set Preset Commands</a>
-                            </li>   
-                        </c:if>
-                    </c:if>
-                </ul>
-                
-            </div>    
-            <!-- /.navbar-collapse -->
         </nav>
+        <!-- End of Topbar -->
 
-        <c:set var = "auth" value = "${pageContext.request.userPrincipal.authorities}" />
-
-        <c:set var = "roleAdmin" value = "false"/>
-        <c:set var = "roleAdminDP" value = "false"/>
-        <c:set var = "roleAdminDPPlus" value = "false"/>
-        <c:set var = "roleAdminSR" value = "false"/>
-
-        <c:set var = "roleOper" value = "false"/>
-        <c:set var = "roleOperDP" value = "false"/>
-        <c:set var = "roleOperDPPlus" value = "false"/>
-        <c:set var = "roleOperSR" value = "false"/>
-
-        <c:set var = "roleUser" value = "false"/>
-        <c:set var = "roleUserDP" value = "false"/>
-        <c:set var = "roleUserDPPlus" value = "false"/>
-        <c:set var = "roleUserSR" value = "false"/>
-
-        <!-- Set administrator category -->
-        <c:if test = "${auth == '[ADMIN]'}">
-            <c:set var = "roleAdmin" value = "true"/>
-        </c:if>
-
-        <c:if test = "${auth == '[ADMINDP]'}">
-            <c:set var = "roleAdminDP" value = "true"/>
-        </c:if>
-
-        <c:if test = "${auth == '[ADMINDP+]'}">
-            <c:set var = "roleAdminDPPlus" value = "true"/>
-        </c:if>
-
-        <c:if test = "${auth == '[ADMINSR]'}">
-            <c:set var = "roleAdminSR" value = "true"/>
-        </c:if>
-
-
-        <!-- Set operetor category -->
-        <c:if test = "${auth == '[OPER]'}">
-            <c:set var = "roleOper" value = "true"/>
-        </c:if>
-
-        <c:if test = "${auth == '[OPERDP]'}">
-            <c:set var = "roleOperDP" value = "true"/>
-        </c:if>
-
-        <c:if test = "${auth == '[OPERDP+]'}">
-            <c:set var = "roleOperDPPlus" value = "true"/>
-        </c:if>
-
-        <c:if test = "${auth == '[OPERSR]'}">
-            <c:set var = "roleOperSR" value = "true"/>
-        </c:if>
-
-
-        <!-- Set user category -->
-        <c:if test = "${auth == '[USER]'}">
-            <c:set var = "roleUser" value = "true"/>
-        </c:if>
-
-        <c:if test = "${auth == '[USERDP]'}">
-            <c:set var = "roleUserDP" value = "true"/>
-        </c:if>
-
-        <c:if test = "${auth == '[USERDP+]'}">
-            <c:set var = "roleUserDPPlus" value = "true"/>
-        </c:if>
-
-        <c:if test = "${auth == '[USERSR]'}">
-            <c:set var = "roleUserSR" value = "true"/>
-        </c:if>
-
-        <script type="text/javascript">
-            // Check login
-            var notEmptyUser = ${not empty pageContext.request.userPrincipal};
-
-            // Load administrator category
-
-            var roleAdmin = ${roleAdmin};
-            var roleAdminDP = ${roleAdminDP};
-            var roleAdminDPPlus = ${roleAdminDPPlus};
-            var roleAdminSR = ${roleAdminSR};
-
-            // Load operetor category
-            var roleOper = ${roleOper};
-            var roleOperDP = ${roleOperDP};
-            var roleOperDPPlus = ${roleOperDPPlus};
-            var roleOperSR = ${roleOperSR};
-
-            // Load user category
-            var roleUser = ${roleUser};
-            var roleUserDP = ${roleUserDP};
-            var roleUserDPPlus = ${roleUserDPPlus};
-            var roleUserSR = ${roleUserSR};
-        </script>
-</div>
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <form role="form" action="<c:url value="/login"/>" method="get" enctype="multipart/form-data">
+          	<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          	<a class="btn btn-primary" href="javascript:;" onclick="parentNode.submit();">Logout</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+    
+  

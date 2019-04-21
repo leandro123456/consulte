@@ -106,26 +106,8 @@ public class HomeController {
 		String nombre = request.getUserPrincipal().getName();
 		User user = userdao.retrieveByMail(nombre);
 		model.addAttribute("user", user);
-		//CARGAR LAS PANTALLAS
 		model.addAttribute("deviceserial", user.getDeviceserialnumber());
-        List<String> mymap= new ArrayList<>();
-        int i =0;
-   		for(String deviceserial : user.getDeviceserialnumber()){
-			System.out.println("serialnumber: "+ deviceserial);
-			Device device = devicedao.retrieveBySerialNumber(deviceserial);
-			if(device!= null){
-//				mymap = new ArrayList<>();
-//				mymap.add(device.getUserRole(nombre));
-//				mymap.add(device.getVista().get(nombre));
-//				model.addAttribute(deviceserial, mymap);
-//				System.out.println("armo este: "+ deviceserial);
-//				System.out.println("armo2: "+mymap.get(1));
-				model.addAttribute("uno"+i, device.getVista().get(nombre));
-				mymap.add(device.getVista().get(nombre));
-				i+=1;
-			}
-		}
-   		model.addAttribute("vistas", mymap);
+        model.addAttribute("vistas",Utils.vistas(user.getEmail()));
    		return new ModelAndView("origin", model);
 	}
 	

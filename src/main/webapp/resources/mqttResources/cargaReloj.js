@@ -23,7 +23,7 @@
 			min: 0,
 			max: 100,
 			width: 15,
-			units: 'value' //this is only the text for the label
+			units: 'Percentage' //this is only the text for the label
 		}
 });
 
@@ -41,7 +41,7 @@ var chart1 = c3.generate({
 			min: 0,
 			max: 60,
 			width: 15,
-			units: 'value' //this is only the text for the label
+			units: 'Celsius' //this is only the text for the label
 		}
 });
 
@@ -59,7 +59,7 @@ var chart2 = c3.generate({
 			min: 0,
 			max: 70,
 			width: 15,
-			units: 'value' //this is only the text for the label
+			units: 'Celsius' //this is only the text for the label
 		}
 	});
 
@@ -78,7 +78,7 @@ var chart3 = c3.generate({
 			min: 0,
 			max: 140,
 			width: 15,
-			units: 'value' //this is only the text for the label
+			units: 'Fahrenheit' //this is only the text for the label
 		}
 });
 
@@ -96,7 +96,7 @@ var chart4 = c3.generate({
 			min: 0,
 			max: 150,
 			width: 15,
-			units: 'value' //this is only the text for the label
+			units: 'Fahrenheit' //this is only the text for the label
 		}
 	});
 }
