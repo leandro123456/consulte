@@ -44,8 +44,8 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item" href="buttons.html">My own</a>
-            <a class="collapse-item" href="cards.html">Shared with me</a>
+            <a class="collapse-item" href="<c:url value='/home/componentmyown' />">My own</a>
+            <a class="collapse-item" href="<c:url value='/home/componentshared' />">Shared with me</a>
           </div>
         </div>
       </li>

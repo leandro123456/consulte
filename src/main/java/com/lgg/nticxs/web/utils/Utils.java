@@ -491,7 +491,6 @@ public class Utils {
 				}
 			}
 			String vistatotal = vista.getInicio()+contenidototal+vista.getFin();
-			System.out.println("salio de la vsta total");
 			return vistatotal;
 		}
 		
