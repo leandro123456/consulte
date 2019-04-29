@@ -11,7 +11,7 @@ public class UserDAO extends JPADAO<User>{
 
 	@SuppressWarnings("unchecked")
 	public List<User> retrieveAll() {
-		String sql = "SELECT u FROM User u WHERE u.delete=false and u.cuenta_iniciada=false";
+		String sql = "SELECT u FROM User u";
 		Query query = getEntityManager().createQuery(sql);
 		List<User> list = query.getResultList();
 		if (list != null && list.size() > 0) {
