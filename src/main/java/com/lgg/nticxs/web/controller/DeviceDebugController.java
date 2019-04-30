@@ -22,68 +22,37 @@ import com.lgg.nticxs.web.model.User;
 import com.lgg.nticxs.web.model.simple.SimpleDevice;
 
 @Controller
-public class DeviceController {
+public class DeviceDebugController {
 	private UserDAO userdao = new UserDAO();
 	private DeviceDAO devicedao = new DeviceDAO();
-	private static final String COLLECTION_DEVICE="DEVICE";
 	
 	
-	@GetMapping("home/componentmyown")
-	public String showMyComponents(HttpServletRequest request,Model model) {
+	@GetMapping("home/listdebugmyown")
+	public String showMyComponents1(HttpServletRequest request,Model model) {
 		CargarDevices(model, request);
-		return "device_show_my";
-	}
-	
-	@PostMapping("home/componentmyown")
-	public String showMyComponentsPost(HttpServletRequest request,Model model) {
-		CargarDevices(model, request);
-		return "device_show_my";
+		return "device_show_debug_list";
 	}
 	
 	
-
-	@PostMapping("home/remove/{deviceserial}")
-	public String removeDevice(Model model, @PathVariable String deviceserial,HttpServletRequest request) {
-		System.out.println("llego al remove!!");
-		System.out.println("serial: "+ deviceserial);
-		CargarDevices(model, request);
-		try {
-			MongoCommands.Delete(COLLECTION_DEVICE, "serialnumber", deviceserial);
-			for(User user: userdao.retrieveAll()) {
-				int index = user.getDeviceserialnumber().indexOf(deviceserial);
-				if (index != -1) {
-					user.getDeviceserialnumber().remove(index);
-					userdao.update(user);
-				}
-			}
-			model.addAttribute("msg", "Delete Successfully");
-		} catch (Exception e) {
-			model.addAttribute("msg1", "Error during the deletion process: "+ e.getMessage());
-		}
-		return "device_show_my";
-	}
-	
-	@GetMapping("home/info/{deviceserial}")
-	public String moreInfoDevice(Model model, @PathVariable String deviceserial) {
+	@GetMapping("home/debugview/{deviceserial}")
+	public String moreInfoDevice1(Model model, @PathVariable String deviceserial, HttpServletRequest request) {
 		Device device= devicedao.retrieveBySerialNumber(deviceserial);
 		DeviceConfiguration configuration = null;
 		if(device.getUsedefaultbrocker())
 			configuration= device.getDeviceconfiguration().get(0);
 		else
 			configuration= device.getDeviceconfiguration().get(1);
-		List<String> admins = device.getAdmins();
-		List<String> users = device.getUsers();
-		System.out.println("llego aca info");
+		String nombre = request.getUserPrincipal().getName();
+		User user = userdao.retrieveByMail(nombre);
+		model.addAttribute("user", user);
 		model.addAttribute("configuration", configuration);
-		model.addAttribute("admins", admins);
-		model.addAttribute("users", users);
-		model.addAttribute("device", device);
-		return "device_more_info";
+		model.addAttribute("deviceserial", deviceserial);
+		return "device_debug";
 	}
 	
 	
-	@GetMapping("home/componentshared")
-	public String showComponentsShared(HttpServletRequest request, Model model) {
+	@GetMapping("home/listdebugshared")
+	public String showComponentsShared1(HttpServletRequest request, Model model) {
 		String name = request.getUserPrincipal().getName();
 		User usuario = userdao.retrieveByMail(name);
 		List<SimpleDevice> devices = new ArrayList<>();
@@ -93,7 +62,7 @@ public class DeviceController {
 		}
 		System.out.println("compartido: "+devices);
 		model.addAttribute("devices", devices);
-		return "device_show_my";
+		return "device_show_debug_list";
 	}
 	
 

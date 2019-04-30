@@ -6,7 +6,9 @@ function startConnect() {
     // Fetch the hostname/IP address and port number from the form
     host = document.getElementById("host").value;
     port = document.getElementById("port").value;
-
+    user = document.getElementById("user").value;
+    pass = document.getElementById("pass").value;
+    
     // Print output for the user in the messages div
     document.getElementById("messages").innerHTML += '<span>Connecting to: ' + host + ' on port: ' + port + '</span><br/>';
     document.getElementById("messages").innerHTML += '<span>Using the following client value: ' + clientID + '</span><br/>';
@@ -21,8 +23,8 @@ function startConnect() {
 
   var options = {
     useSSL: false,
-    userName: "movasim",
-    password: "Sanbenit0",
+    userName: user,
+    password: pass,
     onSuccess:onConnect//,
 //    onFailure:doFail
   }
@@ -35,7 +37,7 @@ function startConnect() {
 // Called when the client connects
 function onConnect() {
     // Fetch the MQTT topic from the form
-    topic = document.getElementById("topic").value;
+    topic = document.getElementById("topiclisten").value;
 
     // Print output for the user in the messages div
     document.getElementById("messages").innerHTML += '<span>Subscribing to: ' + topic + '</span><br/>';

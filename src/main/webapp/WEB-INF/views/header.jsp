@@ -59,8 +59,8 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Debug Utilities:</h6>
-            <a class="collapse-item" href="utilities-color.html">My own</a>
-            <a class="collapse-item" href="utilities-border.html">Shared with me</a>
+            <a class="collapse-item" href="<c:url value='/home/listdebugmyown' />">My own</a>
+            <a class="collapse-item" href="<c:url value='/home/listdebugshared' />">Shared with me</a>
           </div>
         </div>
       </li>
