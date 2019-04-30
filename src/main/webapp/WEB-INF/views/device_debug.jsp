@@ -66,44 +66,109 @@
             <div class="card-body">
 							<div class="card-body ">
 								<form class="user " id="connection-information-form ">
+									<h5>Listen Information</h5>
 									<div class="form-group row ">
 										<b>Hostname or IP Address</b> <input type="text"
-											class="form-control form-control-user" id="host"
-											value="${configuration.iphost}" placeholder="Hostname">
-									</div>
-									<div class="form-group row ">
+											class="form-control form-control-user" id="iphostescuchar"
+											value="${configuration.iphostescuchar}" placeholder="Hostname">
 										<b>Port</b> <input type="text"
-											class="form-control form-control-user" id="port"
-											value="${configuration.port}" placeholder="Port">
-									</div>
-									<div class="form-group row ">
-										<b>Topic to Listen:</b><input id="topiclisten" type="text"
+											class="form-control form-control-user" id="portescuchar"
+											value="${configuration.portescuchar}" placeholder="Port">
+										<b>Topic to Listen:</b><input id="topicescuchar" type="text"
 											class="form-control form-control-user " name="topiclisten"
 											value="${configuration.topicescuchar}" placeholder="Topic to Listen">
-									</div>
-									<div class="form-group row ">
-										<b>Topic to Write:</b><input id="topicwrite" type="text"
-											class="form-control form-control-user " name="topicwrite"
-											value="${configuration.topicescribir}" placeholder="Topic to Write">
-									</div>
-									<div class="form-group row ">
 										<b>User name</b> <input type="text"
-											class="form-control form-control-user" id="user"
-											value="${configuration.user}" placeholder="User name">
-									</div>
-									<div class="form-group row ">
-										<b>Password</b> <input type="text"
+											class="form-control form-control-user" id="userescuchar"
+											value="${configuration.userescuchar}" placeholder="User name">
+										<b>Password</b> <input type="password"
 											class="form-control form-control-user" id="pass"
-											value="${configuration.pass}" placeholder="Password">
+											value="${configuration.passescuchar}" placeholder="Password">
 									</div>
 									<hr>
-									<input type="button"
-										class="btn btn-primary btn-user btn-block"
-										onclick="startConnect()" value="Connect"><input
-										type="button" class="btn btn-primary btn-user btn-block"
-										onclick="startDisconnect()" value="Disconnect">
+									<input type="button" class="btn btn-primary btn-user btn-block"	onclick="startConnect('${configuration.iphostescuchar}', ${configuration.portescuchar}, ${configuration.usesslescuchar}, '${configuration.userescuchar}', '${configuration.passescuchar}', 'messages','${configuration.topicescuchar}')" value="Connect">
+									<input type="button" class="btn btn-primary btn-user btn-block"	onclick="startDisconnect('messagesescuchar')" value="Disconnect">
+									<textarea disabled id="messages" class="form-control" rows="4"></textarea>
+																		
+									<hr class="sidebar-divider my-0">
+									<h5>Write Information</h5>
+									<div class="form-group row ">
+										<b>Hostname or IP Address</b> <input type="text"
+											class="form-control form-control-user" id="iphostescribir"
+											value="${configuration.iphostescribir}" placeholder="Hostname">
+										<b>Port</b> <input type="text"
+											class="form-control form-control-user" id="portescribir"
+											value="${configuration.portescribir}" placeholder="Port">
+										<b>Topic to Write:</b><input id="topicescribir" type="text"
+											class="form-control form-control-user " name="topicwrite"
+											value="${configuration.topicescribir}" placeholder="Topic to Write">
+										<b>User name</b> <input type="text"
+											class="form-control form-control-user" id="userescribir"
+											value="${configuration.userescribir}" placeholder="User name">
+										<b>Password</b> <input type="password"
+											class="form-control form-control-user" id="passescribir"
+											value="${configuration.passescribir}" placeholder="Password">
+									</div>
+									<hr>
+									<input type="button" class="btn btn-primary btn-user btn-block"	onclick="sendInformation()" value="Send">
+									<div id="messagesecribir"></div>
+									
+									<hr class="sidebar-divider my-0">
+									<h5>Listen Information Remote</h5>
+									<div class="form-group row ">
+										<b>Hostname or IP Address</b> <input type="text"
+											class="form-control form-control-user" id="iphostescucharremote"
+											value="${configuration.iphostescucharremote}" placeholder="Hostname">
+										<b>Port</b> <input type="text"
+											class="form-control form-control-user" id="portescucharremote"
+											value="${configuration.portescucharremote}" placeholder="Port">
+										<b>Topic to Listen:</b><input id="topicescucharremote" type="text"
+											class="form-control form-control-user " name="topiclisten"
+											value="${configuration.topicescucharremote}" placeholder="Topic to Listen">
+										<b>User name</b> <input type="text"
+											class="form-control form-control-user" id="userescucharremote"
+											value="${configuration.userescucharremote}" placeholder="User name">
+										<b>Password</b> <input type="password"
+											class="form-control form-control-user" id="passescucharremote"
+											value="${configuration.passescucharremote}" placeholder="Password">
+									</div>
+									<hr>
+									<input type="button" class="btn btn-primary btn-user btn-block"	onclick="startConnect('${configuration.iphostescucharremote}', ${configuration.portescucharremote}, ${configuration.usesslescucharremote}, '${configuration.userescucharremote}', '${configuration.passescucharremote}', 'messageescucharremote','${configuration.topicescucharremote}')" value="Connect">
+									<input type="button" class="btn btn-primary btn-user btn-block"	onclick="startDisconnect('messageescucharremote')" value="Disconnect">
+									<textarea disabled id="messageescucharremote" class="form-control" rows="4"></textarea>
+									
+									<hr class="sidebar-divider my-0">
+									<h5>Write Information Remote</h5>
+									<div class="form-group row ">
+										<b>Hostname or IP Address</b> <input type="text"
+											class="form-control form-control-user" id="iphostescribirremote"
+											value="${configuration.iphostescribirremote}" placeholder="Hostname">
+										<b>Port</b> <input type="text"
+											class="form-control form-control-user" id="portescribirremote"
+											value="${configuration.portescribirremote}" placeholder="Port">
+										<b>Topic to Write:</b><input id="topicescribirremote" type="text"
+											class="form-control form-control-user " name="topicwrite"
+											value="${configuration.topicescribirremote}" placeholder="Topic to Write">
+										<b>User name</b> <input type="text"
+											class="form-control form-control-user" id="userescribirremote"
+											value="${configuration.userescribirremote}" placeholder="User name">
+										<b>Password</b> <input type="password"
+											class="form-control form-control-user" id="passescribirremote"
+											value="${configuration.passescribirremote}" placeholder="Password">
+									</div>
+									<hr>
+									<input type="button" class="btn btn-primary btn-user btn-block"	onclick="startConnect()" value="Send">
+									<textarea disabled id="messagesescribirremote" class="form-control" rows="4"></textarea>
+									
+									<hr class="sidebar-divider my-0">
+									<p> </p>
+										
+								<div class="btn-group-vertical">
+                     	<button type="submit" name="action" value="save" class="btn btn-primary">Save Changes</button>
+
+                     	<button type="submit" name="action" value="setdefault" class="btn btn-primary btn-user btn-block">Restart Default Configuration</button>
+                     </div>
 								</form>
-								<div id="messages"></div>
+								
 							</div>
 				</div>
           </div>

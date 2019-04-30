@@ -125,28 +125,28 @@ public class Test1 {
 		System.out.println("borro");
 	}
 	
-//	@Test
+	//@Test
 	public void testMakeDevicesOnUser(){
 		try {
 			DeviceDAO devicedao = new DeviceDAO();
-			Device device = devicedao.retrieveBySerialNumber("111FFF");
+			Device device = devicedao.retrieveBySerialNumber("111FFFR");
 			if(device == null){
 				device = new Device();
 				device.setDescription("description");
 				device.setName("nombre");
-				device.setSerialnumber("111FFF");
+				device.setSerialnumber("111FFFR");
 				device.setUserowner("t@tes");	
 				DeviceConfiguration deviceconfiguration = new DeviceConfiguration();
-				deviceconfiguration.setIphost("ip");
+				deviceconfiguration.setIphostescuchar("ip");
 				deviceconfiguration.setName("default");
-				deviceconfiguration.setPass("pass");
-				deviceconfiguration.setPort("port");
+				deviceconfiguration.setPassescuchar("pass");
+				deviceconfiguration.setPortescuchar("port");
 				deviceconfiguration.setTopicescribir("topicescribir");
 				deviceconfiguration.setTopicescribirremote("topicescribirremote");
 				deviceconfiguration.setTopicescuchar("topicescuchar");
 				deviceconfiguration.setTopicescucharremote("topicescucharremote");
-				deviceconfiguration.setUser("user");
-				deviceconfiguration.setUsessl(false);
+				deviceconfiguration.setUserescuchar("user");
+				deviceconfiguration.setUsesslescuchar(false);
 				device.getDeviceconfiguration().add(deviceconfiguration);
 				device.getAdmins().add("pepe@test");
 				device.getUsers().add("juli@test");
