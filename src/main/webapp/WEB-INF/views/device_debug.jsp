@@ -65,24 +65,24 @@
             </div>
             <div class="card-body">
 							<div class="card-body ">
-								<form class="user " id="connection-information-form" method="post" enctype="multipart/form-data">
+								<form role="form"  method="post" enctype="multipart/form-data" class="user " id="connection-information-form">
 									<c:if test = "${configuration.topicescuchar != null}">
 										<h5>Listen Information</h5>
 										<div class="form-group row ">
 											<b>Hostname or IP Address</b> <input type="text"
 												class="form-control form-control-user" id="iphostescuchar"
-												name="iphostescuchar" value="${configuration.iphostescuchar}" placeholder="Hostname">
+											    value="${configuration.iphostescuchar}" placeholder="Hostname">
 											<b>Port</b> <input type="text"
 												class="form-control form-control-user" id="portescuchar"
 												value="${configuration.portescuchar}" placeholder="Port">
 											<b>Topic to Listen:</b><input id="topicescuchar" type="text"
-												class="form-control form-control-user " name="topiclisten"
+												class="form-control form-control-user " id="topiclisten"
 												value="${configuration.topicescuchar}" placeholder="Topic to Listen">
 											<b>User name</b> <input type="text"
 												class="form-control form-control-user" id="userescuchar"
 												value="${configuration.userescuchar}" placeholder="User name">
 											<b>Password</b> <input type="password"
-												class="form-control form-control-user" id="pass"
+												class="form-control form-control-user" id="passescuchar"
 												value="${configuration.passescuchar}" placeholder="Password">
 										</div>
 										<input type="button" class="btn btn-primary btn-user btn-block"	onclick="startConnect('${configuration.iphostescuchar}', ${configuration.portescuchar}, ${configuration.usesslescuchar}, '${configuration.userescuchar}', '${configuration.passescuchar}', 'messages','${configuration.topicescuchar}')" value="Connect">
@@ -102,7 +102,7 @@
 												class="form-control form-control-user" id="portescribir"
 												value="${configuration.portescribir}" placeholder="Port">
 											<b>Topic to Write:</b><input id="topicescribir" type="text"
-												class="form-control form-control-user " name="topicwrite"
+												class="form-control form-control-user " id="topicwrite"
 												value="${configuration.topicescribir}" placeholder="Topic to Write">
 											<b>User name</b> <input type="text"
 												class="form-control form-control-user" id="userescribir"
@@ -127,7 +127,7 @@
 												class="form-control form-control-user" id="portescucharremote"
 												value="${configuration.portescucharremote}" placeholder="Port">
 											<b>Topic to Listen:</b><input id="topicescucharremote" type="text"
-												class="form-control form-control-user " name="topiclisten"
+												class="form-control form-control-user " id="topiclistenremote"
 												value="${configuration.topicescucharremote}" placeholder="Topic to Listen">
 											<b>User name</b> <input type="text"
 												class="form-control form-control-user" id="userescucharremote"
@@ -153,7 +153,7 @@
 												class="form-control form-control-user" id="portescribirremote"
 												value="${configuration.portescribirremote}" placeholder="Port">
 											<b>Topic to Write:</b><input id="topicescribirremote" type="text"
-												class="form-control form-control-user " name="topicwrite"
+												class="form-control form-control-user " id="topicwriteremote"
 												value="${configuration.topicescribirremote}" placeholder="Topic to Write">
 											<b>User name</b> <input type="text"
 												class="form-control form-control-user" id="userescribirremote"
@@ -195,6 +195,30 @@
         <div class="modal-body" id="textomodal"></div>
         <div class="modal-footer">
           <form role="form"  id="form_id" method="post" enctype="multipart/form-data">
+          	<input type="hidden" name="iphostescuchar" id="iphostescuchar1"/>
+          	<input type="hidden" name="portescuchar" id="portescuchar1"/>
+          	<input type="hidden" name="topiclisten" id="topiclisten1"/>
+          	<input type="hidden" name="userescuchar" id="userescuchar1"/>
+          	<input type="hidden" name="passescuchar" id="passescuchar1"/>
+          	
+          	<input type="hidden" name="iphostescribir" id="iphostescribir1"/>
+          	<input type="hidden" name="portescribir" id="portescribir1"/>
+          	<input type="hidden" name="topicwrite" id="topicwrite1"/>
+          	<input type="hidden" name="userescribir" id="userescribir1"/>
+          	<input type="hidden" name="passescribir" id="passescribir1"/>
+          	
+          	<input type="hidden" name="iphostescucharremote" id="iphostescucharremote1"/>
+          	<input type="hidden" name="portescucharremote" id="portescucharremote1"/>
+          	<input type="hidden" name="topiclistenremote" id="topiclistenremote1"/>
+          	<input type="hidden" name="userescucharremote" id="userescucharremote1"/>
+          	<input type="hidden" name="passescucharremote" id="passescucharremote1"/>
+          	
+          	<input type="hidden" name="iphostescribirremote" id="iphostescribirremote1"/>
+          	<input type="hidden" name="portescribirremote" id="portescribirremote1"/>
+          	<input type="hidden" name="topicwriteremote" id="topicwriteremote1"/>
+          	<input type="hidden" name="userescribirremote" id="userescribirremote1"/>
+          	<input type="hidden" name="passescribirremote" id="passescribirremote1"/>
+          	
           	<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
           	<a class="btn btn-primary" href="javascript:;" id="modalaceptar" onclick="parentNode.submit();"></a>
           </form>
@@ -217,15 +241,58 @@
                 		  var mail = "${deviceserial}";
                           var button = $(event.relatedTarget)
                           var recipient = button.data('whatever') 
-                          console.log("entro en el finalll: "+ recipient)
                           if( recipient =="save"){
-                          	var action= "/mqttmanagment/home/debugview/"+mail+"/save";
+                        	  if(document.getElementById("iphostescuchar") != null)
+                        	  	document.getElementById("iphostescuchar1").value = document.getElementById("iphostescuchar").value;
+                        	  if(document.getElementById("portescuchar") != null)
+                          	  	document.getElementById("portescuchar1").value = document.getElementById("portescuchar").value;
+                        	  if(document.getElementById("topiclisten") != null)
+                          	  	document.getElementById("topiclisten1").value = document.getElementById("topiclisten").value;
+                        	  if(document.getElementById("userescuchar") != null)
+                          	  	document.getElementById("userescuchar1").value = document.getElementById("userescuchar").value;
+                        	  if(document.getElementById("passescuchar") != null)
+                          	  	document.getElementById("passescuchar1").value = document.getElementById("passescuchar").value;
+                        	  
+                        	  if(document.getElementById("iphostescribir") != null)
+                          	  	document.getElementById("iphostescribir1").value = document.getElementById("iphostescribir").value;
+                        	  if(document.getElementById("portescribir") != null)
+                          	  	document.getElementById("portescribir1").value = document.getElementById("portescribir").value;
+                        	  if(document.getElementById("topicwrite") != null)
+                          	  	document.getElementById("topicwrite1").value = document.getElementById("topicwrite").value;
+                        	  if(document.getElementById("userescribir") != null)
+                          	  	document.getElementById("userescribir1").value = document.getElementById("userescribir").value;
+                        	  if(document.getElementById("passescribir") != null)
+                          	  	document.getElementById("passescribir1").value = document.getElementById("passescribir").value;
+                        	  
+                        	  if(document.getElementById("iphostescucharremote") != null)
+                          	  	document.getElementById("iphostescucharremote1").value = document.getElementById("iphostescucharremote").value;
+                          	  if(document.getElementById("portescucharremote") != null)
+                            	  	document.getElementById("portescucharremote1").value = document.getElementById("portescucharremote").value;
+                          	  if(document.getElementById("topiclistenremote") != null)
+                            	  	document.getElementById("topiclistenremote1").value = document.getElementById("topiclistenremote").value;
+                          	  if(document.getElementById("userescucharremote") != null)
+                            	  	document.getElementById("userescucharremote1").value = document.getElementById("userescucharremote").value;
+                          	  if(document.getElementById("passescucharremote") != null)
+                            	  	document.getElementById("passescucharremote1").value = document.getElementById("passescucharremote").value;
+                          	  
+                          	  if(document.getElementById("iphostescribirremote") != null)
+                            	  	document.getElementById("iphostescribirremote1").value = document.getElementById("iphostescribirremote").value;
+                          	  if(document.getElementById("portescribirremote") != null)
+                            	  	document.getElementById("portescribirremote1").value = document.getElementById("portescribirremote").value;
+                          	  if(document.getElementById("topicwriteremote") != null)
+                            	  	document.getElementById("topicwriteremote1").value = document.getElementById("topicwriteremote").value;
+                          	  if(document.getElementById("userescribirremote") != null)
+                            	  	document.getElementById("userescribirremote1").value = document.getElementById("userescribirremote").value;
+                          	  if(document.getElementById("passescribirremote") != null)
+                            	  	document.getElementById("passescribirremote1").value = document.getElementById("passescribirremote").value;
+                        	  
+                        	  
+                        	  var action= "/mqttmanagment/home/debugview/"+mail+"/save";
                           }
                          if(recipient =="setdefault"){
                             var action= "/mqttmanagment/home/debugview/"+mail+ "/defaultconfiguration";
                           }
-                         console.log("entro en el finalll: "+ action)
-                          document.getElementById("connection-information-form").action = action;
+                          document.getElementById("form_id").action = action;
                 })
                 
                 $('#ModalConfirm').on('show.bs.modal', function(event){

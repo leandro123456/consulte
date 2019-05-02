@@ -50,14 +50,33 @@ public class DeviceDebugController {
 	
 	@PostMapping("home/debugview/{deviceserial}/save")
 	public String moreInfoDevi(Model model, @PathVariable String deviceserial, HttpServletRequest request,
-			@RequestParam("iphostescuchar") String iphostescuchar) {
-		System.out.println("llego!!!!!!");
+			@RequestParam(name="iphostescuchar",required=false) String iphostescuchar,
+			@RequestParam(name="portescuchar", required=false) String portescuchar,
+			@RequestParam(name="topiclisten", required=false) String topiclisten,
+			@RequestParam(name="userescuchar", required=false) String userescuchar,
+			@RequestParam(name="passescuchar", required=false) String passescuchar,
+			@RequestParam(name="iphostescribir", required=false) String iphostescribir,
+			@RequestParam(name="portescribir", required=false) String portescribir,
+			@RequestParam(name="topicwrite", required=false) String topicwrite,
+			@RequestParam(name="userescribir", required=false) String userescribir,
+			@RequestParam(name="passescribir", required=false) String passescribir,
+			@RequestParam(name="iphostescucharremote", required=false) String iphostescucharremote,
+			@RequestParam(name="portescucharremote", required=false) String portescucharremote,
+			@RequestParam(name="topiclistenremote", required=false) String topiclistenremote,
+			@RequestParam(name="userescucharremote", required=false) String userescucharremote,
+			@RequestParam(name="passescucharremote", required=false) String passescucharremote,
+			@RequestParam(name="iphostescribirremote", required=false) String iphostescribirremote,
+			@RequestParam(name="portescribirremote", required=false) String portescribirremote,
+			@RequestParam(name="topicwriteremote", required=false) String topicwriteremote,
+			@RequestParam(name="userescribirremote", required=false) String userescribirremote,
+			@RequestParam(name="passescribirremote", required=false) String passescribirremote) {
+		System.out.println("llego!!!!!!: " + iphostescuchar);
 		return "device_debug";
 	}
-	
+
 	@PostMapping("home/debugview/{deviceserial}/defaultconfiguration")
-	public String moreInfoDevid(Model model, @PathVariable String deviceserial, HttpServletRequest request,
-			@RequestParam("iphostescuchar") String iphostescuchar) {
+	public String moreInfoDevid(Model model, @PathVariable String deviceserial, HttpServletRequest request){
+
 		System.out.println("llego!!!!!!");
 		return "device_debug";
 	}
