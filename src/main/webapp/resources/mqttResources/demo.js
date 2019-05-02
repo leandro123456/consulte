@@ -2,13 +2,8 @@
 function startConnect(host,port,ssl,user,pass,fileouput, topico) {
     // Generate a random client ID
     clientID = "clientID-" + parseInt(Math.random() * 100);
-window.fileouput =fileouput;
-window.topico=topico;
-    // Fetch the hostname/IP address and port number from the form
-//    host = document.getElementById("host").value;
-//    port = document.getElementById("port").value;
-//    user = document.getElementById("user").value;
-//    pass = document.getElementById("pass").value;
+    window.fileouput =fileouput;
+    window.topico=topico;
 
     // Print output for the user in the messages div
     document.getElementById(fileouput).innerHTML += 'Connecting to: ' + host + ' on port: ' + port + '\n';

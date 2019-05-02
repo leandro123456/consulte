@@ -7,15 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lgg.nticxs.web.DAO.DeviceDAO;
 import com.lgg.nticxs.web.DAO.UserDAO;
-import com.lgg.nticxs.web.dbcommands.MongoCommands;
 import com.lgg.nticxs.web.model.Device;
 import com.lgg.nticxs.web.model.DeviceConfiguration;
 import com.lgg.nticxs.web.model.User;
@@ -47,6 +45,20 @@ public class DeviceDebugController {
 		model.addAttribute("user", user);
 		model.addAttribute("configuration", configuration);
 		model.addAttribute("deviceserial", deviceserial);
+		return "device_debug";
+	}
+	
+	@PostMapping("home/debugview/{deviceserial}/save")
+	public String moreInfoDevi(Model model, @PathVariable String deviceserial, HttpServletRequest request,
+			@RequestParam("iphostescuchar") String iphostescuchar) {
+		System.out.println("llego!!!!!!");
+		return "device_debug";
+	}
+	
+	@PostMapping("home/debugview/{deviceserial}/defaultconfiguration")
+	public String moreInfoDevid(Model model, @PathVariable String deviceserial, HttpServletRequest request,
+			@RequestParam("iphostescuchar") String iphostescuchar) {
+		System.out.println("llego!!!!!!");
 		return "device_debug";
 	}
 	

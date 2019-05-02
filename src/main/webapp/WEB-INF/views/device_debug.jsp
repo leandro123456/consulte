@@ -65,108 +65,113 @@
             </div>
             <div class="card-body">
 							<div class="card-body ">
-								<form class="user " id="connection-information-form ">
-									<h5>Listen Information</h5>
-									<div class="form-group row ">
-										<b>Hostname or IP Address</b> <input type="text"
-											class="form-control form-control-user" id="iphostescuchar"
-											value="${configuration.iphostescuchar}" placeholder="Hostname">
-										<b>Port</b> <input type="text"
-											class="form-control form-control-user" id="portescuchar"
-											value="${configuration.portescuchar}" placeholder="Port">
-										<b>Topic to Listen:</b><input id="topicescuchar" type="text"
-											class="form-control form-control-user " name="topiclisten"
-											value="${configuration.topicescuchar}" placeholder="Topic to Listen">
-										<b>User name</b> <input type="text"
-											class="form-control form-control-user" id="userescuchar"
-											value="${configuration.userescuchar}" placeholder="User name">
-										<b>Password</b> <input type="password"
-											class="form-control form-control-user" id="pass"
-											value="${configuration.passescuchar}" placeholder="Password">
-									</div>
-									<hr>
-									<input type="button" class="btn btn-primary btn-user btn-block"	onclick="startConnect('${configuration.iphostescuchar}', ${configuration.portescuchar}, ${configuration.usesslescuchar}, '${configuration.userescuchar}', '${configuration.passescuchar}', 'messages','${configuration.topicescuchar}')" value="Connect">
-									<input type="button" class="btn btn-primary btn-user btn-block"	onclick="startDisconnect('messagesescuchar')" value="Disconnect">
-									<textarea disabled id="messages" class="form-control" rows="4"></textarea>
-																		
-									<hr class="sidebar-divider my-0">
-									<h5>Write Information</h5>
-									<div class="form-group row ">
-										<b>Hostname or IP Address</b> <input type="text"
-											class="form-control form-control-user" id="iphostescribir"
-											value="${configuration.iphostescribir}" placeholder="Hostname">
-										<b>Port</b> <input type="text"
-											class="form-control form-control-user" id="portescribir"
-											value="${configuration.portescribir}" placeholder="Port">
-										<b>Topic to Write:</b><input id="topicescribir" type="text"
-											class="form-control form-control-user " name="topicwrite"
-											value="${configuration.topicescribir}" placeholder="Topic to Write">
-										<b>User name</b> <input type="text"
-											class="form-control form-control-user" id="userescribir"
-											value="${configuration.userescribir}" placeholder="User name">
-										<b>Password</b> <input type="password"
-											class="form-control form-control-user" id="passescribir"
-											value="${configuration.passescribir}" placeholder="Password">
-									</div>
-									<hr>
-									<input type="button" class="btn btn-primary btn-user btn-block"	onclick="sendInformation()" value="Send">
-									<div id="messagesecribir"></div>
-									
-									<hr class="sidebar-divider my-0">
-									<h5>Listen Information Remote</h5>
-									<div class="form-group row ">
-										<b>Hostname or IP Address</b> <input type="text"
-											class="form-control form-control-user" id="iphostescucharremote"
-											value="${configuration.iphostescucharremote}" placeholder="Hostname">
-										<b>Port</b> <input type="text"
-											class="form-control form-control-user" id="portescucharremote"
-											value="${configuration.portescucharremote}" placeholder="Port">
-										<b>Topic to Listen:</b><input id="topicescucharremote" type="text"
-											class="form-control form-control-user " name="topiclisten"
-											value="${configuration.topicescucharremote}" placeholder="Topic to Listen">
-										<b>User name</b> <input type="text"
-											class="form-control form-control-user" id="userescucharremote"
-											value="${configuration.userescucharremote}" placeholder="User name">
-										<b>Password</b> <input type="password"
-											class="form-control form-control-user" id="passescucharremote"
-											value="${configuration.passescucharremote}" placeholder="Password">
-									</div>
-									<hr>
-									<input type="button" class="btn btn-primary btn-user btn-block"	onclick="startConnect('${configuration.iphostescucharremote}', ${configuration.portescucharremote}, ${configuration.usesslescucharremote}, '${configuration.userescucharremote}', '${configuration.passescucharremote}', 'messageescucharremote','${configuration.topicescucharremote}')" value="Connect">
-									<input type="button" class="btn btn-primary btn-user btn-block"	onclick="startDisconnect('messageescucharremote')" value="Disconnect">
-									<textarea disabled id="messageescucharremote" class="form-control" rows="4"></textarea>
-									
-									<hr class="sidebar-divider my-0">
-									<h5>Write Information Remote</h5>
-									<div class="form-group row ">
-										<b>Hostname or IP Address</b> <input type="text"
-											class="form-control form-control-user" id="iphostescribirremote"
-											value="${configuration.iphostescribirremote}" placeholder="Hostname">
-										<b>Port</b> <input type="text"
-											class="form-control form-control-user" id="portescribirremote"
-											value="${configuration.portescribirremote}" placeholder="Port">
-										<b>Topic to Write:</b><input id="topicescribirremote" type="text"
-											class="form-control form-control-user " name="topicwrite"
-											value="${configuration.topicescribirremote}" placeholder="Topic to Write">
-										<b>User name</b> <input type="text"
-											class="form-control form-control-user" id="userescribirremote"
-											value="${configuration.userescribirremote}" placeholder="User name">
-										<b>Password</b> <input type="password"
-											class="form-control form-control-user" id="passescribirremote"
-											value="${configuration.passescribirremote}" placeholder="Password">
-									</div>
-									<hr>
-									<input type="button" class="btn btn-primary btn-user btn-block"	onclick="startConnect()" value="Send">
-									<textarea disabled id="messagesescribirremote" class="form-control" rows="4"></textarea>
-									
-									<hr class="sidebar-divider my-0">
-									<p> </p>
-										
+								<form class="user " id="connection-information-form" method="post" enctype="multipart/form-data">
+									<c:if test = "${configuration.topicescuchar != null}">
+										<h5>Listen Information</h5>
+										<div class="form-group row ">
+											<b>Hostname or IP Address</b> <input type="text"
+												class="form-control form-control-user" id="iphostescuchar"
+												name="iphostescuchar" value="${configuration.iphostescuchar}" placeholder="Hostname">
+											<b>Port</b> <input type="text"
+												class="form-control form-control-user" id="portescuchar"
+												value="${configuration.portescuchar}" placeholder="Port">
+											<b>Topic to Listen:</b><input id="topicescuchar" type="text"
+												class="form-control form-control-user " name="topiclisten"
+												value="${configuration.topicescuchar}" placeholder="Topic to Listen">
+											<b>User name</b> <input type="text"
+												class="form-control form-control-user" id="userescuchar"
+												value="${configuration.userescuchar}" placeholder="User name">
+											<b>Password</b> <input type="password"
+												class="form-control form-control-user" id="pass"
+												value="${configuration.passescuchar}" placeholder="Password">
+										</div>
+										<input type="button" class="btn btn-primary btn-user btn-block"	onclick="startConnect('${configuration.iphostescuchar}', ${configuration.portescuchar}, ${configuration.usesslescuchar}, '${configuration.userescuchar}', '${configuration.passescuchar}', 'messages','${configuration.topicescuchar}')" value="Connect">
+										<input type="button" class="btn btn-primary btn-user btn-block"	onclick="startDisconnect('messagesescuchar')" value="Disconnect">
+										<textarea disabled id="messages" class="form-control" rows="4"></textarea>
+										<p> </p>									
+										<hr class="sidebar-divider my-0">
+										<p> </p>
+									</c:if>
+									<c:if test = "${configuration.topicescribir != null}">
+										<h5>Write Information</h5>
+										<div class="form-group row ">
+											<b>Hostname or IP Address</b> <input type="text"
+												class="form-control form-control-user" id="iphostescribir"
+												value="${configuration.iphostescribir}" placeholder="Hostname">
+											<b>Port</b> <input type="text"
+												class="form-control form-control-user" id="portescribir"
+												value="${configuration.portescribir}" placeholder="Port">
+											<b>Topic to Write:</b><input id="topicescribir" type="text"
+												class="form-control form-control-user " name="topicwrite"
+												value="${configuration.topicescribir}" placeholder="Topic to Write">
+											<b>User name</b> <input type="text"
+												class="form-control form-control-user" id="userescribir"
+												value="${configuration.userescribir}" placeholder="User name">
+											<b>Password</b> <input type="password"
+												class="form-control form-control-user" id="passescribir"
+												value="${configuration.passescribir}" placeholder="Password">
+										</div>
+										<input type="button" class="btn btn-primary btn-user btn-block"	onclick="sendInformation()" value="Send">
+										<textarea disabled id="messagesecribir" class="form-control" rows="4"></textarea>
+										<p> </p>
+										<hr class="sidebar-divider my-0">
+										<p> </p>
+									</c:if>
+									<c:if test = "${configuration.topicescucharremote != null}">
+										<h5>Listen Information Remote Configuration</h5>
+										<div class="form-group row ">
+											<b>Hostname or IP Address</b> <input type="text"
+												class="form-control form-control-user" id="iphostescucharremote"
+												value="${configuration.iphostescucharremote}" placeholder="Hostname">
+											<b>Port</b> <input type="text"
+												class="form-control form-control-user" id="portescucharremote"
+												value="${configuration.portescucharremote}" placeholder="Port">
+											<b>Topic to Listen:</b><input id="topicescucharremote" type="text"
+												class="form-control form-control-user " name="topiclisten"
+												value="${configuration.topicescucharremote}" placeholder="Topic to Listen">
+											<b>User name</b> <input type="text"
+												class="form-control form-control-user" id="userescucharremote"
+												value="${configuration.userescucharremote}" placeholder="User name">
+											<b>Password</b> <input type="password" 
+												class="form-control form-control-user" id="passescucharremote"
+												value="${configuration.passescucharremote}" placeholder="Password">
+										</div>
+										<input type="button" class="btn btn-primary btn-user btn-block"	onclick="startConnect('${configuration.iphostescucharremote}', ${configuration.portescucharremote}, ${configuration.usesslescucharremote}, '${configuration.userescucharremote}', '${configuration.passescucharremote}', 'messageescucharremote','${configuration.topicescucharremote}')" value="Connect">
+										<input type="button" class="btn btn-primary btn-user btn-block"	onclick="startDisconnect('messageescucharremote')" value="Disconnect">
+										<textarea disabled id="messageescucharremote" class="form-control" rows="4"></textarea>
+										<p> </p>
+										<hr class="sidebar-divider my-0">
+										<p> </p>
+									</c:if>
+									<c:if test = "${configuration.topicescribirremote != null}">
+										<h5>Write Information Remote Configuration</h5>
+										<div class="form-group row ">
+											<b>Hostname or IP Address</b> <input type="text"
+												class="form-control form-control-user" id="iphostescribirremote"
+												value="${configuration.iphostescribirremote}" placeholder="Hostname">
+											<b>Port</b> <input type="text"
+												class="form-control form-control-user" id="portescribirremote"
+												value="${configuration.portescribirremote}" placeholder="Port">
+											<b>Topic to Write:</b><input id="topicescribirremote" type="text"
+												class="form-control form-control-user " name="topicwrite"
+												value="${configuration.topicescribirremote}" placeholder="Topic to Write">
+											<b>User name</b> <input type="text"
+												class="form-control form-control-user" id="userescribirremote"
+												value="${configuration.userescribirremote}" placeholder="User name">
+											<b>Password</b> <input type="password"
+												class="form-control form-control-user" id="passescribirremote"
+												value="${configuration.passescribirremote}" placeholder="Password">
+										</div>
+										<input type="button" class="btn btn-primary btn-user btn-block"	onclick="startConnect()" value="Send">
+										<textarea disabled id="messagesescribirremote" class="form-control" rows="4"></textarea>
+										<p> </p>
+										<hr class="sidebar-divider my-0">
+										<p> </p>
+									</c:if>	
 								<div class="btn-group-vertical">
-                     	<button type="submit" name="action" value="save" class="btn btn-primary">Save Changes</button>
-
-                     	<button type="submit" name="action" value="setdefault" class="btn btn-primary btn-user btn-block">Restart Default Configuration</button>
-                     </div>
+                     				<a data-whatever="save" data-toggle="modal" data-target="#ModalConfirm" name="action" value="save" class="btn btn-primary btn-user btn-block">Save Changes</a>
+                     				<a data-whatever="setdefault" data-toggle="modal" data-target="#ModalConfirm" name="action" value="setdefault" class="btn btn-primary btn-user btn-block openBtn">Restart Default Configuration</a>
+                     			</div>
 								</form>
 								
 							</div>
@@ -177,22 +182,21 @@
 </div>
 <jsp:include page="footer.jsp" />
 
-
   <!-- Logout Modal-->
-  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="ModalConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Delete Device</h5>
+          <h5 class="modal-title" id="titulomodal"></h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">Are you sure you delete the device from the platform?</div>
+        <div class="modal-body" id="textomodal"></div>
         <div class="modal-footer">
           <form role="form"  id="form_id" method="post" enctype="multipart/form-data">
           	<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          	<a class="btn btn-primary" href="javascript:;" onclick="parentNode.submit();">Delete</a>
+          	<a class="btn btn-primary" href="javascript:;" id="modalaceptar" onclick="parentNode.submit();"></a>
           </form>
         </div>
       </div>
@@ -209,13 +213,37 @@
   	<script src='<c:url value="/resources/js/demo/datatables-demo.js" />'></script>
   	
   	<script type="text/javascript">
-	  	$('#deleteModal').on('show.bs.modal', function (event) {
-	  		  var button = $(event.relatedTarget)
-		  	  var recipient = button.data('whatever') 
-		  	  // var modal = $(this) modal.find('.modal-body input').val(recipient);
-	  		  var action= "/mqttmanagment/home/remove/"+recipient;
-	  		  document.getElementById("form_id").action = action;
-	  	})
-  	</script>
+                $('#ModalConfirm').on('show.bs.modal',function (event) {
+                		  var mail = "${deviceserial}";
+                          var button = $(event.relatedTarget)
+                          var recipient = button.data('whatever') 
+                          console.log("entro en el finalll: "+ recipient)
+                          if( recipient =="save"){
+                          	var action= "/mqttmanagment/home/debugview/"+mail+"/save";
+                          }
+                         if(recipient =="setdefault"){
+                            var action= "/mqttmanagment/home/debugview/"+mail+ "/defaultconfiguration";
+                          }
+                         console.log("entro en el finalll: "+ action)
+                          document.getElementById("connection-information-form").action = action;
+                })
+                
+                $('#ModalConfirm').on('show.bs.modal', function(event){
+                        var button = $(event.relatedTarget)
+                        var recipient = button.data('whatever')
+                        if( recipient =="save"){
+                                document.getElementById("titulomodal").innerHTML = 'Save all Changes';
+                                document.getElementById("textomodal").innerHTML = 'Are you sure you save the changes?';
+                                document.getElementById("modalaceptar").innerHTML = 'Save'; 
+                        }
+                        if(recipient == "setdefault"){
+                                document.getElementById("titulomodal").innerHTML = 'Reset Defaults';
+                                document.getElementById("textomodal").innerHTML = 'Are you sure to reset the connection values?';
+                                document.getElementById("modalaceptar").innerHTML = 'Accept';
+                        }
+                });
+        </script>
+
+
 
 
