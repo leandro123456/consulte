@@ -33,7 +33,7 @@
      <!-- Begin Page Content -->
      <div class="container-fluid">
         
-			<c:if test="${not empty msg}">
+				<c:if test="${not empty msg}">
 				 	<input type="hidden" id ="mensaje" value="${msg}">
 					<script type="text/javascript">
 						var x= document.getElementById('mensaje').value;

@@ -42,6 +42,9 @@ public class DeviceDebugController {
 			configuration= device.getDeviceconfiguration().get(1);
 		String nombre = request.getUserPrincipal().getName();
 		User user = userdao.retrieveByMail(nombre);
+		System.out.println("user: "+user);
+		System.out.println("conf: "+ configuration);
+		System.out.println("devi: "+ deviceserial);
 		model.addAttribute("user", user);
 		model.addAttribute("configuration", configuration);
 		model.addAttribute("deviceserial", deviceserial);
@@ -70,7 +73,59 @@ public class DeviceDebugController {
 			@RequestParam(name="topicwriteremote", required=false) String topicwriteremote,
 			@RequestParam(name="userescribirremote", required=false) String userescribirremote,
 			@RequestParam(name="passescribirremote", required=false) String passescribirremote) {
-		System.out.println("llego!!!!!!: " + iphostescuchar);
+		System.out.println("que pasa con esto: "+ topiclisten+ ": " + topiclistenremote +"dsa");
+		Device device = devicedao.retrieveBySerialNumber(deviceserial);
+		DeviceConfiguration newconfig = new DeviceConfiguration();
+		if(!iphostescuchar.isEmpty())
+			newconfig.setIphostescuchar(iphostescuchar);
+		if(!portescuchar.isEmpty())
+			newconfig.setPortescuchar(portescuchar);
+		if(!topiclisten.isEmpty())
+			newconfig.setTopicescuchar(topiclisten);
+		if(!userescuchar.isEmpty())
+			newconfig.setUserescuchar(userescuchar);
+		if(!passescuchar.isEmpty())
+			newconfig.setPassescuchar(passescuchar);
+		if(!iphostescribir.isEmpty())
+			newconfig.setIphostescribir(iphostescribir);
+		if(!portescribir.isEmpty())
+			newconfig.setPortescribir(portescribir);
+		if(!topicwrite.isEmpty())
+			newconfig.setTopicescribir(topicwrite);
+		if(!userescribir.isEmpty())
+			newconfig.setUserescribir(userescribir);
+		if(!passescribir.isEmpty())
+			newconfig.setPassescribir(passescribir);
+		if(!iphostescucharremote.isEmpty())
+			newconfig.setIphostescucharremote(iphostescucharremote);
+		if(!portescucharremote.isEmpty())
+			newconfig.setPortescucharremote(portescucharremote);
+		if(!topiclistenremote.isEmpty())
+			newconfig.setTopicescucharremote(topiclistenremote);
+		if(!userescucharremote.isEmpty())
+			newconfig.setUserescucharremote(userescucharremote);
+		if(!passescucharremote.isEmpty())
+			newconfig.setPassescucharremote(passescucharremote);
+		if(!iphostescribirremote.isEmpty())
+			newconfig.setIphostescribirremote(iphostescribirremote);
+		if(!portescribirremote.isEmpty())
+			newconfig.setPortescribirremote(portescribirremote);
+		if(!topicwriteremote.isEmpty())
+			newconfig.setTopicescribirremote(topicwriteremote);
+		if(!userescribirremote.isEmpty())
+			newconfig.setUserescribirremote(userescribirremote);
+		if(!passescribirremote.isEmpty())
+			newconfig.setPassescribirremote(passescribirremote);
+
+		if(device.getDeviceconfiguration().size()==2)
+			device.getDeviceconfiguration().remove(1);
+		device.getDeviceconfiguration().add(newconfig);
+		device.setName("customize");
+		device.setUsedefaultbrocker(false);
+		devicedao.update(device);
+			
+		
+		model.addAttribute("msg", "actualizo correctamente");
 		return "device_debug";
 	}
 
