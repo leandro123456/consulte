@@ -34,8 +34,20 @@
 	                ${vista}
 	          </c:forEach> 
           </div>
+          <div class="fixed" >
+             <a href="/mqttmanagment/home/newdevice">
+                <i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
+             </a>
+          </div>
         </div>
       </div>
+      
+      <div class="visible">
+      <a class="scroll-to-top rounded" href="#page-top">
+	    <i class="fas fa-angle-up"></i>
+	  </a>
+      </div>
+      
       <jsp:include page="footer.jsp" />
 </body>
 

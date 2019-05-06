@@ -34,23 +34,10 @@ public class DeviceDebugController {
 	
 	@GetMapping("home/debugview/{deviceserial}")
 	public String moreInfoDevice1(Model model, @PathVariable String deviceserial, HttpServletRequest request) {
-		Device device= devicedao.retrieveBySerialNumber(deviceserial);
-		DeviceConfiguration configuration = null;
-		if(device.getUsedefaultbrocker())
-			configuration= device.getDeviceconfiguration().get(0);
-		else
-			configuration= device.getDeviceconfiguration().get(1);
-		String nombre = request.getUserPrincipal().getName();
-		User user = userdao.retrieveByMail(nombre);
-		System.out.println("user: "+user);
-		System.out.println("conf: "+ configuration);
-		System.out.println("devi: "+ deviceserial);
-		model.addAttribute("user", user);
-		model.addAttribute("configuration", configuration);
-		model.addAttribute("deviceserial", deviceserial);
+		cargarDeviceDebug(model,deviceserial,request);
 		return "device_debug";
 	}
-	
+
 	@PostMapping("home/debugview/{deviceserial}/save")
 	public String moreInfoDevi(Model model, @PathVariable String deviceserial, HttpServletRequest request,
 			@RequestParam(name="iphostescuchar",required=false) String iphostescuchar,
@@ -124,7 +111,7 @@ public class DeviceDebugController {
 		device.setUsedefaultbrocker(false);
 		devicedao.update(device);
 			
-		
+		cargarDeviceDebug(model,deviceserial,request);
 		model.addAttribute("msg", "actualizo correctamente");
 		return "device_debug";
 	}
@@ -132,7 +119,13 @@ public class DeviceDebugController {
 	@PostMapping("home/debugview/{deviceserial}/defaultconfiguration")
 	public String moreInfoDevid(Model model, @PathVariable String deviceserial, HttpServletRequest request){
 
-		System.out.println("llego!!!!!!");
+		Device device = devicedao.retrieveBySerialNumber(deviceserial);
+		device.getDeviceconfiguration().remove(1);
+		device.setUsedefaultbrocker(true);
+		devicedao.update(device);
+		
+		cargarDeviceDebug(model,deviceserial,request);
+		model.addAttribute("msg", "actualizo correctamente");
 		return "device_debug";
 	}
 	
@@ -150,7 +143,6 @@ public class DeviceDebugController {
 		model.addAttribute("devices", devices);
 		return "device_show_debug_list";
 	}
-	
 
 	private void CargarDevices(Model model, HttpServletRequest request) {
 		String nombre = request.getUserPrincipal().getName();
@@ -164,6 +156,20 @@ public class DeviceDebugController {
 			devices.add(new SimpleDevice(device));
 		}
 		model.addAttribute("devices", devices);
+	}
+	
+	private void cargarDeviceDebug(Model model, String deviceserial, HttpServletRequest request) {
+		Device device= devicedao.retrieveBySerialNumber(deviceserial);
+		DeviceConfiguration configuration = null;
+		if(device.getUsedefaultbrocker())
+			configuration= device.getDeviceconfiguration().get(0);
+		else
+			configuration= device.getDeviceconfiguration().get(1);
+		String nombre = request.getUserPrincipal().getName();
+		User user = userdao.retrieveByMail(nombre);
+		model.addAttribute("user", user);
+		model.addAttribute("configuration", configuration);
+		model.addAttribute("deviceserial", deviceserial);
 	}
 
 }

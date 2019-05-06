@@ -96,6 +96,14 @@ public class DeviceController {
 		return "device_show_my";
 	}
 	
+	@GetMapping("home/newdevice")
+	public String newDevice(HttpServletRequest request, Model model) {
+		String nombre = request.getUserPrincipal().getName();
+		User user = userdao.retrieveByMail(nombre);
+		model.addAttribute("users", user);
+		return "device_new";
+	}
+	
 
 	private void CargarDevices(Model model, HttpServletRequest request) {
 		String nombre = request.getUserPrincipal().getName();

@@ -75,7 +75,7 @@
 											<b>Port</b> <input type="text"
 												class="form-control form-control-user" id="portescuchar"
 												value="${configuration.portescuchar}" placeholder="Port">
-											<b>Topic to Listen:</b><input id="topicescuchar" type="text"
+											<b>Topic to Listen:</b><input type="text"
 												class="form-control form-control-user " id="topiclisten"
 												value="${configuration.topicescuchar}" placeholder="Topic to Listen">
 											<b>User name</b> <input type="text"
@@ -101,7 +101,7 @@
 											<b>Port</b> <input type="text"
 												class="form-control form-control-user" id="portescribir"
 												value="${configuration.portescribir}" placeholder="Port">
-											<b>Topic to Write:</b><input id="topicescribir" type="text"
+											<b>Topic to Write:</b><input type="text"
 												class="form-control form-control-user " id="topicwrite"
 												value="${configuration.topicescribir}" placeholder="Topic to Write">
 											<b>User name</b> <input type="text"
@@ -126,7 +126,7 @@
 											<b>Port</b> <input type="text"
 												class="form-control form-control-user" id="portescucharremote"
 												value="${configuration.portescucharremote}" placeholder="Port">
-											<b>Topic to Listen:</b><input id="topicescucharremote" type="text"
+											<b>Topic to Listen:</b><input type="text"
 												class="form-control form-control-user " id="topiclistenremote"
 												value="${configuration.topicescucharremote}" placeholder="Topic to Listen">
 											<b>User name</b> <input type="text"
@@ -152,7 +152,7 @@
 											<b>Port</b> <input type="text"
 												class="form-control form-control-user" id="portescribirremote"
 												value="${configuration.portescribirremote}" placeholder="Port">
-											<b>Topic to Write:</b><input id="topicescribirremote" type="text"
+											<b>Topic to Write:</b><input type="text"
 												class="form-control form-control-user " id="topicwriteremote"
 												value="${configuration.topicescribirremote}" placeholder="Topic to Write">
 											<b>User name</b> <input type="text"
@@ -168,7 +168,7 @@
 										<hr class="sidebar-divider my-0">
 										<p> </p>
 									</c:if>	
-								<div class="btn-group-vertical">
+								<div class="row">
                      				<a data-whatever="save" data-toggle="modal" data-target="#ModalConfirm" name="action" value="save" class="btn btn-primary btn-user btn-block">Save Changes</a>
                      				<a data-whatever="setdefault" data-toggle="modal" data-target="#ModalConfirm" name="action" value="setdefault" class="btn btn-primary btn-user btn-block openBtn">Restart Default Configuration</a>
                      			</div>

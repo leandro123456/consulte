@@ -9,6 +9,16 @@ body {
     padding-left: 10px;
 }
 
+.fixed {
+  position: fixed;
+  bottom: 0;
+  top: 15%;
+  right: 0;
+  width: 8%;
+  background-color: transparent;
+}
+
+
 input {
     width : 150px;
     margin: 0;
