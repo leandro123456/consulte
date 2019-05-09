@@ -23,8 +23,38 @@
 <link href='<c:url value="/resources/mqttResources/sb-admin-2.min.css" />' rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
+<!-- esto agregue para el reloj -->
+<link rel="stylesheet" href="http://weareoutman.github.io/clockpicker/dist/bootstrap-clockpicker.min.css">
+<script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script src="http://weareoutman.github.io/clockpicker/dist/bootstrap-clockpicker.min.js"></script>
+<style>
+.clock {
+    max-width: 160px;
+    margin-top: 2em;
+    padding: 1em;
+}
+
+.clock input,
+.clock span {
+    border-color: #999;
+}
+</style>
+<!-- para el reloj hasta aca -->
+
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+  <style type="text/css">
+   .tablain {
+   		border-color: #e3e6f
+   		border-width: 0px;
+   		border: transparent; 
+   		text-align: left;
+   		color: #6c6e7e;
+   		background-color: transparent;
+   		}
+  </style>
+
 </head>
 
 
@@ -95,6 +125,44 @@
 							</select>
 						</div>
 						<p> </p>
+						<form id="timerString">
+							<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+                <b>Days of the Week</b>
+                <select id="tipovistatermometro" class="form-control"  onchange="changeTipoVistaTermometro()">
+                        <select multiple class="form-control" id="sel2">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+                        <option value="none">Select</option>
+                        <option value="watches">Watches</option>
+                        <option value="bars">Bars</option>
+                 </select>
+        </div>
+        <div class="input-group clock col-lg-2">
+                <input id="horainicio" type="text" class="form-control" value="" placeholder="Ahora">
+                <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+                </span>
+        </div>
+        <div class="col-lg-5">apagar/preder</div>
+        <div class="col-lg-2">los suiches</div>
+    </div>
+</div>
+
+						</form>
+						
+						
+<!-- <div class="input-group clock"> -->
+<!--         <input id="horainicio" type="text" class="form-control" value="" placeholder="Ahora"> -->
+<!--         <span class="input-group-addon"> -->
+<!--             <span class="glyphicon glyphicon-time"></span> -->
+<!--         </span> -->
+<!--     </div> -->
 						<form id="parametrostermometro">
 						<b>Thermometer show parameters</b>
 						<table class="table table-sm">
@@ -288,16 +356,7 @@
     </div>
   </div>
   
-  <STYLE type="text/css">
-   .tablain {
-   		border-color: #e3e6f
-   		border-width: 0px;
-   		border: transparent; 
-   		text-align: left;
-   		color: #6c6e7e;
-   		background-color: transparent;
-   		}
-  </STYLE>
+
  
     <script src='<c:url value="/resources/vendor/jquery/jquery.min.js" />'></script>
 	<script src='<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js" />'></script>
@@ -483,4 +542,30 @@
 
        } 
    </script> 
+   
+
+<!-- esto es para el reloj -->
+   
+   <script type="text/javascript">
+ var $input = $('.clock').clockpicker({
+    default:          'now',
+    placement:        'bottom', 
+    align:            'left',
+    donetext:         'Listo',
+    autoclose:        false,
+    vibrate:          true,
+    fromnow:          0//,
+ //   init:             function () { console.log('iniciado') },
+ //   beforeShow:       function () { console.log('antes de mostrarse') },
+ //   afterShow:        function () { console.log('después de mostrarse') },
+ //   beforeHide:       function () { console.log('antes de ocultarse') },
+ //   afterHide:        function () { console.log('después de ocultarse') },
+ //   beforeHourSelect: function () { console.log('antes de seleccionar la hora') },
+ //   afterHourSelect:  function () { console.log('después de seleccionar la hora') },
+ //   beforeDone:       function () { console.log('antes de finalizar') },
+ //   afterDone:        function () { console.log('después de finalizar') }
+});
+</script>
+<!-- esto es para el reloj -->
+   
   	
