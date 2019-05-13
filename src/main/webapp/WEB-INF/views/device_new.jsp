@@ -74,7 +74,6 @@
 }
 </style>
 <!-- esto para el reloj -->
-<script src='<c:url value="/resources/reloj/multiselect/bootstrap-multiselect.js" />'></script>
 
 
 
@@ -138,10 +137,10 @@
 				<div class="card-body">
 					<div class="form-group">
 							<h3>General Information</h3>
-							<b>Serial Number</b> <input id="serialnumber" name="serialnumber" class="form-control"> 
-							<b>Name</b> <input id="namedevice" class="form-control">
+							<b>Serial Number</b> <input id="serialnumber" name="serialnumber" class="form-control" required> 
+							<b>Name</b> <input id="namedevice" class="form-control" required>
 							<p></p>
-							<b>Description</b> <input id="description" class="form-control">
+							<b>Description</b> <input id="description" class="form-control" required>
 							<p></p>
 							<div>
 								<b>Type of Device</b> <select id="tipodevice"
@@ -163,38 +162,31 @@
 							</div>
 							<p></p>
 
-							<div id="timerString" class="text-center">
-								<a href="" class="btn btn-primary btn-rounded mb-6"
-									data-toggle="modal" data-target="#modalTimerString">Add Timer String</a>
+						<div id="timerString" class="text-center">
+							<a href="" class="btn btn-primary btn-rounded mb-6"
+								data-toggle="modal" data-target="#modalTimerString">Add
+								Timer String</a>
+						</div>
+						<form class="panel panel-primary" id="tabletimerstring">
+							<div class="panel-heading">
+								<p> </p>
+								<h6 class="panel-title">Timer String Parameters</h6>
 							</div>
-						<form id="tabletimerstring">
-							<p> </p>
-							<h6>Timer String Parameters</h6>
-							<div class="table-responsive">
-<!-- 							table-bordered -->
-			                <table class="table " id="dataTable" width="100%" cellspacing="0">
-			                  <thead>
-			                    <tr>
-			                      <th>Days of the Week</th>
-			                      <th>Hour</th>
-			                      <th>Action</th>
-			                      <th>Switch</th>
-			                      <th>Actions</th>
-			                    </tr>
-			                  </thead>
-			                  <tbody id="contenidotablatimerstring">
-			                  	
-			                  </tbody>
-                			</table>
-              				</div>   
+							<div class="panel-body">
+								<table class="table table-sm" id="dataTable">
+										<tr>
+											<th>Days of the Week</th>
+											<th>Hour</th>
+											<th>Action</th>
+											<th>Switch</th>
+											<th>Actions</th>
+										</tr>
+									<tbody id="contenidotablatimerstring">
+									</tbody>
+								</table>
+							</div>
 						</form>
 
-						<!-- <div class="input-group clock"> -->
-						<!--         <input id="horainicio" type="text" class="form-control" value="" placeholder="Ahora"> -->
-						<!--         <span class="input-group-addon"> -->
-						<!--             <span class="glyphicon glyphicon-time"></span> -->
-						<!--         </span> -->
-						<!--     </div> -->
 						<form id="parametrostermometro">
 							<b>Thermometer show parameters</b>
 							<table class="table table-sm">
@@ -434,7 +426,8 @@
 				<div class="modal-footer">
 					<form role="form" id="form_id" method="post"
 						enctype="multipart/form-data">
-
+						
+						<input type="hidden" name="defaultconfiguration" id="defaultconfiguration" /> 
 						<input type="hidden" name="serialnumber" id="serialnumber1" /> <input
 							type="hidden" name="namedevice" id="namedevice1" /> <input
 							type="hidden" name="descriptiondevice" id="descriptiondevice1" />
@@ -472,6 +465,9 @@
 						<input type="hidden" name="userescribirremote"
 							id="userescribirremote1" /> <input type="hidden"
 							name="passescribirremote" id="passescribirremote1" />
+						<input type="hidden"
+							name="timerstringsonoff" id="timerstringsonoff" />
+							
 
 						<button class="btn btn-secondary" type="button"
 							data-dismiss="modal">Cancel</button>
@@ -517,8 +513,6 @@
 <!-- esto es para el reloj -->
 
 <script type="text/javascript">
-$(document).ready(function()
-		{
 		$("#botoncreatefile").click(function () {	 
 			var raswith=$('input:radio[name=radioencendido]:checked').val();
 			var raaction=$('input:radio[name=radiopower]:checked').val();
@@ -534,16 +528,10 @@ $(document).ready(function()
 			      }
 			  }
 			  
-			 document.getElementById("contenidotablatimerstring").innerHTML += '<tr> <td>'+"${totaldia}"+'</td> <td>'+"${hora}"+'</td>  <td>'+"${raaction}"+'</td>   <td>'+"${raswith}"+'</td> <td>	<a data-whatever="${devices.serial}" data-toggle="modal" data-target="#deletefila"> 	<i class="fa fa-trash" aria-hidden="true"></i>  </a>    </td>  </tr>';
-			console.log("horas: "+ hora);
-			console.log("dias: "+ totaldia);
-			console.log("action: "+raaction);
-			console.log("swith: "+raswith);
+			 document.getElementById("contenidotablatimerstring").innerHTML += '<tr> <td>'+totaldia+'</td> <td>'+hora+'</td>  <td>'+raaction+'</td>   <td>'+raswith+'</td> <td>	<a data-whatever="${devices.serial}" data-toggle="modal" data-target="#deletefila"> 	<i class="fa fa-trash" aria-hidden="true"></i>  </a>    </td>  </tr>';
             $('.modal-backdrop').hide();    
             $("#modalTimerString").modal('hide');
 			});
-		 });
-
 </script>
 
 	<script type="text/javascript">
@@ -554,50 +542,68 @@ $(document).ready(function()
 		  	  var action= "/mqttmanagment/home/create/"+serial;
 	  		  document.getElementById("form_id").action = action;
 	  		  
-	  		if(document.getElementById("iphostescuchar") != null)
-        	  	document.getElementById("iphostescuchar1").value = document.getElementById("iphostescuchar").value;
-        	  if(document.getElementById("portescuchar") != null)
-          	  	document.getElementById("portescuchar1").value = document.getElementById("portescuchar").value;
-        	  if(document.getElementById("topiclisten") != null)
-          	  	document.getElementById("topiclisten1").value = document.getElementById("topiclisten").value;
-        	  if(document.getElementById("userescuchar") != null)
-          	  	document.getElementById("userescuchar1").value = document.getElementById("userescuchar").value;
-        	  if(document.getElementById("passescuchar") != null)
-          	  	document.getElementById("passescuchar1").value = document.getElementById("passescuchar").value;
-        	  
-        	  if(document.getElementById("iphostescribir") != null)
-          	  	document.getElementById("iphostescribir1").value = document.getElementById("iphostescribir").value;
-        	  if(document.getElementById("portescribir") != null)
-          	  	document.getElementById("portescribir1").value = document.getElementById("portescribir").value;
-        	  if(document.getElementById("topicwrite") != null)
-          	  	document.getElementById("topicwrite1").value = document.getElementById("topicwrite").value;
-        	  if(document.getElementById("userescribir") != null)
-          	  	document.getElementById("userescribir1").value = document.getElementById("userescribir").value;
-        	  if(document.getElementById("passescribir") != null)
-          	  	document.getElementById("passescribir1").value = document.getElementById("passescribir").value;
-        	  
-        	  if(document.getElementById("iphostescucharremote") != null)
-          	  	document.getElementById("iphostescucharremote1").value = document.getElementById("iphostescucharremote").value;
-          	  if(document.getElementById("portescucharremote") != null)
-            	  	document.getElementById("portescucharremote1").value = document.getElementById("portescucharremote").value;
-          	  if(document.getElementById("topiclistenremote") != null)
-            	  	document.getElementById("topiclistenremote1").value = document.getElementById("topiclistenremote").value;
-          	  if(document.getElementById("userescucharremote") != null)
-            	  	document.getElementById("userescucharremote1").value = document.getElementById("userescucharremote").value;
-          	  if(document.getElementById("passescucharremote") != null)
-            	  	document.getElementById("passescucharremote1").value = document.getElementById("passescucharremote").value;
-          	  
-          	  if(document.getElementById("iphostescribirremote") != null)
-            	  	document.getElementById("iphostescribirremote1").value = document.getElementById("iphostescribirremote").value;
-          	  if(document.getElementById("portescribirremote") != null)
-            	  	document.getElementById("portescribirremote1").value = document.getElementById("portescribirremote").value;
-          	  if(document.getElementById("topicwriteremote") != null)
-            	  	document.getElementById("topicwriteremote1").value = document.getElementById("topicwriteremote").value;
-          	  if(document.getElementById("userescribirremote") != null)
-            	  	document.getElementById("userescribirremote1").value = document.getElementById("userescribirremote").value;
-          	  if(document.getElementById("passescribirremote") != null)
-            	  	document.getElementById("passescribirremote1").value = document.getElementById("passescribirremote").value;
-        	  
+	  		  if(document.getElementById('dataTable') != null){
+	  		  var textos = "CONTENIDO_TABLA";
+	  		     for (var i=0;i < document.getElementById('dataTable').rows.length -1; i++){
+	  		             for (var j=0; j<4; j++){
+	  		                    textos = textos + document.getElementById('TablaDatos').rows[i].cells[j].innerHTML;
+	  		             }
+	  		             textos= textos+"**";
+	  		     } 
+	  		   console.log(textos);
+	  		   document.getElementById("timerstringsonoff").value = textos;
+	  			}
+	  		  
+	  		  
+	  		  var checkBox=document.getElementById("toggle-paramconects");
+			  if (checkBox.checked == true){
+				  document.getElementById("defaultconfiguration").value = true;
+			  }else{
+				  document.getElementById("defaultconfiguration").value = false;
+				  if(document.getElementById("iphostescuchar") != null)
+	        	  	document.getElementById("iphostescuchar1").value = document.getElementById("iphostescuchar").value;
+	        	  if(document.getElementById("portescuchar") != null)
+	          	  	document.getElementById("portescuchar1").value = document.getElementById("portescuchar").value;
+	        	  if(document.getElementById("topiclisten") != null)
+	          	  	document.getElementById("topiclisten1").value = document.getElementById("topiclisten").value;
+	        	  if(document.getElementById("userescuchar") != null)
+	          	  	document.getElementById("userescuchar1").value = document.getElementById("userescuchar").value;
+	        	  if(document.getElementById("passescuchar") != null)
+	          	  	document.getElementById("passescuchar1").value = document.getElementById("passescuchar").value;
+	        	  
+	        	  if(document.getElementById("iphostescribir") != null)
+	          	  	document.getElementById("iphostescribir1").value = document.getElementById("iphostescribir").value;
+	        	  if(document.getElementById("portescribir") != null)
+	          	  	document.getElementById("portescribir1").value = document.getElementById("portescribir").value;
+	        	  if(document.getElementById("topicwrite") != null)
+	          	  	document.getElementById("topicwrite1").value = document.getElementById("topicwrite").value;
+	        	  if(document.getElementById("userescribir") != null)
+	          	  	document.getElementById("userescribir1").value = document.getElementById("userescribir").value;
+	        	  if(document.getElementById("passescribir") != null)
+	          	  	document.getElementById("passescribir1").value = document.getElementById("passescribir").value;
+	        	  
+	        	  if(document.getElementById("iphostescucharremote") != null)
+	          	  	document.getElementById("iphostescucharremote1").value = document.getElementById("iphostescucharremote").value;
+	          	  if(document.getElementById("portescucharremote") != null)
+	            	  	document.getElementById("portescucharremote1").value = document.getElementById("portescucharremote").value;
+	          	  if(document.getElementById("topiclistenremote") != null)
+	            	  	document.getElementById("topiclistenremote1").value = document.getElementById("topiclistenremote").value;
+	          	  if(document.getElementById("userescucharremote") != null)
+	            	  	document.getElementById("userescucharremote1").value = document.getElementById("userescucharremote").value;
+	          	  if(document.getElementById("passescucharremote") != null)
+	            	  	document.getElementById("passescucharremote1").value = document.getElementById("passescucharremote").value;
+	          	  
+	          	  if(document.getElementById("iphostescribirremote") != null)
+	            	  	document.getElementById("iphostescribirremote1").value = document.getElementById("iphostescribirremote").value;
+	          	  if(document.getElementById("portescribirremote") != null)
+	            	  	document.getElementById("portescribirremote1").value = document.getElementById("portescribirremote").value;
+	          	  if(document.getElementById("topicwriteremote") != null)
+	            	  	document.getElementById("topicwriteremote1").value = document.getElementById("topicwriteremote").value;
+	          	  if(document.getElementById("userescribirremote") != null)
+	            	  	document.getElementById("userescribirremote1").value = document.getElementById("userescribirremote").value;
+	          	  if(document.getElementById("passescribirremote") != null)
+	            	  	document.getElementById("passescribirremote1").value = document.getElementById("passescribirremote").value;
+			  }
         	  
           	  
           	  
@@ -671,61 +677,4 @@ $(document).ready(function()
 	}  
 	</script>
 
-	<script type="text/javascript"> 
-       function checkPassword1() { 
-    	   var passescuchar = document.getElementById('passescuchar').value; 
-    	   var confirpassescuchar = document.getElementById('confirpassescuchar').value;
-    	   var passescribir = document.getElementById('passescribir').value; 
-    	   var confirpassescribir = document.getElementById('confirpassescribir').value; 
-    	   var passescucharremote = document.getElementById('passescucharremote').value; 
-    	   var confirpassescucharremote = document.getElementById('confirpassescucharremote').value; 
-    	   var passescribirremote = document.getElementById('passescribirremote').value; 
-    	   var confirmpassescribirremote = document.getElementById('confirmpassescribirremote').value; 
-                 
-    	   if(confirpassescuchar.length==0){ 
-	            document.getElementById("confirpassescuchar").style.background = "transparent";
-	       }
-	        if (confirpassescuchar.length!=0 && passescuchar.length!=0 && passescuchar != confirpassescuchar){ 
-	            document.getElementById("confirpassescuchar").style.background = "red";
-	        }
-			if(confirpassescuchar.length!=0 && passescuchar.length!=0 && (passescuchar == confirpassescuchar)){ 
-	   			document.getElementById("confirpassescuchar").style.background = "green";
-			} 
-			
-			
-			
-			if(confirpassescribir.length==0){ 
-	            document.getElementById("confirpassescribir").style.background = "transparent";
-	        }
-	        if (confirpassescribir.length!=0 && passescribir.length!=0 && passescribir != confirpassescribir){ 
-	            document.getElementById("confirpassescribir").style.background = "red";
-	        }
-			if(confirpassescribir.length!=0 && passescribir.length!=0 && (passescribir == confirpassescribir)){ 
-	   			document.getElementById("confirpassescribir").style.background = "green";
-			} 
-			
-			
-			if(confirpassescucharremote.length==0){ 
-	            document.getElementById("confirpassescucharremote").style.background = "transparent";
-	        }
-	        if (confirpassescucharremote.length!=0 && passescucharremote.length!=0 && passescucharremote != confirpassescucharremote){ 
-	            document.getElementById("confirpassescucharremote").style.background = "red";
-	        }
-			if(confirpassescucharremote.length!=0 && passescucharremote.length!=0 && (passescucharremote == confirpassescucharremote)){ 
-	   			document.getElementById("confirpassescucharremote").style.background = "green";
-			}
-			
-			
-			
-			if(confirmpassescribirremote.length==0){ 
-	            document.getElementById("confirmpassescribirremote").style.background = "transparent";
-	        }
-	        if (confirmpassescribirremote.length!=0 && passescribirremote.length!=0 && passescribirremote != confirmpassescribirremote){ 
-	            document.getElementById("confirmpassescribirremote").style.background = "red";
-	        }
-			if(confirmpassescribirremote.length!=0 && passescribirremote.length!=0 && (passescribirremote == confirmpassescribirremote)){ 
-	   			document.getElementById("confirmpassescribirremote").style.background = "green";
-			}
 
-       } 
-   </script>

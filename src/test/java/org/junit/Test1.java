@@ -15,16 +15,37 @@ import java.util.regex.Pattern;
 import org.json.JSONObject;
 
 import com.lgg.nticxs.web.DAO.DeviceDAO;
+import com.lgg.nticxs.web.DAO.DeviceDefaultConfigurationDAO;
 import com.lgg.nticxs.web.model.User;
 import com.lgg.nticxs.web.model.Vista;
 import com.lgg.nticxs.web.model.Ciclolectivo;
 import com.lgg.nticxs.web.model.Device;
 import com.lgg.nticxs.web.model.DeviceConfiguration;
+import com.lgg.nticxs.web.model.DeviceDefaultConfiguration;
 import com.lgg.nticxs.web.model.Materia;
 import com.lgg.nticxs.web.model.Materia.materia;
 
 public class Test1 {
 	
+	
+	//@Test
+	public void testCrearDeviceDefaultConfiguration(){
+		DeviceDefaultConfigurationDAO dedao = new DeviceDefaultConfigurationDAO();
+		DeviceDefaultConfiguration deviceconfiguration = new DeviceDefaultConfiguration("12454casa1");
+		deviceconfiguration.setIphostescuchar("gw001.iotek.space");
+		deviceconfiguration.setName("default");
+		deviceconfiguration.setPassescuchar("Sanbenit0");
+		deviceconfiguration.setPortescuchar("8080");
+		deviceconfiguration.setTopicescribir("topicescribir");
+		deviceconfiguration.setTopicescribirremote("topicescribirremote");
+		deviceconfiguration.setTopicescuchar("12454casa1");
+		deviceconfiguration.setTopicescucharremote("topicescucharremote");
+		deviceconfiguration.setUserescuchar("movasim");
+		deviceconfiguration.setUsesslescuchar(false);
+		dedao.create(deviceconfiguration);
+		System.out.println("termino");
+		
+	}
 	
 	//@Test
 	public void testSearchVista(){
