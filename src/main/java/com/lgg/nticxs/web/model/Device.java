@@ -45,6 +45,9 @@ public class Device {
 	@Field (name = "role")
 	private String role;
 	
+	@Field (name = "timerString")
+	private String timerString;
+	
 	@Field (name = "usedefaultbrocker")
 	private Boolean usedefaultbrocker;
 	
@@ -189,6 +192,14 @@ public class Device {
 		this.admins = admins;
 	}
 
+
+	public String getTimerString() {
+		return timerString;
+	}
+
+	public void setTimerString(String timerString) {
+		this.timerString = timerString;
+	}
 
 	public String getUserRole(String userTarget) {
 		if(userowner.equals(userTarget))

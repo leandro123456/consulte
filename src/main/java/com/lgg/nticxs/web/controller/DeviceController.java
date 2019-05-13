@@ -104,6 +104,16 @@ public class DeviceController {
 		return "device_new";
 	}
 	
+	
+	@PostMapping("home/create/{deviceserial}")
+	public String createDevice(Model model, @PathVariable String deviceserial,HttpServletRequest request) {
+		System.out.println("llego al create!!");
+		System.out.println("serial: "+ deviceserial);
+		CargarDevices(model, request);
+		//ahora crear el dispositivo
+		return "origin";
+	}
+	
 
 	private void CargarDevices(Model model, HttpServletRequest request) {
 		String nombre = request.getUserPrincipal().getName();

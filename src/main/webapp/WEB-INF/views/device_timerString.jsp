@@ -37,46 +37,24 @@
 	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
 	crossorigin="anonymous">
 
-<!-- esto para el reloj -->
-<link rel="stylesheet" type="text/css" href='<c:url value="/resources/reloj/dist/bootstrap-clockpicker.min.css" />'>
+<!-- esto agregue para el reloj -->
+<link rel="stylesheet"
+	href="http://weareoutman.github.io/clockpicker/dist/bootstrap-clockpicker.min.css">
+<script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script
+	src="http://weareoutman.github.io/clockpicker/dist/bootstrap-clockpicker.min.js"></script>
+<style>
+.clock {
+	max-width: 160px;
+	margin-top: 2em;
+	padding: 1em;
+}
 
-<style type="text/css">
-.navbar h3 {
-	color: #f5f5f5;
-	margin-top: 14px;
-}
-.hljs-pre {
-	background: #f8f8f8;
-	padding: 3px;
-}
-.footer {
-	border-top: 1px solid #eee;
-	margin-top: 40px;
-	padding: 40px 0;
-}
-.input-group {
-	width: 110px;
-	margin-bottom: 10px;
-}
-.pull-center {
-	margin-left: auto;
-	margin-right: auto;
-}
-@media (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
-}
-@media (max-width: 767px) {
-  .pull-center {
-    float: center;
-  }
+.clock input, .clock span {
+	border-color: #999;
 }
 </style>
-<!-- esto para el reloj -->
-<script src='<c:url value="/resources/reloj/multiselect/bootstrap-multiselect.js" />'></script>
-
-
+<!-- para el reloj hasta aca -->
 
 <link
 	href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css"
@@ -137,57 +115,63 @@
 				</div>
 				<div class="card-body">
 					<div class="form-group">
-							<h3>General Information</h3>
-							<b>Serial Number</b> <input id="serialnumber" name="serialnumber" class="form-control"> 
-							<b>Name</b> <input id="namedevice" class="form-control">
-							<p></p>
-							<b>Description</b> <input id="description" class="form-control">
-							<p></p>
-							<div>
-								<b>Type of Device</b> <select id="tipodevice"
-									class="form-control" onchange="enableType()">
-									<option value="none">Select</option>
-									<option value="thermometer">Thermometer</option>
-									<option value="alarm">Alarm</option>
-									<option value="sonoff">Sonoff</option>
-								</select>
+						<h3>General Information</h3>
+						<b>Serial Number</b> <input id="serialnumber" class="form-control">
+						<b>Name</b> <input id="namedevice" class="form-control">
+						<p></p>
+						<b>Description</b> <input id="description" class="form-control">
+						<p></p>
+						<div>
+							<b>Type of Device</b> <select id="tipodevice"
+								class="form-control" onchange="enableType()">
+								<option value="none">Select</option>
+								<option value="thermometer">Thermometer</option>
+								<option value="alarm">Alarm</option>
+								<option value="sonoff">Sonoff</option>
+							</select>
+						</div>
+						<p></p>
+						<div id="vistastermometro">
+							<b>Type of View</b> <select id="tipovistatermometro"
+								class="form-control" onchange="changeTipoVistaTermometro()">
+								<option value="none">Select</option>
+								<option value="watches">Watches</option>
+								<option value="bars">Bars</option>
+							</select>
+						</div>
+						<p></p>
+						<form id="timerString">
+							<div class="container">
+								<div class="row">
+									<div class="col-lg-3">
+										<div class="form-group">
+											<label for="exampleFormControlSelect2">Days of the
+												Week</label> <select multiple="" class="form-control"
+												id="exampleFormControlSelect2">
+												<option value="monday">Monday</option>
+												<option value="tuesday">Tuesday</option>
+												<option value="wednesday">Wednesday</option>
+												<option value="thursday">Thursday</option>
+												<option value="friday">Friday</option>
+												<option value="saturday">Saturday</option>
+												<option value="sunday">Sunday</option>
+											</select>
+										</div>
+									</div>
+									<div class="input-group clock col-lg-2">
+										<input id="horainicio" type="text" class="form-control"
+											value="" placeholder="Ahora"> <span
+											class="input-group-addon"> <span
+											class="glyphicon glyphicon-time"></span>
+										</span>
+									</div>
+									<div class="col-lg-3">apagar/preder</div>
+									<div class="col-lg-2">los suiches</div>
+								</div>
 							</div>
-							<p></p>
-							<div id="vistastermometro">
-								<b>Type of View</b> <select id="tipovistatermometro"
-									class="form-control" onchange="changeTipoVistaTermometro()">
-									<option value="none">Select</option>
-									<option value="watches">Watches</option>
-									<option value="bars">Bars</option>
-								</select>
-							</div>
-							<p></p>
 
-							<div id="timerString" class="text-center">
-								<a href="" class="btn btn-primary btn-rounded mb-6"
-									data-toggle="modal" data-target="#modalTimerString">Add Timer String</a>
-							</div>
-						<form id="tabletimerstring">
-							<p> </p>
-							<h6>Timer String Parameters</h6>
-							<div class="table-responsive">
-<!-- 							table-bordered -->
-			                <table class="table " id="dataTable" width="100%" cellspacing="0">
-			                  <thead>
-			                    <tr>
-			                      <th>Days of the Week</th>
-			                      <th>Hour</th>
-			                      <th>Action</th>
-			                      <th>Switch</th>
-			                      <th>Actions</th>
-			                    </tr>
-			                  </thead>
-			                  <tbody id="contenidotablatimerstring">
-			                  	
-			                  </tbody>
-                			</table>
-              				</div>   
 						</form>
+
 
 						<!-- <div class="input-group clock"> -->
 						<!--         <input id="horainicio" type="text" class="form-control" value="" placeholder="Ahora"> -->
@@ -326,98 +310,6 @@
 	<jsp:include page="footer.jsp" />
 
 
-	<div class="modal fade" id="modalTimerString" tabindex="-1"
-		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header text-center">
-					<h4 class="modal-title w-100 font-weight-bold">Timer String</h4>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body mx-3">
-
-					<div class="md-form mb-5">
-						<form id="timerString">
-							<div class="container">
-								<div class="row">
-									<div class="col-lg-6">
-										<div class="form-group">
-											<label for="exampleFormControlSelect2">Days of the
-												Week</label> <select id="dias" multiple="multiple" class="form-control"
-												id="exampleFormControlSelect2">
-												<option value="monday">Monday</option>
-												<option value="tuesday">Tuesday</option>
-												<option value="wednesday">Wednesday</option>
-												<option value="thursday">Thursday</option>
-												<option value="friday">Friday</option>
-												<option value="saturday">Saturday</option>
-												<option value="sunday">Sunday</option>
-											</select>
-										</div>
-									</div>
-									<div class="input-group clock col-lg-6">
-										<div class="clearfix">
-											<label for="exampleFormControlSelect2">Hour</label>
-											<div class="input-group clockpicker pull-center"
-												data-placement="center" data-align="top"
-												data-autoclose="true">
-												<input id="hora" type="text" class="form-control" value="00:00">
-<!-- 												<span class="input-group-addon"> <span -->
-<!-- 													class="glyphicon glyphicon-time"></span> -->
-<!-- 												</span> -->
-											</div>
-										</div>
-									</div>
-									<div class="col-lg-6">
-										<label for="exampleFormControlSelect2">Action</label>
-										<div class="form-group">
-											<div class="radio">
-												<label><input type="radio" name="radiopower" value="on" checked>Power
-													On</label>
-											</div>
-											<div class="radio">
-												<label><input type="radio" value="off" name="radiopower">Power
-													Off</label>
-											</div>
-										</div>
-									</div>
-									<div class="col-lg-6">
-										<label for="exampleFormControlSelect2">Switch</label>
-										<div class="form-group">
-											<div class="radio">
-												<label><input type="radio" value="All" 
-												name="radioencendido" checked>All</label>
-											</div>
-											<div class="radio">
-												<label><input type="radio" value="1" name="radioencendido">1</label>
-											</div>
-											<div class="radio">
-												<label><input type="radio" value="2" name="radioencendido">2</label>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-
-						</form>
-
-					</div>
-				</div>
-				<div class="modal-footer d-flex justify-content-center">
-					<a class="btn btn-primary btn-lg btn-block" id="botoncreatefile">Create</a>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-
-
-
 	<!-- Logout Modal-->
 	<div class="modal fade" id="ModalConfirm" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -498,53 +390,6 @@
 	<script
 		src='<c:url value="/resources/vendor/datatables/dataTables.bootstrap4.min.js" />'></script>
 	<script src='<c:url value="/resources/js/demo/datatables-demo.js" />'></script>
-
-<!-- esto es para el reloj -->
-	<script type="text/javascript" src='<c:url value="/resources/reloj/dist/bootstrap-clockpicker.min.js" />'></script>
-	<script type="text/javascript">
-	$('.clockpicker').clockpicker()
-// 	.find('input').change(function(){
-// 		console.log(this.value);
-// 	});
-	var input = $('#single-input').clockpicker({
-	placement: 'bottom',
-	align: 'left',
-	autoclose: true,
-	'default': 'now'
-	});
-
-	</script>
-<!-- esto es para el reloj -->
-
-<script type="text/javascript">
-$(document).ready(function()
-		{
-		$("#botoncreatefile").click(function () {	 
-			var raswith=$('input:radio[name=radioencendido]:checked').val();
-			var raaction=$('input:radio[name=radiopower]:checked').val();
-			var hora = document.getElementById("hora").value;
-			var x=document.getElementById("dias");
-			var totaldia = "";
-			  for (var i = 0; i < x.options.length; i++) {
-			     if(x.options[i].selected ==true){
-			    	 if(totaldia=="")
-			    		 totaldia = x.options[i].value;
-			    	 else
-			    	 totaldia= totaldia+"-"+ x.options[i].value;
-			      }
-			  }
-			  
-			 document.getElementById("contenidotablatimerstring").innerHTML += '<tr> <td>'+"${totaldia}"+'</td> <td>'+"${hora}"+'</td>  <td>'+"${raaction}"+'</td>   <td>'+"${raswith}"+'</td> <td>	<a data-whatever="${devices.serial}" data-toggle="modal" data-target="#deletefila"> 	<i class="fa fa-trash" aria-hidden="true"></i>  </a>    </td>  </tr>';
-			console.log("horas: "+ hora);
-			console.log("dias: "+ totaldia);
-			console.log("action: "+raaction);
-			console.log("swith: "+raswith);
-            $('.modal-backdrop').hide();    
-            $("#modalTimerString").modal('hide');
-			});
-		 });
-
-</script>
 
 	<script type="text/javascript">
 	  	$('#ModalConfirm').on('show.bs.modal', function (event) {
@@ -628,23 +473,15 @@ $(document).ready(function()
         if(valuetype == "thermometer"){
         	document.getElementById('vistastermometro').style.display = 'inline';
         	document.getElementById('parametrostermometro').style.display = 'inline';
-        	document.getElementById('timerString').style.display = 'none';
-        	document.getElementById('tabletimerstring').style.display = 'none';
         }if(valuetype == "alarm"){
         	document.getElementById('vistastermometro').style.display = 'none';
         	document.getElementById('parametrostermometro').style.display = 'none';
-        	document.getElementById('timerString').style.display = 'none';
-        	document.getElementById('tabletimerstring').style.display = 'none';
         }if(valuetype == "sonoff"){
         	document.getElementById('vistastermometro').style.display = 'none';
         	document.getElementById('parametrostermometro').style.display = 'none';
-        	document.getElementById('timerString').style.display = 'inline';
-        	document.getElementById('tabletimerstring').style.display = 'inline';
         }if(valuetype != "thermometer" && valuetype != "alarm" && valuetype != "sonoff"){
         	document.getElementById('vistastermometro').style.display = 'none';
         	document.getElementById('parametrostermometro').style.display = 'none';
-        	document.getElementById('timerString').style.display = 'none';
-        	document.getElementById('tabletimerstring').style.display = 'none';
         }
         
 	}
@@ -729,3 +566,28 @@ $(document).ready(function()
 
        } 
    </script>
+
+
+	<!-- esto es para el reloj -->
+
+	<script type="text/javascript">
+ var $input = $('.clock').clockpicker({
+    default:          'now',
+    placement:        'bottom', 
+    align:            'left',
+    donetext:         'Listo',
+    autoclose:        false,
+    vibrate:          true,
+    fromnow:          0//,
+ //   init:             function () { console.log('iniciado') },
+ //   beforeShow:       function () { console.log('antes de mostrarse') },
+ //   afterShow:        function () { console.log('después de mostrarse') },
+ //   beforeHide:       function () { console.log('antes de ocultarse') },
+ //   afterHide:        function () { console.log('después de ocultarse') },
+ //   beforeHourSelect: function () { console.log('antes de seleccionar la hora') },
+ //   afterHourSelect:  function () { console.log('después de seleccionar la hora') },
+ //   beforeDone:       function () { console.log('antes de finalizar') },
+ //   afterDone:        function () { console.log('después de finalizar') }
+});
+</script>
+	<!-- esto es para el reloj -->
