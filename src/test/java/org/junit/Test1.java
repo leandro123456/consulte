@@ -18,6 +18,7 @@ import com.lgg.nticxs.web.DAO.DeviceDAO;
 import com.lgg.nticxs.web.DAO.DeviceDefaultConfigurationDAO;
 import com.lgg.nticxs.web.model.User;
 import com.lgg.nticxs.web.model.Vista;
+import com.lgg.nticxs.web.model.simple.SimpleTimerString;
 import com.lgg.nticxs.web.model.Ciclolectivo;
 import com.lgg.nticxs.web.model.Device;
 import com.lgg.nticxs.web.model.DeviceConfiguration;
@@ -27,6 +28,32 @@ import com.lgg.nticxs.web.model.Materia.materia;
 
 public class Test1 {
 	
+	
+	@Test
+	public void testMakeTimerString(){
+		String init ="monday-wednesday-friday&01:50&on&All@&monday-tuesday-wednesday-thursday-friday-saturday&07:15&off&All@&";
+		
+		String[] listtimerstring = init.split("@&");
+		System.out.println(listtimerstring.length);
+		String timerresult= "";
+		for(int i=0; i<listtimerstring.length; i++) {
+			System.out.println(listtimerstring[i]);
+			String[] timerstring = listtimerstring[i].split("&");
+			System.out.println("elemento "+i+" tamano: "+ timerstring.length);
+			System.out.println(timerstring[0]);
+			System.out.println(timerstring[1]);
+			System.out.println(timerstring[2]);
+			System.out.println(timerstring[3]);
+			
+			
+			String day = SimpleTimerString.checkDaysRollback(timerstring[0]);
+			String hour = timerstring[1].replaceAll(":", "");
+			String action = SimpleTimerString.checkAction(timerstring[2]);
+			String cualswith = SimpleTimerString.checkSwith(timerstring[3]);
+			timerresult=timerresult+day+hour+action+cualswith;
+		}
+		System.out.println("termino: "+ timerresult);
+	}
 	
 	//@Test
 	public void testCrearDeviceDefaultConfiguration(){

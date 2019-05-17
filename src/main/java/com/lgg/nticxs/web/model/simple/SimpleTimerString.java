@@ -26,6 +26,10 @@ public class SimpleTimerString {
 	static final public String DAY_MONDAY_TUESDAY_WEDNESDAY = "N";
 	static final public String DAY_THURSDAY_FRIDAY_SATURDAY = "O";
 	static final public String DAY_MONDAY_WEDNESDAY_FRIDAY_SATURDAY = "P";
+	static final public String SWITH_ALL = "A";
+	static final public String SWITH_ONE = "1";
+	static final public String SWITH_TWO = "2";
+	static final public String SWITH_THREE = "3";
 	
 	
 	
@@ -57,10 +61,10 @@ public class SimpleTimerString {
 		String result="";
 		switch (action) {
 		case "0":
-			result = "poweroff";
+			result = "off";
 			break;
 		case "1":
-			result = "poweron";
+			result = "on";
 			break;
 		default:
 			break;
@@ -75,60 +79,118 @@ public class SimpleTimerString {
 		String result="";
 		switch (day) {
 		case "A":
-			result = "Monday";
+			result = "monday";
 			break;
 		case "B":
-			result = "Tuesday";
+			result = "tuesday";
 			break;
 		case "C":
-			result = "Wednesday";
+			result = "wednesday";
 			break;
 		case "D":
-			result = "Thursday";
+			result = "thursday";
 			break;
 		case "E":
-			result = "Friday";
+			result = "friday";
 			break;
 		case "F":
-			result = "Saturday";
+			result = "saturday";
 			break;
 		case "G":
-			result = "Sunday";
+			result = "sunday";
 			break;
 		case "H":
-			result = "Monday-Tuesday-Wednesday-Thursday-Friday-Saturday-Sunday";
+			result = "monday-tuesday-wednesday-thursday-friday-saturday-sunday";
 			break;
 		case "I":
-			result = "Monday-Tuesday-Wednesday-Thursday-Friday";
+			result = "monday-tuesday-wednesday-thursday-friday";
 			break;
 		case "J":
-			result = "Saturday-Sunday";
+			result = "saturday-sunday";
 			break;
 		case "K":
-			result = "Monday-Tuesday-Wednesday-Thursday-Friday-Saturday";
+			result = "monday-tuesday-wednesday-thursday-friday-saturday";
 			break;
 		case "L":
-			result = "Monday-Wednesday-Friday";
+			result = "monday-wednesday-friday";
 			break;
 		case "M":
-			result = "Tuesday-Thursday-Saturday";
+			result = "tuesday-thursday-saturday";
 			break;
 		case "N":
-			result = "Monday-Tuesday-Wednesday";
+			result = "monday-tuesday-wednesday";
 			break;
 		case "O":
-			result = "Thursday-Friday-Saturday";
+			result = "thursday-friday-saturday";
 			break;
 		case "P":
-			result = "Monday-Wednesday-Friday-Saturday";
+			result = "monday-wednesday-friday-saturday";
 			break;
 		default:
+			result= "fallo parseo";
 			break;
 		}
 		return result;
 	}
 
 
+	public static String checkDaysRollback(String day) {
+		String result="";
+		switch (day) {
+		case "monday":
+			result = "A";
+			break;
+		case "tuesday":
+			result = "B";
+			break;
+		case "wednesday":
+			result = "C";
+			break;
+		case "thursday":
+			result = "D";
+			break;
+		case "friday":
+			result = "E";
+			break;
+		case "saturday":
+			result = "F";
+			break;
+		case "sunday":
+			result = "G";
+			break;
+		case "monday-tuesday-wednesday-thursday-friday-saturday-sunday":
+			result = "H";
+			break;
+		case "monday-tuesday-wednesday-thursday-friday":
+			result = "I";
+			break;
+		case "saturday-sunday":
+			result = "J";
+			break;
+		case "monday-tuesday-wednesday-thursday-friday-saturday":
+			result = "K";
+			break;
+		case "monday-wednesday-friday":
+			result = "L";
+			break;
+		case "tuesday-thursday-saturday":
+			result = "M";
+			break;
+		case "monday-tuesday-wednesday":
+			result = "N";
+			break;
+		case "thursday-friday-saturday":
+			result = "O";
+			break;
+		case "monday-wednesday-friday-saturday":
+			result = "P";
+			break;
+		default:
+			result = "fallo";
+			break;
+		}
+		return result;
+	}
 
 
 	public static List<SimpleTimerString> obtainTimerString(String timerString) {
@@ -145,6 +207,48 @@ public class SimpleTimerString {
 		return result;
 	}
 
+
+	public static String checkAction(String action) {
+		String result="";
+		switch (action) {
+		case "on":
+			result = POWER_ON;
+			break;
+		case "off":
+			result =POWER_OFF;
+			break;
+		default:
+			result ="error acciones";
+			break;
+		}
+		return result;
+	}
+
+
+
+
+	public static String checkSwith(String interruptor) {
+		String result="";
+		switch (interruptor) {
+		case "All":
+			result = SWITH_ALL;
+			break;
+		case "1":
+			result = SWITH_ONE;
+			break;
+		case "2":
+			result = SWITH_TWO;
+			break;
+		case "3":
+			result = SWITH_THREE;
+			break;
+		default:
+			result ="error interruptores";
+			break;
+		}
+		return result;
+	}
+	
 
 
 
@@ -326,6 +430,37 @@ public class SimpleTimerString {
 	public static String getDayMondayWednesdayFridaySaturday() {
 		return DAY_MONDAY_WEDNESDAY_FRIDAY_SATURDAY;
 	}
-	
+
+
+
+
+	public static void maketimerStringFormat(String timerstringsonoff) {
+		System.out.println("llego a la generacion del timerString format: "+ timerstringsonoff);
+		String[] listtimerstring = timerstringsonoff.split("@&");
+		System.out.println(listtimerstring.length);
+		String timerresult= "";
+		for(int i=0; i<listtimerstring.length; i++) {
+			System.out.println(listtimerstring[i]);
+			String[] timerstring = listtimerstring[i].split("&");
+			System.out.println("elemento "+i+" tamano: "+ timerstring.length);
+			System.out.println(timerstring[0]);
+			System.out.println(timerstring[1]);
+			System.out.println(timerstring[2]);
+			System.out.println(timerstring[3]);
+			
+			
+			String day = SimpleTimerString.checkDaysRollback(timerstring[0]);
+			String hour = timerstring[1].replaceAll(":", "");
+			String action = SimpleTimerString.checkAction(timerstring[2]);
+			String cualswith = SimpleTimerString.checkSwith(timerstring[3]);
+			timerresult=timerresult+day+hour+action+cualswith;
+		}
+		System.out.println("termino: "+ timerresult);
+		
+	}
+
+
+
+
 	
 }

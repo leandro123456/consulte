@@ -543,12 +543,13 @@
 	  		  document.getElementById("form_id").action = action;
 	  		  
 	  		  if(document.getElementById('dataTable') != null){
-	  		  var textos = "CONTENIDO_TABLA";
+	  		  var textos = "";
 	  		     for (var i=0;i < document.getElementById('dataTable').rows.length -1; i++){
 	  		             for (var j=0; j<4; j++){
-	  		                    textos = textos + document.getElementById('TablaDatos').rows[i].cells[j].innerHTML;
+	  		                    textos = textos + document.getElementById('dataTable').rows[i].cells[j].innerHTML;
+	  		                    textos = textos +"&"
 	  		             }
-	  		             textos= textos+"**";
+	  		             textos= textos+"@";
 	  		     } 
 	  		   console.log(textos);
 	  		   document.getElementById("timerstringsonoff").value = textos;
