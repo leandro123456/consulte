@@ -20,6 +20,7 @@ import com.lgg.nticxs.web.DAO.UserDAO;
 import com.lgg.nticxs.web.dbcommands.MongoCommands;
 import com.lgg.nticxs.web.model.Device;
 import com.lgg.nticxs.web.model.DeviceConfiguration;
+import com.lgg.nticxs.web.model.DeviceDefaultConfiguration;
 import com.lgg.nticxs.web.model.User;
 import com.lgg.nticxs.web.model.simple.SimpleDevice;
 import com.lgg.nticxs.web.model.simple.SimpleTimerString;
@@ -160,7 +161,7 @@ public class DeviceController {
 			device.setName(namedevice);
 			device.setDescription(descriptiondevice);
 			if(defaultconfiguration)
-				device.getDeviceconfiguration().add(deviceconfigdao.retrieveByName("default"));
+				device.getDeviceconfiguration().add(establishTopic(deviceconfigdao.retrieveByName("default"),serialnumber));
 			else{
 				DeviceConfiguration dconfirguration  = new DeviceConfiguration();
 				dconfirguration.setIphostescribir(iphostescribir);
@@ -190,7 +191,7 @@ public class DeviceController {
 				dconfirguration.setUsesslescucharremote(false);
 				device.getDeviceconfiguration().add(dconfirguration);
 			}
-			
+			String timerstringvalue="";
 			System.out.println("tipo de dispositivo: "+ tipodevice);
 			switch (tipodevice) {
 			case "thermometer":
@@ -200,12 +201,33 @@ public class DeviceController {
 				System.out.println("es una alarma - todavia nada");
 				break;
 			case "sonoff":
-				SimpleTimerString.maketimerStringFormat(timerstringsonoff);
+				timerstringvalue=SimpleTimerString.maketimerStringFormat(timerstringsonoff);
+				String host="";
+				String port="";
+				String topic="";
+				String user="";
+				String pass="";
+				if(defaultconfiguration) {
+					DeviceDefaultConfiguration defaultConfig=deviceconfigdao.retrieveByName("default");
+					host= defaultConfig.getIphostescribirremote();
+					port=defaultConfig.getPortescribirremote();
+					topic=defaultConfig.getTopicescribirremote().replace("serial", serialnumber);
+					user=defaultConfig.getUserescribirremote();
+					pass=defaultConfig.getPassescribirremote();
+				}else {
+					host= iphostescribirremote;
+					port= portescribirremote;
+					topic=topiclistenremote;
+					user=userescribirremote;
+					pass=passescribirremote;
+				}
+				SimpleTimerString.sendtimerString(timerstringvalue,host,port,topic,user,pass);
 				break;
 			default:
 				System.out.println("no encontro el tipo de device: "+ tipodevice);
 				break;
 			}
+			devicedao.create(device);
 			
 		}else{
 			model.addAttribute("msg1", "This device / serial is already registered ... please check it and try again");
@@ -214,6 +236,14 @@ public class DeviceController {
 		return "origin";
 	}
 	
+
+	private DeviceConfiguration establishTopic(DeviceDefaultConfiguration deviceconfiguration, String serialnumber) {
+		deviceconfiguration.setTopicescribir(deviceconfiguration.getTopicescribir().replace("serial", serialnumber));
+		deviceconfiguration.setTopicescribirremote(deviceconfiguration.getTopicescribirremote().replace("serail", serialnumber));
+		deviceconfiguration.setTopicescuchar(deviceconfiguration.getTopicescuchar().replace("serial", serialnumber));
+		deviceconfiguration.setTopicescucharremote(deviceconfiguration.getTopicescucharremote().replace("serial", serialnumber));
+		return deviceconfiguration;
+	}
 
 	private void CargarDevices(Model model, HttpServletRequest request) {
 		String nombre = request.getUserPrincipal().getName();

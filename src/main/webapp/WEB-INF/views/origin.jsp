@@ -23,6 +23,13 @@
   <link href='<c:url value="/resources/mqttResources/all.min.css" />' rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
   <link href='<c:url value="/resources/mqttResources/sb-admin-2.min.css" />' rel="stylesheet">
+<!--   boton check -->
+<link
+	href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css"
+	rel="stylesheet">
+<script
+	src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+<!-- boton check -->
 </head>
 
 <body id="page-top">
@@ -34,13 +41,45 @@
 	                ${vista}
 	          </c:forEach> 
           </div>
-          <div class="fixed" >
-             <a href="/mqttmanagment/home/newdevice">
-                <i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
-             </a>
-          </div>
-        </div>
-      </div>
+
+			<div class="col-lg-6 mb-4">
+				<div class="card shadow mb-4">
+					<div class="card-header py-3">
+						<h6 class="m-0 font-weight-bold text-primary">Sonoff</h6>
+					</div>
+					<div class="card-body">
+						<form role="form" action="<c:url value='/home/pushbutton/'${sonoffserial} />" method="post" enctype="multipart/form-data">
+						<h4 id="sonoffname" class="small font-weight-bold">
+							Timer<span class="float-right">0</span>
+						</h4>
+						<div class="progress mb-4">
+							<div class="progress-bar" id="sonofftimer" role="progressbar"
+								aria-valuemin="0" aria-valuemax="60" style="width: 50%;">
+							</div>
+						</div>
+						<p></p>
+						<b> Status Power<input
+							id="sonoffpower" type="submit" checked type="checkbox"
+							data-toggle="toggle"
+							data-style="slow"></b>
+						<p></p>
+						</form>
+						<form role="form" action="<c:url value='/home/simulatedpushbutton/'${sonoffserial} />" method="post" enctype="multipart/form-data">
+							<button type="submit" class="btn btn-primary btn-sm">Simulated push button</button>
+						</form>
+					</div>
+				</div>
+			</div>
+
+
+
+				<div class="fixed">
+					<a href="/mqttmanagment/home/newdevice"> <i
+						class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
+					</a>
+				</div>
+			</div>
+		</div>
       
       <div class="visible">
       <a class="scroll-to-top rounded" href="#page-top">

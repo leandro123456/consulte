@@ -28,12 +28,57 @@ import com.lgg.nticxs.web.model.Materia.materia;
 
 public class Test1 {
 	
-	
 	@Test
-	public void testMakeTimerString(){
-		String init ="monday-wednesday-friday&01:50&on&All@&monday-tuesday-wednesday-thursday-friday-saturday&07:15&off&All@&";
+	public void testSendMQTT() {
+		String timerstringsonoff= "monday-wednesday-friday&12:45&on&All&@monday-wednesday-friday&23:52&off&All&@";
+		//String timerstringvalue=SimpleTimerString.maketimerStringFormat(timerstringsonoff);
+		String host= "mqtt.coiaca.com";
+		String port= "1883";
+		//RConfig/
+		String topic="PS3S1P120190323/swcmd";
+		String user="mqttusr";
+		String pass="mqttpwd";
+//		String message ="\"pwd\":\"mqttpwd\", \"command\":\"switchAction\",\"SW1\":\"ON\"";
+		String message ="{'pwd':'mqttpwd', 'command':'switchAction','param1':'SW1','param2':'turnOn'}";
+//		String message = "{\"pwd\":\"mqttpwd\", \"command\":\"simulateButtonPush\",\"param1\":\"BTN1\"}";
+//		String message = "\"pwd\":\"mqttpwd\", \"command\":\"switchAction\",\"param1\":\"SW1\",\"param2\":\"turnOn\"";
+//		String message = "{\"pwd\":\"mqttpwd\", \"command\":\"getStatus\"}";
 		
-		String[] listtimerstring = init.split("@&");
+	   	 JSONObject json = new JSONObject();
+	   	 json.put("pwd", "mqttpwd");
+	   	 json.put("command", "switchAction");
+	   	 json.put("param1", "SW1");
+	   	 json.put("param2", "turnOn");
+	   	 System.out.println("el json: ");
+		SimpleTimerString.sendmessageMQTT(json,host,port,topic,user,pass);
+		System.out.println("termino");
+		
+		//"deviceId":"PS3S1P120190323","SW1":"OFF","PB1LS":1,"PB1TTO":0,"TS":0
+		
+		//serial: PS3S1P120190323
+		//server: mqtt.coiaca.com
+		//port: 1883
+		//user: mqttusr
+		//pass: mqttpwd
+		//coiaca: Coiaca#serial
+		//envio de comandos:  #serial/swcmd
+		//envio de status: #serial/state
+		
+		//configuracion remota
+		//server: mqtttest.qliq.com.ar
+		//port:8883
+		//user: mqttusr
+		//pass: mqttpwd
+		//envio de commandos: RConfig/#serial
+		//recepcion de informacion: RConfig/#serial/result
+		
+	}
+	
+	//@Test
+	public void testMakeTimerString(){
+		String init ="monday-wednesday-friday&12:45&on&All&@monday-wednesday-friday&23:52&off&All&@";
+		
+		String[] listtimerstring = init.split("&@");
 		System.out.println(listtimerstring.length);
 		String timerresult= "";
 		for(int i=0; i<listtimerstring.length; i++) {
@@ -58,19 +103,61 @@ public class Test1 {
 	//@Test
 	public void testCrearDeviceDefaultConfiguration(){
 		DeviceDefaultConfigurationDAO dedao = new DeviceDefaultConfigurationDAO();
-		DeviceDefaultConfiguration deviceconfiguration = new DeviceDefaultConfiguration("12454casa1");
-		deviceconfiguration.setIphostescuchar("gw001.iotek.space");
+		DeviceDefaultConfiguration deviceconfiguration = new DeviceDefaultConfiguration();
 		deviceconfiguration.setName("default");
-		deviceconfiguration.setPassescuchar("Sanbenit0");
+//		deviceconfiguration.setIphostescuchar("gw001.iotek.space");
+//		deviceconfiguration.setPortescuchar("8080");
+//		deviceconfiguration.setTopicescuchar("serial/state");
+//		deviceconfiguration.setPassescuchar("Sanbenit0");
+//		deviceconfiguration.setUserescuchar("movasim");
+//		deviceconfiguration.setUsesslescuchar(false);
+		deviceconfiguration.setIphostescuchar("gw001.iotek.space");
 		deviceconfiguration.setPortescuchar("8080");
-		deviceconfiguration.setTopicescribir("topicescribir");
-		deviceconfiguration.setTopicescribirremote("topicescribirremote");
-		deviceconfiguration.setTopicescuchar("12454casa1");
-		deviceconfiguration.setTopicescucharremote("topicescucharremote");
+		deviceconfiguration.setTopicescuchar("serial/state");
+		deviceconfiguration.setPassescuchar("Sanbenit0");
 		deviceconfiguration.setUserescuchar("movasim");
 		deviceconfiguration.setUsesslescuchar(false);
+		
+		deviceconfiguration.setIphostescribir("");
+		deviceconfiguration.setPortescribir("");
+		deviceconfiguration.setTopicescribir("serial/swcmd");
+		deviceconfiguration.setPassescribir("");
+		deviceconfiguration.setUserescribir("");
+		
+//		deviceconfiguration.setIphostescucharremote("mqtt.coiaca.com");
+//		deviceconfiguration.setPortescucharremote("8080");
+//		deviceconfiguration.setTopicescucharremote("RConfig/debug");
+//		deviceconfiguration.setUserescucharremote("cleocinc");
+//		deviceconfiguration.setPassescucharremote("leandro1");
+		
+		deviceconfiguration.setIphostescucharremote("mqtttest.qliq.com.ar");
+		deviceconfiguration.setPortescucharremote("8883");
+		deviceconfiguration.setTopicescucharremote("RConfig/serial/result");
+		deviceconfiguration.setUserescucharremote("mqttusr");
+		deviceconfiguration.setPassescucharremote("mqttpwd");
+		
+		deviceconfiguration.setIphostescribirremote("mqtttest.qliq.com.ar");
+		deviceconfiguration.setPortescribirremote("8883");
+		deviceconfiguration.setTopicescribirremote("RConfig/serial");
+		deviceconfiguration.setUserescribirremote("mqttusr");
+		deviceconfiguration.setPassescribirremote("mqttpwd");
+		
 		dedao.create(deviceconfiguration);
 		System.out.println("termino");
+		//serial: PS3S1P120190323
+		//user: mqttusr
+		//pass: mqttpwd
+		//coiaca: Coiaca#serial
+		//envio de comandos:  #serial/swcmd
+		//envio de status: #serial/state
+		
+		//configuracion remota
+		//server: mqtttest.qliq.com.ar
+		//port:8883
+		//user: mqttusr
+		//pass: mqttpwd
+		//envio de commandos: RConfig/#serial
+		//recepcion de informacion: RConfig/#serial/result
 		
 	}
 	

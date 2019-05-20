@@ -2,8 +2,18 @@ package com.lgg.nticxs.web.model.simple;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.UUID;
+import java.util.concurrent.Callable;
 
-public class SimpleTimerString {
+import org.eclipse.paho.client.mqttv3.IMqttClient;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.json.JSONObject;
+
+
+public class SimpleTimerString{
 	private String days;
 	private String hours;
 	private String action;
@@ -30,8 +40,13 @@ public class SimpleTimerString {
 	static final public String SWITH_ONE = "1";
 	static final public String SWITH_TWO = "2";
 	static final public String SWITH_THREE = "3";
-	
-	
+	public static final String TOPIC = "engine/temperature";
+		
+    private IMqttClient client;
+    
+    public SimpleTimerString(IMqttClient client) {
+        this.client = client;
+    }
 	
 	public SimpleTimerString(String timerstring) {
 		
@@ -40,10 +55,8 @@ public class SimpleTimerString {
 		this.action = checkActions(timerstring.substring(5));
 		this.switchs = checkSwitch(timerstring.substring(6));
 		
+		
 	}
-
-
-
 
 	private String checkSwitch(String swiths) {
 		String result="";
@@ -53,9 +66,6 @@ public class SimpleTimerString {
 			result=swiths;
 		return result;
 	}
-
-
-
 
 	private String checkActions(String action) {
 		String result="";
@@ -71,9 +81,6 @@ public class SimpleTimerString {
 		}
 		return result;
 	}
-
-
-
 
 	private String checkDays(String day) {
 		String result="";
@@ -133,7 +140,6 @@ public class SimpleTimerString {
 		return result;
 	}
 
-
 	public static String checkDaysRollback(String day) {
 		String result="";
 		switch (day) {
@@ -192,7 +198,6 @@ public class SimpleTimerString {
 		return result;
 	}
 
-
 	public static List<SimpleTimerString> obtainTimerString(String timerString) {
 		List<SimpleTimerString> result = new ArrayList<>();
 		if(timerString == null || timerString.length()<6)		
@@ -206,7 +211,6 @@ public class SimpleTimerString {
 		}
 		return result;
 	}
-
 
 	public static String checkAction(String action) {
 		String result="";
@@ -223,9 +227,6 @@ public class SimpleTimerString {
 		}
 		return result;
 	}
-
-
-
 
 	public static String checkSwith(String interruptor) {
 		String result="";
@@ -248,195 +249,114 @@ public class SimpleTimerString {
 		}
 		return result;
 	}
-	
-
-
 
 	public String getDays() {
 		return days;
 	}
 
-
-
-
 	public void setDays(String days) {
 		this.days = days;
 	}
-
-
-
 
 	public String getHours() {
 		return hours;
 	}
 
-
-
-
 	public void setHours(String hours) {
 		this.hours = hours;
 	}
-
-
-
 
 	public String getAction() {
 		return action;
 	}
 
-
-
-
 	public void setAction(String action) {
 		this.action = action;
 	}
-
-
-
 
 	public String getSwitchs() {
 		return switchs;
 	}
 
-
-
-
 	public void setSwitchs(String switchs) {
 		this.switchs = switchs;
 	}
-
-
-
 
 	public static String getPowerOn() {
 		return POWER_ON;
 	}
 
-
-
-
 	public static String getPowerOff() {
 		return POWER_OFF;
 	}
-
-
-
 
 	public static String getDayMonday() {
 		return DAY_MONDAY;
 	}
 
-
-
-
 	public static String getDayTuesday() {
 		return DAY_TUESDAY;
 	}
-
-
-
 
 	public static String getDayWednesday() {
 		return DAY_WEDNESDAY;
 	}
 
-
-
-
 	public static String getDayThursday() {
 		return DAY_THURSDAY;
 	}
-
-
-
 
 	public static String getDayFriday() {
 		return DAY_FRIDAY;
 	}
 
-
-
-
 	public static String getDaySaturday() {
 		return DAY_SATURDAY;
 	}
-
-
-
 
 	public static String getDaySunday() {
 		return DAY_SUNDAY;
 	}
 
-
-
-
 	public static String getDayAll() {
 		return DAY_ALL;
 	}
-
-
-
 
 	public static String getDayLaboralWeek() {
 		return DAY_LABORAL_WEEK;
 	}
 
-
-
-
 	public static String getDayWeekend() {
 		return DAY_WEEKEND;
 	}
-
-
-
 
 	public static String getDayLaboralWeekPlusSaturday() {
 		return DAY_LABORAL_WEEK_PLUS_SATURDAY;
 	}
 
-
-
-
 	public static String getDayMondayWednesdayFriday() {
 		return DAY_MONDAY_WEDNESDAY_FRIDAY;
 	}
-
-
-
 
 	public static String getDayTuesdayThursdaySaturday() {
 		return DAY_TUESDAY_THURSDAY_SATURDAY;
 	}
 
-
-
-
 	public static String getDayMondayTuesdayWednesday() {
 		return DAY_MONDAY_TUESDAY_WEDNESDAY;
 	}
-
-
-
 
 	public static String getDayThursdayFridaySaturday() {
 		return DAY_THURSDAY_FRIDAY_SATURDAY;
 	}
 
-
-
-
 	public static String getDayMondayWednesdayFridaySaturday() {
 		return DAY_MONDAY_WEDNESDAY_FRIDAY_SATURDAY;
 	}
 
-
-
-
-	public static void maketimerStringFormat(String timerstringsonoff) {
+	public static String maketimerStringFormat(String timerstringsonoff) {
 		System.out.println("llego a la generacion del timerString format: "+ timerstringsonoff);
-		String[] listtimerstring = timerstringsonoff.split("@&");
+		String[] listtimerstring = timerstringsonoff.split("&@");
 		System.out.println(listtimerstring.length);
 		String timerresult= "";
 		for(int i=0; i<listtimerstring.length; i++) {
@@ -447,8 +367,6 @@ public class SimpleTimerString {
 			System.out.println(timerstring[1]);
 			System.out.println(timerstring[2]);
 			System.out.println(timerstring[3]);
-			
-			
 			String day = SimpleTimerString.checkDaysRollback(timerstring[0]);
 			String hour = timerstring[1].replaceAll(":", "");
 			String action = SimpleTimerString.checkAction(timerstring[2]);
@@ -456,11 +374,80 @@ public class SimpleTimerString {
 			timerresult=timerresult+day+hour+action+cualswith;
 		}
 		System.out.println("termino: "+ timerresult);
+		return timerresult;
 		
 	}
 
+	public static void sendtimerString(String timerstringvalue,String serverUri, String port, String topic,
+			String userName, String password) {
+		String publisherId = UUID.randomUUID().toString();
+		try {
+			IMqttClient publisher = new MqttClient(serverUri+":"+port,publisherId);
+			
+			MqttConnectOptions options = new MqttConnectOptions();
+			options.setAutomaticReconnect(true);
+			options.setCleanSession(true);
+			options.setConnectionTimeout(10);
+			options.setUserName(userName);
+			options.setPassword(password.toCharArray());
+			publisher.connect(options);		
+			if ( !publisher.isConnected()) {
+	           	System.out.println("fallo la conexion");
+	        } 
+		   	 JSONObject json = new JSONObject();
+		   	 json.put("pwd", password);
+		   	 json.put("command", "timerString");
+		   	 json.put("param1", "SW1");
+		   	 json.put("param2", timerstringvalue);
+		   	 System.out.println("el json: ");
+	        MqttMessage msg = makemqttmessage(json);
+	        msg.setQos(0);
+	        msg.setRetained(true);
+	        publisher.publish(topic,msg); 
+				
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+	}
 
-
-
+	public static void sendmessageMQTT(JSONObject message,String serverUri, String port, String topic,
+			String userName, String password) {
+		String publisherId = UUID.randomUUID().toString();
+		try {
+			IMqttClient publisher = new MqttClient(serverUri+":"+port,publisherId);
+			
+			MqttConnectOptions options = new MqttConnectOptions();
+			options.setAutomaticReconnect(true);
+			options.setCleanSession(true);
+			options.setConnectionTimeout(10);
+			options.setUserName(userName);
+			options.setPassword(password.toCharArray());
+			publisher.connect(options);
+		
+			if ( !publisher.isConnected()) {
+	           	System.out.println("fallo la conexion");
+	        }else {
+	        	System.out.println("conecto a :" );
+	        }
+	        MqttMessage msg = makemqttmessage(message);
+	      //  msg.setQos(0);
+	      //  msg.setRetained(true);
+	        publisher.publish(topic,msg); 
+				
+		} catch (Exception e) {
+			// TODO: handle exception
+		}	
+	}
 	
+	
+    public static MqttMessage makemqttmessage(JSONObject message1) {                    
+//        byte[] payload = message.getBytes();        
+//        return new MqttMessage(payload);    
+    	 MqttMessage message = new MqttMessage();
+    	 message.setPayload(message1.toString().getBytes());
+    	 return message;
+    	 
+    }	
 }

@@ -406,11 +406,6 @@
 	</div>
 
 
-
-
-
-
-	<!-- Logout Modal-->
 	<div class="modal fade" id="ModalConfirm" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
@@ -542,9 +537,13 @@
 		  	  var action= "/mqttmanagment/home/create/"+serial;
 	  		  document.getElementById("form_id").action = action;
 	  		  
+	  		 if(document.getElementById("tipodevice") != null)
+	        	  	document.getElementById("tipodevice1").value = document.getElementById("tipodevice").value;
+
+	  		  
 	  		  if(document.getElementById('dataTable') != null){
 	  		  var textos = "";
-	  		     for (var i=0;i < document.getElementById('dataTable').rows.length -1; i++){
+	  		     for (var i=1;i < document.getElementById('dataTable').rows.length; i++){
 	  		             for (var j=0; j<4; j++){
 	  		                    textos = textos + document.getElementById('dataTable').rows[i].cells[j].innerHTML;
 	  		                    textos = textos +"&"
