@@ -48,7 +48,8 @@
 						<h6 class="m-0 font-weight-bold text-primary">Sonoff</h6>
 					</div>
 					<div class="card-body">
-						<form role="form" action="<c:url value='/home/pushbutton/'${sonoffserial} />" method="post" enctype="multipart/form-data">
+						<form role="form" action="<c:url value='/home/pushbutton/${sonoffserial}' />"
+						 method="post" id="push${sonoffserial}" enctype="multipart/form-data">
 						<h4 id="sonoffname" class="small font-weight-bold">
 							Timer<span class="float-right">0</span>
 						</h4>
@@ -58,13 +59,16 @@
 							</div>
 						</div>
 						<p></p>
-						<b> Status Power<input
-							id="sonoffpower" type="submit" checked type="checkbox"
-							data-toggle="toggle"
-							data-style="slow"></b>
+						<b> Status Power
+							<div class="float-right">
+								<input id="sonoffpower" checked type="checkbox"	data-toggle="toggle"
+								data-style="slow" onchange="sendMQTTMessage('${sonoffserial}')">
+							</div>
+							
+						</b>
 						<p></p>
 						</form>
-						<form role="form" action="<c:url value='/home/simulatedpushbutton/'${sonoffserial} />" method="post" enctype="multipart/form-data">
+						<form role="form" action="<c:url value='/home/simulatedpushbutton/${sonoffserial}' />" method="post" enctype="multipart/form-data">
 							<button type="submit" class="btn btn-primary btn-sm">Simulated push button</button>
 						</form>
 					</div>
@@ -105,6 +109,14 @@
 	//document.querySelector ('#boton').addEventListener ('click', function() { 
 //		animateprogress("humedad",49);   
 // 	});
+</script>
+
+<script type="text/javascript">
+	function sendMQTTMessage(sonoffserial){
+		var formvalue="push"+sonoffserial;
+		console.log("estevalor: "+ formvalue);
+		document.formvalue.submit();
+	}
 </script>
 
 <script type="text/javascript">

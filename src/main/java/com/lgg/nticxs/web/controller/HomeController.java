@@ -108,6 +108,7 @@ public class HomeController {
 		model.addAttribute("user", user);
 		model.addAttribute("deviceserial", user.getDeviceserialnumber());
         model.addAttribute("vistas",Utils.vistas(user.getEmail()));
+        model.addAttribute("sonoffserial", "PS3S1P120190323");
    		return new ModelAndView("origin", model);
 	}
 	
