@@ -416,7 +416,7 @@ public class SimpleTimerString{
 			String userName, String password) {
 		String publisherId = UUID.randomUUID().toString();
 		try {
-			IMqttClient publisher = new MqttClient(serverUri+":"+port,publisherId);
+			IMqttClient publisher = new MqttClient("tcp://"+serverUri+":"+port,publisherId);
 			
 			MqttConnectOptions options = new MqttConnectOptions();
 			options.setAutomaticReconnect(true);
@@ -429,7 +429,7 @@ public class SimpleTimerString{
 			if ( !publisher.isConnected()) {
 	           	System.out.println("fallo la conexion");
 	        }else {
-	        	System.out.println("conecto a :" );
+	        	System.out.println("conecto a :" + publisher);
 	        }
 	        MqttMessage msg = makemqttmessage(message);
 	      //  msg.setQos(0);
@@ -437,7 +437,8 @@ public class SimpleTimerString{
 	        publisher.publish(topic,msg); 
 				
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("mensaje: "+ e.getMessage());
+			e.printStackTrace();
 		}	
 	}
 	

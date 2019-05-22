@@ -49,7 +49,7 @@ public class Test1 {
 	   	 json.put("command", "switchAction");
 	   	 json.put("param1", "SW1");
 	   	 json.put("param2", "turnOn");
-	   	 System.out.println("el json: ");
+	   	 System.out.println("el json: "+ json);
 		SimpleTimerString.sendmessageMQTT(json,host,port,topic,user,pass);
 		System.out.println("termino");
 		
