@@ -33,13 +33,47 @@ public class SonoffController {
 	private DeviceDefaultConfigurationDAO deviceconfigdao = new DeviceDefaultConfigurationDAO();
 	private static final String COLLECTION_DEVICE="DEVICE";
 	
-	
+	@PostMapping("/home/pushbutton/{sonoffserial}")
+	public String sendPushButton(HttpServletRequest request,Model model,@PathVariable String sonoffserial
+			,@RequestParam String sonoffpower) {
+		System.out.println("trae: "+ sonoffpower);
+		String action="";
+		if(sonoffpower.equals("true"))
+			action="ON";
+		else
+			action="OFF";
+		Device device= devicedao.retrieveBySerialNumber(sonoffserial);
+		DeviceConfiguration deviceconfig = null;
+		if(device.getUsedefaultbrocker()) {
+			deviceconfig= device.getDeviceconfiguration().get(0);
+		}else {
+			deviceconfig= device.getDeviceconfiguration().get(1);
+		}
+		String serverUri = deviceconfig.getIphostescribir();
+		String port = deviceconfig.getPortescribir();
+		String topic = deviceconfig.getTopicescribir();
+		String userName = deviceconfig.getUserescribir();
+		String password = deviceconfig.getPassescribir();
+		JSONObject json = new JSONObject();
+		json.put("pwd", password);
+		json.put("command", "switchAction");
+		json.put("SW1", action);
+		System.out.println("el json: "+json);
+		SimpleTimerString.sendmessageMQTT(json, serverUri, port, topic, userName, password);
+		return "origin";
+	}
+
 	
 	@PostMapping("/home/simulatedpushbutton/{sonoffserial}")
 	public String showsimlatedPushButton(HttpServletRequest request,Model model,@PathVariable String sonoffserial) {
 		Device device= devicedao.retrieveBySerialNumber(sonoffserial);
 		if(device.getUsedefaultbrocker()) {
-			DeviceConfiguration deviceconfig = device.getDeviceconfiguration().get(0);
+			DeviceConfiguration deviceconfig = null;
+			if(device.getUsedefaultbrocker()) {
+				deviceconfig= device.getDeviceconfiguration().get(0);
+			}else {
+				deviceconfig= device.getDeviceconfiguration().get(1);
+			}
 			String serverUri = deviceconfig.getIphostescribir();
 			String port = deviceconfig.getPortescribir();
 			String topic = deviceconfig.getTopicescribir();
@@ -47,10 +81,9 @@ public class SonoffController {
 			String password = deviceconfig.getPassescribir();
 			JSONObject json = new JSONObject();
 			json.put("pwd", password);
-			json.put("command", "switchAction");
-			json.put("param1", "SW1");
-			json.put("param2", "toogle");
-			System.out.println("el json: ");
+			json.put("command", "simulateButtonPush");
+			json.put("SW1", "BTN1");
+			System.out.println("el json: "+json);
 			SimpleTimerString.sendmessageMQTT(json, serverUri, port, topic, userName, password);
 		}else {
 			

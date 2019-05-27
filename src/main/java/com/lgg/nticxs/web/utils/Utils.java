@@ -486,7 +486,12 @@ public class Utils {
 					if(a[i].equals("sensF"))
 						contenidototal= contenidototal+vista.getContenido().get("sensF");
 					break;
+				case "sonoff":
+					if(a[i].equals("sonoffbody"))
+						contenidototal= contenidototal+vista.getContenido().get("sonoffbody");
+					break;
 				default:
+					System.out.println("ERROR VISTA NO ENCONTRADA");
 					break;
 				}
 			}

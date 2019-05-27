@@ -28,7 +28,8 @@ import com.lgg.nticxs.web.model.Materia.materia;
 
 public class Test1 {
 	
-	@Test
+	
+	//@Test
 	public void testSendMQTT() {
 		String timerstringsonoff= "monday-wednesday-friday&12:45&on&All&@monday-wednesday-friday&23:52&off&All&@";
 		//String timerstringvalue=SimpleTimerString.maketimerStringFormat(timerstringsonoff);
@@ -45,10 +46,11 @@ public class Test1 {
 //		String message = "{\"pwd\":\"mqttpwd\", \"command\":\"getStatus\"}";
 		
 	   	 JSONObject json = new JSONObject();
-	   	 json.put("pwd", "mqttpwd");
+	   	 json.put("pwd", "sapo");
 	   	 json.put("command", "switchAction");
-	   	 json.put("param1", "SW1");
-	   	 json.put("param2", "turnOn");
+//	   	 json.put("param1", "SW1");
+//	   	 json.put("param2", "ON");
+	   	 json.put("SW1", "OFF");
 	   	 System.out.println("el json: "+ json);
 		SimpleTimerString.sendmessageMQTT(json,host,port,topic,user,pass);
 		System.out.println("termino");
@@ -161,7 +163,7 @@ public class Test1 {
 		
 	}
 	
-	//@Test
+	@Test
 	public void testSearchVista(){
 		DeviceDAO devicedao= new DeviceDAO();
 		VistaDAO vistadao= new VistaDAO();
@@ -179,7 +181,7 @@ public class Test1 {
 			for(int i=0; i<a.length; i++) {
 				System.out.println(a[i]);
 			}
-			Vista vista = vistadao.retrieveByName(a[0]);
+			Vista vista = vistadao.retrieveByName("sonoff");
 			String contenidototal="";
 			for(int i=1; i<a.length; i++) {
 				String value = vista.getContenido().get(a[i]);
@@ -242,6 +244,21 @@ public class Test1 {
 		vista.setContenido(elem);
 		vistadao.create(vista);
 		System.out.println("termino vista reloj");
+		
+		
+		inicio="<div class=\"col-lg-6 mb-4\"> <div class=\"card shadow mb-4\"> <div class=\"card-header py-3\">	<h6 class=\"m-0 font-weight-bold text-primary\">Sonoff</h6></div>";
+		fin="</div> </div>";
+		String sonoffbody="<div class=\"card-body\"><form role=\"form\" action=\"<c:url value='/home/pushbutton/${sonoffserial}' />\" method=\"post\" id=\"push${sonoffserial}\" enctype=\"multipart/form-data\"><h4 id=\"sonoffname\" class=\"small font-weight-bold\">Timer<span class=\"float-right\">0</span></h4><div class=\"progress mb-4\">	<div class=\"progress-bar\" id=\"sonofftimer\" role=\"progressbar\"	aria-valuemin=\"0\" aria-valuemax=\"60\" style=\"width: 50%;\">	</div></div><p></p><b> Status Power<div class=\"float-right\"><input id=\"sonoffpower\" type=\"checkbox\"	data-toggle=\"toggle\" data-style=\"slow\" onchange=\"sendMQTTMessage('${sonoffserial}')\"></div></b><input type=\"hidden\" name=\"sonoffpower\" id=\"sonoffpower1\" />	<p></p></form><form role=\"form\" action=\"<c:url value='/home/simulatedpushbutton/${sonoffserial}' />\" method=\"post\" enctype=\"multipart/form-data\"><button type=\"submit\" class=\"btn btn-primary btn-sm\">Simulated push button</button>	</form></div>";
+		vistadao = new VistaDAO();
+		vista= new Vista();
+		vista.setName("sonoff");
+		vista.setInicio(inicio);
+		vista.setFin(fin);
+		elem= new HashMap<>();
+		elem.put("sonoffbody",sonoffbody);
+		vista.setContenido(elem);
+		vistadao.create(vista);
+		System.out.println("termino vista de boton");
 	}
 	
 	
@@ -321,12 +338,13 @@ public class Test1 {
 	//@Test
 	public void testUpdateVista(){
 		DeviceDAO devicedao = new DeviceDAO();
-		Device device = devicedao.retrieveBySerialNumber("ASERAS");
+		Device device = devicedao.retrieveBySerialNumber("PS3S1P120190323");
 		//String vista = "<div class=\"col-lg-6 mb-4\"><div class=\"card shadow mb-4\"><div class=\"card-header py-3\"><h6 class=\"m-0 font-weight-bold text-primary\">Sensor de Temperatura Y Humedad</h6></div><div class=\"card-body\"><h4 id=\"humedads\" class=\"small font-weight-bold\"></h4><div class=\"progress mb-4\"><div class=\"progress-bar\" id=\"humedad\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div></div><h4 id=\"temperaturacs\" class=\"small font-weight-bold\">Temperatura °C</h4><div class=\"progress mb-4\"><div id=\"temperaturac\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"70\"></div></div><h4 id=\"sensacioncs\" class=\"small font-weight-bold\">Sensacion Termica °C</h4><div class=\"progress mb-4\"><div id=\"sensacionc\" class=\"progress-bar  bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"70\"></div></div><h4 id=\"temperaturafs\" class=\"small font-weight-bold\">Temperatura °F</h4><div class=\"progress mb-4\"><div id=\"temperaturaf\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"140\"></div></div><h4 id=\"sensacionfs\" class=\"small font-weight-bold\">Sensacion Termica °F</h4><div class=\"progress\"><div id=\"sensacionf\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"140\"></div></div></div></div></div>";
-		String vista="temperatura_horizontal;Hum;tempC;sensC";
+		String vista="sonoff;sonoffbody";
+//		device.getVista().clear();
 		device.getVista().put("t@tes", vista);
 		devicedao.update(device);
-		
+		System.out.println("esta vacio? "+ device.getVista().isEmpty());
 	}
 	
 	//@Test

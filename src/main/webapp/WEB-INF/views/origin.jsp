@@ -33,89 +33,94 @@
 </head>
 
 <body id="page-top">
-  	  <div id="wrapper">
+	<div id="wrapper">
 		<jsp:include page="header.jsp" />
-        <div class="container-fluid">
-          <div class="row" id ="cargadora">
-	           <c:forEach items="${vistas}" var="vista">
+		<div class="container-fluid">
+			<div class="row" id="cargadora">
+				<c:forEach items="${vistas}" var="vista">
 	                ${vista}
-	          </c:forEach> 
-          </div>
-
-			<div class="col-lg-6 mb-4">
-				<div class="card shadow mb-4">
-					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">Sonoff</h6>
-					</div>
-					<div class="card-body">
-						<form role="form" action="<c:url value='/home/pushbutton/${sonoffserial}' />"
-						 method="post" id="push${sonoffserial}" enctype="multipart/form-data">
-						<h4 id="sonoffname" class="small font-weight-bold">
-							Timer<span class="float-right">0</span>
-						</h4>
-						<div class="progress mb-4">
-							<div class="progress-bar" id="sonofftimer" role="progressbar"
-								aria-valuemin="0" aria-valuemax="60" style="width: 50%;">
-							</div>
-						</div>
-						<p></p>
-						<b> Status Power
-							<div class="float-right">
-								<input id="sonoffpower" checked type="checkbox"	data-toggle="toggle"
-								data-style="slow" onchange="sendMQTTMessage('${sonoffserial}')">
-							</div>
-							
-						</b>
-						<p></p>
-						</form>
-						<form role="form" action="<c:url value='/home/simulatedpushbutton/${sonoffserial}' />" method="post" enctype="multipart/form-data">
-							<button type="submit" class="btn btn-primary btn-sm">Simulated push button</button>
-						</form>
-					</div>
-				</div>
+	          </c:forEach>
 			</div>
-
-
-
-				<div class="fixed">
-					<a href="/mqttmanagment/home/newdevice"> <i
-						class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
-					</a>
-				</div>
+			<div class="fixed">
+				<a href="/mqttmanagment/home/newdevice"> <i
+					class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
+				</a>
 			</div>
 		</div>
-      
-      <div class="visible">
-      <a class="scroll-to-top rounded" href="#page-top">
-	    <i class="fas fa-angle-up"></i>
-	  </a>
-      </div>
-      
-      <jsp:include page="footer.jsp" />
+	</div>
+	<div class="col-lg-6 mb-4">
+		<div class="card shadow mb-4">
+			<div class="card-header py-3">
+				<h6 class="m-0 font-weight-bold text-primary">Sonoff</h6>
+			</div>
+			<div class="card-body">
+				<form role="form"
+					action="<c:url value='/home/pushbutton/${sonoffserial}' />"
+					method="post" id="push${sonoffserial}" enctype="multipart/form-data">
+					<h4 id="sonoffname" class="small font-weight-bold">
+						Timer<span class="float-right">0</span>
+					</h4>
+					<div class="progress mb-4">
+						<div class="progress-bar" id="sonofftimer" role="progressbar"
+							aria-valuemin="0" aria-valuemax="60" style="width: 50%;"></div>
+					</div>
+					<p></p>
+					<b> Status Power
+						<div class="float-right">
+							<input id="sonoffpower" type="checkbox" data-toggle="toggle"
+								data-style="slow" onchange="sendMQTTMessage('${sonoffserial}')">
+						</div>
+					</b><input type="hidden" name="sonoffpower" id="sonoffpower1" />
+					<p></p>
+				</form>
+				<form role="form"
+					action="<c:url value='/home/simulatedpushbutton/${sonoffserial}' />"
+					method="post" enctype="multipart/form-data">
+					<button type="submit" class="btn btn-primary btn-sm">Simulated
+						push button</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="visible">
+		<a class="scroll-to-top rounded" href="#page-top"> <i
+			class="fas fa-angle-up"></i>
+		</a>
+	</div>
+
+	<jsp:include page="footer.jsp" />
 </body>
 
 
 <script type="text/javascript">
-	$(document).ready(function(){
-                updateWiget();
-                animateprogress("humedad",50);
-                animateprogress("temperaturac",25);
-				animateprogress("sensacionc",27);
-				animateprogress("temperaturaf",77);
-				animateprogress("sensacionf",80.6);
+	$(document).ready(function() {
+		updateWiget();
+		animateprogress("humedad", 50);
+		animateprogress("temperaturac", 25);
+		animateprogress("sensacionc", 27);
+		animateprogress("temperaturaf", 77);
+		animateprogress("sensacionf", 80.6);
 		//startConnect();
 	});
-	
+
 	//document.querySelector ('#boton').addEventListener ('click', function() { 
-//		animateprogress("humedad",49);   
-// 	});
+	//		animateprogress("humedad",49);   
+	// 	});
 </script>
 
 <script type="text/javascript">
 	function sendMQTTMessage(sonoffserial){
+		var checkBox=document.getElementById("sonoffpower");
+		  if (checkBox.checked == true){
+		  	  	document.getElementById("sonoffpower1").value = true;
+		  }else{
+		  	  	document.getElementById("sonoffpower1").value = false;
+		  }
 		var formvalue="push"+sonoffserial;
 		console.log("estevalor: "+ formvalue);
-		document.formvalue.submit();
+		document.getElementById(formvalue).submit();
 	}
 </script>
 
@@ -156,5 +161,6 @@
 // 		console.log(data.a.length);
 // 	}
 </script>
+
 
 
