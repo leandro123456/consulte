@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -440,63 +441,75 @@ public class Utils {
 			return null;
 		}
 	
-		public static List<String> vistas(String nombre){
+		public static List<String> vistas(String nombreUsuario, List<String> listaSerial, String tipo){
 			List<String> lista = new ArrayList<>();
-			User user = userdao.retrieveByMail(nombre);
-			for(String deviceserial : user.getDeviceserialnumber()){
+			System.out.println("lista de dispositivos que necesito mostrar: "+ listaSerial.size() +" "+tipo);
+			for(int i=0; i<listaSerial.size(); i++){
+				String deviceserial= listaSerial.get(i);
 				Device device = devicedao.retrieveBySerialNumber(deviceserial);
-				String valor = device.getVista().get(nombre);
+				String valor = device.getVista().get(nombreUsuario);
 				String[] a = valor.split(";");
-				String vistatotal = armarVista(a,a[0]);
+				String vistatotal = armarVista(a,a[0],i);
 				lista.add(vistatotal);
 			}
+			System.out.println("elementos de la lista de vistas"+ lista.size());
 			return lista;
 		}
 
-		private static String armarVista(String[] a, String nombre) {
-			Vista vista = vistadao.retrieveByName(nombre);
+		private static String armarVista(String[] atributosDeLaVista, String tipoDeVista, Integer cardinalidadElemento) {
+			Vista vista = vistadao.retrieveByName(tipoDeVista);
 			String contenidototal="";
-			for(int i=1;i<a.length;i++) {
-				switch (nombre) {
+			for(int i=1;i<atributosDeLaVista.length;i++) {
+				switch (tipoDeVista) {
 				case "temperatura_reloj":
-					if(a[i].equals("Hum"))
+					if(atributosDeLaVista[i].equals("Hum"))
 						contenidototal= contenidototal+vista.getContenido().get("Hum");
-					if(a[i].equals("indiceTemp"))
+					if(atributosDeLaVista[i].equals("indiceTemp"))
 						contenidototal= contenidototal+vista.getContenido().get("indiceTemp");
-					if(a[i].equals("tempC"))
+					if(atributosDeLaVista[i].equals("tempC"))
 						contenidototal= contenidototal+vista.getContenido().get("tempC");
-					if(a[i].equals("sensC"))
+					if(atributosDeLaVista[i].equals("sensC"))
 						contenidototal= contenidototal+vista.getContenido().get("sensC");
-					if(a[i].equals("tempF" ))
+					if(atributosDeLaVista[i].equals("tempF" ))
 						contenidototal= contenidototal+vista.getContenido().get("tempF");
-					if(a[i].equals("sensF" ))
+					if(atributosDeLaVista[i].equals("sensF" ))
 						contenidototal= contenidototal+vista.getContenido().get("sensF");
-					if(a[i].equals("finTemp"))
+					if(atributosDeLaVista[i].equals("finTemp"))
 						contenidototal= contenidototal+vista.getContenido().get("finTemp");
 					break;
 				case "temperatura_horizontal":
-					if(a[i].equals("Hum"))
+					if(atributosDeLaVista[i].equals("Hum"))
 						contenidototal= contenidototal+vista.getContenido().get("Hum");
-					if(a[i].equals("tempC"))
+					if(atributosDeLaVista[i].equals("tempC"))
 						contenidototal= contenidototal+vista.getContenido().get("tempC");
-					if(a[i].equals("sensC"))
+					if(atributosDeLaVista[i].equals("sensC"))
 						contenidototal= contenidototal+vista.getContenido().get("sensC");
-					if(a[i].equals("tempF"))
+					if(atributosDeLaVista[i].equals("tempF"))
 						contenidototal= contenidototal+vista.getContenido().get("tempF");
-					if(a[i].equals("sensF"))
+					if(atributosDeLaVista[i].equals("sensF"))
 						contenidototal= contenidototal+vista.getContenido().get("sensF");
 					break;
 				case "sonoff":
-					if(a[i].equals("sonoffbody"))
-						contenidototal= contenidototal+vista.getContenido().get("sonoffbody");
-					break;
+					if(atributosDeLaVista[i].equals("sonoffbody")) {
+						String cuerpoSonoff= vista.getContenido().get("sonoffbody").replaceAll("CAMBIARSONOFF", "cambiarsonoff"+cardinalidadElemento);
+						contenidototal= contenidototal+cuerpoSonoff;	
+						break;	
+					}
 				default:
 					System.out.println("ERROR VISTA NO ENCONTRADA");
 					break;
 				}
 			}
-			String vistatotal = vista.getInicio()+contenidototal+vista.getFin();
+			String inicio="";
+			if(tipoDeVista.equals("sonoff"))
+				inicio= vista.getInicio().replaceAll("CAMBIARSONOFF", "cambiarsonoff"+cardinalidadElemento);
+			else
+				inicio = vista.getInicio();
+			String vistatotal = inicio+contenidototal+vista.getFin();
+			System.out.println("vista total: "+ vistatotal);
 			return vistatotal;
 		}
+
+		
 		
 }

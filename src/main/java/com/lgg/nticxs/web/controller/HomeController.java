@@ -63,6 +63,9 @@ public class HomeController {
 	AsistenciaDAO asistenciadao = new AsistenciaDAO();
 	AdministrativoDAO administdao = new AdministrativoDAO();
 	private DeviceDAO devicedao = new DeviceDAO();
+	private List<String> deviceAsociadoAlarma = new ArrayList<>();
+	private List<String> deviceAsociadoTermomtro = new ArrayList<>();
+	private List<String> deviceAsociadoSonoff = new ArrayList<>();
 	//Integer trimestreActual = Utils.TrimestreActual();
 	
 	@GetMapping("homepage/")
@@ -105,13 +108,40 @@ public class HomeController {
 		}
 		String nombre = request.getUserPrincipal().getName();
 		User user = userdao.retrieveByMail(nombre);
+		if(user!= null && !user.getCuenta_iniciada()) {
+			System.out.println("cuenta no iniciada validarla con el mensaje enviado por mail");
+			model.addAttribute("user", user.getEmail());
+			return new ModelAndView("validate", model);
+		}
+		clasificarSerialUsuario(user.getDeviceserialnumber());
+		System.out.println("cantidad de sonoff: "+ deviceAsociadoSonoff.size());
+		model.addAttribute("sonoffcantidad", deviceAsociadoSonoff.size());
+		for(int i=0; i<deviceAsociadoSonoff.size();i++) {
+			String variable = "sonoffserial"+i;
+			System.out.println("este es el nombre de la variable: "+ variable);
+			model.addAttribute(variable, deviceAsociadoSonoff.get(i));
+		}
+		List<String> vistas = new ArrayList<>();
+		List<String> aux = new  ArrayList<>();
+		aux = Utils.vistas(user.getEmail(),deviceAsociadoSonoff,Device.SONOFF);
+		for(String vista1 : aux)
+			vistas.add(vista1);
+		aux =Utils.vistas(user.getEmail(),deviceAsociadoTermomtro, Device.TERMOMETRO);
+		for(String vista1 : aux)
+			vistas.add(vista1);
+		aux =Utils.vistas(user.getEmail(),deviceAsociadoAlarma,Device.ALARMA);
+		for(String vista1 : aux)
+			vistas.add(vista1);
+		System.out.println("cantidad de vistas a mostrar !!!!!: "+ vistas.size());
 		model.addAttribute("user", user);
-		model.addAttribute("deviceserial", user.getDeviceserialnumber());
-        model.addAttribute("vistas",Utils.vistas(user.getEmail()));
-        model.addAttribute("sonoffserial", "PS3S1P120190323");
+//		model.addAttribute("deviceserial", "PS3S1P120190323");
+		model.addAttribute("vistas",vistas);
+//        model.addAttribute("sonoffserial", "PS3S1P120190323");
+        System.out.println("retorno la vista correctamente");
    		return new ModelAndView("origin", model);
 	}
 	
+
 	@PostMapping("home/")
 	public String sendMail(Model model, String Mensaje) {
 		Properties props = new Properties();
@@ -147,6 +177,26 @@ public class HomeController {
 		return "home";
 	}
 	
+	@PostMapping("validate")
+	public String validateMail(Model model,@RequestParam(name="code") String code,
+			@RequestParam(name="user") String user) {
+		User usuario = userdao.retrieveByMail(user);
+		if(usuario!= null && usuario.getPassCuenta().equals(code)) {
+			usuario.setCuenta_iniciada(true);
+			userdao.update(usuario);
+			return "redirect:/home";
+		}else {
+			model.addAttribute("user", user);
+			model.addAttribute("msg1", "The entered code is incorrect, try again");
+			return "validate";
+		}
+	}
+	
+	@GetMapping("validate")
+		public String validateMailMalo(Model model){
+			model.addAttribute("msg1", "The entered code is incorrect, try again");
+			return "validate";
+	}
 	
 	@GetMapping( "home/download/document/{docId}")
 	public String downloadDocument(@PathVariable String docId, HttpServletResponse response) 
@@ -222,6 +272,23 @@ public class HomeController {
 		promedio = (double) (total/cantidad);
 		return promedio;
 	}
-
+	
+	private void clasificarSerialUsuario(List<String> deviceserialnumbers) {
+		System.out.println("cantidad de elementos: "+ deviceserialnumbers.size());
+		deviceAsociadoAlarma = new ArrayList<>();
+		deviceAsociadoSonoff = new ArrayList<>();
+		deviceAsociadoTermomtro = new ArrayList<>();
+		for(String serial: deviceserialnumbers) {
+			Device device = devicedao.retrieveBySerialNumber(serial);
+			if(device.getTipo().equals(Device.ALARMA))
+				deviceAsociadoAlarma.add(serial);
+			else if (device.getTipo().equals(Device.SONOFF))
+				deviceAsociadoSonoff.add(serial);
+			else if (device.getTipo().equals(Device.TERMOMETRO))
+				deviceAsociadoTermomtro.add(serial);
+			else
+				System.out.println("error tipo no reconocido: "+ device.getTipo());
+			}
+		}
 
 }

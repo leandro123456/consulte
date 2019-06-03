@@ -1,13 +1,13 @@
 <%@ page isELIgnored="false" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
-
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
 	<link rel="stylesheet" type="text/css" href='<c:url value="/resources/mqttResources/style.css" />'>
 	<link rel="stylesheet" type="text/css" href='<c:url value="/resources/mqttResources/c3.min.css" />'>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.min.js" type="text/javascript"></script>     
@@ -30,6 +30,35 @@
 <script
 	src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <!-- boton check -->
+
+
+
+<script>
+	$(document).ready(function() {
+		alert("esta listo");
+		alert("cargue la: "+ "${sonoffserial0}");
+		if("${sonoffserial1}"!="")
+			alert("cargue la: "+ "${sonoffserial1}");
+	});
+</script>
+
+<script type="text/javascript">
+	function sendMQTTMessage(sonoffserial){
+		var checkBox=document.getElementById("sonoffpower");
+		  if (checkBox.checked == true){
+		  	  	document.getElementById("sonoffpower1").value = true;
+		  }else{
+		  	  	document.getElementById("sonoffpower1").value = false;
+		  }
+		var formvalue="push"+sonoffserial;
+		console.log("estevalor: "+ formvalue);
+		document.getElementById(formvalue).submit();
+	}
+</script>
+
+
+
+
 </head>
 
 <body id="page-top">
@@ -48,40 +77,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-lg-6 mb-4">
-		<div class="card shadow mb-4">
-			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">Sonoff</h6>
-			</div>
-			<div class="card-body">
-				<form role="form"
-					action="<c:url value='/home/pushbutton/${sonoffserial}' />"
-					method="post" id="push${sonoffserial}" enctype="multipart/form-data">
-					<h4 id="sonoffname" class="small font-weight-bold">
-						Timer<span class="float-right">0</span>
-					</h4>
-					<div class="progress mb-4">
-						<div class="progress-bar" id="sonofftimer" role="progressbar"
-							aria-valuemin="0" aria-valuemax="60" style="width: 50%;"></div>
-					</div>
-					<p></p>
-					<b> Status Power
-						<div class="float-right">
-							<input id="sonoffpower" type="checkbox" data-toggle="toggle"
-								data-style="slow" onchange="sendMQTTMessage('${sonoffserial}')">
-						</div>
-					</b><input type="hidden" name="sonoffpower" id="sonoffpower1" />
-					<p></p>
-				</form>
-				<form role="form"
-					action="<c:url value='/home/simulatedpushbutton/${sonoffserial}' />"
-					method="post" enctype="multipart/form-data">
-					<button type="submit" class="btn btn-primary btn-sm">Simulated
-						push button</button>
-				</form>
-			</div>
-		</div>
-	</div>
 
 
 	<div class="visible">
@@ -93,8 +88,18 @@
 	<jsp:include page="footer.jsp" />
 </body>
 
+<script> 
+// 	function cambiarsonoff(){
+// 		var cantidad = ${sonoffcantidad};
+// 		for(var i=0; i<cantidad; i++){
+// 			alert("entro!!!");
+// 			reeemplazar los "cambiarsonoff"+i =${sonoffserial+i};
+//			console.log("obtuve la variable: "+ ${"sonoffserial"+i});
+// 		}
+// 	}
+</script>
 
-<script type="text/javascript">
+<script>
 	$(document).ready(function() {
 		updateWiget();
 		animateprogress("humedad", 50);
@@ -102,65 +107,15 @@
 		animateprogress("sensacionc", 27);
 		animateprogress("temperaturaf", 77);
 		animateprogress("sensacionf", 80.6);
-		//startConnect();
+// 		cambiarsonoff();
+		//startConnect();			
 	});
 
 	//document.querySelector ('#boton').addEventListener ('click', function() { 
 	//		animateprogress("humedad",49);   
-	// 	});
+// 		});
 </script>
 
-<script type="text/javascript">
-	function sendMQTTMessage(sonoffserial){
-		var checkBox=document.getElementById("sonoffpower");
-		  if (checkBox.checked == true){
-		  	  	document.getElementById("sonoffpower1").value = true;
-		  }else{
-		  	  	document.getElementById("sonoffpower1").value = false;
-		  }
-		var formvalue="push"+sonoffserial;
-		console.log("estevalor: "+ formvalue);
-		document.getElementById(formvalue).submit();
-	}
-</script>
-
-<script type="text/javascript">
-// 	$(document).ready(function() {
-// 		//cargarDivs();
-// 		getElements();
-// 		function getElements() {
-// 			var mail = "${user.email}";
-// 			var _url = $(location).attr('pathname') +mail+"/elements";
-// 			$.ajax({ url : _url,
-// 				contentType: "application/json",
-// 				dataType: 'json',
-// 				success: function(data){
-// 					for(var i = 0; i < data.deviceserial.length ; i++){
-// 						var item=data.deviceserial[i];
-// 						console.log(item);
-// 						var vara = "${vistas[i]}";
-// 						console.log("hello: "+ vara);
-// 						var vara = '4564dsd';
-// 						console.log(data.item[0]);
-// 						for(var j=0; j< data."4564dsd".length; j++){
-// 							var conjunto = data.item[j];
-// 							 console.log(conjunto);
-// 						}
-// 						var item = "${deviceserial[0]}";
-// 						console.log("item: "+item);
-// 						var valor = "${item}";
-// 						console.log("valor: "+valor);
-// 						$("cargadora").append(vara);
-// 					}
-// 				}
-// 			});
-// 		}   
-// 	})	
-	
-// 	function test(a) {
-// 		console.log(data.a.length);
-// 	}
-</script>
 
 
 

@@ -18,7 +18,7 @@ public class User{
      static final public String ROLE_SUPERADMIN = "SUPERADMIN";
      static final public String ROLE_ADMIN = "ADMIN";
      static final public String ROLE_USER = "USER";
-
+     
 	@Id
 	@GeneratedValue
 	@Field(name = "_id")
@@ -38,6 +38,9 @@ public class User{
 	
 	@Field (name = "email")
 	private String email;
+	
+	@Field (name = "passCuenta")
+	private String passCuenta;
 		
 	@Field (name = "cuenta_iniciada")
 	private Boolean cuenta_iniciada;
@@ -128,6 +131,16 @@ public class User{
 
 	public void setCuenta_iniciada(Boolean cuenta_iniciada) {
 		this.cuenta_iniciada = cuenta_iniciada;
+	}
+
+
+	public String getPassCuenta() {
+		return passCuenta;
+	}
+
+
+	public void setPassCuenta(String passCuenta) {
+		this.passCuenta = passCuenta;
 	}
 
 

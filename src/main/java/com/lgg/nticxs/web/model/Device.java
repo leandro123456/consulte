@@ -16,6 +16,10 @@ import org.eclipse.persistence.nosql.annotations.NoSql;
 @Entity
 @NoSql(dataFormat=DataFormatType.MAPPED)
 public class Device {
+	static final public String TERMOMETRO = "termometro";
+	static final public String SONOFF = "sonoff";
+	static final public String ALARMA = "alarma";
+	
 	@Id
 	@GeneratedValue
 	@Field(name = "_id")
@@ -29,6 +33,9 @@ public class Device {
 	
 	@Field (name = "serialnumber")
 	private String serialnumber;
+	
+	@Field (name = "tipo")
+	private String tipo;
 	
 	@Field (name = "description")
 	private String description;
@@ -47,6 +54,13 @@ public class Device {
 	
 	@Field (name = "timerString")
 	private String timerString;
+	
+	@Field (name = "lastnotification")
+	private DeviceNotification lastnotification;
+	
+	@ElementCollection
+	@Field (name = "alarms")
+	private List<DeviceAlarm> alarms;
 	
 	@Field (name = "usedefaultbrocker")
 	private Boolean usedefaultbrocker;
@@ -128,6 +142,14 @@ public class Device {
 		this.password = password;
 	}
 
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
 	public List<byte[]> getHistoryPassword() {
 		return historyPassword;
 	}
@@ -199,6 +221,22 @@ public class Device {
 
 	public void setTimerString(String timerString) {
 		this.timerString = timerString;
+	}
+	
+	public DeviceNotification getLastnotification() {
+		return lastnotification;
+	}
+
+	public void setLastnotification(DeviceNotification lastnotification) {
+		this.lastnotification = lastnotification;
+	}
+
+	public List<DeviceAlarm> getAlarms() {
+		return alarms;
+	}
+
+	public void setAlarms(List<DeviceAlarm> alarms) {
+		this.alarms = alarms;
 	}
 
 	public String getUserRole(String userTarget) {

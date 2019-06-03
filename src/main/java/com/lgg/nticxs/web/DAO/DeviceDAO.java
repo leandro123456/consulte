@@ -54,4 +54,6 @@ public class DeviceDAO extends JPADAO<Device>{
 		list.get(0).setDelete(true);
 		update(list.get(0));
 	}
+	
+	
 }

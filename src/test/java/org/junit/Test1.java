@@ -163,7 +163,7 @@ public class Test1 {
 		
 	}
 	
-	@Test
+	//@Test
 	public void testSearchVista(){
 		DeviceDAO devicedao= new DeviceDAO();
 		VistaDAO vistadao= new VistaDAO();
@@ -205,50 +205,50 @@ public class Test1 {
 		
 		VistaDAO vistadao = new VistaDAO();
 		Vista vista= new Vista();
-		vista.setName("temperatura_horizontal");
-		vista.setInicio(inicio);
-		vista.setFin(fin);
+//		vista.setName("temperatura_horizontal");
+//		vista.setInicio(inicio);
+//		vista.setFin(fin);
 		Map<String, String> elem= new HashMap<>();
-		elem.put("Hum",humedad);
-		elem.put("tempC", tempC);
-		elem.put("sensC", sensC);
-		elem.put("tempF", tempF);
-		elem.put("sensF", sensF);
-		vista.setContenido(elem);
-		vistadao.create(vista);
-		System.out.println("termino vista horizontal");
+//		elem.put("Hum",humedad);
+//		elem.put("tempC", tempC);
+//		elem.put("sensC", sensC);
+//		elem.put("tempF", tempF);
+//		elem.put("sensF", sensF);
+//		vista.setContenido(elem);
+//		vistadao.create(vista);
+//		System.out.println("termino vista horizontal");
+//		
+//		inicio= "<div class=\"col-12\"> <div class=\"card shadow mb-4\"><div class=\"card-header py-3\"><h6 class=\"m-0 font-weight-bold text-primary\">Sensor de Temperatura Y Humedad</h6></div>";
+//		humedad= "<div class=\"card border-left-primary shadow h-20 py-2\"> <div class=\"card-body\"> <div class=\"row no-gutters align-items-center\"> <div class=\"col-12\"><div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\">Humedad</div> </div><div class=\"col-12\" id=\"chartHum\"> <i class=\"fas fa-calendar fa-2x text-gray-300\"></i> </div> </div> </div></div>";
+//		String indiceTemp="<div class=\"card border-left-primary shadow h-70 py-2\"><div class=\"card-body\"><div class=\"row no-gutters align-items-center\"><div class=\"col-12\"><div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\">Temperatura</div></div>";
+//		tempC= "<div class=\"col-6\" id=\"chartTempC\"></div>";
+//		sensC= "<div class=\"col-6\" id=\"chartHiC\"></div>";
+//		tempF= "<div class=\"col-6\" id=\"chartTempF\"></div>";
+//		sensF= "<div class=\"col-6\" id=\"chartHiF\"></div>";
+//		String finTemp="</div></div></div>";
+//		fin= "</div></div>";
+//		
+//		vistadao = new VistaDAO();
+//		vista= new Vista();
+//		vista.setName("temperatura_reloj");
+//		vista.setInicio(inicio);
+//		vista.setFin(fin);
+//		elem= new HashMap<>();
+//		elem.put("Hum",humedad);
+//		elem.put("tempC", tempC);
+//		elem.put("sensC", sensC);
+//		elem.put("tempF", tempF);
+//		elem.put("sensF", sensF);
+//		elem.put("indiceTemp", indiceTemp);
+//		elem.put("finTemp", finTemp);
+//		vista.setContenido(elem);
+//		vistadao.create(vista);
+//		System.out.println("termino vista reloj");
 		
-		inicio= "<div class=\"col-12\"> <div class=\"card shadow mb-4\"><div class=\"card-header py-3\"><h6 class=\"m-0 font-weight-bold text-primary\">Sensor de Temperatura Y Humedad</h6></div>";
-		humedad= "<div class=\"card border-left-primary shadow h-20 py-2\"> <div class=\"card-body\"> <div class=\"row no-gutters align-items-center\"> <div class=\"col-12\"><div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\">Humedad</div> </div><div class=\"col-12\" id=\"chartHum\"> <i class=\"fas fa-calendar fa-2x text-gray-300\"></i> </div> </div> </div></div>";
-		String indiceTemp="<div class=\"card border-left-primary shadow h-70 py-2\"><div class=\"card-body\"><div class=\"row no-gutters align-items-center\"><div class=\"col-12\"><div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\">Temperatura</div></div>";
-		tempC= "<div class=\"col-6\" id=\"chartTempC\"></div>";
-		sensC= "<div class=\"col-6\" id=\"chartHiC\"></div>";
-		tempF= "<div class=\"col-6\" id=\"chartTempF\"></div>";
-		sensF= "<div class=\"col-6\" id=\"chartHiF\"></div>";
-		String finTemp="</div></div></div>";
-		fin= "</div></div>";
 		
-		vistadao = new VistaDAO();
-		vista= new Vista();
-		vista.setName("temperatura_reloj");
-		vista.setInicio(inicio);
-		vista.setFin(fin);
-		elem= new HashMap<>();
-		elem.put("Hum",humedad);
-		elem.put("tempC", tempC);
-		elem.put("sensC", sensC);
-		elem.put("tempF", tempF);
-		elem.put("sensF", sensF);
-		elem.put("indiceTemp", indiceTemp);
-		elem.put("finTemp", finTemp);
-		vista.setContenido(elem);
-		vistadao.create(vista);
-		System.out.println("termino vista reloj");
-		
-		
-		inicio="<div class=\"col-lg-6 mb-4\"> <div class=\"card shadow mb-4\"> <div class=\"card-header py-3\">	<h6 class=\"m-0 font-weight-bold text-primary\">Sonoff</h6></div>";
+		inicio="<div class=\"col-lg-6 mb-4\"> <div class=\"card shadow mb-4\"> <div class=\"card-header py-3\">	<h6 class=\"m-0 font-weight-bold text-primary\">Sonoff CAMBIARSONOFF</h6></div>";
 		fin="</div> </div>";
-		String sonoffbody="<div class=\"card-body\"><form role=\"form\" action=\"<c:url value='/home/pushbutton/${sonoffserial}' />\" method=\"post\" id=\"push${sonoffserial}\" enctype=\"multipart/form-data\"><h4 id=\"sonoffname\" class=\"small font-weight-bold\">Timer<span class=\"float-right\">0</span></h4><div class=\"progress mb-4\">	<div class=\"progress-bar\" id=\"sonofftimer\" role=\"progressbar\"	aria-valuemin=\"0\" aria-valuemax=\"60\" style=\"width: 50%;\">	</div></div><p></p><b> Status Power<div class=\"float-right\"><input id=\"sonoffpower\" type=\"checkbox\"	data-toggle=\"toggle\" data-style=\"slow\" onchange=\"sendMQTTMessage('${sonoffserial}')\"></div></b><input type=\"hidden\" name=\"sonoffpower\" id=\"sonoffpower1\" />	<p></p></form><form role=\"form\" action=\"<c:url value='/home/simulatedpushbutton/${sonoffserial}' />\" method=\"post\" enctype=\"multipart/form-data\"><button type=\"submit\" class=\"btn btn-primary btn-sm\">Simulated push button</button>	</form></div>";
+		String sonoffbody="<div class=\"card-body\"><form role=\"form\" action=\"<c:url value='/home/pushbutton/CAMBIARSONOFF' />\" method=\"post\" id=\"pushCAMBIARSONOFF\" enctype=\"multipart/form-data\"><h4 id=\"sonoffname\" class=\"small font-weight-bold\">Timer<span class=\"float-right\">0</span></h4><div class=\"progress mb-4\">	<div class=\"progress-bar\" id=\"sonofftimer\" role=\"progressbar\"	aria-valuemin=\"0\" aria-valuemax=\"60\" style=\"width: 50%;\">	</div></div><p></p><b> Status Power<div class=\"float-right\"><input id=\"sonoffpower\" type=\"checkbox\"	data-toggle=\"toggle\" data-style=\"slow\" onchange=\"sendMQTTMessage('CAMBIARSONOFF')\"></div></b><input type=\"hidden\" name=\"sonoffpower\" id=\"sonoffpower1\" />	<p></p></form><form role=\"form\" action=\"<c:url value='/home/simulatedpushbutton/CAMBIARSONOFF' />\" method=\"post\" enctype=\"multipart/form-data\"><button type=\"submit\" class=\"btn btn-primary btn-sm\">Simulated push button</button>	</form></div>";
 		vistadao = new VistaDAO();
 		vista= new Vista();
 		vista.setName("sonoff");
