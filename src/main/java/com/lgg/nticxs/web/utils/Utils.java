@@ -449,14 +449,14 @@ public class Utils {
 				Device device = devicedao.retrieveBySerialNumber(deviceserial);
 				String valor = device.getVista().get(nombreUsuario);
 				String[] a = valor.split(";");
-				String vistatotal = armarVista(a,a[0],i);
+				String vistatotal = armarVista(a,a[0],deviceserial);
 				lista.add(vistatotal);
 			}
 			System.out.println("elementos de la lista de vistas"+ lista.size());
 			return lista;
 		}
 
-		private static String armarVista(String[] atributosDeLaVista, String tipoDeVista, Integer cardinalidadElemento) {
+		private static String armarVista(String[] atributosDeLaVista, String tipoDeVista, String serialDevice) {
 			Vista vista = vistadao.retrieveByName(tipoDeVista);
 			String contenidototal="";
 			for(int i=1;i<atributosDeLaVista.length;i++) {
@@ -491,7 +491,8 @@ public class Utils {
 					break;
 				case "sonoff":
 					if(atributosDeLaVista[i].equals("sonoffbody")) {
-						String cuerpoSonoff= vista.getContenido().get("sonoffbody").replaceAll("CAMBIARSONOFF", "cambiarsonoff"+cardinalidadElemento);
+						System.out.println("ESTA ES LA VISTA ORIGINAL DEL SONOFF: "+ vista.getContenido().get("sonoffbody"));
+						String cuerpoSonoff= vista.getContenido().get("sonoffbody").replaceAll("CAMBIARSONOFF", serialDevice);
 						contenidototal= contenidototal+cuerpoSonoff;	
 						break;	
 					}
@@ -502,7 +503,7 @@ public class Utils {
 			}
 			String inicio="";
 			if(tipoDeVista.equals("sonoff"))
-				inicio= vista.getInicio().replaceAll("CAMBIARSONOFF", "cambiarsonoff"+cardinalidadElemento);
+				inicio= vista.getInicio().replaceAll("CAMBIARSONOFF", serialDevice);
 			else
 				inicio = vista.getInicio();
 			String vistatotal = inicio+contenidototal+vista.getFin();

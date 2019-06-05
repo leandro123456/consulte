@@ -114,7 +114,7 @@ public class HomeController {
 			return new ModelAndView("validate", model);
 		}
 		clasificarSerialUsuario(user.getDeviceserialnumber());
-		System.out.println("cantidad de sonoff: "+ deviceAsociadoSonoff.size());
+		System.out.println("cantidad de sonoff: "+ deviceAsociadoSonoff.size()+ "PRIMERO: " +deviceAsociadoSonoff.get(0));
 		model.addAttribute("sonoffcantidad", deviceAsociadoSonoff.size());
 		for(int i=0; i<deviceAsociadoSonoff.size();i++) {
 			String variable = "sonoffserial"+i;
