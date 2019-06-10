@@ -378,108 +378,136 @@ i.dsc-icon {
 		<div class="card-body">
 
 
-	<div class="col-lg-6">
+							<div class="row">
 
-      <div id="lcd_container">
-        <div class="virtual_lcd">
-          <div id="first_line">&nbsp;</div>
-          <div id="second_line">&nbsp;</div>
-        </div>
-        <div class="status_icons">
-          <i class="dsc-icon icon-check" id="ready_icon" title="Ready"></i>
-          <i class="dsc-icon icon-armed" id="armed_icon" title="Armed"></i>
-          <i class="dsc-icon icon-trouble" id="trouble_icon" title="System Trouble"></i>
-          <i class="dsc-icon icon-ac" id="ac_icon" title="AC Present"></i>
-        </div>
-      </div>
-
-
-      <div id="buttons_area">
-
-        <div id="left_buttons">
-          <div class="keypad_button_row">
-            <button type="button" class="btn btn-outline-dark keypad_button keypad_button_small"><i class="fas fa-chevron-left"></i></button>
-            <button type="button" class="btn btn-outline-dark keypad_button keypad_button_small"><i class="fas fa-chevron-right"></i></button>
-          </div>
-          <div class="keypad_button_row">
-            <button type="button" id="btn_f" class="btn btn-outline-dark keypad_button keypad_button_slim">
-          <i class="dsc-icon icon-flame" title="Fire"></i>
-          </button>
-          </div>
-          <div class="keypad_button_row">
-            <button type="button" id="btn_a" class="btn btn-outline-dark keypad_button keypad_button_slim">
-            <i class="dsc-icon icon-alert" title="Alert"></i>
-          </button>
-          </div>
-          <div class="keypad_button_row">
-            <button type="button" id="btn_p" class="btn btn-outline-dark keypad_button keypad_button_slim">
-            <i class="dsc-icon icon-thief" title="Panic"></i>
-          </button>
-            <div class="keypad_button_row">
-              <i class="fas fa-lightbulb" id="backlight_icon" title="Backlight"></i>
-            </div>
-          </div>
+								<div class="col-xs-12" id="lcd_container">
+									<div class="virtual_lcd">
+										<div id="first_line">&nbsp;</div>
+										<div id="second_line">&nbsp;</div>
+									</div>
+									<div class="status_icons">
+										<i class="dsc-icon icon-check" id="ready_icon" title="Ready"></i>
+										<i class="dsc-icon icon-armed" id="armed_icon" title="Armed"></i>
+										<i class="dsc-icon icon-trouble" id="trouble_icon"
+											title="System Trouble"></i> <i class="dsc-icon icon-ac"
+											id="ac_icon" title="AC Present"></i>
+									</div>
+								</div>
 
 
+								<div class="row" id="buttons_area">
 
-        </div>
+									<div id="left_buttons">
+										<div class="keypad_button_row">
+											<button type="button"
+												class="btn btn-outline-dark keypad_button keypad_button_small">
+												<i class="fas fa-chevron-left"></i>
+											</button>
+											<button type="button"
+												class="btn btn-outline-dark keypad_button keypad_button_small">
+												<i class="fas fa-chevron-right"></i>
+											</button>
+										</div>
+										<div class="keypad_button_row">
+											<button type="button" id="btn_f"
+												class="btn btn-outline-dark keypad_button keypad_button_slim">
+												<i class="dsc-icon icon-flame" title="Fire"></i>
+											</button>
+										</div>
+										<div class="keypad_button_row">
+											<button type="button" id="btn_a"
+												class="btn btn-outline-dark keypad_button keypad_button_slim">
+												<i class="dsc-icon icon-alert" title="Alert"></i>
+											</button>
+										</div>
+										<div class="keypad_button_row">
+											<button type="button" id="btn_p"
+												class="btn btn-outline-dark keypad_button keypad_button_slim">
+												<i class="dsc-icon icon-thief" title="Panic"></i>
+											</button>
+											<div class="keypad_button_row">
+												<i class="fas fa-lightbulb" id="backlight_icon"
+													title="Backlight"></i>
+											</div>
+										</div>
+									</div>
 
-        <div id="keypad_container">
-          <div class="keypad_button_row">
-            <button type="button" id="btn_1" class="btn btn-outline-dark keypad_button">1</button>
-            <button type="button" id="btn_2" class="btn btn-outline-dark keypad_button">2</button>
-            <button type="button" id="btn_3" class="btn btn-outline-dark keypad_button">3</button>
-          </div>
-          <div class="keypad_button_row">
-            <button type="button" id="btn_4" class="btn btn-outline-dark keypad_button">4</button>
-            <button type="button" id="btn_5" class="btn btn-outline-dark keypad_button">5</button>
-            <button type="button" id="btn_6" class="btn btn-outline-dark keypad_button">6</button>
-          </div>
-          <div class="keypad_button_row">
-            <button type="button" id="btn_7" class="btn btn-outline-dark keypad_button">7</button>
-            <button type="button" id="btn_8" class="btn btn-outline-dark keypad_button">8</button>
-            <button type="button" id="btn_9" class="btn btn-outline-dark keypad_button">9</button>
-          </div>
-          <div class="keypad_button_row">
-            <button type="button" id="btn_*" class="btn btn-outline-dark keypad_button"><i class="dsc-icon icon-star"></i></button>
-            <button type="button" id="btn_0" class="btn btn-outline-dark keypad_button">0</button>
-            <button type="button" id="btn_#" class="btn btn-outline-dark keypad_button">#</button>
-          </div>
-        </div>
+									<div id="keypad_container">
+										<div class="keypad_button_row">
+											<button type="button" id="btn_1"
+												class="btn btn-outline-dark keypad_button">1</button>
+											<button type="button" id="btn_2"
+												class="btn btn-outline-dark keypad_button">2</button>
+											<button type="button" id="btn_3"
+												class="btn btn-outline-dark keypad_button">3</button>
+										</div>
+										<div class="keypad_button_row">
+											<button type="button" id="btn_4"
+												class="btn btn-outline-dark keypad_button">4</button>
+											<button type="button" id="btn_5"
+												class="btn btn-outline-dark keypad_button">5</button>
+											<button type="button" id="btn_6"
+												class="btn btn-outline-dark keypad_button">6</button>
+										</div>
+										<div class="keypad_button_row">
+											<button type="button" id="btn_7"
+												class="btn btn-outline-dark keypad_button">7</button>
+											<button type="button" id="btn_8"
+												class="btn btn-outline-dark keypad_button">8</button>
+											<button type="button" id="btn_9"
+												class="btn btn-outline-dark keypad_button">9</button>
+										</div>
+										<div class="keypad_button_row">
+											<button type="button" id="btn_*"
+												class="btn btn-outline-dark keypad_button">
+												<i class="dsc-icon icon-star"></i>
+											</button>
+											<button type="button" id="btn_0"
+												class="btn btn-outline-dark keypad_button">0</button>
+											<button type="button" id="btn_#"
+												class="btn btn-outline-dark keypad_button">#</button>
+										</div>
+									</div>
 
-        <div id="right_buttons">
-          <div class="keypad_button_row">
-            <button type="button" id="btn_s" class="btn btn-outline-dark keypad_button keypad_button_control">
-            <i class="dsc-icon icon-stay_away"></i>
-          </button>
-          </div>
-          <div class="keypad_button_row">
-            <button type="button" id="btn_w" class="btn btn-outline-dark keypad_button keypad_button_control">
-            <i class="dsc-icon icon-stay_empty"></i>
-          </button>
-          </div>
-          <div class="keypad_button_row">
-            <button type="button" id="btn_c" class="btn btn-outline-dark keypad_button keypad_button_control">
-          <i class="dsc-icon icon-bell"></i>
-          </button>
-          </div>
-          <div class="keypad_button_row">
-            <button type="button" class="btn btn-outline-dark keypad_button keypad_button_control">
-          <i class="dsc-icon icon-refresh"></i>
-          </button>
-          </div>
-          <div class="keypad_button_row">
-            <button type="button" class="btn btn-outline-dark keypad_button keypad_button_control">
-            <i class="dsc-icon icon-exit"></i>
-          </button>
-          </div>
+									<div id="right_buttons">
+										<div class="keypad_button_row">
+											<button type="button" id="btn_s"
+												class="btn btn-outline-dark keypad_button keypad_button_control">
+												<i class="dsc-icon icon-stay_away"></i>
+											</button>
+										</div>
+										<div class="keypad_button_row">
+											<button type="button" id="btn_w"
+												class="btn btn-outline-dark keypad_button keypad_button_control">
+												<i class="dsc-icon icon-stay_empty"></i>
+											</button>
+										</div>
+										<div class="keypad_button_row">
+											<button type="button" id="btn_c"
+												class="btn btn-outline-dark keypad_button keypad_button_control">
+												<i class="dsc-icon icon-bell"></i>
+											</button>
+										</div>
+										<div class="keypad_button_row">
+											<button type="button"
+												class="btn btn-outline-dark keypad_button keypad_button_control">
+												<i class="dsc-icon icon-refresh"></i>
+											</button>
+										</div>
+										<div class="keypad_button_row">
+											<button type="button"
+												class="btn btn-outline-dark keypad_button keypad_button_control">
+												<i class="dsc-icon icon-exit"></i>
+											</button>
+										</div>
 
-        </div>
-      </div>
-    </div>
+									</div>
+								</div>
+							</div>
 
-    <div class="col-lg-6">
-      <div id="regular_icons">
+	<div class="container-fluid">
+		<p> </p>
+      <div class="row" id="regular_icons">
         <div class="zone inline_container">
           <i class="far fa-circle" id="fire_icon"></i> Fire
         </div>
@@ -496,7 +524,7 @@ i.dsc-icon {
           <i class="far fa-circle" id="pgm_icon"></i> PGM
         </div>
       </div>
-      <div id="zones_list">
+      <div class="row" id="zones_list">
 
       </div>
 
