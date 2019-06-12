@@ -29,7 +29,7 @@ import com.lgg.nticxs.web.model.Materia.materia;
 public class Test1 {
 	
 	
-	//@Test
+	@Test
 	public void testSendMQTT() {
 		String timerstringsonoff= "monday-wednesday-friday&12:45&on&All&@monday-wednesday-friday&23:52&off&All&@";
 		//String timerstringvalue=SimpleTimerString.maketimerStringFormat(timerstringsonoff);
@@ -52,7 +52,8 @@ public class Test1 {
 //	   	 json.put("param2", "ON");
 	   	 json.put("SW1", "OFF");
 	   	 System.out.println("el json: "+ json);
-		SimpleTimerString.sendmessageMQTT(json,host,port,topic,user,pass);
+	   	SimpleTimerString tim = new SimpleTimerString(timerstringsonoff);
+		tim.sendmessageMQTT(json,host,port,topic,user,pass);
 		System.out.println("termino");
 		
 		//"deviceId":"PS3S1P120190323","SW1":"OFF","PB1LS":1,"PB1TTO":0,"TS":0

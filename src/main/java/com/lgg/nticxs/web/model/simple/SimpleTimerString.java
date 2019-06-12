@@ -1,19 +1,25 @@
 package com.lgg.nticxs.web.model.simple;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.Callable;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import org.eclipse.paho.client.mqttv3.IMqttClient;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.json.JSONObject;
 
 
-public class SimpleTimerString{
+public class SimpleTimerString implements MqttCallback{
 	private String days;
 	private String hours;
 	private String action;
@@ -412,12 +418,12 @@ public class SimpleTimerString{
 		
 	}
 
-	public static void sendmessageMQTT(JSONObject message,String serverUri, String port, String topic,
+	public void sendmessageMQTT(JSONObject message,String serverUri, String port, String topic,
 			String userName, String password) {
 		String publisherId = UUID.randomUUID().toString();
 		try {
-			IMqttClient publisher = new MqttClient("tcp://"+serverUri+":"+port,publisherId);
-			
+			MqttClient publisher = new MqttClient("tcp://"+serverUri+":"+port,publisherId);
+			publisher.setCallback(this);
 			MqttConnectOptions options = new MqttConnectOptions();
 			options.setAutomaticReconnect(true);
 			options.setCleanSession(true);
@@ -431,10 +437,35 @@ public class SimpleTimerString{
 	        }else {
 	        	System.out.println("conecto a :" + publisher);
 	        }
-	        MqttMessage msg = makemqttmessage(message);
-	      //  msg.setQos(0);
-	      //  msg.setRetained(true);
-	        publisher.publish(topic,msg); 
+			int qos = 1;
+			publisher.subscribe("RMgmt/debug", qos);
+			
+			CountDownLatch receivedSignal = new CountDownLatch(10);
+			try {
+				System.in.read();
+				System.out.println("obtuvo");
+			} catch (IOException e) {
+				System.out.println("fallo");
+			}
+			receivedSignal.await(1, TimeUnit.MINUTES);
+			
+			//publisher.subscribe("RMgmt/debug");
+//			CountDownLatch receivedSignal = new CountDownLatch(10);
+//			publisher.subscribe("RMgmt/debug"
+//					, (topic, msg) -> {
+//			    byte[] payload = msg.getPayload();
+//			    // ... payload handling omitted
+//			    receivedSignal.countDown();
+//			}
+//					);    
+//			 System.out.println(String.format("[%s] %s", topic, new String(message.getPayload())));
+//			receivedSignal.await(1, TimeUnit.MINUTES);
+			
+			
+//	        MqttMessage msg = makemqttmessage(message);
+//	      //  msg.setQos(0);
+//	      //  msg.setRetained(true);
+//	        publisher.publish(topic,msg); 
 				
 		} catch (Exception e) {
 			System.out.println("mensaje: "+ e.getMessage());
@@ -451,4 +482,21 @@ public class SimpleTimerString{
     	 return message;
     	 
     }	
+    
+    @Override
+    public void messageArrived(String topic, MqttMessage message) throws Exception {
+            System.out.println("message is : "+message);
+        }
+
+	@Override
+	public void connectionLost(Throwable arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deliveryComplete(IMqttDeliveryToken arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 }
