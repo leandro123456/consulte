@@ -439,7 +439,7 @@ public class SimpleTimerString implements MqttCallback{
 	        }
 	        MqttMessage msg = makemqttmessage(message);
 	      //  msg.setQos(0);
-	      //  msg.setRetained(true);
+	        msg.setRetained(true);
 	        publisher.publish(topic,msg); 
 				
 		} catch (Exception e) {
