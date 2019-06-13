@@ -571,10 +571,10 @@ i.dsc-icon {
 
         if (location.protocol == "file:") {
           //for testing on local
-          cnn_string = "192.168.1.101";
+          cnn_string = "mqtt.coiaca.com";
         }
 
-        ws = new WebSocket('ws://' + cnn_string + '/ws');
+        ws = new WebSocket('ws://' + cnn_string + '/RMgmt/debug');
         ws.binaryType = "arraybuffer";
         ws.onopen = function(e) {
           //addMessage("Connected");

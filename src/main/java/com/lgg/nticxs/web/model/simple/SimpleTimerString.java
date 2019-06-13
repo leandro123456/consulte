@@ -418,12 +418,12 @@ public class SimpleTimerString implements MqttCallback{
 		
 	}
 
-	public void sendmessageMQTT(JSONObject message,String serverUri, String port, String topic,
+	public static void sendmessageMQTT(JSONObject message,String serverUri, String port, String topic,
 			String userName, String password) {
 		String publisherId = UUID.randomUUID().toString();
 		try {
-			MqttClient publisher = new MqttClient("tcp://"+serverUri+":"+port,publisherId);
-			publisher.setCallback(this);
+			IMqttClient publisher = new MqttClient("tcp://"+serverUri+":"+port,publisherId);
+			
 			MqttConnectOptions options = new MqttConnectOptions();
 			options.setAutomaticReconnect(true);
 			options.setCleanSession(true);
@@ -437,35 +437,10 @@ public class SimpleTimerString implements MqttCallback{
 	        }else {
 	        	System.out.println("conecto a :" + publisher);
 	        }
-			int qos = 1;
-			publisher.subscribe("RMgmt/debug", qos);
-			
-			CountDownLatch receivedSignal = new CountDownLatch(10);
-			try {
-				System.in.read();
-				System.out.println("obtuvo");
-			} catch (IOException e) {
-				System.out.println("fallo");
-			}
-			receivedSignal.await(1, TimeUnit.MINUTES);
-			
-			//publisher.subscribe("RMgmt/debug");
-//			CountDownLatch receivedSignal = new CountDownLatch(10);
-//			publisher.subscribe("RMgmt/debug"
-//					, (topic, msg) -> {
-//			    byte[] payload = msg.getPayload();
-//			    // ... payload handling omitted
-//			    receivedSignal.countDown();
-//			}
-//					);    
-//			 System.out.println(String.format("[%s] %s", topic, new String(message.getPayload())));
-//			receivedSignal.await(1, TimeUnit.MINUTES);
-			
-			
-//	        MqttMessage msg = makemqttmessage(message);
-//	      //  msg.setQos(0);
-//	      //  msg.setRetained(true);
-//	        publisher.publish(topic,msg); 
+	        MqttMessage msg = makemqttmessage(message);
+	      //  msg.setQos(0);
+	      //  msg.setRetained(true);
+	        publisher.publish(topic,msg); 
 				
 		} catch (Exception e) {
 			System.out.println("mensaje: "+ e.getMessage());
