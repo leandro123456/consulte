@@ -138,7 +138,7 @@ public class HomeController {
 		model.addAttribute("vistas",vistas);
 //        model.addAttribute("sonoffserial", "PS3S1P120190323");
         System.out.println("retorno la vista correctamente");
-   		return new ModelAndView("originWebSocket", model);
+   		return new ModelAndView("origin", model);
 	}
 	
 

@@ -378,9 +378,9 @@ i.dsc-icon {
 		<div class="card-body">
 
 
-							<div class="row">
+							<div class="col-xs-12">
 
-								<div class="col-xs-12" id="lcd_container">
+								<div id="lcd_container">
 									<div class="virtual_lcd">
 										<div id="first_line">&nbsp;</div>
 										<div id="second_line">&nbsp;</div>
@@ -395,7 +395,7 @@ i.dsc-icon {
 								</div>
 
 
-								<div class="row" id="buttons_area">
+								<div class="col-xs-12" id="buttons_area">
 
 									<div id="left_buttons">
 										<div class="keypad_button_row">
@@ -505,7 +505,7 @@ i.dsc-icon {
 								</div>
 							</div>
 
-	<div class="container-fluid">
+	<div class="col-xs-12">
 		<p> </p>
       <div class="row" id="regular_icons">
         <div class="zone inline_container">
@@ -559,7 +559,7 @@ i.dsc-icon {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script type="text/javascript">
       var ws = null;
-      var cnn_string = "mqtt.coiaca.com";//document.location.host;
+      var cnn_string = "mqtt.coiaca.com:8080";//document.location.host;
 
       $(window).on('beforeunload', function() {
         if (ws != null) {
@@ -571,7 +571,7 @@ i.dsc-icon {
 
         if (location.protocol == "file:") {
           //for testing on local
-          cnn_string = "mqtt.coiaca.com";
+          cnn_string = "mqtt.coiaca.com:8080";
         }
 
         ws = new WebSocket('ws://' + cnn_string + '/PS3S1P120190323/swcmd');
