@@ -1,0 +1,34 @@
+
+<div class=\"card-body\">
+	<form role=\ "form\" action=\
+		"/mqttmanagment/home/pushbutton/CAMBIARSONOFF\" method=\ "post\" id=\
+		"pushCAMBIARSONOFF\" enctype=\"multipart/form-data\">
+		<h4 id=\ "sonoffname\" class=\"smallfont-weight-bold\">
+			Timer<span class=\"float-right\">0</span>
+		</h4>
+		<div class=\"progressmb-4\">
+			<div class=\ "progress-bar\" id=\ "sonofftimer\" role=\
+				"progressbar\"	aria-valuemin=\ "0\" aria-valuemax=\ "60\" style="""width: 50%;\">
+			</div>
+		</div>
+		<p></p>
+		<b> Status Power
+			<div class=\"float-right\">
+				<input id=\ "sonoffpowerCAMBIARSONOFF\" type=\
+					"checkbox\"	data-toggle=\ "toggle\" data-style=\ "slow\" onclick=\"EnviarSonoff('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARSONOFF')\">
+			</div>
+		</b><input type=\ "hidden\" name=\ "sonoffpower\" id=\ "sonoffpower1\" />
+		<p></p>
+	</form>
+	<form role=\ "form\" action=\
+		"/mqttmanagment/home/settimerString/CAMBIARSONOFF\" method=\
+		"get\" enctype=\"multipart/form-data\">
+		<button type=\ "submit\" class=\ "btnbtn-primarybtn-sm\"><i class=\"fal fa-stopwatch\" title=\"Set Timer String\"></i></button>
+	</form>
+
+</div>
+
+
+
+<div class=\"card-body\"> <h4 id=\"sonoffname\" class=\"small font-weight-bold\">Timer<span class=\"float-right\">0</span></h4><div class=\"progres smb-4\">	<div class=\ "progress-bar\" id=\ "sonofftimer\" role=\"progressbar\"	aria-valuemin=\ "0\" aria-valuemax=\ "60\" style="""width: 50%;\">	</div></div><p></p>	<b> Status Power<div class=\"float-right\">	<input id=\ "sonoffpowerCAMBIARSONOFF\" type=\"checkbox\"	data-toggle=\ "toggle\" data-style=\ "slow\" onchange=\"EnviarSonoff('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARSONOFF')\"></div></b><input type=\ "hidden\" name=\ "sonoffpower\" id=\ "sonoffpower1\" />	<p></p>	<button type=\ "submit\" class=\"btn btn-primary btn-sm float-left\" onclick=\"EnviarSonoffSimulatePushbutton('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARSONOFF')\">Simulated push button</button><form role=\ "form\" action=\"/mqttmanagment/home/settimerString/CAMBIARSONOFF\" method=\"get\" enctype=\"multipart/form-data\"><button type=\"submit\" class=\"btn btn-lg float-right\" style=\"background: transparent;  border: transparent;\"><i class=\"fas fa-stopwatch\"  title=\"Set Timer String\"></i></button>	</form></div>
+

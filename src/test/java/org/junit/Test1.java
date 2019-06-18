@@ -29,7 +29,7 @@ import com.lgg.nticxs.web.model.Materia.materia;
 public class Test1 {
 	
 	
-	@Test
+	//@Test
 	public void testSendMQTT() {
 		String timerstringsonoff= "monday-wednesday-friday&12:45&on&All&@monday-wednesday-friday&23:52&off&All&@";
 		//String timerstringvalue=SimpleTimerString.maketimerStringFormat(timerstringsonoff);
@@ -53,7 +53,7 @@ public class Test1 {
 	   	 json.put("SW1", "OFF");
 	   	 System.out.println("el json: "+ json);
 	   	SimpleTimerString tim = new SimpleTimerString(timerstringsonoff);
-		tim.sendmessageMQTT(json,host,port,topic,user,pass);
+		//tim.sendmessageMQTT(json,host,port,topic,user,pass);
 		System.out.println("termino");
 		
 		//"deviceId":"PS3S1P120190323","SW1":"OFF","PB1LS":1,"PB1TTO":0,"TS":0
@@ -249,7 +249,7 @@ public class Test1 {
 		
 		inicio="<div class=\"col-lg-6 mb-4\"> <div class=\"card shadow mb-4\"> <div class=\"card-header py-3\">	<h6 class=\"m-0 font-weight-bold text-primary\">Sonoff CAMBIARSONOFF</h6></div>";
 		fin="</div> </div>";
-		String sonoffbody="<div class=\"card-body\"><form role=\"form\" action=\"/mqttmanagment/home/pushbutton/CAMBIARSONOFF\" method=\"post\" id=\"pushCAMBIARSONOFF\" enctype=\"multipart/form-data\"><h4 id=\"sonoffname\" class=\"small font-weight-bold\">Timer<span class=\"float-right\">0</span></h4><div class=\"progress mb-4\">	<div class=\"progress-bar\" id=\"sonofftimer\" role=\"progressbar\"	aria-valuemin=\"0\" aria-valuemax=\"60\" style=\"width: 50%;\">	</div></div><p></p><b> Status Power<div class=\"float-right\"><input id=\"sonoffpower\" type=\"checkbox\"	data-toggle=\"toggle\" data-style=\"slow\" onchange=\"sendMQTTMessage('CAMBIARSONOFF')\"></div></b><input type=\"hidden\" name=\"sonoffpower\" id=\"sonoffpower1\" />	<p></p></form><form role=\"form\" action=\"/mqttmanagment/home/simulatedpushbutton/CAMBIARSONOFF\" method=\"post\" enctype=\"multipart/form-data\"><button type=\"submit\" class=\"btn btn-primary btn-sm\">Simulated push button</button>	</form></div>";
+		String sonoffbody="<div class=\"card-body\"> <h4 id=\"sonoffname\" class=\"small font-weight-bold\">Timer<span class=\"float-right\">0</span></h4><div class=\"progress mb-4\">	<div class=\"progress-bar\" id=\"sonofftimer\" role=\"progressbar\"	aria-valuemin=\"0\" aria-valuemax=\"60\" style=\"width: 50%;\">	</div></div><p></p>	<b> Status Power<div class=\"float-right\">	<input id=\"sonoffpowerCAMBIARSONOFF\" type=\"checkbox\"	data-toggle=\"toggle\" data-style=\"slow\" onchange=\"EnviarSonoff('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARSONOFF')\"></div></b><input type=\"hidden\" name=\"sonoffpower\" id=\"sonoffpower1\" />	<p></p>	<button type=\"submit\" class=\"btn btn-primary btn-sm float-left\" onclick=\"EnviarSonoffSimulatePushbutton('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARSONOFF')\">Simulated push button</button><form role=\"form\" action=\"/mqttmanagment/home/settimerString/CAMBIARSONOFF\" method=\"get\" enctype=\"multipart/form-data\"><button type=\"submit\" class=\"btn btn-lg float-right\" style=\"background: transparent;  border: transparent;\"><i class=\"fas fa-stopwatch\" title=\"Set Timer String\"></i></button>	</form></div>";
 		vistadao = new VistaDAO();
 		vista= new Vista();
 		vista.setName("sonoff");

@@ -410,7 +410,6 @@ public class SimpleTimerString implements MqttCallback{
 	        msg.setQos(0);
 	        msg.setRetained(true);
 	        publisher.publish(topic,msg); 
-				
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -434,6 +433,7 @@ public class SimpleTimerString implements MqttCallback{
 		
 			if ( !publisher.isConnected()) {
 	           	System.out.println("fallo la conexion");
+	           	return;
 	        }else {
 	        	System.out.println("conecto a :" + publisher);
 	        }

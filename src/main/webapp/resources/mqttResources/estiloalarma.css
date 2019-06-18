@@ -1,0 +1,319 @@
+   .btn {
+        &:hover {
+          background-color: #FFF !important;
+          }
+        }
+    </style>
+
+    <style type="text/css" media="screen">
+      @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans');
+      @import url('https://fonts.googleapis.com/css?family=Codystar');
+
+
+      html {
+        font-size: 16px;
+      }
+
+      @media screen and (min-width: 955px) {
+        body {
+          font-size: 1.265rem !important;
+        }
+        button.keypad_button {
+          width: 5rem !important;
+          font-size: 1.2rem !important;
+        }
+        button.keypad_button_small {
+          width: 2.3rem !important;
+        }
+        div.virtual_lcd {
+          font-size: 2.36rem !important;
+        }
+        div#zones_list {
+          font-size: 0.75rem !important;
+        }
+        i.dsc-icon.icon-star {
+          font-size: 1.0rem !important;
+        }
+
+      }
+
+      body {
+        font-family: 'IBM Plex Sans', sans-serif;
+        font-size: calc(0.38rem + 1.5vw);
+      }
+
+      .greenbullet {
+        color: #28a745;
+      }
+
+      .redbullet {
+        color: #dc3545;
+      }
+
+      p.state_title {
+        display: inline-block;
+      }
+
+      p.state_title:not(:first-child) {
+        margin-left: 10px;
+      }
+
+      button.keypad_button {
+        width: calc(0.6rem + 10vw);
+        border-radius: 1.5rem;
+        font-weight: bold;
+        font-size: calc(0.6rem + 1vw);
+        padding: 0.2rem;
+        max-width: 5rem;
+      }
+
+      button.keypad_button_small {
+        width: 7.0vw;
+        padding: 2px;
+        max-width: 2.2rem;
+        line-height: 1 !important;
+      }
+
+      button.keypad_button_slim {
+        width: 14.5vw;
+        padding: 2px;
+        line-height: 1;
+        max-width: 4.5rem;
+        line-height: 1 !important;
+      }
+
+      button.keypad_button_control {
+        width: 11vw;
+        padding: 2px;
+        font-size: calc(0.6rem + 1vw);
+        line-height: 1 !important;
+        max-width: 4.0rem;
+      }
+
+
+      div.virtual_lcd {
+        background-color: #5f7cd8;
+        color: #ffffff;
+        font-family: 'Codystar', cursive;
+        font-size: calc(1.3rem + 1.8vw);
+        font-weight: bold;
+        padding: 2px 10px;
+        border-radius: 8px;
+        flex: 1;
+      }
+
+      div#lcd_container {
+        width: 100%;
+        margin: 0 auto;
+        border: 1px solid lightgrey;
+        padding: 7px;
+        background-color: whitesmoke;
+        border-radius: 10px;
+        white-space: nowrap;
+        margin-bottom: 10px;
+        display: flex;
+      }
+
+      div.keypad_button_row {
+        margin: 12px 10px;
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      div.container {
+        border: 1px solid #939393;
+        border-radius: 20px;
+        padding: 10px;
+        width: 100vw;
+        background-color: #cacaca;
+        max-width: 500px;
+        min-width: 320px;
+        margin-bottom: 10px;
+      }
+
+      div.inline_container {
+        display: inline-block;
+      }
+
+      div.status_icons {
+        text-align: center;
+        padding: 0px;
+        margin: 0px 0px 0px 5px;
+        flex: 0;
+        color: grey;
+      }
+
+      div.status_icons i {
+        display: block;
+        padding: 4px 0px;
+        margin: 0px;
+      }
+
+       button.btn { 
+         background-color: #d9dcdf;
+         border: 2px solid #898e94; 
+       } 
+
+
+
+      div#left_buttons,
+      div#right_buttons,
+      div#keypad_container {
+        border: 1px solid lightgrey;
+        padding: 7px 0px;
+        border-radius: 8px;
+        background-color: whitesmoke;
+      }
+
+      div#left_buttons {
+        flex: 1;
+        max-width: 5.9rem;
+        line-height: 1 !important;
+      }
+
+      div#right_buttons div.keypad_button_row {
+        margin: 8px 10px;
+      }
+
+      div#keypad_container {
+        flex: 2;
+        margin: 0px 10px;
+        max-width: 17.5rem;
+        line-height: 1.5 !important;
+      }
+
+      div#right_buttons {
+        flex: 0;
+        max-width: 5.8rem;
+        line-height: 1 !important;
+      }
+
+      div#buttons_area {
+        display: flex;
+      }
+
+      div.zones {
+        background-color: whitesmoke;
+      }
+
+      div#zones_list {
+        border-top: 1px solid grey;
+        margin-top: 5px;
+        padding-top: 5px;
+
+        display: grid;
+        grid-template-rows: repeat(16, auto);
+        grid-gap: 10px;
+        grid-auto-flow: column;
+        font-size: 0.75rem;
+      }
+
+      div#regular_icons {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .green_circle {
+        color: green;
+      }
+
+      .red_circle {
+        color: red;
+      }
+
+      .orange_color {
+        color: orange;
+      }
+      i.dsc-icon.icon-star {
+        font-size: calc(0.45rem + 0.8vw);
+        padding: 1rem 0px;
+
+      }
+
+      .alarm_zone {
+        color: red;
+      }
+      
+/*       esto es del archivo */
+@font-face {
+  font-family: 'dsc_icons';
+  src:  url('/mqttmanagment/resources/fontsalarma/dsc_icons.eot?o9xp94');
+  src:  url('/mqttmanagment/resources/fontsalarma/dsc_icons.eot?o9xp94#iefix') format('embedded-opentype'),
+    url('/mqttmanagment/resources/fontsalarma/dsc_icons.ttf?o9xp94') format('truetype'),
+    url('/mqttmanagment/resources/fontsalarma/dsc_icons.woff?o9xp94') format('woff'),
+    url('/mqttmanagment/resources/fontsalarma/dsc_icons.svg?o9xp94#dsc_icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+div.container {
+  margin-top: 5px;
+}
+
+i.dsc-icon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'dsc_icons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-star:before {
+  content: "\e905";
+}
+.icon-ac:before {
+  content: "\e90d";
+}
+.icon-trouble:before {
+  content: "\e90e";
+}
+.icon-armed:before {
+  content: "\e90f";
+}
+.icon-check:before {
+  content: "\e910";
+}
+.icon-thief:before {
+  content: "\e90b";
+}
+.icon-alert:before {
+  content: "\e90c";
+}
+.icon-sleep:before {
+  content: "\e90a";
+}
+.icon-bypass:before {
+  content: "\e909";
+}
+.icon-programming:before {
+  content: "\e908";
+}
+.icon-flame:before {
+  content: "\e907";
+}
+.icon-info:before {
+  content: "\e906";
+}
+.icon-stay_away:before {
+  content: "\e904";
+}
+.icon-stay_empty:before {
+  content: "\e903";
+}
+.icon-bell:before {
+  content: "\e900";
+}
+.icon-refresh:before {
+  content: "\e902";
+}
+.icon-exit:before {
+  content: "\e901";
+}
+

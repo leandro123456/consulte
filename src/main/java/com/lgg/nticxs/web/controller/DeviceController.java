@@ -160,9 +160,13 @@ public class DeviceController {
 			device.setSerialnumber(serialnumber);
 			device.setName(namedevice);
 			device.setDescription(descriptiondevice);
-			if(defaultconfiguration)
-				device.getDeviceconfiguration().add(establishTopic(deviceconfigdao.retrieveByName("default"),serialnumber));
-			else{
+			if(defaultconfiguration) {
+				DeviceDefaultConfiguration deviceConfig= deviceconfigdao.retrieveByName("default");
+				if(deviceConfig == null)
+					System.out.println("es nulo");
+				else
+				device.getDeviceconfiguration().add(establishTopic(deviceConfig,serialnumber));
+			}else{
 				DeviceConfiguration dconfirguration  = new DeviceConfiguration();
 				dconfirguration.setIphostescribir(iphostescribir);
 				dconfirguration.setIphostescribirremote(iphostescribirremote);
