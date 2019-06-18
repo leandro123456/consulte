@@ -1,6 +1,7 @@
 package com.lgg.nticxs.web.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ import com.lgg.nticxs.web.model.Device;
 import com.lgg.nticxs.web.model.DeviceConfiguration;
 import com.lgg.nticxs.web.model.DeviceDefaultConfiguration;
 import com.lgg.nticxs.web.model.User;
+import com.lgg.nticxs.web.model.Vista;
 import com.lgg.nticxs.web.model.simple.SimpleDevice;
 import com.lgg.nticxs.web.model.simple.SimpleTimerString;
 
@@ -155,16 +157,17 @@ public class DeviceController {
 		System.out.println("llego al create!!");
 		System.out.println("serial: "+ deviceserial);
 		
-		if(devicedao.retrieveBySerialNumber(serialnumber) ==null){
+		if(devicedao.retrieveBySerialNumber(deviceserial) ==null){
 			Device device = new Device();
-			device.setSerialnumber(serialnumber);
+			device.setSerialnumber(deviceserial);
 			device.setName(namedevice);
 			device.setDescription(descriptiondevice);
+			
+			String name = request.getUserPrincipal().getName();
+			System.out.println("nombre del dueño: "+ name);
+			device.setUserowner(name);
 			if(defaultconfiguration) {
 				DeviceDefaultConfiguration deviceConfig= deviceconfigdao.retrieveByName("default");
-				if(deviceConfig == null)
-					System.out.println("es nulo");
-				else
 				device.getDeviceconfiguration().add(establishTopic(deviceConfig,serialnumber));
 			}else{
 				DeviceConfiguration dconfirguration  = new DeviceConfiguration();
@@ -197,15 +200,22 @@ public class DeviceController {
 			}
 			String timerstringvalue="";
 			System.out.println("tipo de dispositivo: "+ tipodevice);
+			HashMap<String, String> vista =new HashMap<>();
 			switch (tipodevice) {
 			case "thermometer":
-				
+				//vista termometro por tipo de elemento
+				vista.put("key", "value");
+				device.setVista(vista);
 				break;
 			case "alarm":
+				//vista de alarma
+				vista.put("key", "value");
+				device.setVista(vista);
 				System.out.println("es una alarma - todavia nada");
 				break;
 			case "sonoff":
 				timerstringvalue=SimpleTimerString.maketimerStringFormat(timerstringsonoff);
+				device.setTimerString(timerstringvalue);
 				String host="";
 				String port="";
 				String topic="";
@@ -226,12 +236,20 @@ public class DeviceController {
 					pass=passescribirremote;
 				}
 				SimpleTimerString.sendtimerString(timerstringvalue,host,port,topic,user,pass);
+				//vista sonoff
+				String vistasonoff = Vista.SONOFF+";sonoffbody";
+				vista.put(name, vistasonoff);
+				device.setVista(vista);
 				break;
 			default:
 				System.out.println("no encontro el tipo de device: "+ tipodevice);
 				break;
 			}
+			device.setTipo(tipodevice);
 			devicedao.create(device);
+			User user = userdao.retrieveByMail(name);
+			user.getDeviceserialnumber().add(deviceserial);
+			userdao.update(user);
 			
 		}else{
 			model.addAttribute("msg1", "This device / serial is already registered ... please check it and try again");

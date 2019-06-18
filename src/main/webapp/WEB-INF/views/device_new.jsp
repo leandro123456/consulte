@@ -140,7 +140,7 @@
 							<b>Serial Number</b> <input id="serialnumber" name="serialnumber" class="form-control" required> 
 							<b>Name</b> <input id="namedevice" class="form-control" required>
 							<p></p>
-							<b>Description</b> <input id="description" class="form-control" required>
+							<b>Description</b> <input id="descriptiondevice" class="form-control" required>
 							<p></p>
 							<div>
 								<b>Type of Device</b> <select id="tipodevice"
@@ -537,6 +537,11 @@
 		  	  var action= "/mqttmanagment/home/create/"+serial;
 	  		  document.getElementById("form_id").action = action;
 	  		  
+	  		
+	  		if(document.getElementById("descriptiondevice") != null)
+        	  	document.getElementById("descriptiondevice1").value = document.getElementById("descriptiondevice").value;
+	  		if(document.getElementById("namedevice") != null)
+        	  	document.getElementById("namedevice1").value = document.getElementById("namedevice").value;
 	  		 if(document.getElementById("tipodevice") != null)
 	        	  	document.getElementById("tipodevice1").value = document.getElementById("tipodevice").value;
 

@@ -15,6 +15,12 @@ import org.eclipse.persistence.nosql.annotations.NoSql;
 @Entity
 @NoSql(dataFormat=DataFormatType.MAPPED)
 public class Vista {
+	static final public String TEMP_RELOJ = "temperatura_reloj";
+	static final public String TEMP_HORIZONTAL = "temperatura_horizontal";
+	static final public String SONOFF = "sonoff";
+	static final public String ALARMA = "alarma";
+	
+	
 	@Id
 	@GeneratedValue
 	@Field(name = "_id")
@@ -76,7 +82,5 @@ public class Vista {
 	public void setContenido(Map<String,String> contenido) {
 		this.contenido = contenido;
 	}
-	
-	
 
 }

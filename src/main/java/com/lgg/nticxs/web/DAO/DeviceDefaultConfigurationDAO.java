@@ -11,7 +11,7 @@ public class DeviceDefaultConfigurationDAO extends JPADAO<DeviceDefaultConfigura
 
 	@SuppressWarnings("unchecked")
 	public List<DeviceDefaultConfiguration> retrieveAll() {
-		String sql = "SELECT u FROM Device u WHERE u.delete=false";
+		String sql = "SELECT u FROM DeviceDefaultConfiguration u WHERE u.delete=false";
 		Query query = getEntityManager().createQuery(sql);
 		List<DeviceDefaultConfiguration> list = query.getResultList();
 		if (list != null && list.size() > 0) {
@@ -22,7 +22,7 @@ public class DeviceDefaultConfigurationDAO extends JPADAO<DeviceDefaultConfigura
 	
 	@SuppressWarnings("unchecked")
 	public DeviceDefaultConfiguration retrieveById(String userId) {
-		String sql = "SELECT u FROM Device u WHERE u.id = :id";
+		String sql = "SELECT u FROM DeviceDefaultConfiguration u WHERE u.id = :id";
 		Query query = getEntityManager().createQuery(sql);
 		query.setParameter("id", userId);
 		List<DeviceDefaultConfiguration> list = query.getResultList();
@@ -34,7 +34,7 @@ public class DeviceDefaultConfigurationDAO extends JPADAO<DeviceDefaultConfigura
 	
 	@SuppressWarnings("unchecked")
 	public DeviceDefaultConfiguration retrieveByName(String name) {
-		String sql = "SELECT u FROM Device u WHERE u.name = :name";
+		String sql = "SELECT u FROM DeviceDefaultConfiguration u WHERE u.name = :name";
 		Query query = getEntityManager().createQuery(sql);
 		query.setParameter("name", name);
 		List<DeviceDefaultConfiguration> list = query.getResultList();

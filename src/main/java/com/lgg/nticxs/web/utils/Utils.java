@@ -491,7 +491,6 @@ public class Utils {
 					break;
 				case "sonoff":
 					if(atributosDeLaVista[i].equals("sonoffbody")) {
-						System.out.println("ESTA ES LA VISTA ORIGINAL DEL SONOFF: "+ vista.getContenido().get("sonoffbody"));
 						String cuerpoSonoff= vista.getContenido().get("sonoffbody").replaceAll("CAMBIARSONOFF", serialDevice);
 						contenidototal= contenidototal+cuerpoSonoff;	
 						break;	
