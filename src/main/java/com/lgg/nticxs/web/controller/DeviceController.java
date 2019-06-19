@@ -202,14 +202,22 @@ public class DeviceController {
 			System.out.println("tipo de dispositivo: "+ tipodevice);
 			HashMap<String, String> vista =new HashMap<>();
 			switch (tipodevice) {
-			case "thermometer":
+			case "termometro":
+				System.out.println("tipo: "+tipovistatermometro);
+				System.out.println("humeedad: "+humedadtermometro);
+				System.out.println("temp: "+tempctermometro);
+				System.out.println("temp: "+tempftermometro);
+				System.out.println("sensacion: "+sensacionctermometro);
+				System.out.println("sensacion: "+sensacionftermometro);
 				//vista termometro por tipo de elemento
-				vista.put("key", "value");
+				String termometrovista = armarVistaTermometro(tipovistatermometro,humedadtermometro,tempctermometro,tempftermometro,sensacionctermometro,sensacionftermometro);
+				vista.put(name, termometrovista);
 				device.setVista(vista);
 				break;
-			case "alarm":
+			case "alarma":
 				//vista de alarma
-				vista.put("key", "value");
+				String alarmavista = Vista.ALARMA;
+				vista.put(name, alarmavista);
 				device.setVista(vista);
 				System.out.println("es una alarma - todavia nada");
 				break;
@@ -258,6 +266,18 @@ public class DeviceController {
 		return "origin";
 	}
 	
+
+	private String armarVistaTermometro(String tipovistatermometro, String humedadtermometro, String tempctermometro,
+			String tempftermometro, String sensacionctermometro, String sensacionftermometro) {
+		String result=tipovistatermometro;
+		if(!humedadtermometro.equals(""))
+			result=result+humedadtermometro;
+		if(!tempctermometro.equals(""))
+			result=result+tempctermometro;
+		if(!tempftermometro.equals(""))
+			result=result+
+		return result;
+	}
 
 	private DeviceConfiguration establishTopic(DeviceDefaultConfiguration deviceconfiguration, String serialnumber) {
 		deviceconfiguration.setTopicescribir(deviceconfiguration.getTopicescribir().replace("serial", serialnumber));

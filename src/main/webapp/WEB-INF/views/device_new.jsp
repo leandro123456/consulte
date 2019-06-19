@@ -146,8 +146,8 @@
 								<b>Type of Device</b> <select id="tipodevice"
 									class="form-control" onchange="enableType()">
 									<option value="none">Select</option>
-									<option value="thermometer">Thermometer</option>
-									<option value="alarm">Alarm</option>
+									<option value="termometro">Thermometer</option>
+									<option value="alarma">Alarm</option>
 									<option value="sonoff">Sonoff</option>
 								</select>
 							</div>
@@ -559,6 +559,22 @@
 	  		   document.getElementById("timerstringsonoff").value = textos;
 	  			}
 	  		  
+	  		  //vista termometro
+	  		if(document.getElementById("tipovistatermometro") != null && document.getElementById("tipovistatermometro").value == "watches")
+        	  	document.getElementById("tipovistatermometro1").value = "temperatura_reloj";
+	  		if(document.getElementById("tipovistatermometro") != null  && document.getElementById("tipovistatermometro").value == "bars")
+        	  	document.getElementById("tipovistatermometro1").value = "temperatura_horizontal";
+	  		if(document.getElementById("humedadtermometro") != null && document.getElementById("humedadtermometro").checked == true)
+        	  	document.getElementById("humedadtermometro1").value = true;
+	  		if(document.getElementById("tempctermometro") != null && document.getElementById("tempctermometro").checked == true)
+        	  	document.getElementById("tempctermometro1").value = true;
+	  		if(document.getElementById("sensacionctermometro") != null && document.getElementById("sensacionctermometro").checked == true)
+        	  	document.getElementById("sensacionctermometro1").value = true;
+	  		if(document.getElementById("tempftermometro") != null && document.getElementById("tempftermometro").checked == true)
+        	  	document.getElementById("tempftermometro1").value = true;
+	  		if(document.getElementById("sensacionftermometro") != null && document.getElementById("sensacionftermometro").checked == true)
+        	  	document.getElementById("sensacionftermometro1").value = true;	  
+	  		  //fin termometro
 	  		  
 	  		  var checkBox=document.getElementById("toggle-paramconects");
 			  if (checkBox.checked == true){
@@ -636,12 +652,12 @@
 	function enableType(){
 		var seleccion=document.getElementById('tipodevice');
         var valuetype = seleccion.options[seleccion.selectedIndex].value;
-        if(valuetype == "thermometer"){
+        if(valuetype == "termometro"){
         	document.getElementById('vistastermometro').style.display = 'inline';
         	document.getElementById('parametrostermometro').style.display = 'inline';
         	document.getElementById('timerString').style.display = 'none';
         	document.getElementById('tabletimerstring').style.display = 'none';
-        }if(valuetype == "alarm"){
+        }if(valuetype == "alarma"){
         	document.getElementById('vistastermometro').style.display = 'none';
         	document.getElementById('parametrostermometro').style.display = 'none';
         	document.getElementById('timerString').style.display = 'none';
@@ -651,7 +667,7 @@
         	document.getElementById('parametrostermometro').style.display = 'none';
         	document.getElementById('timerString').style.display = 'inline';
         	document.getElementById('tabletimerstring').style.display = 'inline';
-        }if(valuetype != "thermometer" && valuetype != "alarm" && valuetype != "sonoff"){
+        }if(valuetype != "termometro" && valuetype != "alarma" && valuetype != "sonoff"){
         	document.getElementById('vistastermometro').style.display = 'none';
         	document.getElementById('parametrostermometro').style.display = 'none';
         	document.getElementById('timerString').style.display = 'none';
