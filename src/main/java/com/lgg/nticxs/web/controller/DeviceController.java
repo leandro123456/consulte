@@ -275,7 +275,11 @@ public class DeviceController {
 		if(!tempctermometro.equals(""))
 			result=result+tempctermometro;
 		if(!tempftermometro.equals(""))
-			result=result+
+			result=result+tempftermometro;
+		if(!sensacionctermometro.equals(""))
+			result=result+sensacionctermometro;
+		if(!sensacionftermometro.equals(""))
+			result=result+sensacionftermometro;
 		return result;
 	}
 
