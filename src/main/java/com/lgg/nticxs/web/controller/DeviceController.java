@@ -166,6 +166,7 @@ public class DeviceController {
 			String name = request.getUserPrincipal().getName();
 			System.out.println("nombre del dueño: "+ name);
 			device.setUserowner(name);
+			System.out.println("tiene configuracion por defaault: "+defaultconfiguration);
 			if(defaultconfiguration) {
 				DeviceDefaultConfiguration deviceConfig= deviceconfigdao.retrieveByName("default");
 				device.getDeviceconfiguration().add(establishTopic(deviceConfig,serialnumber));
@@ -211,6 +212,7 @@ public class DeviceController {
 				System.out.println("sensacion: "+sensacionftermometro);
 				//vista termometro por tipo de elemento
 				String termometrovista = armarVistaTermometro(tipovistatermometro,humedadtermometro,tempctermometro,tempftermometro,sensacionctermometro,sensacionftermometro);
+				System.out.println("termometro vista: "+ termometrovista);
 				vista.put(name, termometrovista);
 				device.setVista(vista);
 				break;
@@ -271,19 +273,20 @@ public class DeviceController {
 			String tempftermometro, String sensacionctermometro, String sensacionftermometro) {
 		String result=tipovistatermometro;
 		if(!humedadtermometro.equals(""))
-			result=result+humedadtermometro;
+			result=result+";Hum";
 		if(!tempctermometro.equals(""))
-			result=result+tempctermometro;
+			result=result+";tempC";
 		if(!tempftermometro.equals(""))
-			result=result+tempftermometro;
+			result=result+";tempF";
 		if(!sensacionctermometro.equals(""))
-			result=result+sensacionctermometro;
+			result=result+";sensC";
 		if(!sensacionftermometro.equals(""))
-			result=result+sensacionftermometro;
+			result=result+";sensF";
 		return result;
 	}
 
 	private DeviceConfiguration establishTopic(DeviceDefaultConfiguration deviceconfiguration, String serialnumber) {
+		System.out.println("se setearon los valores de topicos con el serial number: "+ serialnumber);
 		deviceconfiguration.setTopicescribir(deviceconfiguration.getTopicescribir().replace("serial", serialnumber));
 		deviceconfiguration.setTopicescribirremote(deviceconfiguration.getTopicescribirremote().replace("serail", serialnumber));
 		deviceconfiguration.setTopicescuchar(deviceconfiguration.getTopicescuchar().replace("serial", serialnumber));

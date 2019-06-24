@@ -10,21 +10,19 @@ function startConnect(host,port,ssl,user,pass,fileouput, topico) {
     document.getElementById(fileouput).innerHTML += 'Using the following client value: ' + clientID + '\n';
 
     // Initialize new Paho client connection
-    client = new Paho.MQTT.Client(host, Number(port), clientID);
-var text = fileouput;
+    client = new Paho.MQTT.Client(host,port, clientID);
+    var text = fileouput;
     // Set callback handlers
     client.onConnectionLost = onConnectionLost;
     client.onMessageArrived = onMessageArrived;
 
-  var options = {
-    useSSL: ssl,
-    userName: user,
-    password: pass,
-    onSuccess:onConnect//,
-//    onFailure:doFail
-  }
-
-  // connect the client
+	  var options = {
+	    useSSL: ssl,
+	    userName: user,
+	    password: pass,
+	    onSuccess:onConnect//,
+	//    onFailure:doFail
+	  }
   client.connect(options);
 
 }
