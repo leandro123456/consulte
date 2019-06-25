@@ -15,7 +15,7 @@
         ws.binaryType = "arraybuffer";
         ws.onopen = function(e) {
           //addMessage("Connected");
-          console.log("esta conectada al topico")
+          console.log("esta conectada al topico" +'ws://' + cnn_string + topico );
           
         };
         ws.onclose = function(e) {

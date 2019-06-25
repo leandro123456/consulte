@@ -247,15 +247,27 @@
 
 
 <script type="text/javascript">
+	function sleep(milliseconds) {
+	 var start = new Date().getTime();
+	 for (var i = 0; i < 1e7; i++) {
+	  if ((new Date().getTime() - start) > milliseconds) {
+	   break;
+	  }
+	 }
+	}
+
 	$(document).ready(function() {
-		startSocket("mqtt.coiaca.com:8080","/DSC010000000001/dsc/Get/Partition1");
-		//Connecttotal();
 		updateWiget();
 		animateprogress("humedad", 50);
 		animateprogress("temperaturac", 25);
 		animateprogress("sensacionc", 27);
 		animateprogress("temperaturaf", 77);
-		animateprogress("sensacionf", 80.6);		
+		animateprogress("sensacionf", 80.6);
+		//startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr", "mqttpwd","/DSC010000000001/dsc/Get/Partition1");
+		//sleep(20000);
+		startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr", "mqttpwd","PS3S1P120190323/state");
+		//startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr", "mqttpwd","RConfig/debug");
+		//startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr", "mqttpwd","RConfig/WTHUSB000000001");
 	});
 </script>
 
