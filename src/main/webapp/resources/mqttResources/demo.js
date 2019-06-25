@@ -31,8 +31,11 @@ function startConnectSonoff(host,port,ssl,user,pass, topico) {
 }
 
 function onConnectsonoff() {
+	client.subscribe("RConfig/debug");
+	console.log('Subscribing to: ' + "RConfig/debug" + 'primero el de debug');
+	
 	client.subscribe(topico);
-	console.log('Subscribing to: ' + topico + '\n');
+	console.log('Subscribing to: ' + topico + 'segundo');
     
 	client.subscribe("DSC010000000001/dsc/Get/Partition1");
     console.log('Subscribing to: ' + "DSC010000000001/dsc/Get/Partition1  TAMBIEN");
