@@ -1,9 +1,9 @@
 /** inicio sonoff**/
-function startConnectSonoff(host,port,ssl,user,pass, topico) {
+function startConnectSonoff(host,port,ssl,user,pass, topicos) {
 	console.log("llego sonoff");
     // Generate a random client ID
     clientID = "clientID-" + parseInt(Math.random() * 100);
-    window.topico=topico;
+    window.topicos=topicos;
 
     // Print output for the user in the messages div
   //  document.getElementById(fileouput).innerHTML += 'Connecting to: ' + host + ' on port: ' + port + '\n';
@@ -31,15 +31,27 @@ function startConnectSonoff(host,port,ssl,user,pass, topico) {
 }
 
 function onConnectsonoff() {
-	client.subscribe("RConfig/debug");
-	console.log('Subscribing to: ' + "RConfig/debug" + 'primero el de debug');
+	for(var i=0; i<topicos.lenght; i++){
+		console.log("estos son los topicos que necesito: "+ topicos[i]);
+		client.subscribe(topicos[i]);
+		console.log('Subscribing to: ' + topicos[i]+ 'primero el de debug');
+	}
 	
-	client.subscribe(topico);
-	console.log('Subscribing to: ' + topico + 'segundo');
-    
-	client.subscribe("DSC010000000001/dsc/Get/Partition1");
-    console.log('Subscribing to: ' + "DSC010000000001/dsc/Get/Partition1  TAMBIEN");
-    
+//	client.subscribe("RConfig/debug");
+//	console.log('Subscribing to: ' + "RConfig/debug" + 'primero el de debug');
+	
+//	client.subscribe(topico);
+//	console.log('Subscribing to: ' + topico + 'segundo');
+//    
+//	client.subscribe("DSC010000000001/dsc/Get/Partition1");
+//    console.log('Subscribing to: ' + "DSC010000000001/dsc/Get/Partition1  TAMBIEN");
+//    
+//    client.subscribe("PSWS10000000001/state");
+//    console.log('Subscribing to: ' + "PSWS10000000001/state  TAMBIEN");
+//    
+//    client.subscribe("PSWS20000000001/state");
+//    console.log('Subscribing to: ' + "PSWS20000000001/state  TAMBIEN");
+        
 }
 
 function onConnectionLostSonoff(responseObject) {

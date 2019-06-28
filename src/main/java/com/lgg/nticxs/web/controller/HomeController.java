@@ -138,9 +138,10 @@ public class HomeController {
 		model.addAttribute("vistas",vistas);
 //        model.addAttribute("sonoffserial", "PS3S1P120190323");
         System.out.println("retorno la vista correctamente");
+        List<String> topicos=obtenerTopicosDeTodosLosEndpoints(user.getDeviceserialnumber());
+        model.addAttribute("topicos", topicos);
    		return new ModelAndView("origin", model);
 	}
-	
 
 	@PostMapping("home/")
 	public String sendMail(Model model, String Mensaje) {
@@ -291,4 +292,17 @@ public class HomeController {
 			}
 		}
 
+
+	private List<String> obtenerTopicosDeTodosLosEndpoints(List<String> devicesnumber) {
+		List<String> topicos = new ArrayList<>();
+		for(String serial: devicesnumber){
+			System.out.println("llego a la carga de los topicos: "+serial);
+			Device device=devicedao.retrieveBySerialNumber(serial);
+			if(device.getUsedefaultbrocker())
+				topicos.add(device.getDeviceconfiguration().get(0).getTopicescuchar());
+			else
+				topicos.add(device.getDeviceconfiguration().get(1).getTopicescuchar());
+		}
+		return topicos;
+	}
 }

@@ -137,7 +137,7 @@
 				<div class="card-body">
 					<div class="form-group">
 							<h3>General Information</h3>
-							<b>Serial Number</b> <input id="serialnumber" name="serialnumber" class="form-control" required> 
+							<b>Serial Number</b> <input id="serialnumber" class="form-control" required> 
 							<b>Name</b> <input id="namedevice" class="form-control" required>
 							<p></p>
 							<b>Description</b> <input id="descriptiondevice" class="form-control" required>
@@ -537,6 +537,9 @@
 		  	  var action= "/mqttmanagment/home/create/"+serial;
 	  		  document.getElementById("form_id").action = action;
 	  		  
+	  		  
+	  		if(document.getElementById("serialnumber") != null)
+        	  	document.getElementById("serialnumber1").value = document.getElementById("serialnumber").value;
 	  		
 	  		if(document.getElementById("descriptiondevice") != null)
         	  	document.getElementById("descriptiondevice1").value = document.getElementById("descriptiondevice").value;
