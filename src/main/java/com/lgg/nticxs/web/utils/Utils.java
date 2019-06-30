@@ -23,6 +23,7 @@ import com.lgg.nticxs.web.DAO.DeviceDAO;
 import com.lgg.nticxs.web.DAO.UserDAO;
 import com.lgg.nticxs.web.DAO.VistaDAO;
 import com.lgg.nticxs.web.model.Device;
+import com.lgg.nticxs.web.model.DeviceConfiguration;
 import com.lgg.nticxs.web.model.Nota;
 import com.lgg.nticxs.web.model.User;
 import com.lgg.nticxs.web.model.Vista;
@@ -459,6 +460,12 @@ public class Utils {
 		private static String armarVista(String[] atributosDeLaVista, String tipoDeVista, String serialDevice) {
 			Vista vista = vistadao.retrieveByName(tipoDeVista);
 			String contenidototal="";
+			Device device=devicedao.retrieveBySerialNumber(serialDevice);
+			DeviceConfiguration devconfig = null;
+			if(device.getUsedefaultbrocker())
+				devconfig=device.getDeviceconfiguration().get(0);
+			else
+				devconfig=device.getDeviceconfiguration().get(1);
 			for(int i=1;i<atributosDeLaVista.length;i++) {
 				switch (tipoDeVista) {
 				case "temperatura_reloj":
@@ -492,6 +499,12 @@ public class Utils {
 				case "sonoff":
 					if(atributosDeLaVista[i].equals("sonoffbody")) {
 						String cuerpoSonoff= vista.getContenido().get("sonoffbody").replaceAll("CAMBIARSONOFF", serialDevice);
+						System.out.println("este es el cuuerpo del  SONOFF: "+ cuerpoSonoff);
+						cuerpoSonoff=cuerpoSonoff.replaceAll("HOSTSONOFF", devconfig.getIphostescribir());
+						cuerpoSonoff=cuerpoSonoff.replaceAll("PORTSONOFF", devconfig.getPortescribir());
+						cuerpoSonoff=cuerpoSonoff.replaceAll("USERSONOFF", devconfig.getUserescribir());
+						cuerpoSonoff=cuerpoSonoff.replaceAll("PASSSONOFF", devconfig.getPassescribir());
+						cuerpoSonoff=cuerpoSonoff.replaceAll("TOPICSONOFF", devconfig.getTopicescribir());
 						contenidototal= contenidototal+cuerpoSonoff;	
 						break;	
 					}

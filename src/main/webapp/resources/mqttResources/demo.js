@@ -11,10 +11,10 @@ function startConnectSonoff(host,port,ssl,user,pass, topicos) {
 
     // Initialize new Paho client connection
     client = new Paho.MQTT.Client(host,port, clientID);
-    if ( !client.isConnected()) {
-       	console.log("fallo la conexion");
+    if ( client.isConnected()) {
+       	console.log("CONECTO");
     }else {
-    	console.log("conecto a :" + client);
+    	console.log("NO CONECTO A  :" + client);
     }
     // Set callback handlers
     client.onConnectionLost = onConnectionLostSonoff;

@@ -163,39 +163,48 @@
       var message="";
       
       
-      function EnviarSonoffSimulatePushbutton(host,port,user,password,topico){
-    	  Connecttotal(host,port, user,password,topico,"simulatepushbutton");
+      function EnviarSonoffSimulatePushbutton(host,port,user,password,topico,swith,serial){
+    	  Connecttotal(host,port,user,password,topico,swith,serial,"simulatepushbutton");
       }
       
-      function EnviarSonoff(host,port,user,password,topico){
-    	  var checkBox = document.getElementById("sonoffpower"+topico);
+      function EnviarSonoff(host,port,user,password,topico,swith,serial){
+    	  var checkBox = document.getElementById("sonoffpower"+serial);
     	  if (checkBox.checked == true){
-    		  Connecttotal(host,port, user,password,topico,"enviaron");
+    		  Connecttotal(host,port, user,password,topico,swith,serial,"enviaron");
     	  } else {
-    		  Connecttotal(host,port, user,password,topico,"enviaroff");
+    		  Connecttotal(host,port, user,password,topico,swith,serial,"enviaroff");
     	  }
       }
 
-      function Connecttotal(host,port,user,password,topico,message1){
+      function Connecttotal(host,port,user,password,topico,swith,serial,message1){
           var username = user;
           var password = password;
           
           console.log("este es el mensaje: "+ message1);
           if(message1=="enviaron"){
-        	  message='{"pwd":"mqttmng","SW1":"ON","command":"switchAction"}';
-        	  topic=topico+"/swcmd";
+        	  if(swith=="switchone")
+        		  message='{"pwd":"coiaca","param1":"SW1","param2":"turnOn","command":"switchAction"}';
+        	  else
+        		  message='{"pwd":"coiaca","param1":"SW2","param2":"turnOn","command":"switchAction"}';
+        	  topic=topico;
         	  
           }if(message1=="enviaroff"){
-        	  message='{"pwd":"mqttmng","SW1":"OFF","command":"switchAction"}';
-        	  topic=topico+"/swcmd";
+        	  if(swith=="switchone")
+        		  message='{"pwd":"coiaca","param1":"SW1","param2":"turnOff","command":"switchAction"}';
+        	  else
+        		  message='{"pwd":"coiaca","param1":"SW2","param2":"turnOff","command":"switchAction"}';
+        	  topic=topico;
         	  
           }if(message1=="simulatepushbutton"){
-        	  message='{"command":"simulateButtonPush","pwd":"coiaca","param1":"PB1"}';
-        	  topic=topico+"/swcmd";
+        	  if(swith=="switchone")
+        		  message='{"command":"simulateButtonPush","pwd":"coiaca","param1":"PB1"}';
+        	  else
+        		  message='{"command":"simulateButtonPush","pwd":"coiaca","param1":"PB2"}';
+        	  topic=topico;
           }if(message1.includes("alarm-")){
         	  var texto=message1.replace("alarm-","");
         	  message=texto;
-        	  topic=topico+"/dsc/Set/Partition1";
+        	  topic=serial+"/dsc/Set/Partition1";
           }
           
     	  if(mqttClient.isConnected()==false){

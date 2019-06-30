@@ -36,7 +36,8 @@ public class Test1 {
 		String host= "mqtt.coiaca.com";
 		String port= "1883";
 		//RConfig/
-		String topic="PS3S1P120190323/swcmd";
+//		String topic="PS3S1P120190323/swcmd";
+		String topic= "RConfig/PS3S1P120190323";
 		String user="mqttusr";
 		String pass="mqttpwd";
 //		String message ="\"pwd\":\"mqttpwd\", \"command\":\"switchAction\",\"SW1\":\"ON\"";
@@ -45,15 +46,16 @@ public class Test1 {
 //		String message = "\"pwd\":\"mqttpwd\", \"command\":\"switchAction\",\"param1\":\"SW1\",\"param2\":\"turnOn\"";
 //		String message = "{\"pwd\":\"mqttpwd\", \"command\":\"getStatus\"}";
 		
+		//{"pwd":"coiaca", "command":"switchAction","param1":"SW1","param2":"turnOff"}
 	   	 JSONObject json = new JSONObject();
-	   	 json.put("pwd", "sapo");
+	   	 json.put("pwd", "coiaca");
 	   	 json.put("command", "switchAction");
-//	   	 json.put("param1", "SW1");
-//	   	 json.put("param2", "ON");
-	   	 json.put("SW1", "OFF");
+	   	 json.put("param1", "SW1");
+	   	 json.put("param2", "turnOff");
+//	   	 json.put("SW1", "OFF");
 	   	 System.out.println("el json: "+ json);
 	   	SimpleTimerString tim = new SimpleTimerString(timerstringsonoff);
-		//tim.sendmessageMQTT(json,host,port,topic,user,pass);
+		tim.sendmessageMQTT(json,host,port,topic,user,pass);
 		System.out.println("termino");
 		
 		//"deviceId":"PS3S1P120190323","SW1":"OFF","PB1LS":1,"PB1TTO":0,"TS":0
@@ -192,9 +194,10 @@ public class Test1 {
 //		System.out.println("termino vista reloj");
 		
 		
+		//de un solo boton
 		inicio="<div class=\"col-lg-6 mb-4\"> <div class=\"card shadow mb-4\"> <div class=\"card-header py-3\">	<h6 class=\"m-0 font-weight-bold text-primary\">Sonoff CAMBIARSONOFF</h6></div>";
 		fin="</div> </div>";
-		String sonoffbody="<div class=\"card-body\"> <h4 id=\"sonoffname\" class=\"small font-weight-bold\">Timer<span class=\"float-right\">0</span></h4><div class=\"progress mb-4\">	<div class=\"progress-bar\" id=\"sonofftimer\" role=\"progressbar\"	aria-valuemin=\"0\" aria-valuemax=\"60\" style=\"width: 50%;\">	</div></div><p></p>	<b> Status Power<div class=\"float-right\">	<input id=\"sonoffpowerCAMBIARSONOFF\" type=\"checkbox\"	data-toggle=\"toggle\" data-style=\"slow\" onchange=\"EnviarSonoff('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARSONOFF')\"></div></b><input type=\"hidden\" name=\"sonoffpower\" id=\"sonoffpower1\" />	<p></p>	<button type=\"submit\" class=\"btn btn-primary btn-sm float-left\" onclick=\"EnviarSonoffSimulatePushbutton('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARSONOFF')\">Simulated push button</button><form role=\"form\" action=\"/mqttmanagment/home/settimerString/CAMBIARSONOFF\" method=\"get\" enctype=\"multipart/form-data\"><button type=\"submit\" class=\"btn btn-lg float-right\" style=\"background: transparent;  border: transparent;\"><i class=\"fas fa-stopwatch\" title=\"Set Timer String\"></i></button>	</form></div>";
+		String sonoffbody="<div class=\"card-body\"> <h4 id=\"sonoffname\" class=\"small font-weight-bold\">Timer<span class=\"float-right\">0</span></h4><div class=\"progress mb-4\">	<div class=\"progress-bar\" id=\"sonofftimer\" role=\"progressbar\"	aria-valuemin=\"0\" aria-valuemax=\"60\" style=\"width: 50%;\">	</div></div><p></p>	<b> Status Power<div class=\"float-right\">	<input id=\"sonoffpowerCAMBIARSONOFF\" type=\"checkbox\"	data-toggle=\"toggle\" data-style=\"slow\" onchange=\"EnviarSonoff('HOSTSONOFF','PORTSONOFF','USERSONOFF','PASSSONOFF','TOPICSONOFF','switchone','CAMBIARSONOFF')\"></div></b><input type=\"hidden\" name=\"sonoffpower\" id=\"sonoffpower1\" />	<p></p>	<button type=\"submit\" class=\"btn btn-primary btn-sm float-left\" onclick=\"EnviarSonoffSimulatePushbutton('HOSTSONOFF','PORTSONOFF','USERSONOFF','PASSSONOFF','TOPICSONOFF','switchone','CAMBIARSONOFF')\">Simulated push button</button><form role=\"form\" action=\"/mqttmanagment/home/settimerString/CAMBIARSONOFF\" method=\"get\" enctype=\"multipart/form-data\"><button type=\"submit\" class=\"btn btn-lg float-right\" style=\"background: transparent;  border: transparent;\"><i class=\"fas fa-stopwatch\" title=\"Set Timer String\"></i></button>	</form></div>";
 		vistadao = new VistaDAO();
 		vista= new Vista();
 		vista.setName("sonoff");
@@ -204,7 +207,22 @@ public class Test1 {
 		elem.put("sonoffbody",sonoffbody);
 		vista.setContenido(elem);
 		vistadao.create(vista);
-		System.out.println("termino vista de boton");
+		System.out.println("termino vista de 1 boton");
+		
+		//de dos botones
+		inicio="<div class=\"col-lg-6 mb-4\"> <div class=\"card shadow mb-4\"> <div class=\"card-header py-3\">	<h6 class=\"m-0 font-weight-bold text-primary\">Sonoff CAMBIARSONOFF</h6></div>";
+		fin="</div> </div>";
+		sonoffbody="";
+		vistadao = new VistaDAO();
+		vista= new Vista();
+		vista.setName("sonofftwo");
+		vista.setInicio(inicio);
+		vista.setFin(fin);
+		elem= new HashMap<>();
+		elem.put("sonoffbody",sonoffbody);
+		vista.setContenido(elem);
+		vistadao.create(vista);
+		System.out.println("termino vista de 2 boton");
 	}
 	
 }
