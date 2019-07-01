@@ -299,9 +299,9 @@ public class HomeController {
 			System.out.println("llego a la carga de los topicos: "+serial);
 			Device device=devicedao.retrieveBySerialNumber(serial);
 			if(device.getUsedefaultbrocker())
-				topicos.add(device.getDeviceconfiguration().get(0).getTopicescuchar());
+				topicos.add("'"+device.getDeviceconfiguration().get(0).getTopicescuchar()+"'");
 			else
-				topicos.add(device.getDeviceconfiguration().get(1).getTopicescuchar());
+				topicos.add("'"+device.getDeviceconfiguration().get(1).getTopicescuchar()+"'");
 		}
 		return topicos;
 	}

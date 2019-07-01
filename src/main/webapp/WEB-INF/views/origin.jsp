@@ -265,8 +265,15 @@
 		animateprogress("sensacionf", 80.6);
 		//startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr", "mqttpwd","/DSC010000000001/dsc/Get/Partition1");
 		//sleep(20000);
-		console.log("esta es la lista de conexiones: "+ '${topicos}');
-		startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr", '${topicos}');
+		//console.log("esta es la lista de conexiones: "+ '${topicos}');
+		//var top= ${topicos}[3];
+// 		${topicos}.forEach(myFunction);
+
+// 		function myFunction(item, index) { 
+// 		  startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr","mqttpwd",item);
+// 		}
+
+		startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr","mqttpwd",${topicos});
 		//startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr", "mqttpwd","RConfig/debug");
 		//startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr", "mqttpwd","RConfig/WTHUSB000000001");
 	});

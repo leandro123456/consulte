@@ -1,65 +1,43 @@
 /** inicio sonoff**/
 function startConnectSonoff(host,port,ssl,user,pass, topicos) {
 	console.log("llego sonoff");
-    // Generate a random client ID
-    clientID = "clientID-" + parseInt(Math.random() * 100);
+    clientID = "clientID-" +parseInt(Math.random() * 100)+"loco" +parseInt(Math.random() * 100);
     window.topicos=topicos;
 
-    // Print output for the user in the messages div
-  //  document.getElementById(fileouput).innerHTML += 'Connecting to: ' + host + ' on port: ' + port + '\n';
-  //  document.getElementById(fileouput).innerHTML += 'Using the following client value: ' + clientID + '\n';
+    var port1=parseInt(port);
+    client = new Paho.MQTT.Client(host,port1, clientID);
 
-    // Initialize new Paho client connection
-    client = new Paho.MQTT.Client(host,port, clientID);
-    if ( client.isConnected()) {
-       	console.log("CONECTO");
-    }else {
-    	console.log("NO CONECTO A  :" + client);
-    }
-    // Set callback handlers
     client.onConnectionLost = onConnectionLostSonoff;
     client.onMessageArrived = onMessageArrivedSonoff;
-
-	  var options = {
-	    useSSL: ssl,
-	    userName: user,
-	    password: pass,
-	    onSuccess:onConnectsonoff//,
-	//    onFailure:doFail
+    
+    if(client.isConnected()==false){
+    	client.connect({
+      		onSuccess: onConnectsonoff,
+      		onFailure: onConnectionLostSonoff,
+      		keepAliveInterval: 10,
+      		userName: user,
+      		useSSL: false,
+      		password: pass	
+      	});
 	  }
-  client.connect(options);
+	  else{
+		  console.log("ya esta conectada!!");
+		  Connected121();
+	  }   
+}
+
+function myFunction(item, index) { 
+    client.subscribe(item);
+     console.log('Subscribing to: ' + item+ 'primero el de debug');
 }
 
 function onConnectsonoff() {
-	for(var i=0; i<topicos.lenght; i++){
-		console.log("estos son los topicos que necesito: "+ topicos[i]);
-		client.subscribe(topicos[i]);
-		console.log('Subscribing to: ' + topicos[i]+ 'primero el de debug');
-	}
-	
-//	client.subscribe("RConfig/debug");
-//	console.log('Subscribing to: ' + "RConfig/debug" + 'primero el de debug');
-	
-//	client.subscribe(topico);
-//	console.log('Subscribing to: ' + topico + 'segundo');
-//    
-//	client.subscribe("DSC010000000001/dsc/Get/Partition1");
-//    console.log('Subscribing to: ' + "DSC010000000001/dsc/Get/Partition1  TAMBIEN");
-//    
-//    client.subscribe("PSWS10000000001/state");
-//    console.log('Subscribing to: ' + "PSWS10000000001/state  TAMBIEN");
-//    
-//    client.subscribe("PSWS20000000001/state");
-//    console.log('Subscribing to: ' + "PSWS20000000001/state  TAMBIEN");
-        
+	 topicos.forEach(myFunction);
 }
 
 function onConnectionLostSonoff(responseObject) {
-    //var text = fileouput;
-    //document.getElementById(fileouput).innerHTML += 'Connection lost'+'\n';
     console.log('Connection lost');
     if (responseObject.errorCode !== 0) {
-      //  document.getElementById(fileouput).innerHTML += 'ERROR: ' + responseObject.errorMessage + '\n';
     	console.log('ERROR: ' + responseObject.errorMessage);
     }
 }
@@ -71,8 +49,28 @@ function onMessageArrivedSonoff(message) {
 	var inputAll= message.payloadString;
 
 	try {	
-	
+
 	var dataObj = JSON.parse(inputAll)
+	console.log("device: "+ dataObj.deviceId);
+	if(dataObj.SW1 != null && dataObj.SW1=="ON"){
+		var deviceserial = "sonoffpower"+dataObj.deviceId;
+		console.log("sw1 on: "+ deviceserial);
+		document.getElementById(deviceserial).checked = true;
+		console.log("prende!!");
+	}if(dataObj.SW1 != null && dataObj.SW1=="OFF"){
+		var deviceserial = "sonoffpower"+dataObj.deviceId;
+		console.log("sw1 off: " +deviceserial);
+		document.getElementById(deviceserial).checked = false;
+	}if(dataObj.SW2 != null && dataObj.SW1=="ON"){
+		var deviceserial = "sonoffpower"+dataObj.deviceId;
+		console.log("sw2: "+ dataObj.SW2);
+		document.getElementById(deviceserial).checked = true;
+	}if(dataObj.SW2 != null && dataObj.SW1=="OFF"){
+		var deviceserial = "sonoffpower"+dataObj.deviceId;
+		console.log("sw2: "+ dataObj.SW2);
+		document.getElementById(deviceserial).checked = false;
+	}
+	
 	var state = dataObj.tempC; 
     //document.getElementById("messages").innerHTML += '<span>Topic: ' + message.destinationName + '  | ' + inputAll + '</span><br/>';
 	console.log("destino: "+message.destinationName);
