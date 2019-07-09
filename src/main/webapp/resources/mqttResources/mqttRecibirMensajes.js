@@ -167,9 +167,9 @@
     	  Connecttotal(host,port,user,password,topico,swith,serial,"simulatepushbutton");
       }
       
-      function EnviarSonoff(host,port,user,password,topico,swith,serial){
-    	  var checkBox = document.getElementById("sonoffpower"+serial);
-    	  if (checkBox.checked == true){
+      function EnviarSonoff(host,port,user,password,topico,swith,serial,accion){
+    	  var acs = document.getElementById(accion).firstChild.nodeValue;
+    	  if (acs == "Apagado" || acs == "Switched_off"){
     		  Connecttotal(host,port, user,password,topico,swith,serial,"enviaron");
     	  } else {
     		  Connecttotal(host,port, user,password,topico,swith,serial,"enviaroff");

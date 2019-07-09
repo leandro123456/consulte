@@ -28,7 +28,7 @@ function startConnectSonoff(host,port,ssl,user,pass, topicos) {
 
 function myFunction(item, index) { 
     client.subscribe(item);
-     console.log('Subscribing to: ' + item+ 'primero el de debug');
+    console.log('Subscribing to: ' + item+ 'primero el de debug');
 }
 
 function onConnectsonoff() {
@@ -43,6 +43,19 @@ function onConnectionLostSonoff(responseObject) {
 }
 
 
+
+
+function animatevar (id,spanid, val){		
+		var valorr = val+"%";
+		var titulo = id;
+		document.getElementById(id).style.width = valorr;
+		var span = document.getElementById(spanid);
+		if(span.textContent!= 1){
+			span.innerHTML = ''; // clear existing
+			span.appendChild(document.createTextNode(val));
+		}				
+}
+
 //Called when a message arrives
 function onMessageArrivedSonoff(message) {
     console.log("onMessageArrived: " + message.payloadString);
@@ -53,22 +66,29 @@ function onMessageArrivedSonoff(message) {
 	var dataObj = JSON.parse(inputAll)
 	console.log("device: "+ dataObj.deviceId);
 	if(dataObj.SW1 != null && dataObj.SW1=="ON"){
-		var deviceserial = "sonoffpower"+dataObj.deviceId;
+		var deviceserial = "boton1"+dataObj.deviceId;
 		console.log("sw1 on: "+ deviceserial);
-		document.getElementById(deviceserial).checked = true;
-		console.log("prende!!");
+		toggleText(deviceserial,"yes");
+		console.log("tiempo en uno: "+ dataObj.PB1TTO);
+		var barraho= "sonofftimer1"+dataObj.deviceId;
+		var barranum= "span1"+dataObj.deviceId;
+		animatevar(barraho,barranum,dataObj.PB1TTO);
 	}if(dataObj.SW1 != null && dataObj.SW1=="OFF"){
-		var deviceserial = "sonoffpower"+dataObj.deviceId;
+		var deviceserial = "boton1"+dataObj.deviceId;
 		console.log("sw1 off: " +deviceserial);
-		document.getElementById(deviceserial).checked = false;
+		toggleText(deviceserial,"no");
 	}if(dataObj.SW2 != null && dataObj.SW1=="ON"){
-		var deviceserial = "sonoffpower"+dataObj.deviceId;
+		var deviceserial = "boton2"+dataObj.deviceId;
 		console.log("sw2: "+ dataObj.SW2);
-		document.getElementById(deviceserial).checked = true;
+		toggleText(deviceserial,"yes");
+		console.log("tiempo en dos: "+ dataObj.PB2TTO);
+		var barraho= "sonofftimer2"+dataObj.deviceId;
+		var barranum= "span2"+dataObj.deviceId;
+		animatevar(barraho,barranum,dataObj.PB2TTO);
 	}if(dataObj.SW2 != null && dataObj.SW1=="OFF"){
-		var deviceserial = "sonoffpower"+dataObj.deviceId;
+		var deviceserial = "boton2"+dataObj.deviceId;
 		console.log("sw2: "+ dataObj.SW2);
-		document.getElementById(deviceserial).checked = false;
+		toggleText(deviceserial,"no");
 	}
 	
 	var state = dataObj.tempC; 

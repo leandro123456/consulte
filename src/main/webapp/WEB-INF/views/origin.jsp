@@ -36,11 +36,27 @@
 	<div id="wrapper">
 		<jsp:include page="header.jsp" />
 		<div class="container-fluid">
+		
 			<div class="row" id="cargadora">
 				<c:forEach items="${vistas}" var="vista">
 	                ${vista}
 	          </c:forEach>
 
+
+<script>
+function toggleText(button_id, variable) 
+{
+   var el = document.getElementById(button_id);
+   if (variable == "yes"){
+       el.firstChild.data = "Encendido";
+   }
+   if (variable == "no"){
+     el.firstChild.data = "Apagado";
+   }
+   else
+	   console.log("no encontro el nombre de la variable: "+ variable +" iddelboton: "+ button_id);
+}
+</script>
 <!-- alarma -->
 <div class="col-lg-6 mb-4"> 
 	<div class="card shadow mb-4"> 
@@ -232,29 +248,29 @@
 <!-- script alarma -->
 
 <script type="text/javascript">
-	function sendMQTTMessage(sonoffserial){
-		var checkBox=document.getElementById("sonoffpower");
-		  if (checkBox.checked == true){
-		  	  	document.getElementById("sonoffpower1").value = true;
-		  }else{
-		  	  	document.getElementById("sonoffpower1").value = false;
-		  }
-		var formvalue="push"+sonoffserial;
-		console.log("estevalor: "+ formvalue);
-		document.getElementById(formvalue).submit();
-	}
+// 	function sendMQTTMessage(sonoffserial){
+// 		var checkBox=document.getElementById("sonoffpower");
+// 		  if (checkBox.checked == true){
+// 		  	  	document.getElementById("sonoffpower1").value = true;
+// 		  }else{
+// 		  	  	document.getElementById("sonoffpower1").value = false;
+// 		  }
+// 		var formvalue="push"+sonoffserial;
+// 		console.log("estevalor: "+ formvalue);
+// 		document.getElementById(formvalue).submit();
+// 	}
 </script>
 
 
 <script type="text/javascript">
-	function sleep(milliseconds) {
-	 var start = new Date().getTime();
-	 for (var i = 0; i < 1e7; i++) {
-	  if ((new Date().getTime() - start) > milliseconds) {
-	   break;
-	  }
-	 }
-	}
+// 	function sleep(milliseconds) {
+// 	 var start = new Date().getTime();
+// 	 for (var i = 0; i < 1e7; i++) {
+// 	  if ((new Date().getTime() - start) > milliseconds) {
+// 	   break;
+// 	  }
+// 	 }
+// 	}
 
 	$(document).ready(function() {
 		updateWiget();
