@@ -508,13 +508,25 @@ public class Utils {
 						contenidototal= contenidototal+cuerpoSonoff;	
 						break;	
 					}
+				case "sonofftwo":
+					if(atributosDeLaVista[i].equals("sonoffbody")) {
+						String cuerpoSonoff= vista.getContenido().get("sonoffbody").replaceAll("CAMBIARSONOFF", serialDevice);
+						System.out.println("este es el cuuerpo del  SONOFF: "+ cuerpoSonoff);
+						cuerpoSonoff=cuerpoSonoff.replaceAll("HOSTSONOFF", devconfig.getIphostescribir());
+						cuerpoSonoff=cuerpoSonoff.replaceAll("PORTSONOFF", devconfig.getPortescribir());
+						cuerpoSonoff=cuerpoSonoff.replaceAll("USERSONOFF", devconfig.getUserescribir());
+						cuerpoSonoff=cuerpoSonoff.replaceAll("PASSSONOFF", devconfig.getPassescribir());
+						cuerpoSonoff=cuerpoSonoff.replaceAll("TOPICSONOFF", devconfig.getTopicescribir());
+						contenidototal= contenidototal+cuerpoSonoff;	
+						break;	
+					}
 				default:
 					System.out.println("ERROR VISTA NO ENCONTRADA");
 					break;
 				}
 			}
 			String inicio="";
-			if(tipoDeVista.equals("sonoff"))
+			if(tipoDeVista.equals("sonoff") || tipoDeVista.equals("sonofftwo"))
 				inicio= vista.getInicio().replaceAll("CAMBIARSONOFF", serialDevice);
 			else
 				inicio = vista.getInicio();

@@ -18,6 +18,7 @@ public class Vista {
 	static final public String TEMP_RELOJ = "temperatura_reloj";
 	static final public String TEMP_HORIZONTAL = "temperatura_horizontal";
 	static final public String SONOFF = "sonoff";
+	static final public String SONOFF_DOS = "sonofftwo";
 	static final public String ALARMA = "alarma";
 	
 	

@@ -23,7 +23,7 @@
 	src='<c:url value="/resources/mqttResources/cargarElementos.js" />'></script>
 <script src='<c:url value="/resources/mqttResources/progreso.js" />'></script>
 <script src='<c:url value="/resources/mqttResources/cargaReloj.js" />'></script>
-<title>Devices - Dashboard</title>
+<title>cDash</title>
 <link href='<c:url value="/resources/mqttResources/all.min.css" />'
 	rel="stylesheet" type="text/css">
 <link
@@ -109,7 +109,7 @@
 				<script type="text/javascript">
 						var x= document.getElementById('mensaje').value;
 						swal({
-							  //title: x,
+							  title: x,
 							  icon: "success",
 							  timer: 5000,
 							  closeOnClickOutside: false,
@@ -122,7 +122,7 @@
 				<script type="text/javascript">
 						var x= document.getElementById('mensaje1').value;
 						swal({
-							  //title: x,
+							  title: x,
 							  icon: "error",
 							  timer: 5000,
 							  closeOnClickOutside: false,
@@ -132,54 +132,64 @@
 			</c:if>
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-					<h5 class="m-0 font-weight-bold text-primary">New Device</h5>
+					<h5 class="m-0 font-weight-bold text-primary">Dispositivo Nuevo</h5>
 				</div>
 				<div class="card-body">
 					<div class="form-group">
-							<h3>General Information</h3>
-							<b>Serial Number</b> <input id="serialnumber" class="form-control" required> 
-							<b>Name</b> <input id="namedevice" class="form-control" required>
+							<h3>Informacion General</h3>
+							<b>Numero de Serie</b> <input id="serialnumber" class="form-control" required> 
+							<b>Nombre</b> <input id="namedevice" class="form-control" required>
 							<p></p>
-							<b>Description</b> <input id="descriptiondevice" class="form-control" required>
+							<b>Descripcion</b> <input id="descriptiondevice" class="form-control" required>
 							<p></p>
 							<div>
-								<b>Type of Device</b> <select id="tipodevice"
+								<b>Tipo de Dispositivo</b> <select id="tipodevice"
 									class="form-control" onchange="enableType()">
-									<option value="none">Select</option>
-									<option value="termometro">Thermometer</option>
-									<option value="alarma">Alarm</option>
+									<option value="none">Seleccione uno</option>
+									<option value="termometro">Termometro</option>
+									<option value="alarma">Alarma</option>
 									<option value="sonoff">Sonoff</option>
 								</select>
 							</div>
 							<p></p>
 							<div id="vistastermometro">
-								<b>Type of View</b> <select id="tipovistatermometro"
+								<b>Tipo de Vista</b> <select id="tipovistatermometro"
 									class="form-control" onchange="changeTipoVistaTermometro()">
-									<option value="none">Select</option>
-									<option value="watches">Watches</option>
-									<option value="bars">Bars</option>
+									<option value="none">Seleccione uno</option>
+<!-- 									<option value="watches">Relojes</option> -->
+									<option value="bars">Barras</option>
+								</select>
+							</div>
+							
+							<p></p>
+							<div id="cantidadswith">
+								<b>Tipo de Vista</b> <select id="cantidadswiths"
+									class="form-control">
+									<option value="none">Seleccione uno</option>
+									<option value="one">Uno</option>
+									<option value="two">Dos</option>
 								</select>
 							</div>
 							<p></p>
 
 						<div id="timerString" class="text-center">
 							<a href="" class="btn btn-primary btn-rounded mb-6"
-								data-toggle="modal" data-target="#modalTimerString">Add
+								data-toggle="modal" data-target="#modalTimerString">Agregar
 								Timer String</a>
 						</div>
 						<form class="panel panel-primary" id="tabletimerstring">
 							<div class="panel-heading">
 								<p> </p>
-								<h6 class="panel-title">Timer String Parameters</h6>
+								<h6 class="panel-title">Parametros del Timer String</h6>
 							</div>
 							<div class="panel-body">
 								<table class="table table-sm" id="dataTable">
 										<tr>
-											<th>Days of the Week</th>
-											<th>Hour</th>
-											<th>Action</th>
+											<th>Dias de la Semana</th>
+											<th>Hora</th>
+											<th>Accion</th>
 											<th>Switch</th>
-											<th>Actions</th>
+											<th>Accion Sobre Fila</th>
 										</tr>
 									<tbody id="contenidotablatimerstring">
 									</tbody>
@@ -188,31 +198,31 @@
 						</form>
 
 						<form id="parametrostermometro">
-							<b>Thermometer show parameters</b>
+							<b>Parametros del Termometro</b>
 							<table class="table table-sm">
 								<tbody>
 									<tr class="tablain">
-										<td>Humidity</td>
+										<td>Humedad</td>
 										<td><input type="checkbox" id="humedadtermometro"
 											data-toggle="toggle"></td>
 									</tr>
 									<tr class="tablain">
-										<td>Temperature Centigrade</td>
+										<td>Temperatura (Grados Centigrados)</td>
 										<td><input type="checkbox" id="tempctermometro"
 											data-toggle="toggle"></td>
 									</tr>
 									<tr class="tablain">
-										<td>Sensation Centigrade</td>
+										<td>Sensacion Termica (Grados Centigrados)</td>
 										<td><input type="checkbox" id="sensacionctermometro"
 											data-toggle="toggle"></td>
 									</tr>
 									<tr class="tablain">
-										<td>Temperature Fahrenheit</td>
+										<td>Temperatura (Grados Fahrenheit)</td>
 										<td><input type="checkbox" id="tempftermometro"
 											data-toggle="toggle"></td>
 									</tr>
 									<tr class="tablain">
-										<td>Sensation Fahrenheit</td>
+										<td>Sensacion Termica (Grados Fahrenheit)</td>
 										<td><input type="checkbox" id="sensacionftermometro"
 											data-toggle="toggle"></td>
 									</tr>
@@ -220,26 +230,24 @@
 							</table>
 						</form>
 						<p></p>
-						<b>Default Configuration for Connections Parameters <input
+						<b>Configuracion por defecto para parametros de Conexion<input
 							id="toggle-paramconects" checked type="checkbox"
 							data-toggle="toggle" onchange="checkconfiguration()"
 							data-style="slow"></b>
 						<p></p>
 						<form id="parametersConexion" onkeypress=checkPassword()>
-							<h5>Listen Information</h5>
+							<h5>Informacion para escuchar</h5>
 							<div class="form-group row ">
-								<b>Hostname or IP Address</b> <input type="text"
+								<b>Hostname or Direccion IP</b> <input type="text"
 									class="form-control form-control-user" id="iphostescuchar"
-									placeholder="Hostname"> <b>Port</b> <input type="text"
+									placeholder="Hostname"> <b>Puerto</b> <input type="text"
 									class="form-control form-control-user" id="portescuchar"
-									placeholder="Number Port"> <b>Topic to Listen:</b><input
+									placeholder="Number Port"> <b>Topico para escuchar:</b><input
 									type="text" class="form-control form-control-user "
-									id="topiclisten" placeholder="Topic to Listen"> <b>User
-									name</b> <input type="text" class="form-control form-control-user"
-									id="userescuchar" placeholder="User name"> <b>Password</b>
+									id="topiclisten" placeholder="Topic to Listen"> <b>Nombre de Usuario</b> <input type="text" class="form-control form-control-user"
+									id="userescuchar" placeholder="User name"> <b>Contraseña</b>
 								<input type="password" class="form-control form-control-user"
-									id="passescuchar" placeholder="Password"> <b>Confirm
-									Password</b> <input type="password"
+									id="passescuchar" placeholder="Password"> <b>Confirmar Contraseña</b> <input type="password"
 									class="form-control form-control-user" id="confirpassescuchar"
 									placeholder="Confirm Password">
 							</div>
@@ -462,6 +470,9 @@
 							name="passescribirremote" id="passescribirremote1" />
 						<input type="hidden"
 							name="timerstringsonoff" id="timerstringsonoff" />
+						<input type="hidden"
+							name="cantidadswiths" id="cantidadswiths1" />	
+							
 							
 
 						<button class="btn btn-secondary" type="button"
@@ -549,6 +560,7 @@
 	        	  	document.getElementById("tipodevice1").value = document.getElementById("tipodevice").value;
 
 	  		  
+	  		 //vista sonoff
 	  		  if(document.getElementById('dataTable') != null){
 	  		  var textos = "";
 	  		     for (var i=1;i < document.getElementById('dataTable').rows.length; i++){
@@ -561,6 +573,12 @@
 	  		   console.log(textos);
 	  		   document.getElementById("timerstringsonoff").value = textos;
 	  			}
+	  		 if(document.getElementById("cantidadswiths") != null){
+	  			 var cantidades =document.getElementById("cantidadswiths");
+	  			var cantidadelegida =cantidades.options[cantidades.selectedIndex].value;
+	  			 console.log("cantidad elegida: "+ cantidadelegida);
+	  			document.getElementById("cantidadswiths1").value = cantidadelegida;
+	  		 }
 	  		  
 	  		  //vista termometro
 	  		if(document.getElementById("tipovistatermometro") != null && document.getElementById("tipovistatermometro").value == "watches")
@@ -656,21 +674,25 @@
 		var seleccion=document.getElementById('tipodevice');
         var valuetype = seleccion.options[seleccion.selectedIndex].value;
         if(valuetype == "termometro"){
+        	document.getElementById('cantidadswith').style.display = 'none';
         	document.getElementById('vistastermometro').style.display = 'inline';
         	document.getElementById('parametrostermometro').style.display = 'inline';
         	document.getElementById('timerString').style.display = 'none';
         	document.getElementById('tabletimerstring').style.display = 'none';
         }if(valuetype == "alarma"){
+        	document.getElementById('cantidadswith').style.display = 'none';
         	document.getElementById('vistastermometro').style.display = 'none';
         	document.getElementById('parametrostermometro').style.display = 'none';
         	document.getElementById('timerString').style.display = 'none';
         	document.getElementById('tabletimerstring').style.display = 'none';
         }if(valuetype == "sonoff"){
+        	document.getElementById('cantidadswith').style.display = 'inline';
         	document.getElementById('vistastermometro').style.display = 'none';
         	document.getElementById('parametrostermometro').style.display = 'none';
         	document.getElementById('timerString').style.display = 'inline';
         	document.getElementById('tabletimerstring').style.display = 'inline';
         }if(valuetype != "termometro" && valuetype != "alarma" && valuetype != "sonoff"){
+        	document.getElementById('cantidadswith').style.display = 'none';
         	document.getElementById('vistastermometro').style.display = 'none';
         	document.getElementById('parametrostermometro').style.display = 'none';
         	document.getElementById('timerString').style.display = 'none';

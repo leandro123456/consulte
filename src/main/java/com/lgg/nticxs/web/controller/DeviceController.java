@@ -122,6 +122,8 @@ public class DeviceController {
 			
 			//vista sonoff
 			@RequestParam(name="timerstringsonoff", required=false) String timerstringsonoff,
+			@RequestParam(name="cantidadswiths", required=false) String cantidadswiths,
+			
 			
 			//termometro
 			@RequestParam(name="tipovistatermometro", required=false) String tipovistatermometro,
@@ -247,7 +249,12 @@ public class DeviceController {
 				}
 				SimpleTimerString.sendtimerString(timerstringvalue,host,port,topic,user,pass);
 				//vista sonoff
-				String vistasonoff = Vista.SONOFF+";sonoffbody";
+				String vistasonoff ="";
+				System.out.println("cantidad de sonoff recibido: " + cantidadswiths);
+				if(cantidadswiths.equals("one"))
+					vistasonoff= Vista.SONOFF+";sonoffbody";
+				else if(cantidadswiths.equals("two"))
+					vistasonoff= Vista.SONOFF_DOS+";sonoffbody";
 				vista.put(name, vistasonoff);
 				device.setVista(vista);
 				break;

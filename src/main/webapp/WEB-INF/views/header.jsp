@@ -2,6 +2,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
+<link rel="stylesheet" type="text/css" href='<c:url value="/resources/cdash_logo/logo.css" />'>
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -9,10 +10,13 @@
       
 		<form role="form" action="<c:url value="/home"/>" method="get" enctype="multipart/form-data">
 		      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="javascript:;" onclick="parentNode.submit();">
-		        <div class="sidebar-brand-icon rotate-n-15">
-		          <i class="fas fa-laugh-wink"></i>
+<!-- 		        <div class="sidebar-brand-icon"> -->
+				<div class="logodash">
+<!-- 		          <i class="fas fa-laugh-wink"></i> -->
+				<img alt="" src='<c:url value="/resources/cdash_logo/lohoH-iso-blanco-alcorte.png"  />'/>
 		        </div>
-		        <div class="sidebar-brand-text mx-3">Dashboard <sup>*</sup></div>
+		        <div class="sidebar-brand-text mx-3 logodash-text">cDash<sup></sup></div>
+<!-- 				<div class="logodash-text">cDash<sup></sup></div> -->
 		      </a>
 		</form>
       <!-- Divider -->

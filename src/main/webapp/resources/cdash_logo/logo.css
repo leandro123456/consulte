@@ -1,0 +1,20 @@
+body {background-color:#000000;
+}	
+	
+.logodash {
+border-radius: 1em;
+background-color: #FFFFFF;
+padding: 0.3em 0.2em 0.1em 0.2em; 
+width: 4.05em;
+height: 4em; 
+
+}
+
+.logodash-text{
+	font: 18px arial, sans-serif;
+	font-weight:bold;
+/* 	color: #013E7B; */
+	color:#FFFFFF;
+	text-transform: capitalize;
+	float:right;	
+}
