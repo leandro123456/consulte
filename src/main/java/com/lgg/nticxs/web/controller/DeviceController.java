@@ -265,7 +265,7 @@ public class DeviceController {
 			model.addAttribute("msg1", "This device / serial is already registered ... please check it and try again");
 			return "device_new";
 		}
-		return "origin";
+		return "redirect:/home";
 	}
 	
 
@@ -287,10 +287,18 @@ public class DeviceController {
 
 	private DeviceConfiguration establishTopic(DeviceDefaultConfiguration deviceconfiguration, String serialnumber) {
 		System.out.println("se setearon los valores de topicos con el serial number: "+ serialnumber);
+		System.out.println("inicial: "+deviceconfiguration.getTopicescribir());
+		System.out.println("inicial: "+deviceconfiguration.getTopicescribirremote());
+		System.out.println("inicial: "+deviceconfiguration.getTopicescuchar());
+		System.out.println("inicial: "+deviceconfiguration.getTopicescucharremote());
 		deviceconfiguration.setTopicescribir(deviceconfiguration.getTopicescribir().replace("serial", serialnumber));
-		deviceconfiguration.setTopicescribirremote(deviceconfiguration.getTopicescribirremote().replace("serail", serialnumber));
+		deviceconfiguration.setTopicescribirremote(deviceconfiguration.getTopicescribirremote().replace("serial", serialnumber));
 		deviceconfiguration.setTopicescuchar(deviceconfiguration.getTopicescuchar().replace("serial", serialnumber));
-		deviceconfiguration.setTopicescucharremote(deviceconfiguration.getTopicescucharremote().replace("serial", serialnumber));
+		deviceconfiguration.setTopicescucharremote(deviceconfiguration.getTopicescucharremote().replace("serial", serialnumber));	
+		System.out.println("valores de los topicos: "+ deviceconfiguration.getTopicescribir());
+		System.out.println("valores de los topicos: "+ deviceconfiguration.getTopicescribirremote());
+		System.out.println("valores de los topicos: "+ deviceconfiguration.getTopicescuchar());
+		System.out.println("valores de los topicos: "+ deviceconfiguration.getTopicescucharremote());
 		return deviceconfiguration;
 	}
 

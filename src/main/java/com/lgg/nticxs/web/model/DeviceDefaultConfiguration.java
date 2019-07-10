@@ -273,7 +273,7 @@ public class DeviceDefaultConfiguration extends DeviceConfiguration {
 
 	@Override
 	public void setTopicescuchar(String topicescuchar) {
-		this.topicescuchar = topicescuchar+"/state";
+		this.topicescuchar = topicescuchar;
 	}
 
 	public String getTopicescribir() {
@@ -281,7 +281,7 @@ public class DeviceDefaultConfiguration extends DeviceConfiguration {
 	}
 
 	public void setTopicescribir(String topicescribir) {
-		this.topicescribir = topicescribir+"/write";
+		this.topicescribir = topicescribir;
 	}
 
 	public String getTopicescucharremote() {
@@ -289,7 +289,7 @@ public class DeviceDefaultConfiguration extends DeviceConfiguration {
 	}
 
 	public void setTopicescucharremote(String topicescucharremote) {
-		this.topicescucharremote = topicescucharremote+"/state";
+		this.topicescucharremote = topicescucharremote;
 	}
 
 	public String getTopicescribirremote() {
@@ -297,7 +297,7 @@ public class DeviceDefaultConfiguration extends DeviceConfiguration {
 	}
 
 	public void setTopicescribirremote(String topicescribirremote) {
-		this.topicescribirremote = topicescribirremote+"/write";
+		this.topicescribirremote = topicescribirremote;
 	}
 
 
