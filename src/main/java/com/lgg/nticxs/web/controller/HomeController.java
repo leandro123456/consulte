@@ -134,9 +134,7 @@ public class HomeController {
 			vistas.add(vista1);
 		System.out.println("cantidad de vistas a mostrar !!!!!: "+ vistas.size());
 		model.addAttribute("user", user);
-//		model.addAttribute("deviceserial", "PS3S1P120190323");
 		model.addAttribute("vistas",vistas);
-//        model.addAttribute("sonoffserial", "PS3S1P120190323");
         System.out.println("retorno la vista correctamente");
         List<String> topicos=obtenerTopicosDeTodosLosEndpoints(user.getDeviceserialnumber());
         model.addAttribute("topicos", topicos);
@@ -298,10 +296,14 @@ public class HomeController {
 		for(String serial: devicesnumber){
 			System.out.println("llego a la carga de los topicos: "+serial);
 			Device device=devicedao.retrieveBySerialNumber(serial);
-			if(device.getUsedefaultbrocker())
+			if(device.getUsedefaultbrocker()){
 				topicos.add("'"+device.getDeviceconfiguration().get(0).getTopicescuchar()+"'");
-			else
+				topicos.add("'"+device.getDeviceconfiguration().get(0).getTopicescucharremote()+"'");
+			}
+			else{
 				topicos.add("'"+device.getDeviceconfiguration().get(1).getTopicescuchar()+"'");
+				topicos.add("'"+device.getDeviceconfiguration().get(1).getTopicescucharremote()+"'");
+			}
 		}
 		return topicos;
 	}

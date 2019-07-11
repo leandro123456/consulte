@@ -44,25 +44,43 @@ function onConnectionLostSonoff(responseObject) {
 
 
 
-
+//animar la barra del timer del sonoff
 function animatevar (id,spanid, val){		
 		var valorr = val+"%";
 		var titulo = id;
 		document.getElementById(id).style.width = valorr;
 		var span = document.getElementById(spanid);
 		if(span.textContent!= 1){
-			span.innerHTML = ''; // clear existing
+			span.innerHTML = '';
 			span.appendChild(document.createTextNode(val));
 		}				
 }
 
+//mostrar el status del dispositivo que esta reportando
+function informarstatus(topicorecibido, mensajerecibido){
+	var iddevice = topicorecibido.replace("/Status","");
+	console.log("este es el id que me llego: "+ iddevice);
+	if(mensajerecibido =="online"){
+		console.log ("es online")
+	}if(mensajerecibido =="offline"){
+		console.log("es offline")
+	}if(mensajerecibido =="disconnected"){
+		console.log("esta disconnected");
+	}if(mensajerecibido !="disconnected" && mensajerecibido !="online" && mensajerecibido !="offline"){
+		console.log("el mensaje que se recibio es invalido: "+ mensajerecibido);
+	}
+}
+
 //Called when a message arrives
 function onMessageArrivedSonoff(message) {
-    console.log("onMessageArrived: " + message.payloadString);
+    console.log("LLEGO UN MENSAJE: "+message.destinationName+"; contenido: "+  message.payloadString);
 	var inputAll= message.payloadString;
-
+	
+	if(message.destinationName.includes("/Status")){
+		informarstatus(message.destinationName, message.payloadString)
+	}
+	else{
 	try {	
-
 	var dataObj = JSON.parse(inputAll)
 	console.log("device: "+ dataObj.deviceId);
 	if(dataObj.SW1 != null && dataObj.SW1=="ON"){
@@ -113,6 +131,8 @@ function onMessageArrivedSonoff(message) {
 	}catch(err) {
 		 console.log(err.message);
 		}
+	
+	}
 }
 /** fin sonoff**/
 
