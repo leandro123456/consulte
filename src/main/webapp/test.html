@@ -1,3 +1,58 @@
+<div class="card-body">
+	<div>
+		<span class="font-weight-bold">Estado del Switch</span> <span
+			id="spanestadoCAMBIARSONOFF" value="online"
+			class="float-right font-weight">online</span>
+	</div>
+
+	<h6 class="text-lefth font-weight-bold">Cambiar modo del Switch</h6>
+	<div class="float-lefth">
+		<button type="button" id="boton1PS3S1P120190323"
+			onclick="EnviarSonoff('mqtt.coiaca.com','1883','mqttusr','mqttpwd','PS3S1P120190323/swcmd','switchone','PS3S1P120190323','boton1PS3S1P120190323')"
+			class="btn btn-primary btn-sm btn-block">Apagado</button>
+	</div>
+	<input type="hidden" name="sonoffpower" id="sonoffpower1">
+	<p></p>
+	<button type="submit" class="btn btn-primary btn-sm btn-block"
+		onclick="EnviarSonoffSimulatePushbutton('mqtt.coiaca.com','1883','mqttusr','mqttpwd','PS3S1P120190323/swcmd','switchone','PS3S1P120190323')">Simulated
+		push button</button>
+	<p></p>
+	<h4 id="sonoffname" class="small font-weight-bold">
+		Timer<span id="span1PS3S1P120190323" class="float-right">0</span>
+	</h4>
+	<div class="progress mb-4">
+		<div class="progress-bar" id="sonofftimer1PS3S1P120190323"
+			role="progressbar" aria-valuemin="0" aria-valuemax="60"
+			style="width: 0%;"></div>
+	</div>
+	<p></p>
+	<b>
+
+		<h6 class="text-lefth font-weight-bold">Cambiar Funcion de
+			Encendido/Apagado automatico</h6>
+		<form role="form"
+			action="/mqttmanagment/home/settimerString/PS3S1P120190323"
+			method="get" enctype="multipart/form-data">
+			<button type="submit" class="btn btn-lg float-lefth"
+				style="background: transparent; border: transparent;">
+				<i class="fas fa-stopwatch" title="Set Timer String"></i>
+			</button>
+		</form>
+
+	</b>
+</div>
+
+
+
+
+
+
+
+
+
+////////////////////////////
+
+
 <div class="col-lg-6 mb-4">
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
