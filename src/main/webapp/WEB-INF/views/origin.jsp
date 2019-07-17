@@ -44,6 +44,8 @@
 
 
 <script>
+
+//funcion para actulizar los botones en la vista
 function toggleText(button_id, variable) 
 {
    var el = document.getElementById(button_id);
@@ -56,6 +58,16 @@ function toggleText(button_id, variable)
    else
 	   console.log("no encontro el nombre de la variable: "+ variable +" iddelboton: "+ button_id);
 }
+
+//funcion para actulizar el estado en la vista
+function updateEstado(spanId, valor) 
+{
+   var spanStatus = document.getElementById(spanId);
+   spanStatus.firstChild.data = valor;
+   console.log("se actualizo el status del span para el ID: "+ spanId);
+}
+
+
 </script>
 <!-- alarma -->
 <div class="col-lg-6 mb-4"> 

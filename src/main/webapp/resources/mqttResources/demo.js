@@ -61,11 +61,14 @@ function informarstatus(topicorecibido, mensajerecibido){
 	var iddevice = topicorecibido.replace("/Status","");
 	console.log("este es el id que me llego: "+ iddevice);
 	if(mensajerecibido =="online"){
-		console.log ("es online")
+		console.log ("es online");
+		updateEstado("spanestado"+iddevice, "online");
 	}if(mensajerecibido =="offline"){
-		console.log("es offline")
+		console.log("es offline");
+		updateEstado("spanestado"+iddevice, "offline");
 	}if(mensajerecibido =="disconnected"){
 		console.log("esta disconnected");
+		updateEstado("spanestado"+iddevice, "online");
 	}if(mensajerecibido !="disconnected" && mensajerecibido !="online" && mensajerecibido !="offline"){
 		console.log("el mensaje que se recibio es invalido: "+ mensajerecibido);
 	}

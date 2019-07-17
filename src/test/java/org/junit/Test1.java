@@ -141,7 +141,7 @@ public class Test1 {
 	}
 	
 
-	@Test
+	//@Test
 	public void testMakeAllViews() {
 		String inicio= "<div class=\"col-lg-6 mb-4\"><div class=\"card shadow mb-4\"><div class=\"card-header py-3\"><h6 class=\"m-0 font-weight-bold text-primary\">Sensor de Temperatura Y Humedad</h6></div>";
 		String humedad="<div class=\"card-body\"><h4 id=\"humedads\" class=\"small font-weight-bold\">Humedad</h4><div class=\"progress mb-4\"><div class=\"progress-bar\" id=\"humedad\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div></div>";
@@ -202,7 +202,7 @@ public class Test1 {
 				+ "<h6 class=\"font-weight-bold\">Cambiar modo del Switch</h6> <button type=\"button\" id=\"boton1CAMBIARSONOFF\" onclick=\"EnviarSonoff('HOSTSONOFF','PORTSONOFF','USERSONOFF','PASSSONOFF','TOPICSONOFF','switchone','CAMBIARSONOFF','boton1CAMBIARSONOFF')\" class=\"btn btn-primary btn-sm btn-block\">Apagado</button> <p> </p>"
 				+ "<h4 id=\"sonoffname\" class=\"small font-weight-bold\">Timer<span id=\"span1CAMBIARSONOFF\" class=\"float-right\">0</span></h4><div class=\"progress mb-4\">	<div class=\"progress-bar\" id=\"sonofftimer1CAMBIARSONOFF\" role=\"progressbar\"	aria-valuemin=\"0\" aria-valuemax=\"60\" style=\"width: 0%;\">	</div></div> <p> </p>"
 				+ "</b><input type=\"hidden\" name=\"sonoffpower\" id=\"sonoffpower1\" /><p></p>	<button type=\"submit\" class=\"btn btn-primary btn-sm btn-block\" onclick=\"EnviarSonoffSimulatePushbutton('HOSTSONOFF','PORTSONOFF','USERSONOFF','PASSSONOFF','TOPICSONOFF','switchone','CAMBIARSONOFF')\">Simular pulsado del Boton</button> <p> </p>"
-				+ "<form role=\"form\" action=\"/mqttmanagment/home/settimerString/CAMBIARSONOFF\" method=\"get\" enctype=\"multipart/form-data\"><button type=\"submit\" class=\"btn btn-primary btn-sm btn-block\">Cambiar Funcion de Encendido/Apagado automatico</button></form>"
+				+ "<form role=\"form\" action=\"/mqttmanagment/home/settimerString/CAMBIARSONOFF\" method=\"get\" enctype=\"multipart/form-data\"><input type=\"hidden\" name=\"sonoffTimerString\" value=\"one\"/><button type=\"submit\" class=\"btn btn-primary btn-sm btn-block\">Cambiar Funcion de Encendido/Apagado automatico</button></form>"
 				+ "</div>";
 		
 		
@@ -221,19 +221,35 @@ public class Test1 {
 		System.out.println("termino vista de 1 boton");
 		
 		//de dos botones
-//		inicio="<div class=\"col-lg-6 mb-4\"> <div class=\"card shadow mb-4\"> <div class=\"card-header py-3\">	<h6 class=\"m-0 font-weight-bold text-primary\">Sonoff CAMBIARSONOFF</h6></div>";
-//		fin="</div> </div>";
-//		sonoffbody="<div class=\"card-body\"> 	<h6 class=\"text-center font-weight-bold\">Estado del Switch 1</h6> 		<div class=\"float-lefth\"> 			<button type=\"button\" id=\"boton1CAMBIARSONOFF\" onclick=\"EnviarSonoff('HOSTSONOFF','PORTSONOFF','USERSONOFF','PASSSONOFF','TOPICSONOFF','switchone','CAMBIARSONOFF','boton1CAMBIARSONOFF')\" class=\"btn btn-primary btn-block\">Apagado</button></div></b><input type=\"hidden\" name=\"sonoffpower\" id=\"sonoffpower1\" /><p></p><button type=\"submit\"class=\"btn btn-primary btn-sm float-left\" onclick=\"EnviarSonoffSimulatePushbutton('HOSTSONOFF','PORTSONOFF','USERSONOFF','PASSSONOFF','TOPICSONOFF','switchone','CAMBIARSONOFF')\">Simular pulsar boton uno</button>	<p> </p><h4 id=\"sonoffname\" class=\"small font-weight-bold\"> Cronometro<span id=\"span1CAMBIARSONOFF\" class=\"float-right\">0</span></h4><div class=\"progress mb-4\">	<div class=\"progress-bar\" id=\"sonofftimer1CAMBIARSONOFF\" role=\"progressbar\"	aria-valuemin=\"0\" aria-valuemax=\"60\" style=\"width: 0%;\"> </div> </div> <p></p> <form role=\"form\" action=\"/mqttmanagment/home/settimerString/oneCAMBIARSONOFF\" method=\"get\" enctype=\"multipart/form-data\"><button type=\"submit\" class=\"btn btn-lg float-right \" style=\"background: transparent;  border:transparent;\"> <i class=\"fas fa-stopwatch\" title=\"Set TimerString\"></i>	</button></form> <b> Estado del Switch 2 <div class=\"float-right\"> <button type=\"button\" id=\"boton2CAMBIARSONOFF\" onclick=\"EnviarSonoff('HOSTSONOFF','PORTSONOFF','USERSONOFF','PASSSONOFF','TOPICSONOFF','switchtwo','CAMBIARSONOFF','boton2CAMBIARSONOFF')\" class=\"btn btn-primary\">Apagado</button> </div></b><input type=\"hidden\" name=\"sonoffpower\" id=\"sonoffpower2\" /><p></p> <button type=\"submit\" class=\"btn btn-primary btn-sm float-left\" onclick=\"EnviarSonoffSimulatePushbutton('HOSTSONOFF','PORTSONOFF','USERSONOFF','PASSSONOFF','TOPICSONOFF','switchtwo','CAMBIARSONOFF')\">Simular pulsar boton dos</button> <p> </p> <h4 id= \"sonoffname\" class=\"small font-weight-bold\">Cronometro<span id=\"span2CAMBIARSONOFF\" class=\"float-right\">0</span></h4><div class=\"progress mb-4\"><div class=\"progress-bar\" id=\"sonofftimer2CAMBIARSONOFF\" role=\"progressbar\"	aria-valuemin=\"0\" aria-valuemax=\"60\" style=\"width: 0%;\"></div></div><p></p> <form role=\"form\" action=\"/mqttmanagment/home/settimerString/twoCAMBIARSONOFF\" method=\"get\" enctype=\"multipart/form-data\"><button type=\"submit\" class=\"btn btn-lg float-right\" style=\"background: transparent;  border:transparent;\"> <i class=\"fas fa-stopwatch\" title=\"Set TimerString\"></i></button> </form></div>";
-//		vistadao = new VistaDAO();
-//		vista= new Vista();
-//		vista.setName("sonofftwo");
-//		vista.setInicio(inicio);
-//		vista.setFin(fin);
-//		elem= new HashMap<>();
-//		elem.put("sonoffbody",sonoffbody);
-//		vista.setContenido(elem);
-//		vistadao.create(vista);
-//		System.out.println("termino vista de 2 boton");
+		inicio="<div class=\"col-lg-6 mb-4\"> <div class=\"card shadow mb-4\"> <div class=\"card-header py-3\">	<h6 class=\"m-0 font-weight-bold text-primary\">Sonoff CAMBIARSONOFF</h6></div>";
+		fin="</div> </div>";
+		
+		sonoffbody="<div class=\"card-body\">"
+				+ "<div> <span class=\"font-weight-bold\">Estado del Switch</span> <span id=\"spanestadoCAMBIARSONOFF\" class=\"float-right font-weight\">online</span></div> <p> </p>"
+				
+				+ "<h6 class=\"font-weight-bold\">Cambiar modo del Switch 1</h6> <button type=\"button\" id=\"boton1CAMBIARSONOFF\" onclick=\"EnviarSonoff('HOSTSONOFF','PORTSONOFF','USERSONOFF','PASSSONOFF','TOPICSONOFF','switchone','CAMBIARSONOFF','boton1CAMBIARSONOFF')\" class=\"btn btn-primary btn-sm btn-block\">Apagado</button> <p> </p>"
+				+ "<h4 id=\"sonoffname\" class=\"small font-weight-bold\">Timer<span id=\"span1CAMBIARSONOFF\" class=\"float-right\">0</span></h4><div class=\"progress mb-4\">	<div class=\"progress-bar\" id=\"sonofftimer1CAMBIARSONOFF\" role=\"progressbar\"	aria-valuemin=\"0\" aria-valuemax=\"60\" style=\"width: 0%;\">	</div></div> <p> </p>"
+				+ "</b><input type=\"hidden\" name=\"sonoffpower\" id=\"sonoffpower1\" /><p></p>	<button type=\"submit\" class=\"btn btn-primary btn-sm btn-block\" onclick=\"EnviarSonoffSimulatePushbutton('HOSTSONOFF','PORTSONOFF','USERSONOFF','PASSSONOFF','TOPICSONOFF','switchone','CAMBIARSONOFF')\">Simular pulsado del Boton</button> <p> </p>"
+				+ "<form role=\"form\" action=\"/mqttmanagment/home/settimerString/CAMBIARSONOFF\" method=\"get\" enctype=\"multipart/form-data\"><input type=\"hidden\" name=\"sonoffTimerString\" value=\"one\"/><button type=\"submit\" class=\"btn btn-primary btn-sm btn-block\">Cambiar Funcion de Encendido/Apagado automatico</button></form>"
+				
+				+ "<h6 class=\"font-weight-bold\">Cambiar modo del Switch 2</h6> <button type=\"button\" id=\"boton2CAMBIARSONOFF\" onclick=\"EnviarSonoff('HOSTSONOFF','PORTSONOFF','USERSONOFF','PASSSONOFF','TOPICSONOFF','switchtwo','CAMBIARSONOFF','boton2CAMBIARSONOFF')\" class=\"btn btn-primary btn-sm btn-block\">Apagado</button> <p> </p>"
+				+ "<h4 id=\"sonoffname\" class=\"small font-weight-bold\">Timer<span id=\"span2CAMBIARSONOFF\" class=\"float-right\">0</span></h4><div class=\"progress mb-4\">	<div class=\"progress-bar\" id=\"sonofftimer2CAMBIARSONOFF\" role=\"progressbar\"	aria-valuemin=\"0\" aria-valuemax=\"60\" style=\"width: 0%;\">	</div></div> <p> </p>"
+				+ "</b><input type=\"hidden\" name=\"sonoffpower\" id=\"sonoffpower2\" /><p></p>	<button type=\"submit\" class=\"btn btn-primary btn-sm btn-block\" onclick=\"EnviarSonoffSimulatePushbutton('HOSTSONOFF','PORTSONOFF','USERSONOFF','PASSSONOFF','TOPICSONOFF','switchtwo','CAMBIARSONOFF')\">Simular pulsado del Boton 2</button> <p> </p>"
+				+ "<form role=\"form\" action=\"/mqttmanagment/home/settimerString/CAMBIARSONOFF\" method=\"get\" enctype=\"multipart/form-data\"><input type=\"hidden\" name=\"sonoffTimerString\" value=\"two\"/> <button type=\"submit\" class=\"btn btn-primary btn-sm btn-block\">Cambiar Funcion de Encendido/Apagado automatico</button></form>"
+								
+				+ "</div>";
+		
+		
+		vistadao = new VistaDAO();
+		vista= new Vista();
+		vista.setName("sonofftwo");
+		vista.setInicio(inicio);
+		vista.setFin(fin);
+		elem= new HashMap<>();
+		elem.put("sonoffbody",sonoffbody);
+		vista.setContenido(elem);
+		vistadao.create(vista);
+		System.out.println("termino vista de 2 boton");
 	}
 	
 }
