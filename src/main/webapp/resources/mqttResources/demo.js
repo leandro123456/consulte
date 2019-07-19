@@ -44,6 +44,42 @@ function onConnectionLostSonoff(responseObject) {
 
 
 
+//funcion para actualizar el frase dentro de todos los elementos en la vista
+function updateEstado(id, valor,elemento) 
+{
+	if(elemento=="statussonoff"){
+	   var spanStatus = document.getElementById(id);
+	   spanStatus.firstChild.data = valor;
+	}
+	else if(elemento=="botonsonoff"){
+		var boton = document.getElementById(id);
+		   if (valor == "yes"){
+		       boton.firstChild.data = "Encendido";
+		   }
+		   else if (valor == "no"){
+		     boton.firstChild.data = "Apagado";
+		   }
+		   else
+			   console.log("no encontro el valor de la variable: "+ valor +" en el id: "+ id);
+	}
+}
+
+//evaluar status del dispositivo que esta reportando
+function informarstatus(topicorecibido, mensajerecibido){
+	var iddevice = topicorecibido.replace("/Status","");
+	console.log("este es el id del mensaje de status: "+ iddevice);
+	console.log("este es el cuerpo del status: "+ mensajerecibido)
+	if(mensajerecibido =="online"){
+		updateEstado("spanestado"+iddevice, "online","statussonoff");
+	}if(mensajerecibido =="offline"){
+		updateEstado("spanestado"+iddevice, "offline", "statussonoff");
+	}if(mensajerecibido =="disconnected"){
+		updateEstado("spanestado"+iddevice, "online", "statussonoff");
+	}if(mensajerecibido !="disconnected" && mensajerecibido !="online" && mensajerecibido !="offline"){
+		console.log("el mensaje que se recibio es invalido: "+ mensajerecibido);
+	}
+}
+
 //animar la barra del timer del sonoff
 function animatevar (id,spanid, val){		
 		var valorr = val+"%";
@@ -56,88 +92,98 @@ function animatevar (id,spanid, val){
 		}				
 }
 
-//mostrar el status del dispositivo que esta reportando
-function informarstatus(topicorecibido, mensajerecibido){
-	var iddevice = topicorecibido.replace("/Status","");
-	console.log("este es el id que me llego: "+ iddevice);
-	if(mensajerecibido =="online"){
-		console.log ("es online");
-		updateEstado("spanestado"+iddevice, "online");
-	}if(mensajerecibido =="offline"){
-		console.log("es offline");
-		updateEstado("spanestado"+iddevice, "offline");
-	}if(mensajerecibido =="disconnected"){
-		console.log("esta disconnected");
-		updateEstado("spanestado"+iddevice, "online");
-	}if(mensajerecibido !="disconnected" && mensajerecibido !="online" && mensajerecibido !="offline"){
-		console.log("el mensaje que se recibio es invalido: "+ mensajerecibido);
-	}
-}
+/** fin sonoff*/
 
+/** inicio sensor temperatura*/
+
+
+//funcion para animar BARRA de temperatura
+//function animateprogress (id, val){			
+//	var fpAnimationFrame = getRequestAnimationFrame();   
+//	var i = 0.0;
+//	var animacion = function () {
+//	if (i<=val) 
+//		{
+//			var valorr = i+"%";
+//			var titulo = id;
+//			document.getElementById(id).style.width = valorr;
+//			var paragraph = document.getElementById(titulo);
+////			paragraph.innerHTML = id+"<span class='float-right'>"+val+"</span>";     /* <---- Incremento el porcentaje y lo muestro en la etiqueta span */
+//			i++;
+//			fpAnimationFrame(animacion);          /* <------------------ Mientras que el contador no llega al porcentaje fijado la función vuelve a llamarse con fpAnimationFrame     */
+//		}
+//										
+//	}
+//
+//		fpAnimationFrame(animacion);
+//				
+//}
+
+/** fin temperatura*/
+
+
+/** comportamiento cuando recibe un mensaje*/
 //Called when a message arrives
 function onMessageArrivedSonoff(message) {
-    console.log("LLEGO UN MENSAJE: "+message.destinationName+"; contenido: "+  message.payloadString);
-	var inputAll= message.payloadString;
-	
+	console.log("LLEGO UN MENSAJE: "+message.destinationName+"; contenido: "+  message.payloadString);
+	var inputAll= message.payloadString;	
+	var dataObj = null;
 	if(message.destinationName.includes("/Status")){
 		informarstatus(message.destinationName, message.payloadString)
 	}
-	else{
-	try {	
-	var dataObj = JSON.parse(inputAll)
-	console.log("device: "+ dataObj.deviceId);
-	if(dataObj.SW1 != null && dataObj.SW1=="ON"){
-		var deviceserial = "boton1"+dataObj.deviceId;
-		console.log("sw1 on: "+ deviceserial);
-		toggleText(deviceserial,"yes");
-		console.log("tiempo en uno: "+ dataObj.PB1TTO);
-		var barraho= "sonofftimer1"+dataObj.deviceId;
-		var barranum= "span1"+dataObj.deviceId;
-		animatevar(barraho,barranum,dataObj.PB1TTO);
-	}if(dataObj.SW1 != null && dataObj.SW1=="OFF"){
-		var deviceserial = "boton1"+dataObj.deviceId;
-		console.log("sw1 off: " +deviceserial);
-		toggleText(deviceserial,"no");
-	}if(dataObj.SW2 != null && dataObj.SW1=="ON"){
-		var deviceserial = "boton2"+dataObj.deviceId;
-		console.log("sw2: "+ dataObj.SW2);
-		toggleText(deviceserial,"yes");
-		console.log("tiempo en dos: "+ dataObj.PB2TTO);
-		var barraho= "sonofftimer2"+dataObj.deviceId;
-		var barranum= "span2"+dataObj.deviceId;
-		animatevar(barraho,barranum,dataObj.PB2TTO);
-	}if(dataObj.SW2 != null && dataObj.SW1=="OFF"){
-		var deviceserial = "boton2"+dataObj.deviceId;
-		console.log("sw2: "+ dataObj.SW2);
-		toggleText(deviceserial,"no");
-	}
-	
-	var state = dataObj.tempC; 
-    //document.getElementById("messages").innerHTML += '<span>Topic: ' + message.destinationName + '  | ' + inputAll + '</span><br/>';
-	console.log("destino: "+message.destinationName);
+	else if(inputAll.includes("tempC") && inputAll.includes("hum")){
+		dataObj = JSON.parse(inputAll);
+		var serial =dataObj.deviceId;
+		console.log("llego un mensaje de temperatura, cuerpo:  "+ dataObj);
 
-	var gaugeDataHum = {'data': dataObj.hum}
-	var gaugeDataTempC = {'data': dataObj.tempC}
-	var gaugeDataHiC = {'data': dataObj.hiC}
-	var gaugeDataTempF = {'data': dataObj.tempF}
-	var gaugeDataHiF = {'data': dataObj.hiF}
-
-	console.log("objeto recibido: "+dataObj);
-//	var progreso =  animateprogress("humedad",dataObj.hum);
-//	var progreso =  animateprogress("temperaturac",dataObj.tempC);
-//	var progreso =  animateprogress("sensacionc",dataObj.hiC);
-//	var progreso =  animateprogress("temperaturaf",dataObj.tempF);
-//	var progreso =  animateprogress("sensacionf",dataObj.hiF);
-	// create a chart and set options
-	// note that via the c3.js API we bind the chart to the element with id equal to chart1
-	
-	}catch(err) {
-		 console.log(err.message);
+//		var state = dataObj.tempC; 	
+//		var gaugeDataHum = {'data': dataObj.hum}
+//		var gaugeDataTempC = {'data': dataObj.tempC}
+//		var gaugeDataHiC = {'data': dataObj.hiC}
+//		var gaugeDataTempF = {'data': dataObj.tempF}
+//		var gaugeDataHiF = {'data': dataObj.hiF}
+		if(dataObj.hum != null && document.getElementById("humedad"+serial)!= null)
+			animatevar("barrahum"+serial,"humedad"+serial,dataObj.hum);
+		
+		if(dataObj.tempC != null && document.getElementById("temperaturac"+serial)!= null)
+			animatevar("barratempc"+serial,"temperaturac"+serial,dataObj.tempC);
+		
+		if(dataObj.hiC != null && document.getElementById("sensacionc"+serial)!= null)
+			animatevar("barrasensc"+serial,"sensacionc"+serial,dataObj.hiC);
+		
+		if(dataObj.tempF != null && document.getElementById("temperaturaf"+serial)!= null)
+			animatevar("barratempf"+serial,"temperaturaf"+serial,dataObj.tempF);
+		
+		if(dataObj.hiF != null && document.getElementById("sensacionf"+serial)!= null)
+			animatevar("barrasensf"+serial,"sensacionf"+serial,dataObj.hiF);
+	}else{
+			dataObj = JSON.parse(inputAll);
+		if(dataObj.SW1 != null && dataObj.SW1=="ON"){
+			var deviceserial = "boton1"+dataObj.deviceId;
+			updateEstado(deviceserial,"yes","botonsonoff");
+			var barraho= "sonofftimer1"+dataObj.deviceId;
+			var barranum= "span1"+dataObj.deviceId;
+			animatevar(barraho,barranum,dataObj.PB1TTO);
+		}if(dataObj.SW1 != null && dataObj.SW1=="OFF"){
+			var deviceserial = "boton1"+dataObj.deviceId;
+			updateEstado(deviceserial,"no","botonsonoff");
+		}if(dataObj.SW2 != null && dataObj.SW2=="ON"){
+			var deviceserial = "boton2"+dataObj.deviceId;
+			updateEstado(deviceserial,"yes","botonsonoff");
+			var barraho= "sonofftimer2"+dataObj.deviceId;
+			var barranum= "span2"+dataObj.deviceId;
+			animatevar(barraho,barranum,dataObj.PB2TTO);
+		}if(dataObj.SW2 != null && dataObj.SW2=="OFF"){
+			var deviceserial = "boton2"+dataObj.deviceId;
+			updateEstado(deviceserial,"no","botonsonoff");
 		}
-	
 	}
 }
-/** fin sonoff**/
+
+/** comportamiento cuando recibe un mensaje*/
+
+
+
 
 // Called after form input is processed
 function startConnect(host,port,ssl,user,pass,fileouput, topico) {

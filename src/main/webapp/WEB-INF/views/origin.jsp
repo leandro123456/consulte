@@ -45,27 +45,6 @@
 
 <script>
 
-//funcion para actulizar los botones en la vista
-function toggleText(button_id, variable) 
-{
-   var el = document.getElementById(button_id);
-   if (variable == "yes"){
-       el.firstChild.data = "Encendido";
-   }
-   if (variable == "no"){
-     el.firstChild.data = "Apagado";
-   }
-   else
-	   console.log("no encontro el nombre de la variable: "+ variable +" iddelboton: "+ button_id);
-}
-
-//funcion para actulizar el estado en la vista
-function updateEstado(spanId, valor) 
-{
-   var spanStatus = document.getElementById(spanId);
-   spanStatus.firstChild.data = valor;
-   console.log("se actualizo el status del span para el ID: "+ spanId);
-}
 
 
 </script>
@@ -98,37 +77,41 @@ function updateEstado(spanId, valor)
 								<div class="col-xs-12" id="buttons_area">
 
 									<div id="left_buttons">
-										<div class="keypad_button_row">
-											<button type="button"
-												class="btn btn-outline-dark keypad_button keypad_button_small">
-												<i class="fas fa-chevron-left"></i>
-											</button>
-											<button type="button"
-												class="btn btn-outline-dark keypad_button keypad_button_small">
-												<i class="fas fa-chevron-right"></i>
-											</button>
-										</div>
-										<div class="keypad_button_row">
+<!-- 										<div class="keypad_button_row"> -->
+<!-- 											<button type="button" -->
+<!-- 												class="btn btn-outline-dark keypad_button keypad_button_small"> -->
+<!-- 												<i class="fas fa-chevron-left"></i> -->
+<!-- 											</button> -->
+<!-- 											<button type="button" -->
+<!-- 												class="btn btn-outline-dark keypad_button keypad_button_small"> -->
+<!-- 												<i class="fas fa-chevron-right"></i> -->
+<!-- 											</button> -->
+<!-- 										</div> -->
+<!-- 										<p></p> -->
+										<div>
 											<button type="button" id="btn_f"
 												class="btn btn-outline-dark keypad_button keypad_button_slim" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','DSC010000000001','alarm-fire')">
 												<i class="dsc-icon icon-flame" title="Fire"></i>
 											</button>
 										</div>
-										<div class="keypad_button_row">
+										<p></p>
+										<div>
 											<button type="button" id="btn_a"
 												class="btn btn-outline-dark keypad_button keypad_button_slim" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','DSC010000000001','alarm-alert')">
 												<i class="dsc-icon icon-alert" title="Alert"></i>
 											</button>
 										</div>
-										<div class="keypad_button_row">
+										<p></p>
+										<div>
 											<button type="button" id="btn_p"
 												class="btn btn-outline-dark keypad_button keypad_button_slim" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','DSC010000000001','alarm-panic')">
 												<i class="dsc-icon icon-thief" title="Panic"></i>
 											</button>
-											<div class="keypad_button_row">
-												<i class="fas fa-lightbulb" id="backlight_icon"
-													title="Backlight"></i>
-											</div>
+										</div>
+										<p></p>
+										<div>
+											<i class="fas fa-lightbulb" id="backlight_icon"
+												title="Backlight"></i>
 										</div>
 									</div>
 
@@ -170,31 +153,35 @@ function updateEstado(spanId, valor)
 									</div>
 
 									<div id="right_buttons">
-										<div class="keypad_button_row">
+										<div>
 											<button type="button" id="btn_s"
 												class="btn btn-outline-dark keypad_button keypad_button_control">
 												<i class="dsc-icon icon-stay_away"></i>
 											</button>
 										</div>
-										<div class="keypad_button_row">
+										<p></p>
+										<div>
 											<button type="button" id="btn_w"
 												class="btn btn-outline-dark keypad_button keypad_button_control">
 												<i class="dsc-icon icon-stay_empty"></i>
 											</button>
 										</div>
-										<div class="keypad_button_row">
+										<p></p>
+										<div>
 											<button type="button" id="btn_c"
 												class="btn btn-outline-dark keypad_button keypad_button_control">
 												<i class="dsc-icon icon-bell"></i>
 											</button>
 										</div>
-										<div class="keypad_button_row">
+										<p></p>
+										<div>
 											<button type="button"
 												class="btn btn-outline-dark keypad_button keypad_button_control">
 												<i class="dsc-icon icon-refresh"></i>
 											</button>
 										</div>
-										<div class="keypad_button_row">
+										<p></p>
+										<div>
 											<button type="button"
 												class="btn btn-outline-dark keypad_button keypad_button_control">
 												<i class="dsc-icon icon-exit"></i>
@@ -285,12 +272,13 @@ function updateEstado(spanId, valor)
 // 	}
 
 	$(document).ready(function() {
-		updateWiget();
-		animateprogress("humedad", 50);
-		animateprogress("temperaturac", 25);
-		animateprogress("sensacionc", 27);
-		animateprogress("temperaturaf", 77);
-		animateprogress("sensacionf", 80.6);
+		startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr","mqttpwd",${topicos});
+// 		updateWiget();
+// 		animateprogress("humedad", 50);
+// 		animateprogress("temperaturac", 25);
+// 		animateprogress("sensacionc", 27);
+// 		animateprogress("temperaturaf", 77);
+// 		animateprogress("sensacionf", 80.6);
 		//startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr", "mqttpwd","/DSC010000000001/dsc/Get/Partition1");
 		//sleep(20000);
 		//console.log("esta es la lista de conexiones: "+ '${topicos}');
@@ -300,8 +288,6 @@ function updateEstado(spanId, valor)
 // 		function myFunction(item, index) { 
 // 		  startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr","mqttpwd",item);
 // 		}
-
-		startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr","mqttpwd",${topicos});
 		//startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr", "mqttpwd","RConfig/debug");
 		//startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr", "mqttpwd","RConfig/WTHUSB000000001");
 	});

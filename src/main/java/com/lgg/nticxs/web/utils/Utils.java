@@ -495,6 +495,7 @@ public class Utils {
 						contenidototal= contenidototal+vista.getContenido().get("tempF");
 					if(atributosDeLaVista[i].equals("sensF"))
 						contenidototal= contenidototal+vista.getContenido().get("sensF");
+						contenidototal= contenidototal.replaceAll("CAMBIARSENSOR",serialDevice);				
 					break;
 				case "sonoff":
 					if(atributosDeLaVista[i].equals("sonoffbody")) {
@@ -528,7 +529,9 @@ public class Utils {
 			String inicio="";
 			if(tipoDeVista.equals("sonoff") || tipoDeVista.equals("sonofftwo"))
 				inicio= vista.getInicio().replaceAll("CAMBIARSONOFF", serialDevice);
-			else
+			else if (tipoDeVista.equals("temperatura_horizontal") || tipoDeVista.equals("temperatura_reloj"))
+				inicio= vista.getInicio().replaceAll("CAMBIARSENSOR", serialDevice);
+				else
 				inicio = vista.getInicio();
 			String vistatotal = inicio+contenidototal+vista.getFin();
 			System.out.println("vista total: "+ vistatotal);
