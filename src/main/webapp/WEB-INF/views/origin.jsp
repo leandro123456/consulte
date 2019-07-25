@@ -45,14 +45,13 @@
 
 <script>
 
-
-
 </script>
+
 <!-- alarma -->
 <div class="col-lg-6 mb-4"> 
 	<div class="card shadow mb-4"> 
 		<div class="card-header py-3">	
-			<h6 class="m-0 font-weight-bold text-primary">Alarm</h6>
+			<h6 class="m-0 font-weight-bold text-primary">Alarma CAMBIARALARMA</h6>
 		</div>
 		<div class="card-body">
 
@@ -65,11 +64,11 @@
 										<div id="second_line">&nbsp;</div>
 									</div>
 									<div class="status_icons">
-										<i class="dsc-icon icon-check" id="ready_icon" title="Ready"></i>
-										<i class="dsc-icon icon-armed" id="armed_icon" title="Armed"></i>
-										<i class="dsc-icon icon-trouble" id="trouble_icon"
+										<i class="dsc-icon icon-check" id="ready_iconCAMBIARALARMA" title="Ready"></i>
+										<i class="dsc-icon icon-armed" id="armed_iconCAMBIARALARMA" title="Armed"></i>
+										<i class="dsc-icon icon-trouble" id="trouble_iconCAMBIARALARMA"
 											title="System Trouble"></i> <i class="dsc-icon icon-ac"
-											id="ac_icon" title="AC Present"></i>
+											id="ac_iconCAMBIARALARMA" title="AC Present"></i>
 									</div>
 								</div>
 
@@ -88,100 +87,100 @@
 <!-- 											</button> -->
 <!-- 										</div> -->
 <!-- 										<p></p> -->
-										<div>
+										<div class="centrarbonotesalarma">
 											<button type="button" id="btn_f"
-												class="btn btn-outline-dark keypad_button keypad_button_slim" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','DSC010000000001','alarm-fire')">
+												class="btn btn-outline-dark keypad_button keypad_button_control" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARALARMA','alarm-fire')">
 												<i class="dsc-icon icon-flame" title="Fire"></i>
 											</button>
 										</div>
 										<p></p>
-										<div>
+										<div class="centrarbonotesalarma">
 											<button type="button" id="btn_a"
-												class="btn btn-outline-dark keypad_button keypad_button_slim" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','DSC010000000001','alarm-alert')">
+												class="btn btn-outline-dark keypad_button keypad_button_control" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARALARMA','alarm-alert')">
 												<i class="dsc-icon icon-alert" title="Alert"></i>
 											</button>
 										</div>
 										<p></p>
-										<div>
+										<div class="centrarbonotesalarma">
 											<button type="button" id="btn_p"
-												class="btn btn-outline-dark keypad_button keypad_button_slim" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','DSC010000000001','alarm-panic')">
+												class="btn btn-outline-dark keypad_button keypad_button_control" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARALARMA','alarm-panic')">
 												<i class="dsc-icon icon-thief" title="Panic"></i>
 											</button>
 										</div>
-										<p></p>
-										<div>
-											<i class="fas fa-lightbulb" id="backlight_icon"
-												title="Backlight"></i>
-										</div>
+<!-- 										<p></p> -->
+<!-- 										<div> -->
+<!-- 											<i class="fas fa-lightbulb" id="backlight_icon" -->
+<!-- 												title="Backlight"></i> -->
+<!-- 										</div> -->
 									</div>
 
 									<div id="keypad_container">
 										<div class="keypad_button_row">
 											<button type="button" id="btn_1"
-												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','DSC010000000001','alarm-1')">1</button>
+												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARALARMA','alarm-1')">1</button>
 											<button type="button" id="btn_2"
-												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','DSC010000000001','alarm-2')">2</button>
+												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARALARMA','alarm-2')">2</button>
 											<button type="button" id="btn_3"
-												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','DSC010000000001','alarm-3')">3</button>
+												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARALARMA','alarm-3')">3</button>
 										</div>
 										<div class="keypad_button_row">
 											<button type="button" id="btn_4"
-												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','DSC010000000001','alarm-4')">4</button>
+												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARALARMA','alarm-4')">4</button>
 											<button type="button" id="btn_5"
-												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','DSC010000000001','alarm-5')">5</button>
+												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARALARMA','alarm-5')">5</button>
 											<button type="button" id="btn_6"
-												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','DSC010000000001','alarm-6')">6</button>
+												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARALARMA','alarm-6')">6</button>
 										</div>
 										<div class="keypad_button_row">
 											<button type="button" id="btn_7"
-												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','DSC010000000001','alarm-7')">7</button>
+												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARALARMA','alarm-7')">7</button>
 											<button type="button" id="btn_8"
-												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','DSC010000000001','alarm-8')">8</button>
+												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARALARMA','alarm-8')">8</button>
 											<button type="button" id="btn_9"
-												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','DSC010000000001','alarm-9')">9</button>
+												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARALARMA','alarm-9')">9</button>
 										</div>
 										<div class="keypad_button_row">
 											<button type="button" id="btn_*"
-												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','DSC010000000001','alarm-*')">
-												<i class="dsc-icon icon-star"></i>
+												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARALARMA','alarm-*')">*
+<!-- 												<i class="dsc-icon icon-star"></i> -->
 											</button>
 											<button type="button" id="btn_0"
-												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','DSC010000000001','alarm-0')">0</button>
+												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARALARMA','alarm-0')">0</button>
 											<button type="button" id="btn_#"
-												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','DSC010000000001','alarm-#')">#</button>
+												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARALARMA','alarm-#')">#</button>
 										</div>
 									</div>
 
 									<div id="right_buttons">
-										<div>
-											<button type="button" id="btn_s"
+										<div class="centrarbonotesalarma">
+											<button type="button" id="btn_sCAMBIARALARMA"
 												class="btn btn-outline-dark keypad_button keypad_button_control">
 												<i class="dsc-icon icon-stay_away"></i>
 											</button>
 										</div>
 										<p></p>
-										<div>
-											<button type="button" id="btn_w"
+										<div class="centrarbonotesalarma">
+											<button type="button" id="btn_wCAMBIARALARMA"
 												class="btn btn-outline-dark keypad_button keypad_button_control">
 												<i class="dsc-icon icon-stay_empty"></i>
 											</button>
 										</div>
 										<p></p>
-										<div>
-											<button type="button" id="btn_c"
+										<div class="centrarbonotesalarma">
+											<button type="button" id="btn_cCAMBIARALARMA"
 												class="btn btn-outline-dark keypad_button keypad_button_control">
 												<i class="dsc-icon icon-bell"></i>
 											</button>
 										</div>
 										<p></p>
-										<div>
+										<div class="centrarbonotesalarma">
 											<button type="button"
 												class="btn btn-outline-dark keypad_button keypad_button_control">
 												<i class="dsc-icon icon-refresh"></i>
 											</button>
 										</div>
 										<p></p>
-										<div>
+										<div class="centrarbonotesalarma">
 											<button type="button"
 												class="btn btn-outline-dark keypad_button keypad_button_control">
 												<i class="dsc-icon icon-exit"></i>
@@ -196,19 +195,19 @@
 		<p> </p>
       <div class="row" id="regular_icons">
         <div class="zone inline_container">
-          <i class="far fa-circle" id="fire_icon"></i> Fire
+          <i class="far fa-circle" id="fire_iconCAMBIARALARMA"></i> Fire
         </div>
         <div class="zone inline_container">
-          <i class="far fa-circle" id="memory_icon"></i> Memory
+          <i class="far fa-circle" id="memory_iconCAMBIARALARMA"></i> Memory
         </div>
         <div class="zone inline_container">
-          <i class="far fa-circle" id="bypass_icon"></i> Bypass
+          <i class="far fa-circle" id="bypass_iconCAMBIARALARMA"></i> Bypass
         </div>
         <div class="zone inline_container">
-          <i class="far fa-circle" id="program_icon"></i> Program
+          <i class="far fa-circle" id="program_iconCAMBIARALARMA"></i> Program
         </div>
         <div class="zone inline_container">
-          <i class="far fa-circle" id="pgm_icon"></i> PGM
+          <i class="far fa-circle" id="pgm_iconCAMBIARALARMA"></i> PGM
         </div>
       </div>
       <div class="row" id="zones_list">
