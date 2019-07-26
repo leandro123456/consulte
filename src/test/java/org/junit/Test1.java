@@ -153,19 +153,20 @@ public class Test1 {
 		
 		VistaDAO vistadao = new VistaDAO();
 		Vista vista= new Vista();
-		vista.setName("temperatura_horizontal");
-		vista.setInicio(inicio);
-		vista.setFin(fin);
+//		vista.setName("temperatura_horizontal");
+//		vista.setInicio(inicio);
+//		vista.setFin(fin);
 		Map<String, String> elem= new HashMap<>();
-		elem.put("Hum",humedad);
-		elem.put("tempC", tempC);
-		elem.put("sensC", sensC);
-		elem.put("tempF", tempF);
-		elem.put("sensF", sensF);
-		vista.setContenido(elem);
-		vistadao.create(vista);
-		System.out.println("termino vista horizontal");
-//		
+//		elem.put("Hum",humedad);
+//		elem.put("tempC", tempC);
+//		elem.put("sensC", sensC);
+//		elem.put("tempF", tempF);
+//		elem.put("sensF", sensF);
+//		vista.setContenido(elem);
+//		vistadao.create(vista);
+//		System.out.println("termino vista horizontal");
+
+		
 //		inicio= "<div class=\"col-12\"> <div class=\"card shadow mb-4\"><div class=\"card-header py-3\"><h6 class=\"m-0 font-weight-bold text-primary\">Sensor de Temperatura Y Humedad</h6></div>";
 //		humedad= "<div class=\"card border-left-primary shadow h-20 py-2\"> <div class=\"card-body\"> <div class=\"row no-gutters align-items-center\"> <div class=\"col-12\"><div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\">Humedad</div> </div><div class=\"col-12\" id=\"chartHum\"> <i class=\"fas fa-calendar fa-2x text-gray-300\"></i> </div> </div> </div></div>";
 //		String indiceTemp="<div class=\"card border-left-primary shadow h-70 py-2\"><div class=\"card-body\"><div class=\"row no-gutters align-items-center\"><div class=\"col-12\"><div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\">Temperatura</div></div>";
@@ -254,6 +255,131 @@ public class Test1 {
 //		vista.setContenido(elem);
 //		vistadao.create(vista);
 //		System.out.println("termino vista de 2 boton");
+		
+		
+		
+		//alarma
+		inicio="";
+		fin="";
+		String alarmabody="<div class=\"col-lg-6 mb-4\">" + 
+				"	<div class=\"card shadow mb-4\">" + 
+				"		<div class=\"card-header py-3\">" + 
+				"			<h6 class=\"m-0 font-weight-bold text-primary\">Alarma CAMBIARALARMA</h6>" + 
+				"		</div>" + 
+				"		<div class=\"card-body\">" + 
+				"							<div class=\"col-xs-12\">" + 
+				
+				"								<div id=\"lcd_container\">" + 
+				"									<div class=\"virtual_lcd\">" + 
+				"										<div id=\"first_line\">&nbsp;</div>" + 
+				"										<div id=\"second_line\">&nbsp;</div>" + 
+				"									</div>" + 
+				"									<div class=\"status_icons\">" + 
+				"										<i class=\"dsc-icon icon-check\" id=\"ready_iconCAMBIARALARMA\" title=\"Lista\"></i>" + 
+				"										<i class=\"dsc-icon icon-armed\" id=\"armed_iconCAMBIARALARMA\" title=\"Armada\"></i>" + 
+				"										<i class=\"dsc-icon icon-trouble\" id=\"trouble_iconCAMBIARALARMA\"" + 
+				"											title=\"Problema en el Sistema\"></i> <i class=\"dsc-icon icon-ac\"" + 
+				"											id=\"ac_iconCAMBIARALARMA\" title=\"Alarma Activada\"></i>" + 
+				"									</div>" + 
+				"								</div>" + 
+
+				"								<div class=\"col-xs-12\" id=\"buttons_area\">" + 
+				"									<div id=\"left_buttons\">" + 
+				"										<div class=\"centrarbonotesalarma\">" + 
+				"											<button type=\"button\" id=\"btn_f\"" + 
+				"												class=\"btn btn-outline-dark keypad_button keypad_button_control\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonfuego','CAMBIARALARMA','fuego')\">" + 
+				"												<i class=\"dsc-icon icon-flame\" title=\"Fuego\"></i>" + 
+				"											</button>" + 
+				"										</div>" + 
+				"										<p></p>" + 
+				"										<div class=\"centrarbonotesalarma\">" + 
+				"											<button type=\"button\" id=\"btn_a\"" + 
+				"												class=\"btn btn-outline-dark keypad_button keypad_button_control\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonpolicia','CAMBIARALARMA','policia')\">" + 
+				"												<i class=\"dsc-icon icon-alert\" title=\"Alerta\"></i>" + 
+				"											</button>" + 
+				"										</div>" + 
+				"										<p></p>" + 
+				"										<div class=\"centrarbonotesalarma\">" + 
+				"											<button type=\"button\" id=\"btn_p\"" + 
+				"												class=\"btn btn-outline-dark keypad_button keypad_button_control\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonmedico','CAMBIARALARMA','medico')\">" + 
+				"												<i class=\"dsc-icon icon-thief\" title=\"Panico\"></i>" + 
+				"											</button>" + 
+				"										</div>" + 
+				"									</div>" + 
+				
+				"									<div id=\"keypad_container\">" + 
+				"										<div class=\"keypad_button_row\">" + 
+				"											<button type=\"button\" id=\"btn_1\"" + 
+				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','1')\">1</button>" + 
+				"											<button type=\"button\" id=\"btn_2\"" + 
+				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','2')\">2</button>" + 
+				"											<button type=\"button\" id=\"btn_3\"" + 
+				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','3')\">3</button>" + 
+				"										</div>" + 
+				"										<div class=\"keypad_button_row\">" + 
+				"											<button type=\"button\" id=\"btn_4\"" + 
+				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','4')\">4</button>" + 
+				"											<button type=\"button\" id=\"btn_5\"" + 
+				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','5')\">5</button>" + 
+				"											<button type=\"button\" id=\"btn_6\"" + 
+				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','6')\">6</button>" + 
+				"										</div>" + 
+				"										<div class=\"keypad_button_row\">" + 
+				"											<button type=\"button\" id=\"btn_7\"" + 
+				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','7')\">7</button>" + 
+				"											<button type=\"button\" id=\"btn_8\"" + 
+				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','8')\">8</button>" + 
+				"											<button type=\"button\" id=\"btn_9\"" + 
+				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','9')\">9</button>" + 
+				"										</div>" + 
+				"										<div class=\"keypad_button_row\">" + 
+				"											<button type=\"button\" id=\"btn_*\"" + 
+				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','*')\">*</button>" + 
+				"											<button type=\"button\" id=\"btn_0\"" + 
+				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','0')\">0</button>" + 
+				"											<button type=\"button\" id=\"btn_#\"" + 
+				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','#')\">#</button>" + 
+				"										</div>" + 
+				"									</div>" + 
+				
+				"									<div id=\"right_buttons\">" + 
+				"										<div class=\"centrarbonotesalarma\">" + 
+				"											<button type=\"button\" id=\"btn_sCAMBIARALARMA\"" + 
+				"												class=\"btn btn-outline-dark keypad_button keypad_button_control\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonarmadozona','CAMBIARALARMA','armarzona')\">" + 
+				"												<i class=\"dsc-icon icon-stay_away \" title=\"Armar en Casa\"></i>" + 
+				"											</button>" + 
+				"										</div>" + 
+				"										<p></p>" + 
+				"										<div class=\"centrarbonotesalarma\">" + 
+				"											<button type=\"button\" id=\"btn_wCAMBIARALARMA\"" + 
+				"												class=\"btn btn-outline-dark keypad_button keypad_button_control\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonarmadocompleto','CAMBIARALARMA','armartotal')\">" + 
+				"												<i class=\"dsc-icon icon-stay_empty\" title=\"Armar Completa\"></i>" + 
+				"											</button>" + 
+				"										</div>" + 
+				"										<p></p>" + 
+				"										<div class=\"centrarbonotesalarma\">" + 
+				"											<button type=\"button\" id=\"btn_cCAMBIARALARMA\"" + 
+				"												class=\"btn btn-outline-dark keypad_button keypad_button_control\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','*')\">" + 
+				"												<i class=\"dsc-icon icon-bell\"></i>" + 
+				"											</button>" + 
+				"										</div>" + 
+				"									</div>" + 
+				"								</div>" + 
+				"							</div>" + 
+				"						</div>" + 
+				"					</div>" + 
+				"				</div>";
+		
+		vistadao = new VistaDAO();
+		vista= new Vista();
+		vista.setName("alarma");
+		vista.setInicio(inicio);
+		vista.setFin(fin);
+		elem= new HashMap<>();
+		elem.put("alarmabody",alarmabody);
+		vista.setContenido(elem);
+		vistadao.create(vista);
+		System.out.println("termino vista de alarma");
 	}
 	
 }

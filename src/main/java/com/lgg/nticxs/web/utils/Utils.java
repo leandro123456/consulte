@@ -521,6 +521,13 @@ public class Utils {
 						contenidototal= contenidototal+cuerpoSonoff;	
 						break;	
 					}
+				case "alarma":
+					contenidototal= vista.getContenido().get("alarmabody").replaceAll("CAMBIARALARMA", serialDevice);
+					contenidototal=contenidototal.replaceAll("HOSTALARMA", devconfig.getIphostescribir());
+					contenidototal=contenidototal.replaceAll("PORTALARMA", devconfig.getIphostescribir());
+					contenidototal=contenidototal.replaceAll("USERALARMA", devconfig.getIphostescribir());
+					contenidototal=contenidototal.replaceAll("PASSALARMA", devconfig.getIphostescribir());
+					contenidototal=contenidototal.replaceAll("TOPICOALARMA", devconfig.getIphostescribir());
 				default:
 					System.out.println("ERROR VISTA NO ENCONTRADA");
 					break;
