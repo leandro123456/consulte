@@ -584,9 +584,9 @@ public class Utils {
 		public static String sendMail(String Mensaje,String destino) {
 			Properties props = new Properties();
 //			props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-			props.put("mail.smtp.host", "smtp.gmail.com");
 //			props.put("mail.smtp.user", "cleoscinc");
 //			props.put("mail.smtp.clave", "cinylean12");
+			props.put("mail.smtp.host", "smtp.gmail.com");
 			props.put("mail.smtp.auth", "true");
 			props.put("mail.smtp.starttls.enable", "true");
 			props.put("mail.smtp.port", "587");
@@ -596,7 +596,7 @@ public class Utils {
 			Session session = Session.getInstance(props,
 					new javax.mail.Authenticator() {
 				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication("cleoscinc@gmail.com", "cinylean12");
+					return new PasswordAuthentication("cdash.service@gmail.com", "cinylean12");
 				}
 			});
 			MimeMessage message = new MimeMessage(session);
@@ -608,7 +608,7 @@ public class Utils {
 				message.setText(Mensaje,"ISO-8859-1","html");
 
 				Transport transport = session.getTransport("smtp");
-		        transport.connect("smtp.gmail.com", "cleoscinc@gmail.com", "cinylean12");
+		        transport.connect("smtp.gmail.com", "cdash.service@gmail.com", "cinylean12");
 		        transport.sendMessage(message, message.getAllRecipients());
 		        transport.close();
 				
