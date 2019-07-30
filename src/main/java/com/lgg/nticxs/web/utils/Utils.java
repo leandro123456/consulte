@@ -6,6 +6,9 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -13,11 +16,21 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 import java.util.TimeZone;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+import org.springframework.ui.Model;
 
 import com.lgg.nticxs.web.DAO.DeviceDAO;
 import com.lgg.nticxs.web.DAO.UserDAO;
@@ -27,6 +40,7 @@ import com.lgg.nticxs.web.model.DeviceConfiguration;
 import com.lgg.nticxs.web.model.Nota;
 import com.lgg.nticxs.web.model.User;
 import com.lgg.nticxs.web.model.Vista;
+import com.sun.mail.smtp.SMTPTransport;
 
 public class Utils {
 	private static DeviceDAO devicedao= new DeviceDAO();
@@ -522,12 +536,13 @@ public class Utils {
 						break;	
 					}
 				case "alarma":
+					System.out.println("llego al armado de la alarmas");
 					contenidototal= vista.getContenido().get("alarmabody").replaceAll("CAMBIARALARMA", serialDevice);
 					contenidototal=contenidototal.replaceAll("HOSTALARMA", devconfig.getIphostescribir());
-					contenidototal=contenidototal.replaceAll("PORTALARMA", devconfig.getIphostescribir());
-					contenidototal=contenidototal.replaceAll("USERALARMA", devconfig.getIphostescribir());
-					contenidototal=contenidototal.replaceAll("PASSALARMA", devconfig.getIphostescribir());
-					contenidototal=contenidototal.replaceAll("TOPICOALARMA", devconfig.getIphostescribir());
+					contenidototal=contenidototal.replaceAll("PORTALARMA", devconfig.getPortescribir());
+					contenidototal=contenidototal.replaceAll("USERALARMA", devconfig.getUserescribir());
+					contenidototal=contenidototal.replaceAll("PASSALARMA", devconfig.getPassescribir());
+					contenidototal=contenidototal.replaceAll("TOPICOALARMA", devconfig.getTopicescribir());
 				default:
 					System.out.println("ERROR VISTA NO ENCONTRADA");
 					break;
@@ -545,6 +560,66 @@ public class Utils {
 			return vistatotal;
 		}
 
+		public static String generarRandom() {
+			SecureRandom sr = null;
+			try {
+			    sr = SecureRandom.getInstance("SHA1PRNG", "SUN");
+			    int val = sr.nextInt(1134449112);
+			    String result = val+"";
+			    if(result.length()<9) {
+			    	result=result+""+(9-result.length());
+			    }
+			    return result;
+			} catch (NoSuchAlgorithmException e) {
+			    e.printStackTrace();
+			    return "102913212";
+			} catch (NoSuchProviderException e) {
+			    e.printStackTrace();
+			    return "193493203";
+			} 
+		}
+
+		public static String sendMail(String Mensaje,String destino) {
+			Properties props = new Properties();
+//			props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+			props.put("mail.smtp.host", "smtp.gmail.com");
+//			props.put("mail.smtp.user", "cleoscinc");
+//			props.put("mail.smtp.clave", "cinylean12");
+			props.put("mail.smtp.auth", "true");
+			props.put("mail.smtp.starttls.enable", "true");
+			props.put("mail.smtp.port", "587");
+			
+			
+			
+			Session session = Session.getInstance(props,
+					new javax.mail.Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication("cleoscinc@gmail.com", "cinylean12");
+				}
+			});
+			MimeMessage message = new MimeMessage(session);
+			try {
+				message.setFrom(new InternetAddress("cleoscinc"));
+				message.setRecipients(Message.RecipientType.TO,
+						InternetAddress.parse(destino));
+				message.setSubject("[cDash]: Activacion de Cuenta via Email");
+				message.setText(Mensaje);
+
+				Transport transport = session.getTransport("smtp");
+		        transport.connect("smtp.gmail.com", "cleoscinc@gmail.com", "cinylean12");
+		        transport.sendMessage(message, message.getAllRecipients());
+		        transport.close();
+				
+				System.out.println("Su mensaje se envio correctamente");
+
+
+			} catch (MessagingException e) {
+				System.out.println("fallo el envio del mensaje");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			return "home";
+		}
 		
 		
 }

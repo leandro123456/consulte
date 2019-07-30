@@ -36,7 +36,6 @@
 	<div id="wrapper">
 		<jsp:include page="header.jsp" />
 		<div class="container-fluid">
-		
 			<div class="row" id="cargadora">
 				<c:forEach items="${vistas}" var="vista">
 	                ${vista}
@@ -49,8 +48,6 @@
 			</div>
 		</div>
 	</div>
-
-
 	<div class="visible">
 		<a class="scroll-to-top rounded" href="#page-top"> <i
 			class="fas fa-angle-up"></i>
@@ -81,17 +78,19 @@
 
 
 <script type="text/javascript">
-// 	function sleep(milliseconds) {
-// 	 var start = new Date().getTime();
-// 	 for (var i = 0; i < 1e7; i++) {
-// 	  if ((new Date().getTime() - start) > milliseconds) {
-// 	   break;
-// 	  }
-// 	 }
-// 	}
-
 	$(document).ready(function() {
 		startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr","mqttpwd",${topicos});
+		
+//	 	function sleep(milliseconds) {
+//	 	 var start = new Date().getTime();
+//	 	 for (var i = 0; i < 1e7; i++) {
+//	 	  if ((new Date().getTime() - start) > milliseconds) {
+//	 	   break;
+//	 	  }
+//	 	 }
+//	 	}
+
+
 // 		updateWiget();
 // 		animateprogress("humedad", 50);
 // 		animateprogress("temperaturac", 25);
@@ -105,7 +104,6 @@
 // 		${topicos}.forEach(myFunction);
 
 // 		function myFunction(item, index) { 
-// 		  startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr","mqttpwd",item);
 // 		}
 		//startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr", "mqttpwd","RConfig/debug");
 		//startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr", "mqttpwd","RConfig/WTHUSB000000001");

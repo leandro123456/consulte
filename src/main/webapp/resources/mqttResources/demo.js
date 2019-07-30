@@ -121,7 +121,6 @@ function animatevar (id,spanid, val){
 
 /** fin temperatura*/
 
-
 /** comportamiento cuando recibe un mensaje*/
 //Called when a message arrives
 function onMessageArrivedSonoff(message) {
@@ -131,7 +130,7 @@ function onMessageArrivedSonoff(message) {
 	if(message.destinationName.includes("/Status")){
 		informarstatus(message.destinationName, message.payloadString)
 	}
-	else if(inputAll.includes("tempC") && inputAll.includes("hum")){
+	if(inputAll.includes("tempC") && inputAll.includes("hum")){
 		dataObj = JSON.parse(inputAll);
 		var serial =dataObj.deviceId;
 		console.log("llego un mensaje de temperatura, cuerpo:  "+ dataObj);

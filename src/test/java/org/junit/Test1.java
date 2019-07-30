@@ -140,7 +140,7 @@ public class Test1 {
 		
 	}
 	
-
+	
 	//@Test
 	public void testMakeAllViews() {
 		String inicio= "<div class=\"col-lg-6 mb-4\"><div class=\"card shadow mb-4\"><div class=\"card-header py-3\"><h6 class=\"m-0 font-weight-bold text-primary\">Sensor CAMBIARSENSOR</h6></div>";
@@ -287,21 +287,21 @@ public class Test1 {
 				"									<div id=\"left_buttons\">" + 
 				"										<div class=\"centrarbonotesalarma\">" + 
 				"											<button type=\"button\" id=\"btn_f\"" + 
-				"												class=\"btn btn-outline-dark keypad_button keypad_button_control\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonfuego','CAMBIARALARMA','fuego')\">" + 
+				"												class=\"btn btn-outline-dark keypad_button keypad_button_control\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-fuego')\">" + 
 				"												<i class=\"dsc-icon icon-flame\" title=\"Fuego\"></i>" + 
 				"											</button>" + 
 				"										</div>" + 
 				"										<p></p>" + 
 				"										<div class=\"centrarbonotesalarma\">" + 
 				"											<button type=\"button\" id=\"btn_a\"" + 
-				"												class=\"btn btn-outline-dark keypad_button keypad_button_control\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonpolicia','CAMBIARALARMA','policia')\">" + 
+				"												class=\"btn btn-outline-dark keypad_button keypad_button_control\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-policia')\">" + 
 				"												<i class=\"dsc-icon icon-alert\" title=\"Alerta\"></i>" + 
 				"											</button>" + 
 				"										</div>" + 
 				"										<p></p>" + 
 				"										<div class=\"centrarbonotesalarma\">" + 
 				"											<button type=\"button\" id=\"btn_p\"" + 
-				"												class=\"btn btn-outline-dark keypad_button keypad_button_control\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonmedico','CAMBIARALARMA','medico')\">" + 
+				"												class=\"btn btn-outline-dark keypad_button keypad_button_control\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-medico')\">" + 
 				"												<i class=\"dsc-icon icon-thief\" title=\"Panico\"></i>" + 
 				"											</button>" + 
 				"										</div>" + 
@@ -310,56 +310,56 @@ public class Test1 {
 				"									<div id=\"keypad_container\">" + 
 				"										<div class=\"keypad_button_row\">" + 
 				"											<button type=\"button\" id=\"btn_1\"" + 
-				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','1')\">1</button>" + 
+				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-1')\">1</button>" + 
 				"											<button type=\"button\" id=\"btn_2\"" + 
-				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','2')\">2</button>" + 
+				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-2')\">2</button>" + 
 				"											<button type=\"button\" id=\"btn_3\"" + 
-				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','3')\">3</button>" + 
+				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-3')\">3</button>" + 
 				"										</div>" + 
 				"										<div class=\"keypad_button_row\">" + 
 				"											<button type=\"button\" id=\"btn_4\"" + 
-				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','4')\">4</button>" + 
+				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-4')\">4</button>" + 
 				"											<button type=\"button\" id=\"btn_5\"" + 
-				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','5')\">5</button>" + 
+				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-5')\">5</button>" + 
 				"											<button type=\"button\" id=\"btn_6\"" + 
-				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','6')\">6</button>" + 
+				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-6')\">6</button>" + 
 				"										</div>" + 
 				"										<div class=\"keypad_button_row\">" + 
 				"											<button type=\"button\" id=\"btn_7\"" + 
-				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','7')\">7</button>" + 
+				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-7')\">7</button>" + 
 				"											<button type=\"button\" id=\"btn_8\"" + 
-				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','8')\">8</button>" + 
+				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-8')\">8</button>" + 
 				"											<button type=\"button\" id=\"btn_9\"" + 
-				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','9')\">9</button>" + 
+				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-9')\">9</button>" + 
 				"										</div>" + 
 				"										<div class=\"keypad_button_row\">" + 
 				"											<button type=\"button\" id=\"btn_*\"" + 
-				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','*')\">*</button>" + 
+				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-*')\">*</button>" + 
 				"											<button type=\"button\" id=\"btn_0\"" + 
-				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','0')\">0</button>" + 
+				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-0')\">0</button>" + 
 				"											<button type=\"button\" id=\"btn_#\"" + 
-				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','#')\">#</button>" + 
+				"												class=\"btn btn-outline-dark keypad_button\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-#')\">#</button>" + 
 				"										</div>" + 
 				"									</div>" + 
 				
 				"									<div id=\"right_buttons\">" + 
 				"										<div class=\"centrarbonotesalarma\">" + 
 				"											<button type=\"button\" id=\"btn_sCAMBIARALARMA\"" + 
-				"												class=\"btn btn-outline-dark keypad_button keypad_button_control\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonarmadozona','CAMBIARALARMA','armarzona')\">" + 
+				"												class=\"btn btn-outline-dark keypad_button keypad_button_control\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-armarzona')\">" + 
 				"												<i class=\"dsc-icon icon-stay_away \" title=\"Armar en Casa\"></i>" + 
 				"											</button>" + 
 				"										</div>" + 
 				"										<p></p>" + 
 				"										<div class=\"centrarbonotesalarma\">" + 
 				"											<button type=\"button\" id=\"btn_wCAMBIARALARMA\"" + 
-				"												class=\"btn btn-outline-dark keypad_button keypad_button_control\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonarmadocompleto','CAMBIARALARMA','armartotal')\">" + 
+				"												class=\"btn btn-outline-dark keypad_button keypad_button_control\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-armartotal')\">" + 
 				"												<i class=\"dsc-icon icon-stay_empty\" title=\"Armar Completa\"></i>" + 
 				"											</button>" + 
 				"										</div>" + 
 				"										<p></p>" + 
 				"										<div class=\"centrarbonotesalarma\">" + 
 				"											<button type=\"button\" id=\"btn_cCAMBIARALARMA\"" + 
-				"												class=\"btn btn-outline-dark keypad_button keypad_button_control\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','*')\">" + 
+				"												class=\"btn btn-outline-dark keypad_button keypad_button_control\" onclick=\"Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-campana')\">" + 
 				"												<i class=\"dsc-icon icon-bell\"></i>" + 
 				"											</button>" + 
 				"										</div>" + 

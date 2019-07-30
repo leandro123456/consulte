@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lgg.nticxs.web.utils.EncryptorPassword;
+import com.lgg.nticxs.web.utils.Utils;
 import com.lgg.nticxs.web.DAO.UserDAO;
 import com.lgg.nticxs.web.model.User;
 
@@ -18,6 +19,7 @@ import nl.flotsam.xeger.Xeger;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -153,19 +155,25 @@ public class LoginController{
 						List<byte[]> list = new ArrayList<byte[]>();
 						list.add(password);
 					} catch (Exception e) {
-						model.addAttribute("msg1", "Error in the generation of the password");
+						model.addAttribute("msg1", "Error durante la generacion de la contraseña. Por favor vuelva a intentarlo");
 						e.printStackTrace();
 					}
 					user.setRole(role);
 					user.setFirstname(firstName);
 					user.setLastname(lastName);
 					user.setEmail(email);
+					String ran= Utils.generarRandom();
+					user.setPassCuenta(ran);
 					userdao.update(user);
+					String mensaje= "Muchas Gracias por crear su cuenta /n"+
+					"Para finalizar el proceso de activacion ingrese el siguiente valor en el inicio de Sesion: /n"
+							+ ran;
+					Utils.sendMail(mensaje, email);
 				}
-				model.addAttribute("msg2", "The User was created successfully");
+				model.addAttribute("msg2", "Su usuario se creo exitosamente. Se le envio un mail para finalizar el proceso de activacion. Por favor, verifique su cuenta de correo");
 				return "login";
 		} else {
-			model.addAttribute("msg1", "Error ... Incorrect password");
+			model.addAttribute("msg1", "Error ... Contraseña Incorrecta. Por favor vuelva a itentarlo");
 			return "signup";
 		}
 	}

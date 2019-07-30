@@ -114,11 +114,9 @@ public class HomeController {
 			return new ModelAndView("validate", model);
 		}
 		clasificarSerialUsuario(user.getDeviceserialnumber());
-		System.out.println("cantidad de sonoff: "+ deviceAsociadoSonoff.size()+ "PRIMERO: " +deviceAsociadoSonoff.get(0));
 		model.addAttribute("sonoffcantidad", deviceAsociadoSonoff.size());
 		for(int i=0; i<deviceAsociadoSonoff.size();i++) {
 			String variable = "sonoffserial"+i;
-			System.out.println("este es el nombre de la variable: "+ variable);
 			model.addAttribute(variable, deviceAsociadoSonoff.get(i));
 		}
 		List<String> vistas = new ArrayList<>();
@@ -141,40 +139,7 @@ public class HomeController {
    		return new ModelAndView("origin", model);
 	}
 
-	@PostMapping("home/")
-	public String sendMail(Model model, String Mensaje) {
-		Properties props = new Properties();
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.port", "587");
 
-		Session session = Session.getInstance(props,
-				new javax.mail.Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("Username", "PassWord");
-			}
-		});
-
-		try {
-
-			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("Username"));
-			message.setRecipients(Message.RecipientType.TO,
-					InternetAddress.parse("leandrogabrielguzman@gmail.com"));
-			message.setSubject("Activacion de Cuenta de Email");
-			message.setText(Mensaje);
-
-			Transport.send(message);
-			model.addAttribute("msg1", "Su mensaje se envio correctamente");
-
-
-		} catch (MessagingException e) {
-			model.addAttribute("msg1", "Fallo el envio de sucorrectamente");
-			throw new RuntimeException(e);
-		}
-		return "home";
-	}
 	
 	@PostMapping("validate")
 	public String validateMail(Model model,@RequestParam(name="code") String code,
@@ -279,6 +244,7 @@ public class HomeController {
 		deviceAsociadoTermomtro = new ArrayList<>();
 		for(String serial: deviceserialnumbers) {
 			Device device = devicedao.retrieveBySerialNumber(serial);
+			System.out.println("tipo del DEVICE en clasificarUsuario: "+ device.getTipo());
 			if(device.getTipo().equals(Device.ALARMA))
 				deviceAsociadoAlarma.add(serial);
 			else if (device.getTipo().equals(Device.SONOFF))

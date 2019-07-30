@@ -575,9 +575,10 @@
 	  			}
 	  		 if(document.getElementById("cantidadswiths") != null){
 	  			 var cantidades =document.getElementById("cantidadswiths");
-	  			var cantidadelegida =cantidades.options[cantidades.selectedIndex].value;
+	  			 var cantidadelegida =cantidades.options[cantidades.selectedIndex].value;
 	  			 console.log("cantidad elegida: "+ cantidadelegida);
-	  			document.getElementById("cantidadswiths1").value = cantidadelegida;
+	  			 if(cantidadelegida != "none")
+	  				document.getElementById("cantidadswiths1").value = cantidadelegida;
 	  		 }
 	  		  
 	  		  //vista termometro

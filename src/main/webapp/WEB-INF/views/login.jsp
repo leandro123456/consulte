@@ -82,12 +82,12 @@
                     <div class="form-group">
                       <input type="password" class="form-control form-control-user"  name="password" id = "userPassword"  placeholder="Password">
                     </div>
-                    <div class="form-group">
-                      <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck">Remember Me</label>
-                      </div>
-                    </div>
+<!--                     <div class="form-group"> -->
+<!--                       <div class="custom-control custom-checkbox small"> -->
+<!--                         <input type="checkbox" class="custom-control-input" id="customCheck"> -->
+<!--                         <label class="custom-control-label" for="customCheck">Remember Me</label> -->
+<!--                       </div> -->
+<!--                     </div> -->
 <!--                     <input id="sign" type="button" class="btn btn-primary btn-user btn-block" value="Login"> -->
                  	<div class="container-login100-form-btn">
 						<button class="btn btn-primary btn-user btn-block" type="submit" id="sign">Login</button>

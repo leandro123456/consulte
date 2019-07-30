@@ -220,10 +220,10 @@ public class DeviceController {
 				break;
 			case "alarma":
 				//vista de alarma
-				String alarmavista = Vista.ALARMA;
+				String alarmavista = Vista.ALARMA+";alarmabody";
 				vista.put(name, alarmavista);
 				device.setVista(vista);
-				System.out.println("es una alarma - todavia nada");
+				System.out.println("es una alarma");
 				break;
 			case "sonoff":
 				timerstringvalue=SimpleTimerString.maketimerStringFormat(timerstringsonoff);

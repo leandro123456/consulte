@@ -5,10 +5,14 @@ import com.lgg.nticxs.web.DAO.VistaDAO;
 import com.lgg.nticxs.web.DAO.helper.MongoDBRemove;
 
 import java.net.UnknownHostException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,6 +23,7 @@ import com.lgg.nticxs.web.DAO.DeviceDefaultConfigurationDAO;
 import com.lgg.nticxs.web.model.User;
 import com.lgg.nticxs.web.model.Vista;
 import com.lgg.nticxs.web.model.simple.SimpleTimerString;
+import com.lgg.nticxs.web.utils.Utils;
 import com.lgg.nticxs.web.model.Ciclolectivo;
 import com.lgg.nticxs.web.model.Device;
 import com.lgg.nticxs.web.model.DeviceConfiguration;
@@ -36,6 +41,26 @@ public class TestUtilities {
 			System.out.println("es nulo");
 		else
 			System.out.println("tiene contenido");
+	}
+	
+	//@Test
+	public void testenviarmail() {
+		Utils.sendMail("1232132222", "leandrogguzman@hotmail.com");
+		System.out.println("termino");
+	}
+	
+	//@Test
+	public void testCreacionderandom() {
+		SecureRandom sr = null;
+		try {
+		    sr = SecureRandom.getInstance("SHA1PRNG", "SUN");
+		    int val = sr.nextInt(1134449112);
+		    System.out.println(val);
+		} catch (NoSuchAlgorithmException e) {
+		    e.printStackTrace();
+		} catch (NoSuchProviderException e) {
+		    e.printStackTrace();
+		} 
 	}
 	
 	//@Test
