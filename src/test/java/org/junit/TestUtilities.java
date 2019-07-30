@@ -45,7 +45,12 @@ public class TestUtilities {
 	
 	//@Test
 	public void testenviarmail() {
-		Utils.sendMail("1232132222", "leandrogguzman@hotmail.com");
+		String cabecera = "<HTML><BODY><br/> <br/>";
+		String body= "<h1>Muchas Gracias por crear su cuenta </h1> <br/> <h3>Para finalizar el proceso de activacion ingrese el siguiente valor en el inicio de Sesion:</h3> <br/> <h3>"+"11111222121"+"</h3>";
+		String pie = "<br/> <br/> <footer><p> 2019 - cDash</p></footer></BODY></HTML>";
+		 
+		String formulario = String.format("%s%s%s%s", cabecera, body, "<br/> <br/>", pie);		
+		Utils.sendMail(formulario, "leandrogguzman@hotmail.com");
 		System.out.println("termino");
 	}
 	

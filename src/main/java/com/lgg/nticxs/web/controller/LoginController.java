@@ -165,10 +165,12 @@ public class LoginController{
 					String ran= Utils.generarRandom();
 					user.setPassCuenta(ran);
 					userdao.update(user);
-					String mensaje= "Muchas Gracias por crear su cuenta /n"+
-					"Para finalizar el proceso de activacion ingrese el siguiente valor en el inicio de Sesion: /n"
-							+ ran;
-					Utils.sendMail(mensaje, email);
+					String cabecera = "<HTML><BODY><br/> <br/>";
+					String body= "<h1>Muchas Gracias por crear su cuenta </h1> <br/> <h3>Para finalizar el proceso de activacion ingrese el siguiente valor en el inicio de Sesion:</h3> <br/> <h3>"+ran+"</h3>";
+					String pie = "<br/> <br/> <footer><p> 2019 - cDash</p></footer></BODY></HTML>";
+					 
+					String formulario = String.format("%s%s%s%s", cabecera, body, "<br/> <br/>", pie);
+					Utils.sendMail(formulario, email);
 				}
 				model.addAttribute("msg2", "Su usuario se creo exitosamente. Se le envio un mail para finalizar el proceso de activacion. Por favor, verifique su cuenta de correo");
 				return "login";

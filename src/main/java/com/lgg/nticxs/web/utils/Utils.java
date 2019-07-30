@@ -22,12 +22,14 @@ import java.util.TimeZone;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.ui.Model;
@@ -603,7 +605,7 @@ public class Utils {
 				message.setRecipients(Message.RecipientType.TO,
 						InternetAddress.parse(destino));
 				message.setSubject("[cDash]: Activacion de Cuenta via Email");
-				message.setText(Mensaje);
+				message.setText(Mensaje,"ISO-8859-1","html");
 
 				Transport transport = session.getTransport("smtp");
 		        transport.connect("smtp.gmail.com", "cleoscinc@gmail.com", "cinylean12");
