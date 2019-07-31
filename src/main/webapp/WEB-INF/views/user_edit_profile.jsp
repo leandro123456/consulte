@@ -11,7 +11,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Register</title>
+  <title>Editar Usuario</title>
 
   <!-- Custom fonts for this template-->
   <link rel="stylesheet" type="text/css" href='<c:url value="/resources/vendor/fontawesome-free/css/all.min.css"/>'>
@@ -37,37 +37,30 @@
           <div class="col-lg-7">
             <div class="p-5">
               <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Crear una Cuenta</h1>
+                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
               </div>
-              <form class="user" action="<c:url value='signup'/>" method="post" enctype="multipart/form-data" autocomplete="off">
+              <form class="user" action="<c:url value=''/>" method="post" enctype="multipart/form-data" autocomplete="off">
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="firsName" name="firsName" placeholder="Nombre">
+                    <input type="text" class="form-control form-control-user" name="firsName" placeholder="Nombre" value='${user.firstname}'>
                   </div>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control form-control-user" id="lastName" name="lastName" placeholder="Apellido">
+                    <input type="text" class="form-control form-control-user" name="lastName" placeholder="Apellido" value='${user.lastname}'>
                   </div>
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-user" id="selectName" name="email" placeholder="Direccion de email">
+                  <input type="email" class="form-control form-control-user" name="email" placeholder="Email" value='${user.email}'>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="password" class="form-control form-control-user" id="password" name="newPass" placeholder="Contraseña">
+                    <input type="password" class="form-control form-control-user" name="newPass" placeholder="Password">
                   </div>
                   <div class="col-sm-6">
-                    <input type="password" class="form-control form-control-user" id="confirmNewPassword" name="newPass2" placeholder="Repetir Contraseña">
+                    <input type="password" class="form-control form-control-user" name="newPass2" placeholder="Repeat Password">
                   </div>
                 </div>
-                <button class="btn btn-primary btn-user btn-block" type="submit" id="sign">Registrar Cuenta</button>
+                <button class="btn btn-primary btn-user btn-block" type="submit" id="sign">Actualizar Usuario</button>
               </form>
-              <hr>
-              <div class="text-center">
-                <a class="small" href="forgot-password">Olvido su contraseña?</a>
-              </div>
-              <div class="text-center">
-                <a class="small" href="login">Ya tiene una cuenta? Entrar</a>
-              </div>
             </div>
           </div>
         </div>

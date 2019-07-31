@@ -73,11 +73,11 @@
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                    <h1 class="h4 text-gray-900 mb-4">Bienvenido</h1>
                   </div>
                   <form class="user" action="<c:url value="/login" />" method="post" >
                     <div class="form-group">
-                      <input id = "userName" name="user"  type="text" class="form-control form-control-user" aria-describedby="emailHelp" placeholder="User name">
+                      <input id = "userName" name="user"  type="text" class="form-control form-control-user" aria-describedby="emailHelp" placeholder="Email">
                     </div>
                     <div class="form-group">
                       <input type="password" class="form-control form-control-user"  name="password" id = "userPassword"  placeholder="Password">
@@ -90,15 +90,15 @@
 <!--                     </div> -->
 <!--                     <input id="sign" type="button" class="btn btn-primary btn-user btn-block" value="Login"> -->
                  	<div class="container-login100-form-btn">
-						<button class="btn btn-primary btn-user btn-block" type="submit" id="sign">Login</button>
+						<button class="btn btn-primary btn-user btn-block" type="submit" id="sign">Entrar</button>
 					</div>
                   </form>
                   <hr>
                   <div class="text-center">
-                    <a class="small" href="<c:url value="/forgot" />" id="forgot">Forgot Password?</a>
+                    <a class="small" href="<c:url value="/forgot" />" id="forgot">Olvido su contraseña?</a>
                   </div>
                   <div class="text-center">
-                    <a class="small" href="<c:url value="/signup" />" id="signup">Create an Account!</a>
+                    <a class="small" href="<c:url value="/signup" />" id="signup">Crear una Cuenta</a>
                   </div>
                 </div>
               </div>

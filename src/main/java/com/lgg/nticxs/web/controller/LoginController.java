@@ -6,6 +6,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -48,6 +49,36 @@ public class LoginController{
     @GetMapping("/forgot-password")
     public String forgot(Model model) {
     	return "forgot-password";
+    }
+    
+    @PostMapping("/forgotpass")
+    public String forgotpass(Model model, @RequestParam(name="email", required=false) String email) {
+    	User user = userdao.retrieveByMail(email);
+    	if(user ==null)
+    		model.addAttribute("msg1", "Error ... el usuario ingresado no existe, verifiquelo e intente nuevamente");
+    	else{
+    		String ran= Utils.generarRandom();
+			user.setPassCuenta(ran);
+			try {
+				byte[] password = EncryptorPassword.encrypt("cambiame"+ran);
+				user.setPassword(password);
+				List<byte[]> list = new ArrayList<byte[]>();
+				list.add(password);
+			} catch (Exception e) {
+				model.addAttribute("msg1", "Error durante la generacion de la contraseña. Por favor vuelva a intentarlo");
+				e.printStackTrace();
+			}
+			user.setCuenta_iniciada(false);
+			userdao.update(user);
+			
+			//envio del mail
+			String cabecera = "<HTML><BODY><br/> <br/>";
+			String body= "<h1>Usted solicito el blanqueo de su clave </h1> <br/> <h3>A continuacion se agrega su nueva contraseña y tambien su numero de activacion:</h3> <br/>" +"<h3> Contraseña: "+"cambiame"+ran+"</h3>"+"<br/> <h3> Clave de activacion: "+ran+"</h3>";
+			String pie = "<br/> <br/> <footer><p> 2019 - cDash</p></footer></BODY></HTML>";
+			String formulario = String.format("%s%s%s%s", cabecera, body, "<br/> <br/>", pie);
+			Utils.sendMail(formulario, email);
+    	}
+    	return "login";
     }
     
     @GetMapping("/signup")
@@ -143,6 +174,46 @@ public class LoginController{
         return "redirect:/login";
     }
     
+    @GetMapping("/profileuser/{userId}")
+    public String editProfile(Model model, @PathVariable String userId) {
+    	System.out.println("llego al controlador");
+    	User user= userdao.retrieveById(userId);
+    	model.addAttribute("user", user);
+    	return "user_edit_profile";
+    }
+    
+    @PostMapping("/profileuser/{userId}")
+    public String editProfilePost(Model model, 
+    		@PathVariable String userId,
+    		@RequestParam(name="firsName", required=true) String firstname,
+    		@RequestParam(name="lastName", required=true) String lastname,
+    		@RequestParam(name="email", required=true) String email,
+    		@RequestParam(name="newPass", required=true) String pass,
+    		@RequestParam(name="newPass2", required=true) String pass2) {
+    	if(pass.equals(pass2)){
+    		User user= userdao.retrieveById(userId);
+    		user.setFirstname(firstname);
+    		user.setLastname(lastname);
+    		user.setEmail(email);
+    		try {
+				byte[] password = EncryptorPassword.encrypt(pass);
+				user.setPassword(password);
+				List<byte[]> list = new ArrayList<byte[]>();
+				list.add(password);
+			} catch (Exception e) {
+				model.addAttribute("msg1", "Error durante la generacion de la contraseña. Por favor vuelva a intentarlo");
+				e.printStackTrace();
+			}
+    		userdao.update(user);
+    		model.addAttribute("msg1", "Porceso de actualizacion de usuario Completa");
+    		
+    	}else {
+			model.addAttribute("msg1", "Error ... Contraseña Incorrecta. Por favor vuelva a itentarlo");
+			return "user_edit_profile";
+		}
+    	
+    	return "redirect:/home";
+    }
 
 	private String createUser(Model model, String email, String role, String pass, String pass2, String firstName, String lastName) {
 		if(pass.equals(pass2)){
@@ -168,7 +239,6 @@ public class LoginController{
 					String cabecera = "<HTML><BODY><br/> <br/>";
 					String body= "<h1>Muchas Gracias por crear su cuenta </h1> <br/> <h3>Para finalizar el proceso de activacion ingrese el siguiente valor en el inicio de Sesion:</h3> <br/> <h3>"+ran+"</h3>";
 					String pie = "<br/> <br/> <footer><p> 2019 - cDash</p></footer></BODY></HTML>";
-					 
 					String formulario = String.format("%s%s%s%s", cabecera, body, "<br/> <br/>", pie);
 					Utils.sendMail(formulario, email);
 				}
@@ -176,7 +246,7 @@ public class LoginController{
 				return "login";
 		} else {
 			model.addAttribute("msg1", "Error ... Contraseña Incorrecta. Por favor vuelva a itentarlo");
-			return "signup";
+			return "register";
 		}
 	}
 
