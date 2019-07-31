@@ -11,7 +11,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>MQTT Management - Login</title>
+  <title>cDash</title>
 
   <!-- Custom fonts for this template-->
   <link rel="stylesheet" type="text/css" href='<c:url value="/resources/vendor/fontawesome-free/css/all.min.css"/>'>
@@ -49,8 +49,8 @@
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Hello "${user}"</h1>
-                    <h4>Please, to activate your account enter the code that was sent by mail</h4>
+                    <h1 class="h4 text-gray-900 mb-4">Hola "${user}"</h1>
+                    <h4>Por favor, para activar su cuenta ingrese el numero que se le envio por Mail</h4>
                   </div>
                   <form class="user" action="<c:url value="/validate" />" method="post" >
                     <div class="form-group">
@@ -59,7 +59,7 @@
                     </div>
                     <input type="hidden" name="user" value="${user}" />
                  	<div class="container-login100-form-btn">
-						<button class="btn btn-primary btn-user btn-block" type="submit">Continue</button>
+						<button class="btn btn-primary btn-user btn-block" type="submit">Continuar</button>
 					</div>
                   </form>
                 </div>

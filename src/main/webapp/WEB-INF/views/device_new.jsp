@@ -253,7 +253,7 @@
 							</div>
 
 
-							<h5>Write Information</h5>
+							<h5>Informacion para enviar</h5>
 							<div class="form-group row ">
 								<b>Hostname or IP Address</b> <input type="text"
 									class="form-control form-control-user" id="iphostescribir"
@@ -271,7 +271,7 @@
 									placeholder="Confirm Password">
 							</div>
 
-							<h5>Listen Information Remote Configuration</h5>
+							<h5>Informacion para escuchar comandos remotos</h5>
 							<div class="form-group row ">
 								<b>Hostname or IP Address</b> <input type="text"
 									class="form-control form-control-user"
@@ -290,7 +290,7 @@
 									id="confirpassescucharremote" placeholder="Confirm Password">
 							</div>
 
-							<h5>Write Information Remote Configuration</h5>
+							<h5>Informacion para enviar comandos remotos</h5>
 							<div class="form-group row ">
 								<b>Hostname or IP Address</b> <input type="text"
 									class="form-control form-control-user"
@@ -317,7 +317,7 @@
 					<div class="row">
 						<a data-whatever="save" data-toggle="modal"
 							data-target="#ModalConfirm" name="action" value="save"
-							class="btn btn-primary btn-user btn-block">Create Device</a>
+							class="btn btn-primary btn-user btn-block">Crear Dispositivo</a>
 					</div>
 				</div>
 			</div>
@@ -345,22 +345,21 @@
 								<div class="row">
 									<div class="col-lg-6">
 										<div class="form-group">
-											<label for="exampleFormControlSelect2">Days of the
-												Week</label> <select id="dias" multiple="multiple" class="form-control"
+											<label for="exampleFormControlSelect2">Dias de la Semana</label> <select id="dias" multiple="multiple" class="form-control"
 												id="exampleFormControlSelect2">
-												<option value="monday">Monday</option>
-												<option value="tuesday">Tuesday</option>
-												<option value="wednesday">Wednesday</option>
-												<option value="thursday">Thursday</option>
-												<option value="friday">Friday</option>
-												<option value="saturday">Saturday</option>
-												<option value="sunday">Sunday</option>
+												<option value="monday">Lunes</option>
+												<option value="tuesday">Martes</option>
+												<option value="wednesday">Miercoles</option>
+												<option value="thursday">Jueves</option>
+												<option value="friday">Viernes</option>
+												<option value="saturday">Sabado</option>
+												<option value="sunday">Domingo</option>
 											</select>
 										</div>
 									</div>
 									<div class="input-group clock col-lg-6">
 										<div class="clearfix">
-											<label for="exampleFormControlSelect2">Hour</label>
+											<label for="exampleFormControlSelect2">Hora</label>
 											<div class="input-group clockpicker pull-center"
 												data-placement="center" data-align="top"
 												data-autoclose="true">
@@ -372,15 +371,13 @@
 										</div>
 									</div>
 									<div class="col-lg-6">
-										<label for="exampleFormControlSelect2">Action</label>
+										<label for="exampleFormControlSelect2">Accion</label>
 										<div class="form-group">
 											<div class="radio">
-												<label><input type="radio" name="radiopower" value="on" checked>Power
-													On</label>
+												<label><input type="radio" name="radiopower" value="on" checked>Encender</label>
 											</div>
 											<div class="radio">
-												<label><input type="radio" value="off" name="radiopower">Power
-													Off</label>
+												<label><input type="radio" value="off" name="radiopower">Apagar</label>
 											</div>
 										</div>
 									</div>
@@ -389,7 +386,7 @@
 										<div class="form-group">
 											<div class="radio">
 												<label><input type="radio" value="All" 
-												name="radioencendido" checked>All</label>
+												name="radioencendido" checked>Todos</label>
 											</div>
 											<div class="radio">
 												<label><input type="radio" value="1" name="radioencendido">1</label>
@@ -407,7 +404,7 @@
 					</div>
 				</div>
 				<div class="modal-footer d-flex justify-content-center">
-					<a class="btn btn-primary btn-lg btn-block" id="botoncreatefile">Create</a>
+					<a class="btn btn-primary btn-lg btn-block" id="botoncreatefile">Crear</a>
 				</div>
 			</div>
 		</div>
@@ -419,13 +416,13 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Create Device</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Crear Dispositivo</h5>
 					<button class="close" type="button" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
-				<div class="modal-body">Are you sure to create a new device?</div>
+				<div class="modal-body">Esta seguro de crear un nuevo dispositivo?</div>
 				<div class="modal-footer">
 					<form role="form" id="form_id" method="post"
 						enctype="multipart/form-data">
@@ -476,9 +473,9 @@
 							
 
 						<button class="btn btn-secondary" type="button"
-							data-dismiss="modal">Cancel</button>
+							data-dismiss="modal">Cancelar</button>
 						<a class="btn btn-primary" href="javascript:;"
-							onclick="parentNode.submit();">Create</a>
+							onclick="parentNode.submit();">Crear</a>
 					</form>
 				</div>
 			</div>
