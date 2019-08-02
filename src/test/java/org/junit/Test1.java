@@ -245,16 +245,16 @@ public class Test1 {
 				+ "</div>";
 		
 		
-//		vistadao = new VistaDAO();
-//		vista= new Vista();
-//		vista.setName("sonofftwo");
-//		vista.setInicio(inicio);
-//		vista.setFin(fin);
-//		elem= new HashMap<>();
-//		elem.put("sonoffbody",sonoffbody);
-//		vista.setContenido(elem);
-//		vistadao.create(vista);
-//		System.out.println("termino vista de 2 boton");
+		vistadao = new VistaDAO();
+		vista= new Vista();
+		vista.setName("sonofftwo");
+		vista.setInicio(inicio);
+		vista.setFin(fin);
+		elem= new HashMap<>();
+		elem.put("sonoffbody",sonoffbody);
+		vista.setContenido(elem);
+		vistadao.create(vista);
+		System.out.println("termino vista de 2 boton");
 		
 		
 		
@@ -437,16 +437,16 @@ public class Test1 {
 				"					</div>" + 
 				"				</div>";
 		
-		vistadao = new VistaDAO();
-		vista= new Vista();
-		vista.setName("alarma");
-		vista.setInicio(inicio);
-		vista.setFin(fin);
-		elem= new HashMap<>();
-		elem.put("alarmabody",alarmabody);
-		vista.setContenido(elem);
-		vistadao.create(vista);
-		System.out.println("termino vista de alarma");
+//		vistadao = new VistaDAO();
+//		vista= new Vista();
+//		vista.setName("alarma");
+//		vista.setInicio(inicio);
+//		vista.setFin(fin);
+//		elem= new HashMap<>();
+//		elem.put("alarmabody",alarmabody);
+//		vista.setContenido(elem);
+//		vistadao.create(vista);
+//		System.out.println("termino vista de alarma");
 	}
 	
 }

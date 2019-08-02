@@ -66,6 +66,7 @@ public class HomeController {
 	private List<String> deviceAsociadoAlarma = new ArrayList<>();
 	private List<String> deviceAsociadoTermomtro = new ArrayList<>();
 	private List<String> deviceAsociadoSonoff = new ArrayList<>();
+	private List<String> topicosdeAlarma = new ArrayList<>();
 	//Integer trimestreActual = Utils.TrimestreActual();
 	
 	@GetMapping("homepage/")
@@ -136,6 +137,14 @@ public class HomeController {
         System.out.println("retorno la vista correctamente");
         List<String> topicos=obtenerTopicosDeTodosLosEndpoints(user.getDeviceserialnumber());
         model.addAttribute("topicos", topicos);
+        //para las alarmas
+        model.addAttribute("hostalarma", "ha.qliq.com.ar");
+        model.addAttribute("puertoalarma", "1884");
+        model.addAttribute("sslalarma", false);
+        model.addAttribute("usuarioalarma", "homeassistant");
+        model.addAttribute("passalarma", "pAnAmA192");
+        model.addAttribute("topicosalarmas", topicosdeAlarma);
+        //fin de alarmas
    		return new ModelAndView("origin", model);
 	}
 
@@ -258,17 +267,28 @@ public class HomeController {
 
 
 	private List<String> obtenerTopicosDeTodosLosEndpoints(List<String> devicesnumber) {
-		List<String> topicos = new ArrayList<>();
+		List<String> topicos = new ArrayList<>(); 
 		for(String serial: devicesnumber){
 			System.out.println("llego a la carga de los topicos: "+serial);
 			Device device=devicedao.retrieveBySerialNumber(serial);
-			if(device.getUsedefaultbrocker()){
-				topicos.add("'"+device.getDeviceconfiguration().get(0).getTopicescuchar()+"'");
-				topicos.add("'"+device.getDeviceconfiguration().get(0).getTopicescucharremote()+"'");
-			}
-			else{
-				topicos.add("'"+device.getDeviceconfiguration().get(1).getTopicescuchar()+"'");
-				topicos.add("'"+device.getDeviceconfiguration().get(1).getTopicescucharremote()+"'");
+			if(!device.getTipo().equals(Device.ALARMA)) {
+				if(device.getUsedefaultbrocker()){
+					topicos.add("'"+device.getDeviceconfiguration().get(0).getTopicescuchar()+"'");
+					topicos.add("'"+device.getDeviceconfiguration().get(0).getTopicescucharremote()+"'");
+				}
+				else{
+					topicos.add("'"+device.getDeviceconfiguration().get(1).getTopicescuchar()+"'");
+					topicos.add("'"+device.getDeviceconfiguration().get(1).getTopicescucharremote()+"'");
+				}
+			}else {
+				if(device.getUsedefaultbrocker()){
+					topicosdeAlarma.add("'"+device.getDeviceconfiguration().get(0).getTopicescuchar()+"'");
+					topicosdeAlarma.add("'"+device.getDeviceconfiguration().get(0).getTopicescucharremote()+"'");
+				}
+				else{
+					topicosdeAlarma.add("'"+device.getDeviceconfiguration().get(1).getTopicescuchar()+"'");
+					topicosdeAlarma.add("'"+device.getDeviceconfiguration().get(1).getTopicescucharremote()+"'");
+				}
 			}
 		}
 		return topicos;

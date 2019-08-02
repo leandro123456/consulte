@@ -16,6 +16,7 @@
 	<script src='<c:url value="/resources/mqttResources/c3.min.js" />'></script>
 	<script src='<c:url value="/resources/mqttResources/mqttRecibirMensajes.js" />'></script>
 	<script src='<c:url value="/resources/mqttResources/demo.js" />'></script>
+	<script src='<c:url value="/resources/alarma/coneccionAlarma.js" />'></script>
 	<script src='<c:url value="/resources/mqttResources/cargarElementos.js" />'></script>
 	<script src='<c:url value="/resources/mqttResources/progreso.js" />'></script>
 	<script src='<c:url value="/resources/mqttResources/cargaReloj.js" />'></script>	
@@ -80,6 +81,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr","mqttpwd",${topicos});
+		startConnectAlarma("${hostalarma}","${puertoalarma}",${sslalarma},"${usuarioalarma}","${passalarma}",${topicosalarmas});
 		
 //	 	function sleep(milliseconds) {
 //	 	 var start = new Date().getTime();
