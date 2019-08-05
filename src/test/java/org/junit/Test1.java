@@ -145,7 +145,7 @@ public class Test1 {
 	public void testMakeAllViews() {
 		String inicio= "<div class=\"col-lg-6 mb-4\"><div class=\"card shadow mb-4\"><div class=\"card-header py-3\"><h6 class=\"m-0 font-weight-bold text-primary\">Sensor CAMBIARSENSOR</h6></div>"
 					+"<div class=\"card-body\">"
-                    +"<div class=\"row\"> <span class=\"col-md-3 font-weight-bold\"><h6><small>Estado del sensor</small></h6></span> <span class=\"col-md-4 float-right font-weight\"><h6><small id=\"spanestadoCAMBIARSENSOR\">desconocido</small></h6></span></div>";
+                    +"<div class=\"row\"> <span class=\"col-md-4 font-weight-bold\"><h6><small>Estado del sensor</small></h6></span> <span class=\"col-md-4 float-right font-weight\"><h6><small id=\"spanestadoCAMBIARSENSOR\">desconocido</small></h6></span></div>";
 	    String humedad = "<h6 class=\"font-weight-bold\">Humedad<span id=\"humedadCAMBIARSENSOR\" class=\"float-right\">0</span></h6><div class=\"progress mb-4\"><div class=\"progress-bar\" id=\"barrahumCAMBIARSENSOR\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div></div>";
 		String tempC= "<h6 class=\"font-weight-bold\">Temperatura °C<span id=\"temperaturacCAMBIARSENSOR\" class=\"float-right\">0</span></h6><div class=\"progress mb-4\"><div id=\"barratempcCAMBIARSENSOR\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"70\"></div></div>";
 		String sensC= "<h6 class=\" font-weight-bold\">Sensacion Termica °C<span id=\"sensacioncCAMBIARSENSOR\" class=\"float-right\">0</span></h6><div class=\"progress mb-4\"><div id=\"barrasenscCAMBIARSENSOR\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"70\"></div></div>";
@@ -204,7 +204,7 @@ public class Test1 {
 		fin="</div> </div>";
 		String sonoffbody="<div class=\"card-body\">"
 				+ "<div class=\"row\"> "
-				+ "		<span class=\"col-md-3 font-weight-bold\">"
+				+ "		<span class=\"col-md-4 font-weight-bold\">"
 				+ "			<h6>"
 				+ "				<small>Estado del switch</small>"
 				+ "			</h6>"
@@ -243,7 +243,7 @@ public class Test1 {
 		
 		sonoffbody="<div class=\"card-body\">"
 				+"<div class=\"row\"> "
-				+ "		<span class=\"col-md-3 font-weight-bold\">"
+				+ "		<span class=\"col-md-4 font-weight-bold\">"
 				+ "			<h6>"
 				+ "				<small>Estado del sensor</small>"
 				+ "			</h6>"
@@ -296,7 +296,7 @@ public class Test1 {
 				"								<div id=\"lcd_container\">" + 
 				"									<div class=\"virtual_lcd\">" + 
 				"										<div class=\"row\"> "
-				+ "											<span class=\"col-md-3 font-weight-bold\">"
+				+ "											<span class=\"col-md-4 font-weight-bold\">"
 				+ "												<h6>"
 				+ "													<small>Estado de la alarma</small>"
 				+ "												</h6>"
