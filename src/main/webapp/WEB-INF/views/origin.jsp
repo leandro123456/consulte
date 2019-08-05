@@ -80,7 +80,9 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr","mqttpwd",${topicos});
+		if(${cantidadSensores}!=0)
+			startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr","mqttpwd",${topicos});
+		if(${cantidadAlarma}!=0)
 		startConnectAlarma("${hostalarma}","${puertoalarma}",${sslalarma},"${usuarioalarma}","${passalarma}",${topicosalarmas});
 		
 //	 	function sleep(milliseconds) {

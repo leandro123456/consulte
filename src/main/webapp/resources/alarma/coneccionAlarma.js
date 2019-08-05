@@ -90,7 +90,7 @@ function informarstatus45(topicorecibido, mensajerecibido){
 
 /** comportamiento cuando recibe un mensaje*/
 function onMessageArrivedAlarma(message) {
-	console.log("LLEGO UN MENSAJE: "+message.destinationName+"; contenido: "+  message.payloadString);
+	console.log("LLEGO UN MENSAJE DE LA ALARMA: "+message.destinationName+"; contenido: "+  message.payloadString);
 	var inputAll= message.payloadString;	
 	var dataObj = null;
 	if(message.destinationName.includes("/Status")){
@@ -100,13 +100,6 @@ function onMessageArrivedAlarma(message) {
 		dataObj = JSON.parse(inputAll);
 		var serial =dataObj.deviceId;
 		console.log("llego un mensaje de temperatura, cuerpo:  "+ dataObj);
-
-//		var state = dataObj.tempC; 	
-//		var gaugeDataHum = {'data': dataObj.hum}
-//		var gaugeDataTempC = {'data': dataObj.tempC}
-//		var gaugeDataHiC = {'data': dataObj.hiC}
-//		var gaugeDataTempF = {'data': dataObj.tempF}
-//		var gaugeDataHiF = {'data': dataObj.hiF}
 		if(dataObj.hum != null && document.getElementById("humedad"+serial)!= null)
 			animatevar("barrahum"+serial,"humedad"+serial,dataObj.hum);
 		
@@ -121,28 +114,29 @@ function onMessageArrivedAlarma(message) {
 		
 		if(dataObj.hiF != null && document.getElementById("sensacionf"+serial)!= null)
 			animatevar("barrasensf"+serial,"sensacionf"+serial,dataObj.hiF);
-	}else{
-			dataObj = JSON.parse(inputAll);
-		if(dataObj.SW1 != null && dataObj.SW1=="ON"){
-			var deviceserial = "boton1"+dataObj.deviceId;
-			updateEstado(deviceserial,"yes","botonsonoff");
-			var barraho= "sonofftimer1"+dataObj.deviceId;
-			var barranum= "span1"+dataObj.deviceId;
-			animatevar(barraho,barranum,dataObj.PB1TTO);
-		}if(dataObj.SW1 != null && dataObj.SW1=="OFF"){
-			var deviceserial = "boton1"+dataObj.deviceId;
-			updateEstado(deviceserial,"no","botonsonoff");
-		}if(dataObj.SW2 != null && dataObj.SW2=="ON"){
-			var deviceserial = "boton2"+dataObj.deviceId;
-			updateEstado(deviceserial,"yes","botonsonoff");
-			var barraho= "sonofftimer2"+dataObj.deviceId;
-			var barranum= "span2"+dataObj.deviceId;
-			animatevar(barraho,barranum,dataObj.PB2TTO);
-		}if(dataObj.SW2 != null && dataObj.SW2=="OFF"){
-			var deviceserial = "boton2"+dataObj.deviceId;
-			updateEstado(deviceserial,"no","botonsonoff");
-		}
 	}
+//	else{
+//			dataObj = JSON.parse(inputAll);
+//		if(dataObj.SW1 != null && dataObj.SW1=="ON"){
+//			var deviceserial = "boton1"+dataObj.deviceId;
+//			updateEstado(deviceserial,"yes","botonsonoff");
+//			var barraho= "sonofftimer1"+dataObj.deviceId;
+//			var barranum= "span1"+dataObj.deviceId;
+//			animatevar(barraho,barranum,dataObj.PB1TTO);
+//		}if(dataObj.SW1 != null && dataObj.SW1=="OFF"){
+//			var deviceserial = "boton1"+dataObj.deviceId;
+//			updateEstado(deviceserial,"no","botonsonoff");
+//		}if(dataObj.SW2 != null && dataObj.SW2=="ON"){
+//			var deviceserial = "boton2"+dataObj.deviceId;
+//			updateEstado(deviceserial,"yes","botonsonoff");
+//			var barraho= "sonofftimer2"+dataObj.deviceId;
+//			var barranum= "span2"+dataObj.deviceId;
+//			animatevar(barraho,barranum,dataObj.PB2TTO);
+//		}if(dataObj.SW2 != null && dataObj.SW2=="OFF"){
+//			var deviceserial = "boton2"+dataObj.deviceId;
+//			updateEstado(deviceserial,"no","botonsonoff");
+//		}
+//	}
 }
 /** comportamiento cuando recibe un mensaje*/
 

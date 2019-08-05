@@ -136,13 +136,15 @@ public class HomeController {
 		model.addAttribute("vistas",vistas);
         System.out.println("retorno la vista correctamente");
         List<String> topicos=obtenerTopicosDeTodosLosEndpoints(user.getDeviceserialnumber());
+        model.addAttribute("cantidadSensores", topicos.size());
         model.addAttribute("topicos", topicos);
         //para las alarmas
-        model.addAttribute("hostalarma", "ha.qliq.com.ar");
-        model.addAttribute("puertoalarma", "1884");
+        model.addAttribute("cantidadAlarma", topicosdeAlarma.size());
+        model.addAttribute("hostalarma", "mqtt.coiaca.com");
+        model.addAttribute("puertoalarma", "8080");
         model.addAttribute("sslalarma", false);
-        model.addAttribute("usuarioalarma", "homeassistant");
-        model.addAttribute("passalarma", "pAnAmA192");
+        model.addAttribute("usuarioalarma", "mqttusr");
+        model.addAttribute("passalarma", "mqttpwd");
         model.addAttribute("topicosalarmas", topicosdeAlarma);
         //fin de alarmas
    		return new ModelAndView("origin", model);

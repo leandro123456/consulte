@@ -122,7 +122,6 @@ function animatevar (id,spanid, val){
 /** fin temperatura*/
 
 /** comportamiento cuando recibe un mensaje*/
-//Called when a message arrives
 function onMessageArrivedSonoff(message) {
 	console.log("LLEGO UN MENSAJE: "+message.destinationName+"; contenido: "+  message.payloadString);
 	var inputAll= message.payloadString;	
@@ -135,12 +134,6 @@ function onMessageArrivedSonoff(message) {
 		var serial =dataObj.deviceId;
 		console.log("llego un mensaje de temperatura, cuerpo:  "+ dataObj);
 
-//		var state = dataObj.tempC; 	
-//		var gaugeDataHum = {'data': dataObj.hum}
-//		var gaugeDataTempC = {'data': dataObj.tempC}
-//		var gaugeDataHiC = {'data': dataObj.hiC}
-//		var gaugeDataTempF = {'data': dataObj.tempF}
-//		var gaugeDataHiF = {'data': dataObj.hiF}
 		if(dataObj.hum != null && document.getElementById("humedad"+serial)!= null)
 			animatevar("barrahum"+serial,"humedad"+serial,dataObj.hum);
 		
@@ -155,7 +148,8 @@ function onMessageArrivedSonoff(message) {
 		
 		if(dataObj.hiF != null && document.getElementById("sensacionf"+serial)!= null)
 			animatevar("barrasensf"+serial,"sensacionf"+serial,dataObj.hiF);
-	}else{
+	}
+	if(!message.destinationName.includes("/Status") && (!inputAll.includes("tempC") && !inputAll.includes("hum"))){
 			dataObj = JSON.parse(inputAll);
 		if(dataObj.SW1 != null && dataObj.SW1=="ON"){
 			var deviceserial = "boton1"+dataObj.deviceId;
