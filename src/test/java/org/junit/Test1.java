@@ -406,70 +406,70 @@ public class Test1 {
 				"								</div>" +
 				"								<p> </p>		  " +
 				"								<div class=\"row\" id=\"zones_listCAMBIARALARMA\" style=\"margin-left: 1em;\">"+
-				"										<div class=\"col-md-3\" id=\"zone_1_CAMBIARALARMA\"><i class=\"far fa-circle\"></i><h9 >Zone 1</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_2_CAMBIARALARMA\"><i class=\"far fa-circle\"></i><h9 >Zone 2</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_3_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9>Zone 3</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_4_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 4</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_5_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 5</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_6_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 6</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_7_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 7</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_8_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 8</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_9_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 9</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_10_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9>Zone 10</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_11_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 11</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_12_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 12</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_13_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 13</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_14_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 14</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_15_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 15</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_16_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 16</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_17_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 17</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_18_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9>Zone 18</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_19_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 19</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_20_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 20</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_21_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 21</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_22_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 22</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_23_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 23</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_24_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 24</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_25_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 25</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_26_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 26</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_27_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 27</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_28_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 28</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_29_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 29</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_30_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 30</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_31_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 31</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_32_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 32</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_33_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 33</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_34_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 34</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_35_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 35</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_36_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 36</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_37_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 37</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_38_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 38</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_39_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 39</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_40_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 40</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_41_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 41</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_42_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 42</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_43_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 43</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_44_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 44</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_45_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 45</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_46_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 46</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_47_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 47</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_48_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 48</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_49_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 49</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_50_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 50</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_51_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 51</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_52_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 52</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_53_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 53</h9></div>" +				
-				"										<div class=\"col-md-3\" id=\"zone_54_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 54</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_55_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 55</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_56_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 56</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_57_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 57</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_58_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 58</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_59_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 59</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_60_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 60</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_61_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 61</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_62_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 62</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_63_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 63</h9></div>" +
-				"										<div class=\"col-md-3\" id=\"zone_64_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 64</h9></div>" +											
+				"										<div class=\"col-md-3 small\" id=\"zone_1_CAMBIARALARMA\"><i class=\"far fa-circle\"></i><h9 >Zone 1</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_2_CAMBIARALARMA\"><i class=\"far fa-circle\"></i><h9 >Zone 2</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_3_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9>Zone 3</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_4_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 4</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_5_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 5</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_6_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 6</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_7_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 7</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_8_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 8</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_9_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 9</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_10_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9>Zone 10</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_11_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 11</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_12_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 12</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_13_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 13</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_14_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 14</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_15_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 15</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_16_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 16</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_17_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 17</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_18_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9>Zone 18</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_19_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 19</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_20_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 20</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_21_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 21</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_22_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 22</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_23_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 23</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_24_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 24</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_25_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 25</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_26_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 26</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_27_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 27</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_28_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 28</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_29_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 29</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_30_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 30</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_31_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 31</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_32_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 32</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_33_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 33</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_34_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 34</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_35_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 35</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_36_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 36</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_37_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 37</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_38_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 38</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_39_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 39</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_40_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 40</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_41_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 41</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_42_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 42</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_43_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 43</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_44_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 44</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_45_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 45</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_46_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 46</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_47_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 47</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_48_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 48</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_49_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 49</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_50_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 50</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_51_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 51</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_52_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 52</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_53_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 53</h9></div>" +				
+				"										<div class=\"col-md-3 small\" id=\"zone_54_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 54</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_55_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 55</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_56_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 56</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_57_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 57</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_58_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 58</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_59_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 59</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_60_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 60</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_61_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 61</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_62_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 62</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_63_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 63</h9></div>" +
+				"										<div class=\"col-md-3 small\" id=\"zone_64_CAMBIARALARMA\"><i class=\"far fa-circle\"></i> <h9 >Zone 64</h9></div>" +											
 				"								</div>" + 
 				"							</div>" + 
 				"						</div>" + 
