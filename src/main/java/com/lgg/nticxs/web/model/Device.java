@@ -58,6 +58,12 @@ public class Device {
 	@Field (name = "lastnotification")
 	private DeviceNotification lastnotification;
 	
+	@Field (name = "particiones")
+	private Integer particiones;
+	
+	@Field (name = "zonas")
+	private HashMap<Integer, Integer> zonas;
+	
 	@ElementCollection
 	@Field (name = "alarms")
 	private List<DeviceAlarm> alarms;
@@ -249,6 +255,21 @@ public class Device {
 		else
 			return "fallo";
 	}
-	
+
+	public Integer getParticiones() {
+		return particiones;
+	}
+
+	public void setParticiones(Integer particiones) {
+		this.particiones = particiones;
+	}
+
+	public HashMap<Integer, Integer> getZonas() {
+		return zonas;
+	}
+
+	public void setZonas(HashMap<Integer, Integer> zonas) {
+		this.zonas = zonas;
+	}
 	
 }

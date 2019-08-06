@@ -158,6 +158,28 @@
 	div.centrarbonotesalarma{
 	text-align: center;
 	}
+	
+	div.bordecolumna{
+		border: 1px solid lightgrey;
+        padding: 7px 0px;
+        border-radius: 8px;
+        background-color: whitesmoke;
+        margin-bottom: 1em;
+    	margin-left: 1em;
+	}
+	
+	small.alinearspanstatus{
+	margin-right: 1em;
+	margin-left: 1em;
+	}
+	 
+	div.alinezones{
+	margin-left: 0.8em;
+	}
+	
+	div.alinedisplay{
+	margin-left: 1em;
+	}
 
       div#left_buttons,
       div#right_buttons,

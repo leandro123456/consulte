@@ -291,6 +291,18 @@ public class HomeController {
 					topicosdeAlarma.add("'"+device.getDeviceconfiguration().get(1).getTopicescuchar()+"'");
 					topicosdeAlarma.add("'"+device.getDeviceconfiguration().get(1).getTopicescucharremote()+"'");
 				}
+				for(int i=0; i<device.getParticiones();i++) {
+					topicosdeAlarma.add("'"+device.getSerialnumber()+"/Partition"+(i+1)+"'");
+				}
+				int part= device.getZonas().size();
+				for(int j=0; j<part;j++) {
+					for(int t=0; t<device.getZonas().get(j+1);t++)
+						topicosdeAlarma.add("'"+device.getSerialnumber()+"/Zone"+(t+1)+"'");
+				}
+				topicosdeAlarma.add("'"+device.getSerialnumber()+"/Fire"+"'");
+				topicosdeAlarma.add("'"+device.getSerialnumber()+"/Trouble"+"'");
+				topicosdeAlarma.add("'"+device.getSerialnumber()+"/keepAlive "+"'");
+				
 			}
 		}
 		return topicos;

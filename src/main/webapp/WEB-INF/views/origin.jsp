@@ -33,7 +33,7 @@
 <!-- boton check -->
 </head>
 
-<body id="page-top">
+<body id="page-top" onresize="modificarTamanoAlarma()">
 	<div id="wrapper">
 		<jsp:include page="header.jsp" />
 		<div class="container-fluid">
@@ -63,20 +63,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <!-- script alarma -->
 
-<script type="text/javascript">
-// 	function sendMQTTMessage(sonoffserial){
-// 		var checkBox=document.getElementById("sonoffpower");
-// 		  if (checkBox.checked == true){
-// 		  	  	document.getElementById("sonoffpower1").value = true;
-// 		  }else{
-// 		  	  	document.getElementById("sonoffpower1").value = false;
-// 		  }
-// 		var formvalue="push"+sonoffserial;
-// 		console.log("estevalor: "+ formvalue);
-// 		document.getElementById(formvalue).submit();
-// 	}
-</script>
-
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -84,34 +70,25 @@
 			startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr","mqttpwd",${topicos});
 		if(${cantidadAlarma}!=0)
 		startConnectAlarma("${hostalarma}","${puertoalarma}",${sslalarma},"${usuarioalarma}","${passalarma}",${topicosalarmas});
-		
-//	 	function sleep(milliseconds) {
-//	 	 var start = new Date().getTime();
-//	 	 for (var i = 0; i < 1e7; i++) {
-//	 	  if ((new Date().getTime() - start) > milliseconds) {
-//	 	   break;
-//	 	  }
-//	 	 }
-//	 	}
-
-
-// 		updateWiget();
-// 		animateprogress("humedad", 50);
-// 		animateprogress("temperaturac", 25);
-// 		animateprogress("sensacionc", 27);
-// 		animateprogress("temperaturaf", 77);
-// 		animateprogress("sensacionf", 80.6);
-		//startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr", "mqttpwd","/DSC010000000001/dsc/Get/Partition1");
-		//sleep(20000);
-		//console.log("esta es la lista de conexiones: "+ '${topicos}');
-		//var top= ${topicos}[3];
-// 		${topicos}.forEach(myFunction);
-
-// 		function myFunction(item, index) { 
-// 		}
-		//startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr", "mqttpwd","RConfig/debug");
-		//startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr", "mqttpwd","RConfig/WTHUSB000000001");
 	});
+</script>
+
+<script type="text/javascript">
+	function modificarTamanoAlarma(){
+		 var w = window.outerWidth;
+		  var h = window.outerHeight;
+		  var txt = "Window size: width=" + w + ", height=" + h;
+		  if(w<980 ){
+			  console.log("la pantalla se redujo" + txt);
+// 			  var content1 = document.getElementById('columnaderechaDSC010000000002').innerHTML;
+// 			  var content2 = document.getElementById('columnaizquierdaDSC010000000002').innerHTML;
+
+// 			  var combined = document.createElement('div');
+// 			  content1.innerHTML = content2;			  
+// 			  document.getElementById('columnaizquierdaDSC010000000002').innerHTML=content1 + " " + content2;
+// 			  document.getElementById('columnaderechaDSC010000000002').style.display = 'none';
+		  }
+	} 
 </script>
 
 
