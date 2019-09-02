@@ -158,17 +158,17 @@ public class Test1 {
 		Map<String, String> elem= new HashMap<>();
 		
 //propio de la vista
-		vista.setName("temperatura_horizontal");
-		vista.setInicio(inicio);
-		vista.setFin(fin);
-		elem.put("Hum",humedad);
-		elem.put("tempC", tempC);
-		elem.put("sensC", sensC);
-		elem.put("tempF", tempF);
-		elem.put("sensF", sensF);
-		vista.setContenido(elem);
-		vistadao.create(vista);
-		System.out.println("termino vista horizontal");
+//		vista.setName("temperatura_horizontal");
+//		vista.setInicio(inicio);
+//		vista.setFin(fin);
+//		elem.put("Hum",humedad);
+//		elem.put("tempC", tempC);
+//		elem.put("sensC", sensC);
+//		elem.put("tempF", tempF);
+//		elem.put("sensF", sensF);
+//		vista.setContenido(elem);
+//		vistadao.create(vista);
+//		System.out.println("termino vista horizontal");
 
 		
 //		inicio= "<div class=\"col-12\"> <div class=\"card shadow mb-4\"><div class=\"card-header py-3\"><h6 class=\"m-0 font-weight-bold text-primary\">Sensor de Temperatura Y Humedad</h6></div>";
@@ -226,16 +226,16 @@ public class Test1 {
 		//style=\"background: transparent;  border: transparent;\"><i class=\"fas fa-stopwatch\" title=\"Set Timer String\"></i>
 		
 		
-		vistadao = new VistaDAO();
-		vista= new Vista();
-		vista.setName("sonoff");
-		vista.setInicio(inicio);
-		vista.setFin(fin);
-		elem= new HashMap<>();
-		elem.put("sonoffbody",sonoffbody);
-		vista.setContenido(elem);
-		vistadao.create(vista);
-		System.out.println("termino vista de 1 boton");
+//		vistadao = new VistaDAO();
+//		vista= new Vista();
+//		vista.setName("sonoff");
+//		vista.setInicio(inicio);
+//		vista.setFin(fin);
+//		elem= new HashMap<>();
+//		elem.put("sonoffbody",sonoffbody);
+//		vista.setContenido(elem);
+//		vistadao.create(vista);
+//		System.out.println("termino vista de 1 boton");
 		
 		//de dos botones
 		inicio="<div class=\"col-lg-6 mb-4\"> <div class=\"card shadow mb-4\"> <div class=\"card-header py-3\">	<h6 class=\"m-0 font-weight-bold text-primary\">Sonoff CAMBIARSONOFF</h6></div>";
@@ -269,16 +269,16 @@ public class Test1 {
 				+ "</div>";
 		
 		
-		vistadao = new VistaDAO();
-		vista= new Vista();
-		vista.setName("sonofftwo");
-		vista.setInicio(inicio);
-		vista.setFin(fin);
-		elem= new HashMap<>();
-		elem.put("sonoffbody",sonoffbody);
-		vista.setContenido(elem);
-		vistadao.create(vista);
-		System.out.println("termino vista de 2 boton");
+//		vistadao = new VistaDAO();
+//		vista= new Vista();
+//		vista.setName("sonofftwo");
+//		vista.setInicio(inicio);
+//		vista.setFin(fin);
+//		elem= new HashMap<>();
+//		elem.put("sonoffbody",sonoffbody);
+//		vista.setContenido(elem);
+//		vistadao.create(vista);
+//		System.out.println("termino vista de 2 boton");
 		
 		
 		
@@ -308,15 +308,28 @@ public class Test1 {
 				+ "											</span>"
 				+ "										</div>"+
 				
-				"										<div id=\"first_line\">&nbsp;</div>" + 
-				"										<div id=\"second_line\">&nbsp;</div>" + 
+				"										<div id=\"first_lineCAMBIARALARMA\" class=\"row\">" + 
+				"											<span class=\"col-xs-4 alinedisplay\" style=\"padding-left: 1em; padding-right: 0.5em;\">" + 
+				"												<h6 class=\"alinearspanstatus\">Particion:</h6>" + 
+				"											</span>" + 
+				"											<span class=\"col-xs-4 float-right alinezones\">" + 
+				"												<h6 id=\"particionesCAMBIARALARMA\">1</h6>" + 
+				"											</span>" + 
+				"										</div>" + 
+				"										<div id=\"second_lineCAMBIARALARMA\" class=\"row\" style=\"padding-left: 1em; padding-right: 0.5em;\">" + 
+				"											<span class=\"col-xs-4 alinedisplay\" style=\"padding-left: 1em; padding-right: 0.5em;\">" + 
+				"												<h6 class=\"alinearspanstatus\"></h6>" + 
+				"											</span>" + 
+				"											<span class=\"col-xs-4 float-right alinezones\" style=\"padding-left: 1em; padding-right: 0.5em;\">" + 
+				"												<h6 id=\"segundalineaCAMBIARALARMA\"></h6>" + 
+				"											</span>" + 
+				"										</div>"+
 				"									</div>" + 
 				"									<div class=\"status_icons\">" + 
 				"										<i class=\"dsc-icon icon-check\" id=\"ready_iconCAMBIARALARMA\" title=\"Lista\"></i>" + 
 				"										<i class=\"dsc-icon icon-armed\" id=\"armed_iconCAMBIARALARMA\" title=\"Armada\"></i>" + 
-				"										<i class=\"dsc-icon icon-trouble\" id=\"trouble_iconCAMBIARALARMA\"" + 
-				"											title=\"Problema en el Sistema\"></i> <i class=\"dsc-icon icon-ac\"" + 
-				"											id=\"ac_iconCAMBIARALARMA\" title=\"Alarma Activada\"></i>" + 
+				"										<i class=\"dsc-icon icon-trouble\" id=\"trouble_iconCAMBIARALARMA\" title=\"Pendiente\"></i> "
+				+ "										<i class=\"dsc-icon icon-ac\" id=\"ac_iconCAMBIARALARMA\" title=\"Desarmada\"></i>" + 
 				"									</div>" + 
 				"								</div>" + 
 

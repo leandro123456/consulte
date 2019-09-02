@@ -71,72 +71,81 @@ function updateEstado45(id, valor,elemento)
 }
 
 //evaluar status del dispositivo que esta reportando
-function informarstatus45(topicorecibido, mensajerecibido){
-	var iddevice = topicorecibido.replace("/Status","");
-	console.log("este es el id del mensaje de status: "+ iddevice);
-	console.log("este es el cuerpo del status: "+ mensajerecibido)
-	if(mensajerecibido =="online"){
-		updateEstado("spanestado"+iddevice, "online","statussonoff");
-	}if(mensajerecibido =="offline"){
-		updateEstado("spanestado"+iddevice, "offline", "statussonoff");
-	}if(mensajerecibido =="disconnected"){
-		updateEstado("spanestado"+iddevice, "online", "statussonoff");
-	}if(mensajerecibido !="disconnected" && mensajerecibido !="online" && mensajerecibido !="offline"){
-		console.log("el mensaje que se recibio es invalido: "+ mensajerecibido);
-	}
-}
+//function informarstatus45(topicorecibido, mensajerecibido){
+//	var iddevice = topicorecibido.replace("/Status","");
+//	console.log("este es el id del mensaje de status: "+ iddevice);
+//	console.log("este es el cuerpo del status: "+ mensajerecibido)
+//	if(mensajerecibido =="online"){
+//		updateEstado("spanestado"+iddevice, "online","statussonoff");
+//	}if(mensajerecibido =="offline"){
+//		updateEstado("spanestado"+iddevice, "offline", "statussonoff");
+//	}if(mensajerecibido =="disconnected"){
+//		updateEstado("spanestado"+iddevice, "online", "statussonoff");
+//	}if(mensajerecibido !="disconnected" && mensajerecibido !="online" && mensajerecibido !="offline"){
+//		console.log("el mensaje que se recibio es invalido: "+ mensajerecibido);
+//	}
+//}
 
 
 
 /** comportamiento cuando recibe un mensaje*/
 function onMessageArrivedAlarma(message) {
 	console.log("LLEGO UN MENSAJE DE LA ALARMA: "+message.destinationName+"; contenido: "+  message.payloadString);
-	var inputAll= message.payloadString;	
+	var contenido= message.payloadString;
+	var topico = message.destinationName;
 	var dataObj = null;
 	if(message.destinationName.includes("/Status")){
 		informarstatus(message.destinationName, message.payloadString)
 	}
-	if(inputAll.includes("tempC") && inputAll.includes("hum")){
-		dataObj = JSON.parse(inputAll);
-		var serial =dataObj.deviceId;
-		console.log("llego un mensaje de temperatura, cuerpo:  "+ dataObj);
-		if(dataObj.hum != null && document.getElementById("humedad"+serial)!= null)
-			animatevar("barrahum"+serial,"humedad"+serial,dataObj.hum);
-		
-		if(dataObj.tempC != null && document.getElementById("temperaturac"+serial)!= null)
-			animatevar("barratempc"+serial,"temperaturac"+serial,dataObj.tempC);
-		
-		if(dataObj.hiC != null && document.getElementById("sensacionc"+serial)!= null)
-			animatevar("barrasensc"+serial,"sensacionc"+serial,dataObj.hiC);
-		
-		if(dataObj.tempF != null && document.getElementById("temperaturaf"+serial)!= null)
-			animatevar("barratempf"+serial,"temperaturaf"+serial,dataObj.tempF);
-		
-		if(dataObj.hiF != null && document.getElementById("sensacionf"+serial)!= null)
-			animatevar("barrasensf"+serial,"sensacionf"+serial,dataObj.hiF);
+	if(topico.includes("Partition")){
+		var iddevice = topico.substring(0,topico.search("/Partition"));
+		var numparticion = topico.substring(topico.search("Partition")).replace("Partition","");
+		var numdisplay = document.getElementById("particiones"+iddevice).innerHTML;
+		console.log("este es el numero de particion en el display: "+ numdisplay);
+		if(numdisplay == numparticion){
+			//como el display apunta a la particion correcta veo el estado
+			if(contenido=="disarmed"){
+				document.getElementById("ac_icon"+iddevice).style.color = "yellow";
+				document.getElementById("armed_icon"+iddevice).style.color = "grey";
+				document.getElementById("trouble_icon"+iddevice).style.color = "grey";
+				
+				var spanStatus = document.getElementById("second_line"+iddevice);
+				spanStatus.firstChild.data = contenido;
+			}else if(contenido == "armed_home"){
+				document.getElementById("armed_icon"+iddevice).style.color = "green";
+				document.getElementById("ac_icon"+iddevice).style.color = "grey";
+				document.getElementById("trouble_icon"+iddevice).style.color = "grey";
+				
+				var spanStatus = document.getElementById("second_line"+iddevice);
+				spanStatus.firstChild.data = contenido;
+			}else if(contenido =="armed_away"){
+				document.getElementById("armed_icon"+iddevice).style.color = "green";
+				document.getElementById("trouble_icon"+iddevice).style.color = "grey";
+				document.getElementById("ac_icon"+iddevice).style.color = "grey";
+				
+				var spanStatus = document.getElementById("second_line"+iddevice);
+				spanStatus.firstChild.data = contenido;
+			}else if(contenido =="pending"){
+				document.getElementById("trouble_icon"+iddevice).style.color = "yellow";
+				document.getElementById("armed_icon"+iddevice).style.color = "grey";
+				document.getElementById("ac_icon"+iddevice).style.color = "grey";
+				
+				var spanStatus = document.getElementById("second_line"+iddevice);
+				spanStatus.firstChild.data = contenido;
+			}else if (contenido == "triggered"){			
+				document.getElementById("trouble_icon"+iddevice).style.color = "red";
+				document.getElementById("armed_icon"+iddevice).style.color = "red";
+				document.getElementById("ac_icon"+iddevice).style.color = "red";
+				
+				var spanStatus = document.getElementById("second_line"+iddevice);
+				spanStatus.firstChild.data = contenido;
+			}else{
+				//como no lo reconoce lo muestra en el segundo display
+				var spanStatus = document.getElementById("second_line"+iddevice);
+				spanStatus.firstChild.data = contenido;
+			}
+		}
 	}
-//	else{
-//			dataObj = JSON.parse(inputAll);
-//		if(dataObj.SW1 != null && dataObj.SW1=="ON"){
-//			var deviceserial = "boton1"+dataObj.deviceId;
-//			updateEstado(deviceserial,"yes","botonsonoff");
-//			var barraho= "sonofftimer1"+dataObj.deviceId;
-//			var barranum= "span1"+dataObj.deviceId;
-//			animatevar(barraho,barranum,dataObj.PB1TTO);
-//		}if(dataObj.SW1 != null && dataObj.SW1=="OFF"){
-//			var deviceserial = "boton1"+dataObj.deviceId;
-//			updateEstado(deviceserial,"no","botonsonoff");
-//		}if(dataObj.SW2 != null && dataObj.SW2=="ON"){
-//			var deviceserial = "boton2"+dataObj.deviceId;
-//			updateEstado(deviceserial,"yes","botonsonoff");
-//			var barraho= "sonofftimer2"+dataObj.deviceId;
-//			var barranum= "span2"+dataObj.deviceId;
-//			animatevar(barraho,barranum,dataObj.PB2TTO);
-//		}if(dataObj.SW2 != null && dataObj.SW2=="OFF"){
-//			var deviceserial = "boton2"+dataObj.deviceId;
-//			updateEstado(deviceserial,"no","botonsonoff");
-//		}
-//	}
 }
 /** comportamiento cuando recibe un mensaje*/
 

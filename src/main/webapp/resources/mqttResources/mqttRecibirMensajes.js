@@ -203,8 +203,15 @@
         	  topic=topico;
           }if(message1.includes("alarm-")){
         	  var texto=message1.replace("alarm-","");
+        	  var partition = "";
+        	  if(swith=="particion")
+        		  partition = "1";
+        	  if(texto=="armarzona")
+        		  texto=partition+"S";
+        	  if(texto=="armartotal")
+                  texto=partition+"A";
         	  message=texto;
-        	  topic=serial+"/dsc/Set/Partition1";
+        	  topic=serial+"/cmd";
           }
           
     	  if(mqttClient.isConnected()==false){
