@@ -63,7 +63,7 @@
               <h6 class="m-0 font-weight-bold text-primary">Devices ${device.serialnumber}</h6>
             </div>
             <div class="card-body">
-              <form role="form" action="<c:url value="/home/home/componentmyown/" />${device.serialnumber}/" method="post" enctype="multipart/form-data">
+              <form role="form" action="<c:url value="/home/savemodification/" />${device.serialnumber}/" method="post" enctype="multipart/form-data">
                    <div class="form-group">
                        <h2>General Information</h2>
                        <label>Name</label>
@@ -77,9 +77,9 @@
 						<label>Name</label>
 						<input name="confname" class="form-control" disabled value="${configuration.name}">
 						<label>IP - Host</label>
-						<input name="confname" class="form-control" disabled value="${configuration.iphost}">
+						<input name="confname" class="form-control" disabled value="${configuration.iphostescuchar}">
 						<label>Port</label>
-						<input name="confname" class="form-control" disabled value="${configuration.port}">
+						<input name="confname" class="form-control" disabled value="${configuration.portescuchar}">
 						<label>User</label>
 						<input name="confname" class="form-control" disabled value="${configuration.name}">
 						<label>Password</label>

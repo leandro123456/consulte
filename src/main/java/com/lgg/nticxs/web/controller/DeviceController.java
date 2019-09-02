@@ -71,7 +71,7 @@ public class DeviceController {
 	}
 	
 	@GetMapping("home/info/{deviceserial}")
-	public String moreInfoDevice(Model model, @PathVariable String deviceserial) {
+	public String moreInfoDevice(Model model, @PathVariable String deviceserial, HttpServletRequest request) {
 		Device device= devicedao.retrieveBySerialNumber(deviceserial);
 		DeviceConfiguration configuration = null;
 		if(device.getUsedefaultbrocker())
@@ -85,6 +85,13 @@ public class DeviceController {
 		model.addAttribute("admins", admins);
 		model.addAttribute("users", users);
 		model.addAttribute("device", device);
+
+		//informacion de usuario
+		String nombre = request.getUserPrincipal().getName();
+		User user = userdao.retrieveByMail(nombre);
+		model.addAttribute("user", user);
+		System.out.println("id del usuario: "+ user.getId());
+		System.out.println("device: "+ device.getSerialnumber());
 		return "device_more_info";
 	}
 	

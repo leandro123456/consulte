@@ -71,20 +71,23 @@ function updateEstado45(id, valor,elemento)
 }
 
 //evaluar status del dispositivo que esta reportando
-//function informarstatus45(topicorecibido, mensajerecibido){
-//	var iddevice = topicorecibido.replace("/Status","");
-//	console.log("este es el id del mensaje de status: "+ iddevice);
-//	console.log("este es el cuerpo del status: "+ mensajerecibido)
-//	if(mensajerecibido =="online"){
-//		updateEstado("spanestado"+iddevice, "online","statussonoff");
-//	}if(mensajerecibido =="offline"){
-//		updateEstado("spanestado"+iddevice, "offline", "statussonoff");
-//	}if(mensajerecibido =="disconnected"){
-//		updateEstado("spanestado"+iddevice, "online", "statussonoff");
-//	}if(mensajerecibido !="disconnected" && mensajerecibido !="online" && mensajerecibido !="offline"){
-//		console.log("el mensaje que se recibio es invalido: "+ mensajerecibido);
-//	}
-//}
+function informarstatus45(topicorecibido, mensajerecibido){
+	var iddevice = topicorecibido.replace("/Status","");
+	console.log("este es el id del mensaje de status: "+ iddevice);
+	console.log("este es el cuerpo del status: "+ mensajerecibido)
+	if(mensajerecibido =="online"){
+		updateEstado45("spanestado"+iddevice, "online","statussonoff");
+		document.getElementById("ready_icon"+iddevice).style.color = "green"
+	}if(mensajerecibido =="offline"){
+		updateEstado45("spanestado"+iddevice, "offline", "statussonoff");
+		document.getElementById("ready_icon"+iddevice).style.color = "red"
+	}if(mensajerecibido =="disconnected"){
+		updateEstado45("spanestado"+iddevice, "online", "statussonoff");
+		document.getElementById("ready_icon"+iddevice).style.color = "yellow"
+	}if(mensajerecibido !="disconnected" && mensajerecibido !="online" && mensajerecibido !="offline"){
+		console.log("el mensaje que se recibio es invalido: "+ mensajerecibido);
+	}
+}
 
 
 
@@ -95,7 +98,7 @@ function onMessageArrivedAlarma(message) {
 	var topico = message.destinationName;
 	var dataObj = null;
 	if(message.destinationName.includes("/Status")){
-		informarstatus(message.destinationName, message.payloadString)
+		informarstatus45(message.destinationName, message.payloadString)
 	}
 	if(topico.includes("Partition")){
 		var iddevice = topico.substring(0,topico.search("/Partition"));
