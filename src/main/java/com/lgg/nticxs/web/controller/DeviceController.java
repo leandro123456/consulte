@@ -54,6 +54,9 @@ public class DeviceController {
 		System.out.println("llego al remove!!");
 		System.out.println("serial: "+ deviceserial);
 		CargarDevices(model, request);
+		Device device = devicedao.retrieveBySerialNumber(deviceserial);
+		String nombredelejecutor = request.getUserPrincipal().getName();
+		if(device.getUserowner().equals(nombredelejecutor)){
 		try {
 			MongoCommands.Delete(COLLECTION_DEVICE, "serialnumber", deviceserial);
 			for(User user: userdao.retrieveAll()) {
@@ -63,10 +66,22 @@ public class DeviceController {
 					userdao.update(user);
 				}
 			}
-			model.addAttribute("msg", "Delete Successfully");
+			model.addAttribute("msg", "Borrado exitoso");
 		} catch (Exception e) {
-			model.addAttribute("msg1", "Error during the deletion process: "+ e.getMessage());
+			model.addAttribute("msg1", "Error durante el proceso de borrado: "+ e.getMessage());
+		}}else{
+			//borro la vista asociada al usuario y el nombre del dispositivo
+			device = devicedao.retrieveBySerialNumber(deviceserial);
+			device.getAdmins().remove(nombredelejecutor);
+			device.getVista().remove(nombredelejecutor);
+			devicedao.update(device);
+			//Actualizo el usuario quitandole el dispositivo
+			User userComun = userdao.retrieveByMail(nombredelejecutor);
+			userComun.getDeviceserialnumber().remove(deviceserial);
+			userdao.update(userComun);
+			model.addAttribute("msg", "Como usted no es el dueño del dispositivo, unicamente se ha quitado su relacion con el mismo");
 		}
+				
 		return "device_show_my";
 	}
 	
@@ -177,7 +192,11 @@ public class DeviceController {
 			device.setUserowner(name);
 			System.out.println("tiene configuracion por defaault: "+defaultconfiguration);
 			if(defaultconfiguration) {
-				DeviceDefaultConfiguration deviceConfig= deviceconfigdao.retrieveByName("default");
+				DeviceDefaultConfiguration deviceConfig= null;
+				if(!tipodevice.equals("alarma"))
+					deviceConfig=deviceconfigdao.retrieveByName("default");
+				else
+					deviceConfig=deviceconfigdao.retrieveByName("default-alarma");
 				device.getDeviceconfiguration().add(establishTopic(deviceConfig,serialnumber));
 			}else{
 				DeviceConfiguration dconfirguration  = new DeviceConfiguration();
@@ -276,8 +295,26 @@ public class DeviceController {
 			userdao.update(user);
 			
 		}else{
-			model.addAttribute("msg1", "This device / serial is already registered ... please check it and try again");
-			return "device_new";
+			//model.addAttribute("msg1", "This device / serial is already registered ... please check it and try again");
+			//return "device_new";
+			
+			//actualizo el usuario en el dispositivo
+			Device device = devicedao.retrieveBySerialNumber(deviceserial);
+			String administrador = request.getUserPrincipal().getName();
+			System.out.println("nombre del administrador: "+ administrador);
+			device.getAdmins().add(administrador);
+			
+			//agrego la misma vista que el dueño en el nuevo usuario
+			String vistaprincipal = device.getVista().get(device.getUserowner());
+			device.getVista().put(administrador, vistaprincipal);
+			devicedao.update(device);
+			//actualizo el usuario
+			User user1 = userdao.retrieveByMail(administrador);
+			user1.getDeviceserialnumber().add(deviceserial);
+			userdao.update(user1);
+			System.out.println("actualizo el dispositivo agregando un nuevo admin");
+			model.addAttribute("msg1", "El dispositivo, ya existe usted se agrego como administrador, pero no como propietario del producto");
+
 		}
 		return "redirect:/home";
 	}

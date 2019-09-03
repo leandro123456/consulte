@@ -144,15 +144,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+           <h5 class="modal-title" id="exampleModalLabel">Borrar Dispositivo</h5> <!--Ready to Leave? -->
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">Ã—</span>
+            <span aria-hidden="true">x</span>
           </button>
         </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-body">¿Esta seguro de borrar el dispositivo?</div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="/mqttmanagment/home/remove/">Delete</a>
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          <a class="btn btn-primary" href="/mqttmanagment/home/remove/">Borrar</a>
         </div>
       </div>
     </div>

@@ -39,7 +39,7 @@
 					<script type="text/javascript">
 						var x= document.getElementById('mensaje').value;
 						swal({
-							  //title: x,
+							  title: x,
 							  icon: "success",
 							  timer: 5000,
 							  closeOnClickOutside: false,
@@ -52,7 +52,7 @@
 					<script type="text/javascript">
 						var x= document.getElementById('mensaje1').value;
 						swal({
-							  //title: x,
+							  title: x,
 							  icon: "error",
 							  timer: 5000,
 							  closeOnClickOutside: false,
@@ -151,16 +151,16 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Delete Device</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Borrar Dispositivo</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">Are you sure you delete the device from the platform?</div>
+        <div class="modal-body">¿Esta seguro de borrar el dispositivo?</div>
         <div class="modal-footer">
           <form role="form"  id="form_id" method="post" enctype="multipart/form-data">
-          	<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          	<a class="btn btn-primary" href="javascript:;" onclick="parentNode.submit();">Delete</a>
+          	<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          	<a class="btn btn-primary" href="javascript:;" onclick="parentNode.submit();">Borrar</a>
           </form>
         </div>
       </div>

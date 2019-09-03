@@ -29,14 +29,43 @@
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-
+<script src='<c:url value="https://unpkg.com/sweetalert/dist/sweetalert.min.js"/>'></script>
 <!-- boton check -->
 </head>
 
 <body id="page-top" onresize="modificarTamanoAlarma()">
-	<div id="wrapper">
+	<div id="wrapper">	
 		<jsp:include page="header.jsp" />
 		<div class="container-fluid">
+			
+			<c:if test="${not empty msg}">
+				 	<input type="hidden" id ="mensaje" value="${msg}">
+					<script type="text/javascript">
+						var x= document.getElementById('mensaje').value;
+						swal({
+							  title: x,
+							  icon: "success",
+							  timer: 5000,
+							  closeOnClickOutside: false,
+							  buttons: false,
+							});
+					</script>
+				</c:if>
+				<c:if test="${not empty msg1}">
+				 	<input type="hidden" id ="mensaje1" value="${msg1}">
+					<script type="text/javascript">
+						var x= document.getElementById('mensaje1').value;
+						swal({
+							  title: x,
+							  icon: "error",
+							  timer: 5000,
+							  closeOnClickOutside: false,
+							  buttons: false,
+							});
+					</script>
+				</c:if>	
+			
+			
 			<div class="row" id="cargadora">
 				<c:forEach items="${vistas}" var="vista">
 	                ${vista}
