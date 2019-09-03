@@ -183,16 +183,17 @@
           console.log("este es el mensaje: "+ message1);
           if(message1=="enviaron"){
         	  if(swith=="switchone")
-        		  message='{"pwd":"coiaca","param1":"SW1","param2":"turnOn","command":"switchAction"}';
+        		  message='{"SW1":"ON"}';
+        	  //message='{"pwd":"coiaca","param1":"SW1":"On","command":"switchAction"}';
         	  else
-        		  message='{"pwd":"coiaca","param1":"SW2","param2":"turnOn","command":"switchAction"}';
+        		  message='{"SW2":"ON"}';
         	  topic=topico;
         	  
           }if(message1=="enviaroff"){
         	  if(swith=="switchone")
-        		  message='{"pwd":"coiaca","param1":"SW1","param2":"turnOff","command":"switchAction"}';
+        		  message='{"SW1":"OFF"}';
         	  else
-        		  message='{"pwd":"coiaca","param1":"SW2","param2":"turnOff","command":"switchAction"}';
+        		  message='{"SW2":"OFF"}';
         	  topic=topico;
         	  
           }if(message1=="simulatepushbutton"){

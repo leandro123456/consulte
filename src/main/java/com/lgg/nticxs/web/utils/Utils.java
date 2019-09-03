@@ -522,6 +522,7 @@ public class Utils {
 						cuerpoSonoff=cuerpoSonoff.replaceAll("USERSONOFF", devconfig.getUserescribir());
 						cuerpoSonoff=cuerpoSonoff.replaceAll("PASSSONOFF", devconfig.getPassescribir());
 						cuerpoSonoff=cuerpoSonoff.replaceAll("TOPICSONOFF", devconfig.getTopicescribir());
+						cuerpoSonoff=cuerpoSonoff.replaceAll("TOPICREMOTESONOFF", devconfig.getTopicescribirremote());
 						contenidototal= contenidototal+cuerpoSonoff;	
 						break;	
 					}
@@ -534,6 +535,7 @@ public class Utils {
 						cuerpoSonoff=cuerpoSonoff.replaceAll("USERSONOFF", devconfig.getUserescribir());
 						cuerpoSonoff=cuerpoSonoff.replaceAll("PASSSONOFF", devconfig.getPassescribir());
 						cuerpoSonoff=cuerpoSonoff.replaceAll("TOPICSONOFF", devconfig.getTopicescribir());
+						cuerpoSonoff=cuerpoSonoff.replaceAll("TOPICREMOTESONOFF", devconfig.getTopicescribirremote());
 						contenidototal= contenidototal+cuerpoSonoff;	
 						break;	
 					}
