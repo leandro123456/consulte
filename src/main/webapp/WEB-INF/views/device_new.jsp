@@ -137,10 +137,32 @@
 				<div class="card-body">
 					<div class="form-group">
 							<h3>Informacion General</h3>
-							<b>Numero de Serie</b> <input id="serialnumber" class="form-control" required> 
 							<b>Nombre</b> <input id="namedevice" class="form-control" required>
 							<p></p>
 							<b>Descripcion</b> <input id="descriptiondevice" class="form-control" required>
+							<p></p>
+							<div>
+								<b>Marca del Dispositivo</b> <select id="marcadevice"
+									class="form-control" onchange="seleccionModelo()">
+									<option value="none">Seleccione uno</option>
+									<option value="coiaca">Coiaca</option>
+									<option value="otro">Otro</option>
+								</select>
+							</div>
+							<p></p>
+							<div>
+								<b>Modelo del Dispositivo</b> <select id="modelodevice"
+									class="form-control" onchange="autocompletarSerial()">
+									<option value="none">Seleccione uno</option>
+									<option value="WTHUSB">WTHUSB</option>
+									<option value="PSWS1">PSWS1</option>
+									<option value="PSWS2">PSWS2</option>
+									<option value="BRDSC">BRDSC01</option>
+									<option value="PS3S1">Sonoff</option>
+								</select>
+							</div>
+							<p></p>
+							<b>Numero de Serie</b> <input id="serialnumber" class="form-control" required>							
 							<p></p>
 							<div>
 								<b>Tipo de Dispositivo</b> <select id="tipodevice"
@@ -230,81 +252,111 @@
 							</table>
 						</form>
 						<p></p>
-						<b>Configuracion por defecto para parametros de Conexion<input
+						<b>Ver Opciones Avanzadas<input
 							id="toggle-paramconects" checked type="checkbox"
 							data-toggle="toggle" onchange="checkconfiguration()"
 							data-style="slow"></b>
 						<p></p>
 						<form id="parametersConexion" onkeypress=checkPassword()>
-							<h5>Informacion para escuchar</h5>
+							<h5>Topico para escuchar</h5>
 							<div class="form-group row ">
-								<b>Hostname or Direccion IP</b> <input type="text"
+								<b>Hostname or Direccion IP</b> 
+									<input type="text"
 									class="form-control form-control-user" id="iphostescuchar"
-									placeholder="Hostname"> <b>Puerto</b> <input type="text"
+									placeholder="Hostname"> 
+								<b>Puerto</b> 
+									<input type="text"
 									class="form-control form-control-user" id="portescuchar"
-									placeholder="Number Port"> <b>Topico para escuchar:</b><input
+									placeholder="Number Port"> 
+								<b>Topico</b>
+									<input
 									type="text" class="form-control form-control-user "
-									id="topiclisten" placeholder="Topic to Listen"> <b>Nombre de Usuario</b> <input type="text" class="form-control form-control-user"
-									id="userescuchar" placeholder="User name"> <b>Contraseña</b>
-								<input type="password" class="form-control form-control-user"
-									id="passescuchar" placeholder="Password"> <b>Confirmar Contraseña</b> <input type="password"
+									id="topiclisten" placeholder="Topic to Listen"> 
+								<b>Nombre de Usuario</b> 
+									<input type="text" class="form-control form-control-user"
+									id="userescuchar" placeholder="User name"> 
+								<b>Contraseña</b>
+									<input type="password" class="form-control form-control-user"
+									id="passescuchar" placeholder="Password"> 
+								<b>Confirmar Contraseña</b> 
+									<input type="password"
 									class="form-control form-control-user" id="confirpassescuchar"
 									placeholder="Confirm Password">
 							</div>
 
 
-							<h5>Informacion para enviar</h5>
+							<h5>Topico para enviar</h5>
 							<div class="form-group row ">
-								<b>Hostname or IP Address</b> <input type="text"
+								<b>Hostname o Direccion IP</b> 
+									<input type="text" 
 									class="form-control form-control-user" id="iphostescribir"
-									placeholder="Hostname"> <b>Port</b> <input type="text"
+									placeholder="Hostname" value=""> 
+								<b>Puerto</b> 
+									<input type="text"
 									class="form-control form-control-user" id="portescribir"
-									placeholder=" Number Port"> <b>Topic to Write:</b><input
-									type="text" class="form-control form-control-user "
-									id="topicwrite" placeholder="Topic to Write"> <b>User
-									name</b> <input type="text" class="form-control form-control-user"
-									id="userescribir" placeholder="User name"> <b>Password</b>
+									placeholder=" Number Port"> 
+								<b>Topico</b>
+									<input type="text" class="form-control form-control-user "
+									id="topicwrite" placeholder="Topic to Write"> 
+								<b>Nombre de usuario</b> 
+									<input type="text" class="form-control form-control-user"
+									id="userescribir" placeholder="User name"> 
+								<b>Contraseña</b>
 								<input type="password" class="form-control form-control-user"
-									id="passescribir" placeholder="Password"> <b>Confirm
-									Password</b> <input type="password"
+									id="passescribir" placeholder="Password"> 
+								<b>Confirmar Contraseña</b> <input type="password"
 									class="form-control form-control-user" id="confirpassescribir"
 									placeholder="Confirm Password">
 							</div>
 
-							<h5>Informacion para escuchar comandos remotos</h5>
+							<h5>Topico para escuchar comandos remotos</h5>
 							<div class="form-group row ">
-								<b>Hostname or IP Address</b> <input type="text"
+								<b>Hostname o Direccion IP</b> 
+									<input type="text"
 									class="form-control form-control-user"
-									id="iphostescucharremote" placeholder="Hostname"> <b>Port</b>
-								<input type="text" class="form-control form-control-user"
-									id="portescucharremote" placeholder="Number Port"> <b>Topic
-									to Listen:</b><input type="text"
+									id="iphostescucharremote" placeholder="Hostname"> 
+								<b>Puerto</b>
+									<input type="text" class="form-control form-control-user"
+									id="portescucharremote" placeholder="Number Port"> 
+								<b>Topico</b>
+									<input type="text"
 									class="form-control form-control-user " id="topiclistenremote"
-									placeholder="Topic to Listen"> <b>User name</b> <input
+									placeholder="Topic to Listen"> 
+								<b>Nombre de Usuario</b> 
+									<input
 									type="text" class="form-control form-control-user"
-									id="userescucharremote" placeholder="User name"> <b>Password</b>
-								<input type="password" class="form-control form-control-user"
-									id="passescucharremote" placeholder="Password"> <b>Confirm
-									Password</b> <input type="password"
+									id="userescucharremote" placeholder="User name"> 
+								<b>Contraseña</b>
+									<input type="password" class="form-control form-control-user"
+									id="passescucharremote" placeholder="Password"> 
+								<b>Confirmar Contraseña</b> 
+									<input type="password"
 									class="form-control form-control-user"
 									id="confirpassescucharremote" placeholder="Confirm Password">
 							</div>
 
-							<h5>Informacion para enviar comandos remotos</h5>
+							<h5>Topico para enviar comandos remotos</h5>
 							<div class="form-group row ">
-								<b>Hostname or IP Address</b> <input type="text"
+								<b>Hostname or Direccin IP</b> 
+									<input type="text"
 									class="form-control form-control-user"
-									id="iphostescribirremote" placeholder="Hostname"> <b>Port</b>
-								<input type="text" class="form-control form-control-user"
-									id="portescribirremote" placeholder="Number Port"> <b>Topic
-									to Write:</b><input type="text"
+									id="iphostescribirremote" placeholder="Hostname"> 
+								<b>Puerto</b>
+									<input type="text" class="form-control form-control-user"
+									id="portescribirremote" placeholder="Number Port"> 
+								<b>Topico</b>
+									<input type="text"
 									class="form-control form-control-user " id="topicwriteremote"
-									placeholder="Topic to Write"> <b>User name</b> <input
+									placeholder="Topic to Write"> 
+								<b>Nombre de Usuario</b> 
+									<input
 									type="text" class="form-control form-control-user"
-									id="userescribirremote" placeholder="User name"> <b>Password</b>
+									id="userescribirremote" placeholder="User name"> 
+								<b>Contraseña</b>
 								<input type="password" class="form-control form-control-user"
-									id="passescribirremote" placeholder="Password"> <b>Confirm
-									Password</b> <input type="password"
+									id="passescribirremote" placeholder="Password"> 
+								<b>Confirmar Contraseña</b> 
+								<input type="password"
 									class="form-control form-control-user"
 									id="confirmpassescribirremote" placeholder="Confirm Password">
 							</div>
@@ -511,7 +563,6 @@
 	autoclose: true,
 	'default': 'now'
 	});
-
 	</script>
 <!-- esto es para el reloj -->
 
@@ -654,19 +705,147 @@
   	$(document).ready(function () {
   		checkconfiguration();
   		enableType();
+  		//ocultar los modelos cuando carga la pagina
+  		document.getElementById('modelodevice').style.display = 'none';
   	});
   	</script>
+  	
+  	
+  	<script type="text/javascript">
+  	function completarloscamposdeconfiguracion(marca, modelo){
+  		if(marca!=null && marca == "coiaca"){
+  			if(modelo!=null && modelo.includes("BRDSC")){
+  				//usar los valores de confirguracion por default de la alarma  
+  				document.getElementById("iphostescuchar").value =${configdef.iphostescuchar};
+  				document.getElementById("portescuchar").value =${configdef.portescuchar};
+  				document.getElementById("topiclisten").value =${configdef.topicescuchar};
+  				document.getElementById("userescuchar").value =${configdef.userescuchar};
+  				document.getElementById("passescuchar").value =${configdef.passescuchar};
+  				document.getElementById("confirpassescuchar").value =${configdef.passescuchar};
+  				
+  				document.getElementById("iphostescribir").value =${configdef.iphostescribir};
+  				document.getElementById("portescribir").value =${configdef.portescribir};
+  				document.getElementById("topicwrite").value =${configdef.topicescribir};
+  				document.getElementById("userescribir").value =${configdef.userescribir};
+  				document.getElementById("passescribir").value =${configdef.passescribir};
+  				document.getElementById("confirpassescribir").value =${configdef.passescribir};
+  				
+  				document.getElementById("iphostescuchar").value =${configdef.iphostescuchar};
+  				document.getElementById("portescucharremote").value =${configdef.portescucharremote};
+  				document.getElementById("topiclistenremote").value =${configdef.topicescucharremote};
+  				document.getElementById("userescucharremote").value =${configdef.userescucharremote};
+  				document.getElementById("passescucharremote").value =${configdef.passescucharremote};
+  				document.getElementById("confirpassescucharremote").value =${configdef.passescucharremote};
+  				
+  				document.getElementById("iphostescribirremote").value =${configdef.iphostescribirremote};
+  				document.getElementById("portescribirremote").value =${configdef.portescribirremote};
+  				document.getElementById("topicwriteremote").value =${configdef.topicescribirremote};
+  				document.getElementById("userescribirremote").value =${configdef.userescribirremote};
+  				document.getElementById("passescribirremote").value =${configdef.passescribirremote};
+  				document.getElementById("confirmpassescribirremote").value =${configdef.confirmpassescribirremote};
+  				
+  			}else if(modelo!=null){
+  				//usar los valores de confirguracion por default de cualquiera
+  				document.getElementById("iphostescuchar").value =${configdeflocal.iphostescuchar};
+  				document.getElementById("portescuchar").value =${configdeflocal.portescuchar};
+  				document.getElementById("topiclisten").value =${configdeflocal.topicescuchar};
+  				document.getElementById("userescuchar").value =${configdeflocal.userescuchar};
+  				document.getElementById("passescuchar").value =${configdeflocal.passescuchar};
+  				document.getElementById("confirpassescuchar").value =${configdeflocal.passescuchar};
+  				
+  				document.getElementById("iphostescribir").value =${configdeflocal.iphostescribir};
+  				document.getElementById("portescribir").value =${configdeflocal.portescribir};
+  				document.getElementById("topicwrite").value =${configdeflocal.topicescribir};
+  				document.getElementById("userescribir").value =${configdeflocal.userescribir};
+  				document.getElementById("passescribir").value =${configdeflocal.passescribir};
+  				document.getElementById("confirpassescribir").value =${configdeflocal.passescribir};
+  				
+  				document.getElementById("iphostescuchar").value =${configdeflocal.iphostescuchar};
+  				document.getElementById("portescucharremote").value =${configdeflocal.portescucharremote};
+  				document.getElementById("topiclistenremote").value =${configdeflocal.topicescucharremote};
+  				document.getElementById("userescucharremote").value =${configdeflocal.userescucharremote};
+  				document.getElementById("passescucharremote").value =${configdeflocal.passescucharremote};
+  				document.getElementById("confirpassescucharremote").value =${configdeflocal.passescucharremote};
+  				
+  				document.getElementById("iphostescribirremote").value =${configdeflocal.iphostescribirremote};
+  				document.getElementById("portescribirremote").value =${configdeflocal.portescribirremote};
+  				document.getElementById("topicwriteremote").value =${configdeflocal.topicescribirremote};
+  				document.getElementById("userescribirremote").value =${configdeflocal.userescribirremote};
+  				document.getElementById("passescribirremote").value =${configdeflocal.passescribirremote};
+  				document.getElementById("confirmpassescribirremote").value =${configdeflocal.confirmpassescribirremote};
+  			}else{
+  				console.log("El MODELO es null");	
+  			}
+  		}else{
+  			console.log("la MARCA es null");
+  		}
+  	}
+  	</script>
+	
 	<script type="text/javascript">
+  	// funcion para mostrar los modelos de coiaca
+		function seleccionModelo(){
+			var seleccion=document.getElementById('marcadevice');
+	        var valuetype = seleccion.options[seleccion.selectedIndex].value;
+	        if(valuetype == "coiaca"){
+	        	document.getElementById('modelodevice').style.display = 'inline';
+	        }else{
+	        	document.getElementById('modelodevice').style.display = 'none';
+	        }
+		}
+	</script>
+	
+	<script type="text/javascript">
+  	//funcion para escribir en el campo serial el id y tambien grisar el tipo de dispositivo
+  	function autocompletarSerial(){
+  			var seleccion21=document.getElementById('marcadevice');
+	        var valormodelo = seleccion21.options[seleccion21.selectedIndex].value;
+	        var contenidoserial = null;
+	      //sugiero el comienzo, griso el desplegable y modifico el valor que tiene
+	        if(valormodelo == "WTHUSB"){ 
+	        	contenidoserial = document.getElementById("serialnumber");
+	        	contenidoserial.firstChild.data = "WTHUSB";
+	        	document.getElementById('tipodevice').value = 'termometro';
+	        }if(valormodelo == "PSWS1"){ 
+	        	contenidoserial = document.getElementById("serialnumber");
+	        	contenidoserial.firstChild.data = "PSWS1";
+	        	document.getElementById('tipodevice').value = 'termometro';
+	        }if(valormodelo == "PSWS2"){ 
+	        	contenidoserial = document.getElementById("serialnumber");
+	        	contenidoserial.firstChild.data = "PSWS2";
+	        	document.getElementById('tipodevice').value = 'termometro';
+	        }if(valormodelo == "BRDSC"){ 
+	        	contenidoserial = document.getElementById("serialnumber");
+	        	contenidoserial.firstChild.data = "BRDSC01";
+	        	document.getElementById('tipodevice').value = 'termometro';
+	        }if(valormodelo == "PS3S1"){ 
+	        	contenidoserial = document.getElementById("serialnumber");
+	        	contenidoserial.firstChild.data = "PS3S1";
+	        	document.getElementById('tipodevice').value = 'termometro';
+	        }
+	        document.getElementById("tipodevice").disabled = true;
+  	}
+	</script>
+	
+  	<script type="text/javascript">
 	  function checkconfiguration() {
 		  var checkBox=document.getElementById("toggle-paramconects");
 		  if (checkBox.checked == true){
 			    document.getElementById('parametersConexion').style.display = 'none';
 			  } else {
 				  document.getElementById('parametersConexion').style.display = 'inline';
+				  
+				  var seleccion=document.getElementById('marcadevice');
+				  var marcaDev = seleccion.options[seleccion.selectedIndex].value;
+				  var seleccion1=document.getElementById('modelodevice');
+				  var modeloDev = seleccion.options[seleccion1.selectedIndex].value;
+				 completarloscamposdeconfiguracion(marcaDev,modeloDev);
 			  }
-		  
 	  }
 	</script>
+	
+	
+	
 	<script type="text/javascript">
 	function enableType(){
 		var seleccion=document.getElementById('tipodevice');
@@ -718,7 +897,7 @@
 	   			console.log("ya termino!!");
 	   			document.getElementById("confirpassescuchar").style.background = "green";
 		} 
-	}  
+	};  
 	</script>
 
 

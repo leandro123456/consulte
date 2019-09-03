@@ -130,6 +130,15 @@ public class DeviceController {
 		String nombre = request.getUserPrincipal().getName();
 		User user = userdao.retrieveByMail(nombre);
 		model.addAttribute("users", user);
+		//hoy tengo solo dos configuraciones por default
+		
+		DeviceDefaultConfiguration confi2 = deviceconfigdao.retrieveByName("defaultalarma");
+		DeviceDefaultConfiguration confi = deviceconfigdao.retrieveByName("default");
+		
+		System.out.println("configuracion default: "+confi.getName());
+		System.out.println("configuacion defautl alarma: "+ confi2.getName());
+		//model.addAttribute("configdeflocal", confi);
+		//model.addAttribute("configdef", confi2);
 		return "device_new";
 	}
 	
