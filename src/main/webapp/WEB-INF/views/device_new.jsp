@@ -548,7 +548,7 @@
 		src='<c:url value="/resources/vendor/datatables/jquery.dataTables.min.js" />'></script>
 	<script
 		src='<c:url value="/resources/vendor/datatables/dataTables.bootstrap4.min.js" />'></script>
-	<script src='<c:url value="/resources/js/demo/datatables-demo.js" />'></script>
+<%-- 	<script src='<c:url value="/resources/js/demo/datatables-demo.js" />'></script> --%>
 
 <!-- esto es para el reloj -->
 	<script type="text/javascript" src='<c:url value="/resources/reloj/dist/bootstrap-clockpicker.min.js" />'></script>
@@ -716,63 +716,63 @@
   		if(marca!=null && marca == "coiaca"){
   			if(modelo!=null && modelo.includes("BRDSC")){
   				//usar los valores de confirguracion por default de la alarma  
-  				document.getElementById("iphostescuchar").value =${configdef.iphostescuchar};
-  				document.getElementById("portescuchar").value =${configdef.portescuchar};
-  				document.getElementById("topiclisten").value =${configdef.topicescuchar};
-  				document.getElementById("userescuchar").value =${configdef.userescuchar};
-  				document.getElementById("passescuchar").value =${configdef.passescuchar};
-  				document.getElementById("confirpassescuchar").value =${configdef.passescuchar};
+//   				document.getElementById("iphostescuchar").value =${configdef.iphostescuchar};
+//   				document.getElementById("portescuchar").value =${configdef.portescuchar};
+//   				document.getElementById("topiclisten").value =${configdef.topicescuchar};
+//   				document.getElementById("userescuchar").value =${configdef.userescuchar};
+//   				document.getElementById("passescuchar").value =${configdef.passescuchar};
+//   				document.getElementById("confirpassescuchar").value =${configdef.passescuchar};
   				
-  				document.getElementById("iphostescribir").value =${configdef.iphostescribir};
-  				document.getElementById("portescribir").value =${configdef.portescribir};
-  				document.getElementById("topicwrite").value =${configdef.topicescribir};
-  				document.getElementById("userescribir").value =${configdef.userescribir};
-  				document.getElementById("passescribir").value =${configdef.passescribir};
-  				document.getElementById("confirpassescribir").value =${configdef.passescribir};
+//   				document.getElementById("iphostescribir").value =${configdef.iphostescribir};
+//   				document.getElementById("portescribir").value =${configdef.portescribir};
+//   				document.getElementById("topicwrite").value =${configdef.topicescribir};
+//   				document.getElementById("userescribir").value =${configdef.userescribir};
+//   				document.getElementById("passescribir").value =${configdef.passescribir};
+//   				document.getElementById("confirpassescribir").value =${configdef.passescribir};
   				
-  				document.getElementById("iphostescuchar").value =${configdef.iphostescuchar};
-  				document.getElementById("portescucharremote").value =${configdef.portescucharremote};
-  				document.getElementById("topiclistenremote").value =${configdef.topicescucharremote};
-  				document.getElementById("userescucharremote").value =${configdef.userescucharremote};
-  				document.getElementById("passescucharremote").value =${configdef.passescucharremote};
-  				document.getElementById("confirpassescucharremote").value =${configdef.passescucharremote};
+//   				document.getElementById("iphostescuchar").value =${configdef.iphostescuchar};
+//   				document.getElementById("portescucharremote").value =${configdef.portescucharremote};
+//   				document.getElementById("topiclistenremote").value =${configdef.topicescucharremote};
+//   				document.getElementById("userescucharremote").value =${configdef.userescucharremote};
+//   				document.getElementById("passescucharremote").value =${configdef.passescucharremote};
+//   				document.getElementById("confirpassescucharremote").value =${configdef.passescucharremote};
   				
-  				document.getElementById("iphostescribirremote").value =${configdef.iphostescribirremote};
-  				document.getElementById("portescribirremote").value =${configdef.portescribirremote};
-  				document.getElementById("topicwriteremote").value =${configdef.topicescribirremote};
-  				document.getElementById("userescribirremote").value =${configdef.userescribirremote};
-  				document.getElementById("passescribirremote").value =${configdef.passescribirremote};
-  				document.getElementById("confirmpassescribirremote").value =${configdef.confirmpassescribirremote};
+//   				document.getElementById("iphostescribirremote").value =${configdef.iphostescribirremote};
+//   				document.getElementById("portescribirremote").value =${configdef.portescribirremote};
+//   				document.getElementById("topicwriteremote").value =${configdef.topicescribirremote};
+//   				document.getElementById("userescribirremote").value =${configdef.userescribirremote};
+//   				document.getElementById("passescribirremote").value =${configdef.passescribirremote};
+//   				document.getElementById("confirmpassescribirremote").value =${configdef.confirmpassescribirremote};
   				
-  			}else if(modelo!=null){
-  				//usar los valores de confirguracion por default de cualquiera
-  				document.getElementById("iphostescuchar").value =${configdeflocal.iphostescuchar};
-  				document.getElementById("portescuchar").value =${configdeflocal.portescuchar};
-  				document.getElementById("topiclisten").value =${configdeflocal.topicescuchar};
-  				document.getElementById("userescuchar").value =${configdeflocal.userescuchar};
-  				document.getElementById("passescuchar").value =${configdeflocal.passescuchar};
-  				document.getElementById("confirpassescuchar").value =${configdeflocal.passescuchar};
+//   			}else if(modelo!=null){
+//   				//usar los valores de confirguracion por default de cualquiera
+//   				document.getElementById("iphostescuchar").value =${configdeflocal.iphostescuchar};
+//   				document.getElementById("portescuchar").value =${configdeflocal.portescuchar};
+//   				document.getElementById("topiclisten").value =${configdeflocal.topicescuchar};
+//   				document.getElementById("userescuchar").value =${configdeflocal.userescuchar};
+//   				document.getElementById("passescuchar").value =${configdeflocal.passescuchar};
+//   				document.getElementById("confirpassescuchar").value =${configdeflocal.passescuchar};
   				
-  				document.getElementById("iphostescribir").value =${configdeflocal.iphostescribir};
-  				document.getElementById("portescribir").value =${configdeflocal.portescribir};
-  				document.getElementById("topicwrite").value =${configdeflocal.topicescribir};
-  				document.getElementById("userescribir").value =${configdeflocal.userescribir};
-  				document.getElementById("passescribir").value =${configdeflocal.passescribir};
-  				document.getElementById("confirpassescribir").value =${configdeflocal.passescribir};
+//   				document.getElementById("iphostescribir").value =${configdeflocal.iphostescribir};
+//   				document.getElementById("portescribir").value =${configdeflocal.portescribir};
+//   				document.getElementById("topicwrite").value =${configdeflocal.topicescribir};
+//   				document.getElementById("userescribir").value =${configdeflocal.userescribir};
+//   				document.getElementById("passescribir").value =${configdeflocal.passescribir};
+//   				document.getElementById("confirpassescribir").value =${configdeflocal.passescribir};
   				
-  				document.getElementById("iphostescuchar").value =${configdeflocal.iphostescuchar};
-  				document.getElementById("portescucharremote").value =${configdeflocal.portescucharremote};
-  				document.getElementById("topiclistenremote").value =${configdeflocal.topicescucharremote};
-  				document.getElementById("userescucharremote").value =${configdeflocal.userescucharremote};
-  				document.getElementById("passescucharremote").value =${configdeflocal.passescucharremote};
-  				document.getElementById("confirpassescucharremote").value =${configdeflocal.passescucharremote};
+//   				document.getElementById("iphostescuchar").value =${configdeflocal.iphostescuchar};
+//   				document.getElementById("portescucharremote").value =${configdeflocal.portescucharremote};
+//   				document.getElementById("topiclistenremote").value =${configdeflocal.topicescucharremote};
+//   				document.getElementById("userescucharremote").value =${configdeflocal.userescucharremote};
+//   				document.getElementById("passescucharremote").value =${configdeflocal.passescucharremote};
+//   				document.getElementById("confirpassescucharremote").value =${configdeflocal.passescucharremote};
   				
-  				document.getElementById("iphostescribirremote").value =${configdeflocal.iphostescribirremote};
-  				document.getElementById("portescribirremote").value =${configdeflocal.portescribirremote};
-  				document.getElementById("topicwriteremote").value =${configdeflocal.topicescribirremote};
-  				document.getElementById("userescribirremote").value =${configdeflocal.userescribirremote};
-  				document.getElementById("passescribirremote").value =${configdeflocal.passescribirremote};
-  				document.getElementById("confirmpassescribirremote").value =${configdeflocal.confirmpassescribirremote};
+//   				document.getElementById("iphostescribirremote").value =${configdeflocal.iphostescribirremote};
+//   				document.getElementById("portescribirremote").value =${configdeflocal.portescribirremote};
+//   				document.getElementById("topicwriteremote").value =${configdeflocal.topicescribirremote};
+//   				document.getElementById("userescribirremote").value =${configdeflocal.userescribirremote};
+//   				document.getElementById("passescribirremote").value =${configdeflocal.passescribirremote};
+//   				document.getElementById("confirmpassescribirremote").value =${configdeflocal.confirmpassescribirremote};
   			}else{
   				console.log("El MODELO es null");	
   			}

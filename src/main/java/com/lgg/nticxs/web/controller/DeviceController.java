@@ -24,6 +24,7 @@ import com.lgg.nticxs.web.model.DeviceConfiguration;
 import com.lgg.nticxs.web.model.DeviceDefaultConfiguration;
 import com.lgg.nticxs.web.model.User;
 import com.lgg.nticxs.web.model.Vista;
+import com.lgg.nticxs.web.model.simple.SimpleDefaultConfiguration;
 import com.lgg.nticxs.web.model.simple.SimpleDevice;
 import com.lgg.nticxs.web.model.simple.SimpleTimerString;
 
@@ -132,8 +133,8 @@ public class DeviceController {
 		model.addAttribute("users", user);
 		//hoy tengo solo dos configuraciones por default
 		
-		DeviceDefaultConfiguration confi2 = deviceconfigdao.retrieveByName("defaultalarma");
-		DeviceDefaultConfiguration confi = deviceconfigdao.retrieveByName("default");
+		SimpleDefaultConfiguration confi2 = new SimpleDefaultConfiguration(deviceconfigdao.retrieveByName("defaultalarma"));
+		SimpleDefaultConfiguration confi = new SimpleDefaultConfiguration(deviceconfigdao.retrieveByName("default"));
 		
 		System.out.println("configuracion default: "+confi.getName());
 		System.out.println("configuacion defautl alarma: "+ confi2.getName());
