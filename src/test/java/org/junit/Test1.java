@@ -313,7 +313,7 @@ public class Test1 {
 				"												<h6 class=\"alinearspanstatus\">Particion:</h6>" + 
 				"											</span>" + 
 				"											<span class=\"col-xs-4 float-right alinezones\">" + 
-				"												<h6 id=\"particionesCAMBIARALARMA\">1</h6>" + 
+				"												<h6 id=\"particionesCAMBIARALARMA\"></h6>" + 
 				"											</span>" + 
 				"										</div>" + 
 				"										<div id=\"second_lineCAMBIARALARMA\" class=\"row\" style=\"padding-left: 1em; padding-right: 0.5em;\">" + 

@@ -100,7 +100,7 @@ function onMessageArrivedAlarma(message) {
 	if(message.destinationName.includes("/Status")){
 		informarstatus45(message.destinationName, message.payloadString)
 	}
-	if(topico.includes("Partition")){
+	if(topico.includes("Partition") && !topico.includes("active")){
 		var iddevice = topico.substring(0,topico.search("/Partition"));
 		var numparticion = topico.substring(topico.search("Partition")).replace("Partition","");
 		var numdisplay = document.getElementById("particiones"+iddevice).innerHTML;
@@ -148,6 +148,13 @@ function onMessageArrivedAlarma(message) {
 				spanStatus.firstChild.data = contenido;
 			}
 		}
+	} else if (topico.includes("activePartition")){
+		console.log("particion activa!!!!!!!!!!!!!!!!!!!!!"+ message.payloadString);
+		iddevice = topico.substring(0,topico.search("/activePartition"));
+		console.log("particion activa!!!!!!!!!!!!!!!!!!!!!"+ iddevice);
+		 var numparticion = document.getElementById("particiones"+iddevice);
+		 console.log("particion activa!!!!!!!!!!!!!!!!!!!!!"+ numparticion);
+		 numparticion.innerHTML = message.payloadString;
 	}
 }
 /** comportamiento cuando recibe un mensaje*/
