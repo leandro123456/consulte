@@ -150,7 +150,7 @@
 								</select>
 							</div>
 							<p></p>
-							<div>
+							<div id="selectormodelo">
 								<b>Modelo del Dispositivo</b> <select id="modelodevice"
 									class="form-control" onchange="autocompletarSerial()">
 									<option value="none">Seleccione uno</option>
@@ -788,8 +788,10 @@
 			var seleccion=document.getElementById('marcadevice');
 	        var valuetype = seleccion.options[seleccion.selectedIndex].value;
 	        if(valuetype == "coiaca"){
+	        	document.getElementById('selectormodelo').style.display = 'inline';
 	        	document.getElementById('modelodevice').style.display = 'inline';
 	        }else{
+	        	document.getElementById('selectormodelo').style.display = 'none';
 	        	document.getElementById('modelodevice').style.display = 'none';
 	        }
 		}
@@ -798,7 +800,7 @@
 	<script type="text/javascript">
   	//funcion para escribir en el campo serial el id y tambien grisar el tipo de dispositivo
   	function autocompletarSerial(){
-  			var seleccion21=document.getElementById('marcadevice');
+  			var seleccion21=document.getElementById('modelodevice');
 	        var valormodelo = seleccion21.options[seleccion21.selectedIndex].value;
 	        var contenidoserial = null;
 	      //sugiero el comienzo, griso el desplegable y modifico el valor que tiene
@@ -823,6 +825,7 @@
 	        	contenidoserial.firstChild.data = "PS3S1";
 	        	document.getElementById('tipodevice').value = 'termometro';
 	        }
+	        console.log("este es el valor del tipo de DEVICE: "+ document.getElementById('tipodevice').value);
 	        document.getElementById("tipodevice").disabled = true;
   	}
 	</script>
