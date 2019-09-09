@@ -1,25 +1,23 @@
-package com.lgg.nticxs.web.config;
+package com.lgg.nticxs.web;
 
-/**
- * Created by movasim on 05/09/16.
- */
-import org.springframework.boot.context.embedded.MultipartConfigFactory;
+import javax.servlet.MultipartConfigElement;
+
+import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-import javax.servlet.MultipartConfigElement;
-
-@Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.lgg.nticxs.web")
-public class AppConfig extends WebMvcConfigurerAdapter {
+@Configuration
+@ComponentScan("com.baeldung.web")
+public class WebMvcConfigure implements WebMvcConfigurer {
+	
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
@@ -33,8 +31,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     @Bean
     public MultipartConfigElement multipartConfigElement() {
         MultipartConfigFactory factory = new MultipartConfigFactory();
-        factory.setMaxFileSize("10Mb");
-        factory.setMaxRequestSize("10Mb");
+//        factory.setMaxFileSize("10Mb");
+//        factory.setMaxRequestSize("10Mb");
         return factory.createMultipartConfig();
     }
 
@@ -42,5 +40,5 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
-
+    
 }

@@ -1,4 +1,4 @@
-package com.lgg.nticxs.web.config;
+package com.lgg.nticxs.web.config.security;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import com.lgg.nticxs.web.utils.EncryptorPassword;
+
+
 import com.lgg.nticxs.web.DAO.UserDAO;
 import com.lgg.nticxs.web.model.User;
 
@@ -41,7 +43,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 				e.printStackTrace();
 			}
 		}
-		return null;
+		throw new IncorrectLoginCredentialsException();
 	}
 
 	@Override

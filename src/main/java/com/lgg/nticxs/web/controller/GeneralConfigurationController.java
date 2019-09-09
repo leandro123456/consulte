@@ -54,7 +54,7 @@ public class GeneralConfigurationController {
     public String index(Model model) {
     	loadPage(model);
     	
-    	logger.logger("INFO", "SM-WEB", "General Configuration", "", "", "index()", "", "", "", "The screen of General Configuration opens");
+//    	logger.logger("INFO", "SM-WEB", "General Configuration", "", "", "index()", "", "", "", "The screen of General Configuration opens");
     	
         return "general_configuration";
     }
@@ -213,10 +213,6 @@ public class GeneralConfigurationController {
 	//solo se le setea el parametro delete como true
 	
     model.addAttribute("msg1", "Correct Deletion");
-    
-    logger.logger("DEBUG", "SM-WEB", "General Configuration", "", "Delete user", "deleteUserGet()", "", "", 
-    "ID User: " + userid, 
-    "Correct Deletion of the user");
     
     loadPage(model);
     return "general_configuration";
@@ -875,7 +871,6 @@ public class GeneralConfigurationController {
    @GetMapping("home/general/configuration/role/add")
    public String roleAddGet(Model model) {
 	   
-	   logger.logger("INFO", "SM-WEB", "General Configuration", "", "Role creation", "roleAddGet()", "", "", "", "A screen opens where can add a new role");
 	   
 	   return "role_add";
    }
@@ -893,9 +888,7 @@ public class GeneralConfigurationController {
 			   if(name.equals("VISITOR") || name.equals("SUPERADMIN") || name.equals("PRE-AUTHENTICATION")) {
 				   model.addAttribute("msg1", "This name is reserved for a special role");
 				   
-				   logger.logger("WARNING", "SM-WEB", "General Configuration", "", "Role creation", "roleAddPost()", "", "", 
-						   "Name role: " + name, 
-						   "It is trying to use a name reserved");
+
 				   
 				   return "role_add";
 			   }
@@ -911,9 +904,7 @@ public class GeneralConfigurationController {
 					   
 					   model.addAttribute("msg1", "Role created successfully");
 					   
-					   logger.logger("DEBUG", "SM-WEB", "General Configuration", "", "Role creation", "roleAddPost()", "", "", 
-							   "Name role: " + name, 
-							   "Role created successfully");
+
 					   
 					   loadPage(model);
 					   return "general_configuration";
@@ -921,10 +912,7 @@ public class GeneralConfigurationController {
 				   
 			   } else {
 				   model.addAttribute("msg1", "Role name already exists");
-				   
-				   logger.logger("WARNING", "SM-WEB", "General Configuration", "", "Role creation", "roleAddPost()", "", "", 
-						   "Name role: " + name, 
-						   "Role name already exists");
+
 				   
 				   return "role_add";
 			   }
@@ -932,9 +920,7 @@ public class GeneralConfigurationController {
 		   } else {
 			   model.addAttribute("msg1", "Role name is empty");
 			   
-			   logger.logger("WARNING", "SM-WEB", "General Configuration", "", "Role creation", "roleAddPost()", "", "", 
-					   "Name role: " + name, 
-					   "Role name is empty");
+
 			   
 			   return "role_add";
 		   }
@@ -949,7 +935,6 @@ public class GeneralConfigurationController {
    @GetMapping("home/general/configuration/lot/add")
    public String lotAddGet(Model model) {
 	   
-	   logger.logger("INFO", "SM-WEB", "General Configuration", "", "Lot creation", "lotAddGet()", "", "", "", "A screen opens where can add a new lot");
 	   
 	   return "lot_add";
    }
@@ -982,18 +967,13 @@ public class GeneralConfigurationController {
 //			   } else {
 				   model.addAttribute("msg1", "Lot name already exists");
 				   
-				   logger.logger("WARNING", "SM-WEB", "General Configuration", "", "Lot creation", "lotAddPost()", "", "", 
-						   "Name lot: " + name, 
-						   "Lot name already exists");
-				   
+
 				   return "lote_add";
 			   }
 		   } else {
 			   model.addAttribute("msg1", "Lot name is empty");
 			   
-			   logger.logger("WARNING", "SM-WEB", "General Configuration", "", "Lot creation", "lotAddPost()", "", "", 
-					   "Name lot: " + name, 
-					   "Lot name is empty");
+
 			   
 			   return "lote_add";
 		   }
@@ -1006,7 +986,6 @@ public class GeneralConfigurationController {
    @GetMapping("home/general/configuration/lot/card/add")
    public String lotCardAddGet(Model model) {
 	   
-	   logger.logger("INFO", "SM-WEB", "General Configuration", "", "Card lot creation", "lotCardAddGet()", "", "", "", "A screen opens where can add a new card lot");
 	   
 	   return "lot_card_add";
    }

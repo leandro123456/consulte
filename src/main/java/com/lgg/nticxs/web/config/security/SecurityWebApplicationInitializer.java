@@ -1,4 +1,4 @@
-package com.lgg.nticxs.web.config;
+package com.lgg.nticxs.web.config.security;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 

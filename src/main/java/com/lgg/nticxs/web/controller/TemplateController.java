@@ -41,7 +41,6 @@ public class TemplateController {
 
     @GetMapping("home/template/explorer")
     public String search(Model model) {
-    	logger.logger("INFO", "SM-WEB", "Template", "", "", "search()", "", "", "", "The screen of template explorer opens");
     	
         return "template_explorer";
     }
@@ -231,9 +230,6 @@ public class TemplateController {
     	
     	model.addAttribute("id", id);
     	
-    	logger.logger("INFO", "SM-WEB", "Template", "", "Add lot", "addLotsTemplateGet()", "", "", 
-    			"ID template: " + id, 
-    			"A screen opens where shows all lots for add to a specific template");
     	
     	return "template_lot_add";
     }
@@ -245,9 +241,6 @@ public class TemplateController {
     	
     	model.addAttribute("id", id);
     	
-    	logger.logger("INFO", "SM-WEB", "Template", "", "Delete lot", "deleteLotsTemplateGet()", "", "", 
-    			"ID template: " + id, 
-    			"A screen opens where shows all lots for add to a specific template");
     	
     	return "template_lot_delete";
     }

@@ -34,7 +34,7 @@ public class TailLogReader {
         if (endPosition > startPosition) {
             lines = reader.readRegion(startPosition,endPosition);
             
-            logger.logger("INFO", "SM-WEB", "", "", "", "main()", "", "", "", lines);
+//            logger.logger("INFO", "SM-WEB", "", "", "", "main()", "", "", "", lines);
             
             startPosition = endPosition;
         }
@@ -53,7 +53,7 @@ public class TailLogReader {
             if (endPosition > startPosition) {
                 lines = reader.readRegion(startPosition,endPosition);
                 
-                logger.logger("INFO", "SM-WEB", "", "", "", "main()", "", "", "", lines);
+//                logger.logger("INFO", "SM-WEB", "", "", "", "main()", "", "", "", lines);
                 
                 startPosition = endPosition;
             }

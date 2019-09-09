@@ -3,31 +3,17 @@ package com.lgg.nticxs.web.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Properties;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONObject;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,33 +21,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.lgg.nticxs.web.utils.Utils;
 import com.lgg.nticxs.web.DAO.AdminDAO;
-import com.lgg.nticxs.web.DAO.AdministrativoDAO;
 import com.lgg.nticxs.web.DAO.UserDAO;
-import com.lgg.nticxs.web.DAO.AsistenciaDAO;
 import com.lgg.nticxs.web.DAO.DeviceDAO;
-import com.lgg.nticxs.web.DAO.DocenteDAO;
-import com.lgg.nticxs.web.DAO.DocumentoDAO;
-import com.lgg.nticxs.web.DAO.NotaDAO;
-import com.lgg.nticxs.web.DAO.PadreDAO;
+
 import com.lgg.nticxs.web.model.User;
 import com.lgg.nticxs.web.model.Asistencia;
 import com.lgg.nticxs.web.model.Device;
-import com.lgg.nticxs.web.model.Documento;
-import com.lgg.nticxs.web.model.Materia;
-import com.lgg.nticxs.web.model.Nota;
-import com.lgg.nticxs.web.model.Padre;
-import com.lgg.nticxs.web.model.SimpleAlumno;
+
 
 @Controller
 public class HomeController {
-	DocumentoDAO docdao = new DocumentoDAO();
-	PadreDAO padredao = new PadreDAO();
 	UserDAO userdao = new UserDAO();
-	DocenteDAO docentedoa = new DocenteDAO();
 	AdminDAO admindao = new AdminDAO();
-	NotaDAO notasdao = new NotaDAO();
-	AsistenciaDAO asistenciadao = new AsistenciaDAO();
-	AdministrativoDAO administdao = new AdministrativoDAO();
 	private DeviceDAO devicedao = new DeviceDAO();
 	private List<String> deviceAsociadoAlarma = new ArrayList<>();
 	private List<String> deviceAsociadoTermomtro = new ArrayList<>();
@@ -172,45 +143,9 @@ public class HomeController {
 			model.addAttribute("msg1", "The entered code is incorrect, try again");
 			return "validate";
 	}
-	
-	@GetMapping( "home/download/document/{docId}")
-	public String downloadDocument(@PathVariable String docId, HttpServletResponse response) 
-			throws IOException {
-		Documento document = docdao.retrieveById(docId);
-        response.setContentLength(document.getDocumento().length);
-        response.setHeader("Content-Disposition","attachment; filename=\"" + document.getName() +"\"");
-        FileCopyUtils.copy(document.getDocumento(), response.getOutputStream());
- 		return "home";
-	}
-	
-	
-	private void loadPageAlumno(Model model, String materia) {
-		List<Documento> documentos = docdao.retrieveByMateria(materia);
-		model.addAttribute("documentos", documentos);
-	}
-	
-	private void loadPagePadreAlumno(Model model, String materia, String alumnoName) {
-		User alumno = userdao.retrieveByMail(alumnoName);
-		List<Nota> notas = notasdao.retrieveByAlumno(alumno.getId());
-		List<Asistencia> asistencias = asistenciadao.retrieveByAlumno(alumno.getId());
-		Double promediotareas = promedio(notas,Nota.ACTIVIDADES);
-		Double promediotp = promedio(notas,Nota.TRABAJO_PRACTICO);
-		Double promedioev = promedio(notas,Nota.EVALUACION);
-		Double promediotrimestre = promedio(notas,"trimestre");
-		Integer asistenciaFaltas = promedioAsistencia(asistencias);
-		Integer asistenciaPresente = promedioAsistencia(asistencias);
 		
-		model.addAttribute("promediotareas", promediotareas*10);
-		model.addAttribute("promediotp", promediotp*10);
-		model.addAttribute("promedioev", promedioev*10);
-		model.addAttribute("promediotrimestre", promediotrimestre*10);
 
-		model.addAttribute("notas", notas);
-		model.addAttribute("asistencias", asistencias);
-		model.addAttribute("asistenciaFaltas",asistenciaFaltas);
-		model.addAttribute("asistenciaPresente",asistenciaPresente);
-		
-	}
+
 
 	private Integer promedioAsistencia(List<Asistencia> asistencia) {
 		Integer asistenciaTotal = 0;
@@ -230,23 +165,7 @@ public class HomeController {
 		return asistenciaTotal;
 	}
 
-	private Double promedio(List<Nota> notas, String tipo) {
-		Double promedio = 0.0;
-		Double total=0.0;
-		Integer cantidad = 0;
-		
-		if (notas != null) {
-//			for(Nota nota : notas){
-//				if(nota.getTrimestre() == trimestreActual && nota.getTipo().equals(tipo)){
-//					cantidad +=1;
-//					total=total+nota.getValor();
-//				}
-//			}
-		}
-		if(cantidad != 0)
-		promedio = (double) (total/cantidad);
-		return promedio;
-	}
+
 	
 	private void clasificarSerialUsuario(List<String> deviceserialnumbers) {
 		System.out.println("cantidad de elementos: "+ deviceserialnumbers.size());

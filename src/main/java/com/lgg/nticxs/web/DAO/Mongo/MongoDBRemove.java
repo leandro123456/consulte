@@ -1,6 +1,19 @@
-package com.lgg.nticxs.web.DAO.helper;
+package com.lgg.nticxs.web.DAO.Mongo;
+
+import static com.mongodb.client.model.Filters.eq;
+import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
+import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.bson.Document;
+import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.codecs.pojo.PojoCodecProvider;
+import org.bson.conversions.Bson;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -8,8 +21,17 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.WriteResult;
+import com.mongodb.client.AggregateIterable;
+import com.mongodb.client.DistinctIterable;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
 
-public class MongoDBRemove {
+
+
+public class MongoDBRemove{
+		
 
 	public static void removeByQuery() throws UnknownHostException {
 
@@ -61,4 +83,8 @@ public class MongoDBRemove {
 
 		System.out.println("Number of documents removed:" + r1.getN());
 	}
+	
+	
+	//nuevos metodos
+
 }

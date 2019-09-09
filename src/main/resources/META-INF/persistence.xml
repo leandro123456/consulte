@@ -11,7 +11,6 @@
 			<property name="eclipselink.nosql.property.mongo.host" value="localhost" />
 			<property name="eclipselink.nosql.property.mongo.db" value="MQTT-Manager" />
 			<property name="eclipselink.logging.level" value="INFO" /> <!-- FINEST -->
-			<property name="eclipselink.cache.shared.default" value="false"/>
 			<property name="eclipselink.cache.size.default" value="0"/>
 			<property name="eclipselink.cache.type.default" value="None"/>
 		</properties>

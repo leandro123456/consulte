@@ -2,7 +2,7 @@ package org.junit;
 
 import com.lgg.nticxs.web.DAO.UserDAO;
 import com.lgg.nticxs.web.DAO.VistaDAO;
-import com.lgg.nticxs.web.DAO.helper.MongoDBRemove;
+import com.lgg.nticxs.web.DAO.Mongo.MongoDBRemove;
 
 import java.net.UnknownHostException;
 import java.security.NoSuchAlgorithmException;

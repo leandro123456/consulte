@@ -18,48 +18,48 @@ import com.lgg.nticxs.web.model.SimpleSr;
 
 @Controller
 public class AmdDPController {
-	
-//	private KeysDAO dpdao= new KeysDAO();
 //	
-//	private MNODAO mnodaoDp=new MNODAO();
-//	private com.movasim.sr.DAO.MNODAO mnodaoSr= new com.movasim.sr.DAO.MNODAO();
-	
-	private WSLogger logger = new WSLogger();
-	
-	/**------------------------------------------------ AMD DP ---------------------------------**/
-	
-	@GetMapping("home/amddp")
-    public String search(Model model) {
-//    	loadPage(model);
-    	
-    	logger.logger("INFO", "SM-WEB", "AMD DP", "", "", "search()", "", "", "", "The screen of AMD DP opens");
-    	
-        return "amddp";
-    }
-	
-	
-	/**					DPs AMD			**/
-	
-	@GetMapping("home/amddp/dp/edit/{dpid}")
-    public String editDP(Model model, @PathVariable String dpid) {
-//    	Keys dp= dpdao.retrieveById(dpid);
-    	//model.addAttribute("dp",dp);
-    	
-    	logger.logger("INFO", "SM-WEB", "AMD-DP", "", "Edit SM-DP", "editDP()", "", "", "ID DP: " + dpid, "A screen opens for edit the SM-DP");
-    	
-    	return "dp_edit";
-    }
+////	private KeysDAO dpdao= new KeysDAO();
+////	
+////	private MNODAO mnodaoDp=new MNODAO();
+////	private com.movasim.sr.DAO.MNODAO mnodaoSr= new com.movasim.sr.DAO.MNODAO();
+//	
+//	private WSLogger logger = new WSLogger();
+//	
+//	/**------------------------------------------------ AMD DP ---------------------------------**/
+//	
+//	@GetMapping("home/amddp")
+//    public String search(Model model) {
+////    	loadPage(model);
+//    	
+//    	logger.logger("INFO", "SM-WEB", "AMD DP", "", "", "search()", "", "", "", "The screen of AMD DP opens");
+//    	
+//        return "amddp";
+//    }
+//	
+//	
+//	/**					DPs AMD			**/
+//	
+//	@GetMapping("home/amddp/dp/edit/{dpid}")
+//    public String editDP(Model model, @PathVariable String dpid) {
+////    	Keys dp= dpdao.retrieveById(dpid);
+//    	//model.addAttribute("dp",dp);
+//    	
+//    	logger.logger("INFO", "SM-WEB", "AMD-DP", "", "Edit SM-DP", "editDP()", "", "", "ID DP: " + dpid, "A screen opens for edit the SM-DP");
+//    	
+//    	return "dp_edit";
+//    }
     
-    @PostMapping("home/amddp/dp/edit/{dpid}")
-    public String editDPSave(Model model,
-    		@PathVariable String dpid,
-    		@RequestParam("action") String action,
-    		@RequestParam("name") String name,
-    		@RequestParam(name="description", required=false) String description
-    		//@RequestParam("certificate") String certificate,
-			//@RequestParam("privateKey") String privateKey,
-			//@RequestParam("publicKey") String publicKey
-    		)  {
+//    @PostMapping("home/amddp/dp/edit/{dpid}")
+//    public String editDPSave(Model model,
+//    		@PathVariable String dpid,
+//    		@RequestParam("action") String action,
+//    		@RequestParam("name") String name,
+//    		@RequestParam(name="description", required=false) String description
+//    		//@RequestParam("certificate") String certificate,
+//			//@RequestParam("privateKey") String privateKey,
+//			//@RequestParam("publicKey") String publicKey
+//    		)  {
 //    	if (action.compareTo("save") == 0) {
 //    		Keys dp=dpdao.retrieveById(dpid);
 //    		if(dp!=null){
@@ -91,24 +91,24 @@ public class AmdDPController {
 //    		}
 //    	}
 //    	loadPage(model);
-    	return "amddp";
-    }
-    
-    @GetMapping("home/amddp/dp/add")
-    public String addDP(Model model){
-    	
-    	logger.logger("INFO", "SM-WEB", "AMD-DP", "", "Add SM-DP certificate", "addDP()", "", "", "", "A screen opens where can add a new SM-DP certificate");
-    	
-    	return "dp_add";
-    }    
-    
-    @PostMapping("home/amddp/dp/add")
-    public String addDP2(Model model,@RequestParam("action") String action,
-    		@RequestParam(name="name") String name,
-    		@RequestParam("certificate") String certificate,
-			@RequestParam("privateKey") String privateKey,
-			@RequestParam("publicKey") String publicKey,
-       		@RequestParam(name="description", required=false) String description){
+//    	return "amddp";
+//    }
+//    
+//    @GetMapping("home/amddp/dp/add")
+//    public String addDP(Model model){
+//    	
+//    	logger.logger("INFO", "SM-WEB", "AMD-DP", "", "Add SM-DP certificate", "addDP()", "", "", "", "A screen opens where can add a new SM-DP certificate");
+//    	
+//    	return "dp_add";
+//    }    
+//    
+//    @PostMapping("home/amddp/dp/add")
+//    public String addDP2(Model model,@RequestParam("action") String action,
+//    		@RequestParam(name="name") String name,
+//    		@RequestParam("certificate") String certificate,
+//			@RequestParam("privateKey") String privateKey,
+//			@RequestParam("publicKey") String publicKey,
+//       		@RequestParam(name="description", required=false) String description){
 //    	if (action.compareTo("save") == 0) {
 //    		if(dpdao.existDp(name)){
 //    			model.addAttribute("msg1", "SM-DP name already exists");
@@ -135,26 +135,26 @@ public class AmdDPController {
 //    		model.addAttribute("msg1", "SM-DP created successfully");
 //    	}
 //    	loadPage(model);
-    	return "amddp";
-    } 
-    
-    @GetMapping("/home/amddp/dp/delete/{dpid}")
-    public String deleteDP(Model model,@PathVariable String dpid){
+//    	return "amddp";
+//    } 
+//    
+//    @GetMapping("/home/amddp/dp/delete/{dpid}")
+//    public String deleteDP(Model model,@PathVariable String dpid){
 //    	dpdao.deleteDp(dpid);
 //    	model.addAttribute("msg1", "Correct Deletion");
 //    	
 //    	logger.logger("DEBUG", "SM-WEB", "AMD-DP", "", "Delete DP", "deleteDP()", "", "", "ID DP: " + dpid, "The SM-DP certificate was successfully deleted");
 //    	
 //    	loadPage(model);
-    	return "amddp";
-    }
-    
-    /**					End DPs AMD					**/
-    
-    /**					SRs of DP					**/
-	
- 	@GetMapping("home/amddp/sr/edit/{srid}")
-    public String editSR(Model model,@PathVariable String srid) {
+//    	return "amddp";
+//    }
+//    
+//    /**					End DPs AMD					**/
+//    
+//    /**					SRs of DP					**/
+//	
+// 	@GetMapping("home/amddp/sr/edit/{srid}")
+//    public String editSR(Model model,@PathVariable String srid) {
 //    	SRDAO srdao=new SRDAO();
 //    	SimpleSr srsimp;
 //    	SR sr= srdao.retrieveById(srid);
@@ -163,24 +163,24 @@ public class AmdDPController {
 //    		srsimp= new SimpleSr(sr);
 //    		model.addAttribute("sr",srsimp);
 //    	}   
-    	
-    	logger.logger("INFO", "SM-WEB", "AMD-DP", "", "Edit SM-SR", "editSR()", "", "",
-    	"ID SM-SR: " + srid,
-    	"A screen opens where can edit the SM-SR");
-    	
-    	return "sr_editDP";
-    }
-    
-    @PostMapping("home/amddp/sr/edit/{srid}")
-    public String editSRSave(Model model,
-    		@PathVariable String srid,
-    		@RequestParam("action") String action,
-    		@RequestParam("name") String name,
-    		@RequestParam("identifier") String identifier,
-    		@RequestParam("url") String url,
-    		@RequestParam("owner") String owner,
-    		@RequestParam("vendor") String vendor,
-    		@RequestParam("active") Boolean active){
+//    	
+//    	logger.logger("INFO", "SM-WEB", "AMD-DP", "", "Edit SM-SR", "editSR()", "", "",
+//    	"ID SM-SR: " + srid,
+//    	"A screen opens where can edit the SM-SR");
+//    	
+//    	return "sr_editDP";
+//    }
+//    
+//    @PostMapping("home/amddp/sr/edit/{srid}")
+//    public String editSRSave(Model model,
+//    		@PathVariable String srid,
+//    		@RequestParam("action") String action,
+//    		@RequestParam("name") String name,
+//    		@RequestParam("identifier") String identifier,
+//    		@RequestParam("url") String url,
+//    		@RequestParam("owner") String owner,
+//    		@RequestParam("vendor") String vendor,
+//    		@RequestParam("active") Boolean active){
 //    	
 //    	SRDAO srdao=new SRDAO();
 //    	
@@ -218,25 +218,25 @@ public class AmdDPController {
 //    	}
 //    	
 //    	loadPage(model);
-    	return "amddp";
-    }
-    
-    @GetMapping("home/amddp/sr/add")
-    public String addSr(Model model){
-    	
-    	logger.logger("INFO", "SM-WEB", "AMD-DP", "", "Add SM-SR", "addSr()", "", "", "", "A screen opens where can add a new SM-SR");
-    	
-    	return "sr_addDP";
-    }    
-    
-    @PostMapping("home/amddp/sr/add")
-    public String addSrPost(Model model,@RequestParam("action") String action,
-    		@RequestParam(name="name", required=false) String name,
-    		@RequestParam(name="smsrid", required=false) String smsrid,
-    		@RequestParam(name="url", required=false) String url,
-    		@RequestParam(name="owner", required=false) String owner,
-    		@RequestParam(name="vendor", required=false) String vendor,
-    		@RequestParam(name="active", required=false) Boolean active){
+//    	return "amddp";
+//    }
+//    
+//    @GetMapping("home/amddp/sr/add")
+//    public String addSr(Model model){
+//    	
+//    	logger.logger("INFO", "SM-WEB", "AMD-DP", "", "Add SM-SR", "addSr()", "", "", "", "A screen opens where can add a new SM-SR");
+//    	
+//    	return "sr_addDP";
+//    }    
+//    
+//    @PostMapping("home/amddp/sr/add")
+//    public String addSrPost(Model model,@RequestParam("action") String action,
+//    		@RequestParam(name="name", required=false) String name,
+//    		@RequestParam(name="smsrid", required=false) String smsrid,
+//    		@RequestParam(name="url", required=false) String url,
+//    		@RequestParam(name="owner", required=false) String owner,
+//    		@RequestParam(name="vendor", required=false) String vendor,
+//    		@RequestParam(name="active", required=false) Boolean active){
     	
 //    	SRDAO srdao=new SRDAO();
 //    	
@@ -273,11 +273,11 @@ public class AmdDPController {
 //    	}
 //    	
 //    	loadPage(model);
-    	return "amddp";
-    } 
-    
-    @GetMapping("/home/amddp/sr/delete/{srid}")
-    public String deleteSr(Model model,@PathVariable String srid){
+//    	return "amddp";
+//    } 
+//    
+//    @GetMapping("/home/amddp/sr/delete/{srid}")
+//    public String deleteSr(Model model,@PathVariable String srid){
 //    	SRDAO srdao=new SRDAO();
 //    	srdao.deleteSr(srid);
 //    	model.addAttribute("msg1", "Correct Deletion");
@@ -285,15 +285,15 @@ public class AmdDPController {
 //    	logger.logger("DEBUG", "SM-WEB", "AMD-DP", "", "Delete SM-SR", "deleteSr()", "", "", "ID SM-SR: " + srid, "Deleted the SM-SR suceessfully");
 //    	
 //    	loadPage(model);
-    	return "amddp";
-    }
-    
-    		/**					end SR of DP		**/
-    
-    		/**			Template Classification			**/
-    
-    @PostMapping("home/amddp/template/category/add")
-    public String addCategory(Model model, @RequestParam(name="namecat", required=false) String name){
+//    	return "amddp";
+//    }
+//    
+//    		/**					end SR of DP		**/
+//    
+//    		/**			Template Classification			**/
+//    
+//    @PostMapping("home/amddp/template/category/add")
+//    public String addCategory(Model model, @RequestParam(name="namecat", required=false) String name){
 //    	ClasificationIppDAO clasdao=new ClasificationIppDAO();    	
 //    	List<ClasificationIpp> clasif= clasdao.retrieveByType("Category");
 //    	if(!thisName(clasif, name)){
@@ -328,11 +328,11 @@ public class AmdDPController {
 //    	"Successful create of the category");
 //    	
 //    	loadPage(model);
-    	return "amddp";
-    }
-    
-    @PostMapping("home/amddp/template/clase/add")
-    public String addClass(Model model, @RequestParam(name="namecla", required=false) String name ){
+//    	return "amddp";
+//    }
+//    
+//    @PostMapping("home/amddp/template/clase/add")
+//    public String addClass(Model model, @RequestParam(name="namecla", required=false) String name ){
 //    	ClasificationIppDAO clasdao=new ClasificationIppDAO();
 //    	List<ClasificationIpp> clasif= clasdao.retrieveByType("Class");
 //    	if(!thisName(clasif, name)){
@@ -358,11 +358,11 @@ public class AmdDPController {
 //    	"Successful create of the class");
 //    	
 //    	loadPage(model);
-    	return "amddp";
-    }
-    
-    @PostMapping("home/amddp/template/type/add")
-    public String addType(Model model, @RequestParam(name="nametyp",required=false) String name){
+//    	return "amddp";
+//    }
+//    
+//    @PostMapping("home/amddp/template/type/add")
+//    public String addType(Model model, @RequestParam(name="nametyp",required=false) String name){
 //    	ClasificationIppDAO clasdao=new ClasificationIppDAO();
 //    	List<ClasificationIpp> clasif= clasdao.retrieveByType("Type");
 //    	if(!thisName(clasif, name)){
@@ -388,11 +388,11 @@ public class AmdDPController {
 //    	"Successful create of the type");
 //    	
 //    	loadPage(model);
-    	return "amddp";
-    }
-    
-    @PostMapping("home/amddp/template/clase/delete")
-    public String deleteClass(Model model, @RequestParam(name="clases", required=false) String clase){
+//    	return "amddp";
+//    }
+//    
+//    @PostMapping("home/amddp/template/clase/delete")
+//    public String deleteClass(Model model, @RequestParam(name="clases", required=false) String clase){
 //    	ClasificationIppDAO clasdao=new ClasificationIppDAO();
 //    	if(clase!=null){
 //	    	ClasificationIpp clasif= clasdao.retrieveByName(clase, "Class");
@@ -410,11 +410,11 @@ public class AmdDPController {
 //    	    		"Error delete of the class, did not choose an option");
 //    	}
 //    	loadPage(model);
-    	return "amddp";
-    }
-    
-    @PostMapping("home/amddp/template/type/delete")
-    public String deleteType(Model model, @RequestParam(name="types", required=false) String type){
+//    	return "amddp";
+//    }
+//    
+//    @PostMapping("home/amddp/template/type/delete")
+//    public String deleteType(Model model, @RequestParam(name="types", required=false) String type){
 //    	if(type!=null){
 //	    	ClasificationIppDAO clasdao=new ClasificationIppDAO();
 //	    	ClasificationIpp clasif= clasdao.retrieveByName(type,"Type");
@@ -432,11 +432,11 @@ public class AmdDPController {
 //    	    		"Error delete of the type, did not choose an option");
 //    	}
 //    	loadPage(model);
-    	return "amddp";
-    }
-    
-    @PostMapping("home/amddp/template/category/delete")
-    public String deleteCategory(Model model, @RequestParam(name="categorys", required=false) String category){
+//    	return "amddp";
+//    }
+//    
+//    @PostMapping("home/amddp/template/category/delete")
+//    public String deleteCategory(Model model, @RequestParam(name="categorys", required=false) String category){
 //    	if(category!=null){
 //    	ClasificationIppDAO clasdao=new ClasificationIppDAO();
 //    	ClasificationIpp clasif= clasdao.retrieveByName(category,"Category");
@@ -455,13 +455,13 @@ public class AmdDPController {
 //    		"Error delete of the category, did not choose an option");
 //    	}
 //    	loadPage(model);
-    	return "amddp";
-    }
-    
-/**			IPP Groups management			**/
-    
-    @GetMapping("home/amddp/group/edit/{groupid}")
-    public String editGroup(Model model,@PathVariable String groupid){
+//    	return "amddp";
+//    }
+//    
+///**			IPP Groups management			**/
+//    
+//    @GetMapping("home/amddp/group/edit/{groupid}")
+//    public String editGroup(Model model,@PathVariable String groupid){
 //    	ClasificationIppDAO clasdao=new ClasificationIppDAO();
 //    	ClasificationIpp groups=clasdao.retrieveById(groupid);
 //    	SimpleGroups group=new SimpleGroups(groups);
@@ -471,16 +471,16 @@ public class AmdDPController {
 //    	"ID IPP group: " + groupid, 
 //    	"A screen opens where can edit the IPP group");
 //    	
-    	return "group_edit";
-    }
-    			  
-    @PostMapping("home/amddp/group/edit/{groupid}")
-    public String editGroup2(Model model,
-    		@PathVariable String groupid, 
-    		@RequestParam("action") String action,
-    		@RequestParam("name") String name,
-    		@RequestParam("active") Boolean active,
-    		@RequestParam(name="description", required=false) String description){
+//    	return "group_edit";
+//    }
+//    			  
+//    @PostMapping("home/amddp/group/edit/{groupid}")
+//    public String editGroup2(Model model,
+//    		@PathVariable String groupid, 
+//    		@RequestParam("action") String action,
+//    		@RequestParam("name") String name,
+//    		@RequestParam("active") Boolean active,
+//    		@RequestParam(name="description", required=false) String description){
 //    	
 //    	ClasificationIppDAO clasdao=new ClasificationIppDAO();
 //    	if (action.compareTo("save") == 0) {
@@ -497,11 +497,11 @@ public class AmdDPController {
 //    		clasdao.update(group);
 //	    	}
 //    	loadPage(model);
-    	return "amddp";
-    }
-    
-    @GetMapping("home/amddp/group/delete/{groupid}")
-    public String deleteGroup(Model model,@PathVariable String groupid){
+//    	return "amddp";
+//    }
+//    
+//    @GetMapping("home/amddp/group/delete/{groupid}")
+//    public String deleteGroup(Model model,@PathVariable String groupid){
 //    	ClasificationIppDAO clasdao=new ClasificationIppDAO();
 //    	clasdao.deleteClasificationIpp(groupid);
 //    	model.addAttribute("msg1", "Correct Deletion");
@@ -509,23 +509,23 @@ public class AmdDPController {
 //    	logger.logger("DEBUG", "SM-WEB", "AMD-DP", "", "Delete IPP Group", "deleteGroup()", "", "", "ID IPP group: " + groupid, "Successfully deleted IPP Group");
 //    	
 //    	loadPage(model);
-    	return "amddp";
-    }
-    
-    @GetMapping("home/amddp/group/add")
-    public String addGroup(Model model){
-    	
-    	logger.logger("INFO", "SM-WEB", "AMD-DP", "", "Add IPP Group", "deleteGroup()", "", "", "", "A screen opens where can add a new IPP group");
-    	
-    	return "group_add";
-    }
-    
-    @PostMapping("home/amddp/group/add")
-    public String addGroup2(Model model,
-    		@RequestParam("action") String action,
-    		@RequestParam(name="name", required=false) String name,
-    		@RequestParam(name="description", required=false) String description,
-    		@RequestParam(name="active", required=false) Boolean active){
+//    	return "amddp";
+//    }
+//    
+//    @GetMapping("home/amddp/group/add")
+//    public String addGroup(Model model){
+//    	
+//    	logger.logger("INFO", "SM-WEB", "AMD-DP", "", "Add IPP Group", "deleteGroup()", "", "", "", "A screen opens where can add a new IPP group");
+//    	
+//    	return "group_add";
+//    }
+//    
+//    @PostMapping("home/amddp/group/add")
+//    public String addGroup2(Model model,
+//    		@RequestParam("action") String action,
+//    		@RequestParam(name="name", required=false) String name,
+//    		@RequestParam(name="description", required=false) String description,
+//    		@RequestParam(name="active", required=false) Boolean active){
 //    	ClasificationIppDAO clasdao=new ClasificationIppDAO();
 //    	if (action.compareTo("save") == 0) {
 //    	ClasificationIpp group = new ClasificationIpp();
@@ -543,15 +543,15 @@ public class AmdDPController {
 //    	
 //    	}
 //    	loadPage(model);
-    	return "amddp";
-    }
-    
-    /**					end DPs AMD			**/
-    
-/**	   --------------------------   	MNO DP init	------------------------------		**/
-    
-    @GetMapping("home/amddp/mno/edit/{mnoid}")
-    public String editMNO(Model model,@PathVariable String mnoid) {
+//    	return "amddp";
+//    }
+//    
+//    /**					end DPs AMD			**/
+//    
+///**	   --------------------------   	MNO DP init	------------------------------		**/
+//    
+//    @GetMapping("home/amddp/mno/edit/{mnoid}")
+//    public String editMNO(Model model,@PathVariable String mnoid) {
 //    	MNO mnoDp = mnodaoDp.retrieveById(mnoid);
 //    	
 //    	if(mnoDp != null){
@@ -563,17 +563,17 @@ public class AmdDPController {
 //    			"ID MNO: " + mnoid, 
 //    			"A screen opens where can edit the MNO");
 //    	
-    	return "mno_editDP";
-    }
-    
-    @PostMapping("home/amddp/mno/edit/{mnoid}")
-    public String editMNOSave(Model model,
-    		@PathVariable String mnoid,
-    		@RequestParam("action") String action,
-    		@RequestParam(name="name", required=true) String name,
-    		@RequestParam(name="url", required=false) String url,
-    		@RequestParam(name="endpoint", required=false) String endpoint,
-    		@RequestParam(name="smsc", required=false) String smsc){
+//    	return "mno_editDP";
+//    }
+//    
+//    @PostMapping("home/amddp/mno/edit/{mnoid}")
+//    public String editMNOSave(Model model,
+//    		@PathVariable String mnoid,
+//    		@RequestParam("action") String action,
+//    		@RequestParam(name="name", required=true) String name,
+//    		@RequestParam(name="url", required=false) String url,
+//    		@RequestParam(name="endpoint", required=false) String endpoint,
+//    		@RequestParam(name="smsc", required=false) String smsc){
 //    	
 //    	if (action.compareTo("save") == 0) {
 //    		MNO mnoDp = mnodaoDp.retrieveById(mnoid);
@@ -608,11 +608,11 @@ public class AmdDPController {
 //    			
 //    	}
 //    	loadPage(model);
-    	return "amddp";
-    }
-    
-    @GetMapping("home/amddp/mno/delete/{mnoid}")
-    public String deleteMNO(Model model,@PathVariable String mnoid) {
+//    	return "amddp";
+//    }
+//    
+//    @GetMapping("home/amddp/mno/delete/{mnoid}")
+//    public String deleteMNO(Model model,@PathVariable String mnoid) {
 //    	MNO mnoDp= mnodaoDp.retrieveById(mnoid);
 //    	com.movasim.sr.model.MNO mnoSr=mnodaoSr.retrieveByMnoId(mnoDp.getMnoid());
 //    	
@@ -636,24 +636,24 @@ public class AmdDPController {
 //        	"Error delete the MNO");
 //    	}
 //    	loadPage(model);
-    	return "amddp";
-    }
-    
-    @GetMapping("home/amddp/mno/add")
-    public String addMNO(Model model){
-    	
-    	logger.logger("INFO", "SM-WEB", "AMD-DP", "", "Add MNO", "addMNO()", "", "", "", "A screen opens where can add a new MNO");
-    	
-    	return "mno_addDP";
-    }  
-    
-    @PostMapping("home/amddp/mno/add")
-    public String addMno(Model model,@RequestParam("action") String action,
-    		@RequestParam(name="name", required=true) String name,
-    		@RequestParam(name="mnoid", required=true) String mnoid,
-    		@RequestParam(name="url", required=false) String url,
-    		@RequestParam(name="endpoint", required=false) String endpoint,
-    		@RequestParam(name="smsc", required=false) String smsc){
+//    	return "amddp";
+//    }
+//    
+//    @GetMapping("home/amddp/mno/add")
+//    public String addMNO(Model model){
+//    	
+//    	logger.logger("INFO", "SM-WEB", "AMD-DP", "", "Add MNO", "addMNO()", "", "", "", "A screen opens where can add a new MNO");
+//    	
+//    	return "mno_addDP";
+//    }  
+//    
+//    @PostMapping("home/amddp/mno/add")
+//    public String addMno(Model model,@RequestParam("action") String action,
+//    		@RequestParam(name="name", required=true) String name,
+//    		@RequestParam(name="mnoid", required=true) String mnoid,
+//    		@RequestParam(name="url", required=false) String url,
+//    		@RequestParam(name="endpoint", required=false) String endpoint,
+//    		@RequestParam(name="smsc", required=false) String smsc){
     	
 //    	if (action.compareTo("save") == 0) {
 //    		MNO mnoDp = new MNO();
@@ -683,11 +683,11 @@ public class AmdDPController {
 //    	}
 //    	
 //    	loadPage(model);
-    	return "amddp";
-    } 
-    
-    /**	   --------------------------   	MNOS end	------------------------------		**/
-    
+//    	return "amddp";
+//    } 
+//    
+//    /**	   --------------------------   	MNOS end	------------------------------		**/
+//    
     
 //    /**			UTILS		**/
 //    

@@ -25,7 +25,7 @@ public class AmdSRController {
 //	private KeysDAO srdao = new KeysDAO();
 //	private DPDAO srdpdao = new DPDAO();
 	
-	private static WSLogger logger = new WSLogger();
+//	private static WSLogger logger = new WSLogger();
 	
 	/**------------------------------------------------ AMD SR ---------------------------------**/
 	
@@ -33,7 +33,7 @@ public class AmdSRController {
     public String ampsrload(Model model) {
 //    	loadPage(model);
     	
-    	logger.logger("INFO", "SM-WEB", "AMD SR", "", "", "ampsrload()", "", "", "", "The screen of AMD SR opens");
+//    	logger.logger("INFO", "SM-WEB", "AMD SR", "", "", "ampsrload()", "", "", "", "The screen of AMD SR opens");
     	
         return "amdsr";
     }

@@ -24,12 +24,9 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 public class IppController {
-	private static WSLogger logger = new WSLogger();
 
     @GetMapping("home/ipp/generation")
     public String generation(Model model) {       
-        logger.logger("INFO", "SM-WEB", "IPP", "", "", "generation()", "", "", "", "The screen of IPP generation opens");
-        
         return "ipp_generation";
     }
 
@@ -256,10 +253,7 @@ public class IppController {
 //            loadPageIppGeneration(model);
             model.addAttribute("msg1", "There is no personalization information available" );
             
-            logger.logger("ERROR", "SM-WEB", "IPP", "", "Generation IPP", "generateIpp()", "", "",
-            		"List template: " + listTemplate + ", List MNO: " + listMno + ", List Group: " + listGroup + ", Description: " + description
-            		+ ", Filter: " + filter + ", Quantity: " + quantity + ", Available: " + available, 
-            		"There is no personalization information available");
+;
             
             return "ipp_generation";
         }
@@ -268,10 +262,7 @@ public class IppController {
 //        loadPageIppGeneration(model);
         model.addAttribute("msg1", "You failed to template empty" );
         
-        logger.logger("ERROR", "SM-WEB", "IPP", "", "Generation IPP", "generateIpp()", "", "",
-        		"List template: " + listTemplate + ", List MNO: " + listMno + ", List Group: " + listGroup + ", Description: " + description
-        		+ ", Filter: " + filter + ", Quantity: " + quantity + ", Available: " + available, 
-        		"You failed to template empty");
+
         
         return "ipp_generation";
     }
@@ -279,14 +270,12 @@ public class IppController {
 
     @GetMapping("home/ipp/explorer")
     public String search(Model model) {
-    	logger.logger("INFO", "SM-WEB", "IPP", "", "", "search()", "", "", "", "The screen of IPP explorer opens");
     	
         return "ipp_explorer";
     }
 
     @GetMapping("home/ipp/results")
     public String results() {
-    	logger.logger("INFO", "SM-WEB", "IPP", "", "", "results()", "", "", "", "The screen of IPP explorer opens");
     	
         return "ipp_explorer";
     }
@@ -512,10 +501,6 @@ public class IppController {
     		@PathVariable String id) {
     	    	model.addAttribute("id", id);
     	
-    	logger.logger("INFO", "SM-WEB", "IPP", "", "Add lot", "addLotsToIppGet()", "", "", 
-    			"ID IPP: " + id, 
-    			"A screen opens where shows all lots for add to a specific IPP");
-    	
     	return "ipp_lots_add";
     }
     
@@ -624,10 +609,6 @@ public class IppController {
     		@PathVariable String id) {
     	
     	model.addAttribute("id", id);
-    	
-    	logger.logger("INFO", "SM-WEB", "IPP", "", "Delete lot", "deleteLotsToIppGet()", "", "", 
-    			"ID IPP: " + id, 
-    			"A screen opens where shows all lots for delete to a specific IPP");
     	
     	return "ipp_lots_delete";
     }

@@ -85,7 +85,7 @@ public class Settings {
 			this.movasimPathCurl = propertiesWEB.getProperty("movasimPathCurl");
         } catch (Exception e) {
 
-            logger.logger("ERROR", "SM-WEB", "Persistence", "", "", "load()", "", "", "", "Cannot load the properties file");
+//            logger.logger("ERROR", "SM-WEB", "Persistence", "", "", "load()", "", "", "", "Cannot load the properties file");
             
             e.printStackTrace();
         }

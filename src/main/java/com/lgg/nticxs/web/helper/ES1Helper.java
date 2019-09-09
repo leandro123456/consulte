@@ -1,22 +1,10 @@
 package com.lgg.nticxs.web.helper;
 
-import com.lgg.nticxs.web.utils.Settings;
-
-import org.apache.cxf.configuration.jsse.TLSClientParameters;
-import org.apache.cxf.endpoint.Client;
-import org.apache.cxf.frontend.ClientProxy;
-import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
-import org.apache.cxf.transport.http.HTTPConduit;
-
-
-import java.io.FileInputStream;
-import java.math.BigInteger;
-import java.security.KeyStore;
-
-import javax.net.ssl.KeyManager;
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
+//import org.apache.cxf.configuration.jsse.TLSClientParameters;
+//import org.apache.cxf.endpoint.Client;
+//import org.apache.cxf.frontend.ClientProxy;
+//import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
+//import org.apache.cxf.transport.http.HTTPConduit;
 
 /**
  * Created by movasim on 19/09/16.
@@ -48,20 +36,20 @@ public class ES1Helper {
 //    }
     
 		/**		Mutual Authentication**/
-private static void authenticate(Object service) throws Exception {
-Client cxfClient = ClientProxy.getClient(service); 
-HTTPConduit conduit = (HTTPConduit) cxfClient.getConduit(); 
-
-//trust any server, quick and easy, not the focus of this problem 
-TrustManager[] simpleTrustManager = new TrustManager[]{new X509TrustManager() { 
-    public java.security.cert.X509Certificate[] getAcceptedIssuers() { 
-            return null; 
-    } 
-    public void checkClientTrusted(java.security.cert.X509Certificate[] certs, String authType) { 
-    } 
-    public void checkServerTrusted(java.security.cert.X509Certificate[] certs, String authType) { 
-    } 
-}}; 
+//private static void authenticate(Object service) throws Exception {
+//Client cxfClient = ClientProxy.getClient(service); 
+//HTTPConduit conduit = (HTTPConduit) cxfClient.getConduit(); 
+//
+////trust any server, quick and easy, not the focus of this problem 
+//TrustManager[] simpleTrustManager = new TrustManager[]{new X509TrustManager() { 
+//    public java.security.cert.X509Certificate[] getAcceptedIssuers() { 
+//            return null; 
+//    } 
+//    public void checkClientTrusted(java.security.cert.X509Certificate[] certs, String authType) { 
+//    } 
+//    public void checkServerTrusted(java.security.cert.X509Certificate[] certs, String authType) { 
+//    } 
+//}}; 
 
 //KeyStore ks = KeyStore.getInstance("JKS"); 
 //FileInputStream in = new FileInputStream(Settings.getInstance().getKeystore());
@@ -78,5 +66,5 @@ TrustManager[] simpleTrustManager = new TrustManager[]{new X509TrustManager() {
 //tlsParams.setCertAlias(Settings.getInstance().getKeystoreAlias()); 
 //tlsParams.setDisableCNCheck(true);
 //conduit.setTlsClientParameters(tlsParams);
-}
+//}
 }

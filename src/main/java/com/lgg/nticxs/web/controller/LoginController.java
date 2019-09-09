@@ -6,6 +6,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,8 +38,21 @@ public class LoginController{
     }
 
     @GetMapping("/login")
-    public String login(Model model) {
-        return "login";
+	public String login(@RequestParam(value="incorrectcredentials", required=false) boolean incorrectcredentials,
+			@RequestParam(value="incorrecttoken", required=false) boolean incorrecttoken,
+			Model model, 
+			@ModelAttribute("user") String userName,
+			@ModelAttribute("password") String password) {
+
+		if(!userName.equals("") && !password.equals("")) {
+			model.addAttribute("user", userName);
+			model.addAttribute("password", password);
+		}
+
+		if(incorrectcredentials) { model.addAttribute("incorrectcredentials", true);}
+		if(incorrecttoken) {model.addAttribute("incorrecttoken", true);}
+
+		return "login";
     }
     
     @GetMapping("/register")

@@ -55,7 +55,7 @@ public class ApiController {
 			Pattern pattern = Pattern.compile("var_out:(.+?)\n(.+?)$", Pattern.DOTALL);
 			Matcher matcher = pattern.matcher(fileContent);
 			if (!matcher.find()) {
-				logger.logger("ERROR", "SM-WEB", "", "", "", "UpdateEcasd()", "", "", "", "Failed");
+//				logger.logger("ERROR", "SM-WEB", "", "", "", "UpdateEcasd()", "", "", "", "Failed");
 			}
 			headers = matcher.group(1).split("/");
 			dataLines = matcher.group(2).split("\r\n");
@@ -87,7 +87,7 @@ public class ApiController {
 //						ecasd=Utils.decrypt3Des(Settings.getInstance().getKeyMovasim(), values[i]); //clave movasim
 //						ecasd=ecasd.substring(0,CryptoTools.hexToDecimal(ecasd.substring(6,8))*2+8);
 						} catch (Exception e) {
-							logger.logger("ERROR", "SM-WEB", "", "", "", "UpdateEcasd()", "", "", "", "Failed to decrypt ECASD");
+//							logger.logger("ERROR", "SM-WEB", "", "", "", "UpdateEcasd()", "", "", "", "Failed to decrypt ECASD");
 							
 							e.printStackTrace();
 						}

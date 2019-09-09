@@ -143,49 +143,13 @@ public class ProvisioningController {
     	model.addAttribute("materia", materia);
         return "provisioning";
     }
-    @PostMapping("home/{idmateria}/provisioning/allnotes")
-    public String uploaAllNotes(Model model,
-    		@PathVariable String idmateria,@RequestParam("file_notas") MultipartFile file, 
-    		@RequestParam("fecha") String fecha, @RequestParam("tipo") String tipo,
-    		@RequestParam("description") String description) {
-        if (!file.isEmpty()) {
-        	Boolean result = OperationCSV.uploadAllNotes(file,fecha, tipo, description, idmateria);
-        	if(result) {
-        		model.addAttribute("msg", "Carga exitosa de notas.");
-        	}
-        	else
-        		model.addAttribute("msg", "Fallo al cargar las notas.");
-            return "provisioning";
-        } else {
-            model.addAttribute("msg", "Carga fallida. Archivo vacio.");
-            return "provisioning";
-        }
-    }
+
     
     @GetMapping("home/{idmateria}/provisioning/allassistance")
     public String  uploaAllAssistanceGet(Model model,
     		@PathVariable String materia){
     	model.addAttribute("materia", materia);
         return "provisioning";
-    }
-    @PostMapping("home/{idmateria}/provisioning/allassistance")
-    public String uploaAllAssistance(Model model,
-    		@PathVariable String idmateria,@RequestParam("file_assistance") MultipartFile file, 
-    		@RequestParam("fecha") String fecha, @RequestParam("description") String description) {
-        if (!file.isEmpty()) {
-        	Boolean result = OperationCSV.uploadAllAssistance(file,fecha, description, idmateria);
-        	if(result) {
-        		model.addAttribute("msg", "Carga exitosa de toda la asistencia.");
-        		model.addAttribute("materia", idmateria);
-        		return "provisioning";
-        	}
-        	else
-        		model.addAttribute("msg", "Fallo al cargar la asistencia.");
-            return "provisioning";
-        } else {
-            model.addAttribute("msg", "Carga fallida. Archivo vacio.");
-            return "provisioning";
-        }
     }
     
     

@@ -1,13 +1,6 @@
 package com.lgg.nticxs.web.helper;
 
 
-
-import org.apache.cxf.configuration.jsse.TLSClientParameters;
-import org.apache.cxf.endpoint.Client;
-import org.apache.cxf.frontend.ClientProxy;
-import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
-import org.apache.cxf.transport.http.HTTPConduit;
-
 import java.io.FileInputStream;
 import java.math.BigInteger;
 import java.security.KeyStore;
@@ -109,20 +102,20 @@ public class ES2Helper {
   
     
     				/**		Mutual Authentication**/
-	private static void authenticate(Object service) throws Exception {
-		Client cxfClient = ClientProxy.getClient(service); 
-        HTTPConduit conduit = (HTTPConduit) cxfClient.getConduit(); 
-
-        //trust any server, quick and easy, not the focus of this problem 
-        TrustManager[] simpleTrustManager = new TrustManager[]{new X509TrustManager() { 
-                public java.security.cert.X509Certificate[] getAcceptedIssuers() { 
-                        return null; 
-                } 
-                public void checkClientTrusted(java.security.cert.X509Certificate[] certs, String authType) { 
-                } 
-                public void checkServerTrusted(java.security.cert.X509Certificate[] certs, String authType) { 
-                } 
-        }}; 
+//	private static void authenticate(Object service) throws Exception {
+//		Client cxfClient = ClientProxy.getClient(service); 
+//        HTTPConduit conduit = (HTTPConduit) cxfClient.getConduit(); 
+//
+//        //trust any server, quick and easy, not the focus of this problem 
+//        TrustManager[] simpleTrustManager = new TrustManager[]{new X509TrustManager() { 
+//                public java.security.cert.X509Certificate[] getAcceptedIssuers() { 
+//                        return null; 
+//                } 
+//                public void checkClientTrusted(java.security.cert.X509Certificate[] certs, String authType) { 
+//                } 
+//                public void checkServerTrusted(java.security.cert.X509Certificate[] certs, String authType) { 
+//                } 
+//        }}; 
 
 //        KeyStore ks = KeyStore.getInstance("JKS"); 
 //        FileInputStream in = new FileInputStream(Settings.getInstance().getKeystore());
@@ -139,5 +132,5 @@ public class ES2Helper {
 //        tlsParams.setCertAlias(Settings.getInstance().getKeystoreAlias()); 
 //        tlsParams.setDisableCNCheck(true);
 //        conduit.setTlsClientParameters(tlsParams);
-	}
+//	}
 }

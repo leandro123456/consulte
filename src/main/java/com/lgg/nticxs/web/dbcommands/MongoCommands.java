@@ -2,7 +2,7 @@ package com.lgg.nticxs.web.dbcommands;
 
 import java.net.UnknownHostException;
 
-import com.lgg.nticxs.web.DAO.helper.MongoDBRemove;
+import com.lgg.nticxs.web.DAO.Mongo.MongoDBRemove;
 
 public class MongoCommands {
 	static final private String DATABASE= "MQTT-Manager";

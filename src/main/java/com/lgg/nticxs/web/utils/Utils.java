@@ -39,7 +39,6 @@ import com.lgg.nticxs.web.DAO.UserDAO;
 import com.lgg.nticxs.web.DAO.VistaDAO;
 import com.lgg.nticxs.web.model.Device;
 import com.lgg.nticxs.web.model.DeviceConfiguration;
-import com.lgg.nticxs.web.model.Nota;
 import com.lgg.nticxs.web.model.User;
 import com.lgg.nticxs.web.model.Vista;
 import com.sun.mail.smtp.SMTPTransport;
@@ -427,11 +426,7 @@ public class Utils {
 			return fechaRespuesta;
 		}
 		
-		public static Integer TrimestreActual() {
-			Integer fechaActual = obtenerTrimestre(fechaActual());
-			return fechaActual;
-			
-		}
+
 
 		public static Calendar fechaACalendar(String fecha) {
 			System.out.println("fecha del timestre: "+fecha);
@@ -443,20 +438,6 @@ public class Utils {
 			return c1;
 		}
 
-		public static Integer obtenerTrimestre(String fecha) {
-			Calendar fechaActual = fechaACalendar(fecha);
-			Calendar fechaInicioPrimerTrimestre = fechaACalendar(Settings.getInstance().getInicio_primer_timestre());
-			Calendar fechaInicioSegundoTrimestre = fechaACalendar(Settings.getInstance().getInicio_segundo_timestre());
-			Calendar fechaInicioTercerTrimestre = fechaACalendar(Settings.getInstance().getInicio_tercer_timestre());
-			Calendar fechaFinTercerTrimestre = fechaACalendar(Settings.getInstance().getFin_tercer_timestre());
-			if(fechaActual.after(fechaInicioPrimerTrimestre) && fechaActual.before(fechaInicioSegundoTrimestre))
-				return Nota.PRIMER_TRIMESTRE;
-			if(fechaActual.after(fechaInicioSegundoTrimestre) && fechaActual.before(fechaInicioTercerTrimestre))
-				return Nota.SEGUNDO_TRIMESTRE;
-			if(fechaActual.after(fechaInicioTercerTrimestre) && fechaActual.before(fechaFinTercerTrimestre))
-				return Nota.TERCER_TRIMESTRE;
-			return null;
-		}
 	
 		public static List<String> vistas(String nombreUsuario, List<String> listaSerial, String tipo){
 			List<String> lista = new ArrayList<>();
