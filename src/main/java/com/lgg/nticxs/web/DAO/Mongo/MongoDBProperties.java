@@ -6,25 +6,19 @@ import java.util.List;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoClientOptions.Builder;
-import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
-
-import coolsense.movasim.persistence.util.PropertiesFile;
 
 abstract class MongoDBProperties {
 	
-	private static final String HOST_MONGODB = PropertiesFile.getInstance().getHostMongoDB();
-	private static final Integer PORT_MONGODB = PropertiesFile.getInstance().getPortMongoDB();
-	private static final Boolean USE_SSL_MONGODB = PropertiesFile.getInstance().getUseSSLMongoDB();
-	
-	private static final String USER_MONGODB = PropertiesFile.getInstance().getUserMongoDB();
-	private static final String PASSWORD_MONGODB = PropertiesFile.getInstance().getPasswordMongoDB();
+	private static final String HOST_MONGODB = "localhost";
+	private static final Integer PORT_MONGODB = 27017;
+	private static final Boolean USE_SSL_MONGODB = false;
 	
 	protected abstract String getDatabaseName();
 	
 	protected MongoClient getMongoClient() {
-		MongoCredential mongoCredential = getMongoCredential();
-		return new MongoClient(getServerAddress(), mongoCredential, getMongoClientOptions());
+//		MongoCredential mongoCredential = getMongoCredential();
+		return new MongoClient(getServerAddress(), getMongoClientOptions());
 	}
 	
 	private List<ServerAddress> getServerAddress() {
@@ -43,7 +37,7 @@ abstract class MongoDBProperties {
 		return mongoOptions;
 	}
 	
-	private MongoCredential getMongoCredential() {
-		return MongoCredential.createScramSha1Credential(USER_MONGODB, getDatabaseName(), PASSWORD_MONGODB.toCharArray());
-	}
+//	private MongoCredential getMongoCredential() {
+//		return MongoCredential.createScramSha1Credential(USER_MONGODB, getDatabaseName(), PASSWORD_MONGODB.toCharArray());
+//	}
 }

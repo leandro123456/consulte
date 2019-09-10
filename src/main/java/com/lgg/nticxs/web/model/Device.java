@@ -3,90 +3,35 @@ package com.lgg.nticxs.web.model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import com.lgg.nticxs.web.DAO.Mongo.MongoDBObject;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
-import org.eclipse.persistence.nosql.annotations.DataFormatType;
-import org.eclipse.persistence.nosql.annotations.Field;
-import org.eclipse.persistence.nosql.annotations.NoSql;
+public class Device extends MongoDBObject{
 
-@Entity
-@NoSql(dataFormat=DataFormatType.MAPPED)
-public class Device {
+	private static final long serialVersionUID = -4346222511562336633L;
 	static final public String TERMOMETRO = "termometro";
 	static final public String SONOFF = "sonoff";
 	static final public String ALARMA = "alarma";
-	
-	@Id
-	@GeneratedValue
-	@Field(name = "_id")
-	private String id;
-	
-	@Field(name = "name")
-	private String name;
-	
-	@Field (name = "userowner")
-	private String userowner;
-	
-	@Field (name = "serialnumber")
-	private String serialnumber;
-	
-	@Field (name = "tipo")
-	private String tipo;
-	
-	@Field (name = "description")
-	private String description;
-	
-	@Field (name = "password")
-	private byte[] password;
-	
-	@Field (name = "historyPassword")
-	private List<byte[]> historyPassword;
-	
-	@Field (name = "delete")
-	private Boolean delete;
 
-	@Field (name = "role")
+	private String id;
+	private String name;
+	private String userowner;
+	private String serialnumber;
+	private String tipo;
+	private String description;
+	private byte[] password;
+	private List<byte[]> historyPassword;
+	private Boolean delete;
 	private String role;
-	
-	@Field (name = "timerString")
 	private String timerString;
-	
-	@Field (name = "lastnotification")
 	private DeviceNotification lastnotification;
-	
-	@Field (name = "particiones")
 	private Integer particiones;
-	
-	@Field (name = "zonas")
 	private HashMap<Integer, Integer> zonas;
-	
-	@ElementCollection
-	@Field (name = "alarms")
 	private List<DeviceAlarm> alarms;
-	
-	@Field (name = "usedefaultbrocker")
 	private Boolean usedefaultbrocker;
-	
-	@ElementCollection //es una lista, en la posicion 0 esta el default
-	@Field(name="deviceconfiguration")
 	private List<DeviceConfiguration> deviceconfiguration;
-	
-	@Field (name = "vista")
 	private HashMap<String, String> vista;
-	
-//	@Field (name = "vistaporusuario")
-//	private HashMap<String, String> vistaporusuario;
-	
-	@ElementCollection 
-	@Field(name="users")
 	private List<String> users;
-	
-	@ElementCollection 
-	@Field(name="admins")
 	private List<String> admins;
 
 	

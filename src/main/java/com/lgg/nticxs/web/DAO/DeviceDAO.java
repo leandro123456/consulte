@@ -1,37 +1,30 @@
 package com.lgg.nticxs.web.DAO;
 
+import static com.mongodb.client.model.Filters.eq;
+
 import java.util.List;
 
-import javax.persistence.Query;
+import org.bson.conversions.Bson;
 
-import com.lgg.nticxs.web.jpa.JPADAO;
 import com.lgg.nticxs.web.model.Device;
-import com.lgg.nticxs.web.model.User;
+import com.lgg.nticxs.web.DAO.Mongo.*;
 
-public class DeviceDAO extends JPADAO<Device>{
 
-	@SuppressWarnings("unchecked")
-	public List<Device> retrieveAll() {
-		String sql = "SELECT u FROM Device u WHERE u.delete=false";
-		Query query = getEntityManager().createQuery(sql);
-		List<Device> list = query.getResultList();
-		if (list != null && list.size() > 0) {
-			return list;
-		}
-		return null;
+public class DeviceDAO extends MongoDBClient<Device>{
+
+	public DeviceDAO() {
+		super(Device.class);
 	}
 	
-	@SuppressWarnings("unchecked")
-	public Device retrieveById(String userId) {
-		String sql = "SELECT u FROM Device u WHERE u.id = :id";
-		Query query = getEntityManager().createQuery(sql);
-		query.setParameter("id", userId);
-		List<Device> list = query.getResultList();
-		if (list != null && list.size() > 0) {
-			return list.get(0);
-		}
-		return null;
+	public List<Device> retrieveAllDevices() {
+		return this.retrieveAll();
 	}
+	
+	public Device retrieveById(String deviceId) {
+		Bson filter = eq("deviceId", deviceId);
+		return this.retrieveListByFilter(filter);
+	}
+
 	
 	@SuppressWarnings("unchecked")
 	public Device retrieveBySerialNumber(String serialnumber) {
@@ -53,6 +46,12 @@ public class DeviceDAO extends JPADAO<Device>{
 		List<Device> list = query.getResultList();
 		list.get(0).setDelete(true);
 		update(list.get(0));
+	}
+
+	@Override
+	protected String getDatabaseName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
