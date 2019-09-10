@@ -1,47 +1,37 @@
 package com.lgg.nticxs.web.DAO;
 
+import static com.mongodb.client.model.Filters.eq;
+
 import java.util.List;
 
-import javax.persistence.Query;
+import org.bson.conversions.Bson;
 
-import com.lgg.nticxs.web.jpa.JPADAO;
+import com.lgg.nticxs.web.DAO.Mongo.MongoDBClient;
 import com.lgg.nticxs.web.model.DeviceDefaultConfiguration;
 
-public class DeviceDefaultConfigurationDAO extends JPADAO<DeviceDefaultConfiguration>{
-
-	@SuppressWarnings("unchecked")
+public class DeviceDefaultConfigurationDAO extends MongoDBClient<DeviceDefaultConfiguration>{
+	
+	public DeviceDefaultConfigurationDAO() {
+		super(DeviceDefaultConfiguration.class);
+	}
+	
 	public List<DeviceDefaultConfiguration> retrieveAll() {
-		String sql = "SELECT u FROM DeviceDefaultConfiguration u WHERE u.delete=false";
-		Query query = getEntityManager().createQuery(sql);
-		List<DeviceDefaultConfiguration> list = query.getResultList();
-		if (list != null && list.size() > 0) {
-			return list;
-		}
-		return null;
+		return this.retrieveAll();
 	}
 	
-	@SuppressWarnings("unchecked")
 	public DeviceDefaultConfiguration retrieveById(String userId) {
-		String sql = "SELECT u FROM DeviceDefaultConfiguration u WHERE u.id = :id";
-		Query query = getEntityManager().createQuery(sql);
-		query.setParameter("id", userId);
-		List<DeviceDefaultConfiguration> list = query.getResultList();
-		if (list != null && list.size() > 0) {
-			return list.get(0);
-		}
-		return null;
+		Bson filter = eq("id", userId);
+		return this.retrieveByFilter(filter);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public DeviceDefaultConfiguration retrieveByName(String name) {
-		String sql = "SELECT u FROM DeviceDefaultConfiguration u WHERE u.name = :name";
-		Query query = getEntityManager().createQuery(sql);
-		query.setParameter("name", name);
-		List<DeviceDefaultConfiguration> list = query.getResultList();
-		if (list != null && list.size() > 0) {
-			return list.get(0);
-		}
-		return null;
+		Bson filter = eq("name", name);
+		return this.retrieveByFilter(filter);
+	}
+
+	@Override
+	protected String getDatabaseName() {
+		return "MQTT-Manager";
 	}
 
 }

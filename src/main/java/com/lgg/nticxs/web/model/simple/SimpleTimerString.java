@@ -1,13 +1,9 @@
 package com.lgg.nticxs.web.model.simple;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
+
 
 import org.eclipse.paho.client.mqttv3.IMqttClient;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -15,7 +11,6 @@ import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.json.JSONObject;
 
 
@@ -48,7 +43,8 @@ public class SimpleTimerString implements MqttCallback{
 	static final public String SWITH_THREE = "3";
 	public static final String TOPIC = "engine/temperature";
 		
-    private IMqttClient client;
+    @SuppressWarnings("unused")
+	private IMqttClient client;
     
     public SimpleTimerString(IMqttClient client) {
         this.client = client;
@@ -384,6 +380,7 @@ public class SimpleTimerString implements MqttCallback{
 		
 	}
 
+	@SuppressWarnings("resource")
 	public static void sendtimerString(String timerstringvalue,String serverUri, String port, String topic,
 			String userName, String password) {
 		String publisherId = UUID.randomUUID().toString();
@@ -417,6 +414,7 @@ public class SimpleTimerString implements MqttCallback{
 		
 	}
 
+	@SuppressWarnings("resource")
 	public static void sendmessageMQTT(JSONObject message,String serverUri, String port, String topic,
 			String userName, String password) {
 		String publisherId = UUID.randomUUID().toString();

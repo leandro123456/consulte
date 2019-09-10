@@ -3,40 +3,25 @@ package com.lgg.nticxs.web.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.bson.codecs.pojo.annotations.BsonProperty;
 
-import org.eclipse.persistence.nosql.annotations.DataFormatType;
-import org.eclipse.persistence.nosql.annotations.Field;
-import org.eclipse.persistence.nosql.annotations.NoSql;
+import com.lgg.nticxs.web.DAO.Mongo.MongoDBObject;
 
-
-@Entity
-@NoSql(dataFormat=DataFormatType.MAPPED)
-public class Vista {
+public class Vista extends MongoDBObject {
+	
+	private static final long serialVersionUID = -4346222511562336633L;
 	static final public String TEMP_RELOJ = "temperatura_reloj";
 	static final public String TEMP_HORIZONTAL = "temperatura_horizontal";
 	static final public String SONOFF = "sonoff";
 	static final public String SONOFF_DOS = "sonofftwo";
 	static final public String ALARMA = "alarma";
 	
-	
-	@Id
-	@GeneratedValue
-	@Field(name = "_id")
+	@BsonProperty("id")
 	private String id;
 	
-	@Field(name = "name")
 	private String name;
-	
-	@Field(name = "inicio")
 	private String inicio;
-	
-	@Field(name = "fin")
 	private String fin;
-	
-	@Field (name = "contenido")
 	private Map<String,String> contenido;
 
 	public Vista() {

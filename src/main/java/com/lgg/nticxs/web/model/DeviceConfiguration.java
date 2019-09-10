@@ -1,93 +1,66 @@
 package com.lgg.nticxs.web.model;
 
-import javax.persistence.Embeddable;
 
-import org.eclipse.persistence.nosql.annotations.DataFormatType;
-import org.eclipse.persistence.nosql.annotations.Field;
-import org.eclipse.persistence.nosql.annotations.NoSql;
-
-@Embeddable
-@NoSql(dataFormat=DataFormatType.MAPPED)
 public class DeviceConfiguration {
 	
-	@Field (name = "name")
+
 	private String name;
-	
-	@Field (name = "userescuchar")
 	private String userescuchar;
-	
-	@Field (name = "passescuchar")
 	private String passescuchar;
-	
-	@Field (name = "iphostescuchar")
 	private String iphostescuchar;
-	
-	@Field (name = "portescuchar")
 	private String portescuchar;
-	
-	@Field (name = "usesslescuchar")
 	private Boolean usesslescuchar;
-	
-	@Field (name = "topicescuchar")
 	private String topicescuchar;
-	
-	@Field (name = "userescribir")
 	private String userescribir;
-	
-	@Field (name = "passescribir")
 	private String passescribir;
-	
-	@Field (name = "iphostescribir")
 	private String iphostescribir;
-	
-	@Field (name = "portescribir")
 	private String portescribir;
-	
-	@Field (name = "usesslescribir")
 	private Boolean usesslescribir;
-	
-	@Field (name = "topicescribir")
 	private String topicescribir;
-	
-	@Field (name = "userescucharremote")
 	private String userescucharremote;
-	
-	@Field (name = "passescucharremote")
 	private String passescucharremote;
-	
-	@Field (name = "iphostescucharremote")
 	private String iphostescucharremote;
-	
-	@Field (name = "portescucharremote")
 	private String portescucharremote;
-	
-	@Field (name = "usesslescucharremote")
 	private Boolean usesslescucharremote;
-	
-	@Field (name = "topicescucharremote")
 	private String topicescucharremote;
-	
-	@Field (name = "userescribirremote")
 	private String userescribirremote;
-	
-	@Field (name = "passescribirremote")
 	private String passescribirremote;
-	
-	@Field (name = "iphostescribirremote")
 	private String iphostescribirremote;
-	
-	@Field (name = "portescribirremote")
 	private String portescribirremote;
-	
-	@Field (name = "usesslescribirremote")
 	private Boolean usesslescribirremote;
-	
-	@Field (name = "topicescribirremote")
 	private String topicescribirremote;
 
 	
 	
 	public DeviceConfiguration() {
+	}
+
+	public DeviceConfiguration(DeviceDefaultConfiguration deviceconfiguration) {
+		this.name= deviceconfiguration.getName();
+		this.userescuchar=deviceconfiguration.getUserescuchar();
+		this.passescuchar = deviceconfiguration.getPassescuchar();
+		this.iphostescuchar = deviceconfiguration.getIphostescuchar();
+		this.portescuchar = deviceconfiguration.getPortescuchar();
+		this.usesslescuchar = deviceconfiguration.getUsesslescuchar();
+		this.topicescuchar=deviceconfiguration.getTopicescuchar();
+		this.userescribir=deviceconfiguration.getUserescribir();
+		this.passescribir=deviceconfiguration.getPassescribir();
+		this.iphostescribir=deviceconfiguration.getIphostescribir();
+		this.portescribir=deviceconfiguration.getPortescribir();
+		this.usesslescribir=deviceconfiguration.getUsesslescribir();
+		this.topicescribir=deviceconfiguration.getTopicescribir();
+		this.userescucharremote=deviceconfiguration.getUserescucharremote();
+		this.passescucharremote=deviceconfiguration.getPassescucharremote();
+		this.iphostescucharremote=deviceconfiguration.getIphostescucharremote();
+		this.portescucharremote= deviceconfiguration.getPortescucharremote();
+		this.usesslescucharremote=deviceconfiguration.getUsesslescucharremote();
+		this.topicescucharremote=deviceconfiguration.getTopicescucharremote();
+		this.userescribirremote=deviceconfiguration.getUserescribirremote();
+		this.passescribirremote=deviceconfiguration.getPassescribirremote();
+		this.iphostescribirremote=deviceconfiguration.getIphostescribirremote();
+		this.portescribirremote=deviceconfiguration.getPortescribirremote();
+		this.usesslescribirremote=deviceconfiguration.getUsesslescribirremote();
+		this.topicescribirremote=deviceconfiguration.getTopicescribirremote();
 	}
 
 	public String getName() {

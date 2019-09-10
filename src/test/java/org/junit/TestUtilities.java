@@ -12,9 +12,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.json.JSONObject;
 
@@ -24,12 +21,10 @@ import com.lgg.nticxs.web.model.User;
 import com.lgg.nticxs.web.model.Vista;
 import com.lgg.nticxs.web.model.simple.SimpleTimerString;
 import com.lgg.nticxs.web.utils.Utils;
-import com.lgg.nticxs.web.model.Ciclolectivo;
 import com.lgg.nticxs.web.model.Device;
 import com.lgg.nticxs.web.model.DeviceConfiguration;
 import com.lgg.nticxs.web.model.DeviceDefaultConfiguration;
-import com.lgg.nticxs.web.model.Materia;
-import com.lgg.nticxs.web.model.Materia.materia;
+
 
 public class TestUtilities {
 	
@@ -94,6 +89,33 @@ public class TestUtilities {
 		System.out.println("termino: "+ timerresult);
 	}
 	
+	//@Test
+	public void createUser(){
+		UserDAO userdao =new UserDAO();
+		User user = new User();
+		user.setCuenta_iniciada(false);
+		user.setEmail("jaha@gmail.com");
+		user.setFirstname("leo");
+		user.setDelete(false);
+		List<String> listadeequipos = new ArrayList<>();
+		listadeequipos.add("1122122");
+		listadeequipos.add("dsdasdsd");
+		user.setDeviceserialnumber(listadeequipos);
+		user.setLastname("sapo");
+		user.setPassCuenta("pass");
+		user.setPassword("password".getBytes());
+		user.setRole(User.ROLE_ADMIN);
+		userdao.create(user);
+		System.out.println("termino");
+	}
+	
+	
+	@Test
+	public void searchUsuario(){
+		UserDAO userdao = new UserDAO();
+		User usuario = userdao.retrieveByMail("leandrogabrielguzman@gmail.com");
+		System.out.println("nombre			"+usuario.getFirstname());;
+	}
 	
 	//@Test
 	public void testSearchVista(){
@@ -101,12 +123,13 @@ public class TestUtilities {
 		VistaDAO vistadao= new VistaDAO();
 
 		UserDAO userdao = new UserDAO();
-		User user = userdao.retrieveByMail("t@tes");
+		User user = userdao.retrieveByMail("jaha@gmail.com");
+		System.out.println("encontro la papa: "+ user);
 
 		for(String deviceserial : user.getDeviceserialnumber()){
 			System.out.println("serialnumber: "+ deviceserial);
 			Device device = devicedao.retrieveBySerialNumber(deviceserial);
-			String valor = device.getVista().get("t@tes");
+			String valor = (String) device.getVista().get("jaha@gmail.com");
 			System.out.println(valor);
 			String[] a = valor.split(";");
 			System.out.println(a.length);
@@ -188,13 +211,27 @@ public class TestUtilities {
 	}
 	
 	//@Test
+	public void createVista(){
+		VistaDAO vistadao = new VistaDAO();
+		Vista vista = new Vista();
+		vista.setFin("fin");
+		vista.setInicio("inicio");
+		vista.setName("elNuevo");
+		Map<String, String> mapa = new HashMap<String, String>();
+		mapa.put("uno", "va");
+		mapa.put("dos", "dosppa");
+		vista.setContenido(mapa);
+		vistadao.create(vista);
+	}
+	
+	//@Test
 	public void testUpdateVista(){
 		DeviceDAO devicedao = new DeviceDAO();
 		Device device = devicedao.retrieveBySerialNumber("PS3S1P120190323");
 		//String vista = "<div class=\"col-lg-6 mb-4\"><div class=\"card shadow mb-4\"><div class=\"card-header py-3\"><h6 class=\"m-0 font-weight-bold text-primary\">Sensor de Temperatura Y Humedad</h6></div><div class=\"card-body\"><h4 id=\"humedads\" class=\"small font-weight-bold\"></h4><div class=\"progress mb-4\"><div class=\"progress-bar\" id=\"humedad\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div></div><h4 id=\"temperaturacs\" class=\"small font-weight-bold\">Temperatura °C</h4><div class=\"progress mb-4\"><div id=\"temperaturac\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"70\"></div></div><h4 id=\"sensacioncs\" class=\"small font-weight-bold\">Sensacion Termica °C</h4><div class=\"progress mb-4\"><div id=\"sensacionc\" class=\"progress-bar  bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"70\"></div></div><h4 id=\"temperaturafs\" class=\"small font-weight-bold\">Temperatura °F</h4><div class=\"progress mb-4\"><div id=\"temperaturaf\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"140\"></div></div><h4 id=\"sensacionfs\" class=\"small font-weight-bold\">Sensacion Termica °F</h4><div class=\"progress\"><div id=\"sensacionf\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"140\"></div></div></div></div></div>";
 		String vista="sonoff;sonoffbody";
 //		device.getVista().clear();
-		device.getVista().put("t@tes", vista);
+		device.getVista().put("jaha@gmail.com", vista);
 		devicedao.update(device);
 		System.out.println("esta vacio? "+ device.getVista().isEmpty());
 	}
@@ -203,12 +240,12 @@ public class TestUtilities {
 	public void searchVistas(){
 		UserDAO userdao = new UserDAO();
 		DeviceDAO devicedao = new DeviceDAO();
-		User user = userdao.retrieveByMail("t@tes");
+		User user = userdao.retrieveByMail("jaha@gmail.com");
 		Device device = devicedao.retrieveBySerialNumber(user.getDeviceserialnumber().get(0));
 //		System.out.println(device.getDescription());
 //		System.out.println("esta es la vista: "+ device.getVista().get("t@tes"));
 		
-		String allenvelope=device.getVista().get("t@tes");
+		String allenvelope=(String) device.getVista().get("jaha@gmail.com");
 		System.out.println("original: "+allenvelope);
 		String pattern = "parametername";
 		String[] vector = allenvelope.split(pattern);

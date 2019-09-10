@@ -12,7 +12,6 @@ import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -22,31 +21,24 @@ import java.util.TimeZone;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
-import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 
-import org.springframework.ui.Model;
 
 import com.lgg.nticxs.web.DAO.DeviceDAO;
-import com.lgg.nticxs.web.DAO.UserDAO;
 import com.lgg.nticxs.web.DAO.VistaDAO;
 import com.lgg.nticxs.web.model.Device;
 import com.lgg.nticxs.web.model.DeviceConfiguration;
-import com.lgg.nticxs.web.model.User;
 import com.lgg.nticxs.web.model.Vista;
-import com.sun.mail.smtp.SMTPTransport;
 
 public class Utils {
-	private static DeviceDAO devicedao= new DeviceDAO();
-	private static VistaDAO vistadao= new VistaDAO();
-	private static UserDAO userdao = new UserDAO();
+	private static final DeviceDAO devicedao= new DeviceDAO();
+	private static final VistaDAO vistadao= new VistaDAO();
 	
 	public static byte[] incByteArray(byte[] value) {
 		byte[] result = new byte[value.length];
@@ -445,7 +437,7 @@ public class Utils {
 			for(int i=0; i<listaSerial.size(); i++){
 				String deviceserial= listaSerial.get(i);
 				Device device = devicedao.retrieveBySerialNumber(deviceserial);
-				String valor = device.getVista().get(nombreUsuario);
+				String valor = (String) device.getVista().get(nombreUsuario);
 				String[] a = valor.split(";");
 				String vistatotal = armarVista(a,a[0],deviceserial);
 				lista.add(vistatotal);
@@ -589,9 +581,10 @@ public class Utils {
 						InternetAddress.parse(destino));
 				message.setSubject("[cDash]: Activacion de Cuenta via Email");
 				message.setText(Mensaje,"ISO-8859-1","html");
-
+				System.out.println("esto es previo al error");
 				Transport transport = session.getTransport("smtp");
-		        transport.connect("smtp.gmail.com", "cdash.service@gmail.com", "cinylean12");
+				System.out.println("este es el error");
+				transport.connect("smtp.gmail.com", "cdash.service@gmail.com", "cinylean12");
 		        transport.sendMessage(message, message.getAllRecipients());
 		        transport.close();
 				

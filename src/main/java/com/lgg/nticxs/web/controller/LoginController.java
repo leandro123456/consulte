@@ -43,13 +43,17 @@ public class LoginController{
 			Model model, 
 			@ModelAttribute("user") String userName,
 			@ModelAttribute("password") String password) {
-
+    	System.out.println("valoes ingresados: "+userName);
+    	System.out.println("valoes ingresados: "+password);
+    	
 		if(!userName.equals("") && !password.equals("")) {
 			model.addAttribute("user", userName);
 			model.addAttribute("password", password);
 		}
 
-		if(incorrectcredentials) { model.addAttribute("incorrectcredentials", true);}
+		if(incorrectcredentials) {
+            model.addAttribute("msg1", "Error ... el usuario o la contraseña son incorrectas. Por favor verifiquelo e intente nuevamente");
+            model.addAttribute("incorrectcredentials", true);}
 		if(incorrecttoken) {model.addAttribute("incorrecttoken", true);}
 
 		return "login";
@@ -232,9 +236,11 @@ public class LoginController{
 	private String createUser(Model model, String email, String role, String pass, String pass2, String firstName, String lastName) {
 		if(pass.equals(pass2)){
 				User user = userdao.retrieveByMail(email);
+				System.out.println("el user es null??: "+ user);
 				if(user== null) {
 					user = new User();
 					try {
+						System.out.println("cifrado de la contraseña");
 						byte[] password = EncryptorPassword.encrypt(pass);
 						user.setPassword(password);
 						List<byte[]> list = new ArrayList<byte[]>();
@@ -243,21 +249,26 @@ public class LoginController{
 						model.addAttribute("msg1", "Error durante la generacion de la contraseña. Por favor vuelva a intentarlo");
 						e.printStackTrace();
 					}
+					System.out.println("este es el nuevo rol: "+ role);
 					user.setRole(role);
 					user.setFirstname(firstName);
 					user.setLastname(lastName);
 					user.setEmail(email);
 					String ran= Utils.generarRandom();
 					user.setPassCuenta(ran);
-					userdao.update(user);
+					userdao.create(user);
 					String cabecera = "<HTML><BODY><br/> <br/>";
 					String body= "<h1>Muchas Gracias por crear su cuenta </h1> <br/> <h3>Para finalizar el proceso de activacion ingrese el siguiente valor en el inicio de Sesion:</h3> <br/> <h3>"+ran+"</h3>";
 					String pie = "<br/> <br/> <footer><p> 2019 - cDash</p></footer></BODY></HTML>";
 					String formulario = String.format("%s%s%s%s", cabecera, body, "<br/> <br/>", pie);
 					Utils.sendMail(formulario, email);
+					model.addAttribute("msg2", "Su usuario se creo exitosamente. Se le envio un mail para finalizar el proceso de activacion. Por favor, verifique su cuenta de correo");
+					return "login";
+				}else{
+					model.addAttribute("msg1", "Error ... El usuario solicitado ya exite... si olvido la contraseña recuperela en con su email");
+					return "register";
 				}
-				model.addAttribute("msg2", "Su usuario se creo exitosamente. Se le envio un mail para finalizar el proceso de activacion. Por favor, verifique su cuenta de correo");
-				return "login";
+				
 		} else {
 			model.addAttribute("msg1", "Error ... Contraseña Incorrecta. Por favor vuelva a itentarlo");
 			return "register";

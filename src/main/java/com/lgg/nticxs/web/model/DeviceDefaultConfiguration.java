@@ -1,94 +1,36 @@
 package com.lgg.nticxs.web.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.lgg.nticxs.web.DAO.Mongo.MongoDBObject;
 
-import org.eclipse.persistence.nosql.annotations.DataFormatType;
-import org.eclipse.persistence.nosql.annotations.Field;
-import org.eclipse.persistence.nosql.annotations.NoSql;
 
-@Entity
-@NoSql(dataFormat=DataFormatType.MAPPED)
-public class DeviceDefaultConfiguration extends DeviceConfiguration {
-	@Id
-	@GeneratedValue
-	@Field(name = "_id")
+public class DeviceDefaultConfiguration extends MongoDBObject {
+
+	private static final long serialVersionUID = -4346222511562336633L;
 	private String id;
-	
-	@Field (name = "name")
 	private String name;
-	
-	@Field (name = "userescuchar")
 	private String userescuchar;
-	
-	@Field (name = "passescuchar")
 	private String passescuchar;
-	
-	@Field (name = "iphostescuchar")
 	private String iphostescuchar;
-	
-	@Field (name = "portescuchar")
 	private String portescuchar;
-	
-	@Field (name = "usesslescuchar")
 	private Boolean usesslescuchar;
-	
-	@Field (name = "topicescuchar")
 	private String topicescuchar;
-	
-	@Field (name = "userescribir")
 	private String userescribir;
-	
-	@Field (name = "passescribir")
 	private String passescribir;
-	
-	@Field (name = "iphostescribir")
 	private String iphostescribir;
-	
-	@Field (name = "portescribir")
 	private String portescribir;
-	
-	@Field (name = "usesslescribir")
 	private Boolean usesslescribir;
-	
-	@Field (name = "topicescribir")
 	private String topicescribir;
-	
-	@Field (name = "userescucharremote")
 	private String userescucharremote;
-	
-	@Field (name = "passescucharremote")
 	private String passescucharremote;
-	
-	@Field (name = "iphostescucharremote")
 	private String iphostescucharremote;
-	
-	@Field (name = "portescucharremote")
 	private String portescucharremote;
-	
-	@Field (name = "usesslescucharremote")
 	private Boolean usesslescucharremote;
-	
-	@Field (name = "topicescucharremote")
 	private String topicescucharremote;
-	
-	@Field (name = "userescribirremote")
 	private String userescribirremote;
-	
-	@Field (name = "passescribirremote")
 	private String passescribirremote;
-	
-	@Field (name = "iphostescribirremote")
 	private String iphostescribirremote;
-	
-	@Field (name = "portescribirremote")
 	private String portescribirremote;
-	
-	@Field (name = "usesslescribirremote")
 	private Boolean usesslescribirremote;
-	
-	@Field (name = "topicescribirremote")
 	private String topicescribirremote;
 
 	
@@ -271,7 +213,6 @@ public class DeviceDefaultConfiguration extends DeviceConfiguration {
 		return topicescuchar;
 	}
 
-	@Override
 	public void setTopicescuchar(String topicescuchar) {
 		this.topicescuchar = topicescuchar;
 	}

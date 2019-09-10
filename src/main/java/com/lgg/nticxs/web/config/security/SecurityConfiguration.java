@@ -42,26 +42,63 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    @Override
 	    public void configure(HttpSecurity http) throws Exception {
 	    	
+//	    	
+//	    	RolesDAO roledao = new RolesDAO();
+//	    	List<Role> listRole = roledao.retrieveAll();
+//	    	String access = "";
+//	    	
+//	    	for (Role role : listRole) {
+//	    		access = access + "hasAuthority('" + role.getNameRole() + "') or ";
+//	    	}
+	    	//http.servletApi();
+//	        http
+//	        .authorizeRequests()
+//	        .antMatchers("/").permitAll()
+//	        .antMatchers("/signup").permitAll()
+//	        .antMatchers("/home/").access(access.substring(0, (access.length() - 4)))
+//	        .and().formLogin().defaultSuccessUrl("/home/").loginPage("/login")
+//            .usernameParameter("user").passwordParameter("password")
+//	        .and().exceptionHandling().accessDeniedPage ("/logoutsession")
+//	        .and().csrf().disable();
+	        
+	        
+	  //funciono
+//	        .authorizeRequests()
+//	            .anyRequest().authenticated()
+//	            .and()
+//	        .formLogin().loginPage("/login")
+//	        .permitAll()
+//	            .and()
+//	        .logout()
+//	        .permitAll();
+	        
 	    	
-	    	RolesDAO roledao = new RolesDAO();
-	    	List<Role> listRole = roledao.retrieveAll();
-	    	String access = "";
-	    	
-	    	for (Role role : listRole) {
-	    		access = access + "hasAuthority('" + role.getNameRole() + "') or ";
-	    	}
-	    	
+//	    	RolesDAO roledao = new RolesDAO();
+//	    	List<Role> listRole = roledao.retrieveAll();
+//	    	String access = "";
+//	    	
+//	    	for (Role role : listRole) {
+//	    		access = access + "hasAuthority('" + role.getNameRole() + "') or ";
+//	    	}
+	        
 	    	http.servletApi();
-	    	
-	        http.authorizeRequests()
-	        .antMatchers("/").permitAll()
-	        .antMatchers("/signup").permitAll()
-	        .antMatchers("/home/").access(access.substring(0, (access.length() - 4)))
-	        .and().formLogin().defaultSuccessUrl("/home/").loginPage("/login")
-            .usernameParameter("user").passwordParameter("password")
-	        .and().exceptionHandling().accessDeniedPage ("/logoutsession")
-	        .and().csrf().disable();
+			http.authorizeRequests()
+				.antMatchers("/").permitAll()
+				.antMatchers("/signup").permitAll()
+		        .antMatchers("/home/").permitAll()
+		        .and().formLogin().defaultSuccessUrl("/home/").loginPage("/login")
+	            .usernameParameter("user").passwordParameter("password")
+		        .and().exceptionHandling().accessDeniedPage ("/logoutsession")
+		        .and().csrf().disable();
    }
+	    
+	    @Autowired
+	    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+	        auth
+	            .inMemoryAuthentication()
+	                .withUser("user").password("password").roles("USER").and()
+	                .withUser("user").password("password").roles("USER", "ADMIN");
+	    }
 	
 
 	    @Bean

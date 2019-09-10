@@ -315,7 +315,7 @@ public class DeviceController {
 			device.getAdmins().add(administrador);
 			
 			//agrego la misma vista que el dueño en el nuevo usuario
-			String vistaprincipal = device.getVista().get(device.getUserowner());
+			String vistaprincipal = (String) device.getVista().get(device.getUserowner());
 			device.getVista().put(administrador, vistaprincipal);
 			devicedao.update(device);
 			//actualizo el usuario
@@ -347,20 +347,22 @@ public class DeviceController {
 	}
 
 	private DeviceConfiguration establishTopic(DeviceDefaultConfiguration deviceconfiguration, String serialnumber) {
-		System.out.println("se setearon los valores de topicos con el serial number: "+ serialnumber);
-		System.out.println("inicial: "+deviceconfiguration.getTopicescribir());
-		System.out.println("inicial: "+deviceconfiguration.getTopicescribirremote());
-		System.out.println("inicial: "+deviceconfiguration.getTopicescuchar());
-		System.out.println("inicial: "+deviceconfiguration.getTopicescucharremote());
+//		System.out.println("se setearon los valores de topicos con el serial number: "+ serialnumber);
+//		System.out.println("inicial: "+deviceconfiguration.getTopicescribir());
+//		System.out.println("inicial: "+deviceconfiguration.getTopicescribirremote());
+//		System.out.println("inicial: "+deviceconfiguration.getTopicescuchar());
+//		System.out.println("inicial: "+deviceconfiguration.getTopicescucharremote());
 		deviceconfiguration.setTopicescribir(deviceconfiguration.getTopicescribir().replace("serial", serialnumber));
 		deviceconfiguration.setTopicescribirremote(deviceconfiguration.getTopicescribirremote().replace("serial", serialnumber));
 		deviceconfiguration.setTopicescuchar(deviceconfiguration.getTopicescuchar().replace("serial", serialnumber));
 		deviceconfiguration.setTopicescucharremote(deviceconfiguration.getTopicescucharremote().replace("serial", serialnumber));	
-		System.out.println("valores de los topicos: "+ deviceconfiguration.getTopicescribir());
-		System.out.println("valores de los topicos: "+ deviceconfiguration.getTopicescribirremote());
-		System.out.println("valores de los topicos: "+ deviceconfiguration.getTopicescuchar());
-		System.out.println("valores de los topicos: "+ deviceconfiguration.getTopicescucharremote());
-		return deviceconfiguration;
+//		System.out.println("valores de los topicos: "+ deviceconfiguration.getTopicescribir());
+//		System.out.println("valores de los topicos: "+ deviceconfiguration.getTopicescribirremote());
+//		System.out.println("valores de los topicos: "+ deviceconfiguration.getTopicescuchar());
+//		System.out.println("valores de los topicos: "+ deviceconfiguration.getTopicescucharremote());
+		DeviceConfiguration deviceconf = new DeviceConfiguration(deviceconfiguration); 
+		
+		return deviceconf;
 	}
 
 	private void CargarDevices(Model model, HttpServletRequest request) {

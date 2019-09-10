@@ -3,6 +3,10 @@ package com.lgg.nticxs.web.model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.bson.codecs.pojo.annotations.BsonProperty;
+
 import com.lgg.nticxs.web.DAO.Mongo.MongoDBObject;
 
 
@@ -12,8 +16,10 @@ public class Device extends MongoDBObject{
 	static final public String TERMOMETRO = "termometro";
 	static final public String SONOFF = "sonoff";
 	static final public String ALARMA = "alarma";
-
+	
+	@BsonProperty("id")
 	private String id;
+	
 	private String name;
 	private String userowner;
 	private String serialnumber;
@@ -30,7 +36,7 @@ public class Device extends MongoDBObject{
 	private List<DeviceAlarm> alarms;
 	private Boolean usedefaultbrocker;
 	private List<DeviceConfiguration> deviceconfiguration;
-	private HashMap<String, String> vista;
+	private Map<String,String> vista;
 	private List<String> users;
 	private List<String> admins;
 
@@ -141,7 +147,7 @@ public class Device extends MongoDBObject{
 		this.description = description;
 	}
 
-	public HashMap<String, String> getVista() {
+	public Map getVista() {
 		return vista;
 	}
 

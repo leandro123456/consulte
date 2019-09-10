@@ -1,34 +1,32 @@
 package com.lgg.nticxs.web.DAO;
 
+import static com.mongodb.client.model.Filters.eq;
+
 import java.util.List;
 
-import javax.persistence.Query;
+import org.bson.conversions.Bson;
 
-import com.lgg.nticxs.web.jpa.JPADAO;
+import com.lgg.nticxs.web.DAO.Mongo.MongoDBClient;
 import com.lgg.nticxs.web.model.Role;
 
-public class RolesDAO extends JPADAO<Role>{
+public class RolesDAO extends MongoDBClient<Role>{
 
-	@SuppressWarnings("unchecked")
+	
+	public RolesDAO() {
+		super(Role.class);
+	}
+
 	public List<Role> retrieveAll() {
-		String sql = "SELECT r FROM Role r";
-		Query query = getEntityManager().createQuery(sql);
-		List<Role> list = query.getResultList();
-		if (list != null && list.size() > 0) {
-			return list;
-		}
-		return null;
+		return this.retrieveAll();
 	}
 	
-	@SuppressWarnings("unchecked")
 	public Role retrieveByNameRole(String nameRole) {
-		String sql = "SELECT r FROM Role r WHERE r.nameRole = :nameRole";
-		Query query = getEntityManager().createQuery(sql);
-		query.setParameter("nameRole", nameRole);
-		List<Role> list = query.getResultList();
-		if (list != null && list.size() > 0) {
-			return list.get(0);
-		}
-		return null;
+		Bson filter = eq("nameRole", nameRole);
+		return this.retrieveByFilter(filter);
+	}
+
+	@Override
+	protected String getDatabaseName() {
+		return "MQTT-Manager";
 	}
 }

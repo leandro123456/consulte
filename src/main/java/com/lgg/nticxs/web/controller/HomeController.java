@@ -20,19 +20,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lgg.nticxs.web.utils.Utils;
-import com.lgg.nticxs.web.DAO.AdminDAO;
 import com.lgg.nticxs.web.DAO.UserDAO;
 import com.lgg.nticxs.web.DAO.DeviceDAO;
 
 import com.lgg.nticxs.web.model.User;
-import com.lgg.nticxs.web.model.Asistencia;
 import com.lgg.nticxs.web.model.Device;
 
 
 @Controller
 public class HomeController {
 	UserDAO userdao = new UserDAO();
-	AdminDAO admindao = new AdminDAO();
 	private DeviceDAO devicedao = new DeviceDAO();
 	private List<String> deviceAsociadoAlarma = new ArrayList<>();
 	private List<String> deviceAsociadoTermomtro = new ArrayList<>();
@@ -80,6 +77,7 @@ public class HomeController {
 		}
 		String nombre = request.getUserPrincipal().getName();
 		User user = userdao.retrieveByMail(nombre);
+		System.out.println("USUARIO CONSEGUIDO +++++++++++++++++++++"+user);
 		if(user!= null && !user.getCuenta_iniciada()) {
 			System.out.println("cuenta no iniciada validarla con el mensaje enviado por mail");
 			model.addAttribute("user", user.getEmail());
@@ -126,15 +124,30 @@ public class HomeController {
 	@PostMapping("validate")
 	public String validateMail(Model model,@RequestParam(name="code") String code,
 			@RequestParam(name="user") String user) {
+		System.out.println("este es el usuario que busca: " + user);
+		System.out.println("este es el codigo que busca: "+ code);
+		try {
+			System.out.println("entro en el TRY");
 		User usuario = userdao.retrieveByMail(user);
+		System.out.println("ES IGUAL: "+ usuario.getPassCuenta().equals(code));
+		System.out.println("el usuario es null: "+ usuario);
 		if(usuario!= null && usuario.getPassCuenta().equals(code)) {
+			System.out.println("entro en el if");
 			usuario.setCuenta_iniciada(true);
 			userdao.update(usuario);
+			System.out.println("termino de esperar+++++++++++++++++++++++++");
 			return "redirect:/home";
 		}else {
+			System.out.println("entro en el else");
 			model.addAttribute("user", user);
 			model.addAttribute("msg1", "The entered code is incorrect, try again");
 			return "validate";
+		}
+		
+		} catch (Exception e) {
+			System.out.println("ES UNA VERGA!!!!!!!!!!!!!!!1111");
+			e.printStackTrace();
+			return null;
 		}
 	}
 	
@@ -144,26 +157,6 @@ public class HomeController {
 			return "validate";
 	}
 		
-
-
-
-	private Integer promedioAsistencia(List<Asistencia> asistencia) {
-		Integer asistenciaTotal = 0;
-		if(asistencia!= null) {
-			if(Asistencia.AUSENTE_JUSTIFICADO != null) {
-				for(Asistencia asist : asistencia) {
-					if(asist.getTipo().equals(Asistencia.AUSENTE) || asist.getTipo().equals(Asistencia.AUSENTE_JUSTIFICADO))
-						asistenciaTotal+=1;
-				}
-			}else {
-				for(Asistencia asist : asistencia) {
-					if(asist.getTipo().equals(Asistencia.PRESENTE))
-						asistenciaTotal+=1;
-				}
-			}
-		}
-		return asistenciaTotal;
-	}
 
 
 	

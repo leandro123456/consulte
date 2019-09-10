@@ -1,30 +1,15 @@
 package org.junit;
 
-import com.lgg.nticxs.web.DAO.UserDAO;
-import com.lgg.nticxs.web.DAO.VistaDAO;
-import com.lgg.nticxs.web.DAO.Mongo.MongoDBRemove;
-
-import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.json.JSONObject;
-
-import com.lgg.nticxs.web.DAO.DeviceDAO;
 import com.lgg.nticxs.web.DAO.DeviceDefaultConfigurationDAO;
-import com.lgg.nticxs.web.model.User;
+import com.lgg.nticxs.web.DAO.VistaDAO;
 import com.lgg.nticxs.web.model.Vista;
 import com.lgg.nticxs.web.model.simple.SimpleTimerString;
-import com.lgg.nticxs.web.model.Ciclolectivo;
-import com.lgg.nticxs.web.model.Device;
-import com.lgg.nticxs.web.model.DeviceConfiguration;
 import com.lgg.nticxs.web.model.DeviceDefaultConfiguration;
-import com.lgg.nticxs.web.model.Materia;
-import com.lgg.nticxs.web.model.Materia.materia;
+
 
 public class Test1 {
 	
@@ -171,16 +156,16 @@ public class Test1 {
 //		System.out.println("termino vista horizontal");
 
 		
-//		inicio= "<div class=\"col-12\"> <div class=\"card shadow mb-4\"><div class=\"card-header py-3\"><h6 class=\"m-0 font-weight-bold text-primary\">Sensor de Temperatura Y Humedad</h6></div>";
-//		humedad= "<div class=\"card border-left-primary shadow h-20 py-2\"> <div class=\"card-body\"> <div class=\"row no-gutters align-items-center\"> <div class=\"col-12\"><div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\">Humedad</div> </div><div class=\"col-12\" id=\"chartHum\"> <i class=\"fas fa-calendar fa-2x text-gray-300\"></i> </div> </div> </div></div>";
-//		String indiceTemp="<div class=\"card border-left-primary shadow h-70 py-2\"><div class=\"card-body\"><div class=\"row no-gutters align-items-center\"><div class=\"col-12\"><div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\">Temperatura</div></div>";
-//		tempC= "<div class=\"col-6\" id=\"chartTempC\"></div>";
-//		sensC= "<div class=\"col-6\" id=\"chartHiC\"></div>";
-//		tempF= "<div class=\"col-6\" id=\"chartTempF\"></div>";
-//		sensF= "<div class=\"col-6\" id=\"chartHiF\"></div>";
-//		String finTemp="</div></div></div>";
-//		fin= "</div></div>";
-//		
+		inicio= "<div class=\"col-12\"> <div class=\"card shadow mb-4\"><div class=\"card-header py-3\"><h6 class=\"m-0 font-weight-bold text-primary\">Sensor de Temperatura Y Humedad</h6></div>";
+		humedad= "<div class=\"card border-left-primary shadow h-20 py-2\"> <div class=\"card-body\"> <div class=\"row no-gutters align-items-center\"> <div class=\"col-12\"><div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\">Humedad</div> </div><div class=\"col-12\" id=\"chartHum\"> <i class=\"fas fa-calendar fa-2x text-gray-300\"></i> </div> </div> </div></div>";
+		String indiceTemp="<div class=\"card border-left-primary shadow h-70 py-2\"><div class=\"card-body\"><div class=\"row no-gutters align-items-center\"><div class=\"col-12\"><div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\">Temperatura</div></div>";
+		tempC= "<div class=\"col-6\" id=\"chartTempC\"></div>";
+		sensC= "<div class=\"col-6\" id=\"chartHiC\"></div>";
+		tempF= "<div class=\"col-6\" id=\"chartTempF\"></div>";
+		sensF= "<div class=\"col-6\" id=\"chartHiF\"></div>";
+		String finTemp="</div></div></div>";
+		fin= "</div></div>";
+		
 //		vistadao = new VistaDAO();
 //		vista= new Vista();
 //		vista.setName("temperatura_reloj");
@@ -492,16 +477,16 @@ public class Test1 {
 				"					</div>" + 
 				"				</div>";
 		
-		vistadao = new VistaDAO();
-		vista= new Vista();
-		vista.setName("alarma");
-		vista.setInicio(inicio);
-		vista.setFin(fin);
-		elem= new HashMap<>();
-		elem.put("alarmabody",alarmabody);
-		vista.setContenido(elem);
-		vistadao.create(vista);
-		System.out.println("termino vista de alarma");
+//		vistadao = new VistaDAO();
+//		vista= new Vista();
+//		vista.setName("alarma");
+//		vista.setInicio(inicio);
+//		vista.setFin(fin);
+//		elem= new HashMap<>();
+//		elem.put("alarmabody",alarmabody);
+//		vista.setContenido(elem);
+//		vistadao.create(vista);
+//		System.out.println("termino vista de alarma");
 	}
 	
 }

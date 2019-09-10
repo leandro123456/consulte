@@ -1,56 +1,43 @@
 package com.lgg.nticxs.web.DAO;
 
+
+import static com.mongodb.client.model.Filters.eq;
+
 import java.util.List;
 
-import javax.persistence.Query;
+import org.bson.conversions.Bson;
 
-import com.lgg.nticxs.web.jpa.JPADAO;
+import com.lgg.nticxs.web.DAO.Mongo.MongoDBClient;
 import com.lgg.nticxs.web.model.User;
 
-public class UserDAO extends JPADAO<User>{
+public class UserDAO extends MongoDBClient<User>{
 
-	@SuppressWarnings("unchecked")
+	
+	
+	public UserDAO() {
+		super(User.class);
+	}
+
 	public List<User> retrieveAll() {
-		String sql = "SELECT u FROM User u";
-		Query query = getEntityManager().createQuery(sql);
-		List<User> list = query.getResultList();
-		if (list != null && list.size() > 0) {
-			return list;
-		}
-		return null;
+		return this.retrieveAll();
 	}
 	
-	@SuppressWarnings("unchecked")
-	public User retrieveById(String userId) {
-		String sql = "SELECT u FROM User u WHERE u.id = :id";
-		Query query = getEntityManager().createQuery(sql);
-		query.setParameter("id", userId);
-		List<User> list = query.getResultList();
-		if (list != null && list.size() > 0) {
-			return list.get(0);
-		}
-		return null;
+	public User retrieveById(String deviceId) {
+		Bson filter = eq("id", deviceId);
+		return this.retrieveByFilter(filter);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public User retrieveByMail(String email) {
-		String sql = "SELECT u FROM User u WHERE u.email = :email and u.delete=false";
-		Query query = getEntityManager().createQuery(sql);
-		query.setParameter("email", email);
-		List<User> list = query.getResultList();
-		if (list != null && list.size() > 0) {
-			return list.get(0);
-		}
-		return null;
+		Bson filter = eq("email", email);
+		return this.retrieveByFilter(filter);
 	}
 	
-	@SuppressWarnings("unchecked")
-    public void deleteUser(String id) {
-		String sql = "SELECT u FROM User u WHERE u.id = :id";
-		Query query = getEntityManager().createQuery(sql);
-		query.setParameter("id", id);
-		List<User> list = query.getResultList();
-		list.get(0).setDelete(true);
-		update(list.get(0));
+    public void deleteUser(User user) {
+		this.delete(user);
+	}
+	
+	@Override
+	protected String getDatabaseName() {
+		return "MQTT-Manager";
 	}
 }

@@ -37,7 +37,7 @@ public class DashboardController {
 			if(device!= null){
 				mymap = new ArrayList<>();
 				mymap.add(device.getUserRole(usermail));
-				mymap.add(device.getVista().get(usermail));
+				mymap.add((String) device.getVista().get(usermail));
 				json.put(deviceserial, mymap);
 			}
 		}

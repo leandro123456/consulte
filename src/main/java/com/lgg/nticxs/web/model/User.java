@@ -3,53 +3,29 @@ package com.lgg.nticxs.web.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.bson.codecs.pojo.annotations.BsonProperty;
 
-import org.eclipse.persistence.nosql.annotations.DataFormatType;
-import org.eclipse.persistence.nosql.annotations.Field;
-import org.eclipse.persistence.nosql.annotations.NoSql;
+import com.lgg.nticxs.web.DAO.Mongo.MongoDBObject;
 
-@Entity
-@NoSql(dataFormat=DataFormatType.MAPPED)
-public class User{
-     static final public String ROLE_SUPERADMIN = "SUPERADMIN";
-     static final public String ROLE_ADMIN = "ADMIN";
-     static final public String ROLE_USER = "USER";
-     
-	@Id
-	@GeneratedValue
-	@Field(name = "_id")
+
+public class User extends MongoDBObject{
+    
+	private static final long serialVersionUID = -4346222511562336633L;
+	static final public String ROLE_SUPERADMIN = "SUPERADMIN";
+    static final public String ROLE_ADMIN = "ADMIN";
+    static final public String ROLE_USER = "USER";
+    
+    @BsonProperty("id")
 	private String id;
-	
-	@Field (name = "firstname")
+    
 	private String firstname;
-	
-	@Field (name = "lastname")
 	private String lastname;
-	
-	@Field (name = "password")
 	private byte[] password;
-
-	@Field (name = "delete")
 	private Boolean delete;
-	
-	@Field (name = "email")
 	private String email;
-	
-	@Field (name = "passCuenta")
 	private String passCuenta;
-		
-	@Field (name = "cuenta_iniciada")
 	private Boolean cuenta_iniciada;
-
-	@Field (name = "role")
 	private String role;
-	
-	@ElementCollection 
-	@Field(name="deviceserialnumber")
 	private List<String> deviceserialnumber;
 	
 	public String getEmail() {

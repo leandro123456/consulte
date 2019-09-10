@@ -1,23 +1,12 @@
 package com.lgg.nticxs.web.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.lgg.nticxs.web.DAO.Mongo.MongoDBObject;
 
-import org.eclipse.persistence.nosql.annotations.DataFormatType;
-import org.eclipse.persistence.nosql.annotations.Field;
-import org.eclipse.persistence.nosql.annotations.NoSql;
-
-@Entity
-@NoSql(dataFormat=DataFormatType.MAPPED)
-public class Role {
+public class Role extends MongoDBObject{
 	
-	@Id
-	@GeneratedValue
-	@Field(name = "_id")
+	private static final long serialVersionUID = -4346222511562336633L;
+
 	private String id;
-	
-	@Field (name = "nameRole")
 	private String nameRole;
 
 	public String getId() {
