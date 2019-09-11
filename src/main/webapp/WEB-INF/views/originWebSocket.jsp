@@ -272,11 +272,11 @@
 /*       esto es del archivo */
 @font-face {
   font-family: 'dsc_icons';
-  src:  url('/mqttmanagment/resources/fontsalarma/dsc_icons.eot?o9xp94');
-  src:  url('/mqttmanagment/resources/fontsalarma/dsc_icons.eot?o9xp94#iefix') format('embedded-opentype'),
-    url('/mqttmanagment/resources/fontsalarma/dsc_icons.ttf?o9xp94') format('truetype'),
-    url('/mqttmanagment/resources/fontsalarma/dsc_icons.woff?o9xp94') format('woff'),
-    url('/mqttmanagment/resources/fontsalarma/dsc_icons.svg?o9xp94#dsc_icons') format('svg');
+  src:  url('/resources/fontsalarma/dsc_icons.eot?o9xp94');
+  src:  url('/resources/fontsalarma/dsc_icons.eot?o9xp94#iefix') format('embedded-opentype'),
+    url('/resources/fontsalarma/dsc_icons.ttf?o9xp94') format('truetype'),
+    url('/resources/fontsalarma/dsc_icons.woff?o9xp94') format('woff'),
+    url('/resources/fontsalarma/dsc_icons.svg?o9xp94#dsc_icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -522,7 +522,7 @@ i.dsc-icon {
 <!-- alarma -->
 			</div>
 			<div class="fixed">
-				<a href="/mqttmanagment/home/newdevice"> <i
+				<a href="/home/newdevice"> <i
 					class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
 				</a>
 			</div>
@@ -540,7 +540,7 @@ i.dsc-icon {
 </body>
 
 <script type="text/javascript">
-var socket = new WebSocket("ws://localhost:80/mqttmanagment/home/websocket/progress");
+var socket = new WebSocket("ws://localhost:80/home/websocket/progress");
 socket.onmessage = onMessage;
 
 function onMessage(event) {

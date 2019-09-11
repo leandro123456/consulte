@@ -593,7 +593,7 @@
 	  		  var button = $(event.relatedTarget)
 		  	  var recipient = button.data('whatever') 
 	  		  var serial=document.getElementById('serialnumber').value;
-		  	  var action= "/mqttmanagment/home/create/"+serial;
+		  	  var action= "/home/create/"+serial;
 	  		  document.getElementById("form_id").action = action;
 	  		  
 	  		  

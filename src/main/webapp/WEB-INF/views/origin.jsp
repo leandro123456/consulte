@@ -72,7 +72,7 @@
 	          </c:forEach>
 			</div>
 			<div class="fixed">
-				<a href="/mqttmanagment/home/newdevice"> <i
+				<a href="/home/newdevice"> <i
 					class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
 				</a>
 			</div>

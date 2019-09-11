@@ -17,9 +17,6 @@ public class Device extends MongoDBObject{
 	static final public String SONOFF = "sonoff";
 	static final public String ALARMA = "alarma";
 	
-	@BsonProperty("id")
-	private String id;
-	
 	private String name;
 	private String userowner;
 	private String serialnumber;
@@ -73,14 +70,6 @@ public class Device extends MongoDBObject{
 
 	public void setDeviceconfiguration(List<DeviceConfiguration> deviceconfiguration) {
 		this.deviceconfiguration = deviceconfiguration;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public String getName() {

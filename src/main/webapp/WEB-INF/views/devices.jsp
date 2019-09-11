@@ -116,10 +116,10 @@
 	                      </c:choose>
 	                      </td>
 	                      <td>
-	                      	<a href="/mqttmanagment/home/info/${devices.serial}">
+	                      	<a href="/home/info/${devices.serial}">
 					          <span class="glyphicon glyphicon-info-sign"></span>
 					        </a>
-					        <a href="/mqttmanagment/home/remove/${devices.serial}" data-toggle="modal" data-target="#deleteModal">
+					        <a href="/home/remove/${devices.serial}" data-toggle="modal" data-target="#deleteModal">
 	                      	 <span class="glyphicon glyphicon-trash"></span>
 	                      	</a>
 	                      </td>
@@ -152,7 +152,7 @@
         <div class="modal-body">¿Esta seguro de borrar el dispositivo?</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          <a class="btn btn-primary" href="/mqttmanagment/home/remove/">Borrar</a>
+          <a class="btn btn-primary" href="/home/remove/">Borrar</a>
         </div>
       </div>
     </div>

@@ -126,7 +126,7 @@
 	                      </c:choose>
 	                      </td>
 	                      <td>
-	                      	<a href="/mqttmanagment/home/info/${devices.serial}">
+	                      	<a href="/home/info/${devices.serial}">
 					          <i class="fa fa-info" aria-hidden="true"></i>
 					        </a>
 					        <a data-whatever="${devices.serial}" data-toggle="modal" data-target="#deleteModal">
@@ -181,7 +181,7 @@
 	  		  var button = $(event.relatedTarget)
 		  	  var recipient = button.data('whatever') 
 		  	  // var modal = $(this) modal.find('.modal-body input').val(recipient);
-	  		  var action= "/mqttmanagment/home/remove/"+recipient;
+	  		  var action= "/home/remove/"+recipient;
 	  		  document.getElementById("form_id").action = action;
 	  	})
   	</script>

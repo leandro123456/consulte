@@ -15,7 +15,7 @@ public class DeviceDefaultConfigurationDAO extends MongoDBClient<DeviceDefaultCo
 		super(DeviceDefaultConfiguration.class);
 	}
 	
-	public List<DeviceDefaultConfiguration> retrieveAll() {
+	public List<DeviceDefaultConfiguration> retrieveAllConf() {
 		return this.retrieveAll();
 	}
 	

@@ -142,7 +142,7 @@
 	  		  var button = $(event.relatedTarget)
 		  	  var recipient = button.data('whatever') 
 		  	  // var modal = $(this) modal.find('.modal-body input').val(recipient);
-	  		  var action= "/mqttmanagment/home/remove/"+recipient;
+	  		  var action= "/home/remove/"+recipient;
 	  		  document.getElementById("form_id").action = action;
 	  	})
   	</script>

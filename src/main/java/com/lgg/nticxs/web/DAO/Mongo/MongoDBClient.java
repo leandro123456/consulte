@@ -69,7 +69,7 @@ public abstract class MongoDBClient<T extends MongoDBObject> extends MongoDBProp
 			MongoDatabase mongoDatabase = mongoClient.getDatabase(getDatabaseName());
 			mongoDatabase = mongoDatabase.withCodecRegistry(this.pojoCodecRegistry);
 			MongoCollection<T> mongoCollection = mongoDatabase.getCollection(this.collectionName, this.classType);
-			
+			System.out.println("este es el objectId:               "+object.getId());
 			mongoCollection.updateOne(eq("_id", object.getId()), parseToDocumentUpdate(object));
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -270,8 +270,11 @@ public abstract class MongoDBClient<T extends MongoDBObject> extends MongoDBProp
 	@SuppressWarnings("unchecked")
 	private Document parseToDocumentUpdate(T object) {
 		DBObject dbObject = this.morphiaMapper.toDBObject(object);
+		System.out.println("este es el eelemntoooooo: "+ dbObject);
 		Document documentObject = new Document(dbObject.toMap());
 		if (documentObject.containsKey("className")) documentObject.remove("className");
+		if (documentObject.containsKey("id")) documentObject.remove("id");
+		if (documentObject.containsKey("_id")) documentObject.remove("_id");
 		String jsonDocument = documentObject.toJson();
 		
 		String jsonUpdate = "{ $set: " + jsonDocument + " }";

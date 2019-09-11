@@ -287,10 +287,10 @@
                             	  	document.getElementById("passescribirremote1").value = document.getElementById("passescribirremote").value;
                         	  
                         	  
-                        	  var action= "/mqttmanagment/home/debugview/"+mail+"/save";
+                        	  var action= "/home/debugview/"+mail+"/save";
                           }
                          if(recipient =="setdefault"){
-                            var action= "/mqttmanagment/home/debugview/"+mail+ "/defaultconfiguration";
+                            var action= "/home/debugview/"+mail+ "/defaultconfiguration";
                           }
                           document.getElementById("form_id").action = action;
                 })

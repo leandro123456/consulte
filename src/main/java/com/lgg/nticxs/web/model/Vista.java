@@ -16,9 +16,6 @@ public class Vista extends MongoDBObject {
 	static final public String SONOFF_DOS = "sonofftwo";
 	static final public String ALARMA = "alarma";
 	
-	@BsonProperty("id")
-	private String id;
-	
 	private String name;
 	private String inicio;
 	private String fin;
@@ -27,13 +24,6 @@ public class Vista extends MongoDBObject {
 	public Vista() {
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.codecs.pojo.annotations.BsonProperty;
+import org.bson.types.ObjectId;
 
 import com.lgg.nticxs.web.DAO.Mongo.MongoDBObject;
 
@@ -15,9 +16,7 @@ public class User extends MongoDBObject{
     static final public String ROLE_ADMIN = "ADMIN";
     static final public String ROLE_USER = "USER";
     
-    @BsonProperty("id")
-	private String id;
-    
+
 	private String firstname;
 	private String lastname;
 	private byte[] password;
@@ -52,15 +51,6 @@ public class User extends MongoDBObject{
 		this.role = role;
 	}
 
-
-	public String getId() {
-		return id;
-	}
-
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 
 	public String getFirstname() {

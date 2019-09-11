@@ -19,6 +19,7 @@ import com.lgg.nticxs.web.DAO.DeviceDAO;
 import com.lgg.nticxs.web.DAO.DeviceDefaultConfigurationDAO;
 import com.lgg.nticxs.web.model.User;
 import com.lgg.nticxs.web.model.Vista;
+import com.lgg.nticxs.web.model.simple.SimpleDefaultConfiguration;
 import com.lgg.nticxs.web.model.simple.SimpleTimerString;
 import com.lgg.nticxs.web.utils.Utils;
 import com.lgg.nticxs.web.model.Device;
@@ -93,8 +94,7 @@ public class TestUtilities {
 	public void createUser(){
 		UserDAO userdao =new UserDAO();
 		User user = new User();
-		user.setCuenta_iniciada(false);
-		user.setEmail("jaha@gmail.com");
+		user.setEmail("leandrogabrielguzman@gmail.com");
 		user.setFirstname("leo");
 		user.setDelete(false);
 		List<String> listadeequipos = new ArrayList<>();
@@ -111,10 +111,29 @@ public class TestUtilities {
 	
 	
 	@Test
+	public void searchDefaultConfig(){
+		DeviceDefaultConfigurationDAO deviceconfigdao = new DeviceDefaultConfigurationDAO();
+		System.out.println("EMPEZO");
+		DeviceDefaultConfiguration elem =deviceconfigdao.retrieveByName("defaultalarma");
+		System.out.println("elemento: "+ elem);
+		SimpleDefaultConfiguration confi2 = new SimpleDefaultConfiguration(elem);
+		SimpleDefaultConfiguration confi = new SimpleDefaultConfiguration(deviceconfigdao.retrieveByName("default"));
+		System.out.println("va: "+ confi);
+		System.out.println("TERMINO");
+	}
+	
+	//@Test
 	public void searchUsuario(){
 		UserDAO userdao = new UserDAO();
+		//User usuario = userdao.retrieveByMail("leandrogabrielguzman@gmail.com");
 		User usuario = userdao.retrieveByMail("leandrogabrielguzman@gmail.com");
 		System.out.println("nombre			"+usuario.getFirstname());;
+		usuario.setFirstname("leandrogdsadasdasdasdost!!!!!");
+		System.out.println("este es el mail: "+ usuario.getEmail());
+		System.out.println("este es el ID: "+ usuario.getId());
+		userdao.update(usuario);
+		System.out.println("termino");
+		
 	}
 	
 	//@Test

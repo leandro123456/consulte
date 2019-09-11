@@ -6,7 +6,6 @@ import com.lgg.nticxs.web.DAO.Mongo.MongoDBObject;
 public class DeviceDefaultConfiguration extends MongoDBObject {
 
 	private static final long serialVersionUID = -4346222511562336633L;
-	private String id;
 	private String name;
 	private String userescuchar;
 	private String passescuchar;
