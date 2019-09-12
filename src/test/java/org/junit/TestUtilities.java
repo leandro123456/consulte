@@ -23,8 +23,10 @@ import com.lgg.nticxs.web.model.simple.SimpleDefaultConfiguration;
 import com.lgg.nticxs.web.model.simple.SimpleTimerString;
 import com.lgg.nticxs.web.utils.Utils;
 import com.lgg.nticxs.web.model.Device;
+import com.lgg.nticxs.web.model.DeviceAlarm;
 import com.lgg.nticxs.web.model.DeviceConfiguration;
 import com.lgg.nticxs.web.model.DeviceDefaultConfiguration;
+import com.lgg.nticxs.web.model.DeviceNotification;
 
 
 public class TestUtilities {
@@ -121,11 +123,19 @@ public class TestUtilities {
 		System.out.println("TERMINO");
 	}
 	
-	@Test
+	//s@Test
+	public void searchDevices(){
+		DeviceDAO devdao = new DeviceDAO();
+		Device devi = devdao.retrieveBySerialNumber("111FFF");
+		
+		System.out.println("termino: " + devi);
+	}
+	
+	//@Test
 	public void searchDefaultConfig(){
 		DeviceDefaultConfigurationDAO deviceconfigdao = new DeviceDefaultConfigurationDAO();
 		System.out.println("EMPEZO");
-		DeviceDefaultConfiguration elem =deviceconfigdao.retrieveByName("default-alarma");
+		DeviceDefaultConfiguration elem =deviceconfigdao.retrieveByName("defaultalarma");
 		System.out.println("elemento: "+ elem);
 		SimpleDefaultConfiguration confi2 = new SimpleDefaultConfiguration(elem);
 		SimpleDefaultConfiguration confi = new SimpleDefaultConfiguration(deviceconfigdao.retrieveByName("default"));
@@ -224,8 +234,8 @@ public class TestUtilities {
 				
 				String vistareloj="temperatura_reloj;Hum;indiceTemp;tempC;sensC;finTemp";
 				
-				device.getVista().put(device.getUserowner(), vistareloj);
-				device.getVista().put("pepe@test", indicadores2);			
+//				device.getVista().put(device.getUserowner(), vistareloj);
+//				device.getVista().put("pepe@test", indicadores2);			
 				devicedao.update(device);
 			}
 			
@@ -238,6 +248,69 @@ public class TestUtilities {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Test
+	public void createDevice(){
+		DeviceDAO devdao = new DeviceDAO();
+		if(devdao.retrieveBySerialNumber("111122222222") ==null)
+			System.out.println("no existe");
+		else
+			System.out.println("SI EXISTE");
+			
+		Device dev = new Device();
+		dev.setName("leandrogabrielguzman@gmail.com");
+		dev.setDelete(false);
+		dev.setSerialnumber("111122222222");
+		dev.setDescription("descripciont device");
+		dev.setUserowner("leandrogabrielguzman@gmail.com");
+		
+		ArrayList<String> admins = new ArrayList<>();
+		admins.add("juan");
+		admins.add("pepe");
+		//dev.setAdmins(admins);	
+		ArrayList<DeviceAlarm> alarms =new ArrayList<>();
+		DeviceAlarm devalarm = new DeviceAlarm();
+		devalarm.setContent("noss");
+		devalarm.setName("nombre");
+		devalarm.setDescription("descripcion");
+		devalarm.setTime("hora");
+		alarms.add(devalarm);
+		DeviceAlarm devalarm1 = new DeviceAlarm();
+		devalarm1.setContent("snoss1");
+		devalarm1.setName("nombre1");
+		devalarm1.setDescription("descripcion1");
+		devalarm1.setTime("hora1");
+		alarms.add(devalarm1);
+		//dev.setAlarms(alarms);
+		
+		DeviceDefaultConfigurationDAO deviceconfigdao = new DeviceDefaultConfigurationDAO();
+		DeviceDefaultConfiguration deviceconfiguration1 =deviceconfigdao.retrieveByName("defaultalarma");
+		DeviceConfiguration deviceconfiguration2 = new DeviceConfiguration(deviceconfiguration1);
+		ArrayList<DeviceConfiguration> deviceconfiguration = new ArrayList<>();
+		deviceconfiguration.add(deviceconfiguration2);
+		dev.setDeviceconfiguration(deviceconfiguration);
+		
+		DeviceNotification lastnotification = new DeviceNotification();
+		lastnotification.setContent("content");
+		lastnotification.setDescription("description");
+		lastnotification.setName("name");
+		lastnotification.setTime("time");
+		dev.setLastnotification(lastnotification);
+		
+		dev.setPassword("password".getBytes());
+		
+		HashMap<String, String> vistaPorUsuario = new HashMap<>();
+		vistaPorUsuario.put("pepe", Vista.SONOFF+";sonoffbody");
+		vistaPorUsuario.put("juan", "vaor;valor");
+		dev.setVista(vistaPorUsuario);
+		
+		dev.setVista(vistaPorUsuario);
+		
+		dev.setUsers(admins);
+		
+		devdao.create(dev);
+		System.out.println("termino");
 	}
 	
 	//@Test
@@ -261,7 +334,7 @@ public class TestUtilities {
 		//String vista = "<div class=\"col-lg-6 mb-4\"><div class=\"card shadow mb-4\"><div class=\"card-header py-3\"><h6 class=\"m-0 font-weight-bold text-primary\">Sensor de Temperatura Y Humedad</h6></div><div class=\"card-body\"><h4 id=\"humedads\" class=\"small font-weight-bold\"></h4><div class=\"progress mb-4\"><div class=\"progress-bar\" id=\"humedad\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div></div><h4 id=\"temperaturacs\" class=\"small font-weight-bold\">Temperatura °C</h4><div class=\"progress mb-4\"><div id=\"temperaturac\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"70\"></div></div><h4 id=\"sensacioncs\" class=\"small font-weight-bold\">Sensacion Termica °C</h4><div class=\"progress mb-4\"><div id=\"sensacionc\" class=\"progress-bar  bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"70\"></div></div><h4 id=\"temperaturafs\" class=\"small font-weight-bold\">Temperatura °F</h4><div class=\"progress mb-4\"><div id=\"temperaturaf\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"140\"></div></div><h4 id=\"sensacionfs\" class=\"small font-weight-bold\">Sensacion Termica °F</h4><div class=\"progress\"><div id=\"sensacionf\" class=\"progress-bar bg-info\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"140\"></div></div></div></div></div>";
 		String vista="sonoff;sonoffbody";
 //		device.getVista().clear();
-		device.getVista().put("jaha@gmail.com", vista);
+//		device.getVista().put("jaha@gmail.com", vista);
 		devicedao.update(device);
 		System.out.println("esta vacio? "+ device.getVista().isEmpty());
 	}

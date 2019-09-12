@@ -7,7 +7,7 @@ import java.util.List;
 import org.bson.conversions.Bson;
 
 import com.lgg.nticxs.web.model.Device;
-import com.lgg.nticxs.web.DAO.Mongo.*;
+import com.lgg.nticxs.web.DAO.Mongo.MongoDBClient;;
 
 
 public class DeviceDAO extends MongoDBClient<Device>{

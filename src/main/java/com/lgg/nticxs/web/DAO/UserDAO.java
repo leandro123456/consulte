@@ -13,7 +13,6 @@ import com.lgg.nticxs.web.model.User;
 public class UserDAO extends MongoDBClient<User>{
 
 	
-	
 	public UserDAO() {
 		super(User.class);
 	}

@@ -1,6 +1,7 @@
 package com.lgg.nticxs.web.controller;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 
@@ -133,7 +134,7 @@ public class DeviceController {
 		model.addAttribute("users", user);
 		//hoy tengo solo dos configuraciones por default
 		
-		SimpleDefaultConfiguration confi2 = new SimpleDefaultConfiguration(deviceconfigdao.retrieveByName("default-alarma"));
+		SimpleDefaultConfiguration confi2 = new SimpleDefaultConfiguration(deviceconfigdao.retrieveByName("defaultalarma"));
 		SimpleDefaultConfiguration confi = new SimpleDefaultConfiguration(deviceconfigdao.retrieveByName("default"));
 		
 		System.out.println("configuracion default: "+confi.getName());
@@ -192,114 +193,126 @@ public class DeviceController {
 		System.out.println("serial: "+ deviceserial);
 		
 		if(devicedao.retrieveBySerialNumber(deviceserial) ==null){
-			Device device = new Device();
-			device.setSerialnumber(deviceserial);
-			device.setName(namedevice);
-			device.setDescription(descriptiondevice);
-			
 			String name = request.getUserPrincipal().getName();
-			System.out.println("nombre del dueño: "+ name);
-			device.setUserowner(name);
-			System.out.println("tiene configuracion por defaault: "+defaultconfiguration);
-			if(defaultconfiguration) {
-				DeviceDefaultConfiguration deviceConfig= null;
-				if(!tipodevice.equals("alarma"))
-					deviceConfig=deviceconfigdao.retrieveByName("default");
-				else
-					deviceConfig=deviceconfigdao.retrieveByName("default-alarma");
-				device.getDeviceconfiguration().add(establishTopic(deviceConfig,serialnumber));
-			}else{
-				DeviceConfiguration dconfirguration  = new DeviceConfiguration();
-				dconfirguration.setIphostescribir(iphostescribir);
-				dconfirguration.setIphostescribirremote(iphostescribirremote);
-				dconfirguration.setIphostescuchar(iphostescuchar);
-				dconfirguration.setIphostescucharremote(iphostescucharremote);
-				dconfirguration.setName("personalized");
-				dconfirguration.setPassescribir(passescribir);
-				dconfirguration.setPassescribirremote(passescribirremote);
-				dconfirguration.setPassescuchar(passescuchar);
-				dconfirguration.setPassescucharremote(passescucharremote);
-				dconfirguration.setPortescribir(portescribir);
-				dconfirguration.setPortescribirremote(portescribirremote);
-				dconfirguration.setPortescuchar(portescuchar);
-				dconfirguration.setPortescucharremote(portescucharremote);
-				dconfirguration.setTopicescribir(topicwrite);
-				dconfirguration.setTopicescribirremote(topicwriteremote);
-				dconfirguration.setTopicescuchar(topiclisten);
-				dconfirguration.setTopicescucharremote(topiclistenremote);
-				dconfirguration.setUserescribir(userescribir);
-				dconfirguration.setUserescribirremote(userescribirremote);
-				dconfirguration.setUserescuchar(userescuchar);
-				dconfirguration.setUserescucharremote(userescucharremote);
-				dconfirguration.setUsesslescribir(false);
-				dconfirguration.setUsesslescribirremote(false);
-				dconfirguration.setUsesslescuchar(false);
-				dconfirguration.setUsesslescucharremote(false);
-				device.getDeviceconfiguration().add(dconfirguration);
-			}
-			String timerstringvalue="";
-			System.out.println("tipo de dispositivo: "+ tipodevice);
-			HashMap<String, String> vista =new HashMap<>();
-			switch (tipodevice) {
-			case "termometro":
-				System.out.println("tipo: "+tipovistatermometro);
-				System.out.println("humeedad: "+humedadtermometro);
-				System.out.println("temp: "+tempctermometro);
-				System.out.println("temp: "+tempftermometro);
-				System.out.println("sensacion: "+sensacionctermometro);
-				System.out.println("sensacion: "+sensacionftermometro);
-				//vista termometro por tipo de elemento
-				String termometrovista = armarVistaTermometro(tipovistatermometro,humedadtermometro,tempctermometro,tempftermometro,sensacionctermometro,sensacionftermometro);
-				System.out.println("termometro vista: "+ termometrovista);
-				vista.put(name, termometrovista);
-				device.setVista(vista);
-				break;
-			case "alarma":
-				//vista de alarma
-				String alarmavista = Vista.ALARMA+";alarmabody";
-				vista.put(name, alarmavista);
-				device.setVista(vista);
-				System.out.println("es una alarma");
-				break;
-			case "sonoff":
-				timerstringvalue=SimpleTimerString.maketimerStringFormat(timerstringsonoff);
-				device.setTimerString(timerstringvalue);
-				String host="";
-				String port="";
-				String topic="";
-				String user="";
-				String pass="";
+			try {
+				Device device = new Device();
+				device.setSerialnumber(deviceserial);
+				device.setName("nada");//namedevice);
+				device.setDescription(descriptiondevice);
+				
+				name = request.getUserPrincipal().getName();
+				System.out.println("nombre del dueño: "+ name);
+				device.setUserowner(Base64.getEncoder().encodeToString("name".getBytes()));
+				System.out.println("tiene configuracion por defaault: "+defaultconfiguration);
 				if(defaultconfiguration) {
-					DeviceDefaultConfiguration defaultConfig=deviceconfigdao.retrieveByName("default");
-					host= defaultConfig.getIphostescribirremote();
-					port=defaultConfig.getPortescribirremote();
-					topic=defaultConfig.getTopicescribirremote().replace("serial", serialnumber);
-					user=defaultConfig.getUserescribirremote();
-					pass=defaultConfig.getPassescribirremote();
-				}else {
-					host= iphostescribirremote;
-					port= portescribirremote;
-					topic=topiclistenremote;
-					user=userescribirremote;
-					pass=passescribirremote;
+					DeviceDefaultConfiguration deviceConfig= null;
+					if(!tipodevice.equals("alarma"))
+						deviceConfig=deviceconfigdao.retrieveByName("default");
+					else
+						deviceConfig=deviceconfigdao.retrieveByName("defaultalarma");
+					device.getDeviceconfiguration().add(establishTopic(deviceConfig,serialnumber));
+				System.out.println("PASO EL ESTABLECIMIENTO DE LOS LOS VALORES DE CONFIGURACIONS");
+				}else{
+					DeviceConfiguration dconfirguration  = new DeviceConfiguration();
+					dconfirguration.setIphostescribir(iphostescribir);
+					dconfirguration.setIphostescribirremote(iphostescribirremote);
+					dconfirguration.setIphostescuchar(iphostescuchar);
+					dconfirguration.setIphostescucharremote(iphostescucharremote);
+					dconfirguration.setName("personalized");
+					dconfirguration.setPassescribir(passescribir);
+					dconfirguration.setPassescribirremote(passescribirremote);
+					dconfirguration.setPassescuchar(passescuchar);
+					dconfirguration.setPassescucharremote(passescucharremote);
+					dconfirguration.setPortescribir(portescribir);
+					dconfirguration.setPortescribirremote(portescribirremote);
+					dconfirguration.setPortescuchar(portescuchar);
+					dconfirguration.setPortescucharremote(portescucharremote);
+					dconfirguration.setTopicescribir(topicwrite);
+					dconfirguration.setTopicescribirremote(topicwriteremote);
+					dconfirguration.setTopicescuchar(topiclisten);
+					dconfirguration.setTopicescucharremote(topiclistenremote);
+					dconfirguration.setUserescribir(userescribir);
+					dconfirguration.setUserescribirremote(userescribirremote);
+					dconfirguration.setUserescuchar(userescuchar);
+					dconfirguration.setUserescucharremote(userescucharremote);
+					dconfirguration.setUsesslescribir(false);
+					dconfirguration.setUsesslescribirremote(false);
+					dconfirguration.setUsesslescuchar(false);
+					dconfirguration.setUsesslescucharremote(false);
+					device.getDeviceconfiguration().add(dconfirguration);
 				}
-				SimpleTimerString.sendtimerString(timerstringvalue,host,port,topic,user,pass);
-				//vista sonoff
-				String vistasonoff ="";
-				System.out.println("cantidad de sonoff recibido: " + cantidadswiths);
-				if(cantidadswiths.equals("one"))
-					vistasonoff= Vista.SONOFF+";sonoffbody";
-				else if(cantidadswiths.equals("two"))
-					vistasonoff= Vista.SONOFF_DOS+";sonoffbody";
-				vista.put(name, vistasonoff);
-				device.setVista(vista);
-				break;
-			default:
-				System.out.println("no encontro el tipo de device: "+ tipodevice);
-				break;
+				String timerstringvalue="";
+				System.out.println("tipo de dispositivo: "+ tipodevice);
+				HashMap<String, String> vista =new HashMap<>();
+				switch (tipodevice) {
+				case "termometro":
+					System.out.println("tipo: "+tipovistatermometro);
+					System.out.println("humeedad: "+humedadtermometro);
+					System.out.println("temp: "+tempctermometro);
+					System.out.println("temp: "+tempftermometro);
+					System.out.println("sensacion: "+sensacionctermometro);
+					System.out.println("sensacion: "+sensacionftermometro);
+					//vista termometro por tipo de elemento
+					String termometrovista = armarVistaTermometro(tipovistatermometro,humedadtermometro,tempctermometro,tempftermometro,sensacionctermometro,sensacionftermometro);
+					System.out.println("termometro vista: "+ termometrovista);
+					vista.put(name, termometrovista);
+					device.setVista(vista);
+					break;
+				case "alarma":
+					//vista de alarma
+					String alarmavista = Vista.ALARMA+";alarmabody";
+					vista.put(name, alarmavista);
+					device.setVista(vista);
+					System.out.println("es una alarma");
+					break;
+				case "sonoff":
+					timerstringvalue=SimpleTimerString.maketimerStringFormat(timerstringsonoff);
+					device.setTimerString(timerstringvalue);
+					String host="";
+					String port="";
+					String topic="";
+					String user="";
+					String pass="";
+					if(defaultconfiguration) {
+						DeviceDefaultConfiguration defaultConfig=deviceconfigdao.retrieveByName("default");
+						host= defaultConfig.getIphostescribirremote();
+						port=defaultConfig.getPortescribirremote();
+						topic=defaultConfig.getTopicescribirremote().replace("serial", serialnumber);
+						user=defaultConfig.getUserescribirremote();
+						pass=defaultConfig.getPassescribirremote();
+					}else {
+						host= iphostescribirremote;
+						port= portescribirremote;
+						topic=topiclistenremote;
+						user=userescribirremote;
+						pass=passescribirremote;
+					}
+					SimpleTimerString.sendtimerString(timerstringvalue,host,port,topic,user,pass);
+					//vista sonoff
+					String vistasonoff ="";
+					System.out.println("cantidad de sonoff recibido: " + cantidadswiths);
+					if(cantidadswiths.equals("one"))
+						vistasonoff= Vista.SONOFF+";sonoffbody";
+					else if(cantidadswiths.equals("two"))
+						vistasonoff= Vista.SONOFF_DOS+";sonoffbody";
+					vista.put(name, vistasonoff);
+					device.setVista(vista);
+					break;
+				default:
+					System.out.println("no encontro el tipo de device: "+ tipodevice);
+					break;
+				}
+				device.setTipo(tipodevice);
+				System.out.println("termino de setar todo, ahora lo guarda: *****************");
+				System.out.println("a ver si muestra que onda el device "+device.toString());
+				devicedao.create(device);
+				System.out.println("YA CREO EL DECICE -**************************************");
+			} catch (Exception e) {
+				System.out.println("fallo, nose que onda: "+ e.getMessage());
+				e.printStackTrace();
+				
 			}
-			device.setTipo(tipodevice);
-			devicedao.create(device);
+			
 			User user = userdao.retrieveByMail(name);
 			user.getDeviceserialnumber().add(deviceserial);
 			userdao.update(user);

@@ -29,7 +29,6 @@ public class Device extends MongoDBObject{
 	private String timerString;
 	private DeviceNotification lastnotification;
 	private Integer particiones;
-	private HashMap<Integer, Integer> zonas;
 	private List<DeviceAlarm> alarms;
 	private Boolean usedefaultbrocker;
 	private List<DeviceConfiguration> deviceconfiguration;
@@ -44,8 +43,7 @@ public class Device extends MongoDBObject{
 		deviceconfiguration = new ArrayList<>();
 		users = new  ArrayList<>();
 		admins = new ArrayList<>();
-		vista = new HashMap<>();
-//		vistaporusuario = new HashMap<>();
+		vista = new HashMap<String,String>();
 	}
 
 	public String getUserowner() {
@@ -136,12 +134,14 @@ public class Device extends MongoDBObject{
 		this.description = description;
 	}
 
-	public Map getVista() {
+
+
+	public Map<String, String> getVista() {
 		return vista;
 	}
 
-	public void setVista(HashMap<String, String> vista) {
-		this.vista = vista;
+	public void setVista(Map<String, String> vistaPorUsuario) {
+		this.vista = vistaPorUsuario;
 	}
 
 	public List<String> getUsers() {
@@ -204,12 +204,12 @@ public class Device extends MongoDBObject{
 		this.particiones = particiones;
 	}
 
-	public HashMap<Integer, Integer> getZonas() {
-		return zonas;
-	}
-
-	public void setZonas(HashMap<Integer, Integer> zonas) {
-		this.zonas = zonas;
-	}
+//	public HashMap<Integer, Integer> getZonas() {
+//		return zonas;
+//	}
+//
+//	public void setZonas(HashMap<Integer, Integer> zonas) {
+//		this.zonas = zonas;
+//	}
 	
 }

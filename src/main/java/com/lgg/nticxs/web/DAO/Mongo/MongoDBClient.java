@@ -51,8 +51,10 @@ public abstract class MongoDBClient<T extends MongoDBObject> extends MongoDBProp
 		try {
 			MongoDatabase mongoDatabase = mongoClient.getDatabase(getDatabaseName());
 			mongoDatabase = mongoDatabase.withCodecRegistry(this.pojoCodecRegistry);
+			System.out.println("coleccion: "+ this.collectionName);
+			System.out.println("tipo: "+ this.classType);
 			MongoCollection<T> mongoCollection = mongoDatabase.getCollection(this.collectionName, this.classType);
-			
+			System.out.println("este es el objeto********: "+ object.getId());
 			mongoCollection.insertOne(object);
 		} catch(Exception e) {
 			e.printStackTrace();
