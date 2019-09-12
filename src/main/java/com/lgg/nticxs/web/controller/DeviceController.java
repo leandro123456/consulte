@@ -133,7 +133,7 @@ public class DeviceController {
 		model.addAttribute("users", user);
 		//hoy tengo solo dos configuraciones por default
 		
-		SimpleDefaultConfiguration confi2 = new SimpleDefaultConfiguration(deviceconfigdao.retrieveByName("defaultalarma"));
+		SimpleDefaultConfiguration confi2 = new SimpleDefaultConfiguration(deviceconfigdao.retrieveByName("default-alarma"));
 		SimpleDefaultConfiguration confi = new SimpleDefaultConfiguration(deviceconfigdao.retrieveByName("default"));
 		
 		System.out.println("configuracion default: "+confi.getName());

@@ -806,24 +806,24 @@
 	      //sugiero el comienzo, griso el desplegable y modifico el valor que tiene
 	        if(valormodelo == "WTHUSB"){ 
 	        	contenidoserial = document.getElementById("serialnumber");
-	        	contenidoserial.firstChild.data = "WTHUSB";
+	        	contenidoserial.value = "WTHUSB";
 	        	document.getElementById('tipodevice').value = 'termometro';
 	        }if(valormodelo == "PSWS1"){ 
 	        	contenidoserial = document.getElementById("serialnumber");
-	        	contenidoserial.firstChild.data = "PSWS1";
-	        	document.getElementById('tipodevice').value = 'termometro';
+	        	contenidoserial.value = "PSWS1";
+	        	document.getElementById('tipodevice').value = 'sonoff';
 	        }if(valormodelo == "PSWS2"){ 
 	        	contenidoserial = document.getElementById("serialnumber");
-	        	contenidoserial.firstChild.data = "PSWS2";
-	        	document.getElementById('tipodevice').value = 'termometro';
+	        	contenidoserial.value = "PSWS2";
+	        	document.getElementById('tipodevice').value = 'sonoff';
 	        }if(valormodelo == "BRDSC"){ 
 	        	contenidoserial = document.getElementById("serialnumber");
-	        	contenidoserial.firstChild.data = "BRDSC01";
-	        	document.getElementById('tipodevice').value = 'termometro';
+	        	contenidoserial.value = "BRDSC01";
+	        	document.getElementById('tipodevice').value = 'alarma';
 	        }if(valormodelo == "PS3S1"){ 
 	        	contenidoserial = document.getElementById("serialnumber");
-	        	contenidoserial.firstChild.data = "PS3S1";
-	        	document.getElementById('tipodevice').value = 'termometro';
+	        	contenidoserial.value = "PS3S1";
+	        	document.getElementById('tipodevice').value = 'sonoff';
 	        }
 	        console.log("este es el valor del tipo de DEVICE: "+ document.getElementById('tipodevice').value);
 	        document.getElementById("tipodevice").disabled = true;

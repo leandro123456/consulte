@@ -143,17 +143,17 @@ public class Test1 {
 		Map<String, String> elem= new HashMap<>();
 		
 //propio de la vista
-//		vista.setName("temperatura_horizontal");
-//		vista.setInicio(inicio);
-//		vista.setFin(fin);
-//		elem.put("Hum",humedad);
-//		elem.put("tempC", tempC);
-//		elem.put("sensC", sensC);
-//		elem.put("tempF", tempF);
-//		elem.put("sensF", sensF);
-//		vista.setContenido(elem);
-//		vistadao.create(vista);
-//		System.out.println("termino vista horizontal");
+		vista.setName("temperatura_horizontal");
+		vista.setInicio(inicio);
+		vista.setFin(fin);
+		elem.put("Hum",humedad);
+		elem.put("tempC", tempC);
+		elem.put("sensC", sensC);
+		elem.put("tempF", tempF);
+		elem.put("sensF", sensF);
+		vista.setContenido(elem);
+		vistadao.create(vista);
+		System.out.println("termino vista horizontal");
 
 		
 		inicio= "<div class=\"col-12\"> <div class=\"card shadow mb-4\"><div class=\"card-header py-3\"><h6 class=\"m-0 font-weight-bold text-primary\">Sensor de Temperatura Y Humedad</h6></div>";
@@ -166,22 +166,22 @@ public class Test1 {
 		String finTemp="</div></div></div>";
 		fin= "</div></div>";
 		
-//		vistadao = new VistaDAO();
-//		vista= new Vista();
-//		vista.setName("temperatura_reloj");
-//		vista.setInicio(inicio);
-//		vista.setFin(fin);
-//		elem= new HashMap<>();
-//		elem.put("Hum",humedad);
-//		elem.put("tempC", tempC);
-//		elem.put("sensC", sensC);
-//		elem.put("tempF", tempF);
-//		elem.put("sensF", sensF);
-//		elem.put("indiceTemp", indiceTemp);
-//		elem.put("finTemp", finTemp);
-//		vista.setContenido(elem);
-//		vistadao.create(vista);
-//		System.out.println("termino vista reloj");
+		vistadao = new VistaDAO();
+		vista= new Vista();
+		vista.setName("temperatura_reloj");
+		vista.setInicio(inicio);
+		vista.setFin(fin);
+		elem= new HashMap<>();
+		elem.put("Hum",humedad);
+		elem.put("tempC", tempC);
+		elem.put("sensC", sensC);
+		elem.put("tempF", tempF);
+		elem.put("sensF", sensF);
+		elem.put("indiceTemp", indiceTemp);
+		elem.put("finTemp", finTemp);
+		vista.setContenido(elem);
+		vistadao.create(vista);
+		System.out.println("termino vista reloj");
 		
 
 		//de un solo boton
@@ -211,16 +211,16 @@ public class Test1 {
 		//style=\"background: transparent;  border: transparent;\"><i class=\"fas fa-stopwatch\" title=\"Set Timer String\"></i>
 		
 		
-//		vistadao = new VistaDAO();
-//		vista= new Vista();
-//		vista.setName("sonoff");
-//		vista.setInicio(inicio);
-//		vista.setFin(fin);
-//		elem= new HashMap<>();
-//		elem.put("sonoffbody",sonoffbody);
-//		vista.setContenido(elem);
-//		vistadao.create(vista);
-//		System.out.println("termino vista de 1 boton");
+		vistadao = new VistaDAO();
+		vista= new Vista();
+		vista.setName("sonoff");
+		vista.setInicio(inicio);
+		vista.setFin(fin);
+		elem= new HashMap<>();
+		elem.put("sonoffbody",sonoffbody);
+		vista.setContenido(elem);
+		vistadao.create(vista);
+		System.out.println("termino vista de 1 boton");
 		
 		//de dos botones
 		inicio="<div class=\"col-lg-6 mb-4\"> <div class=\"card shadow mb-4\"> <div class=\"card-header py-3\">	<h6 class=\"m-0 font-weight-bold text-primary\">Sonoff CAMBIARSONOFF</h6></div>";
@@ -254,16 +254,16 @@ public class Test1 {
 				+ "</div>";
 		
 		
-//		vistadao = new VistaDAO();
-//		vista= new Vista();
-//		vista.setName("sonofftwo");
-//		vista.setInicio(inicio);
-//		vista.setFin(fin);
-//		elem= new HashMap<>();
-//		elem.put("sonoffbody",sonoffbody);
-//		vista.setContenido(elem);
-//		vistadao.create(vista);
-//		System.out.println("termino vista de 2 boton");
+		vistadao = new VistaDAO();
+		vista= new Vista();
+		vista.setName("sonofftwo");
+		vista.setInicio(inicio);
+		vista.setFin(fin);
+		elem= new HashMap<>();
+		elem.put("sonoffbody",sonoffbody);
+		vista.setContenido(elem);
+		vistadao.create(vista);
+		System.out.println("termino vista de 2 boton");
 		
 		
 		
@@ -477,16 +477,16 @@ public class Test1 {
 				"					</div>" + 
 				"				</div>";
 		
-//		vistadao = new VistaDAO();
-//		vista= new Vista();
-//		vista.setName("alarma");
-//		vista.setInicio(inicio);
-//		vista.setFin(fin);
-//		elem= new HashMap<>();
-//		elem.put("alarmabody",alarmabody);
-//		vista.setContenido(elem);
-//		vistadao.create(vista);
-//		System.out.println("termino vista de alarma");
+		vistadao = new VistaDAO();
+		vista= new Vista();
+		vista.setName("alarma");
+		vista.setInicio(inicio);
+		vista.setFin(fin);
+		elem= new HashMap<>();
+		elem.put("alarmabody",alarmabody);
+		vista.setContenido(elem);
+		vistadao.create(vista);
+		System.out.println("termino vista de alarma");
 	}
 	
 }

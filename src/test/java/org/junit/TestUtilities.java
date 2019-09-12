@@ -110,11 +110,22 @@ public class TestUtilities {
 	}
 	
 	
+	//@Test
+	public void createConfig() {
+		DeviceDefaultConfigurationDAO deviceconfigdao = new DeviceDefaultConfigurationDAO();
+		System.out.println("EMPEZO");
+		DeviceDefaultConfiguration elem =new DeviceDefaultConfiguration();
+		elem.setName("test");
+		elem.setUserescribir("dsa");
+		deviceconfigdao.create(elem);
+		System.out.println("TERMINO");
+	}
+	
 	@Test
 	public void searchDefaultConfig(){
 		DeviceDefaultConfigurationDAO deviceconfigdao = new DeviceDefaultConfigurationDAO();
 		System.out.println("EMPEZO");
-		DeviceDefaultConfiguration elem =deviceconfigdao.retrieveByName("defaultalarma");
+		DeviceDefaultConfiguration elem =deviceconfigdao.retrieveByName("default-alarma");
 		System.out.println("elemento: "+ elem);
 		SimpleDefaultConfiguration confi2 = new SimpleDefaultConfiguration(elem);
 		SimpleDefaultConfiguration confi = new SimpleDefaultConfiguration(deviceconfigdao.retrieveByName("default"));
