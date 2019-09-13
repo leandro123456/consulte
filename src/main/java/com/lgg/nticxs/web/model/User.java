@@ -26,6 +26,7 @@ public class User extends MongoDBObject{
 	private Boolean cuenta_iniciada;
 	private String role;
 	private List<String> deviceserialnumber;
+	private String cookie;
 	
 	public String getEmail() {
 		return email;
@@ -51,6 +52,14 @@ public class User extends MongoDBObject{
 		this.role = role;
 	}
 
+	public String getCookie() {
+		return cookie;
+	}
+
+
+	public void setCookie(String cookie) {
+		this.cookie = cookie;
+	}
 
 
 	public String getFirstname() {

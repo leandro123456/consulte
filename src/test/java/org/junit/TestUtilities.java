@@ -9,6 +9,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -301,7 +302,7 @@ public class TestUtilities {
 		dev.setPassword("password".getBytes());
 		
 		HashMap<String, String> vistaPorUsuario = new HashMap<>();
-		vistaPorUsuario.put("pepe", Vista.SONOFF+";sonoffbody");
+		vistaPorUsuario.put(Base64.getEncoder().encodeToString("leandrogabrielguzman@gmail.com".getBytes()), Vista.SONOFF+";sonoffbody");
 		vistaPorUsuario.put("juan", "vaor;valor");
 		dev.setVista(vistaPorUsuario);
 		

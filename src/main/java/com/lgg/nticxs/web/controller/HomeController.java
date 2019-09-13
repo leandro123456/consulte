@@ -2,10 +2,15 @@ package com.lgg.nticxs.web.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,6 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,7 +68,7 @@ public class HomeController {
     }
 	
 	@RequestMapping("/home")
-	public ModelAndView books(HttpServletRequest request, ModelMap model){
+	public ModelAndView books( HttpServletRequest request, ModelMap model){
 		String role= "";
 		try {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -74,7 +80,9 @@ public class HomeController {
 		    }
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}	
+		
+		
 		String nombre = request.getUserPrincipal().getName();
 		User user = userdao.retrieveByMail(nombre);
 		System.out.println("USUARIO CONSEGUIDO +++++++++++++++++++++"+user);
@@ -91,13 +99,13 @@ public class HomeController {
 		}
 		List<String> vistas = new ArrayList<>();
 		List<String> aux = new  ArrayList<>();
-		aux = Utils.vistas(user.getEmail(),deviceAsociadoSonoff,Device.SONOFF);
+		aux = Utils.vistas(Base64.getEncoder().encodeToString(user.getEmail().getBytes()),deviceAsociadoSonoff,Device.SONOFF);
 		for(String vista1 : aux)
 			vistas.add(vista1);
-		aux =Utils.vistas(user.getEmail(),deviceAsociadoTermomtro, Device.TERMOMETRO);
+		aux =Utils.vistas(Base64.getEncoder().encodeToString(user.getEmail().getBytes()),deviceAsociadoTermomtro, Device.TERMOMETRO);
 		for(String vista1 : aux)
 			vistas.add(vista1);
-		aux =Utils.vistas(user.getEmail(),deviceAsociadoAlarma,Device.ALARMA);
+		aux =Utils.vistas(Base64.getEncoder().encodeToString(user.getEmail().getBytes()),deviceAsociadoAlarma,Device.ALARMA);
 		for(String vista1 : aux)
 			vistas.add(vista1);
 		System.out.println("cantidad de vistas a mostrar !!!!!: "+ vistas.size());

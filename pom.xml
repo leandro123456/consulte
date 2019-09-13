@@ -37,11 +37,11 @@
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
-                <configuration>
-                    <url>http://localhost:9090</url>
-                    <username>joe</username>
-                    <password>joe</password>
-                </configuration>
+<!--                 <configuration> -->
+<!--                     <url>http://localhost:9090</url> -->
+<!--                     <username>joe</username> -->
+<!--                     <password>joe</password> -->
+<!--                 </configuration> -->
             </plugin>
             </plugins>
     </build>
@@ -59,7 +59,34 @@
 		    <artifactId>mongo-java-driver</artifactId>
 		</dependency>
 		
-	
+<!-- 	************************  MANEJO DE SESSION   **************************** -->		
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.session</groupId> -->
+<!-- 			<artifactId>spring-session-data-redis</artifactId> -->
+<!-- 			<version>2.0.3.RELEASE</version> -->
+<!-- 		</dependency> -->
+		
+<!-- 		<dependency> -->
+<!-- 	        <groupId>redis.clients</groupId> -->
+<!-- 	        <artifactId>jedis</artifactId> -->
+<!-- 	    </dependency> -->
+<!-- 	    <dependency> -->
+<!-- 	        <groupId>io.lettuce</groupId> -->
+<!-- 	        <artifactId>lettuce-core</artifactId> -->
+<!-- 	    </dependency> -->
+		
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework</groupId> -->
+<!-- 			<artifactId>spring-web</artifactId> -->
+<!-- 			<exclusions> -->
+<!-- 				<exclusion> -->
+<!-- 					<groupId>commons-logging</groupId> -->
+<!-- 					<artifactId>commons-logging</artifactId> -->
+<!-- 				</exclusion> -->
+<!-- 			</exclusions> -->
+<!-- 		</dependency> -->
+		
+<!-- 	************************  APROVISIONAMIENTO   **************************** -->
 		<!-- https://mvnrepository.com/artifact/org.mongodb.morphia/morphia -->
 		<dependency>
 		    <groupId>org.mongodb.morphia</groupId>

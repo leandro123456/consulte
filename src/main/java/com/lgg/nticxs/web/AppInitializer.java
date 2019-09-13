@@ -10,6 +10,7 @@ import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 import com.lgg.nticxs.web.DAO.UserDAO;
 
@@ -33,6 +34,7 @@ public class AppInitializer extends SpringBootServletInitializer{
 	public UserDAO userDao() {
 		return new UserDAO();
 	}
+	
 	
 	@Bean
 	public WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> setConfiguration() {

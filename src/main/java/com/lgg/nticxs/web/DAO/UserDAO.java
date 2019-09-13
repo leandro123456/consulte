@@ -31,6 +31,11 @@ public class UserDAO extends MongoDBClient<User>{
 		return this.retrieveByFilter(filter);
 	}
 	
+	public User retrieveByCookie(String cookie) {
+		Bson filter = eq("cookie", cookie);
+		return this.retrieveByFilter(filter);
+	}
+	
     public void deleteUser(User user) {
 		this.delete(user);
 	}

@@ -255,13 +255,13 @@ public class DeviceController {
 					//vista termometro por tipo de elemento
 					String termometrovista = armarVistaTermometro(tipovistatermometro,humedadtermometro,tempctermometro,tempftermometro,sensacionctermometro,sensacionftermometro);
 					System.out.println("termometro vista: "+ termometrovista);
-					vista.put(name, termometrovista);
+					vista.put(Base64.getEncoder().encodeToString(name.getBytes()), termometrovista);
 					device.setVista(vista);
 					break;
 				case "alarma":
 					//vista de alarma
 					String alarmavista = Vista.ALARMA+";alarmabody";
-					vista.put(name, alarmavista);
+					vista.put(Base64.getEncoder().encodeToString(name.getBytes()), alarmavista);
 					device.setVista(vista);
 					System.out.println("es una alarma");
 					break;
@@ -295,7 +295,7 @@ public class DeviceController {
 						vistasonoff= Vista.SONOFF+";sonoffbody";
 					else if(cantidadswiths.equals("two"))
 						vistasonoff= Vista.SONOFF_DOS+";sonoffbody";
-					vista.put(name, vistasonoff);
+					vista.put(Base64.getEncoder().encodeToString(name.getBytes()), vistasonoff);
 					device.setVista(vista);
 					break;
 				default:
