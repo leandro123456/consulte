@@ -80,8 +80,23 @@ public class HomeController {
 		    }
 	
 		
+<<<<<<< HEAD
 		if(request == null || request.getUserPrincipal() ==null){
 			System.out.println("SESION NO INICIADA!!");
+=======
+		System.out.println("todas la cookies entro en otro EN EL HOME");
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for(Cookie coo : cookies){
+				User user = userdao.retrieveByCookie(coo.getValue());
+				System.out.println("la cookie encontrada HOME: " + coo.getValue());
+			}
+		}else
+			System.out.println("las cookies que llegan aca estan EN NULL");
+		
+		if(request == null) {
+			System.out.println("el request es NULL ");
+>>>>>>> b0b3a5dbd23b26abe0e092d2cec1927a22f2a7e6
 			return new ModelAndView("login", model); 
 		}
 		

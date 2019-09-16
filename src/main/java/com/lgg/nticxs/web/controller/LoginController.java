@@ -1,8 +1,11 @@
 package com.lgg.nticxs.web.controller;
 
+<<<<<<< HEAD
 import org.springframework.core.annotation.SynthesizedAnnotation;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+=======
+>>>>>>> b0b3a5dbd23b26abe0e092d2cec1927a22f2a7e6
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,12 +29,16 @@ import nl.flotsam.xeger.Xeger;
 
 import java.io.IOException;
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+=======
+import java.util.List;
+>>>>>>> b0b3a5dbd23b26abe0e092d2cec1927a22f2a7e6
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -48,17 +55,43 @@ public class LoginController{
 //    @Resource(name="authenticationManager")
 //    private AuthenticationManager authManager;
 
+<<<<<<< HEAD
 	@GetMapping("/")
     public String redirect(
     		Model model,HttpServletRequest request, HttpServletResponse response) {
 
     	System.out.println("LLEGO A LA BARRA!!!");	    
         return "redirect:/login";
+=======
+	@GetMapping("/error")
+    public String redirecterror(Model model) {    
+        return "redirect:login";
+    }
+    
+	@GetMapping("/")
+    public String redirect( @CookieValue(value = "username") String username,
+    		Model model,HttpServletRequest request, HttpServletResponse response) {
+
+		System.out.println("todas la cookies solo con el barra");
+		Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for(Cookie coo : cookies){
+            	User user = userdao.retrieveByCookie(coo.getValue());
+            	if(user != null){
+            		System.out.println("encontro al usuario por su cookie");
+            		return "redirect:/home";
+            		}
+            }
+        	
+        }	    
+        return "redirect:login";
+>>>>>>> b0b3a5dbd23b26abe0e092d2cec1927a22f2a7e6
     }
 
-    @GetMapping("/login")
+	@GetMapping("/login")
 	public String login(@RequestParam(value="incorrectcredentials", required=false) boolean incorrectcredentials,
 			@RequestParam(value="incorrecttoken", required=false) boolean incorrecttoken,
+<<<<<<< HEAD
 			Model model, 
 			HttpServletRequest request, HttpServletResponse response,
 			@ModelAttribute("user") String userName,
@@ -99,18 +132,45 @@ public class LoginController{
         	
         }
     	
+=======
+			Model model,HttpServletRequest request,HttpServletResponse response, 
+			@ModelAttribute("user") String userName,
+			@ModelAttribute("password") String password) {
+		System.out.println("valoes ingresados previos al login: "+userName);
+		System.out.println("valoes ingresados pass previo al login: "+password);
+
+		System.out.println("todas la cookies entro en otro");
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for(Cookie coo : cookies){
+				User user = userdao.retrieveByCookie(coo.getValue());
+				if(user != null){
+					System.out.println("encontro al usuario por su cookie");
+					return "redirect:/home";
+				}
+				System.out.println("la cookie encontrada: " + coo.getValue());
+			}
+		}
+//		else {
+//			System.out.println("las cookies son NULL");
+//			Cookie cook= new Cookie("username", "valor");
+//			response.addCookie(cook);
+//			System.out.println("termino de armar la cookie"+ cook.getValue());
+//		}
+
+>>>>>>> b0b3a5dbd23b26abe0e092d2cec1927a22f2a7e6
 		if(!userName.equals("") && !password.equals("")) {
 			model.addAttribute("user", userName);
 			model.addAttribute("password", password);
 		}
 
 		if(incorrectcredentials) {
-            model.addAttribute("msg1", "Error ... el usuario o la contraseña son incorrectas. Por favor verifiquelo e intente nuevamente");
-            model.addAttribute("incorrectcredentials", true);}
+			model.addAttribute("msg1", "Error ... el usuario o la contraseña son incorrectas. Por favor verifiquelo e intente nuevamente");
+			model.addAttribute("incorrectcredentials", true);}
 		if(incorrecttoken) {model.addAttribute("incorrecttoken", true);}
 		
 		return "login";
-    }
+	}
     
     @GetMapping("/register")
     public String signupRegister(Model model) {
@@ -242,9 +302,14 @@ public class LoginController{
         if (auth != null){
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
+<<<<<<< HEAD
         System.out.println("VA A SALIR!!!");
         response.resetBuffer(); 
         
+=======
+        SecurityContextHolder.clearContext();
+        System.out.println("SE BORRO EL CONTEXTO");
+>>>>>>> b0b3a5dbd23b26abe0e092d2cec1927a22f2a7e6
         return "redirect:/login";
     }
     

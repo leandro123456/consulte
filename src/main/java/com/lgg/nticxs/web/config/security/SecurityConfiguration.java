@@ -11,22 +11,29 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.Filter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
+<<<<<<< HEAD
 import com.lgg.nticxs.web.DAO.RolesDAO;
 import com.lgg.nticxs.web.config.security.cookies.MySimpleUrlAuthenticationSuccessHandler;
 import com.lgg.nticxs.web.model.Role;
 
 
+=======
+import com.lgg.nticxs.web.config.security.cookie.MySimpleUrlAuthenticationSuccessHandler;
+>>>>>>> b0b3a5dbd23b26abe0e092d2cec1927a22f2a7e6
 
 @Configuration
 @EnableWebSecurity
@@ -41,6 +48,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 
 
+<<<<<<< HEAD
 	    @Override
 	    public void configure(HttpSecurity http) throws Exception {
 	    	
@@ -105,13 +113,58 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    }
 	    
 	    @Autowired
+=======
+	@Override
+	public void configure(HttpSecurity http) throws Exception {
+
+		http
+		.csrf().disable()
+		.authorizeRequests()
+		.antMatchers("/anonymous*").anonymous()
+		.antMatchers("/","/login*","/signup").permitAll()
+		.anyRequest().authenticated()
+		//.antMatchers("/home/").permitAll()
+		.and()
+		.formLogin()
+		//.defaultSuccessUrl("/home/")
+		.loginPage("/login")
+		.loginProcessingUrl("/login")
+		.successHandler(successHandler())
+		.failureUrl("/login.jsp?error=true")
+		.usernameParameter("user").passwordParameter("password")
+		.and()
+		.logout().deleteCookies("JSESSIONID")
+		.and()
+		.rememberMe().key("uniqueAndSecret").tokenValiditySeconds(86400)
+		.and()
+		.sessionManagement()
+		.sessionFixation().migrateSession()
+		.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+		.invalidSessionUrl("/login")
+		.maximumSessions(2)
+		.expiredUrl("/login");
+   }
+	    
+	    private AuthenticationSuccessHandler successHandler() {
+	        return new MySimpleUrlAuthenticationSuccessHandler();
+	    }
+
+	    
+		@Autowired
+>>>>>>> b0b3a5dbd23b26abe0e092d2cec1927a22f2a7e6
 	    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 	        auth
 	            .inMemoryAuthentication()
 	                .withUser("user").password("password").roles("USER").and()
 	                .withUser("user").password("password").roles("USER", "ADMIN");
 	    }
-	
+	    
+ 
+		@Bean
+		public HttpSessionEventPublisher httpSessionEventPublisher() {
+		    return new HttpSessionEventPublisher();
+		}
+	    
 
 	    @Bean
 	    public AuthenticationFailureHandler authenticationFailureHandler() {
