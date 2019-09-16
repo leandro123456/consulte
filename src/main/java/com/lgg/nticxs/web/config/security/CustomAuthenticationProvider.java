@@ -32,6 +32,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		if(user != null){
 			try {
 				if (name.equals(user.getEmail()) && password.equals(EncryptorPassword.decrypt(user.getPassword()))) {
+					System.out.println("ACA VALIDO EL USUARIO Y PASS!!!!");
 					List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 					authorities.add(new SimpleGrantedAuthority(user.getRole()));
 					return new UsernamePasswordAuthenticationToken(user.getEmail(),user.getPassword(), authorities);
@@ -45,6 +46,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		}
 		throw new IncorrectLoginCredentialsException();
 	}
+
 
 	@Override
 	public boolean supports(Class<?> authentication) {

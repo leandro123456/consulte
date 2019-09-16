@@ -19,9 +19,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler;
 
 import com.lgg.nticxs.web.DAO.RolesDAO;
+import com.lgg.nticxs.web.config.security.cookies.MySimpleUrlAuthenticationSuccessHandler;
 import com.lgg.nticxs.web.model.Role;
 
 
@@ -81,16 +83,26 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //	    		access = access + "hasAuthority('" + role.getNameRole() + "') or ";
 //	    	}
 	        
-	    	http.servletApi();
+	    	//http.servletApi();
 			http.authorizeRequests()
 				.antMatchers("/").permitAll()
 				.antMatchers("/signup").permitAll()
 		        .antMatchers("/home/").permitAll()
 		        .and().formLogin().defaultSuccessUrl("/home/").loginPage("/login")
 	            .usernameParameter("user").passwordParameter("password")
-		        .and().exceptionHandling().accessDeniedPage ("/logoutsession")
+	            .successHandler(myAuthenticationSuccessHandler())
+	            .and().exceptionHandling().accessDeniedPage ("/logoutsession")
+		        .and()
+	            .logout().deleteCookies("JSESSIONID")
+	            .and()
+	            .rememberMe().key("uniqueAndSecret").tokenValiditySeconds(86400)
 		        .and().csrf().disable();
    }
+	    
+	    @Bean
+	    public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
+	        return new MySimpleUrlAuthenticationSuccessHandler();
+	    }
 	    
 	    @Autowired
 	    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

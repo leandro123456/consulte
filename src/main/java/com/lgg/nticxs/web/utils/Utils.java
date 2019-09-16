@@ -502,7 +502,7 @@ public class Utils {
 				case "sonofftwo":
 					if(atributosDeLaVista[i].equals("sonoffbody")) {
 						String cuerpoSonoff= vista.getContenido().get("sonoffbody").replaceAll("CAMBIARSONOFF", serialDevice);
-						System.out.println("este es el cuuerpo del  SONOFF: "+ cuerpoSonoff);
+						//System.out.println("este es el cuuerpo del  SONOFF: "+ cuerpoSonoff);
 						cuerpoSonoff=cuerpoSonoff.replaceAll("HOSTSONOFF", devconfig.getIphostescribir());
 						cuerpoSonoff=cuerpoSonoff.replaceAll("PORTSONOFF", devconfig.getPortescribir());
 						cuerpoSonoff=cuerpoSonoff.replaceAll("USERSONOFF", devconfig.getUserescribir());
@@ -533,7 +533,7 @@ public class Utils {
 				else
 				inicio = vista.getInicio();
 			String vistatotal = inicio+contenidototal+vista.getFin();
-			System.out.println("vista total: "+ vistatotal);
+			//System.out.println("vista total: "+ vistatotal);
 			return vistatotal;
 		}
 

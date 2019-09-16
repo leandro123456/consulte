@@ -207,7 +207,7 @@
         </div>
         <div class="modal-body">está listo para finalizar su sesión actual?</div>
         <div class="modal-footer">
-          <form role="form" action="<c:url value="/login"/>" method="get" enctype="multipart/form-data">
+          <form role="form" action="<c:url value="/logoutsession"/>" method="get" enctype="multipart/form-data">
           	<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
           	<a class="btn btn-primary" href="javascript:;" onclick="parentNode.submit();">Salir</a>
           </form>

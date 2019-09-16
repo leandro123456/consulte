@@ -78,11 +78,35 @@ public class HomeController {
 		    	role=grantedAuthority.getAuthority();
 		    	model.addAttribute("role", role);
 		    }
-		} catch (Exception e) {
-			e.printStackTrace();
-		}	
+	
 		
+		if(request == null || request.getUserPrincipal() ==null){
+			System.out.println("SESION NO INICIADA!!");
+			return new ModelAndView("login", model); 
+		}
 		
+		System.out.println("copie informacion de las cookies... home");
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+        	System.out.println(Arrays.stream(cookies)
+                    .map(c -> c.getName() + "=" + c.getValue()).collect(Collectors.joining(", ")));
+        	
+        	for (Cookie coo: cookies){
+            	System.out.println("cookies HOME: "+ coo.getName());
+            	System.out.println("cookie valor HOME :"+ coo.getValue());
+                //Guardo la cookie dentro del usuario
+                UserDAO userdao = new UserDAO();
+                System.out.println("MI SIMPLE - busco el usuario: "+ authentication.getName());
+                User user = userdao.retrieveByMail(authentication.getName());
+                if (user != null && coo.getName().equals("JSESSIONID")){
+                	user.setCookie(coo.getValue());
+                	userdao.update(user);
+                }else{
+                	System.out.println("no se puede guardar la Cookie el usuario es null");
+                }
+            }
+		}	    
+ 
 		String nombre = request.getUserPrincipal().getName();
 		User user = userdao.retrieveByMail(nombre);
 		System.out.println("USUARIO CONSEGUIDO +++++++++++++++++++++"+user);
@@ -125,6 +149,11 @@ public class HomeController {
         model.addAttribute("topicosalarmas", topicosdeAlarma);
         //fin de alarmas
    		return new ModelAndView("origin", model);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("ERROR en el inicio de la sesion - AFUERA");
+			return new ModelAndView("logoutsession", model);
+		}
 	}
 
 
