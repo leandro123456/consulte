@@ -82,6 +82,20 @@ public class HomeController {
 			e.printStackTrace();
 		}	
 		
+		System.out.println("todas la cookies entro en otro EN EL HOME");
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for(Cookie coo : cookies){
+				User user = userdao.retrieveByCookie(coo.getValue());
+				System.out.println("la cookie encontrada HOME: " + coo.getValue());
+			}
+		}else
+			System.out.println("las cookies que llegan aca estan EN NULL");
+		
+		if(request == null) {
+			System.out.println("el request es NULL ");
+			return new ModelAndView("login", model); 
+		}
 		
 		String nombre = request.getUserPrincipal().getName();
 		User user = userdao.retrieveByMail(nombre);

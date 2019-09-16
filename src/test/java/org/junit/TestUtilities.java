@@ -251,7 +251,7 @@ public class TestUtilities {
 		}
 	}
 	
-	@Test
+	//@Test
 	public void createDevice(){
 		DeviceDAO devdao = new DeviceDAO();
 		if(devdao.retrieveBySerialNumber("111122222222") ==null)

@@ -11,20 +11,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.Filter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
-import com.lgg.nticxs.web.DAO.RolesDAO;
-import com.lgg.nticxs.web.model.Role;
-
-
+import com.lgg.nticxs.web.config.security.cookie.MySimpleUrlAuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -39,67 +40,56 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 
 
-	    @Override
-	    public void configure(HttpSecurity http) throws Exception {
-	    	
-//	    	
-//	    	RolesDAO roledao = new RolesDAO();
-//	    	List<Role> listRole = roledao.retrieveAll();
-//	    	String access = "";
-//	    	
-//	    	for (Role role : listRole) {
-//	    		access = access + "hasAuthority('" + role.getNameRole() + "') or ";
-//	    	}
-	    	//http.servletApi();
-//	        http
-//	        .authorizeRequests()
-//	        .antMatchers("/").permitAll()
-//	        .antMatchers("/signup").permitAll()
-//	        .antMatchers("/home/").access(access.substring(0, (access.length() - 4)))
-//	        .and().formLogin().defaultSuccessUrl("/home/").loginPage("/login")
-//            .usernameParameter("user").passwordParameter("password")
-//	        .and().exceptionHandling().accessDeniedPage ("/logoutsession")
-//	        .and().csrf().disable();
-	        
-	        
-	  //funciono
-//	        .authorizeRequests()
-//	            .anyRequest().authenticated()
-//	            .and()
-//	        .formLogin().loginPage("/login")
-//	        .permitAll()
-//	            .and()
-//	        .logout()
-//	        .permitAll();
-	        
-	    	
-//	    	RolesDAO roledao = new RolesDAO();
-//	    	List<Role> listRole = roledao.retrieveAll();
-//	    	String access = "";
-//	    	
-//	    	for (Role role : listRole) {
-//	    		access = access + "hasAuthority('" + role.getNameRole() + "') or ";
-//	    	}
-	        
-	    	http.servletApi();
-			http.authorizeRequests()
-				.antMatchers("/").permitAll()
-				.antMatchers("/signup").permitAll()
-		        .antMatchers("/home/").permitAll()
-		        .and().formLogin().defaultSuccessUrl("/home/").loginPage("/login")
-	            .usernameParameter("user").passwordParameter("password")
-		        .and().exceptionHandling().accessDeniedPage ("/logoutsession")
-		        .and().csrf().disable();
+	@Override
+	public void configure(HttpSecurity http) throws Exception {
+
+		http
+		.csrf().disable()
+		.authorizeRequests()
+		.antMatchers("/anonymous*").anonymous()
+		.antMatchers("/","/login*","/signup").permitAll()
+		.anyRequest().authenticated()
+		//.antMatchers("/home/").permitAll()
+		.and()
+		.formLogin()
+		//.defaultSuccessUrl("/home/")
+		.loginPage("/login")
+		.loginProcessingUrl("/login")
+		.successHandler(successHandler())
+		.failureUrl("/login.jsp?error=true")
+		.usernameParameter("user").passwordParameter("password")
+		.and()
+		.logout().deleteCookies("JSESSIONID")
+		.and()
+		.rememberMe().key("uniqueAndSecret").tokenValiditySeconds(86400)
+		.and()
+		.sessionManagement()
+		.sessionFixation().migrateSession()
+		.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+		.invalidSessionUrl("/login")
+		.maximumSessions(2)
+		.expiredUrl("/login");
    }
 	    
-	    @Autowired
+	    private AuthenticationSuccessHandler successHandler() {
+	        return new MySimpleUrlAuthenticationSuccessHandler();
+	    }
+
+	    
+		@Autowired
 	    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 	        auth
 	            .inMemoryAuthentication()
 	                .withUser("user").password("password").roles("USER").and()
 	                .withUser("user").password("password").roles("USER", "ADMIN");
 	    }
-	
+	    
+ 
+		@Bean
+		public HttpSessionEventPublisher httpSessionEventPublisher() {
+		    return new HttpSessionEventPublisher();
+		}
+	    
 
 	    @Bean
 	    public AuthenticationFailureHandler authenticationFailureHandler() {

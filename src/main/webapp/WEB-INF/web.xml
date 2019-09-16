@@ -10,9 +10,11 @@
 
 <!-- 	la	duracion de la session ya estaba comentada -->
 	<session-config>
-	    <session-timeout>1</session-timeout>
+	    <session-timeout>10</session-timeout>
 	</session-config>
+	
 </web-app>
 
 
 <!-- ****** lo nuevo ***** -->
+
