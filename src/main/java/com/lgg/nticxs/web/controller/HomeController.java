@@ -43,29 +43,29 @@ public class HomeController {
 	private List<String> topicosdeAlarma = new ArrayList<>();
 	//Integer trimestreActual = Utils.TrimestreActual();
 	
-	@GetMapping("homepage/")
-    public ModelAndView pageLoad(HttpServletRequest request, ModelMap model) {
-		String role= "";
-		try {
-			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			@SuppressWarnings("unchecked")
-			Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) authentication.getAuthorities();
-		    for (GrantedAuthority grantedAuthority : authorities) {
-		    	role=grantedAuthority.getAuthority();
-		    	model.addAttribute("role", role);
-		    }
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		String nombre = request.getUserPrincipal().getName();
-		model.addAttribute("usuario", nombre);
-		if(role.equals("ADMINISTRATIVO") || role.equals("DOCENTE") || role.equals("ADMIN")) {
-			return new ModelAndView("redirect:/home/provisioning", model);
-		}else {
-			return new ModelAndView("redirect:/home", model);
-
-		}	
-    }
+//	@GetMapping("homepage/")
+//    public ModelAndView pageLoad(HttpServletRequest request, ModelMap model) {
+//		String role= "";
+//		try {
+//			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//			@SuppressWarnings("unchecked")
+//			Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) authentication.getAuthorities();
+//		    for (GrantedAuthority grantedAuthority : authorities) {
+//		    	role=grantedAuthority.getAuthority();
+//		    	model.addAttribute("role", role);
+//		    }
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		String nombre = request.getUserPrincipal().getName();
+//		model.addAttribute("usuario", nombre);
+//		if(role.equals("ADMINISTRATIVO") || role.equals("DOCENTE") || role.equals("ADMIN")) {
+//			return new ModelAndView("redirect:/home/provisioning", model);
+//		}else {
+//			return new ModelAndView("redirect:/home", model);
+//
+//		}	
+//    }
 	
 	@RequestMapping("/home")
 	public ModelAndView books( HttpServletRequest request, ModelMap model){
@@ -79,24 +79,8 @@ public class HomeController {
 		    	model.addAttribute("role", role);
 		    }
 	
-		
-<<<<<<< HEAD
 		if(request == null || request.getUserPrincipal() ==null){
 			System.out.println("SESION NO INICIADA!!");
-=======
-		System.out.println("todas la cookies entro en otro EN EL HOME");
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
-			for(Cookie coo : cookies){
-				User user = userdao.retrieveByCookie(coo.getValue());
-				System.out.println("la cookie encontrada HOME: " + coo.getValue());
-			}
-		}else
-			System.out.println("las cookies que llegan aca estan EN NULL");
-		
-		if(request == null) {
-			System.out.println("el request es NULL ");
->>>>>>> b0b3a5dbd23b26abe0e092d2cec1927a22f2a7e6
 			return new ModelAndView("login", model); 
 		}
 		
@@ -111,7 +95,7 @@ public class HomeController {
             	System.out.println("cookie valor HOME :"+ coo.getValue());
                 //Guardo la cookie dentro del usuario
                 UserDAO userdao = new UserDAO();
-                System.out.println("MI SIMPLE - busco el usuario: "+ authentication.getName());
+                System.out.println("HOME CONTROLLER - busco el usuario: "+ authentication.getName());
                 User user = userdao.retrieveByMail(authentication.getName());
                 if (user != null && coo.getName().equals("JSESSIONID")){
                 	user.setCookie(coo.getValue());
@@ -120,6 +104,8 @@ public class HomeController {
                 	System.out.println("no se puede guardar la Cookie el usuario es null");
                 }
             }
+        	System.out.println("creo cookie asociada al usuario");
+        	Cookie nuevac = new Cookie(Base64.getEncoder().encode(authentication.getName().getBytes()), value);
 		}	    
  
 		String nombre = request.getUserPrincipal().getName();

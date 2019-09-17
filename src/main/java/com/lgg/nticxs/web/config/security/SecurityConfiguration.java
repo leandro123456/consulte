@@ -2,7 +2,6 @@ package com.lgg.nticxs.web.config.security;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties.Filter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -24,16 +22,8 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
-
-<<<<<<< HEAD
-import com.lgg.nticxs.web.DAO.RolesDAO;
 import com.lgg.nticxs.web.config.security.cookies.MySimpleUrlAuthenticationSuccessHandler;
-import com.lgg.nticxs.web.model.Role;
 
-
-=======
-import com.lgg.nticxs.web.config.security.cookie.MySimpleUrlAuthenticationSuccessHandler;
->>>>>>> b0b3a5dbd23b26abe0e092d2cec1927a22f2a7e6
 
 @Configuration
 @EnableWebSecurity
@@ -48,72 +38,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 
 
-<<<<<<< HEAD
-	    @Override
-	    public void configure(HttpSecurity http) throws Exception {
-	    	
-//	    	
-//	    	RolesDAO roledao = new RolesDAO();
-//	    	List<Role> listRole = roledao.retrieveAll();
-//	    	String access = "";
-//	    	
-//	    	for (Role role : listRole) {
-//	    		access = access + "hasAuthority('" + role.getNameRole() + "') or ";
-//	    	}
-	    	//http.servletApi();
-//	        http
-//	        .authorizeRequests()
-//	        .antMatchers("/").permitAll()
-//	        .antMatchers("/signup").permitAll()
-//	        .antMatchers("/home/").access(access.substring(0, (access.length() - 4)))
-//	        .and().formLogin().defaultSuccessUrl("/home/").loginPage("/login")
-//            .usernameParameter("user").passwordParameter("password")
-//	        .and().exceptionHandling().accessDeniedPage ("/logoutsession")
-//	        .and().csrf().disable();
-	        
-	        
-	  //funciono
-//	        .authorizeRequests()
-//	            .anyRequest().authenticated()
-//	            .and()
-//	        .formLogin().loginPage("/login")
-//	        .permitAll()
-//	            .and()
-//	        .logout()
-//	        .permitAll();
-	        
-	    	
-//	    	RolesDAO roledao = new RolesDAO();
-//	    	List<Role> listRole = roledao.retrieveAll();
-//	    	String access = "";
-//	    	
-//	    	for (Role role : listRole) {
-//	    		access = access + "hasAuthority('" + role.getNameRole() + "') or ";
-//	    	}
-	        
-	    	//http.servletApi();
-			http.authorizeRequests()
-				.antMatchers("/").permitAll()
-				.antMatchers("/signup").permitAll()
-		        .antMatchers("/home/").permitAll()
-		        .and().formLogin().defaultSuccessUrl("/home/").loginPage("/login")
-	            .usernameParameter("user").passwordParameter("password")
-	            .successHandler(myAuthenticationSuccessHandler())
-	            .and().exceptionHandling().accessDeniedPage ("/logoutsession")
-		        .and()
-	            .logout().deleteCookies("JSESSIONID")
-	            .and()
-	            .rememberMe().key("uniqueAndSecret").tokenValiditySeconds(86400)
-		        .and().csrf().disable();
-   }
-	    
-	    @Bean
-	    public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
-	        return new MySimpleUrlAuthenticationSuccessHandler();
-	    }
-	    
-	    @Autowired
-=======
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 
@@ -147,16 +71,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    
 	    private AuthenticationSuccessHandler successHandler() {
 	        return new MySimpleUrlAuthenticationSuccessHandler();
-	    }
-
-	    
-		@Autowired
->>>>>>> b0b3a5dbd23b26abe0e092d2cec1927a22f2a7e6
-	    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-	        auth
-	            .inMemoryAuthentication()
-	                .withUser("user").password("password").roles("USER").and()
-	                .withUser("user").password("password").roles("USER", "ADMIN");
 	    }
 	    
  
