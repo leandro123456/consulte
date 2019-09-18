@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lgg.nticxs.web.utils.EncryptorPassword;
@@ -56,54 +58,50 @@ public class LoginController{
     public String redirect(
     		Model model,HttpServletRequest request, HttpServletResponse response) {
     	System.out.println("LLEGO A LA BARRA!!!");	    
-        return "redirect:/login";
+        return "redirect:/home";
     }
 
+	
+	
+//    @RequestMapping(value = "/login", method = RequestMethod.POST)
+//    public void login(@RequestParam("username") final String username, @RequestParam("password") final String password, final HttpServletRequest request) {
+//        UsernamePasswordAuthenticationToken authReq =
+//            new UsernamePasswordAuthenticationToken(username, password);
+//        Authentication auth = authManager.authenticate(authReq);
+//        SecurityContext sc = SecurityContextHolder.getContext();
+//        sc.setAuthentication(auth);
+//        HttpSession session = request.getSession(true);
+//        session.setAttribute("SPRING_SECURITY_CONTEXT", sc);
+//    }
+	
 	@GetMapping("/login")
-	public String login(@RequestParam(value="incorrectcredentials", required=false) boolean incorrectcredentials,
+	public String logini(@RequestParam(value="incorrectcredentials", required=false) boolean incorrectcredentials,
 			@RequestParam(value="incorrecttoken", required=false) boolean incorrecttoken,
 			Model model, 
 			HttpServletRequest request, HttpServletResponse response,
 			@ModelAttribute("user") String userName,
 			@ModelAttribute("password") String password) {
-    	System.out.println("valoes ingresados previos al login: "+userName);
-    	System.out.println("valoes ingresados pass previo al login: "+password);
     	
     	
-		System.out.println("ENTRO EN LOGIN ...todas la cookies");
-		Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-//        	System.out.println(Arrays.stream(cookies)
-//                    .map(c -> c.getName() + "=" + c.getValue()).collect(Collectors.joining(", ")));
-        	for(Cookie coo : cookies){
-        		System.out.println("valor de la cookies: "+coo.getName()+ " = "+coo.getValue());		
-//        		byte[] decodedBytes = Base64.getDecoder().decode(coo.getValue().getBytes());
-//        		String decodedString = new String(decodedBytes);
-        		
-        		User user = userdao.retrieveByCookie(coo.getValue());
-        		if (user != null){
-        			System.out.println("encontro al usuario++++++++++++++++++");
-        			
-        			
-        			   UsernamePasswordAuthenticationToken authReq
-        			      = new UsernamePasswordAuthenticationToken(user, user.getPassword());
-//        			    Authentication auth = authManager.authenticate(authReq);
-        			     
-        			    SecurityContext sc = SecurityContextHolder.getContext();
-//        			    sc.setAuthentication(auth);
-        			    HttpSession session = request.getSession(true);
-        			    session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, sc);
-        			System.out.println("ahora si te redirijo");
-        			return "redirect:/home";
-        		}else{
-        			System.out.println("me quedo en el login");
-        		}
-        	}
-        	
-        }
+		System.out.println("ENTRO EN LOGIN LORO ...todas la cookies");
+//		Cookie[] cookies = request.getCookies();
+//        if (cookies != null) {
+//        	for(Cookie coo : cookies){
+//        		System.out.println("valor de la cookies: "+coo.getName()+ " = "+coo.getValue());		        		
+//        		User user = userdao.retrieveByCookie(coo.getValue());
+//        		if (user != null){
+//        			System.out.println("encontro al usuario++++++++++++++++++");
+//        			System.out.println("ahora si te redirijo");
+//        			return "redirect:/home";
+//        		}else{
+//        			System.out.println("me quedo en el login");
+//        		}
+//        	}
+//        	
+//        }
     	
 		if(!userName.equals("") && !password.equals("")) {
-			model.addAttribute("user", userName);
+  		model.addAttribute("user", userName);
 			model.addAttribute("password", password);
 		}
 
@@ -152,7 +150,7 @@ public class LoginController{
 			String formulario = String.format("%s%s%s%s", cabecera, body, "<br/> <br/>", pie);
 			Utils.sendMail(formulario, email);
     	}
-    	return "login";
+    	return "redirect:/login";
     }
     
     @GetMapping("/signup")

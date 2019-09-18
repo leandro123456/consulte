@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -33,6 +34,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         super();
     }
 	
+    @Bean("authenticationManager")
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+            return super.authenticationManagerBean();
+    }
+    
 	@Autowired
 	private CustomAuthenticationProvider authProvider;
 	
@@ -52,17 +59,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.anyRequest().authenticated()
 		//.antMatchers("/home/").permitAll()
 		.and()
+        .rememberMe().key("uniqueAndSecret").tokenValiditySeconds(86400)
+        
+		.and()
 		.formLogin()
 		//.defaultSuccessUrl("/home/")
 		.loginPage("/login")
 		.loginProcessingUrl("/login")
 		.successHandler(successHandler())
 		.failureUrl("/login.jsp?error=true")
-		//.usernameParameter("user").passwordParameter("password")
+		.usernameParameter("user").passwordParameter("password")
 		.and()
 		.logout().deleteCookies("JSESSIONID")
-		.and()
-		.rememberMe().key("uniqueAndSecret").tokenValiditySeconds(86400)
+
+        
+		
 		.and()
 		.sessionManagement()
 		.sessionFixation().migrateSession()
