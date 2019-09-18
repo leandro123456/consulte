@@ -105,7 +105,7 @@ public class HomeController {
                 }
             }
         	System.out.println("creo cookie asociada al usuario");
-        	Cookie nuevac = new Cookie(Base64.getEncoder().encode(authentication.getName().getBytes()), value);
+        //	Cookie nuevac = new Cookie(Base64.getEncoder().encode(authentication.getName().getBytes()), value);
 		}	    
  
 		String nombre = request.getUserPrincipal().getName();

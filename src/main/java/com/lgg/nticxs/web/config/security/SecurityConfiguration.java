@@ -26,9 +26,13 @@ import com.lgg.nticxs.web.config.security.cookies.MySimpleUrlAuthenticationSucce
 
 
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+	public SecurityConfiguration() {
+        super();
+    }
+	
 	@Autowired
 	private CustomAuthenticationProvider authProvider;
 	
@@ -40,7 +44,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-
 		http
 		.csrf().disable()
 		.authorizeRequests()
@@ -55,7 +58,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.loginProcessingUrl("/login")
 		.successHandler(successHandler())
 		.failureUrl("/login.jsp?error=true")
-		.usernameParameter("user").passwordParameter("password")
+		//.usernameParameter("user").passwordParameter("password")
 		.and()
 		.logout().deleteCookies("JSESSIONID")
 		.and()
