@@ -9,10 +9,8 @@
 	<meta name="author" content="">
 
 
-<link rel="stylesheet" type="text/css"
-	href='<c:url value="/resources/mqttResources/style.css" />'>
-<link rel="stylesheet" type="text/css"
-	href='<c:url value="/resources/mqttResources/c3.min.css" />'>
+<link rel="stylesheet" type="text/css" 	href='<c:url value="/resources/mqttResources/style.css" />'>
+<link rel="stylesheet" type="text/css" 	href='<c:url value="/resources/mqttResources/c3.min.css" />'>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.min.js"
 	type="text/javascript"></script>
