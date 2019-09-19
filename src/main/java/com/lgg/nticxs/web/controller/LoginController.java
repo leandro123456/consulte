@@ -2,6 +2,8 @@ package com.lgg.nticxs.web.controller;
 
 
 import org.springframework.core.annotation.SynthesizedAnnotation;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
@@ -56,55 +58,17 @@ public class LoginController{
 
 	@GetMapping("/")
     public String redirect(
-    		Model model,HttpServletRequest request, HttpServletResponse response) {
-    	System.out.println("LLEGO A LA BARRA!!!");	    
+    		Model model,HttpServletRequest request, HttpServletResponse response) {   
         return "redirect:/home";
     }
 
-	
-	
-//    @RequestMapping(value = "/login", method = RequestMethod.POST)
-//    public void login(@RequestParam("username") final String username, @RequestParam("password") final String password, final HttpServletRequest request) {
-//        UsernamePasswordAuthenticationToken authReq =
-//            new UsernamePasswordAuthenticationToken(username, password);
-//        Authentication auth = authManager.authenticate(authReq);
-//        SecurityContext sc = SecurityContextHolder.getContext();
-//        sc.setAuthentication(auth);
-//        HttpSession session = request.getSession(true);
-//        session.setAttribute("SPRING_SECURITY_CONTEXT", sc);
-//    }
-	
+		
 	@GetMapping("/login")
 	public String logini(@RequestParam(value="incorrectcredentials", required=false) boolean incorrectcredentials,
 			@RequestParam(value="incorrecttoken", required=false) boolean incorrecttoken,
 			Model model, 
-			HttpServletRequest request, HttpServletResponse response,
-			@ModelAttribute("user") String userName,
-			@ModelAttribute("password") String password) {
+			HttpServletRequest request, HttpServletResponse response) {
     	
-    	
-		System.out.println("ENTRO EN LOGIN LORO ...todas la cookies");
-//		Cookie[] cookies = request.getCookies();
-//        if (cookies != null) {
-//        	for(Cookie coo : cookies){
-//        		System.out.println("valor de la cookies: "+coo.getName()+ " = "+coo.getValue());		        		
-//        		User user = userdao.retrieveByCookie(coo.getValue());
-//        		if (user != null){
-//        			System.out.println("encontro al usuario++++++++++++++++++");
-//        			System.out.println("ahora si te redirijo");
-//        			return "redirect:/home";
-//        		}else{
-//        			System.out.println("me quedo en el login");
-//        		}
-//        	}
-//        	
-//        }
-    	
-		if(!userName.equals("") && !password.equals("")) {
-  		model.addAttribute("user", userName);
-			model.addAttribute("password", password);
-		}
-
 		if(incorrectcredentials) {
 			model.addAttribute("msg1", "Error ... el usuario o la contraseña son incorrectas. Por favor verifiquelo e intente nuevamente");
 			model.addAttribute("incorrectcredentials", true);}
@@ -237,6 +201,7 @@ public class LoginController{
     	
     }
 
+    
     @GetMapping("/logoutsession")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -246,8 +211,19 @@ public class LoginController{
         }
 
         System.out.println("VA A SALIR!!!");
-        response.resetBuffer(); 
+        HttpSession session= request.getSession(false);
         SecurityContextHolder.clearContext();
+             session= request.getSession(false);
+            if(session != null) {
+                session.invalidate();
+            }
+            System.out.println("CANTIDAD DE COOKIES: "+ request.getCookies().length);
+            for(Cookie cookie : request.getCookies()) {
+                System.out.println("tiempo de vida de la cookie: "+ cookie.getMaxAge());
+            	cookie.setMaxAge(0);
+            	response.addCookie(cookie);
+            }
+            
         System.out.println("SE BORRO EL CONTEXTO");
         return "redirect:/login";
     }

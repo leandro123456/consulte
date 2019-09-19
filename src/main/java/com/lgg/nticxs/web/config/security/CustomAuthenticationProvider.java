@@ -34,8 +34,12 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 				if (name.equals(user.getEmail()) && password.equals(EncryptorPassword.decrypt(user.getPassword()))) {
 					System.out.println("ACA VALIDO EL USUARIO Y PASS!!!!");
 					List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+					System.out.println("BUSCO AUTORIDADES");
 					authorities.add(new SimpleGrantedAuthority(user.getRole()));
-					return new UsernamePasswordAuthenticationToken(user.getEmail(),user.getPassword(), authorities);
+					System.out.println("traigo el rol del usuario");
+					UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user.getEmail(),user.getPassword(), authorities); 
+					System.out.println("GENERO TOKEN");
+					return token;
 				} else {
 					System.out.println("Login failed"+ "Invalid date. User name = " + user.getEmail());
 				}

@@ -13,12 +13,15 @@ import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.lgg.nticxs.web.DAO.UserDAO;
 
 
 @SpringBootApplication
 @EnableAutoConfiguration(exclude= {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class})
+@SessionAttributes("authorizationRequest")
 public class AppInitializer extends SpringBootServletInitializer{	
 	
 	

@@ -37,11 +37,6 @@
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
-<!--                 <configuration> -->
-<!--                     <url>http://localhost:9090</url> -->
-<!--                     <username>joe</username> -->
-<!--                     <password>joe</password> -->
-<!--                 </configuration> -->
             </plugin>
             </plugins>
     </build>
@@ -49,7 +44,8 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 	    <artifactId>spring-boot-starter-parent</artifactId>
-	    <version>2.0.3.RELEASE</version>
+<!-- 	    <version>2.0.3.RELEASE</version> -->
+		<version>2.0.9.RELEASE</version>
 	</parent>
     
     <dependencies>
@@ -62,12 +58,16 @@
 <!-- 	************************  MANEJO DE SESSION   **************************** -->	
 
 <!-- https://mvnrepository.com/artifact/com.codahale.metrics/metrics-core -->
-<dependency>
-    <groupId>com.codahale.metrics</groupId>
-    <artifactId>metrics-core</artifactId>
-    <version>3.0.2</version>
-</dependency>
+<!-- <dependency> -->
+<!--     <groupId>com.codahale.metrics</groupId> -->
+<!--     <artifactId>metrics-core</artifactId> -->
+<!--     <version>3.0.2</version> -->
+<!-- </dependency> -->
 
+<!-- 	<dependency> -->
+<!--     <groupId>org.springframework.boot</groupId> -->
+<!--     <artifactId>spring-boot-starter-thymeleaf</artifactId> -->
+<!-- </dependency> -->
 	
 <!-- 		<dependency> -->
 <!-- 			<groupId>org.springframework.session</groupId> -->
@@ -127,12 +127,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-		<!-- Spring Boot Tomcat -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
 		</dependency>
 		
 		

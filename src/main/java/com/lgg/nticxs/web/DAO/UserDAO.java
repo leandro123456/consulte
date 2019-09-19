@@ -17,7 +17,7 @@ public class UserDAO extends MongoDBClient<User>{
 		super(User.class);
 	}
 
-	public List<User> retrieveAll() {
+	public List<User> retrieveAllUsers() {
 		return this.retrieveAll();
 	}
 	

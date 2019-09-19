@@ -61,7 +61,7 @@ public class DeviceController {
 		if(device.getUserowner().equals(nombredelejecutor)){
 		try {
 			MongoCommands.Delete(COLLECTION_DEVICE, "serialnumber", deviceserial);
-			for(User user: userdao.retrieveAll()) {
+			for(User user: userdao.retrieveAllUsers()) {
 				int index = user.getDeviceserialnumber().indexOf(deviceserial);
 				if (index != -1) {
 					user.getDeviceserialnumber().remove(index);

@@ -18,16 +18,23 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.User.UserBuilder;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
+
+import com.lgg.nticxs.web.DAO.UserDAO;
 import com.lgg.nticxs.web.config.security.cookies.MySimpleUrlAuthenticationSuccessHandler;
+import com.lgg.nticxs.web.config.security.cookies.MyUserDetailsService;
 
 
 @Configuration
-//@EnableWebSecurity
+@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	public SecurityConfiguration() {
@@ -48,46 +55,59 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		auth.authenticationProvider(authProvider);
 	}
 
-
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http
-		.csrf().disable()
+		//.csrf().disable()
 		.authorizeRequests()
 		.antMatchers("/anonymous*").anonymous()
-		.antMatchers("/","/login*","/signup").permitAll()
+		.antMatchers("/","/login","/signup").permitAll()
+	//	.antMatchers("/login*").permitAll()
 		.anyRequest().authenticated()
-		//.antMatchers("/home/").permitAll()
-		.and()
-        .rememberMe().key("uniqueAndSecret").tokenValiditySeconds(86400)
-        
+
+     
 		.and()
 		.formLogin()
-		//.defaultSuccessUrl("/home/")
 		.loginPage("/login")
 		.loginProcessingUrl("/login")
 		.successHandler(successHandler())
-		.failureUrl("/login.jsp?error=true")
+		.failureUrl("/login?error=true")
 		.usernameParameter("user").passwordParameter("password")
-		.and()
-		.logout().deleteCookies("JSESSIONID")
+		.and().exceptionHandling().accessDeniedPage ("/logoutsession")
 
-        
-		
 		.and()
-		.sessionManagement()
-		.sessionFixation().migrateSession()
-		.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-		.invalidSessionUrl("/login")
-		.maximumSessions(2)
-		.expiredUrl("/login");
+        .rememberMe().key("uniqueAndSecret") 
+        .userDetailsService(MyUserDetails())
+		
+        .and()
+        .csrf().disable()
+        ;
+		
+	    http.logout()
+        .clearAuthentication(true)
+        .invalidateHttpSession(true)
+        
+		.and()
+		.logout().deleteCookies("JSESSIONID");
+		
+		//.and()
+//		.sessionManagement()
+//		.sessionFixation().migrateSession()
+//		.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+//		.invalidSessionUrl("/login")
+//		.maximumSessions(12)
+//		.expiredUrl("/login");
    }
 	    
 	    private AuthenticationSuccessHandler successHandler() {
 	        return new MySimpleUrlAuthenticationSuccessHandler();
 	    }
 	    
+	    private UserDetailsService MyUserDetails(){
+	    	return new MyUserDetailsService();
+	    }
  
+	    
 		@Bean
 		public HttpSessionEventPublisher httpSessionEventPublisher() {
 		    return new HttpSessionEventPublisher();
