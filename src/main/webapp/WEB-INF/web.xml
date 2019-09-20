@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<filter>
+    <filter-name>HeaderSecurityFilter</filter-name>
+    <filter-class>org.apache.catalina.filters.HttpHeaderSecurityFilter</filter-class>
+</filter>
+
+<filter-mapping>
+    <filter-name>HeaderSecurityFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>

@@ -21,7 +21,7 @@ import com.lgg.nticxs.web.DAO.UserDAO;
 
 @SpringBootApplication
 @EnableAutoConfiguration(exclude= {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class})
-@SessionAttributes("authorizationRequest")
+//@SessionAttributes("authorizationRequest")
 public class AppInitializer extends SpringBootServletInitializer{	
 	
 	
@@ -35,11 +35,11 @@ public class AppInitializer extends SpringBootServletInitializer{
 		SpringApplication.run(AppInitializer.class, args);
 	}
 	
-	@Override
-    public void onStartup(ServletContext sc) throws ServletException {
-        sc.getSessionCookieConfig().setHttpOnly(true);        
-        sc.getSessionCookieConfig().setSecure(true);        
-    }
+//	@Override
+//    public void onStartup(ServletContext sc) throws ServletException {
+//        sc.getSessionCookieConfig().setHttpOnly(true);        
+//        sc.getSessionCookieConfig().setSecure(true);        
+//    }
 
 	@Bean
 	public UserDAO userDao() {

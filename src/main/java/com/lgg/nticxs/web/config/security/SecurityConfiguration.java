@@ -61,7 +61,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		//.csrf().disable()
 		.authorizeRequests()
 		.antMatchers("/anonymous*").anonymous()
-		.antMatchers("/","/login","/signup").permitAll()
+		.antMatchers("/","/login","/signup","forgot-password").permitAll()
 	//	.antMatchers("/login*").permitAll()
 		.anyRequest().authenticated()
 
@@ -86,17 +86,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    http.logout()
         .clearAuthentication(true)
         .invalidateHttpSession(true)
-        
 		.and()
 		.logout().deleteCookies("JSESSIONID");
-		
-		//.and()
-//		.sessionManagement()
-//		.sessionFixation().migrateSession()
-//		.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-//		.invalidSessionUrl("/login")
-//		.maximumSessions(12)
-//		.expiredUrl("/login");
    }
 	    
 	    private AuthenticationSuccessHandler successHandler() {
