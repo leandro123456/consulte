@@ -45,6 +45,7 @@
 							  closeOnClickOutside: false,
 							  buttons: false,
 							});
+						setTimeout('window.location.href = "/home/componentmyown";', 5000);
 					</script>
 				</c:if>
 				<c:if test="${not empty msg1}">
@@ -58,6 +59,7 @@
 							  closeOnClickOutside: false,
 							  buttons: false,
 							});
+						setTimeout('window.location.href = "/home/componentmyown";', 5000);
 					</script>
 				</c:if>	
           <div class="card shadow mb-4">

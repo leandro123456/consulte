@@ -241,20 +241,12 @@ public class DeviceController {
 				HashMap<String, String> vista =new HashMap<>();
 				switch (tipodevice) {
 				case "termometro":
-//					System.out.println("tipo: "+tipovistatermometro);
-//					System.out.println("humeedad: "+humedadtermometro);
-//					System.out.println("temp: "+tempctermometro);
-//					System.out.println("temp: "+tempftermometro);
-//					System.out.println("sensacion: "+sensacionctermometro);
-//					System.out.println("sensacion: "+sensacionftermometro);
-					//vista termometro por tipo de elemento
 					String termometrovista = armarVistaTermometro(tipovistatermometro,humedadtermometro,tempctermometro,tempftermometro,sensacionctermometro,sensacionftermometro);
 					System.out.println("termometro vista: "+ termometrovista);
 					vista.put(Base64.getEncoder().encodeToString(name.getBytes()), termometrovista);
 					device.setVista(vista);
 					break;
 				case "alarma":
-					//vista de alarma
 					String alarmavista = Vista.ALARMA+";alarmabody";
 					vista.put(Base64.getEncoder().encodeToString(name.getBytes()), alarmavista);
 					device.setVista(vista);
@@ -262,7 +254,7 @@ public class DeviceController {
 					break;
 				case "sonoff":
 					System.out.println("timer-string-recibido: "+ timerstringsonoff);
-					if(timerstringsonoff != null && timerstringsonoff!="")
+					if(timerstringsonoff != null && !timerstringsonoff.equals("") && !timerstringsonoff.equals(" "))
 						timerstringvalue=SimpleTimerString.maketimerStringFormat(timerstringsonoff);
 					device.setTimerString(timerstringvalue);
 					String host="";
@@ -326,14 +318,15 @@ public class DeviceController {
 			
 			//agrego la misma vista que el dueño en el nuevo usuario
 			String vistaprincipal = (String) device.getVista().get(device.getUserowner());
-			device.getVista().put(administrador, vistaprincipal);
+			System.out.println("555555555555555555555 ESTA ES LA VISTA PRINCIPAL: " +vistaprincipal);
+			device.getVista().put(Base64.getEncoder().encodeToString(administrador.getBytes()), vistaprincipal);
 			devicedao.update(device);
 			//actualizo el usuario
 			User user1 = userdao.retrieveByMail(administrador);
 			user1.getDeviceserialnumber().add(deviceserial);
 			userdao.update(user1);
-			System.out.println("actualizo el dispositivo agregando un nuevo admin");
-			model.addAttribute("msg1", "El dispositivo, ya existe usted se agrego como administrador, pero no como propietario del producto");
+			System.out.println("Actualizo el dispositivo agregando un nuevo admin");
+			System.out.println("El dispositivo, ya existe usted se agrego como administrador, pero no como propietario del producto");
 
 		}
 		return "redirect:/home";

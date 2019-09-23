@@ -175,7 +175,7 @@
 							</div>
 							<p></p>
 							<div id="vistastermometro">
-								<b>Tipo de Vista</b> <select id="tipovistatermometro"
+								<b>Vista de Termometro</b> <select id="tipovistatermometro"
 									class="form-control" onchange="changeTipoVistaTermometro()">
 									<option value="none">Seleccione uno</option>
 <!-- 									<option value="watches">Relojes</option> -->
@@ -185,7 +185,7 @@
 							
 							<p></p>
 							<div id="cantidadswith">
-								<b>Tipo de Vista</b> <select id="cantidadswiths"
+								<b>Cantidad de Swiths</b> <select id="cantidadswiths"
 									class="form-control">
 									<option value="none">Seleccione uno</option>
 									<option value="one">Uno</option>
@@ -808,17 +808,22 @@
 	        	contenidoserial = document.getElementById("serialnumber");
 	        	contenidoserial.value = "WTHUSB";
 	        	document.getElementById('tipodevice').value = 'termometro';
+	        	document.getElementById('tipovistatermometro').value = 'bars';
+	        	document.getElementById("tipovistatermometro").disabled = true;
 	        }if(valormodelo == "PSWS1"){ 
 	        	contenidoserial = document.getElementById("serialnumber");
 	        	contenidoserial.value = "PSWS1";
 	        	document.getElementById('tipodevice').value = 'sonoff';
+	        	document.getElementById('cantidadswiths').value = 'one';
+	        	document.getElementById("cantidadswiths").disabled = true;        	
 	        }if(valormodelo == "PSWS2"){ 
-	        	contenidoserial = document.getElementById("serialnumber");
-	        	contenidoserial.value = "PSWS2";
+	        	document.getElementById("serialnumber").value = "PSWS2";
 	        	document.getElementById('tipodevice').value = 'sonoff';
+	        	document.getElementById('cantidadswiths').value = 'two';
+	        	document.getElementById("cantidadswiths").disabled = true;
 	        }if(valormodelo == "BRDSC"){ 
 	        	contenidoserial = document.getElementById("serialnumber");
-	        	contenidoserial.value = "BRDSC01";
+	        	contenidoserial.value = "DSC01";
 	        	document.getElementById('tipodevice').value = 'alarma';
 	        }if(valormodelo == "PS3S1"){ 
 	        	contenidoserial = document.getElementById("serialnumber");
@@ -826,6 +831,7 @@
 	        	document.getElementById('tipodevice').value = 'sonoff';
 	        }
 	        console.log("este es el valor del tipo de DEVICE: "+ document.getElementById('tipodevice').value);
+	        enableType();
 	        document.getElementById("tipodevice").disabled = true;
   	}
 	</script>
