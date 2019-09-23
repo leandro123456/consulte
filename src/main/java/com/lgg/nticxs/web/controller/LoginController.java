@@ -232,8 +232,12 @@ public class LoginController{
     
     @GetMapping("/profileuser/{userId}")
     public String editProfile(Model model, @PathVariable String userId) {
-    	System.out.println("llego al controlador");
-    	User user= userdao.retrieveById(userId);
+    	System.out.println("llego al controlador de confirgracion de IPP");
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    	System.out.println("Edit profile - busco el usuario: "+ authentication.getName());
+        User user = userdao.retrieveByMail(authentication.getName());
+    	
+    	//User user= userdao.retrieveById(userId);
     	model.addAttribute("user", user);
     	return "user_edit_profile";
     }
@@ -246,8 +250,11 @@ public class LoginController{
     		@RequestParam(name="email", required=true) String email,
     		@RequestParam(name="newPass", required=true) String pass,
     		@RequestParam(name="newPass2", required=true) String pass2) {
+    	System.out.println("este es el USERID: "+ userId);
     	if(pass.equals(pass2)){
-    		User user= userdao.retrieveById(userId);
+    		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        	System.out.println("Edit profile - busco el usuario: "+ authentication.getName());
+            User user = userdao.retrieveByMail(authentication.getName());
     		user.setFirstname(firstname);
     		user.setLastname(lastname);
     		user.setEmail(email);
