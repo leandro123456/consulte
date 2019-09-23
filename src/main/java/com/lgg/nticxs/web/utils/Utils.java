@@ -442,7 +442,6 @@ public class Utils {
 				String vistatotal = armarVista(a,a[0],deviceserial);
 				lista.add(vistatotal);
 			}
-			System.out.println("elementos de la lista de vistas"+ lista.size());
 			return lista;
 		}
 
@@ -533,7 +532,6 @@ public class Utils {
 				else
 				inicio = vista.getInicio();
 			String vistatotal = inicio+contenidototal+vista.getFin();
-			//System.out.println("vista total: "+ vistatotal);
 			return vistatotal;
 		}
 

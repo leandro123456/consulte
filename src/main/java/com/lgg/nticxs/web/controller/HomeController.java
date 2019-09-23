@@ -41,31 +41,7 @@ public class HomeController {
 	private List<String> deviceAsociadoTermomtro = new ArrayList<>();
 	private List<String> deviceAsociadoSonoff = new ArrayList<>();
 	private List<String> topicosdeAlarma = new ArrayList<>();
-	//Integer trimestreActual = Utils.TrimestreActual();
-	
-//	@GetMapping("homepage/")
-//    public ModelAndView pageLoad(HttpServletRequest request, ModelMap model) {
-//		String role= "";
-//		try {
-//			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//			@SuppressWarnings("unchecked")
-//			Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) authentication.getAuthorities();
-//		    for (GrantedAuthority grantedAuthority : authorities) {
-//		    	role=grantedAuthority.getAuthority();
-//		    	model.addAttribute("role", role);
-//		    }
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		String nombre = request.getUserPrincipal().getName();
-//		model.addAttribute("usuario", nombre);
-//		if(role.equals("ADMINISTRATIVO") || role.equals("DOCENTE") || role.equals("ADMIN")) {
-//			return new ModelAndView("redirect:/home/provisioning", model);
-//		}else {
-//			return new ModelAndView("redirect:/home", model);
-//
-//		}	
-//    }
+
 	
 	@RequestMapping("/home")
 	public ModelAndView books( HttpServletRequest request, ModelMap model){
@@ -81,7 +57,7 @@ public class HomeController {
 	
 		if(request == null || request.getUserPrincipal() ==null){
 			System.out.println("SESION NO INICIADA!!");
-			return new ModelAndView("login", model); 
+			return new ModelAndView("/login", model); 
 		}
 		
 		System.out.println("copie informacion de las cookies... home");

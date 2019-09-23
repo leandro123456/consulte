@@ -146,8 +146,7 @@ public class DeviceController {
 	
 	
 	@PostMapping("home/create/{deviceserial}")
-	public String createDevice(Model model, @PathVariable String deviceserial,HttpServletRequest request,
-			
+	public String createDevice(Model model, @PathVariable String deviceserial,HttpServletRequest request,			
 			@RequestParam(name="serialnumber", required=true) String serialnumber,
 			@RequestParam(name="namedevice", required=false) String namedevice,
 			@RequestParam(name="descriptiondevice", required=false) String descriptiondevice,
@@ -156,7 +155,6 @@ public class DeviceController {
 			//vista sonoff
 			@RequestParam(name="timerstringsonoff", required=false) String timerstringsonoff,
 			@RequestParam(name="cantidadswiths", required=false) String cantidadswiths,
-			
 			
 			//termometro
 			@RequestParam(name="tipovistatermometro", required=false) String tipovistatermometro,
@@ -189,20 +187,17 @@ public class DeviceController {
 			@RequestParam(name="userescribirremote", required=false) String userescribirremote,
 			@RequestParam(name="passescribirremote", required=false) String passescribirremote
 			) {
-		System.out.println("llego al create!!");
-		System.out.println("serial: "+ deviceserial);
-		
 		if(devicedao.retrieveBySerialNumber(deviceserial) ==null){
 			String name = request.getUserPrincipal().getName();
 			try {
 				Device device = new Device();
 				device.setSerialnumber(deviceserial);
-				device.setName("nada");//namedevice);
+				device.setName(namedevice);
 				device.setDescription(descriptiondevice);
 				
 				name = request.getUserPrincipal().getName();
 				System.out.println("nombre del dueño: "+ name);
-				device.setUserowner(Base64.getEncoder().encodeToString("name".getBytes()));
+				device.setUserowner(Base64.getEncoder().encodeToString(name.getBytes()));
 				System.out.println("tiene configuracion por defaault: "+defaultconfiguration);
 				if(defaultconfiguration) {
 					DeviceDefaultConfiguration deviceConfig= null;
@@ -246,12 +241,12 @@ public class DeviceController {
 				HashMap<String, String> vista =new HashMap<>();
 				switch (tipodevice) {
 				case "termometro":
-					System.out.println("tipo: "+tipovistatermometro);
-					System.out.println("humeedad: "+humedadtermometro);
-					System.out.println("temp: "+tempctermometro);
-					System.out.println("temp: "+tempftermometro);
-					System.out.println("sensacion: "+sensacionctermometro);
-					System.out.println("sensacion: "+sensacionftermometro);
+//					System.out.println("tipo: "+tipovistatermometro);
+//					System.out.println("humeedad: "+humedadtermometro);
+//					System.out.println("temp: "+tempctermometro);
+//					System.out.println("temp: "+tempftermometro);
+//					System.out.println("sensacion: "+sensacionctermometro);
+//					System.out.println("sensacion: "+sensacionftermometro);
 					//vista termometro por tipo de elemento
 					String termometrovista = armarVistaTermometro(tipovistatermometro,humedadtermometro,tempctermometro,tempftermometro,sensacionctermometro,sensacionftermometro);
 					System.out.println("termometro vista: "+ termometrovista);
@@ -266,7 +261,9 @@ public class DeviceController {
 					System.out.println("es una alarma");
 					break;
 				case "sonoff":
-					timerstringvalue=SimpleTimerString.maketimerStringFormat(timerstringsonoff);
+					System.out.println("timer-string-recibido: "+ timerstringsonoff);
+					if(timerstringsonoff != null && timerstringsonoff!="")
+						timerstringvalue=SimpleTimerString.maketimerStringFormat(timerstringsonoff);
 					device.setTimerString(timerstringvalue);
 					String host="";
 					String port="";

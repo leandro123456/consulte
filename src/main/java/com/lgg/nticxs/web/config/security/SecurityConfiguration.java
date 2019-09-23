@@ -58,18 +58,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http
-		//.csrf().disable()
 		.authorizeRequests()
 		.antMatchers("/anonymous*").anonymous()
 		.antMatchers("/","/login","/signup","forgot-password").permitAll()
-	//	.antMatchers("/login*").permitAll()
-		.anyRequest().authenticated()
-
+//		.anyRequest().authenticated()
      
 		.and()
 		.formLogin()
-		.loginPage("/login")
-		.loginProcessingUrl("/login")
+//		.loginPage("/login")
+//		.loginProcessingUrl("/login")
 		.successHandler(successHandler())
 		.failureUrl("/login?error=true")
 		.usernameParameter("user").passwordParameter("password")

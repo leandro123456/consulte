@@ -14,6 +14,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.lgg.nticxs.web.utils.EncryptorPassword;
 import com.lgg.nticxs.web.utils.Utils;
@@ -64,9 +66,9 @@ public class LoginController{
 
 		
 	@GetMapping("/login")
-	public String logini(@RequestParam(value="incorrectcredentials", required=false) boolean incorrectcredentials,
+	public ModelAndView logini(@RequestParam(value="incorrectcredentials", required=false) boolean incorrectcredentials,
 			@RequestParam(value="incorrecttoken", required=false) boolean incorrecttoken,
-			Model model, 
+			 ModelMap model, 
 			HttpServletRequest request, HttpServletResponse response) {
     	
 		if(incorrectcredentials) {
@@ -74,7 +76,7 @@ public class LoginController{
 			model.addAttribute("incorrectcredentials", true);}
 		if(incorrecttoken) {model.addAttribute("incorrecttoken", true);}
 		
-		return "login";
+		return new ModelAndView("login", model);
 	}
     
     @GetMapping("/register")
@@ -225,7 +227,7 @@ public class LoginController{
             }
             
         System.out.println("SE BORRO EL CONTEXTO");
-        return "redirect:/login";
+        return "login";
     }
     
     @GetMapping("/profileuser/{userId}")
