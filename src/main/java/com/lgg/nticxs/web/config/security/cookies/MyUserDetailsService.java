@@ -18,11 +18,8 @@ public class MyUserDetailsService implements UserDetailsService {
     public MyUserDetailsService() {
     	
     	List<com.lgg.nticxs.web.model.User> usuarios = userdao.retrieveAllUsers();
-        //in a real application, instead of using local data,
-        // we will find user details by some other means e.g. from an external system
     	for(com.lgg.nticxs.web.model.User us : usuarios)
     		users.add(new UserObject(us.getEmail(), new String(us.getPassword()), us.getRole()));
-//        users.add(new UserObject("mike", "234", "ADMIN"));
     }
 
     @Override

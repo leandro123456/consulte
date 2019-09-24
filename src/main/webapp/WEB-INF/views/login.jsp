@@ -22,14 +22,45 @@
   <script src='<c:url value="resources/vendor/bootstrap/js/bootstrap.bundle.min.js" />'></script>
   <script src='<c:url value="resources/vendor/jquery-easing/jquery.easing.min.js" />'></script>
   <script src='<c:url value="resources/js/sb-admin-2.min.js" />'></script>
+  <script src='<c:url value="https://unpkg.com/sweetalert/dist/sweetalert.min.js"/>'></script>
 
   <div class="container">
 
     <div class="row justify-content-center">
 
       <div class="col-xl-10 col-lg-12 col-md-9">
-		
-		
+				<c:if test="${param.error != null}">
+				 	<input type="hidden" id ="mensaje1" value="Usuario o Contraseña Incorrectos, intentalo nuevamente">
+					<script type="text/javascript">
+						var x= document.getElementById('mensaje1').value;
+						swal({
+							  title: x,
+							  icon: "error",
+							  timer: 5000,
+							  closeOnClickOutside: false,
+							  buttons: false,
+							});
+						setTimeout('window.location.href = "/login";', 5000);
+					</script>
+				</c:if>
+				<c:if test="${param.logout != null}">
+				 	<input type="hidden" id ="mensaje" value="La sesión ha sido cerrada correctamente.">
+					<script type="text/javascript">
+						var x= document.getElementById('mensaje').value;
+						swal({
+							  //title: x,
+							  icon: "success",
+							  timer: 5000,
+							  closeOnClickOutside: false,
+							  buttons: false,
+							});
+						setTimeout('window.location.href = "/login";', 5000);
+					</script>
+				</c:if>
+
+                    <c:if test="${param.logout != null}">
+                        <p class="logout">La sesión ha sido cerrada correctamente.</p>
+                    </c:if>
 		
         <div class="card o-hidden border-0 shadow-lg my-5">
           <div class="card-body p-0">

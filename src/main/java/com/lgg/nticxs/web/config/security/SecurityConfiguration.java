@@ -41,11 +41,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         super();
     }
 	
-    @Bean("authenticationManager")
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-            return super.authenticationManagerBean();
-    }
+//    @Bean("authenticationManager")
+//    @Override
+//    public AuthenticationManager authenticationManagerBean() throws Exception {
+//            return super.authenticationManagerBean();
+//    }
     
 	@Autowired
 	private CustomAuthenticationProvider authProvider;
@@ -60,14 +60,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http
 		.authorizeRequests()
 		.antMatchers("/anonymous*").anonymous()
-		.antMatchers("/","/login","/signup","forgot-password").permitAll()
+		.antMatchers("/","/login*","/signup","forgot-password").permitAll()
 //		.anyRequest().authenticated()
      
 		.and()
 		.formLogin()
-//		.loginPage("/login")
+		.loginPage("/login")
 //		.loginProcessingUrl("/login")
 		.successHandler(successHandler())
+//		.failureUrl("/login")
 		.failureUrl("/login?error=true")
 		.usernameParameter("user").passwordParameter("password")
 		.and().exceptionHandling().accessDeniedPage ("/logoutsession")
@@ -75,7 +76,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.and()
         .rememberMe().key("uniqueAndSecret") 
         .userDetailsService(MyUserDetails())
-		
+
         .and()
         .csrf().disable()
         ;
@@ -102,38 +103,38 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		}
 	    
 
-	    @Bean
-	    public AuthenticationFailureHandler authenticationFailureHandler() {
-	        ExceptionMappingAuthenticationFailureHandler exceptionMappingAuthenticationFailureHandler = new ExceptionMappingAuthenticationFailureHandler();
-	        DefaultRedirectStrategy redirect = new DefaultRedirectStrategy() {
-	        	
-	        	@Override
-	        	public void sendRedirect(HttpServletRequest request, HttpServletResponse response, String url) throws IOException {
-//	        		if(url.equals("/login/token")) {
-	        		if(url.equals("/login")) {
-	        			try {
-	            			HttpSession session = request.getSession(false);
-	            			url = super.calculateRedirectUrl(request.getContextPath(), url);
-	    					session.getServletContext().getRequestDispatcher(url).forward(request, response);
-	    					return;
-	    				} catch (ServletException e) {
-	    					e.printStackTrace();
-	    				}
-	        		}
-	        		
-	        		super.sendRedirect(request, response, url);
-	        	}
-	        };
-	        
-	        Map<String, String> exceptionMap = new HashMap<String, String>();
-	        exceptionMap.put(IncorrectLoginCredentialsException.class.getName(), "/login?incorrectcredentials=true");
-	        exceptionMap.put(IncorrectTokenException.class.getName(), "/login?incorrecttoken=true");
-	        exceptionMap.put(TokenRequiredException.class.getName(), "/login");
-	        exceptionMappingAuthenticationFailureHandler.setExceptionMappings(exceptionMap);
-	        exceptionMappingAuthenticationFailureHandler.setRedirectStrategy(redirect);
-	        
-	        return exceptionMappingAuthenticationFailureHandler;
-	    }
+//	    @Bean
+//	    public AuthenticationFailureHandler authenticationFailureHandler() {
+//	        ExceptionMappingAuthenticationFailureHandler exceptionMappingAuthenticationFailureHandler = new ExceptionMappingAuthenticationFailureHandler();
+//	        DefaultRedirectStrategy redirect = new DefaultRedirectStrategy() {
+//	        	
+//	        	@Override
+//	        	public void sendRedirect(HttpServletRequest request, HttpServletResponse response, String url) throws IOException {
+////	        		if(url.equals("/login/token")) {
+//	        		if(url.equals("/login")) {
+//	        			try {
+//	            			HttpSession session = request.getSession(false);
+//	            			url = super.calculateRedirectUrl(request.getContextPath(), url);
+//	    					session.getServletContext().getRequestDispatcher(url).forward(request, response);
+//	    					return;
+//	    				} catch (ServletException e) {
+//	    					e.printStackTrace();
+//	    				}
+//	        		}
+//	        		
+//	        		super.sendRedirect(request, response, url);
+//	        	}
+//	        };
+//	        
+//	        Map<String, String> exceptionMap = new HashMap<String, String>();
+//	        exceptionMap.put(IncorrectLoginCredentialsException.class.getName(), "/login");
+//	        exceptionMap.put(IncorrectTokenException.class.getName(), "/login");
+//	        exceptionMap.put(TokenRequiredException.class.getName(), "/login");
+//	        exceptionMappingAuthenticationFailureHandler.setExceptionMappings(exceptionMap);
+//	        exceptionMappingAuthenticationFailureHandler.setRedirectStrategy(redirect);
+//	        
+//	        return exceptionMappingAuthenticationFailureHandler;
+//	    }
 	
 	
 	

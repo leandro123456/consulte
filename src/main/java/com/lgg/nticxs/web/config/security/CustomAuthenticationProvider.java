@@ -49,6 +49,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			}
 		}
 		throw new IncorrectLoginCredentialsException();
+//		return null;
 	}
 
 
