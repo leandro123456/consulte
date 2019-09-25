@@ -1,27 +1,15 @@
 package com.lgg.nticxs.web.controller;
 
 
-import org.springframework.core.annotation.SynthesizedAnnotation;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -34,15 +22,8 @@ import nl.flotsam.xeger.Xeger;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
 import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-
-import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -54,9 +35,6 @@ import javax.servlet.http.HttpSession;
 public class LoginController{
 	private UserDAO userdao  = new UserDAO();
 	
-//    @Resource(name="authenticationManager")
-//    private AuthenticationManager authManager;
-
 
 	@GetMapping("/")
     public String redirect(
@@ -208,7 +186,8 @@ public class LoginController{
 
     
     @GetMapping("/logoutsession")
-    public String logout(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView logout(HttpServletRequest request, HttpServletResponse response,
+    		ModelMap model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null){
         	System.out.println("la autenticacion no es null entonces la borro");
@@ -228,9 +207,9 @@ public class LoginController{
             	cookie.setMaxAge(0);
             	response.addCookie(cookie);
             }
-            
-        System.out.println("SE BORRO EL CONTEXTO");
-        return "login";
+        model.addAttribute("msg1", "Error ... el usuario ingresado no existe, verifiquelo e intente nuevamente");
+        System.out.println("SE BORRO EL CONTEXTO jjjjjj");
+        return new ModelAndView("login", model);
     }
     
     @GetMapping("/profileuser/{userId}")

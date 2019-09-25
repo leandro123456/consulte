@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.json.JSONObject;
+import org.springframework.web.client.RestTemplate;
 
 import com.lgg.nticxs.web.DAO.DeviceDAO;
 import com.lgg.nticxs.web.DAO.DeviceDefaultConfigurationDAO;
@@ -40,6 +41,20 @@ public class TestUtilities {
 			System.out.println("es nulo");
 		else
 			System.out.println("tiene contenido");
+	}
+	
+	@Test
+	public void testSendRequestCoiaca() {
+		String deviceid= "DSC010000000002";
+		final String uri = "http://device.coiaca.com/api/product/?id="+deviceid;
+	    RestTemplate restTemplate = new RestTemplate();
+	    String result = restTemplate.getForObject(uri, String.class);
+	    System.out.println("recibio respuesta de coiaca");
+	    String str = result;
+	    JSONObject obj = new JSONObject(str);
+	    String n = obj.getString("deviceID");
+	    System.out.println("parseo el resultado: " + n);
+	    System.out.println("este es el resultado: "+ obj.toString());
 	}
 	
 	//@Test
