@@ -43,7 +43,7 @@ public class TestUtilities {
 			System.out.println("tiene contenido");
 	}
 	
-	@Test
+	//@Test
 	public void testSendRequestCoiaca() {
 		String deviceid= "DSC010000000002";
 		final String uri = "http://device.coiaca.com/api/product/?id="+deviceid;
