@@ -2,10 +2,185 @@
  * Esta clase tiene las animaciones para la carga de los Devices
  */
 
+//Evento para evaluar el contenido del Serial
+function evaluarNumeroDeSerie(valorSerial){
+	if(valorSerial.includes("WTHUSB") || valorSerial.includes("PSWS1") ||
+			valorSerial.includes("PSWS2") ||valorSerial.includes("DSC01") ||
+			valorSerial.includes("PS3S1")){
+		console.log("se encontro dispositivo de coiaca")
+		document.getElementById('marcadevice').value = 'coiaca';
+		document.getElementById("marcadevice").disabled = true;
+		evaluarSerial(valorSerial);
+		
+	}else{
+		document.getElementById('marcadevice').value = 'otro';
+		document.getElementById("marcadevice").disabled = true;
+		document.getElementById('selectormodelo').style.display = 'none';
+	}
+}
+
+
+
+//funcion para escribir en el campo serial el id y tambien grisar el tipo de dispositivo
+	function evaluarSerial(serial){
+		console.log("va a evaluar el serial: "+ serial);
+        if(serial.includes("WTHUSB")){ 
+        	document.getElementById('modelodevice').value = 'WTHUSB';
+        	document.getElementById('tipodevice').value = 'termometro';
+        	document.getElementById('tipovistatermometro').value = 'bars';
+        	document.getElementById("tipovistatermometro").disabled = true;
+        	enableType("termometro");
+        }if(serial.includes("PSWS1")){ 
+        	document.getElementById('modelodevice').value = 'PSWS1';
+        	document.getElementById('tipodevice').value = 'sonoff';
+        	document.getElementById('cantidadswiths').value = 'one';
+        	document.getElementById("cantidadswiths").disabled = true;    
+        	enableType("sonoff");
+        }if(serial.includes("PSWS2")){ 
+        	document.getElementById('modelodevice').value = 'PSWS2';
+        	document.getElementById("serialnumber").value = "PSWS2";
+        	document.getElementById('tipodevice').value = 'sonoff';
+        	document.getElementById('cantidadswiths').value = 'two';
+        	document.getElementById("cantidadswiths").disabled = true;
+        	enableType("sonoff");
+        }if(serial.includes("DSC01")){ 
+        	document.getElementById('modelodevice').value = 'BRDSC';
+        	document.getElementById('tipodevice').value = 'alarma';
+        	enableType("alarma");
+        }if(serial.includes("PS3S1")){ 
+        	document.getElementById('modelodevice').value = 'PS3S1';
+        	document.getElementById('tipodevice').value = 'sonoff';
+        	document.getElementById('cantidadswiths').value = 'one';
+        	document.getElementById("cantidadswiths").disabled = true;
+        	enableType("sonoff");
+        }
+        document.getElementById('modelodevice').disabled = true;
+        document.getElementById("tipodevice").disabled = true;
+	}
+	
+
+	
+	//Mostrar los tipos de Dispositivos Posibles para Coiaca
+	function enableType(valuetype){
+        if(valuetype == "termometro"){
+        	document.getElementById('cantidadswith').style.display = 'none';
+        	document.getElementById('vistastermometro').style.display = 'inline';
+        	document.getElementById('parametrostermometro').style.display = 'inline';
+        	document.getElementById('timerString').style.display = 'none';
+        	document.getElementById('tabletimerstring').style.display = 'none';
+        }if(valuetype == "alarma"){
+        	document.getElementById('cantidadswith').style.display = 'none';
+        	document.getElementById('vistastermometro').style.display = 'none';
+        	document.getElementById('parametrostermometro').style.display = 'none';
+        	document.getElementById('timerString').style.display = 'none';
+        	document.getElementById('tabletimerstring').style.display = 'none';
+        }if(valuetype == "sonoff"){
+        	document.getElementById('cantidadswith').style.display = 'inline';
+        	document.getElementById('vistastermometro').style.display = 'none';
+        	document.getElementById('parametrostermometro').style.display = 'none';
+        	document.getElementById('timerString').style.display = 'inline';
+        	document.getElementById('tabletimerstring').style.display = 'inline';
+        }if(valuetype != "termometro" && valuetype != "alarma" && valuetype != "sonoff"){
+        	document.getElementById('cantidadswith').style.display = 'none';
+        	document.getElementById('vistastermometro').style.display = 'none';
+        	document.getElementById('parametrostermometro').style.display = 'none';
+        	document.getElementById('timerString').style.display = 'none';
+        	document.getElementById('tabletimerstring').style.display = 'none';
+        }
+        
+	}
+	
+//funcion para mostrar los modelos de coiaca
+//function seleccionModelo(){
+//	var seleccion=document.getElementById('marcadevice');
+//    var valuetype = seleccion.options[seleccion.selectedIndex].value;
+//    if(valuetype == "coiaca"){
+//    	document.getElementById('selectormodelo').style.display = 'inline';
+//    	document.getElementById('modelodevice').style.display = 'inline';
+//    }else{
+//    	document.getElementById('selectormodelo').style.display = 'none';
+//    	document.getElementById('modelodevice').style.display = 'none';
+//    }
+//}
+
 //Evento asociado a la carga de la ventana Modal
 function siguienteAnimacion(){
-	alert("estado: "+document.getElementById("infoGeneral").style.display +";s");
-	alert("estado: "+document.getElementById("infoDeducidaCoiaca").style.display +";s");
+	if(document.getElementById("infoGeneral").style.display=="inline"){
+		document.getElementById("botonAnterior").style.display="inline";
+		document.getElementById("botonSiguiente").style.display="inline";
+		document.getElementById("infoDeducidaCoiaca").style.display="inline";
+		document.getElementById("infoGeneral").style.display="none";
+		document.getElementById("infoPropiaVista").style.display="none";
+		document.getElementById("infoAvanzada").style.display="none";
+		document.getElementById("infoFinal").style.display="none";
+		document.getElementById('parametersConexion').style.display = 'none';
+	}
+	else if(document.getElementById("infoDeducidaCoiaca").style.display=="inline"){
+		document.getElementById("botonAnterior").style.display="inline";
+		document.getElementById("botonSiguiente").style.display="inline";
+		document.getElementById("infoPropiaVista").style.display="inline";
+		document.getElementById("infoDeducidaCoiaca").style.display="none";
+		document.getElementById("infoAvanzada").style.display="none";
+		document.getElementById("infoGeneral").style.display="none";
+		document.getElementById("infoFinal").style.display="none";
+	}
+	else if(document.getElementById("infoPropiaVista").style.display=="inline"){
+		document.getElementById("botonAnterior").style.display="inline";
+		document.getElementById("botonSiguiente").style.display="inline";
+		document.getElementById("infoAvanzada").style.display="inline";
+		document.getElementById("infoDeducidaCoiaca").style.display="none";
+		document.getElementById("infoPropiaVista").style.display="none";
+		document.getElementById("infoGeneral").style.display="none";
+		document.getElementById("infoFinal").style.display="none";
+	}
+	else if(document.getElementById("infoAvanzada").style.display=="inline"){
+		document.getElementById("botonAnterior").style.display="inline";
+		document.getElementById("botonSiguiente").style.display="none";
+		document.getElementById("infoDeducidaCoiaca").style.display="none";
+		document.getElementById("infoAvanzada").style.display="none";
+		document.getElementById("infoPropiaVista").style.display="none";
+		document.getElementById("infoGeneral").style.display="none";
+		document.getElementById("infoFinal").style.display="inline";
+	}
+		
+}
+
+//Evento asociado a la carga de la ventana Modal para regresar
+function anteriorAnimacion(){
+	if(document.getElementById("infoGeneral").style.display=="inline"){
+		document.getElementById("infoDeducidaCoiaca").style.display="inline";
+		document.getElementById("infoGeneral").style.display="none";
+		document.getElementById("infoPropiaVista").style.display="none";
+		document.getElementById("infoAvanzada").style.display="none";
+	}
+	else if(document.getElementById("infoDeducidaCoiaca").style.display=="inline"){
+		document.getElementById("botonAnterior").style.display="none";
+		document.getElementById("infoPropiaVista").style.display="none";
+		document.getElementById("infoDeducidaCoiaca").style.display="none";
+		document.getElementById("infoAvanzada").style.display="none";
+		document.getElementById("infoGeneral").style.display="inline";
+	}
+	else if(document.getElementById("infoPropiaVista").style.display=="inline"){
+		document.getElementById("infoAvanzada").style.display="none";
+		document.getElementById("infoDeducidaCoiaca").style.display="inline";
+		document.getElementById("infoPropiaVista").style.display="none";
+		document.getElementById("infoGeneral").style.display="none";
+	}
+	else if(document.getElementById("infoAvanzada").style.display=="inline"){
+		document.getElementById("infoDeducidaCoiaca").style.display="none";
+		document.getElementById("infoAvanzada").style.display="none";
+		document.getElementById("infoPropiaVista").style.display="inline";
+		document.getElementById("infoGeneral").style.display="none";
+	}
+	else if(document.getElementById("infoFinal").style.display=="inline"){
+		document.getElementById("botonSiguiente").style.display="inline";
+		document.getElementById("infoDeducidaCoiaca").style.display="none";
+		document.getElementById("infoFinal").style.display="none";
+		document.getElementById("infoAvanzada").style.display="inline";
+		document.getElementById("infoPropiaVista").style.display="none";
+		document.getElementById("infoGeneral").style.display="none";
+	}
+		
 }
 
 
@@ -120,61 +295,7 @@ $('#ModalConfirm').on('show.bs.modal', function (event) {
           	  
           	  
 	  	})
-	  	
-
-
-
-// funcion para mostrar los modelos de coiaca
-		function seleccionModelo(){
-			var seleccion=document.getElementById('marcadevice');
-	        var valuetype = seleccion.options[seleccion.selectedIndex].value;
-	        if(valuetype == "coiaca"){
-	        	document.getElementById('selectormodelo').style.display = 'inline';
-	        	document.getElementById('modelodevice').style.display = 'inline';
-	        }else{
-	        	document.getElementById('selectormodelo').style.display = 'none';
-	        	document.getElementById('modelodevice').style.display = 'none';
-	        }
-		}
-		
-		
-		//funcion para escribir en el campo serial el id y tambien grisar el tipo de dispositivo
-	  	function autocompletarSerial(){
-	  			var seleccion21=document.getElementById('modelodevice');
-		        var valormodelo = seleccion21.options[seleccion21.selectedIndex].value;
-		        var contenidoserial = null;
-		        if(valormodelo == "WTHUSB"){ 
-		        	contenidoserial = document.getElementById("serialnumber");
-		        	contenidoserial.value = "WTHUSB";
-		        	document.getElementById('tipodevice').value = 'termometro';
-		        	document.getElementById('tipovistatermometro').value = 'bars';
-		        	document.getElementById("tipovistatermometro").disabled = true;
-		        }if(valormodelo == "PSWS1"){ 
-		        	contenidoserial = document.getElementById("serialnumber");
-		        	contenidoserial.value = "PSWS1";
-		        	document.getElementById('tipodevice').value = 'sonoff';
-		        	document.getElementById('cantidadswiths').value = 'one';
-		        	document.getElementById("cantidadswiths").disabled = true;        	
-		        }if(valormodelo == "PSWS2"){ 
-		        	document.getElementById("serialnumber").value = "PSWS2";
-		        	document.getElementById('tipodevice').value = 'sonoff';
-		        	document.getElementById('cantidadswiths').value = 'two';
-		        	document.getElementById("cantidadswiths").disabled = true;
-		        }if(valormodelo == "BRDSC"){ 
-		        	contenidoserial = document.getElementById("serialnumber");
-		        	contenidoserial.value = "DSC01";
-		        	document.getElementById('tipodevice').value = 'alarma';
-		        }if(valormodelo == "PS3S1"){ 
-		        	contenidoserial = document.getElementById("serialnumber");
-		        	contenidoserial.value = "PS3S1";
-		        	document.getElementById('tipodevice').value = 'sonoff';
-		        }
-		        console.log("este es el valor del tipo de DEVICE: "+ document.getElementById('tipodevice').value);
-		        enableType();
-		        document.getElementById("tipodevice").disabled = true;
-	  	}
-	  	
-	  	
+	  	  	
 	  	
 	  //funcion para mostrar las opciones avanzadas
 	  	function checkconfiguration() {
@@ -196,38 +317,7 @@ $('#ModalConfirm').on('show.bs.modal', function (event) {
 	  	
 	  	
 	  	
-		//Mostrar los tipos de Dispositivos Posibles para Coiaca
-		function enableType(){
-			var seleccion=document.getElementById('tipodevice');
-	        var valuetype = seleccion.options[seleccion.selectedIndex].value;
-	        if(valuetype == "termometro"){
-	        	document.getElementById('cantidadswith').style.display = 'none';
-	        	document.getElementById('vistastermometro').style.display = 'inline';
-	        	document.getElementById('parametrostermometro').style.display = 'inline';
-	        	document.getElementById('timerString').style.display = 'none';
-	        	document.getElementById('tabletimerstring').style.display = 'none';
-	        }if(valuetype == "alarma"){
-	        	document.getElementById('cantidadswith').style.display = 'none';
-	        	document.getElementById('vistastermometro').style.display = 'none';
-	        	document.getElementById('parametrostermometro').style.display = 'none';
-	        	document.getElementById('timerString').style.display = 'none';
-	        	document.getElementById('tabletimerstring').style.display = 'none';
-	        }if(valuetype == "sonoff"){
-	        	document.getElementById('cantidadswith').style.display = 'inline';
-	        	document.getElementById('vistastermometro').style.display = 'none';
-	        	document.getElementById('parametrostermometro').style.display = 'none';
-	        	document.getElementById('timerString').style.display = 'inline';
-	        	document.getElementById('tabletimerstring').style.display = 'inline';
-	        }if(valuetype != "termometro" && valuetype != "alarma" && valuetype != "sonoff"){
-	        	document.getElementById('cantidadswith').style.display = 'none';
-	        	document.getElementById('vistastermometro').style.display = 'none';
-	        	document.getElementById('parametrostermometro').style.display = 'none';
-	        	document.getElementById('timerString').style.display = 'none';
-	        	document.getElementById('tabletimerstring').style.display = 'none';
-	        }
-	        
-		}
-		
+
 		
 		
 		

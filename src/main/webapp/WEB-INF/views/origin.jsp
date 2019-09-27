@@ -76,16 +76,10 @@
 	                ${vista}
 	          </c:forEach>
 			</div>
-<!-- 			<div class="fixed"> -->
-<!-- 				<a href="/home/newdevice"> <i -->
-<!-- 					class="fa fa-plus-circle fa-3x" aria-hidden="true"></i> -->
-<!-- 				</a> -->
-<!-- 			</div> -->
 			<div class="fixed">
 				<a href="/home/newdeviceb" data-toggle="modal" data-target="#createDeviceModal"> 
 					<i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
 				</a>
-				<button onclick="createDevice()">nuevoSA</button>
 			</div>
 		</div>
 	</div>
@@ -110,7 +104,7 @@
 
 
 <!-- Crear device con Modal -->
-  <div class="modal fade bd-example-modal-xl" id="createDeviceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="createDeviceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -121,7 +115,7 @@
         </div>
         <div class="modal-body">
         	<div class="form-group">
-        		<div id="infoGeneral">
+        		<div id="infoGeneral" style="display:inline">
 							<h3>Informacion General</h3>
 							<b>Nombre</b> <input id="namedevice" class="form-control" required>
 							<p></p>
@@ -133,7 +127,7 @@
 					<h3>Informacion Dispositivo Ciaca</h3>
 							<div>
 								<b>Marca del Dispositivo</b> <select id="marcadevice"
-									class="form-control" onchange="seleccionModelo()">
+									class="form-control">
 									<option value="none">Seleccione uno</option>
 									<option value="coiaca">Coiaca</option>
 									<option value="otro">Otro</option>
@@ -142,7 +136,7 @@
 							<p></p>
 							<div id="selectormodelo">
 								<b>Modelo del Dispositivo</b> <select id="modelodevice"
-									class="form-control" onchange="autocompletarSerial()">
+									class="form-control">
 									<option value="none">Seleccione uno</option>
 									<option value="WTHUSB">WTHUSB</option>
 									<option value="PSWS1">PSWS1</option>
@@ -155,7 +149,7 @@
 							<p></p>
 							<div>
 								<b>Tipo de Dispositivo</b> <select id="tipodevice"
-									class="form-control" onchange="enableType()">
+									class="form-control">
 									<option value="none">Seleccione uno</option>
 									<option value="termometro">Termometro</option>
 									<option value="alarma">Alarma</option>
@@ -245,8 +239,8 @@
 						</form>
 				</div>
 				<div id="infoAvanzada" style="display:none">
-					<h3>Informacion General</h3>
-						<b>Ver Opciones Avanzadas<input
+					<h3>Informacion Avanzada</h3>
+						<b>Usar configuracion por Default<input
 							id="toggle-paramconects" checked type="checkbox"
 							data-toggle="toggle" onchange="checkconfiguration()"
 							data-style="slow"></b>
@@ -356,21 +350,123 @@
 							</div>
 						</form>
 					</div>
+					<div id="infoFinal" style="display:none">
+						<h5>Termino con la configuracion... desea guardar los cambios?</h5>
+					</div>
+					
 				</div>
-			<form>
-          		<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          		<a class="btn btn-primary" href="javascript:;" onclick="siguienteAnimacion()">Siguiente</a>
-        	</form>
+				<div class="btn-group">
+          			<button id="botonAnterior" style="display:none" class="btn btn-secondary" onclick="anteriorAnimacion()" type="button">Anterior</button>
+          			<button id="botonSiguiente" class="btn btn-primary" onclick="siguienteAnimacion()" type="button">Siguiente</button>
+          		</div>
         </div>
         <div class="modal-footer">
-          <form role="form" action="<c:url value="/logoutsession"/>" method="get" enctype="multipart/form-data">
+          <form id="formCreate"  action="<c:url value="home/create"/>" method="post" > <%-- role="form" enctype="multipart/form-data" --%>
           	<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          	<a class="btn btn-primary" href="javascript:;" onclick="parentNode.submit();">Finalizar</a>
+<!--           	<a class="btn btn-primary" href="javascript:;" onclick="parentNode.submit();">Finalizar</a> -->
+          	<button onclick="document.getElementById('formCreate').submit();">Finalizar</button>
           </form>
         </div>
       </div>
     </div>
   </div>
+
+
+	<div class="modal fade" id="modalTimerString" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header text-center">
+					<h4 class="modal-title w-100 font-weight-bold">Timer String</h4>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body mx-3">
+
+					<div class="md-form mb-5">
+						<form id="timerString">
+							<div class="container">
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label for="exampleFormControlSelect2">Dias de la Semana</label> <select id="dias" multiple="multiple" class="form-control"
+												id="exampleFormControlSelect2">
+												<option value="monday">Lunes</option>
+												<option value="tuesday">Martes</option>
+												<option value="wednesday">Miercoles</option>
+												<option value="thursday">Jueves</option>
+												<option value="friday">Viernes</option>
+												<option value="saturday">Sabado</option>
+												<option value="sunday">Domingo</option>
+											</select>
+										</div>
+									</div>
+									<div class="input-group clock col-lg-6">
+										<div class="clearfix">
+											<label for="exampleFormControlSelect2">Hora</label>
+											<div class="input-group clockpicker pull-center"
+												data-placement="center" data-align="top"
+												data-autoclose="true">
+												<input id="hora" type="text" class="form-control" value="00:00">
+<!-- 												<span class="input-group-addon"> <span -->
+<!-- 													class="glyphicon glyphicon-time"></span> -->
+<!-- 												</span> -->
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<label for="exampleFormControlSelect2">Accion</label>
+										<div class="form-group">
+											<div class="radio">
+												<label><input type="radio" name="radiopower" value="on" checked>Encender</label>
+											</div>
+											<div class="radio">
+												<label><input type="radio" value="off" name="radiopower">Apagar</label>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<label for="exampleFormControlSelect2">Switch</label>
+										<div class="form-group">
+											<div class="radio">
+												<label><input type="radio" value="All" 
+												name="radioencendido" checked>Todos</label>
+											</div>
+											<div class="radio">
+												<label><input type="radio" value="1" name="radioencendido">1</label>
+											</div>
+											<div class="radio">
+												<label><input type="radio" value="2" name="radioencendido">2</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</form>
+
+					</div>
+				</div>
+				<div class="modal-footer d-flex justify-content-center">
+					<a class="btn btn-primary btn-lg btn-block" id="botoncreatefile">Crear</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+
+
+<script type="text/javascript">
+//Evento asociado a terminar de escribir el Serial
+$("#serialnumber").blur(function() {
+	var valorSerial = document.getElementById("serialnumber").value;
+      evaluarNumeroDeSerie(valorSerial);
+    });
+</script>
 
 <script type="text/javascript">
 	$(document).ready(function() {

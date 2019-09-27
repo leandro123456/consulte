@@ -146,6 +146,72 @@ public class DeviceController {
 	}
 	
 	
+	
+	
+	@PostMapping("home/create")
+	public String createDeviceNew(Model model,HttpServletRequest request,			
+			@RequestParam(name="serialnumber", required=true) String serialnumber,
+			@RequestParam(name="namedevice", required=false) String namedevice,
+			@RequestParam(name="descriptiondevice", required=false) String descriptiondevice,
+			@RequestParam(name="tipodevice", required=false) String tipodevice,
+			
+			//vista sonoff
+			@RequestParam(name="timerstringsonoff", required=false) String timerstringsonoff,
+			@RequestParam(name="cantidadswiths", required=false) String cantidadswiths,
+			
+			//termometro
+			@RequestParam(name="tipovistatermometro", required=false) String tipovistatermometro,
+			@RequestParam(name="humedadtermometro", required=false) String humedadtermometro,
+			@RequestParam(name="tempctermometro", required=false) String tempctermometro,
+			@RequestParam(name="sensacionctermometro", required=false) String sensacionctermometro,
+			@RequestParam(name="tempftermometro", required=false) String tempftermometro,
+			@RequestParam(name="sensacionftermometro", required=false) String sensacionftermometro,
+			
+			//configuracion de topicos
+			@RequestParam(name="defaultconfiguration", required=true) Boolean defaultconfiguration,
+			@RequestParam(name="iphostescuchar", required=false) String iphostescuchar,
+			@RequestParam(name="portescuchar", required=false) String portescuchar,
+			@RequestParam(name="topiclisten", required=false) String topiclisten,
+			@RequestParam(name="userescuchar", required=false) String userescuchar,
+			@RequestParam(name="passescuchar", required=false) String passescuchar,
+			@RequestParam(name="iphostescribir", required=false) String iphostescribir,
+			@RequestParam(name="portescribir", required=false) String portescribir,
+			@RequestParam(name="topicwrite", required=false) String topicwrite,
+			@RequestParam(name="userescribir", required=false) String userescribir,
+			@RequestParam(name="passescribir", required=false) String passescribir,
+			@RequestParam(name="iphostescucharremote", required=false) String iphostescucharremote,
+			@RequestParam(name="portescucharremote", required=false) String portescucharremote,
+			@RequestParam(name="topiclistenremote", required=false) String topiclistenremote,
+			@RequestParam(name="userescucharremote", required=false) String userescucharremote,
+			@RequestParam(name="passescucharremote", required=false) String passescucharremote,
+			@RequestParam(name="iphostescribirremote", required=false) String iphostescribirremote,
+			@RequestParam(name="portescribirremote", required=false) String portescribirremote,
+			@RequestParam(name="topicwriteremote", required=false) String topicwriteremote,
+			@RequestParam(name="userescribirremote", required=false) String userescribirremote,
+			@RequestParam(name="passescribirremote", required=false) String passescribirremote
+			) {
+		if(devicedao.retrieveBySerialNumber(serialnumber) ==null){
+			ManagementDevice.createDevice(
+					request,serialnumber, namedevice, descriptiondevice, tipodevice, 
+					//propoio configuracion
+					defaultconfiguration,
+					iphostescuchar, portescuchar, topiclisten, userescuchar,passescuchar,
+					iphostescribir, portescribir, topicwrite, userescribir, passescribir,
+					iphostescucharremote, portescucharremote, topiclistenremote, userescucharremote, passescucharremote,
+					iphostescribirremote, portescribirremote, topicwriteremote,userescribirremote,passescribirremote,
+					//propio de la GUI Vistas
+					timerstringsonoff, cantidadswiths, tipovistatermometro, humedadtermometro,
+					tempctermometro,sensacionctermometro, tempftermometro,sensacionftermometro);
+		}else{
+			ManagementDevice.updateDevice(request,serialnumber);
+		}
+		model.addAttribute("msg", "Termino de crear el dispositivo");
+		return "home";
+	}
+	
+	
+	
+	
 	@PostMapping("home/create/{deviceserial}")
 	public String createDevice(Model model, @PathVariable String deviceserial,HttpServletRequest request,			
 			@RequestParam(name="serialnumber", required=true) String serialnumber,
