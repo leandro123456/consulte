@@ -113,15 +113,18 @@
             <span aria-hidden="true">×</span>
           </button>
         </div>
+        <form role="form" action="<c:url value="home/create"/>"
+        	method="post" enctype="multipart/form-data">
         <div class="modal-body">
-        	<div class="form-group">
+<!--         	<div class="form-group"> -->
+        	
         		<div id="infoGeneral" style="display:inline">
 							<h3>Informacion General</h3>
-							<b>Nombre</b> <input id="namedevice" class="form-control" required>
+							<b>Nombre</b> <input name="namedevice" id="namedevice" class="form-control" required>
 							<p></p>
-							<b>Descripcion</b> <input id="descriptiondevice" class="form-control" required>
+							<b>Descripcion</b> <input name="descriptiondevice" id="descriptiondevice" class="form-control" required>
 							<p></p>
-							<b>Numero de Serie</b> <input id="serialnumber" class="form-control" required>
+							<b>Numero de Serie</b> <input name="serialnumber" id="serialnumber" class="form-control" required>
 				</div>
 				<div id="infoDeducidaCoiaca" style="display:none">
 					<h3>Informacion Dispositivo Ciaca</h3>
@@ -149,7 +152,7 @@
 							<p></p>
 							<div>
 								<b>Tipo de Dispositivo</b> <select id="tipodevice"
-									class="form-control">
+									name="tipodevice" class="form-control">
 									<option value="none">Seleccione uno</option>
 									<option value="termometro">Termometro</option>
 									<option value="alarma">Alarma</option>
@@ -162,7 +165,7 @@
 					<h3>Personalizar Vista</h3>
 							<div id="vistastermometro">
 								<b>Vista de Termometro</b> <select id="tipovistatermometro"
-									class="form-control" onchange="changeTipoVistaTermometro()">
+									name="tipovistatermometro" class="form-control" onchange="changeTipoVistaTermometro()">
 									<option value="none">Seleccione uno</option>
 <!-- 									<option value="watches">Relojes</option> -->
 									<option value="bars">Barras</option>
@@ -172,7 +175,7 @@
 							<p></p>
 							<div id="cantidadswith">
 								<b>Cantidad de Swiths</b> <select id="cantidadswiths"
-									class="form-control">
+									name="cantidadswiths" class="form-control">
 									<option value="none">Seleccione uno</option>
 									<option value="one">Uno</option>
 									<option value="two">Dos</option>
@@ -185,13 +188,13 @@
 								data-toggle="modal" data-target="#modalTimerString">Agregar
 								Timer String</a>
 						</div>
-						<form class="panel panel-primary" id="tabletimerstring">
+						<div class="panel panel-primary" id="tabletimerstring">
 							<div class="panel-heading">
 								<p> </p>
 								<h6 class="panel-title">Parametros del Timer String</h6>
 							</div>
 							<div class="panel-body">
-								<table class="table table-sm" id="dataTable">
+								<table name="timerstringsonoff" class="table table-sm" id="dataTable">
 										<tr>
 											<th>Dias de la Semana</th>
 											<th>Hora</th>
@@ -203,45 +206,45 @@
 									</tbody>
 								</table>
 							</div>
-						</form>
+						</div>
 
-						<form id="parametrostermometro">
+						<div id="parametrostermometro">
 							<b>Parametros del Termometro</b>
 							<table class="table table-sm">
 								<tbody>
 									<tr class="tablain">
 										<td>Humedad</td>
 										<td><input type="checkbox" id="humedadtermometro"
-											data-toggle="toggle"></td>
+											name="humedadtermometro" data-toggle="toggle"></td>
 									</tr>
 									<tr class="tablain">
 										<td>Temperatura (Grados Centigrados)</td>
 										<td><input type="checkbox" id="tempctermometro"
-											data-toggle="toggle"></td>
+											name="tempctermometro" data-toggle="toggle"></td>
 									</tr>
 									<tr class="tablain">
 										<td>Sensacion Termica (Grados Centigrados)</td>
 										<td><input type="checkbox" id="sensacionctermometro"
-											data-toggle="toggle"></td>
+											name="sensacionctermometro" data-toggle="toggle"></td>
 									</tr>
 									<tr class="tablain">
 										<td>Temperatura (Grados Fahrenheit)</td>
 										<td><input type="checkbox" id="tempftermometro"
-											data-toggle="toggle"></td>
+											name="tempftermometro" data-toggle="toggle"></td>
 									</tr>
 									<tr class="tablain">
 										<td>Sensacion Termica (Grados Fahrenheit)</td>
 										<td><input type="checkbox" id="sensacionftermometro"
-											data-toggle="toggle"></td>
+											name="sensacionftermometro" data-toggle="toggle"></td>
 									</tr>
 								</tbody>
 							</table>
-						</form>
+						</div>
 				</div>
 				<div id="infoAvanzada" style="display:none">
 					<h3>Informacion Avanzada</h3>
 						<b>Usar configuracion por Default<input
-							id="toggle-paramconects" checked type="checkbox"
+							id="toggle-paramconects" name="defaultconfiguration" checked type="checkbox"
 							data-toggle="toggle" onchange="checkconfiguration()"
 							data-style="slow"></b>
 						<p></p>
@@ -354,19 +357,17 @@
 						<h5>Termino con la configuracion... desea guardar los cambios?</h5>
 					</div>
 					
-				</div>
+				
 				<div class="btn-group">
           			<button id="botonAnterior" style="display:none" class="btn btn-secondary" onclick="anteriorAnimacion()" type="button">Anterior</button>
           			<button id="botonSiguiente" class="btn btn-primary" onclick="siguienteAnimacion()" type="button">Siguiente</button>
           		</div>
         </div>
         <div class="modal-footer">
-          <form id="formCreate"  action="<c:url value="home/create"/>" method="post" > <%-- role="form" enctype="multipart/form-data" --%>
-          	<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-<!--           	<a class="btn btn-primary" href="javascript:;" onclick="parentNode.submit();">Finalizar</a> -->
-          	<button onclick="document.getElementById('formCreate').submit();">Finalizar</button>
-          </form>
+          	<button type="button" class="btn btn-secondary"  data-dismiss="modal">Cancelar</button>
+          	<button type="submit" class="btn btn-default">Finalizar</button>
         </div>
+        </form>
       </div>
     </div>
   </div>
