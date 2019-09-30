@@ -73,16 +73,8 @@ public class DeviceDebugController {
 			newconfig.setUserescuchar(userescuchar);
 		if(!passescuchar.isEmpty())
 			newconfig.setPassescuchar(passescuchar);
-		if(!iphostescribir.isEmpty())
-			newconfig.setIphostescribir(iphostescribir);
-		if(!portescribir.isEmpty())
-			newconfig.setPortescribir(portescribir);
 		if(!topicwrite.isEmpty())
 			newconfig.setTopicescribir(topicwrite);
-		if(!userescribir.isEmpty())
-			newconfig.setUserescribir(userescribir);
-		if(!passescribir.isEmpty())
-			newconfig.setPassescribir(passescribir);
 		if(!iphostescucharremote.isEmpty())
 			newconfig.setIphostescucharremote(iphostescucharremote);
 		if(!portescucharremote.isEmpty())
@@ -93,16 +85,8 @@ public class DeviceDebugController {
 			newconfig.setUserescucharremote(userescucharremote);
 		if(!passescucharremote.isEmpty())
 			newconfig.setPassescucharremote(passescucharremote);
-		if(!iphostescribirremote.isEmpty())
-			newconfig.setIphostescribirremote(iphostescribirremote);
-		if(!portescribirremote.isEmpty())
-			newconfig.setPortescribirremote(portescribirremote);
 		if(!topicwriteremote.isEmpty())
 			newconfig.setTopicescribirremote(topicwriteremote);
-		if(!userescribirremote.isEmpty())
-			newconfig.setUserescribirremote(userescribirremote);
-		if(!passescribirremote.isEmpty())
-			newconfig.setPassescribirremote(passescribirremote);
 
 		if(device.getDeviceconfiguration().size()==2)
 			device.getDeviceconfiguration().remove(1);

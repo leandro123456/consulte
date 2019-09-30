@@ -7,29 +7,23 @@ public class DeviceDefaultConfiguration extends MongoDBObject {
 
 	private static final long serialVersionUID = -4346222511562336633L;
 	private String name;
-	private String userescuchar;
-	private String passescuchar;
+	private String version;
 	private String iphostescuchar;
 	private String portescuchar;
 	private Boolean usesslescuchar;
+	private String userescuchar;
+	private String passescuchar;
 	private String topicescuchar;
-	private String userescribir;
-	private String passescribir;
-	private String iphostescribir;
-	private String portescribir;
-	private Boolean usesslescribir;
 	private String topicescribir;
+//	private String topicescucharEstado;
+//	private String topicescucharRed;
+	
 	private String userescucharremote;
 	private String passescucharremote;
 	private String iphostescucharremote;
 	private String portescucharremote;
 	private Boolean usesslescucharremote;
 	private String topicescucharremote;
-	private String userescribirremote;
-	private String passescribirremote;
-	private String iphostescribirremote;
-	private String portescribirremote;
-	private Boolean usesslescribirremote;
 	private String topicescribirremote;
 
 	
@@ -88,46 +82,6 @@ public class DeviceDefaultConfiguration extends MongoDBObject {
 		this.usesslescuchar = usesslescuchar;
 	}
 
-	public String getUserescribir() {
-		return userescribir;
-	}
-
-	public void setUserescribir(String userescribir) {
-		this.userescribir = userescribir;
-	}
-
-	public String getPassescribir() {
-		return passescribir;
-	}
-
-	public void setPassescribir(String passescribir) {
-		this.passescribir = passescribir;
-	}
-
-	public String getIphostescribir() {
-		return iphostescribir;
-	}
-
-	public void setIphostescribir(String iphostescribir) {
-		this.iphostescribir = iphostescribir;
-	}
-
-	public String getPortescribir() {
-		return portescribir;
-	}
-
-	public void setPortescribir(String portescribir) {
-		this.portescribir = portescribir;
-	}
-
-	public Boolean getUsesslescribir() {
-		return usesslescribir;
-	}
-
-	public void setUsesslescribir(Boolean usesslescribir) {
-		this.usesslescribir = usesslescribir;
-	}
-
 	public String getUserescucharremote() {
 		return userescucharremote;
 	}
@@ -167,47 +121,7 @@ public class DeviceDefaultConfiguration extends MongoDBObject {
 	public void setUsesslescucharremote(Boolean usesslescucharremote) {
 		this.usesslescucharremote = usesslescucharremote;
 	}
-
-	public String getUserescribirremote() {
-		return userescribirremote;
-	}
-
-	public void setUserescribirremote(String userescribirremote) {
-		this.userescribirremote = userescribirremote;
-	}
-
-	public String getPassescribirremote() {
-		return passescribirremote;
-	}
-
-	public void setPassescribirremote(String passescribirremote) {
-		this.passescribirremote = passescribirremote;
-	}
-
-	public String getIphostescribirremote() {
-		return iphostescribirremote;
-	}
-
-	public void setIphostescribirremote(String iphostescribirremote) {
-		this.iphostescribirremote = iphostescribirremote;
-	}
-
-	public String getPortescribirremote() {
-		return portescribirremote;
-	}
-
-	public void setPortescribirremote(String portescribirremote) {
-		this.portescribirremote = portescribirremote;
-	}
-
-	public Boolean getUsesslescribirremote() {
-		return usesslescribirremote;
-	}
-
-	public void setUsesslescribirremote(Boolean usesslescribirremote) {
-		this.usesslescribirremote = usesslescribirremote;
-	}
-
+	
 	public String getTopicescuchar() {
 		return topicescuchar;
 	}
@@ -239,6 +153,30 @@ public class DeviceDefaultConfiguration extends MongoDBObject {
 	public void setTopicescribirremote(String topicescribirremote) {
 		this.topicescribirremote = topicescribirremote;
 	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
+
+//	public String getTopicescucharEstado() {
+//		return topicescucharEstado;
+//	}
+//
+//	public void setTopicescucharEstado(String topicescucharEstado) {
+//		this.topicescucharEstado = topicescucharEstado;
+//	}
+//
+//	public String getTopicescucharRed() {
+//		return topicescucharRed;
+//	}
+//
+//	public void setTopicescucharRed(String topicescucharRed) {
+//		this.topicescucharRed = topicescucharRed;
+//	}
 
 
 }

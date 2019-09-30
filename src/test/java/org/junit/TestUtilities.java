@@ -134,7 +134,6 @@ public class TestUtilities {
 		System.out.println("EMPEZO");
 		DeviceDefaultConfiguration elem =new DeviceDefaultConfiguration();
 		elem.setName("test");
-		elem.setUserescribir("dsa");
 		deviceconfigdao.create(elem);
 		System.out.println("TERMINO");
 	}

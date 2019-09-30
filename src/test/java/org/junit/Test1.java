@@ -81,12 +81,7 @@ public class Test1 {
 		deviceconfiguration.setPassescuchar("Sanbenit0");
 		deviceconfiguration.setUserescuchar("movasim");
 		deviceconfiguration.setUsesslescuchar(false);
-		
-		deviceconfiguration.setIphostescribir("");
-		deviceconfiguration.setPortescribir("");
 		deviceconfiguration.setTopicescribir("serial/swcmd");
-		deviceconfiguration.setPassescribir("");
-		deviceconfiguration.setUserescribir("");
 		
 //		deviceconfiguration.setIphostescucharremote("mqtt.coiaca.com");
 //		deviceconfiguration.setPortescucharremote("8080");
@@ -99,12 +94,7 @@ public class Test1 {
 		deviceconfiguration.setTopicescucharremote("RConfig/serial/result");
 		deviceconfiguration.setUserescucharremote("mqttusr");
 		deviceconfiguration.setPassescucharremote("mqttpwd");
-		
-		deviceconfiguration.setIphostescribirremote("mqtttest.qliq.com.ar");
-		deviceconfiguration.setPortescribirremote("8883");
 		deviceconfiguration.setTopicescribirremote("RConfig/serial");
-		deviceconfiguration.setUserescribirremote("mqttusr");
-		deviceconfiguration.setPassescribirremote("mqttpwd");
 		
 		dedao.create(deviceconfiguration);
 		System.out.println("termino");

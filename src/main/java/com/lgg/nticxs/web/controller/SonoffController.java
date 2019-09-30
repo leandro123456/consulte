@@ -49,11 +49,11 @@ public class SonoffController {
 		}else {
 			deviceconfig= device.getDeviceconfiguration().get(1);
 		}
-		String serverUri = deviceconfig.getIphostescribir();
-		String port = deviceconfig.getPortescribir();
+		String serverUri = deviceconfig.getIphostescuchar();
+		String port = deviceconfig.getPortescuchar();
 		String topic = deviceconfig.getTopicescribir();
-		String userName = deviceconfig.getUserescribir();
-		String password = deviceconfig.getPassescribir();
+		String userName = deviceconfig.getUserescuchar();
+		String password = deviceconfig.getPassescuchar();
 		JSONObject json = new JSONObject();
 		json.put("pwd", password);
 		json.put("command", "switchAction");
@@ -74,11 +74,11 @@ public class SonoffController {
 			}else {
 				deviceconfig= device.getDeviceconfiguration().get(1);
 			}
-			String serverUri = deviceconfig.getIphostescribir();
-			String port = deviceconfig.getPortescribir();
+			String serverUri = deviceconfig.getIphostescuchar();
+			String port = deviceconfig.getPortescuchar();
 			String topic = deviceconfig.getTopicescribir();
-			String userName = deviceconfig.getUserescribir();
-			String password = deviceconfig.getPassescribir();
+			String userName = deviceconfig.getUserescuchar();
+			String password = deviceconfig.getPassescuchar();
 			JSONObject json = new JSONObject();
 			json.put("pwd", password);
 			json.put("command", "simulateButtonPush");

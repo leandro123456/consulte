@@ -30,12 +30,14 @@ function evaluarNumeroDeSerie(valorSerial){
         	document.getElementById('tipovistatermometro').value = 'bars';
         	document.getElementById("tipovistatermometro").disabled = true;
         	enableType("termometro");
+        	obtenerConfiguracion("termometro");
         }if(serial.includes("PSWS1")){ 
         	document.getElementById('modelodevice').value = 'PSWS1';
         	document.getElementById('tipodevice').value = 'sonoff';
         	document.getElementById('cantidadswiths').value = 'one';
         	document.getElementById("cantidadswiths").disabled = true;    
         	enableType("sonoff");
+        	obtenerConfiguracion("sonoff");
         }if(serial.includes("PSWS2")){ 
         	document.getElementById('modelodevice').value = 'PSWS2';
         	document.getElementById("serialnumber").value = "PSWS2";
@@ -43,16 +45,19 @@ function evaluarNumeroDeSerie(valorSerial){
         	document.getElementById('cantidadswiths').value = 'two';
         	document.getElementById("cantidadswiths").disabled = true;
         	enableType("sonoff");
+        	obtenerConfiguracion("sonoff");
         }if(serial.includes("DSC01")){ 
         	document.getElementById('modelodevice').value = 'BRDSC';
         	document.getElementById('tipodevice').value = 'alarma';
         	enableType("alarma");
+        	obtenerConfiguracion("alarma");
         }if(serial.includes("PS3S1")){ 
         	document.getElementById('modelodevice').value = 'PS3S1';
         	document.getElementById('tipodevice').value = 'sonoff';
         	document.getElementById('cantidadswiths').value = 'one';
         	document.getElementById("cantidadswiths").disabled = true;
         	enableType("sonoff");
+        	obtenerConfiguracion("sonoff");
         }
         document.getElementById('modelodevice').disabled = true;
         document.getElementById("tipodevice").disabled = true;
@@ -113,7 +118,6 @@ function siguienteAnimacion(){
 		document.getElementById("infoPropiaVista").style.display="none";
 		document.getElementById("infoAvanzada").style.display="none";
 		document.getElementById("infoFinal").style.display="none";
-		document.getElementById('parametersConexion').style.display = 'none';
 	}
 	else if(document.getElementById("infoDeducidaCoiaca").style.display=="inline"){
 		document.getElementById("botonAnterior").style.display="inline";
@@ -299,27 +303,32 @@ $('#ModalConfirm').on('show.bs.modal', function (event) {
           	  
           	  
 	  	})
-	  	  	
+  	
 	  	
-	  //funcion para mostrar las opciones avanzadas
-	  	function checkconfiguration() {
-			  var checkBox=document.getElementById("toggle-paramconects");
-			  if (checkBox.checked == true){
-				    document.getElementById('parametersConexion').style.display = 'none';
-				  } else {
-					  document.getElementById('parametersConexion').style.display = 'inline';
-					  
-					  var seleccion=document.getElementById('marcadevice');
-					  var marcaDev = seleccion.options[seleccion.selectedIndex].value;
-					  var seleccion1=document.getElementById('modelodevice');
-					  var modeloDev = seleccion.options[seleccion1.selectedIndex].value;
-					 completarloscamposdeconfiguracion(marcaDev,modeloDev);
-				  }
-		  }
-	  	
-	  	
-	  	
-	  	
+/**
+ * Estas funciones se usan para cargar la configuracion por default de los 
+ * parametros de conexion
+ */
+
+	function obtenerConfiguracion(tipoDevice) {
+		var _url = $(location).attr('pathname') + "/configuraciondefault/"+tipoDevice;
+		alert("quiero ir a esta URL"+ _url);
+		$.ajax({ url : _url,
+			contentType: "application/json",
+			dataType: 'json',
+			success: function(data){
+				alert("esta es la respuesta: "+ data);
+				document.getElementById('iphostescuchar').value = data.iphostescuchar;
+				document.getElementById('portescuchar').value = data.portescuchar;
+				document.getElementById('userescuchar').value = data.userescuchar;
+				document.getElementById('topiclisten').value = data.topicescuchar;
+				document.getElementById('topicwrite').value = data.topicescribir;
+				document.getElementById('iphostescucharremote').value = data.iphostescucharremote;
+				document.getElementById('portescucharremote').value = data.portescucharremote;
+				document.getElementById('topiclistenremote').value = data.topicescucharremote;
+				document.getElementById('topicwriteremote').value = data.topicescribirremote;
+			}});
+	}
 	  	
 
 		

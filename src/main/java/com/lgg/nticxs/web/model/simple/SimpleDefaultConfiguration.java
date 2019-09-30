@@ -41,11 +41,6 @@ public class SimpleDefaultConfiguration {
 		this.portescuchar =conf.getPortescuchar();
 		this.usesslescuchar=conf.getUsesslescuchar();
 		this.topicescuchar =conf.getTopicescuchar();
-		this.userescribir =conf.getUserescribir();
-		this.passescribir =conf.getPassescribir();
-		this.iphostescribir =conf.getIphostescribir();
-		this.portescribir=conf.getPortescribir();
-		this.usesslescribir=conf.getUsesslescribir();
 		this.topicescribir=conf.getTopicescribir();
 		this.userescucharremote=conf.getUserescucharremote();
 		this.passescucharremote=conf.getPassescucharremote();
@@ -53,11 +48,7 @@ public class SimpleDefaultConfiguration {
 		this.portescucharremote=conf.getPortescucharremote();
 		this.usesslescucharremote=conf.getUsesslescucharremote();
 		this.topicescucharremote=conf.getTopicescucharremote();
-		this.userescribirremote=conf.getUserescribirremote();
 		this.passescribirremote=conf.getPassescucharremote();
-		this.iphostescribirremote=conf.getIphostescribirremote();
-		this.portescribirremote=conf.getPortescribirremote();
-		this.usesslescribirremote=conf.getUsesslescribirremote();
 		this.topicescribirremote =conf.getTopicescribirremote();
 		
 	}

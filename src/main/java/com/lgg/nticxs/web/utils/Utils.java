@@ -489,10 +489,10 @@ public class Utils {
 					if(atributosDeLaVista[i].equals("sonoffbody")) {
 						String cuerpoSonoff= vista.getContenido().get("sonoffbody").replaceAll("CAMBIARSONOFF", serialDevice);
 						System.out.println("este es el cuuerpo del  SONOFF: "+ cuerpoSonoff);
-						cuerpoSonoff=cuerpoSonoff.replaceAll("HOSTSONOFF", devconfig.getIphostescribir());
-						cuerpoSonoff=cuerpoSonoff.replaceAll("PORTSONOFF", devconfig.getPortescribir());
-						cuerpoSonoff=cuerpoSonoff.replaceAll("USERSONOFF", devconfig.getUserescribir());
-						cuerpoSonoff=cuerpoSonoff.replaceAll("PASSSONOFF", devconfig.getPassescribir());
+						cuerpoSonoff=cuerpoSonoff.replaceAll("HOSTSONOFF", devconfig.getIphostescuchar());
+						cuerpoSonoff=cuerpoSonoff.replaceAll("PORTSONOFF", devconfig.getPortescuchar());
+						cuerpoSonoff=cuerpoSonoff.replaceAll("USERSONOFF", devconfig.getUserescuchar());
+						cuerpoSonoff=cuerpoSonoff.replaceAll("PASSSONOFF", devconfig.getPassescuchar());
 						cuerpoSonoff=cuerpoSonoff.replaceAll("TOPICSONOFF", devconfig.getTopicescribir());
 						cuerpoSonoff=cuerpoSonoff.replaceAll("TOPICREMOTESONOFF", devconfig.getTopicescribirremote());
 						contenidototal= contenidototal+cuerpoSonoff;	
@@ -502,10 +502,10 @@ public class Utils {
 					if(atributosDeLaVista[i].equals("sonoffbody")) {
 						String cuerpoSonoff= vista.getContenido().get("sonoffbody").replaceAll("CAMBIARSONOFF", serialDevice);
 						//System.out.println("este es el cuuerpo del  SONOFF: "+ cuerpoSonoff);
-						cuerpoSonoff=cuerpoSonoff.replaceAll("HOSTSONOFF", devconfig.getIphostescribir());
-						cuerpoSonoff=cuerpoSonoff.replaceAll("PORTSONOFF", devconfig.getPortescribir());
-						cuerpoSonoff=cuerpoSonoff.replaceAll("USERSONOFF", devconfig.getUserescribir());
-						cuerpoSonoff=cuerpoSonoff.replaceAll("PASSSONOFF", devconfig.getPassescribir());
+						cuerpoSonoff=cuerpoSonoff.replaceAll("HOSTSONOFF", devconfig.getIphostescuchar());
+						cuerpoSonoff=cuerpoSonoff.replaceAll("PORTSONOFF", devconfig.getPortescuchar());
+						cuerpoSonoff=cuerpoSonoff.replaceAll("USERSONOFF", devconfig.getUserescuchar());
+						cuerpoSonoff=cuerpoSonoff.replaceAll("PASSSONOFF", devconfig.getPassescuchar());
 						cuerpoSonoff=cuerpoSonoff.replaceAll("TOPICSONOFF", devconfig.getTopicescribir());
 						cuerpoSonoff=cuerpoSonoff.replaceAll("TOPICREMOTESONOFF", devconfig.getTopicescribirremote());
 						contenidototal= contenidototal+cuerpoSonoff;	
@@ -514,10 +514,10 @@ public class Utils {
 				case "alarma":
 					System.out.println("llego al armado de la alarmas");
 					contenidototal= vista.getContenido().get("alarmabody").replaceAll("CAMBIARALARMA", serialDevice);
-					contenidototal=contenidototal.replaceAll("HOSTALARMA", devconfig.getIphostescribir());
-					contenidototal=contenidototal.replaceAll("PORTALARMA", devconfig.getPortescribir());
-					contenidototal=contenidototal.replaceAll("USERALARMA", devconfig.getUserescribir());
-					contenidototal=contenidototal.replaceAll("PASSALARMA", devconfig.getPassescribir());
+					contenidototal=contenidototal.replaceAll("HOSTALARMA", devconfig.getIphostescuchar());
+					contenidototal=contenidototal.replaceAll("PORTALARMA", devconfig.getPortescuchar());
+					contenidototal=contenidototal.replaceAll("USERALARMA", devconfig.getUserescuchar());
+					contenidototal=contenidototal.replaceAll("PASSALARMA", devconfig.getPassescuchar());
 					contenidototal=contenidototal.replaceAll("TOPICOALARMA", devconfig.getTopicescribir());
 				default:
 					System.out.println("ERROR VISTA NO ENCONTRADA");

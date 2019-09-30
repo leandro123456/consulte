@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lgg.nticxs.web.DAO.DeviceDAO;
@@ -168,27 +170,18 @@ public class DeviceController {
 			@RequestParam(name="sensacionftermometro", required=false) String sensacionftermometro,
 			
 			//configuracion de topicos
-			@RequestParam(name="defaultconfiguration", required=true) Boolean defaultconfiguration,
 			@RequestParam(name="iphostescuchar", required=false) String iphostescuchar,
 			@RequestParam(name="portescuchar", required=false) String portescuchar,
 			@RequestParam(name="topiclisten", required=false) String topiclisten,
 			@RequestParam(name="userescuchar", required=false) String userescuchar,
 			@RequestParam(name="passescuchar", required=false) String passescuchar,
-			@RequestParam(name="iphostescribir", required=false) String iphostescribir,
-			@RequestParam(name="portescribir", required=false) String portescribir,
 			@RequestParam(name="topicwrite", required=false) String topicwrite,
-			@RequestParam(name="userescribir", required=false) String userescribir,
-			@RequestParam(name="passescribir", required=false) String passescribir,
 			@RequestParam(name="iphostescucharremote", required=false) String iphostescucharremote,
 			@RequestParam(name="portescucharremote", required=false) String portescucharremote,
 			@RequestParam(name="topiclistenremote", required=false) String topiclistenremote,
 			@RequestParam(name="userescucharremote", required=false) String userescucharremote,
 			@RequestParam(name="passescucharremote", required=false) String passescucharremote,
-			@RequestParam(name="iphostescribirremote", required=false) String iphostescribirremote,
-			@RequestParam(name="portescribirremote", required=false) String portescribirremote,
-			@RequestParam(name="topicwriteremote", required=false) String topicwriteremote,
-			@RequestParam(name="userescribirremote", required=false) String userescribirremote,
-			@RequestParam(name="passescribirremote", required=false) String passescribirremote
+			@RequestParam(name="topicwriteremote", required=false) String topicwriteremote
 			) {
 		System.out.println("PARAMETROS DE ENTRADA serialnumber: "+ serialnumber);
 		System.out.println("PARAMETROS DE ENTRADA namedevice: "+ namedevice);
@@ -202,33 +195,23 @@ public class DeviceController {
 		System.out.println("PARAMETROS DE ENTRADA sensacionctermometro: "+ sensacionctermometro);
 		System.out.println("PARAMETROS DE ENTRADA tempftermometro: "+ tempftermometro);
 		System.out.println("PARAMETROS DE ENTRADA sensacionftermometro: "+ sensacionftermometro);
-		System.out.println("PARAMETROS DE ENTRADA defaultconfiguration: "+ defaultconfiguration);
 		System.out.println("PARAMETROS DE ENTRADA iphostescuchar: "+ iphostescuchar);
 		System.out.println("PARAMETROS DE ENTRADA portescuchar: "+ portescuchar);
 		System.out.println("PARAMETROS DE ENTRADA topiclisten: "+ topiclisten);
 		System.out.println("PARAMETROS DE ENTRADA userescuchar: "+ userescuchar);
 		System.out.println("PARAMETROS DE ENTRADA passescuchar: "+ passescuchar);
-		System.out.println("PARAMETROS DE ENTRADA iphostescribir: "+ iphostescribir);
-		System.out.println("PARAMETROS DE ENTRADA portescribir: "+ portescribir);
 		System.out.println("PARAMETROS DE ENTRADA topicwrite: "+ topicwrite);
-		System.out.println("PARAMETROS DE ENTRADA userescribir: "+ userescribir);
-		System.out.println("PARAMETROS DE ENTRADA passescribir: "+ passescribir);
 		System.out.println("PARAMETROS DE ENTRADA iphostescucharremote: "+ iphostescucharremote);
 		System.out.println("PARAMETROS DE ENTRADA portescucharremote: "+ portescucharremote);
 		System.out.println("PARAMETROS DE ENTRADA topiclistenremote: "+ topiclistenremote);
 		System.out.println("PARAMETROS DE ENTRADA userescucharremote: "+ userescucharremote);
 		System.out.println("PARAMETROS DE ENTRADA passescucharremote: "+ passescucharremote);
-		System.out.println("PARAMETROS DE ENTRADA iphostescribirremote: "+ iphostescribirremote);
-		System.out.println("PARAMETROS DE ENTRADA portescribirremote: "+ portescribirremote);
 		System.out.println("PARAMETROS DE ENTRADA topicwriteremote: "+topicwriteremote );
-		System.out.println("PARAMETROS DE ENTRADA userescribirremote: "+ userescribirremote);
-		System.out.println("PARAMETROS DE ENTRADA passescribirremote: "+passescribirremote );
 		System.out.println("ES NULL SERIAL: "+ devicedao.retrieveBySerialNumber(serialnumber) ==null);
 		if(devicedao.retrieveBySerialNumber(serialnumber) ==null){
 			ManagementDevice.createDevice(
 					request,serialnumber, namedevice, descriptiondevice, tipodevice, 
 					//propoio configuracion
-					defaultconfiguration,
 					iphostescuchar, portescuchar, topiclisten, userescuchar,passescuchar,
 					iphostescribir, portescribir, topicwrite, userescribir, passescribir,
 					iphostescucharremote, portescucharremote, topiclistenremote, userescucharremote, passescucharremote,
@@ -311,6 +294,34 @@ public class DeviceController {
 		}
 		return "redirect:/home";
 	}
+	
+	
+	
+	   @GetMapping("home/configuraciondefault/{tipodevice}")
+	   @ResponseBody
+	    public String getRunningOperations(Model model, @PathVariable String tipodevice) {
+	    	System.out.println("Llego a la peticion de ajax");
+	        JSONObject json = new JSONObject();
+	        DeviceDefaultConfigurationDAO devdefdao= new DeviceDefaultConfigurationDAO();
+	        DeviceDefaultConfiguration dev = null;
+	        if(tipodevice.equals("alarma")){
+	        	dev = devdefdao.retrieveByName("defaultalarma");
+	        	json.put("iphostescuchar", dev.getIphostescuchar());
+	        	json.put("portescuchar", dev.getPortescuchar());
+	        	json.put("userescuchar", dev.getUserescuchar());
+	        	json.put("topicescuchar", dev.getTopicescuchar());
+	        	json.put("topicescribir", dev.getTopicescribir());
+	        	json.put("iphostescucharremote", dev.getIphostescucharremote());
+	        	json.put("portescucharremote", dev.getPortescucharremote());
+	        	json.put("topicescucharremote", dev.getTopicescucharremote());
+	        	json.put("topicescribirremote", dev.getTopicescribirremote());
+	        }
+	        return json.toString();
+
+	    }
+	   
+	   
+	   
 	
 
 	private void CargarDevices(Model model, HttpServletRequest request) {

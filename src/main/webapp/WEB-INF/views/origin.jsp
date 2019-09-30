@@ -249,13 +249,8 @@
 				</div>
 				<div id="infoAvanzada" style="display:none">
 					<h3>Informacion Avanzada</h3>
-						<b>Usar configuracion por Default<input
-							id="toggle-paramconects" name="defaultconfiguration" checked type="checkbox"
-							data-toggle="toggle" onchange="checkconfiguration()"
-							data-style="slow"></b>
-						<p></p>
 						<div id="parametersConexion" onkeypress=checkPassword()>
-							<h5>Topico para escuchar</h5>
+							<h6>Configuracion del Dispositivo</h6>
 							<div class="form-group row ">
 								<b>Hostname or Direccion IP</b> 
 									<input type="text"
@@ -265,97 +260,52 @@
 									<input type="text"
 									class="form-control form-control-user" id="portescuchar"
 									placeholder="Number Port"> 
-								<b>Topico</b>
-									<input
-									type="text" class="form-control form-control-user "
-									id="topiclisten" placeholder="Topic to Listen"> 
 								<b>Nombre de Usuario</b> 
 									<input type="text" class="form-control form-control-user"
-									id="userescuchar" placeholder="User name"> 
+									id="userescuchar" placeholder="Nombre de usuario"> 
 								<b>Contraseña</b>
 									<input type="password" class="form-control form-control-user"
-									id="passescuchar" placeholder="Password"> 
+									id="passescuchar" placeholder="Contraseña"> 
 								<b>Confirmar Contraseña</b> 
 									<input type="password"
 									class="form-control form-control-user" id="confirpassescuchar"
-									placeholder="Confirm Password">
-							</div>
-
-
-							<h5>Topico para enviar</h5>
-							<div class="form-group row ">
-								<b>Hostname o Direccion IP</b> 
-									<input type="text" 
-									class="form-control form-control-user" id="iphostescribir"
-									placeholder="Hostname" value=""> 
-								<b>Puerto</b> 
-									<input type="text"
-									class="form-control form-control-user" id="portescribir"
-									placeholder=" Number Port"> 
-								<b>Topico</b>
+									placeholder="Confirmar Contraseña">
+								<b>Topico para recibir Informacion</b>
 									<input type="text" class="form-control form-control-user "
-									id="topicwrite" placeholder="Topic to Write"> 
-								<b>Nombre de usuario</b> 
-									<input type="text" class="form-control form-control-user"
-									id="userescribir" placeholder="User name"> 
-								<b>Contraseña</b>
-								<input type="password" class="form-control form-control-user"
-									id="passescribir" placeholder="Password"> 
-								<b>Confirmar Contraseña</b> <input type="password"
-									class="form-control form-control-user" id="confirpassescribir"
-									placeholder="Confirm Password">
+									id="topiclisten" placeholder="Topico para recibir Informacion">
+								<b>Topico para envio de Informacion</b>
+									<input type="text" class="form-control form-control-user "
+									id="topicwrite" placeholder="Topico para envio de Informacion"> 
 							</div>
-
-							<h5>Topico para escuchar comandos remotos</h5>
+							
+							<h6>Configuracion Remota</h6>
 							<div class="form-group row ">
 								<b>Hostname o Direccion IP</b> 
 									<input type="text"
 									class="form-control form-control-user"
-									id="iphostescucharremote" placeholder="Hostname"> 
+									id="iphostescucharremote" placeholder="Hostname o direccion IP"> 
 								<b>Puerto</b>
 									<input type="text" class="form-control form-control-user"
-									id="portescucharremote" placeholder="Number Port"> 
-								<b>Topico</b>
-									<input type="text"
-									class="form-control form-control-user " id="topiclistenremote"
-									placeholder="Topic to Listen"> 
+									id="portescucharremote" placeholder="Puerto"> 
 								<b>Nombre de Usuario</b> 
 									<input
 									type="text" class="form-control form-control-user"
-									id="userescucharremote" placeholder="User name"> 
+									id="userescucharremote" placeholder="Nombre de usuario"> 
 								<b>Contraseña</b>
 									<input type="password" class="form-control form-control-user"
-									id="passescucharremote" placeholder="Password"> 
+									id="passescucharremote" placeholder="Contraseña"> 
 								<b>Confirmar Contraseña</b> 
 									<input type="password"
 									class="form-control form-control-user"
-									id="confirpassescucharremote" placeholder="Confirm Password">
-							</div>
-
-							<h5>Topico para enviar comandos remotos</h5>
-							<div class="form-group row ">
-								<b>Hostname or Direccin IP</b> 
+									id="confirpassescucharremote" placeholder="Confirmar Contraseña">
+								<b>Topico para recepcion de Respuestas</b>
 									<input type="text"
-									class="form-control form-control-user"
-									id="iphostescribirremote" placeholder="Hostname"> 
-								<b>Puerto</b>
-									<input type="text" class="form-control form-control-user"
-									id="portescribirremote" placeholder="Number Port"> 
-								<b>Topico</b>
+									class="form-control form-control-user " id="topiclistenremote"
+									placeholder="Topico para recepcion de Respuestas"> 
+								<b>Topico para envio de Comando de Configuracion</b>
 									<input type="text"
 									class="form-control form-control-user " id="topicwriteremote"
-									placeholder="Topic to Write"> 
-								<b>Nombre de Usuario</b> 
-									<input
-									type="text" class="form-control form-control-user"
-									id="userescribirremote" placeholder="User name"> 
-								<b>Contraseña</b>
-								<input type="password" class="form-control form-control-user"
-									id="passescribirremote" placeholder="Password"> 
-								<b>Confirmar Contraseña</b> 
-								<input type="password"
-									class="form-control form-control-user"
-									id="confirmpassescribirremote" placeholder="Confirm Password">
+									placeholder="Topico para envio de Comando de Configuracion"> 
 							</div>
 						</div>
 					</div>

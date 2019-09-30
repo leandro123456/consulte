@@ -16,17 +16,19 @@ import com.lgg.nticxs.web.model.Vista;
 import com.lgg.nticxs.web.model.simple.SimpleTimerString;
 
 public class ManagementDevice {
-	
+	private DeviceDefaultConfigurationDAO devdefdao = new DeviceDefaultConfigurationDAO();
 
 
-	public static void createDevice(HttpServletRequest request, String deviceserial, String namedevice,
-			String descriptiondevice, String tipodevice, Boolean defaultconfiguration, String iphostescuchar,
-			String portescuchar, String topiclisten, String userescuchar, String passescuchar, String iphostescribir,
-			String portescribir, String topicwrite, String userescribir, String passescribir,
-			String iphostescucharremote, String portescucharremote, String topiclistenremote, String userescucharremote,
-			String passescucharremote, String iphostescribirremote, String portescribirremote, String topicwriteremote,
-			String userescribirremote, String passescribirremote, String timerstringsonoff, String cantidadswiths,
-			String tipovistatermometro, String humedadtermometro, String tempctermometro, String sensacionctermometro,
+	public static void createDevice(HttpServletRequest request, String deviceserial,
+			String namedevice, String descriptiondevice, String tipodevice, 
+			String iphostescuchar, String portescuchar, String topiclisten, 
+			String userescuchar, String passescuchar, String topicwrite,
+			String iphostescucharremote, String portescucharremote, 
+			String topiclistenremote, String userescucharremote,
+			String passescucharremote, String topicwriteremote,
+			String timerstringsonoff, String cantidadswiths,
+			String tipovistatermometro, String humedadtermometro, 
+			String tempctermometro, String sensacionctermometro,
 			String tempftermometro, String sensacionftermometro) {
 		
 		UserDAO userdao = new UserDAO();
@@ -42,45 +44,16 @@ public class ManagementDevice {
 			name = request.getUserPrincipal().getName();
 			System.out.println("nombre del dueño: "+ name);
 			device.setUserowner(Base64.getEncoder().encodeToString(name.getBytes()));
-			System.out.println("tiene configuracion por defaault: "+defaultconfiguration);
+			boolean configuracionExitosa= establecerParametrosDeConeccion(device,tipodevice,iphostescuchar,
+					portescuchar,userescuchar,passescuchar,topiclisten, topicwrite,
+					iphostescucharremote, portescucharremote,
+					userescucharremote,passescucharremote,topiclistenremote, topicwriteremote);
+			
 			System.out.println("TIPO DE DEVICE: "+tipodevice);
-			if(defaultconfiguration) {
-				DeviceDefaultConfiguration deviceConfig= null;
-				if(!tipodevice.equals("alarma"))
-					deviceConfig=deviceconfigdao.retrieveByName("default");
-				else
-					deviceConfig=deviceconfigdao.retrieveByName("defaultalarma");
-				device.getDeviceconfiguration().add(establishTopic(deviceConfig,deviceserial));
-			System.out.println("PASO EL ESTABLECIMIENTO DE LOS LOS VALORES DE CONFIGURACIONS");
-			}else{
-				DeviceConfiguration dconfirguration  = new DeviceConfiguration();
-				dconfirguration.setIphostescribir(iphostescribir);
-				dconfirguration.setIphostescribirremote(iphostescribirremote);
-				dconfirguration.setIphostescuchar(iphostescuchar);
-				dconfirguration.setIphostescucharremote(iphostescucharremote);
-				dconfirguration.setName("personalized");
-				dconfirguration.setPassescribir(passescribir);
-				dconfirguration.setPassescribirremote(passescribirremote);
-				dconfirguration.setPassescuchar(passescuchar);
-				dconfirguration.setPassescucharremote(passescucharremote);
-				dconfirguration.setPortescribir(portescribir);
-				dconfirguration.setPortescribirremote(portescribirremote);
-				dconfirguration.setPortescuchar(portescuchar);
-				dconfirguration.setPortescucharremote(portescucharremote);
-				dconfirguration.setTopicescribir(topicwrite);
-				dconfirguration.setTopicescribirremote(topicwriteremote);
-				dconfirguration.setTopicescuchar(topiclisten);
-				dconfirguration.setTopicescucharremote(topiclistenremote);
-				dconfirguration.setUserescribir(userescribir);
-				dconfirguration.setUserescribirremote(userescribirremote);
-				dconfirguration.setUserescuchar(userescuchar);
-				dconfirguration.setUserescucharremote(userescucharremote);
-				dconfirguration.setUsesslescribir(false);
-				dconfirguration.setUsesslescribirremote(false);
-				dconfirguration.setUsesslescuchar(false);
-				dconfirguration.setUsesslescucharremote(false);
-				device.getDeviceconfiguration().add(dconfirguration);
+			if(configuracionExitosa){
+				System.out.println("la configuracion fue exitosa");
 			}
+	
 			String timerstringvalue="";
 			System.out.println("tipo de dispositivo: "+ tipodevice);
 			HashMap<String, String> vista =new HashMap<>();
@@ -107,19 +80,20 @@ public class ManagementDevice {
 				String topic="";
 				String user="";
 				String pass="";
-				if(defaultconfiguration) {
+				
+				if(device.getDeviceconfiguration().size()==1) {
 					DeviceDefaultConfiguration defaultConfig=deviceconfigdao.retrieveByName("default");
-					host= defaultConfig.getIphostescribirremote();
-					port=defaultConfig.getPortescribirremote();
+					host= defaultConfig.getIphostescucharremote();
+					port=defaultConfig.getPortescucharremote();
 					topic=defaultConfig.getTopicescribirremote().replace("serial", deviceserial);
-					user=defaultConfig.getUserescribirremote();
-					pass=defaultConfig.getPassescribirremote();
+					user=defaultConfig.getUserescucharremote();
+					pass=defaultConfig.getPassescucharremote();
 				}else {
-					host= iphostescribirremote;
-					port= portescribirremote;
+					host= iphostescucharremote;
+					port= portescucharremote;
 					topic=topiclistenremote;
-					user=userescribirremote;
-					pass=passescribirremote;
+					user=userescucharremote;
+					pass=passescucharremote;
 				}
 				SimpleTimerString.sendtimerString(timerstringvalue,host,port,topic,user,pass);
 				//vista sonoff
@@ -151,7 +125,8 @@ public class ManagementDevice {
 		user.getDeviceserialnumber().add(deviceserial);
 		userdao.update(user);
 	}
-	
+
+
 	public static void updateDevice(HttpServletRequest request, String deviceserial) {
 		UserDAO userdao = new UserDAO();
 		DeviceDAO devicedao = new DeviceDAO();
@@ -200,6 +175,68 @@ public class ManagementDevice {
 		DeviceConfiguration deviceconf = new DeviceConfiguration(deviceconfiguration); 
 		
 		return deviceconf;
+	}
+	
+	
+	
+
+	private static boolean establecerParametrosDeConeccion(Device device, String tipodevice, String iphostescuchar,
+			String portescuchar, String userescuchar, String passescuchar, String topiclisten, String topicwrite,
+			String iphostescucharremote, String portescucharremote, String userescucharremote,
+			String passescucharremote, String topiclistenremote, String topicwriteremote) {
+		
+		if(esConfiguracionporDefault(tipodevice, iphostescuchar, portescuchar, 
+				userescuchar, passescuchar, topiclisten, topicwrite,
+				iphostescucharremote, portescucharremote, userescucharremote,
+				passescucharremote, topiclistenremote, topicwriteremote)) {
+			DeviceDefaultConfiguration deviceConfig= null;
+			if(!tipodevice.equals("alarma"))
+				deviceConfig=deviceconfigdao.retrieveByName("default");
+			else
+				deviceConfig=deviceconfigdao.retrieveByName("defaultalarma");
+			device.getDeviceconfiguration().add(establishTopic(deviceConfig,deviceserial));
+		System.out.println("PASO EL ESTABLECIMIENTO DE LOS LOS VALORES DE CONFIGURACIONS");
+		}else{
+			DeviceConfiguration dconfirguration  = new DeviceConfiguration();
+			dconfirguration.setIphostescuchar(iphostescuchar);
+			dconfirguration.setIphostescucharremote(iphostescucharremote);
+			dconfirguration.setName("personalized");
+			dconfirguration.setPassescuchar(passescuchar);
+			dconfirguration.setPassescucharremote(passescucharremote);
+			dconfirguration.setPortescuchar(portescuchar);
+			dconfirguration.setPortescucharremote(portescucharremote);
+			dconfirguration.setTopicescribir(topicwrite);
+			dconfirguration.setTopicescribirremote(topicwriteremote);
+			dconfirguration.setTopicescuchar(topiclisten);
+			dconfirguration.setTopicescucharremote(topiclistenremote);
+			dconfirguration.setUserescuchar(userescuchar);
+			dconfirguration.setUserescucharremote(userescucharremote);
+			dconfirguration.setUsesslescuchar(false);
+			dconfirguration.setUsesslescucharremote(false);
+			device.getDeviceconfiguration().add(dconfirguration);
+		}
+		return false;
+	}
+
+
+	private boolean esConfiguracionporDefault(String tipodevice, String iphostescuchar, 
+			String portescuchar,
+			String userescuchar, String passescuchar, String topiclisten, String topicwrite,
+			String iphostescucharremote, String portescucharremote, String userescucharremote,
+			String passescucharremote, String topiclistenremote, String topicwriteremote) {
+		DeviceDefaultConfiguration dev = null;
+		if(tipodevice.equals("alarma")){
+			dev= devdefdao.retrieveByName("defaultalarma");
+			if(dev.getIphostescuchar().equals(iphostescuchar) &&
+				dev.getPortescuchar().equals(portescuchar) &&
+				dev.getUserescuchar().equals(userescuchar) &&
+				dev.getPassescuchar().equals(passescuchar) &&
+				dev.getTopicescuchar())
+		}else{
+			
+		}
+			
+		return false;
 	}
 
 }

@@ -5,29 +5,23 @@ public class DeviceConfiguration {
 	
 
 	private String name;
-	private String userescuchar;
-	private String passescuchar;
+	private String version;
 	private String iphostescuchar;
 	private String portescuchar;
 	private Boolean usesslescuchar;
+	private String userescuchar;
+	private String passescuchar;
 	private String topicescuchar;
-	private String userescribir;
-	private String passescribir;
-	private String iphostescribir;
-	private String portescribir;
-	private Boolean usesslescribir;
+//	private String topicescucharstado;
+//	private String topicescucharred;
 	private String topicescribir;
-	private String userescucharremote;
-	private String passescucharremote;
+	
 	private String iphostescucharremote;
 	private String portescucharremote;
 	private Boolean usesslescucharremote;
+	private String userescucharremote;
+	private String passescucharremote;
 	private String topicescucharremote;
-	private String userescribirremote;
-	private String passescribirremote;
-	private String iphostescribirremote;
-	private String portescribirremote;
-	private Boolean usesslescribirremote;
 	private String topicescribirremote;
 
 	
@@ -37,29 +31,23 @@ public class DeviceConfiguration {
 
 	public DeviceConfiguration(DeviceDefaultConfiguration deviceconfiguration) {
 		this.name= deviceconfiguration.getName();
+		this.version =deviceconfiguration.getVersion();
 		this.userescuchar=deviceconfiguration.getUserescuchar();
 		this.passescuchar = deviceconfiguration.getPassescuchar();
 		this.iphostescuchar = deviceconfiguration.getIphostescuchar();
 		this.portescuchar = deviceconfiguration.getPortescuchar();
 		this.usesslescuchar = deviceconfiguration.getUsesslescuchar();
 		this.topicescuchar=deviceconfiguration.getTopicescuchar();
-		this.userescribir=deviceconfiguration.getUserescribir();
-		this.passescribir=deviceconfiguration.getPassescribir();
-		this.iphostescribir=deviceconfiguration.getIphostescribir();
-		this.portescribir=deviceconfiguration.getPortescribir();
-		this.usesslescribir=deviceconfiguration.getUsesslescribir();
 		this.topicescribir=deviceconfiguration.getTopicescribir();
+//		this.topicescucharstado=deviceconfiguration.getTopicescucharEstado();
+//		this.topicescucharred=deviceconfiguration.getTopicescucharRed();
+		
 		this.userescucharremote=deviceconfiguration.getUserescucharremote();
 		this.passescucharremote=deviceconfiguration.getPassescucharremote();
 		this.iphostescucharremote=deviceconfiguration.getIphostescucharremote();
 		this.portescucharremote= deviceconfiguration.getPortescucharremote();
 		this.usesslescucharremote=deviceconfiguration.getUsesslescucharremote();
 		this.topicescucharremote=deviceconfiguration.getTopicescucharremote();
-		this.userescribirremote=deviceconfiguration.getUserescribirremote();
-		this.passescribirremote=deviceconfiguration.getPassescribirremote();
-		this.iphostescribirremote=deviceconfiguration.getIphostescribirremote();
-		this.portescribirremote=deviceconfiguration.getPortescribirremote();
-		this.usesslescribirremote=deviceconfiguration.getUsesslescribirremote();
 		this.topicescribirremote=deviceconfiguration.getTopicescribirremote();
 	}
 
@@ -70,6 +58,30 @@ public class DeviceConfiguration {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
+
+//	public String getTopicescucharstado() {
+//		return topicescucharstado;
+//	}
+//
+//	public void setTopicescucharstado(String topicescucharstado) {
+//		this.topicescucharstado = topicescucharstado;
+//	}
+//
+//	public String getTopicescucharred() {
+//		return topicescucharred;
+//	}
+//
+//	public void setTopicescucharred(String topicescucharred) {
+//		this.topicescucharred = topicescucharred;
+//	}
 
 	public String getUserescuchar() {
 		return userescuchar;
@@ -111,46 +123,6 @@ public class DeviceConfiguration {
 		this.usesslescuchar = usesslescuchar;
 	}
 
-	public String getUserescribir() {
-		return userescribir;
-	}
-
-	public void setUserescribir(String userescribir) {
-		this.userescribir = userescribir;
-	}
-
-	public String getPassescribir() {
-		return passescribir;
-	}
-
-	public void setPassescribir(String passescribir) {
-		this.passescribir = passescribir;
-	}
-
-	public String getIphostescribir() {
-		return iphostescribir;
-	}
-
-	public void setIphostescribir(String iphostescribir) {
-		this.iphostescribir = iphostescribir;
-	}
-
-	public String getPortescribir() {
-		return portescribir;
-	}
-
-	public void setPortescribir(String portescribir) {
-		this.portescribir = portescribir;
-	}
-
-	public Boolean getUsesslescribir() {
-		return usesslescribir;
-	}
-
-	public void setUsesslescribir(Boolean usesslescribir) {
-		this.usesslescribir = usesslescribir;
-	}
-
 	public String getUserescucharremote() {
 		return userescucharremote;
 	}
@@ -189,46 +161,6 @@ public class DeviceConfiguration {
 
 	public void setUsesslescucharremote(Boolean usesslescucharremote) {
 		this.usesslescucharremote = usesslescucharremote;
-	}
-
-	public String getUserescribirremote() {
-		return userescribirremote;
-	}
-
-	public void setUserescribirremote(String userescribirremote) {
-		this.userescribirremote = userescribirremote;
-	}
-
-	public String getPassescribirremote() {
-		return passescribirremote;
-	}
-
-	public void setPassescribirremote(String passescribirremote) {
-		this.passescribirremote = passescribirremote;
-	}
-
-	public String getIphostescribirremote() {
-		return iphostescribirremote;
-	}
-
-	public void setIphostescribirremote(String iphostescribirremote) {
-		this.iphostescribirremote = iphostescribirremote;
-	}
-
-	public String getPortescribirremote() {
-		return portescribirremote;
-	}
-
-	public void setPortescribirremote(String portescribirremote) {
-		this.portescribirremote = portescribirremote;
-	}
-
-	public Boolean getUsesslescribirremote() {
-		return usesslescribirremote;
-	}
-
-	public void setUsesslescribirremote(Boolean usesslescribirremote) {
-		this.usesslescribirremote = usesslescribirremote;
 	}
 
 	public String getTopicescuchar() {
