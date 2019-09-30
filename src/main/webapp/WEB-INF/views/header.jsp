@@ -2,6 +2,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
+<link rel='shortcut icon' href='<c:url value="/resources/images/favicon.ico" />' type="image/x-icon"/>
+
 <link rel="stylesheet" type="text/css" href='<c:url value="/resources/cdash_logo/logo.css" />'>
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
