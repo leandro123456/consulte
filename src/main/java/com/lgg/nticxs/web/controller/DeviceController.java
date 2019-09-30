@@ -236,13 +236,14 @@ public class DeviceController {
 					//propio de la GUI Vistas
 					timerstringsonoff, cantidadswiths, tipovistatermometro, humedadtermometro,
 					tempctermometro,sensacionctermometro, tempftermometro,sensacionftermometro);
+			model.addAttribute("msg", "Termino de crear el dispositivo");
 		}else{
 			System.out.println("TIPO DE DEVICE NO es NULL: "+tipodevice);
 			System.out.println("TIPO DE TERMOMETRO NO es NULL: "+tipovistatermometro);
 			ManagementDevice.updateDevice(request,serialnumber);
+			model.addAttribute("msg", "El dispositivo ya estaba creado, usted fue agregado como usuario Administrador");
 		}
-		model.addAttribute("msg", "Termino de crear el dispositivo");
-		return "redirect:/home";
+		return "origin";
 	}
 	
 	

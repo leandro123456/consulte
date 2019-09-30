@@ -54,6 +54,7 @@
 							  closeOnClickOutside: false,
 							  buttons: false,
 							});
+						setTimeout('window.location.href = "/home";', 5000);
 					</script>
 				</c:if>
 				<c:if test="${not empty msg1}">
@@ -67,22 +68,10 @@
 							  closeOnClickOutside: false,
 							  buttons: false,
 							});
-					</script>
-				</c:if>	
-				<c:if test="${param.msg != null}">
-				 	<input type="hidden" id ="mensaje1" value="${msg}">
-					<script type="text/javascript">
-						var x= document.getElementById('mensaje1').value;
-						swal({
-							  title: x,
-							  icon: "success",
-							  timer: 5000,
-							  closeOnClickOutside: false,
-							  buttons: false,
-							});
 						setTimeout('window.location.href = "/home";', 5000);
 					</script>
-				</c:if>
+				</c:if>	
+
 			
 			
 			<div class="row" id="cargadora">
