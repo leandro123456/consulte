@@ -69,6 +69,20 @@
 							});
 					</script>
 				</c:if>	
+				<c:if test="${param.msg != null}">
+				 	<input type="hidden" id ="mensaje1" value="${msg}">
+					<script type="text/javascript">
+						var x= document.getElementById('mensaje1').value;
+						swal({
+							  title: x,
+							  icon: "success",
+							  timer: 5000,
+							  closeOnClickOutside: false,
+							  buttons: false,
+							});
+						setTimeout('window.location.href = "/home";', 5000);
+					</script>
+				</c:if>
 			
 			
 			<div class="row" id="cargadora">
@@ -110,136 +124,137 @@
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Alta de Dispositivo</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
+          	<span aria-hidden="true">×</span>
           </button>
         </div>
-        <form role="form" action="<c:url value="home/create"/>"
-        	method="post" enctype="multipart/form-data">
-        <div class="modal-body">
-<!--         	<div class="form-group"> -->
-        	
+        <form role="form" action="<c:url value="home/create"/>" method="post">
+        	<div class="modal-body">
         		<div id="infoGeneral" style="display:inline">
-							<h3>Informacion General</h3>
-							<b>Nombre</b> <input name="namedevice" id="namedevice" class="form-control" required>
-							<p></p>
-							<b>Descripcion</b> <input name="descriptiondevice" id="descriptiondevice" class="form-control" required>
-							<p></p>
-							<b>Numero de Serie</b> <input name="serialnumber" id="serialnumber" class="form-control" required>
+					<h3>Informacion General</h3>
+					<b>Nombre</b> 
+					<input name="namedevice" id="namedevice" class="form-control" required>
+					<p></p>
+					<b>Descripcion</b> 
+					<input name="descriptiondevice" id="descriptiondevice" class="form-control" required>
+					<p></p>
+					<b>Numero de Serie</b> 
+					<input name="serialnumber" id="serialnumber" class="form-control" required>
+					<p></p>
 				</div>
 				<div id="infoDeducidaCoiaca" style="display:none">
-					<h3>Informacion Dispositivo Ciaca</h3>
-							<div>
-								<b>Marca del Dispositivo</b> <select id="marcadevice"
-									class="form-control">
-									<option value="none">Seleccione uno</option>
-									<option value="coiaca">Coiaca</option>
-									<option value="otro">Otro</option>
-								</select>
-							</div>
-							<p></p>
-							<div id="selectormodelo">
-								<b>Modelo del Dispositivo</b> <select id="modelodevice"
-									class="form-control">
-									<option value="none">Seleccione uno</option>
-									<option value="WTHUSB">WTHUSB</option>
-									<option value="PSWS1">PSWS1</option>
-									<option value="PSWS2">PSWS2</option>
-									<option value="BRDSC">BRDSC01</option>
-									<option value="PS3S1">Sonoff</option>
-								</select>
-							</div>
-														
-							<p></p>
-							<div>
-								<b>Tipo de Dispositivo</b> <select id="tipodevice"
-									name="tipodevice" class="form-control">
-									<option value="none">Seleccione uno</option>
-									<option value="termometro">Termometro</option>
-									<option value="alarma">Alarma</option>
-									<option value="sonoff">Sonoff</option>
-								</select>
-							</div>
-							
+					<h3>Informacion Dispositivo Coiaca</h3>
+					<div>
+						<b>Marca del Dispositivo</b> <select id="marcadevice"
+							class="form-control">
+							<option value="none">Seleccione uno</option>
+							<option value="coiaca">Coiaca</option>
+							<option value="otro">Otro</option>
+						</select>
+					</div>
+					<p></p>
+					<div id="selectormodelo">
+						<b>Modelo del Dispositivo</b> 
+						<select id="modelodevice" class="form-control">
+							<option value="none">Seleccione uno</option>
+							<option value="WTHUSB">WTHUSB</option>
+							<option value="PSWS1">PSWS1</option>
+							<option value="PSWS2">PSWS2</option>
+							<option value="BRDSC">BRDSC01</option>
+							<option value="PS3S1">Sonoff</option>
+						</select>
+					</div>						
+					<p></p>
+					<div>
+						<b>Tipo de Dispositivo</b> 
+						<select id="tipodevice" class="form-control">
+							<option value="none">Seleccione uno</option>
+							<option value="termometro">Termometro</option>
+							<option value="alarma">Alarma</option>
+							<option value="sonoff">Sonoff</option>
+						</select>
+					</div>
+					<p></p>	
 				</div>
 				<div id="infoPropiaVista" style="display:none">
 					<h3>Personalizar Vista</h3>
-							<div id="vistastermometro">
-								<b>Vista de Termometro</b> <select id="tipovistatermometro"
-									name="tipovistatermometro" class="form-control" onchange="changeTipoVistaTermometro()">
-									<option value="none">Seleccione uno</option>
-<!-- 									<option value="watches">Relojes</option> -->
-									<option value="bars">Barras</option>
-								</select>
-							</div>
-							
-							<p></p>
-							<div id="cantidadswith">
-								<b>Cantidad de Swiths</b> <select id="cantidadswiths"
-									name="cantidadswiths" class="form-control">
-									<option value="none">Seleccione uno</option>
-									<option value="one">Uno</option>
-									<option value="two">Dos</option>
-								</select>
-							</div>
-							<p></p>
+					<div id="vistastermometro">
+						<b>Vista de Termometro</b> 
+						<select id="tipovistatermometro"
+							name="tipovistatermometro" class="form-control" onchange="changeTipoVistaTermometro()">
+							<option value="none">Seleccione uno</option>
+<!-- 								<option value="watches">Relojes</option> -->
+							<option value="bars">Barras</option>
+						</select>
+					</div>
+					
+					<p></p>
+					<div id="cantidadswith">
+						<b>Cantidad de Swiths</b> <select id="cantidadswiths"
+							name="cantidadswiths" class="form-control">
+							<option value="none">Seleccione uno</option>
+							<option value="one">Uno</option>
+							<option value="two">Dos</option>
+						</select>
+					</div>
+					<p></p>
 
-						<div id="timerString" class="text-center">
-							<a href="" class="btn btn-primary btn-rounded mb-6"
-								data-toggle="modal" data-target="#modalTimerString">Agregar
-								Timer String</a>
+					<div id="timerString" class="text-center">
+						<a href="" class="btn btn-primary btn-rounded mb-6"
+							data-toggle="modal" data-target="#modalTimerString">Agregar
+							Timer String</a>
+					</div>
+					<div class="panel panel-primary" id="tabletimerstring">
+						<div class="panel-heading">
+							<p> </p>
+							<h6 class="panel-title">Parametros del Timer String</h6>
 						</div>
-						<div class="panel panel-primary" id="tabletimerstring">
-							<div class="panel-heading">
-								<p> </p>
-								<h6 class="panel-title">Parametros del Timer String</h6>
-							</div>
-							<div class="panel-body">
-								<table name="timerstringsonoff" class="table table-sm" id="dataTable">
-										<tr>
-											<th>Dias de la Semana</th>
-											<th>Hora</th>
-											<th>Accion</th>
-											<th>Switch</th>
-											<th>Accion Sobre Fila</th>
-										</tr>
-									<tbody id="contenidotablatimerstring">
-									</tbody>
-								</table>
-							</div>
-						</div>
-
-						<div id="parametrostermometro">
-							<b>Parametros del Termometro</b>
-							<table class="table table-sm">
-								<tbody>
-									<tr class="tablain">
-										<td>Humedad</td>
-										<td><input type="checkbox" id="humedadtermometro"
-											name="humedadtermometro" data-toggle="toggle"></td>
+						<div class="panel-body">
+							<table name="timerstringsonoff" class="table table-sm" id="dataTable">
+									<tr>
+										<th>Dias de la Semana</th>
+										<th>Hora</th>
+										<th>Accion</th>
+										<th>Switch</th>
+										<th>Accion Sobre Fila</th>
 									</tr>
-									<tr class="tablain">
-										<td>Temperatura (Grados Centigrados)</td>
-										<td><input type="checkbox" id="tempctermometro"
-											name="tempctermometro" data-toggle="toggle"></td>
-									</tr>
-									<tr class="tablain">
-										<td>Sensacion Termica (Grados Centigrados)</td>
-										<td><input type="checkbox" id="sensacionctermometro"
-											name="sensacionctermometro" data-toggle="toggle"></td>
-									</tr>
-									<tr class="tablain">
-										<td>Temperatura (Grados Fahrenheit)</td>
-										<td><input type="checkbox" id="tempftermometro"
-											name="tempftermometro" data-toggle="toggle"></td>
-									</tr>
-									<tr class="tablain">
-										<td>Sensacion Termica (Grados Fahrenheit)</td>
-										<td><input type="checkbox" id="sensacionftermometro"
-											name="sensacionftermometro" data-toggle="toggle"></td>
-									</tr>
+								<tbody id="contenidotablatimerstring">
 								</tbody>
 							</table>
 						</div>
+					</div>
+
+					<div id="parametrostermometro">
+						<b>Parametros del Termometro</b>
+						<table class="table table-sm">
+							<tbody>
+								<tr class="tablain">
+									<td>Humedad</td>
+									<td><input type="checkbox" id="humedadtermometro"
+										name="humedadtermometro" data-toggle="toggle"></td>
+								</tr>
+								<tr class="tablain">
+									<td>Temperatura (Grados Centigrados)</td>
+									<td><input type="checkbox" id="tempctermometro"
+										name="tempctermometro" data-toggle="toggle"></td>
+								</tr>
+								<tr class="tablain">
+									<td>Sensacion Termica (Grados Centigrados)</td>
+									<td><input type="checkbox" id="sensacionctermometro"
+										name="sensacionctermometro" data-toggle="toggle"></td>
+								</tr>
+								<tr class="tablain">
+									<td>Temperatura (Grados Fahrenheit)</td>
+									<td><input type="checkbox" id="tempftermometro"
+										name="tempftermometro" data-toggle="toggle"></td>
+								</tr>
+								<tr class="tablain">
+									<td>Sensacion Termica (Grados Fahrenheit)</td>
+									<td><input type="checkbox" id="sensacionftermometro"
+										name="sensacionftermometro" data-toggle="toggle"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 				<div id="infoAvanzada" style="display:none">
 					<h3>Informacion Avanzada</h3>
@@ -248,7 +263,7 @@
 							data-toggle="toggle" onchange="checkconfiguration()"
 							data-style="slow"></b>
 						<p></p>
-						<form id="parametersConexion" onkeypress=checkPassword()>
+						<div id="parametersConexion" onkeypress=checkPassword()>
 							<h5>Topico para escuchar</h5>
 							<div class="form-group row ">
 								<b>Hostname or Direccion IP</b> 
@@ -351,7 +366,7 @@
 									class="form-control form-control-user"
 									id="confirmpassescribirremote" placeholder="Confirm Password">
 							</div>
-						</form>
+						</div>
 					</div>
 					<div id="infoFinal" style="display:none">
 						<h5>Termino con la configuracion... desea guardar los cambios?</h5>
@@ -365,7 +380,8 @@
         </div>
         <div class="modal-footer">
           	<button type="button" class="btn btn-secondary"  data-dismiss="modal">Cancelar</button>
-          	<button type="submit" class="btn btn-default">Finalizar</button>
+          	<input type="hidden" name="tipodevice" id="tipodevice1" />
+          	<button type="submit" class="btn btn-primary">Finalizar</button>
         </div>
         </form>
       </div>

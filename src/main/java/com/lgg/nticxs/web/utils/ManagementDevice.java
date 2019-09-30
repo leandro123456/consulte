@@ -43,6 +43,7 @@ public class ManagementDevice {
 			System.out.println("nombre del dueño: "+ name);
 			device.setUserowner(Base64.getEncoder().encodeToString(name.getBytes()));
 			System.out.println("tiene configuracion por defaault: "+defaultconfiguration);
+			System.out.println("TIPO DE DEVICE: "+tipodevice);
 			if(defaultconfiguration) {
 				DeviceDefaultConfiguration deviceConfig= null;
 				if(!tipodevice.equals("alarma"))

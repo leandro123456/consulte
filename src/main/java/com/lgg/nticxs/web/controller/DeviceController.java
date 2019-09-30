@@ -190,6 +190,40 @@ public class DeviceController {
 			@RequestParam(name="userescribirremote", required=false) String userescribirremote,
 			@RequestParam(name="passescribirremote", required=false) String passescribirremote
 			) {
+		System.out.println("PARAMETROS DE ENTRADA serialnumber: "+ serialnumber);
+		System.out.println("PARAMETROS DE ENTRADA namedevice: "+ namedevice);
+		System.out.println("PARAMETROS DE ENTRADA descriptiondevice: "+ descriptiondevice);
+		System.out.println("PARAMETROS DE ENTRADA tipodevice: "+tipodevice);
+		System.out.println("PARAMETROS DE ENTRADA timerstringsonoff: "+ timerstringsonoff);
+		System.out.println("PARAMETROS DE ENTRADA cantidadswiths: "+ cantidadswiths);
+		System.out.println("PARAMETROS DE ENTRADA tipovistatermometro: "+tipovistatermometro);
+		System.out.println("PARAMETROS DE ENTRADA humedadtermometro: "+ humedadtermometro);
+		System.out.println("PARAMETROS DE ENTRADA tempctermometro: "+ tempctermometro);
+		System.out.println("PARAMETROS DE ENTRADA sensacionctermometro: "+ sensacionctermometro);
+		System.out.println("PARAMETROS DE ENTRADA tempftermometro: "+ tempftermometro);
+		System.out.println("PARAMETROS DE ENTRADA sensacionftermometro: "+ sensacionftermometro);
+		System.out.println("PARAMETROS DE ENTRADA defaultconfiguration: "+ defaultconfiguration);
+		System.out.println("PARAMETROS DE ENTRADA iphostescuchar: "+ iphostescuchar);
+		System.out.println("PARAMETROS DE ENTRADA portescuchar: "+ portescuchar);
+		System.out.println("PARAMETROS DE ENTRADA topiclisten: "+ topiclisten);
+		System.out.println("PARAMETROS DE ENTRADA userescuchar: "+ userescuchar);
+		System.out.println("PARAMETROS DE ENTRADA passescuchar: "+ passescuchar);
+		System.out.println("PARAMETROS DE ENTRADA iphostescribir: "+ iphostescribir);
+		System.out.println("PARAMETROS DE ENTRADA portescribir: "+ portescribir);
+		System.out.println("PARAMETROS DE ENTRADA topicwrite: "+ topicwrite);
+		System.out.println("PARAMETROS DE ENTRADA userescribir: "+ userescribir);
+		System.out.println("PARAMETROS DE ENTRADA passescribir: "+ passescribir);
+		System.out.println("PARAMETROS DE ENTRADA iphostescucharremote: "+ iphostescucharremote);
+		System.out.println("PARAMETROS DE ENTRADA portescucharremote: "+ portescucharremote);
+		System.out.println("PARAMETROS DE ENTRADA topiclistenremote: "+ topiclistenremote);
+		System.out.println("PARAMETROS DE ENTRADA userescucharremote: "+ userescucharremote);
+		System.out.println("PARAMETROS DE ENTRADA passescucharremote: "+ passescucharremote);
+		System.out.println("PARAMETROS DE ENTRADA iphostescribirremote: "+ iphostescribirremote);
+		System.out.println("PARAMETROS DE ENTRADA portescribirremote: "+ portescribirremote);
+		System.out.println("PARAMETROS DE ENTRADA topicwriteremote: "+topicwriteremote );
+		System.out.println("PARAMETROS DE ENTRADA userescribirremote: "+ userescribirremote);
+		System.out.println("PARAMETROS DE ENTRADA passescribirremote: "+passescribirremote );
+		System.out.println("ES NULL SERIAL: "+ devicedao.retrieveBySerialNumber(serialnumber) ==null);
 		if(devicedao.retrieveBySerialNumber(serialnumber) ==null){
 			ManagementDevice.createDevice(
 					request,serialnumber, namedevice, descriptiondevice, tipodevice, 
@@ -203,10 +237,12 @@ public class DeviceController {
 					timerstringsonoff, cantidadswiths, tipovistatermometro, humedadtermometro,
 					tempctermometro,sensacionctermometro, tempftermometro,sensacionftermometro);
 		}else{
+			System.out.println("TIPO DE DEVICE NO es NULL: "+tipodevice);
+			System.out.println("TIPO DE TERMOMETRO NO es NULL: "+tipovistatermometro);
 			ManagementDevice.updateDevice(request,serialnumber);
 		}
 		model.addAttribute("msg", "Termino de crear el dispositivo");
-		return "home";
+		return "redirect:/home";
 	}
 	
 	
@@ -254,7 +290,9 @@ public class DeviceController {
 			@RequestParam(name="userescribirremote", required=false) String userescribirremote,
 			@RequestParam(name="passescribirremote", required=false) String passescribirremote
 			) {
+		
 		if(devicedao.retrieveBySerialNumber(deviceserial) ==null){
+			
 			ManagementDevice.createDevice(
 					request,deviceserial, namedevice, descriptiondevice, tipodevice, 
 					//propoio configuracion
@@ -267,6 +305,7 @@ public class DeviceController {
 					timerstringsonoff, cantidadswiths, tipovistatermometro, humedadtermometro,
 					tempctermometro,sensacionctermometro, tempftermometro,sensacionftermometro);
 		}else{
+			
 			ManagementDevice.updateDevice(request,deviceserial);
 		}
 		return "redirect:/home";

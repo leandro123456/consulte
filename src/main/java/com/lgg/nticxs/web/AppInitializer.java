@@ -50,7 +50,7 @@ public class AppInitializer extends SpringBootServletInitializer{
 	@Bean
 	public WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> setConfiguration() {
 		return factory -> {
-			factory.setPort(9090);
+			factory.setPort(80);
 		};
 	}
 	

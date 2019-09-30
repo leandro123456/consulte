@@ -141,6 +141,10 @@ function siguienteAnimacion(){
 		document.getElementById("infoPropiaVista").style.display="none";
 		document.getElementById("infoGeneral").style.display="none";
 		document.getElementById("infoFinal").style.display="inline";
+ 		 if(document.getElementById("tipodevice") != null)
+     	  	document.getElementById("tipodevice1").value = document.getElementById("tipodevice").value;
+ 		 else
+ 			 console.log("tipodevice NULL: " + document.getElementById("tipodevice"));
 	}
 		
 }
