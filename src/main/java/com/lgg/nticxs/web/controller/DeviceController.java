@@ -212,14 +212,15 @@ public class DeviceController {
 			ManagementDevice.createDevice(
 					request,serialnumber, namedevice, descriptiondevice, tipodevice, 
 					//propoio configuracion
-					iphostescuchar, portescuchar, topiclisten, userescuchar,passescuchar,
-					iphostescribir, portescribir, topicwrite, userescribir, passescribir,
-					iphostescucharremote, portescucharremote, topiclistenremote, userescucharremote, passescucharremote,
-					iphostescribirremote, portescribirremote, topicwriteremote,userescribirremote,passescribirremote,
+					iphostescuchar, portescuchar, 
+					topiclisten, userescuchar,passescuchar,
+					topicwrite,	iphostescucharremote, portescucharremote,
+					topiclistenremote, userescucharremote,
+					passescucharremote,topicwriteremote,
 					//propio de la GUI Vistas
 					timerstringsonoff, cantidadswiths, tipovistatermometro, humedadtermometro,
 					tempctermometro,sensacionctermometro, tempftermometro,sensacionftermometro);
-			model.addAttribute("msg", "Termino de crear el dispositivo");
+			model.addAttribute("msg", "Se creo exitosamente el dispositivo");
 		}else{
 			System.out.println("TIPO DE DEVICE NO es NULL: "+tipodevice);
 			System.out.println("TIPO DE TERMOMETRO NO es NULL: "+tipovistatermometro);
@@ -228,101 +229,47 @@ public class DeviceController {
 		}
 		return "origin";
 	}
-	
-	
-	
-	
-	@PostMapping("home/create/{deviceserial}")
-	public String createDevice(Model model, @PathVariable String deviceserial,HttpServletRequest request,			
-			@RequestParam(name="serialnumber", required=true) String serialnumber,
-			@RequestParam(name="namedevice", required=false) String namedevice,
-			@RequestParam(name="descriptiondevice", required=false) String descriptiondevice,
-			@RequestParam(name="tipodevice", required=false) String tipodevice,
-			
-			//vista sonoff
-			@RequestParam(name="timerstringsonoff", required=false) String timerstringsonoff,
-			@RequestParam(name="cantidadswiths", required=false) String cantidadswiths,
-			
-			//termometro
-			@RequestParam(name="tipovistatermometro", required=false) String tipovistatermometro,
-			@RequestParam(name="humedadtermometro", required=false) String humedadtermometro,
-			@RequestParam(name="tempctermometro", required=false) String tempctermometro,
-			@RequestParam(name="sensacionctermometro", required=false) String sensacionctermometro,
-			@RequestParam(name="tempftermometro", required=false) String tempftermometro,
-			@RequestParam(name="sensacionftermometro", required=false) String sensacionftermometro,
-			
-			//configuracion de topicos
-			@RequestParam(name="defaultconfiguration", required=true) Boolean defaultconfiguration,
-			@RequestParam(name="iphostescuchar", required=false) String iphostescuchar,
-			@RequestParam(name="portescuchar", required=false) String portescuchar,
-			@RequestParam(name="topiclisten", required=false) String topiclisten,
-			@RequestParam(name="userescuchar", required=false) String userescuchar,
-			@RequestParam(name="passescuchar", required=false) String passescuchar,
-			@RequestParam(name="iphostescribir", required=false) String iphostescribir,
-			@RequestParam(name="portescribir", required=false) String portescribir,
-			@RequestParam(name="topicwrite", required=false) String topicwrite,
-			@RequestParam(name="userescribir", required=false) String userescribir,
-			@RequestParam(name="passescribir", required=false) String passescribir,
-			@RequestParam(name="iphostescucharremote", required=false) String iphostescucharremote,
-			@RequestParam(name="portescucharremote", required=false) String portescucharremote,
-			@RequestParam(name="topiclistenremote", required=false) String topiclistenremote,
-			@RequestParam(name="userescucharremote", required=false) String userescucharremote,
-			@RequestParam(name="passescucharremote", required=false) String passescucharremote,
-			@RequestParam(name="iphostescribirremote", required=false) String iphostescribirremote,
-			@RequestParam(name="portescribirremote", required=false) String portescribirremote,
-			@RequestParam(name="topicwriteremote", required=false) String topicwriteremote,
-			@RequestParam(name="userescribirremote", required=false) String userescribirremote,
-			@RequestParam(name="passescribirremote", required=false) String passescribirremote
-			) {
-		
-		if(devicedao.retrieveBySerialNumber(deviceserial) ==null){
-			
-			ManagementDevice.createDevice(
-					request,deviceserial, namedevice, descriptiondevice, tipodevice, 
-					//propoio configuracion
-					defaultconfiguration,
-					iphostescuchar, portescuchar, topiclisten, userescuchar,passescuchar,
-					iphostescribir, portescribir, topicwrite, userescribir, passescribir,
-					iphostescucharremote, portescucharremote, topiclistenremote, userescucharremote, passescucharremote,
-					iphostescribirremote, portescribirremote, topicwriteremote,userescribirremote,passescribirremote,
-					//propio de la GUI Vistas
-					timerstringsonoff, cantidadswiths, tipovistatermometro, humedadtermometro,
-					tempctermometro,sensacionctermometro, tempftermometro,sensacionftermometro);
-		}else{
-			
-			ManagementDevice.updateDevice(request,deviceserial);
-		}
-		return "redirect:/home";
-	}
-	
-	
-	
-	   @GetMapping("home/configuraciondefault/{tipodevice}")
-	   @ResponseBody
-	    public String getRunningOperations(Model model, @PathVariable String tipodevice) {
-	    	System.out.println("Llego a la peticion de ajax");
-	        JSONObject json = new JSONObject();
-	        DeviceDefaultConfigurationDAO devdefdao= new DeviceDefaultConfigurationDAO();
-	        DeviceDefaultConfiguration dev = null;
-	        if(tipodevice.equals("alarma")){
-	        	dev = devdefdao.retrieveByName("defaultalarma");
-	        	json.put("iphostescuchar", dev.getIphostescuchar());
-	        	json.put("portescuchar", dev.getPortescuchar());
-	        	json.put("userescuchar", dev.getUserescuchar());
-	        	json.put("topicescuchar", dev.getTopicescuchar());
-	        	json.put("topicescribir", dev.getTopicescribir());
-	        	json.put("iphostescucharremote", dev.getIphostescucharremote());
-	        	json.put("portescucharremote", dev.getPortescucharremote());
-	        	json.put("topicescucharremote", dev.getTopicescucharremote());
-	        	json.put("topicescribirremote", dev.getTopicescribirremote());
-	        }
-	        return json.toString();
 
-	    }
+
+	@GetMapping("home/configuraciondefault/{tipodevice}/{serial}")
+	@ResponseBody
+	public String getRunningOperations(Model model, @PathVariable String tipodevice
+			, @PathVariable String serial) {
+		System.out.println("Llego a la peticion de ajax");
+		JSONObject json = new JSONObject();
+		DeviceDefaultConfigurationDAO devdefdao= new DeviceDefaultConfigurationDAO();
+		DeviceDefaultConfiguration dev = null;
+		if(tipodevice.equals("alarma"))
+			dev = devdefdao.retrieveByName("defaultalarma");
+		else
+			dev = devdefdao.retrieveByName("default");
+		json.put("iphostescuchar", dev.getIphostescuchar());
+		json.put("portescuchar", dev.getPortescuchar());
+		json.put("userescuchar", dev.getUserescuchar());
+		json.put("iphostescucharremote", dev.getIphostescucharremote());
+		json.put("portescucharremote", dev.getPortescucharremote());
+		
+		HashMap<String, String> topicos= establecerTopicosDefault(serial,dev.getTopicescuchar(),dev.getTopicescribir()
+				,dev.getTopicescucharremote(),dev.getTopicescribirremote());
+		json.put("topicescuchar",topicos.get("escuchar"));
+		json.put("topicescribir", topicos.get("escribir"));
+		json.put("topicescucharremote", topicos.get("escucharremoto"));
+		json.put("topicescribirremote", topicos.get("escribirremoto"));
+
+		return json.toString();
+
+	}
 	   
-	   
-	   
-	
+
+	private HashMap<String, String> establecerTopicosDefault(String serial, String topicescuchar, String topicescribir,
+			String topicescucharremote, String topicescribirremote) {
+		HashMap<String, String> result = new HashMap<String, String>();
+		result.put("escuchar", topicescuchar.replace("serial", serial));
+		result.put("escuchar", topicescribir.replace("serial", serial));
+		result.put("escuchar", topicescucharremote.replace("serial", serial));
+		result.put("escuchar", topicescribirremote.replace("serial", serial));	
+		return result;
+	}
 
 	private void CargarDevices(Model model, HttpServletRequest request) {
 		String nombre = request.getUserPrincipal().getName();
@@ -337,5 +284,70 @@ public class DeviceController {
 		}
 		model.addAttribute("devices", devices);
 	}
+	
+	
+//	@PostMapping("home/create/{deviceserial}")
+//	public String createDevice(Model model, @PathVariable String deviceserial,HttpServletRequest request,			
+//			@RequestParam(name="serialnumber", required=true) String serialnumber,
+//			@RequestParam(name="namedevice", required=false) String namedevice,
+//			@RequestParam(name="descriptiondevice", required=false) String descriptiondevice,
+//			@RequestParam(name="tipodevice", required=false) String tipodevice,
+//			
+//			//vista sonoff
+//			@RequestParam(name="timerstringsonoff", required=false) String timerstringsonoff,
+//			@RequestParam(name="cantidadswiths", required=false) String cantidadswiths,
+//			
+//			//termometro
+//			@RequestParam(name="tipovistatermometro", required=false) String tipovistatermometro,
+//			@RequestParam(name="humedadtermometro", required=false) String humedadtermometro,
+//			@RequestParam(name="tempctermometro", required=false) String tempctermometro,
+//			@RequestParam(name="sensacionctermometro", required=false) String sensacionctermometro,
+//			@RequestParam(name="tempftermometro", required=false) String tempftermometro,
+//			@RequestParam(name="sensacionftermometro", required=false) String sensacionftermometro,
+//			
+//			//configuracion de topicos
+//			@RequestParam(name="defaultconfiguration", required=true) Boolean defaultconfiguration,
+//			@RequestParam(name="iphostescuchar", required=false) String iphostescuchar,
+//			@RequestParam(name="portescuchar", required=false) String portescuchar,
+//			@RequestParam(name="topiclisten", required=false) String topiclisten,
+//			@RequestParam(name="userescuchar", required=false) String userescuchar,
+//			@RequestParam(name="passescuchar", required=false) String passescuchar,
+//			@RequestParam(name="iphostescribir", required=false) String iphostescribir,
+//			@RequestParam(name="portescribir", required=false) String portescribir,
+//			@RequestParam(name="topicwrite", required=false) String topicwrite,
+//			@RequestParam(name="userescribir", required=false) String userescribir,
+//			@RequestParam(name="passescribir", required=false) String passescribir,
+//			@RequestParam(name="iphostescucharremote", required=false) String iphostescucharremote,
+//			@RequestParam(name="portescucharremote", required=false) String portescucharremote,
+//			@RequestParam(name="topiclistenremote", required=false) String topiclistenremote,
+//			@RequestParam(name="userescucharremote", required=false) String userescucharremote,
+//			@RequestParam(name="passescucharremote", required=false) String passescucharremote,
+//			@RequestParam(name="iphostescribirremote", required=false) String iphostescribirremote,
+//			@RequestParam(name="portescribirremote", required=false) String portescribirremote,
+//			@RequestParam(name="topicwriteremote", required=false) String topicwriteremote,
+//			@RequestParam(name="userescribirremote", required=false) String userescribirremote,
+//			@RequestParam(name="passescribirremote", required=false) String passescribirremote
+//			) {
+//		
+//		if(devicedao.retrieveBySerialNumber(deviceserial) ==null){
+//			
+//			ManagementDevice.createDevice(
+//					request,deviceserial, namedevice, descriptiondevice, tipodevice, 
+//					//propoio configuracion
+//					defaultconfiguration,
+//					iphostescuchar, portescuchar, topiclisten, userescuchar,passescuchar,
+//					iphostescribir, portescribir, topicwrite, userescribir, passescribir,
+//					iphostescucharremote, portescucharremote, topiclistenremote, userescucharremote, passescucharremote,
+//					iphostescribirremote, portescribirremote, topicwriteremote,userescribirremote,passescribirremote,
+//					//propio de la GUI Vistas
+//					timerstringsonoff, cantidadswiths, tipovistatermometro, humedadtermometro,
+//					tempctermometro,sensacionctermometro, tempftermometro,sensacionftermometro);
+//		}else{
+//			
+//			ManagementDevice.updateDevice(request,deviceserial);
+//		}
+//		return "redirect:/home";
+//	}
+	
 
 }

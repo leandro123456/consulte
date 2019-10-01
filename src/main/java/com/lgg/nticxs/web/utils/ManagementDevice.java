@@ -1,9 +1,12 @@
 package com.lgg.nticxs.web.utils;
 
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+
 
 import com.lgg.nticxs.web.DAO.DeviceDAO;
 import com.lgg.nticxs.web.DAO.DeviceDefaultConfigurationDAO;
@@ -16,8 +19,6 @@ import com.lgg.nticxs.web.model.Vista;
 import com.lgg.nticxs.web.model.simple.SimpleTimerString;
 
 public class ManagementDevice {
-	private DeviceDefaultConfigurationDAO devdefdao = new DeviceDefaultConfigurationDAO();
-
 
 	public static void createDevice(HttpServletRequest request, String deviceserial,
 			String namedevice, String descriptiondevice, String tipodevice, 
@@ -36,26 +37,26 @@ public class ManagementDevice {
 		DeviceDefaultConfigurationDAO deviceconfigdao = new DeviceDefaultConfigurationDAO();
 		String name = request.getUserPrincipal().getName();
 		try {
+			System.out.println("tipo de dispositivo: "+ tipodevice);
 			Device device = new Device();
 			device.setSerialnumber(deviceserial);
 			device.setName(namedevice);
 			device.setDescription(descriptiondevice);
-			
 			name = request.getUserPrincipal().getName();
-			System.out.println("nombre del dueño: "+ name);
+			System.out.println("nombre del dueño del dispositivo: "+ name);
 			device.setUserowner(Base64.getEncoder().encodeToString(name.getBytes()));
-			boolean configuracionExitosa= establecerParametrosDeConeccion(device,tipodevice,iphostescuchar,
+			
+			//seteo configuracion de topicos
+			DeviceConfiguration configuracionConexion= establecerParametrosDeConeccion(device,tipodevice,iphostescuchar,
 					portescuchar,userescuchar,passescuchar,topiclisten, topicwrite,
 					iphostescucharremote, portescucharremote,
 					userescucharremote,passescucharremote,topiclistenremote, topicwriteremote);
+			List<DeviceConfiguration> configs = new ArrayList<DeviceConfiguration>();
+			configs.add(configuracionConexion);
+			device.setDeviceconfiguration(configs);
 			
-			System.out.println("TIPO DE DEVICE: "+tipodevice);
-			if(configuracionExitosa){
-				System.out.println("la configuracion fue exitosa");
-			}
-	
-			String timerstringvalue="";
-			System.out.println("tipo de dispositivo: "+ tipodevice);
+			
+			//seteo la vista del dispositivo
 			HashMap<String, String> vista =new HashMap<>();
 			switch (tipodevice) {
 			case "termometro":
@@ -71,6 +72,7 @@ public class ManagementDevice {
 				System.out.println("es una alarma");
 				break;
 			case "sonoff":
+				String timerstringvalue="";
 				System.out.println("timer-string-recibido: "+ timerstringsonoff);
 				if(timerstringsonoff != null && !timerstringsonoff.equals("") && !timerstringsonoff.equals(" "))
 					timerstringvalue=SimpleTimerString.maketimerStringFormat(timerstringsonoff);
@@ -166,77 +168,51 @@ public class ManagementDevice {
 			result=result+";sensF";
 		return result;
 	}
-
-	private static DeviceConfiguration establishTopic(DeviceDefaultConfiguration deviceconfiguration, String serialnumber) {
-		deviceconfiguration.setTopicescribir(deviceconfiguration.getTopicescribir().replace("serial", serialnumber));
-		deviceconfiguration.setTopicescribirremote(deviceconfiguration.getTopicescribirremote().replace("serial", serialnumber));
-		deviceconfiguration.setTopicescuchar(deviceconfiguration.getTopicescuchar().replace("serial", serialnumber));
-		deviceconfiguration.setTopicescucharremote(deviceconfiguration.getTopicescucharremote().replace("serial", serialnumber));	
-		DeviceConfiguration deviceconf = new DeviceConfiguration(deviceconfiguration); 
-		
-		return deviceconf;
-	}
-	
 	
 	
 
-	private static boolean establecerParametrosDeConeccion(Device device, String tipodevice, String iphostescuchar,
-			String portescuchar, String userescuchar, String passescuchar, String topiclisten, String topicwrite,
+	private static DeviceConfiguration establecerParametrosDeConeccion(Device device, String tipodevice,
+			String iphostescuchar,String portescuchar, String userescuchar, 
+			String passescuchar, String topiclisten, String topicwrite,
 			String iphostescucharremote, String portescucharremote, String userescucharremote,
 			String passescucharremote, String topiclistenremote, String topicwriteremote) {
+		DeviceDefaultConfigurationDAO devdefdao = new DeviceDefaultConfigurationDAO();
+		DeviceConfiguration dconfirguration  = new DeviceConfiguration();
+		DeviceDefaultConfiguration deviceConfig= null;
+		if(!tipodevice.equals("alarma"))
+			deviceConfig=devdefdao.retrieveByName("default");
+		else 
+			deviceConfig=devdefdao.retrieveByName("defaultalarma");
 		
-		if(esConfiguracionporDefault(tipodevice, iphostescuchar, portescuchar, 
-				userescuchar, passescuchar, topiclisten, topicwrite,
-				iphostescucharremote, portescucharremote, userescucharremote,
-				passescucharremote, topiclistenremote, topicwriteremote)) {
-			DeviceDefaultConfiguration deviceConfig= null;
-			if(!tipodevice.equals("alarma"))
-				deviceConfig=deviceconfigdao.retrieveByName("default");
-			else
-				deviceConfig=deviceconfigdao.retrieveByName("defaultalarma");
-			device.getDeviceconfiguration().add(establishTopic(deviceConfig,deviceserial));
-		System.out.println("PASO EL ESTABLECIMIENTO DE LOS LOS VALORES DE CONFIGURACIONS");
-		}else{
-			DeviceConfiguration dconfirguration  = new DeviceConfiguration();
-			dconfirguration.setIphostescuchar(iphostescuchar);
-			dconfirguration.setIphostescucharremote(iphostescucharremote);
-			dconfirguration.setName("personalized");
+		if(deviceConfig.getUserescuchar().equals(userescuchar)) {
+			dconfirguration.setPassescuchar(deviceConfig.getPassescuchar());
+			dconfirguration.setName("default");
+		}else {
 			dconfirguration.setPassescuchar(passescuchar);
+			dconfirguration.setName("personalized");
+		}if(deviceConfig.getUserescucharremote().equals(userescucharremote)) {
+			dconfirguration.setPassescucharremote(deviceConfig.getPassescucharremote());
+			dconfirguration.setName("default");
+		}else {
 			dconfirguration.setPassescucharremote(passescucharremote);
-			dconfirguration.setPortescuchar(portescuchar);
-			dconfirguration.setPortescucharremote(portescucharremote);
-			dconfirguration.setTopicescribir(topicwrite);
-			dconfirguration.setTopicescribirremote(topicwriteremote);
-			dconfirguration.setTopicescuchar(topiclisten);
-			dconfirguration.setTopicescucharremote(topiclistenremote);
-			dconfirguration.setUserescuchar(userescuchar);
-			dconfirguration.setUserescucharremote(userescucharremote);
-			dconfirguration.setUsesslescuchar(false);
-			dconfirguration.setUsesslescucharremote(false);
-			device.getDeviceconfiguration().add(dconfirguration);
+			dconfirguration.setName("personalized");
 		}
-		return false;
+		dconfirguration.setIphostescuchar(iphostescuchar);
+		dconfirguration.setIphostescucharremote(iphostescucharremote);				
+		dconfirguration.setPortescuchar(portescuchar);
+		dconfirguration.setPortescucharremote(portescucharremote);
+		dconfirguration.setTopicescribir(topicwrite);
+		dconfirguration.setTopicescribirremote(topicwriteremote);
+		dconfirguration.setTopicescuchar(topiclisten);
+		dconfirguration.setTopicescucharremote(topiclistenremote);
+		dconfirguration.setUserescuchar(userescuchar);
+		dconfirguration.setUserescucharremote(userescucharremote);
+		dconfirguration.setUsesslescuchar(false);
+		dconfirguration.setUsesslescucharremote(false);
+		System.out.println("PASO EL ESTABLECIMIENTO DE LOS LOS VALORES DE CONFIGURACIONS");
+
+		return dconfirguration;
 	}
 
-
-	private boolean esConfiguracionporDefault(String tipodevice, String iphostescuchar, 
-			String portescuchar,
-			String userescuchar, String passescuchar, String topiclisten, String topicwrite,
-			String iphostescucharremote, String portescucharremote, String userescucharremote,
-			String passescucharremote, String topiclistenremote, String topicwriteremote) {
-		DeviceDefaultConfiguration dev = null;
-		if(tipodevice.equals("alarma")){
-			dev= devdefdao.retrieveByName("defaultalarma");
-			if(dev.getIphostescuchar().equals(iphostescuchar) &&
-				dev.getPortescuchar().equals(portescuchar) &&
-				dev.getUserescuchar().equals(userescuchar) &&
-				dev.getPassescuchar().equals(passescuchar) &&
-				dev.getTopicescuchar())
-		}else{
-			
-		}
-			
-		return false;
-	}
 
 }

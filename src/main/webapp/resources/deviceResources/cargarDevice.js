@@ -30,14 +30,14 @@ function evaluarNumeroDeSerie(valorSerial){
         	document.getElementById('tipovistatermometro').value = 'bars';
         	document.getElementById("tipovistatermometro").disabled = true;
         	enableType("termometro");
-        	obtenerConfiguracion("termometro");
+        	obtenerConfiguracion("termometro",serial);
         }if(serial.includes("PSWS1")){ 
         	document.getElementById('modelodevice').value = 'PSWS1';
         	document.getElementById('tipodevice').value = 'sonoff';
         	document.getElementById('cantidadswiths').value = 'one';
         	document.getElementById("cantidadswiths").disabled = true;    
         	enableType("sonoff");
-        	obtenerConfiguracion("sonoff");
+        	obtenerConfiguracion("sonoff",serial);
         }if(serial.includes("PSWS2")){ 
         	document.getElementById('modelodevice').value = 'PSWS2';
         	document.getElementById("serialnumber").value = "PSWS2";
@@ -45,19 +45,19 @@ function evaluarNumeroDeSerie(valorSerial){
         	document.getElementById('cantidadswiths').value = 'two';
         	document.getElementById("cantidadswiths").disabled = true;
         	enableType("sonoff");
-        	obtenerConfiguracion("sonoff");
+        	obtenerConfiguracion("sonoff",serial);
         }if(serial.includes("DSC01")){ 
         	document.getElementById('modelodevice').value = 'BRDSC';
         	document.getElementById('tipodevice').value = 'alarma';
         	enableType("alarma");
-        	obtenerConfiguracion("alarma");
+        	obtenerConfiguracion("alarma",serial);
         }if(serial.includes("PS3S1")){ 
         	document.getElementById('modelodevice').value = 'PS3S1';
         	document.getElementById('tipodevice').value = 'sonoff';
         	document.getElementById('cantidadswiths').value = 'one';
         	document.getElementById("cantidadswiths").disabled = true;
         	enableType("sonoff");
-        	obtenerConfiguracion("sonoff");
+        	obtenerConfiguracion("sonoff",serial);
         }
         document.getElementById('modelodevice').disabled = true;
         document.getElementById("tipodevice").disabled = true;
@@ -310,8 +310,8 @@ $('#ModalConfirm').on('show.bs.modal', function (event) {
  * parametros de conexion
  */
 
-	function obtenerConfiguracion(tipoDevice) {
-		var _url = $(location).attr('pathname') + "/configuraciondefault/"+tipoDevice;
+	function obtenerConfiguracion(tipoDevice,serial) {
+		var _url = $(location).attr('pathname') + "/configuraciondefault/"+tipoDevice+"/"+serial;
 		alert("quiero ir a esta URL"+ _url);
 		$.ajax({ url : _url,
 			contentType: "application/json",
