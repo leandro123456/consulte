@@ -71,13 +71,13 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Serial Number</th>
-                      <th>Name</th>
-                      <th>Description</th>
-                      <th>Use Default Configuration</th>
-                      <th>Shared How User</th>
-                      <th>Shared How Admin</th>
-                      <th>Actions</th>
+                      <th>Numero de Serie</th>
+                      <th>Nombre</th>
+                      <th>Descripcion</th>
+                      <th>Usa Configuracion por Defecto</th>
+                      <th>Compartido como Usuario</th>
+                      <th>Compartido como Administrador</th>
+                      <th>Acciones</th>
                     </tr>
                   </thead>
 <!--                   <tfoot> -->

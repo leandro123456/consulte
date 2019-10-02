@@ -60,7 +60,8 @@ public class ManagementDevice {
 			HashMap<String, String> vista =new HashMap<>();
 			switch (tipodevice) {
 			case "termometro":
-				String termometrovista = armarVistaTermometro(tipovistatermometro,humedadtermometro,tempctermometro,tempftermometro,sensacionctermometro,sensacionftermometro);
+				String termometrovista = armarVistaTermometro(tipovistatermometro,humedadtermometro,tempctermometro,
+						tempftermometro,sensacionctermometro,sensacionftermometro);
 				System.out.println("termometro vista: "+ termometrovista);
 				vista.put(Base64.getEncoder().encodeToString(name.getBytes()), termometrovista);
 				device.setVista(vista);
@@ -156,15 +157,15 @@ public class ManagementDevice {
 	private static String armarVistaTermometro(String tipovistatermometro, String humedadtermometro, String tempctermometro,
 			String tempftermometro, String sensacionctermometro, String sensacionftermometro) {
 		String result=tipovistatermometro;
-		if(!humedadtermometro.equals(""))
+		if(humedadtermometro!=null && !humedadtermometro.equals(""))
 			result=result+";Hum";
-		if(!tempctermometro.equals(""))
+		if(tempctermometro!=null && !tempctermometro.equals(""))
 			result=result+";tempC";
-		if(!tempftermometro.equals(""))
+		if(tempftermometro!=null && !tempftermometro.equals(""))
 			result=result+";tempF";
-		if(!sensacionctermometro.equals(""))
+		if(sensacionctermometro!=null && !sensacionctermometro.equals(""))
 			result=result+";sensC";
-		if(!sensacionftermometro.equals(""))
+		if(sensacionftermometro!=null && !sensacionftermometro.equals(""))
 			result=result+";sensF";
 		return result;
 	}

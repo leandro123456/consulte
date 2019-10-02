@@ -248,6 +248,7 @@ public class DeviceController {
 		json.put("userescuchar", dev.getUserescuchar());
 		json.put("iphostescucharremote", dev.getIphostescucharremote());
 		json.put("portescucharremote", dev.getPortescucharremote());
+		json.put("userescucharremote", dev.getUserescucharremote());
 		
 		HashMap<String, String> topicos= establecerTopicosDefault(serial,dev.getTopicescuchar(),dev.getTopicescribir()
 				,dev.getTopicescucharremote(),dev.getTopicescribirremote());
@@ -265,9 +266,9 @@ public class DeviceController {
 			String topicescucharremote, String topicescribirremote) {
 		HashMap<String, String> result = new HashMap<String, String>();
 		result.put("escuchar", topicescuchar.replace("serial", serial));
-		result.put("escuchar", topicescribir.replace("serial", serial));
-		result.put("escuchar", topicescucharremote.replace("serial", serial));
-		result.put("escuchar", topicescribirremote.replace("serial", serial));	
+		result.put("escribir", topicescribir.replace("serial", serial));
+		result.put("escucharremoto", topicescucharremote.replace("serial", serial));
+		result.put("escribirremoto", topicescribirremote.replace("serial", serial));	
 		return result;
 	}
 

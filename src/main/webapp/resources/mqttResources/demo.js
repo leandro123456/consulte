@@ -123,12 +123,15 @@ function animatevar (id,spanid, val){
 
 /** comportamiento cuando recibe un mensaje*/
 function onMessageArrivedSonoff(message) {
+	console.log("en ESTE CASO NO DEBERIA SER TOMADA COMO NOTIFICACION: "+ message.destinationName.includes("/cmd"));
 	console.log("LLEGO UN MENSAJE: "+message.destinationName+"; contenido: "+  message.payloadString);
+	
 	var inputAll= message.payloadString;	
 	var dataObj = null;
 	if(message.destinationName.includes("/Status")){
 		informarstatus(message.destinationName, message.payloadString)
 	}
+	
 	if(inputAll.includes("tempC") && inputAll.includes("hum")){
 		dataObj = JSON.parse(inputAll);
 		var serial =dataObj.deviceId;
@@ -149,7 +152,8 @@ function onMessageArrivedSonoff(message) {
 		if(dataObj.hiF != null && document.getElementById("sensacionf"+serial)!= null)
 			animatevar("barrasensf"+serial,"sensacionf"+serial,dataObj.hiF);
 	}
-	if(!message.destinationName.includes("/Status") && (!inputAll.includes("tempC") && !inputAll.includes("hum"))){
+	
+	if(!message.destinationName.includes("/cmd") && !message.destinationName.includes("/Status") && (!inputAll.includes("tempC") && !inputAll.includes("hum"))){
 			dataObj = JSON.parse(inputAll);
 		if(dataObj.SW1 != null && dataObj.SW1=="ON"){
 			var deviceserial = "boton1"+dataObj.deviceId;

@@ -322,7 +322,32 @@
         <div class="modal-footer">
           	<button type="button" class="btn btn-secondary"  data-dismiss="modal">Cancelar</button>
           	<input type="hidden" name="tipodevice" id="tipodevice1" />
-          	<button type="submit" class="btn btn-primary">Finalizar</button>
+          	
+<!--           	informacion de las vistas SONOFF-->
+			<input type="hidden" name="timerstringsonoff" id="timerstringsonoff1" />
+			<input type="hidden" name="cantidadswiths" id="cantidadswiths1" />
+			
+			<input type="hidden" name="tipovistatermometro" id="tipovistatermometro1" />
+			<input type="hidden" name="humedadtermometro" id="humedadtermometro1" />
+			<input type="hidden" name="tempctermometro" id="tempctermometro1" />
+			<input type="hidden" name="sensacionctermometro" id="sensacionctermometro1" />
+			<input type="hidden" name="tempftermometro" id="tempftermometro1" />
+			<input type="hidden" name="sensacionftermometro" id="sensacionftermometro1" />
+
+<!-- 				informacion de configuracion -->
+			<input type="hidden" name="iphostescuchar" id="iphostescuchar1" />
+			<input type="hidden" name="portescuchar" id="portescuchar1" />
+			<input type="hidden" name="topiclisten" id="topiclisten1" />
+			<input type="hidden" name="userescuchar" id="userescuchar1" />
+			<input type="hidden" name="passescuchar" id="passescuchar1" />
+			<input type="hidden" name="topicwrite" id="topicwrite1" />
+			<input type="hidden" name="iphostescucharremote" id="iphostescucharremote1" />
+			<input type="hidden" name="portescucharremote" id="portescucharremote1" />
+			<input type="hidden" name="topiclistenremote" id="topiclistenremote1" />
+			<input type="hidden" name="userescucharremote" id="userescucharremote1" />
+			<input type="hidden" name="passescucharremote" id="passescucharremote1" />
+			<input type="hidden" name="topicwriteremote" id="topicwriteremote1" />      	
+          	<button type="submit" style="display:none" id="botonfinalizar" class="btn btn-primary">Finalizar</button>
         </div>
         </form>
       </div>
@@ -428,8 +453,9 @@ $("#serialnumber").blur(function() {
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		if(${cantidadSensores}!=0)
+		if(${cantidadSensores}!=0){
 			startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr","mqttpwd",${topicos});
+		}
 		if(${cantidadAlarma}!=0)
 		startConnectAlarma("${hostalarma}","${puertoalarma}",${sslalarma},"${usuarioalarma}","${passalarma}",${topicosalarmas});
 	});

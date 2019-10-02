@@ -109,49 +109,103 @@ function evaluarNumeroDeSerie(valorSerial){
 //}
 
 //Evento asociado a la carga de la ventana Modal
-function siguienteAnimacion(){
-	if(document.getElementById("infoGeneral").style.display=="inline"){
-		document.getElementById("botonAnterior").style.display="inline";
-		document.getElementById("botonSiguiente").style.display="inline";
-		document.getElementById("infoDeducidaCoiaca").style.display="inline";
-		document.getElementById("infoGeneral").style.display="none";
-		document.getElementById("infoPropiaVista").style.display="none";
-		document.getElementById("infoAvanzada").style.display="none";
-		document.getElementById("infoFinal").style.display="none";
+	function siguienteAnimacion(){
+		if(document.getElementById("infoGeneral").style.display=="inline"){
+			document.getElementById("botonAnterior").style.display="inline";
+			document.getElementById("botonSiguiente").style.display="inline";
+			document.getElementById("infoDeducidaCoiaca").style.display="inline";
+			document.getElementById("infoGeneral").style.display="none";
+			document.getElementById("infoPropiaVista").style.display="none";
+			document.getElementById("infoAvanzada").style.display="none";
+			document.getElementById("infoFinal").style.display="none";
+		}
+		else if(document.getElementById("infoDeducidaCoiaca").style.display=="inline"){
+			document.getElementById("botonAnterior").style.display="inline";
+			document.getElementById("botonSiguiente").style.display="inline";
+			document.getElementById("infoPropiaVista").style.display="inline";
+			document.getElementById("infoDeducidaCoiaca").style.display="none";
+			document.getElementById("infoAvanzada").style.display="none";
+			document.getElementById("infoGeneral").style.display="none";
+			document.getElementById("infoFinal").style.display="none";
+		}
+		else if(document.getElementById("infoPropiaVista").style.display=="inline"){
+			document.getElementById("botonAnterior").style.display="inline";
+			document.getElementById("botonSiguiente").style.display="inline";
+			document.getElementById("infoAvanzada").style.display="inline";
+			document.getElementById("infoDeducidaCoiaca").style.display="none";
+			document.getElementById("infoPropiaVista").style.display="none";
+			document.getElementById("infoGeneral").style.display="none";
+			document.getElementById("infoFinal").style.display="none";
+		}
+		else if(document.getElementById("infoAvanzada").style.display=="inline"){
+			document.getElementById("botonfinalizar").style.display="inline";
+			document.getElementById("botonAnterior").style.display="inline";
+			document.getElementById("botonSiguiente").style.display="none";
+			document.getElementById("infoDeducidaCoiaca").style.display="none";
+			document.getElementById("infoAvanzada").style.display="none";
+			document.getElementById("infoPropiaVista").style.display="none";
+			document.getElementById("infoGeneral").style.display="none";
+			document.getElementById("infoFinal").style.display="inline";
+			if(document.getElementById("tipodevice") != null)
+				document.getElementById("tipodevice1").value = document.getElementById("tipodevice").value;
+			
+			//vista termometro
+	  		if(document.getElementById("tipovistatermometro") != null && document.getElementById("tipovistatermometro").value == "watches")
+        	  	document.getElementById("tipovistatermometro1").value = "temperatura_reloj";
+	  		if(document.getElementById("tipovistatermometro") != null  && document.getElementById("tipovistatermometro").value == "bars")
+        	  	document.getElementById("tipovistatermometro1").value = "temperatura_horizontal";
+	  		
+
+	  		 //vista sonoff
+	  		  if(document.getElementById('dataTable') != null){
+	  		  var textos = "";
+	  		     for (var i=1;i < document.getElementById('dataTable').rows.length; i++){
+	  		             for (var j=0; j<4; j++){
+	  		                    textos = textos + document.getElementById('dataTable').rows[i].cells[j].innerHTML;
+	  		                    textos = textos +"&"
+	  		             }
+	  		             textos= textos+"@";
+	  		     } 
+	  		   console.log(textos);
+	  		   if(document.getElementById("timerstringsonoff")!=null)
+	  			   document.getElementById("timerstringsonoff").value = textos;
+	  			}
+	  		 if(document.getElementById("cantidadswiths") != null){
+	  			 var cantidades =document.getElementById("cantidadswiths");
+	  			 var cantidadelegida =cantidades.options[cantidades.selectedIndex].value;
+	  			 console.log("cantidad elegida: "+ cantidadelegida);
+	  			 if(cantidadelegida != "none")
+	  				document.getElementById("cantidadswiths1").value = cantidadelegida;
+	  		 }
+	  		 
+			if(document.getElementById("iphostescuchar") != null)
+				document.getElementById("iphostescuchar1").value = document.getElementById("iphostescuchar").value;
+			if(document.getElementById("portescuchar") != null)
+				document.getElementById("portescuchar1").value = document.getElementById("portescuchar").value;
+			if(document.getElementById("topiclisten") != null)
+				document.getElementById("topiclisten1").value = document.getElementById("topiclisten").value;
+			if(document.getElementById("userescuchar") != null)
+				document.getElementById("userescuchar1").value = document.getElementById("userescuchar").value;
+			if(document.getElementById("passescuchar") != null)
+				document.getElementById("passescuchar1").value = document.getElementById("passescuchar").value;
+			if(document.getElementById("topicwrite") != null)
+				document.getElementById("topicwrite1").value = document.getElementById("topicwrite").value;
+			if(document.getElementById("iphostescucharremote") != null)
+				document.getElementById("iphostescucharremote1").value = document.getElementById("iphostescucharremote").value;
+			if(document.getElementById("portescucharremote") != null)
+				document.getElementById("portescucharremote1").value = document.getElementById("portescucharremote").value;
+			if(document.getElementById("topiclistenremote") != null)
+				document.getElementById("topiclistenremote1").value = document.getElementById("topiclistenremote").value;
+			if(document.getElementById("userescucharremote") != null)
+				document.getElementById("userescucharremote1").value = document.getElementById("userescucharremote").value;
+			if(document.getElementById("passescucharremote") != null)
+				document.getElementById("passescucharremote1").value = document.getElementById("passescucharremote").value;
+			if(document.getElementById("topicwriteremote") != null)
+				document.getElementById("topicwriteremote1").value = document.getElementById("topicwriteremote").value;
+
+		}
+
 	}
-	else if(document.getElementById("infoDeducidaCoiaca").style.display=="inline"){
-		document.getElementById("botonAnterior").style.display="inline";
-		document.getElementById("botonSiguiente").style.display="inline";
-		document.getElementById("infoPropiaVista").style.display="inline";
-		document.getElementById("infoDeducidaCoiaca").style.display="none";
-		document.getElementById("infoAvanzada").style.display="none";
-		document.getElementById("infoGeneral").style.display="none";
-		document.getElementById("infoFinal").style.display="none";
-	}
-	else if(document.getElementById("infoPropiaVista").style.display=="inline"){
-		document.getElementById("botonAnterior").style.display="inline";
-		document.getElementById("botonSiguiente").style.display="inline";
-		document.getElementById("infoAvanzada").style.display="inline";
-		document.getElementById("infoDeducidaCoiaca").style.display="none";
-		document.getElementById("infoPropiaVista").style.display="none";
-		document.getElementById("infoGeneral").style.display="none";
-		document.getElementById("infoFinal").style.display="none";
-	}
-	else if(document.getElementById("infoAvanzada").style.display=="inline"){
-		document.getElementById("botonAnterior").style.display="inline";
-		document.getElementById("botonSiguiente").style.display="none";
-		document.getElementById("infoDeducidaCoiaca").style.display="none";
-		document.getElementById("infoAvanzada").style.display="none";
-		document.getElementById("infoPropiaVista").style.display="none";
-		document.getElementById("infoGeneral").style.display="none";
-		document.getElementById("infoFinal").style.display="inline";
- 		 if(document.getElementById("tipodevice") != null)
-     	  	document.getElementById("tipodevice1").value = document.getElementById("tipodevice").value;
- 		 else
- 			 console.log("tipodevice NULL: " + document.getElementById("tipodevice"));
-	}
-		
-}
 
 //Evento asociado a la carga de la ventana Modal para regresar
 function anteriorAnimacion(){
@@ -187,6 +241,7 @@ function anteriorAnimacion(){
 		document.getElementById("infoAvanzada").style.display="inline";
 		document.getElementById("infoPropiaVista").style.display="none";
 		document.getElementById("infoGeneral").style.display="none";
+		document.getElementById("botonfinalizar").style.display="none";
 	}
 		
 }
@@ -312,12 +367,10 @@ $('#ModalConfirm').on('show.bs.modal', function (event) {
 
 	function obtenerConfiguracion(tipoDevice,serial) {
 		var _url = $(location).attr('pathname') + "/configuraciondefault/"+tipoDevice+"/"+serial;
-		alert("quiero ir a esta URL"+ _url);
 		$.ajax({ url : _url,
 			contentType: "application/json",
 			dataType: 'json',
 			success: function(data){
-				alert("esta es la respuesta: "+ data);
 				document.getElementById('iphostescuchar').value = data.iphostescuchar;
 				document.getElementById('portescuchar').value = data.portescuchar;
 				document.getElementById('userescuchar').value = data.userescuchar;
@@ -325,6 +378,7 @@ $('#ModalConfirm').on('show.bs.modal', function (event) {
 				document.getElementById('topicwrite').value = data.topicescribir;
 				document.getElementById('iphostescucharremote').value = data.iphostescucharremote;
 				document.getElementById('portescucharremote').value = data.portescucharremote;
+				document.getElementById('userescucharremote').value = data.userescucharremote;
 				document.getElementById('topiclistenremote').value = data.topicescucharremote;
 				document.getElementById('topicwriteremote').value = data.topicescribirremote;
 			}});

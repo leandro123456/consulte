@@ -116,6 +116,7 @@ public class HomeController {
         List<String> topicos=obtenerTopicosDeTodosLosEndpoints(user.getDeviceserialnumber());
         model.addAttribute("cantidadSensores", topicos.size());
         model.addAttribute("topicos", topicos);
+        System.out.println("cantidad de topicos a subscribirme local: "+ topicos.size());
         //para las alarmas
         model.addAttribute("cantidadAlarma", topicosdeAlarma.size());
         model.addAttribute("hostalarma", "mqtt.coiaca.com");
@@ -124,6 +125,7 @@ public class HomeController {
         model.addAttribute("usuarioalarma", "mqttusr");
         model.addAttribute("passalarma", "mqttpwd");
         model.addAttribute("topicosalarmas", topicosdeAlarma);
+        System.out.println("cantidad de topicos a subscribirme alarma: "+ topicosdeAlarma.size());
         //fin de alarmas
    		return new ModelAndView("origin", model);
 		} catch (Exception e) {
@@ -202,20 +204,22 @@ public class HomeController {
 			if(!device.getTipo().equals(Device.ALARMA)) {
 				if(device.getUsedefaultbrocker()){
 					topicos.add("'"+device.getDeviceconfiguration().get(0).getTopicescuchar()+"'");
-					topicos.add("'"+device.getDeviceconfiguration().get(0).getTopicescucharremote()+"'");
+					System.out.println("VA A AGREGAR ESTE TOPICO LOCAL: "+ device.getDeviceconfiguration().get(0).getTopicescuchar());
+					//topicos.add("'"+device.getDeviceconfiguration().get(0).getTopicescucharremote()+"'");
 				}
 				else{
 					topicos.add("'"+device.getDeviceconfiguration().get(1).getTopicescuchar()+"'");
-					topicos.add("'"+device.getDeviceconfiguration().get(1).getTopicescucharremote()+"'");
+					System.out.println("VA A AGREGAR TOPICO NO LOCAL: " +device.getDeviceconfiguration().get(1).getTopicescuchar());
+					//topicos.add("'"+device.getDeviceconfiguration().get(1).getTopicescucharremote()+"'");
 				}
 			}else {
 				if(device.getUsedefaultbrocker()){
 					topicosdeAlarma.add("'"+device.getDeviceconfiguration().get(0).getTopicescuchar()+"'");
-					topicosdeAlarma.add("'"+device.getDeviceconfiguration().get(0).getTopicescucharremote()+"'");
+					//topicosdeAlarma.add("'"+device.getDeviceconfiguration().get(0).getTopicescucharremote()+"'");
 				}
 				else{
 					topicosdeAlarma.add("'"+device.getDeviceconfiguration().get(1).getTopicescuchar()+"'");
-					topicosdeAlarma.add("'"+device.getDeviceconfiguration().get(1).getTopicescucharremote()+"'");
+					//topicosdeAlarma.add("'"+device.getDeviceconfiguration().get(1).getTopicescucharremote()+"'");
 				}
 //				for(int i=0; i<device.getParticiones();i++) {
 //					topicosdeAlarma.add("'"+device.getSerialnumber()+"/Partition"+(i+1)+"'");
@@ -231,6 +235,7 @@ public class HomeController {
 				
 			}
 		}
+		
 		return topicos;
 	}
 }
