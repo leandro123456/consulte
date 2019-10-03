@@ -117,7 +117,10 @@ public class HomeController {
         model.addAttribute("cantidadSensores", topicos.size());
         model.addAttribute("topicos", topicos);
         System.out.println("cantidad de topicos a subscribirme local: "+ topicos.size());
+        
         //para las alarmas
+        List<String> topicosdeAlarma=obtenerTopicosDeTodosLosEndpoints(user.getDeviceserialnumber());
+        System.out.println("cantidad de topicos a subscribirme alarma: "+ topicosdeAlarma.size());
         model.addAttribute("cantidadAlarma", topicosdeAlarma.size());
         model.addAttribute("hostalarma", "mqtt.coiaca.com");
         model.addAttribute("puertoalarma", "8080");
@@ -125,7 +128,7 @@ public class HomeController {
         model.addAttribute("usuarioalarma", "mqttusr");
         model.addAttribute("passalarma", "mqttpwd");
         model.addAttribute("topicosalarmas", topicosdeAlarma);
-        System.out.println("cantidad de topicos a subscribirme alarma: "+ topicosdeAlarma.size());
+        
         //fin de alarmas
    		return new ModelAndView("origin", model);
 		} catch (Exception e) {

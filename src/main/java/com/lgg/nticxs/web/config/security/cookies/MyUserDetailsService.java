@@ -18,6 +18,7 @@ public class MyUserDetailsService implements UserDetailsService {
     public MyUserDetailsService() {
     	
     	List<com.lgg.nticxs.web.model.User> usuarios = userdao.retrieveAllUsers();
+    	System.out.println("cantidad de Usuarios encontrados: "+ usuarios.size());
     	for(com.lgg.nticxs.web.model.User us : usuarios)
     		users.add(new UserObject(us.getEmail(), new String(us.getPassword()), us.getRole()));
     }
