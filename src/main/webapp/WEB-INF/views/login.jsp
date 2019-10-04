@@ -41,7 +41,39 @@
 				</ul>
 			</nav>
 
+<c:if test="${param.error != null}">
+				 	<input type="hidden" id ="mensaje1" value="Usuario o Contraseña Incorrectos, intentalo nuevamente">
+					<script type="text/javascript">
+						var x= document.getElementById('mensaje1').value;
+						swal({
+							  title: x,
+							  icon: "error",
+							  timer: 5000,
+							  closeOnClickOutside: false,
+							  buttons: false,
+							});
+						setTimeout('window.location.href = "/login";', 2000);
+					</script>
+				</c:if>
+				<c:if test="${param.logout != null}">
+				 	<input type="hidden" id ="mensaje" value="La sesión ha sido cerrada correctamente.">
+					<script type="text/javascript">
+						var x= document.getElementById('mensaje').value;
+						swal({
+							  //title: x,
+							  icon: "success",
+							  timer: 5000,
+							  closeOnClickOutside: false,
+							  buttons: false,
+							});
+						setTimeout('window.location.href = "/login";', 2000);
+					</script>
+				</c:if>
 
+                    <c:if test="${param.logout != null}">
+                        <p class="logout">La sesión ha sido cerrada correctamente.</p>
+                    </c:if>
+                    
 		<!-- Banner -->
 			<section id="banner">
 				<div class="inner">
