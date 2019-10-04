@@ -3,12 +3,22 @@
 <%@taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <head>
-    <title>cDash</title>
+    <title>cDash - Control for your IoT devices</title>
     <link rel='shortcut icon' href='<c:url value="/resources/images/favicon.ico" />' type="image/x-icon"/>
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link type="text/css" rel="stylesheet" href="resources/loginresources/css/main.css">
-
+	
+	<script type="text/javascript"> <!-- FEDERICO le meti este script para que cambie la imagen de fondo y que no sea sismpre la misma. Si, me copé -->
+		if (document.getElementById) { window.onload = swap };
+		function swap() {
+		var numimages=4;
+		rndimg = new Array("resources/loginresources/css/images/banner4.jpg", "resources/loginresources/css/images/banner3.jpg", "resources/loginresources/css/images/banner2.jpg", "resources/loginresources/css/images/banner.jpg"); 
+		x=(Math.floor(Math.random()*numimages));
+		randomimage=(rndimg[x]);
+		document.getElementById("banner").style.backgroundImage = "url("+ randomimage +")"; 
+		}
+	</script>
   	
 </head>
 
@@ -17,110 +27,80 @@
 
 <!-- Header -->
 			<header id="header" class="alt">
-				<div class="logo"><a href="login" style="font-weight: bold">cDash<span> - IoT</span></a></div>
-				<a href="#menu">Menu</a>
+			<img src="resources/loginresources/css/images/logo.png" alt="" width=50 height=auto />
+				<div class="logo"><a href="login">cDash <span>- Control for your IoT devices</span></a></div>
 			</header>
 
-		<!-- Nav -->
-<!-- 			<nav id="menu"> -->
-<!-- 				<ul class="links"> -->
-<!-- 					<li><a href="index.html">Home</a></li> -->
-<!-- 					<li><a href="generic.html">Generic</a></li> -->
-<!-- 					<li><a href="elements.html">Elements</a></li> -->
-<!-- 				</ul> -->
-<!-- 			</nav> -->
+<!-- Nav -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="index.html">Inicio</a></li>
+					<li><a href="#">Ayuda</a></li>
+					<!-- <li><a href="generic.html">Generic</a></li>
+					<li><a href="elements.html">Elements</a></li> -->
+				</ul>
+			</nav>
+
 
 		<!-- Banner -->
 			<section id="banner">
 				<div class="inner">
 					<header>
-						<h1>Controle sus dispositivos IoT</h1>
+						<p><img src="resources/loginresources/css/images/logo.png" alt=""/></p>
+						<h2 style="color:#FFFFFF; text-align:left !important;">controla <br/>tus dispositivos</h2>   <!-- FEDERICO cambie de h1 a h2 y agregué style -->		
+						<!-- <p>Aliquam libero augue varius non odio nec faucibus congue<br />felis quisque a diam rutrum tempus massa accumsan faucibus purus.</p> -->
 					</header>
-	<!-- 				agrego login al banner -->
-				<div class="row justify-content-center">
-	
-			      <div class="col-xl-10 col-lg-12 col-md-9">
-							<c:if test="${param.error != null}">
-							 	<input type="hidden" id ="mensaje1" value="Usuario o Contraseña Incorrectos, intentalo nuevamente">
-								<script type="text/javascript">
-									var x= document.getElementById('mensaje1').value;
-									swal({
-										  title: x,
-										  icon: "error",
-										  timer: 5000,
-										  closeOnClickOutside: false,
-										  buttons: false,
-										});
-									setTimeout('window.location.href = "/login";', 5000);
-								</script>
-							</c:if>
-							<c:if test="${param.logout != null}">
-							 	<input type="hidden" id ="mensaje" value="La sesión ha sido cerrada correctamente.">
-								<script type="text/javascript">
-									var x= document.getElementById('mensaje').value;
-									swal({
-										  //title: x,
-										  icon: "success",
-										  timer: 5000,
-										  closeOnClickOutside: false,
-										  buttons: false,
-										});
-									setTimeout('window.location.href = "/login";', 5000);
-								</script>
-							</c:if>
+
+
+			<div class="row justify-content-center">
+			      <div class="col-xl-10 col-lg-12 col-md-9">			
+			        <div class="card o-hidden border-0 shadow-lg my-5">
+			          <div class="card-body p-0">
+			            <div class="row">
+			              <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+			              <div class="col-lg-6">
+			                <div class="p-5">
+			                  <form class="user" action="<c:url value='/login'/>" method="post" >
+			                    <div class="form-group">
+			                      <input id = "userName" name="user"  type="text" class="form-control form-control-user" aria-describedby="emailHelp" placeholder="Email">
+			                    </div>
+			                    <div class="form-group">
+			                      <input type="password" class="form-control form-control-user"  name="password" id = "userPassword"  placeholder="Contraseña">
+			                    </div>
+			                    <div class="form-group">
+			                      <div class="custom-control custom-checkbox small">
+			                        <input checked type="checkbox" name="remember-me" class="custom-control-input" id="customCheck"> <!-- FEDERICO agregué el CHECKED -->
+			                        <label class="custom-control-label" for="customCheck">Recordar</label>
+			                      </div>
+			                    </div>
+			                 	<div class="container-login100-form-btn">
+									<button class="btn btn-primary btn-user btn-block" type="submit" id="sign">Ingresar</button>
+								</div>
+			                  </form>
+			                  <hr>
+			                  <div class="text-center">
+			                    <a class="small" href="<c:url value='/forgot'/>" id="forgot">¿Olvidó su contraseña?</a>
+			                  </div>
+			                  <div class="text-center">
+			                    <a class="small" href="<c:url value='/signup'/>" id="signup">Crear una cuenta</a>
+			                  </div>
+			                </div>
+			              </div>
+			            </div>
+			          </div>
+			        </div>
 			
-			                    <c:if test="${param.logout != null}">
-			                        <p class="logout">La sesión ha sido cerrada correctamente.</p>
-			                    </c:if>
-					
-							        <div class="card o-hidden border-0 shadow-lg my-5">
-							          <div class="card-body p-0">
-							            <div class="row" style="float: none">
-							              <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-							              <div class="col-lg-6">
-							                <div class="p-5">
-							                  <form class="user" action="<c:url value="/login" />" method="post" >
-							                    <div class="form-group">
-							                      <input id = "userName" name="user"  type="text" class="form-control form-control-user" aria-describedby="emailHelp" placeholder="Email">
-							                    </div>
-							                    <div class="form-group">
-							                      <input type="password" class="form-control form-control-user"  name="password" id = "userPassword"  placeholder="Password">
-							                    </div>
-							                    <div class="form-group">
-							                      <div class="custom-control custom-checkbox small">
-							                        <input type="checkbox" name="remember-me" class="custom-control-input" id="customCheck">
-							                        <label class="custom-control-label" for="customCheck">Remember Me</label>
-							                      </div>
-							                    </div>
-							                 	<div class="container-login100-form-btn">
-													<button class="btn btn-primary btn-user btn-block" type="submit" id="sign">Entrar</button>
-												</div>
-							                  </form>
-							                  <hr>
-							                  <div class="text-center">
-							                    <a class="small" href="<c:url value="/forgot" />" id="forgot">Olvido su contraseña?</a>
-							                  </div>
-							                  <div class="text-center">
-							                    <a class="small" href="<c:url value="/signup" />" id="signup">Crear una Cuenta</a>
-							                  </div>
-							                </div>
-							              </div>
-							            </div>
-							          </div>
-							        </div>
-							
-							      </div>
-							
-							    </div>
-				    <a href="#main" class="button big scrolly">Learn More</a>
-    </div>
+			      </div>
+			
+			    </div>
 
 
-<!-- 					aca termina				 -->
+					<!-- <a href="#main" class="button big scrolly">Learn More</a> -->
+				</div>
 			</section>
 
 		<!-- Main -->
-			<div id="main">
+			<div id="main" class="main-home"> <!-- FEDERICO agregué el clase main-home -->
 
 				<!-- Section -->
 					<section class="wrapper style1">
@@ -197,15 +177,15 @@
 			</div>
 
 		<!-- Footer -->
-			<footer id="footer">
+			<footer id="footer" class="footer-home"> <!-- FEDERICO agregué el clase footer-home -->
 				<div class="copyright">
 					<ul class="icons">
+						<li><a href="https://www.facebook.com/cdashiot/" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
 						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
 						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
 						<li><a href="#" class="icon fa-snapchat"><span class="label">Snapchat</span></a></li>
 					</ul>
-					<p>&copy; Untitled. All rights reserved. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Unsplash</a>.</p>
+					<p>&copy; cDash. All rights reserved. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Unsplash</a>.</p>
 				</div>
 			</footer>
 
