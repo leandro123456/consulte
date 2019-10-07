@@ -1,17 +1,18 @@
-body {background-color:#000000;
+body {
+	background-color:#000000;
 }	
 	
 .logodash {
 border-radius: 1em;
 background-color: #FFFFFF;
+height: auto;
 /* padding: 0.3em;  */
 /* min-width: 4.05em; */
-height: auto; 
-margin-top: 1em;
-padding-left: 0em;
-padding-right: 0em;
-padding-top: 0em;
-padding-bottom: 0em;
+/* margin-top: 1em; */
+/* padding-left: 0em; */
+/* padding-right: 0em; */
+/* padding-top: 0em; */
+/* padding-bottom: 0em; */
 
 }
 
@@ -23,3 +24,7 @@ padding-bottom: 0em;
 	text-transform: none;
 	float:right;	
 }
+
+.logodash img {
+	width: 5em;
+	}

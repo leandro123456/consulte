@@ -139,6 +139,7 @@ function evaluarNumeroDeSerie(valorSerial){
 		}
 		else if(document.getElementById("infoAvanzada").style.display=="inline"){
 			document.getElementById("botonfinalizar").style.display="inline";
+			document.getElementById("botoncancelar").style.display="inline";
 			document.getElementById("botonAnterior").style.display="inline";
 			document.getElementById("botonSiguiente").style.display="none";
 			document.getElementById("infoDeducidaCoiaca").style.display="none";
@@ -242,6 +243,7 @@ function anteriorAnimacion(){
 		document.getElementById("infoPropiaVista").style.display="none";
 		document.getElementById("infoGeneral").style.display="none";
 		document.getElementById("botonfinalizar").style.display="none";
+		document.getElementById("botoncancelar").style.display="none";
 	}
 		
 }

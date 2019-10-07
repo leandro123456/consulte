@@ -14,7 +14,7 @@
 		      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="javascript:;" onclick="parentNode.submit();">
 <!-- 		        <div class="sidebar-brand-icon"> -->
 				<div class="logodash">
-				<img alt="" style="width: 5em;" src='<c:url value="/resources/loginresources/css/images/logoBig.png"  />'/>
+				<img alt="" src='<c:url value="/resources/loginresources/css/images/logoBig.png"  />'/>
 		        </div>
 		        <div class="sidebar-brand-text mx-3 logodash-text">cDash<sup></sup></div>
 <!-- 				<div class="logodash-text">cDash<sup></sup></div> -->

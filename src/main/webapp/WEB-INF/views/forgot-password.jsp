@@ -47,7 +47,7 @@
 				<div class="inner">
 					<header>
 						<p><img src="resources/loginresources/css/images/logo.png" alt=""/></p>
-						<h2 style="color:#FFFFFF; text-align:left !important;">Olvido <br/> su Contraseña?</h2>   <!-- FEDERICO cambie de h1 a h2 y agregué style -->		
+						<h2 style="color:#FFFFFF; text-align:left !important;">¿Olvidó <br/> su Contraseña?</h2>   <!-- FEDERICO cambie de h1 a h2 y agregué style -->		
 <!-- 						<p>Lo entendemos, cosas que pueden pasar.<br/> Simplemente ingrese su dirección de correo electrónico a continuación <br/> y le enviaremos una nueva contraseña y su codigo de activacion.</p> -->
 					</header>
 	
@@ -70,7 +70,7 @@
 		                    <a class="small" href="register">Crear una Cuenta</a>
 		                  </div>
 		                  <div class="text-center">
-		                    <a class="small" href="login">Ya tiene una cuenta? Entrar</a>
+		                    <a class="small" href="login">¿Ya tiene una cuenta? Entrar</a>
 		                  </div>
 		                </div>
 		              </div>

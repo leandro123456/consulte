@@ -50,7 +50,7 @@
 				<div class="inner">
 					<header>
 						<p><img src="resources/loginresources/css/images/logo.png" alt=""/></p>
-						<h2 style="color:#FFFFFF; text-align:left !important;">Información de la cuenta</h2>   <!-- FEDERICO cambie de h1 a h2 y agregué style -->		
+						<h2 style="color:#FFFFFF; text-align:left !important;">Nueva cuenta</h2>   <!-- FEDERICO cambie de h1 a h2 y agregué style -->		
 						<!-- <p>Aliquam libero augue varius non odio nec faucibus congue<br />felis quisque a diam rutrum tempus massa accumsan faucibus purus.</p> -->
 					</header>
 

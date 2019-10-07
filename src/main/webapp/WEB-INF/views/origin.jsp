@@ -17,8 +17,8 @@
 	<script src='<c:url value="/resources/mqttResources/mqttRecibirMensajes.js" />'></script>
 	<script src='<c:url value="/resources/mqttResources/demo.js" />'></script>
 	<script src='<c:url value="/resources/alarma/coneccionAlarma.js" />'></script>
-	<script src='<c:url value="/resources/mqttResources/cargarElementos.js" />'></script>
-	<script src='<c:url value="/resources/mqttResources/progreso.js" />'></script>
+<%-- 	<script src='<c:url value="/resources/mqttResources/cargarElementos.js" />'></script> --%>
+<%-- 	<script src='<c:url value="/resources/mqttResources/progreso.js" />'></script> --%>
 	<script src='<c:url value="/resources/mqttResources/cargaReloj.js" />'></script>	
 	<link href='<c:url value="/resources/mqttResources/estiloalarma.css" />' rel="stylesheet" type="text/css">
 	<!-- Alta de Device -->
@@ -31,7 +31,7 @@
   
   <link href='<c:url value="/resources/mqttResources/all.min.css" />' rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-  <link href='<c:url value="/resources/mqttResources/sb-admin-2.min.css" />' rel="stylesheet">
+  <link href='<c:url value="/resources/mqttResources/sb-admin-2.css" />' rel="stylesheet">
 <!--   boton check -->
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
@@ -320,7 +320,7 @@
           		</div>
         </div>
         <div class="modal-footer">
-<!--           	<button type="button" class="btn btn-secondary"  data-dismiss="modal">Cancelar</button> -->
+          	<button style="display:none" id="botoncancelar" type="button" class="btn btn-secondary"  data-dismiss="modal">Cancelar</button>
           	<input type="hidden" name="tipodevice" id="tipodevice1" />
           	
 <!--           	informacion de las vistas SONOFF-->
