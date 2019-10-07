@@ -40,7 +40,7 @@
 <!-- boton check -->
 </head>
 
-<body id="page-top" onresize="modificarTamanoAlarma()">
+<body id="page-top">
 	<div id="wrapper">	
 		<jsp:include page="header.jsp" />
 		<div class="container-fluid">
@@ -113,7 +113,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Alta de Dispositivo</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Nuevo dispositivo</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
           	<span aria-hidden="true">×</span>
           </button>
@@ -121,11 +121,11 @@
         <form role="form" action="<c:url value="home/create"/>" method="post">
         	<div class="modal-body">
         		<div id="infoGeneral" style="display:inline">
-					<h3>Informacion General</h3>
-					<b>Nombre</b> 
+<!-- 					<h3>Informacion General</h3> -->
+					<b>Nombre del dispositivo</b> 
 					<input name="namedevice" id="namedevice" class="form-control" required>
 					<p></p>
-					<b>Descripcion</b> 
+					<b>Descripción</b> 
 					<input name="descriptiondevice" id="descriptiondevice" class="form-control" required>
 					<p></p>
 					<b>Numero de Serie</b> 
@@ -133,9 +133,9 @@
 					<p></p>
 				</div>
 				<div id="infoDeducidaCoiaca" style="display:none">
-					<h3>Informacion Dispositivo Coiaca</h3>
+					<h3>Información del dispositivo</h3>
 					<div>
-						<b>Marca del Dispositivo</b> <select id="marcadevice"
+						<b>Marca</b> <select id="marcadevice"
 							class="form-control">
 							<option value="none">Seleccione uno</option>
 							<option value="coiaca">Coiaca</option>
@@ -144,7 +144,7 @@
 					</div>
 					<p></p>
 					<div id="selectormodelo">
-						<b>Modelo del Dispositivo</b> 
+						<b>Modelo</b> 
 						<select id="modelodevice" class="form-control">
 							<option value="none">Seleccione uno</option>
 							<option value="WTHUSB">WTHUSB</option>
@@ -156,7 +156,7 @@
 					</div>						
 					<p></p>
 					<div>
-						<b>Tipo de Dispositivo</b> 
+						<b>Tipo</b> 
 						<select id="tipodevice" class="form-control">
 							<option value="none">Seleccione uno</option>
 							<option value="termometro">Termometro</option>
@@ -167,7 +167,7 @@
 					<p></p>	
 				</div>
 				<div id="infoPropiaVista" style="display:none">
-					<h3>Personalizar Vista</h3>
+					<h3>Vista</h3>
 					<div id="vistastermometro">
 						<b>Vista de Termometro</b> 
 						<select id="tipovistatermometro"
@@ -248,61 +248,61 @@
 					</div>
 				</div>
 				<div id="infoAvanzada" style="display:none">
-					<h3>Informacion Avanzada</h3>
+					<h3>Configuración avanzada</h3>
 						<div id="parametersConexion" onkeypress=checkPassword()>
-							<h6>Configuracion del Dispositivo</h6>
+							<h6>Los siguientes son los parámetros con los que su equipo ha sido configurado de fábrica. No los modifique si no está seguro de lo que está haciendo.</h6>
 							<div class="form-group row ">
-								<b>Hostname or Direccion IP</b> 
+								<b>URL del Broker MQTT</b> 
 									<input type="text"
 									class="form-control form-control-user" id="iphostescuchar"
 									placeholder="Hostname"> 
-								<b>Puerto</b> 
+								<b>Puerto del Broker MQTT</b> 
 									<input type="text"
 									class="form-control form-control-user" id="portescuchar"
 									placeholder="Number Port"> 
-								<b>Nombre de Usuario</b> 
+								<b>Nombre de usuario MQTT</b> 
 									<input type="text" class="form-control form-control-user"
 									id="userescuchar" placeholder="Nombre de usuario"> 
-								<b>Contraseña</b>
+								<b>Contraseña MQTT</b>
 									<input type="password" class="form-control form-control-user"
 									id="passescuchar" placeholder="Contraseña"> 
-								<b>Confirmar Contraseña</b> 
+								<b>Repetir contraseña MQTT</b> 
 									<input type="password"
 									class="form-control form-control-user" id="confirpassescuchar"
 									placeholder="Confirmar Contraseña">
-								<b>Topico para recibir Informacion</b>
+								<b>Prefijo de topicos de estados</b>
 									<input type="text" class="form-control form-control-user "
 									id="topiclisten" placeholder="Topico para recibir Informacion">
-								<b>Topico para envio de Informacion</b>
+								<b>Topico de comandos</b>
 									<input type="text" class="form-control form-control-user "
 									id="topicwrite" placeholder="Topico para envio de Informacion"> 
 							</div>
 							
-							<h6>Configuracion Remota</h6>
+							<h6>Administración Remota</h6>
 							<div class="form-group row ">
-								<b>Hostname o Direccion IP</b> 
+								<b>URL del Broker MQTT de Administración Remota</b> 
 									<input type="text"
 									class="form-control form-control-user"
 									id="iphostescucharremote" placeholder="Hostname o direccion IP"> 
-								<b>Puerto</b>
+								<b>Puerto del Broker MQTT de Administración Remota</b>
 									<input type="text" class="form-control form-control-user"
 									id="portescucharremote" placeholder="Puerto"> 
-								<b>Nombre de Usuario</b> 
+								<b>Nombre de usuario MQTT de Administración Remota</b> 
 									<input
 									type="text" class="form-control form-control-user"
 									id="userescucharremote" placeholder="Nombre de usuario"> 
-								<b>Contraseña</b>
+								<b>Contraseña MQTT de Administración Remota</b>
 									<input type="password" class="form-control form-control-user"
 									id="passescucharremote" placeholder="Contraseña"> 
-								<b>Confirmar Contraseña</b> 
+								<b>Confirmar contraseña MQTT de Administración Remota</b> 
 									<input type="password"
 									class="form-control form-control-user"
 									id="confirpassescucharremote" placeholder="Confirmar Contraseña">
-								<b>Topico para recepcion de Respuestas</b>
+								<b>Topico de resultados de Administración Remota</b>
 									<input type="text"
 									class="form-control form-control-user " id="topiclistenremote"
 									placeholder="Topico para recepcion de Respuestas"> 
-								<b>Topico para envio de Comando de Configuracion</b>
+								<b>Topico de comandos de Administración Remota</b>
 									<input type="text"
 									class="form-control form-control-user " id="topicwriteremote"
 									placeholder="Topico para envio de Comando de Configuracion"> 
@@ -310,17 +310,17 @@
 						</div>
 					</div>
 					<div id="infoFinal" style="display:none">
-						<h5>Termino con la configuracion... desea guardar los cambios?</h5>
+						<h5>La configuración está lista. Precione Agregar Dispositivo para terminar.</h5>
 					</div>
 					
 				
 				<div class="btn-group">
-          			<button id="botonAnterior" style="display:none" class="btn btn-secondary" onclick="anteriorAnimacion()" type="button">Anterior</button>
-          			<button id="botonSiguiente" class="btn btn-primary" onclick="siguienteAnimacion()" type="button">Siguiente</button>
+          			<button id="botonAnterior" style="display:none" class="btn btn-secondary" onclick="anteriorAnimacion()" type="button">Volver</button>
+          			<button id="botonSiguiente" class="btn btn-primary" onclick="siguienteAnimacion()" type="button">Continuar</button>
           		</div>
         </div>
         <div class="modal-footer">
-          	<button type="button" class="btn btn-secondary"  data-dismiss="modal">Cancelar</button>
+<!--           	<button type="button" class="btn btn-secondary"  data-dismiss="modal">Cancelar</button> -->
           	<input type="hidden" name="tipodevice" id="tipodevice1" />
           	
 <!--           	informacion de las vistas SONOFF-->
@@ -347,7 +347,7 @@
 			<input type="hidden" name="userescucharremote" id="userescucharremote1" />
 			<input type="hidden" name="passescucharremote" id="passescucharremote1" />
 			<input type="hidden" name="topicwriteremote" id="topicwriteremote1" />      	
-          	<button type="submit" style="display:none" id="botonfinalizar" class="btn btn-primary">Finalizar</button>
+          	<button type="submit" style="display:none" id="botonfinalizar" class="btn btn-primary">Agregar Dispositivo</button>
         </div>
         </form>
       </div>

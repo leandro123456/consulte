@@ -4,15 +4,20 @@ body {background-color:#000000;
 .logodash {
 border-radius: 1em;
 background-color: #FFFFFF;
-padding: 0.3em; 
-min-width: 4.05em;
+/* padding: 0.3em;  */
+/* min-width: 4.05em; */
 height: auto; 
+margin-top: 1em;
+padding-left: 0em;
+padding-right: 0em;
+padding-top: 0em;
+padding-bottom: 0em;
 
 }
 
 .logodash-text{
 	font: 18px arial, sans-serif;
-	font-weight:bold;
+/* 	font-weight:bold; */
 /* 	color: #013E7B; */
 	color:#FFFFFF;
 	text-transform: none;

@@ -50,7 +50,7 @@
 				<div class="inner">
 					<header>
 						<p><img src="resources/loginresources/css/images/logo.png" alt=""/></p>
-						<h2 style="color:#FFFFFF; text-align:left !important;">Crear una cuenta</h2>   <!-- FEDERICO cambie de h1 a h2 y agregué style -->		
+						<h2 style="color:#FFFFFF; text-align:left !important;">Información de la cuenta</h2>   <!-- FEDERICO cambie de h1 a h2 y agregué style -->		
 						<!-- <p>Aliquam libero augue varius non odio nec faucibus congue<br />felis quisque a diam rutrum tempus massa accumsan faucibus purus.</p> -->
 					</header>
 
@@ -72,7 +72,7 @@
 			                  </div>
 			                </div>
 			                <div class="form-group">
-			                  <input type="email" class="form-control form-control-user" id="selectName" name="email" placeholder="Direccion de email">
+			                  <input type="email" class="form-control form-control-user" id="selectName" name="email" placeholder="Email">
 			                </div>
 			                <div class="form-group row">
 			                  <div class="col-sm-6 mb-3 mb-sm-0">
@@ -82,14 +82,14 @@
 			                    <input type="password" class="form-control form-control-user" id="confirmNewPassword" name="newPass2" placeholder="Repetir Contraseña">
 			                  </div>
 			                </div>
-			                <button class="btn btn-primary btn-user btn-block" type="submit" id="sign">Registrar Cuenta</button>
+			                <button class="btn btn-primary btn-user btn-block" type="submit" id="sign">Crear cuenta</button>
 			              </form>
 			              <hr>
 			              <div class="text-center">
-			                <a class="small" href="forgot-password">Olvido su contraseña?</a>
+			                <a class="small" href="forgot-password">¿Olvidó su contraseña?</a>
 			              </div>
 			              <div class="text-center">
-			                <a class="small" href="login">Ya tiene una cuenta? Entrar</a>
+			                <a class="small" href="login">¿Ya tiene una cuenta? Entrar</a>
 			              </div>
 			            </div>
 			          </div>

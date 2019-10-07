@@ -285,8 +285,8 @@ public class LoginController{
 					user.setPassCuenta(ran);
 					userdao.create(user);
 					String cabecera = "<HTML><BODY><br/> <br/>";
-					String body= "<h1>Muchas Gracias por crear su cuenta </h1> <br/> <h3>Para finalizar el proceso de activacion ingrese el siguiente valor en el inicio de Sesion:</h3> <br/> <h3>"+ran+"</h3>";
-					String pie = "<br/> <br/> <footer><p> 2019 - cDash</p></footer></BODY></HTML>";
+					String body= "<h1>Su cuenta ha sido creada. </h1> <br/> <h3>Para activarla, inicie sesion en http://cdash.space e ingrese el siguiente código:</h3> <br/> <h3>"+ran+"</h3>";
+					String pie = "";//"<br/> <br/> <footer><p> 2019 - cDash</p></footer></BODY></HTML>";
 					String formulario = String.format("%s%s%s%s", cabecera, body, "<br/> <br/>", pie);
 					Utils.sendMail(formulario, email);
 					model.addAttribute("msg2", "Su usuario se creo exitosamente. Se le envio un mail para finalizar el proceso de activacion. Por favor, verifique su cuenta de correo");

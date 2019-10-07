@@ -60,43 +60,43 @@
 				</c:if>	
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Devices ${device.serialnumber}</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Dispositivo: ${device.serialnumber}</h6>
             </div>
             <div class="card-body">
               <form role="form" action="<c:url value="/home/savemodification/" />${device.serialnumber}/" method="post" enctype="multipart/form-data">
                    <div class="form-group">
-                       <h2>General Information</h2>
-                       <label>Name</label>
+                       <h2>Información general</h2>
+                       <label>Nombre del dispositivo</label>
                        <input name="name" class="form-control" value="${device.name}">
                        <p> </p>
-                       <label>Description</label>
+                       <label>Descripción</label>
                        <input name="description" class="form-control" value="${device.description}">
                        <p> </p>
                         <hr class="sidebar-divider my-0">
-						<h2>Configuration</h2>
-						<label>Name</label>
+						<h2>Configuracion del dispositivo</h2>
+						<label>Nombre de la configuración</label>
 						<input name="confname" class="form-control" disabled value="${configuration.name}">
-						<label>IP - Host</label>
+						<label>Broker MQTT</label>
 						<input name="confname" class="form-control" disabled value="${configuration.iphostescuchar}">
-						<label>Port</label>
+						<label>Puerto</label>
 						<input name="confname" class="form-control" disabled value="${configuration.portescuchar}">
-						<label>User</label>
+						<label>Nombre de usuario del broker MQTT</label>
 						<input name="confname" class="form-control" disabled value="${configuration.name}">
-						<label>Password</label>
+						<label>Contraseña</label>
 						<input type="password" class="form-control form-control-user"  name="password" id = "userPassword"  placeholder="Password">
-						<label>Confirm Password</label>
+						<label>Repetir contraseña</label>
 						<input type="password" class="form-control form-control-user"  name="password2" id = "userPassword2"  placeholder="Repeit Password">
-						<label>Listening Topic</label>
+						<label>Prefijo para los tópicos de estado</label>
 						<input name="confname" class="form-control" disabled value="${configuration.topicescuchar}">
-						<label>Writing Topic</label>
+						<label>Tópico de comandos</label>
 						<input name="confname" class="form-control" disabled value="${configuration.topicescribir}">
                      </div>
                      <div class="col-md-5 centered">
                      </div>
 						<div class="col-md-6 centered">
-                     	<button type="submit" name="action" value="save" class="btn btn-default">Save</button>
+                     	<button type="submit" name="action" value="save" class="btn btn-default">Guardar</button>
 
-                     	<button type="submit" name="action" value="cancel" class="btn btn-default">Cancel</button>
+                     	<button type="submit" name="action" value="cancel" class="btn btn-default">Cancelar</button>
                      </div>
                  </form>
             </div>

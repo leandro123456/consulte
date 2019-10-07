@@ -89,7 +89,8 @@ public class HomeController {
 		System.out.println("USUARIO CONSEGUIDO +++++++++++++++++++++"+user);
 		if(user!= null && !user.getCuenta_iniciada()) {
 			System.out.println("cuenta no iniciada validarla con el mensaje enviado por mail");
-			model.addAttribute("user", user.getEmail());
+			model.addAttribute("user", user.getFirstname());
+			model.addAttribute("useremail", user.getEmail());
 			return new ModelAndView("validate", model);
 		}
 		clasificarSerialUsuario(user.getDeviceserialnumber());

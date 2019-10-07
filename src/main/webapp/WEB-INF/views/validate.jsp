@@ -49,17 +49,17 @@
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Hola "${user}"</h1>
-                    <h4>Por favor, para activar su cuenta ingrese el numero que se le envio por Mail</h4>
+                    <h1 class="h4 text-gray-900 mb-4">Hola ${user}</h1>
+                    <h4>Por favor, ingresa el código que te hemos enviado por email para activar tu cuenta</h4>
                   </div>
                   <form class="user" action="<c:url value="/validate" />" method="post" >
                     <div class="form-group">
                       <input id = "code" name="code"  type="text" class="form-control form-control-user" 
                       placeholder="Enter The Code">
                     </div>
-                    <input type="hidden" name="user" value="${user}" />
+                    <input type="hidden" name="user" value="${useremail}" />
                  	<div class="container-login100-form-btn">
-						<button class="btn btn-primary btn-user btn-block" type="submit">Continuar</button>
+						<button class="btn btn-primary btn-user btn-block" type="submit">Validar y continuar</button>
 					</div>
                   </form>
                 </div>

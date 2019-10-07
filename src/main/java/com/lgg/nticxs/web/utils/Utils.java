@@ -577,7 +577,7 @@ public class Utils {
 				message.setFrom(new InternetAddress("cleoscinc"));
 				message.setRecipients(Message.RecipientType.TO,
 						InternetAddress.parse(destino));
-				message.setSubject("[cDash]: Activacion de Cuenta via Email");
+				message.setSubject("[cDash]: Activacion de Cuenta");
 				message.setText(Mensaje,"ISO-8859-1","html");
 				System.out.println("esto es previo al error");
 				Transport transport = session.getTransport("smtp");

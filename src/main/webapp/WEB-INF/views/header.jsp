@@ -6,7 +6,7 @@
 
 <link rel="stylesheet" type="text/css" href='<c:url value="/resources/cdash_logo/logo.css" />'>
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
       
@@ -14,8 +14,7 @@
 		      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="javascript:;" onclick="parentNode.submit();">
 <!-- 		        <div class="sidebar-brand-icon"> -->
 				<div class="logodash">
-<!-- 		          <i class="fas fa-laugh-wink"></i> -->
-				<img alt="" src='<c:url value="/resources/cdash_logo/lohoH-iso-blanco-alcorte.png"  />'/>
+				<img alt="" style="width: 5em;" src='<c:url value="/resources/loginresources/css/images/logoBig.png"  />'/>
 		        </div>
 		        <div class="sidebar-brand-text mx-3 logodash-text">cDash<sup></sup></div>
 <!-- 				<div class="logodash-text">cDash<sup></sup></div> -->
@@ -47,7 +46,7 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-cog"></i>
-          <span>Componentes</span>
+          <span>Dispositivos</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
