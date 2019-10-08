@@ -93,7 +93,7 @@
 
 
       div.virtual_lcd {
-        background-color: #224A85;
+        background-color: blue;
         color: #ffffff;
         font-family: 'Codystar', cursive;
         font-size: calc(1.3rem + 1.8vw);

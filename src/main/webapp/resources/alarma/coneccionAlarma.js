@@ -73,8 +73,8 @@ function updateEstado45(id, valor,elemento)
 //evaluar status del dispositivo que esta reportando
 function informarstatus45(topicorecibido, mensajerecibido){
 	var iddevice = topicorecibido.replace("/Status","");
-	console.log("este es el id del mensaje de status: "+ iddevice);
-	console.log("este es el cuerpo del status: "+ mensajerecibido)
+	console.log("************** este es el id del mensaje de status: "+ iddevice);
+	console.log("************** este es el cuerpo del status: "+ mensajerecibido)
 	if(mensajerecibido =="online"){
 		updateEstado45("spanestado"+iddevice, "online","statussonoff");
 		if(document.getElementById("ready_icon"+iddevice)!= null)
