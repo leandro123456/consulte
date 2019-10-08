@@ -77,13 +77,16 @@ function informarstatus45(topicorecibido, mensajerecibido){
 	console.log("este es el cuerpo del status: "+ mensajerecibido)
 	if(mensajerecibido =="online"){
 		updateEstado45("spanestado"+iddevice, "online","statussonoff");
-		document.getElementById("ready_icon"+iddevice).style.color = "green"
+		if(document.getElementById("ready_icon"+iddevice)!= null)
+			document.getElementById("ready_icon"+iddevice).style.color = "green"
 	}if(mensajerecibido =="offline"){
 		updateEstado45("spanestado"+iddevice, "offline", "statussonoff");
-		document.getElementById("ready_icon"+iddevice).style.color = "red"
+		if(document.getElementById("ready_icon"+iddevice)!= null)
+			document.getElementById("ready_icon"+iddevice).style.color = "red"
 	}if(mensajerecibido =="disconnected"){
 		updateEstado45("spanestado"+iddevice, "online", "statussonoff");
-		document.getElementById("ready_icon"+iddevice).style.color = "yellow"
+		if(document.getElementById("ready_icon"+iddevice)!= null)
+			document.getElementById("ready_icon"+iddevice).style.color = "yellow"
 	}if(mensajerecibido !="disconnected" && mensajerecibido !="online" && mensajerecibido !="offline"){
 		console.log("el mensaje que se recibio es invalido: "+ mensajerecibido);
 	}
