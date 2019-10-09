@@ -153,7 +153,7 @@ function onMessageArrivedSonoff(message) {
 			animatevar("barrasensf"+serial,"sensacionf"+serial,dataObj.hiF);
 	}
 	
-	if(!message.destinationName.includes("/cmd") && !message.destinationName.includes("/Status") && (!inputAll.includes("tempC") && !inputAll.includes("hum"))){
+	if(!message.destinationName.includes("/swcmd") && !message.destinationName.includes("/cmd") && !message.destinationName.includes("/Status") && (!inputAll.includes("tempC") && !inputAll.includes("hum"))){
 			dataObj = JSON.parse(inputAll);
 		if(dataObj.SW1 != null && dataObj.SW1=="ON"){
 			var deviceserial = "boton1"+dataObj.deviceId;

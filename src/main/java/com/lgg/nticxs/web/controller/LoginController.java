@@ -231,32 +231,34 @@ public class LoginController{
     		@RequestParam(name="lastName", required=true) String lastname,
     		@RequestParam(name="email", required=true) String email,
     		@RequestParam(name="newPass", required=true) String pass,
-    		@RequestParam(name="newPass2", required=true) String pass2) {
+    		@RequestParam(name="newPass2", required=true) String pass2,
+    		@RequestParam(name="action", required=true) String action) {
     	System.out.println("este es el USERID: "+ userId);
-    	if(pass.equals(pass2)){
-    		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        	System.out.println("Edit profile - busco el usuario: "+ authentication.getName());
-            User user = userdao.retrieveByMail(authentication.getName());
-    		user.setFirstname(firstname);
-    		user.setLastname(lastname);
-    		user.setEmail(email);
-    		try {
-				byte[] password = EncryptorPassword.encrypt(pass);
-				user.setPassword(password);
-				List<byte[]> list = new ArrayList<byte[]>();
-				list.add(password);
-			} catch (Exception e) {
-				model.addAttribute("msg1", "Error durante la generacion de la contraseña. Por favor vuelva a intentarlo");
-				e.printStackTrace();
-			}
-    		userdao.update(user);
-    		model.addAttribute("msg1", "Porceso de actualizacion de usuario Completa");
-    		
-    	}else {
-			model.addAttribute("msg1", "Error ... Contraseña Incorrecta. Por favor vuelva a itentarlo");
-			return "user_edit_profile";
-		}
-    	
+    	if(action.equals("save")) {
+    		if(pass.equals(pass2)){
+    			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    			System.out.println("Edit profile - busco el usuario: "+ authentication.getName());
+    			User user = userdao.retrieveByMail(authentication.getName());
+    			user.setFirstname(firstname);
+    			user.setLastname(lastname);
+    			user.setEmail(email);
+    			try {
+    				byte[] password = EncryptorPassword.encrypt(pass);
+    				user.setPassword(password);
+    				List<byte[]> list = new ArrayList<byte[]>();
+    				list.add(password);
+    			} catch (Exception e) {
+    				model.addAttribute("msg", "Error durante la generacion de la contraseña. Por favor vuelva a intentarlo");
+    				e.printStackTrace();
+    			}
+    			userdao.update(user);
+    			model.addAttribute("msg", "Porceso de actualizacion de usuario Completa");
+
+    		}else {
+    			model.addAttribute("msg", "Error ... Contraseña Incorrecta. Por favor vuelva a itentarlo");
+    			return "user_edit_profile";
+    		}
+    	}
     	return "redirect:/home";
     }
 

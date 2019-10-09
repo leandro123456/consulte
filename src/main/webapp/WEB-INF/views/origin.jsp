@@ -41,10 +41,38 @@
 </head>
 
 <body id="page-top">
+<script type="text/javascript">
+function getParameterByName(name) {
+	var locacion = location.search;
+	console.log("NOM2: "+ location.search);
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+    results = regex.exec(location.search);
+    console.log("NOM3: "+ results);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}	
+</script>
+
 	<div id="wrapper">	
 		<jsp:include page="header.jsp" />
 		<div class="container-fluid">
-			
+			<c:if test="${param.msg != null}">
+				 	<input type="hidden" id ="mensaje1" value="Usuario o Contraseña Incorrectos, intentalo nuevamente">
+					<script type="text/javascript">
+					console.log("NOM21: "+ location.search);
+					var mens = getParameterByName('msg');
+					console.log("parametro: "+mens);
+						var x= document.getElementById('mensaje1').value;
+						swal({
+							  title: x,
+							  icon: "success",
+							  timer: 5000,
+							  closeOnClickOutside: false,
+							  buttons: false,
+							});
+						setTimeout('window.location.href = "/home";', 2000);
+					</script>
+				</c:if>
 			<c:if test="${not empty msg}">
 				 	<input type="hidden" id ="mensaje" value="${msg}">
 					<script type="text/javascript">
@@ -453,9 +481,11 @@ $("#serialnumber").blur(function() {
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		console.log("dispositivos: "+ ${cantidadSensores});
 		if(${cantidadSensores}!=0){
 			startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr","mqttpwd",${topicos});
 		}
+		console.log("dispositivos alarma: "+ ${cantidadAlarma})
 		if(${cantidadAlarma}!=0)
 		startConnectAlarma("${hostalarma}","${puertoalarma}",${sslalarma},"${usuarioalarma}","${passalarma}",${topicosalarmas});
 	});

@@ -40,8 +40,7 @@
 					<li><a href="elements.html">Elements</a></li> -->
 				</ul>
 			</nav>
-
-<c:if test="${param.error != null}">
+				<c:if test="${param.error != null}">
 				 	<input type="hidden" id ="mensaje1" value="Usuario o Contraseña Incorrectos, intentalo nuevamente">
 					<script type="text/javascript">
 						var x= document.getElementById('mensaje1').value;
@@ -55,6 +54,7 @@
 						setTimeout('window.location.href = "/login";', 2000);
 					</script>
 				</c:if>
+			
 				<c:if test="${param.logout != null}">
 				 	<input type="hidden" id ="mensaje" value="La sesión ha sido cerrada correctamente.">
 					<script type="text/javascript">

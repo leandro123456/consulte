@@ -180,7 +180,7 @@
 <%-- esta ya estaba comentada 			       ${user.id} --%>
 			        <a class="dropdown-item" href="javascript:;" onclick="parentNode.submit();">
 			          <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  		Cambiar Perfil
+                  		Editar Usuario
                   	</a>
 				</form>
 <!--                 <a class="dropdown-item" href="#"> -->
@@ -209,12 +209,12 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Esta seguro de Salir?</h5>
+          <h5 class="modal-title" id="exampleModalLabel">¿Esta seguro de Salir?</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">está listo para finalizar su sesión actual?</div>
+        <div class="modal-body">¿Está listo para finalizar su sesión actual?</div>
         <div class="modal-footer">
           <form role="form" action="<c:url value="/logoutsession"/>" method="get" enctype="multipart/form-data">
           	<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>

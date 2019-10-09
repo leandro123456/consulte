@@ -69,7 +69,6 @@ public class HomeController {
         	for (Cookie coo: cookies){
             	System.out.println("cookies HOME: "+ coo.getName());
             	System.out.println("cookie valor HOME :"+ coo.getValue());
-                //Guardo la cookie dentro del usuario
                 UserDAO userdao = new UserDAO();
                 System.out.println("HOME CONTROLLER - busco el usuario: "+ authentication.getName());
                 User user = userdao.retrieveByMail(authentication.getName());
@@ -86,7 +85,6 @@ public class HomeController {
  
 		String nombre = request.getUserPrincipal().getName();
 		User user = userdao.retrieveByMail(nombre);
-		System.out.println("USUARIO CONSEGUIDO +++++++++++++++++++++"+user);
 		if(user!= null && !user.getCuenta_iniciada()) {
 			System.out.println("cuenta no iniciada validarla con el mensaje enviado por mail");
 			model.addAttribute("user", user.getFirstname());
@@ -113,14 +111,14 @@ public class HomeController {
 		System.out.println("cantidad de vistas a mostrar !!!!!: "+ vistas.size());
 		model.addAttribute("user", user);
 		model.addAttribute("vistas",vistas);
-        System.out.println("retorno la vista correctamente");
-        List<String> topicos=obtenerTopicosDeTodosLosEndpoints(user.getDeviceserialnumber());
+        List<String> topicos=obtenerTopicosDeTodosLosEndpoints(user.getDeviceserialnumber(),"noalarma");
+        System.out.println("Topicos comunes: "+topicos.size());
         model.addAttribute("cantidadSensores", topicos.size());
         model.addAttribute("topicos", topicos);
         System.out.println("cantidad de topicos a subscribirme local: "+ topicos.size());
         
         //para las alarmas
-        List<String> topicosdeAlarma=obtenerTopicosDeTodosLosEndpoints(user.getDeviceserialnumber());
+        List<String> topicosdeAlarma=obtenerTopicosDeTodosLosEndpoints(user.getDeviceserialnumber(),Device.ALARMA);
         System.out.println("cantidad de topicos a subscribirme alarma: "+ topicosdeAlarma.size());
         model.addAttribute("cantidadAlarma", topicosdeAlarma.size());
         model.addAttribute("hostalarma", "mqtt.coiaca.com");
@@ -200,44 +198,30 @@ public class HomeController {
 		}
 
 
-	private List<String> obtenerTopicosDeTodosLosEndpoints(List<String> devicesnumber) {
+	private List<String> obtenerTopicosDeTodosLosEndpoints(List<String> devicesnumber, String tipoSolicitado) {
 		List<String> topicos = new ArrayList<>(); 
 		for(String serial: devicesnumber){
 			System.out.println("llego a la carga de los topicos: "+serial);
 			Device device=devicedao.retrieveBySerialNumber(serial);
-			if(!device.getTipo().equals(Device.ALARMA)) {
-				if(device.getUsedefaultbrocker()){
-					topicos.add("'"+device.getDeviceconfiguration().get(0).getTopicescuchar()+"'");
-					System.out.println("VA A AGREGAR ESTE TOPICO LOCAL: "+ device.getDeviceconfiguration().get(0).getTopicescuchar());
-					//topicos.add("'"+device.getDeviceconfiguration().get(0).getTopicescucharremote()+"'");
-				}
-				else{
-					topicos.add("'"+device.getDeviceconfiguration().get(1).getTopicescuchar()+"'");
-					System.out.println("VA A AGREGAR TOPICO NO LOCAL: " +device.getDeviceconfiguration().get(1).getTopicescuchar());
-					//topicos.add("'"+device.getDeviceconfiguration().get(1).getTopicescucharremote()+"'");
-				}
-			}else {
-				if(device.getUsedefaultbrocker()){
-					topicosdeAlarma.add("'"+device.getDeviceconfiguration().get(0).getTopicescuchar()+"'");
-					//topicosdeAlarma.add("'"+device.getDeviceconfiguration().get(0).getTopicescucharremote()+"'");
-				}
-				else{
-					topicosdeAlarma.add("'"+device.getDeviceconfiguration().get(1).getTopicescuchar()+"'");
-					//topicosdeAlarma.add("'"+device.getDeviceconfiguration().get(1).getTopicescucharremote()+"'");
-				}
-//				for(int i=0; i<device.getParticiones();i++) {
-//					topicosdeAlarma.add("'"+device.getSerialnumber()+"/Partition"+(i+1)+"'");
-//				}
-//				int part= device.getZonas().size();
-//				for(int j=0; j<part;j++) {
-//					for(int t=0; t<device.getZonas().get(j+1);t++)
-//						topicosdeAlarma.add("'"+device.getSerialnumber()+"/Zone"+(t+1)+"'");
-//				}
-//				topicosdeAlarma.add("'"+device.getSerialnumber()+"/Fire"+"'");
-//				topicosdeAlarma.add("'"+device.getSerialnumber()+"/Trouble"+"'");
-//				topicosdeAlarma.add("'"+device.getSerialnumber()+"/keepAlive "+"'");
-				
+			if(tipoSolicitado.equals(Device.ALARMA) && device.getTipo().equals(Device.ALARMA)) {
+					if(device.getUsedefaultbrocker()){
+						topicos.add("'"+device.getDeviceconfiguration().get(0).getTopicescuchar()+"'");
+					}
+					else{
+						topicos.add("'"+device.getDeviceconfiguration().get(1).getTopicescuchar()+"'");
+					}
+
 			}
+			if(!tipoSolicitado.equals(Device.ALARMA) && !device.getTipo().equals(Device.ALARMA)) {
+					if(device.getUsedefaultbrocker()){
+						topicos.add("'"+device.getDeviceconfiguration().get(0).getTopicescuchar()+"'");
+						System.out.println("VA A AGREGAR ESTE TOPICO LOCAL: "+ device.getDeviceconfiguration().get(0).getTopicescuchar());
+					}
+					else{
+						topicos.add("'"+device.getDeviceconfiguration().get(1).getTopicescuchar()+"'");
+						System.out.println("VA A AGREGAR TOPICO NO LOCAL: " +device.getDeviceconfiguration().get(1).getTopicescuchar());
+					}
+				}
 		}
 		
 		return topicos;
