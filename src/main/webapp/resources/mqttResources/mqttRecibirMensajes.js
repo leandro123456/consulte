@@ -164,19 +164,60 @@
       
       
       function EnviarSonoffSimulatePushbutton(host,port,user,password,topico,swith,serial){
-    	  Connecttotal(host,port,user,password,topico,swith,serial,"simulatepushbutton");
+    	  
+    	//Nueva version
+    	  var urlsendInformation = $(location).attr('pathname') + "/sendCommand/"+serial+"/"+"simulatepushbutton"+"/"+swith;
+  			$.ajax({ url : urlsendInformation,
+  			contentType: "application/json",
+  			dataType: 'json',
+  			success: function(data){
+  				console.log(data.result);
+  			}});
+    	  
+    	  //
+    	//  Connecttotal(host,port,user,password,topico,swith,serial,"simulatepushbutton");
       }
       
       function EnviarSonoff(host,port,user,password,topico,swith,serial,accion){
+    	 
+    	  
+    	//Nueva version
+    	  var urlsendInformation = "";
+    		  
     	  var acs = document.getElementById(accion).firstChild.nodeValue;
     	  if (acs == "Apagado" || acs == "Switched_off"){
-    		  Connecttotal(host,port, user,password,topico,swith,serial,"enviaron");
+    		  urlsendInformation =$(location).attr('pathname') + "/sendCommand/"+serial+"/"+"enviaron"+"/"+swith;
     	  } else {
-    		  Connecttotal(host,port, user,password,topico,swith,serial,"enviaroff");
+    		  urlsendInformation =$(location).attr('pathname') + "/sendCommand/"+serial+"/"+"enviaroff"+"/"+swith;
+    	  }
+
+    	  $.ajax({ url : urlsendInformation,
+  			contentType: "application/json",
+  			dataType: 'json',
+  			success: function(data){
+  				console.log(data.result);
+  			}});
+    	  
+    	  
+    		//  Connecttotal(host,port, user,password,topico,swith,serial,"enviaron");
+    		//  Connecttotal(host,port, user,password,topico,swith,serial,"enviaroff");
     	  }
       }
 
       function Connecttotal(host,port,user,password,topico,swith,serial,message1){
+    	  
+    	  //Nueva version
+    	  var urlsendInformation = $(location).attr('pathname') + "/sendCommand/"+serial+"/"+message1+"/"+"none";
+  			$.ajax({ url : urlsendInformation,
+  			contentType: "application/json",
+  			dataType: 'json',
+  			success: function(data){
+  				console.log(data.result);
+  			}});
+    	  
+    	  //
+    	  
+    	  
           var username = user;
           var password = password;
           
