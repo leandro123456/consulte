@@ -49,7 +49,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-user" name="email" placeholder="Email" value='${user.email}'>
+                  <input type="email" class="form-control form-control-user" name="email" readonly placeholder="Email" value='${user.email}'>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">

@@ -1,468 +1,1110 @@
-<!-- esto es la alarma original -->
-<div class="col-lg-6 mb-4"> 
-	<div class="card shadow mb-4"> 
-		<div class="card-header py-3">	
-			<h6 class="m-0 font-weight-bold text-primary">Alarma CAMBIARALARMA</h6>
-		</div>
-		<div class="card-body">
 
-
-							<div class="col-xs-12">
-
-								<div id="lcd_container">
-									<div class="virtual_lcd">
-										<div id="first_line">&nbsp;</div>
-										<div id="second_line">&nbsp;</div>
-									</div>
-									<div class="status_icons">
-										<i class="dsc-icon icon-check" id="ready_iconCAMBIARALARMA" title="Lista"></i>
-										<i class="dsc-icon icon-armed" id="armed_iconCAMBIARALARMA" title="Armada"></i>
-										<i class="dsc-icon icon-trouble" id="trouble_iconCAMBIARALARMA"
-											title="Problema en el Sistema"></i> <i class="dsc-icon icon-ac"
-											id="ac_iconCAMBIARALARMA" title="Alarma Activada"></i>
-									</div>
-								</div>
-
-
-								<div class="col-xs-12" id="buttons_area">
-
-									<div id="left_buttons">
-<!-- 										<div class="keypad_button_row"> -->
-<!-- 											<button type="button" -->
-<!-- 												class="btn btn-outline-dark keypad_button keypad_button_small"> -->
-<!-- 												<i class="fas fa-chevron-left"></i> -->
-<!-- 											</button> -->
-<!-- 											<button type="button" -->
-<!-- 												class="btn btn-outline-dark keypad_button keypad_button_small"> -->
-<!-- 												<i class="fas fa-chevron-right"></i> -->
-<!-- 											</button> -->
-<!-- 										</div> -->
-<!-- 										<p></p> -->
-										<div class="centrarbonotesalarma">
-											<button type="button" id="btn_f"
-												class="btn btn-outline-dark keypad_button keypad_button_control" onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonfuego','CAMBIARALARMA','fuego')">
-												<i class="dsc-icon icon-flame" title="Fuego"></i>
-											</button>
-										</div>
-										<p></p>
-										<div class="centrarbonotesalarma">
-											<button type="button" id="btn_a"
-												class="btn btn-outline-dark keypad_button keypad_button_control" onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonpolicia','CAMBIARALARMA','policia')">
-												<i class="dsc-icon icon-alert" title="Alerta"></i>
-											</button>
-										</div>
-										<p></p>
-										<div class="centrarbonotesalarma">
-											<button type="button" id="btn_p"
-												class="btn btn-outline-dark keypad_button keypad_button_control" onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonmedico','CAMBIARALARMA','medico')">
-												<i class="dsc-icon icon-thief" title="Panico"></i>
-											</button>
-										</div>
-<!-- 										<p></p> -->
-<!-- 										<div> -->
-<!-- 											<i class="fas fa-lightbulb" id="backlight_icon" -->
-<!-- 												title="Backlight"></i> -->
-<!-- 										</div> -->
-									</div>
-
-									<div id="keypad_container">
-										<div class="keypad_button_row">
-											<button type="button" id="btn_1"
-												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','1')">1</button>
-											<button type="button" id="btn_2"
-												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','2')">2</button>
-											<button type="button" id="btn_3"
-												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','3')">3</button>
-										</div>
-										<div class="keypad_button_row">
-											<button type="button" id="btn_4"
-												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','4')">4</button>
-											<button type="button" id="btn_5"
-												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','5')">5</button>
-											<button type="button" id="btn_6"
-												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','6')">6</button>
-										</div>
-										<div class="keypad_button_row">
-											<button type="button" id="btn_7"
-												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','7')">7</button>
-											<button type="button" id="btn_8"
-												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','8')">8</button>
-											<button type="button" id="btn_9"
-												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','9')">9</button>
-										</div>
-										<div class="keypad_button_row">
-											<button type="button" id="btn_*"
-												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','*')">*</button>
-											<button type="button" id="btn_0"
-												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','0')">0</button>
-											<button type="button" id="btn_#"
-												class="btn btn-outline-dark keypad_button" onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','#')">#</button>
-										</div>
-									</div>
-
-									<div id="right_buttons">
-										<div class="centrarbonotesalarma">
-											<button type="button" id="btn_sCAMBIARALARMA"
-												class="btn btn-outline-dark keypad_button keypad_button_control" onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonarmadozona','CAMBIARALARMA','armarzona')">
-												<i class="dsc-icon icon-stay_away " title="Armar en Casa"></i>
-											</button>
-										</div>
-										<p></p>
-										<div class="centrarbonotesalarma">
-											<button type="button" id="btn_wCAMBIARALARMA"
-												class="btn btn-outline-dark keypad_button keypad_button_control" onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonarmadocompleto','CAMBIARALARMA','armartotal')">
-												<i class="dsc-icon icon-stay_empty" title="Armar Completa"></i>
-											</button>
-										</div>
-										<p></p>
-										<div class="centrarbonotesalarma">
-											<button type="button" id="btn_cCAMBIARALARMA"
-												class="btn btn-outline-dark keypad_button keypad_button_control" onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','*')">
-												<i class="dsc-icon icon-bell"></i>
-											</button>
-										</div>
-<!-- 										<p></p> -->
-<!-- 										<div class="centrarbonotesalarma"> -->
-<!-- 											<button type="button" -->
-<!-- 												class="btn btn-outline-dark keypad_button keypad_button_control"> -->
-<!-- 												<i class="dsc-icon icon-refresh"></i> -->
-<!-- 											</button> -->
-<!-- 										</div> -->
-<!-- 										<p></p> -->
-<!-- 										<div class="centrarbonotesalarma"> -->
-<!-- 											<button type="button" -->
-<!-- 												class="btn btn-outline-dark keypad_button keypad_button_control"> -->
-<!-- 												<i class="dsc-icon icon-exit"></i> -->
-<!-- 											</button> -->
-<!-- 										</div> -->
-									</div>
-								</div>
-							</div>
-
-<!-- 	<div class="col-xs-12"> -->
-<!-- 		<p> </p> -->
-<!--       <div class="row" id="regular_icons"> -->
-<!--         <div class="zone inline_container"> -->
-<!--           <i class="far fa-circle" id="fire_iconCAMBIARALARMA"></i> Fire -->
-<!--         </div> -->
-<!--         <div class="zone inline_container"> -->
-<!--           <i class="far fa-circle" id="memory_iconCAMBIARALARMA"></i> Memory -->
-<!--         </div> -->
-<!--         <div class="zone inline_container"> -->
-<!--           <i class="far fa-circle" id="bypass_iconCAMBIARALARMA"></i> Bypass -->
-<!--         </div> -->
-<!--         <div class="zone inline_container"> -->
-<!--           <i class="far fa-circle" id="program_iconCAMBIARALARMA"></i> Program -->
-<!--         </div> -->
-<!--         <div class="zone inline_container"> -->
-<!--           <i class="far fa-circle" id="pgm_iconCAMBIARALARMA"></i> PGM -->
-<!--         </div> -->
-<!--       </div> -->
-<!--       <div class="row" id="zones_list"> -->
-
-<!--       </div> -->
-
-<!--     </div> -->
-
-		</div>
-	</div>
-</div>
-
-
-
-<!-- aca finaliza la larma original -->
-
-<div class="card-body">
-	<div>
-		<span class="font-weight-bold">Estado del Switch</span> <span
-			id="spanestadoCAMBIARSONOFF" value="online"
-			class="float-right font-weight">online</span>
-	</div>
-
-	<h6 class="text-lefth font-weight-bold">Cambiar modo del Switch</h6>
-	<div class="float-lefth">
-		<button type="button" id="boton1PS3S1P120190323"
-			onclick="EnviarSonoff('mqtt.coiaca.com','1883','mqttusr','mqttpwd','PS3S1P120190323/swcmd','switchone','PS3S1P120190323','boton1PS3S1P120190323')"
-			class="btn btn-primary btn-sm btn-block">Apagado</button>
-	</div>
-	<input type="hidden" name="sonoffpower" id="sonoffpower1">
-	<p></p>
-	<button type="submit" class="btn btn-primary btn-sm btn-block"
-		onclick="EnviarSonoffSimulatePushbutton('mqtt.coiaca.com','1883','mqttusr','mqttpwd','PS3S1P120190323/swcmd','switchone','PS3S1P120190323')">Simulated
-		push button</button>
-	<p></p>
-	<h4 id="sonoffname" class="small font-weight-bold">
-		Timer<span id="span1PS3S1P120190323" class="float-right">0</span>
-	</h4>
-	<div class="progress mb-4">
-		<div class="progress-bar" id="sonofftimer1PS3S1P120190323"
-			role="progressbar" aria-valuemin="0" aria-valuemax="60"
-			style="width: 0%;"></div>
-	</div>
-	<p></p>
-	<b>
-
-		<h6 class="text-lefth font-weight-bold">Cambiar Funcion de
-			Encendido/Apagado automatico</h6>
-		<form role="form"
-			action="/home/settimerString/PS3S1P120190323"
-			method="get" enctype="multipart/form-data">
-			<button type="submit" class="btn btn-lg float-lefth"
-				style="background: transparent; border: transparent;">
-				<i class="fas fa-stopwatch" title="Set Timer String"></i>
-			</button>
-		</form>
-
-	</b>
-</div>
-
-
-
-
-
-
-
-
-
-////////////////////////////
 
 
 <div class="col-lg-6 mb-4">
+	\t
 	<div class="card shadow mb-4">
+		\t\t
 		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">Sonoff
-				PS3S1P120190323</h6>
+			\t\t\t
+			<h6 class="m-0 font-weight-bold text-primary">Alarma
+				CAMBIARALARMA</h6>
+			\t\t
 		</div>
+		\t\t
 		<div class="card-body">
+			\t\t\t\t\t\t\t
+			<div class="col-xs-12">
+				\t\t\t\t\t\t\t\t
+				<div id="lcd_container">
+					\t\t\t\t\t\t\t\t\t
+					<div class="virtual_lcd">
+						\t\t\t\t\t\t\t\t\t\t
+						<div class="row">
+							\t\t\t\t\t\t\t\t\t\t\t<span class="col-xs-4 alinedisplay">\t\t\t\t\t\t\t\t\t\t\t\t
+								<h6>
+									\t\t\t\t\t\t\t\t\t\t\t\t\t<small class="alinearspanstatus">Estado</small>\t\t\t\t\t\t\t\t\t\t\t\t
+								</h6>\t\t\t\t\t\t\t\t\t\t\t
+							</span> \t\t\t\t\t\t\t\t\t\t\t<span
+								class="col-xs-4 float-right alinezones">\t\t\t\t\t\t\t\t\t\t\t\t
+								<h6>
+									\t\t\t\t\t\t\t\t\t\t\t\t\t<small id="spanestadoCAMBIARALARMA">desconocido</small>\t\t\t\t\t\t\t\t\t\t\t\t
+								</h6>\t\t\t\t\t\t\t\t\t\t\t
+							</span>\t\t\t\t\t\t\t\t\t\t
+						</div>
+						\t\t\t\t\t\t\t\t\t\t
+						<div id="first_lineCAMBIARALARMA" class="row">
+							\t\t\t\t\t\t\t\t\t\t\t<span class="col-xs-4 alinedisplay"
+								style="padding-left: 1em; padding-right: 0.5em;">\t\t\t\t\t\t\t\t\t\t\t\t
+								<h6 class="alinearspanstatus">Particion:</h6>\t\t\t\t\t\t\t\t\t\t\t
+							</span>\t\t\t\t\t\t\t\t\t\t\t<span
+								class="col-xs-4 float-right alinezones">\t\t\t\t\t\t\t\t\t\t\t\t
+								<h6 id="particionesCAMBIARALARMA"></h6>\t\t\t\t\t\t\t\t\t\t\t
+							</span>\t\t\t\t\t\t\t\t\t\t
+						</div>
+						\t\t\t\t\t\t\t\t\t\t
+						<div id="second_lineCAMBIARALARMA" class="row"
+							style="padding-left: 1em; padding-right: 0.5em;">
+							\t\t\t\t\t\t\t\t\t\t\t<span class="col-xs-4 alinedisplay"
+								style="padding-left: 1em; padding-right: 0.5em;">\t\t\t\t\t\t\t\t\t\t\t\t
+								<h6 class="alinearspanstatus"></h6>\t\t\t\t\t\t\t\t\t\t\t
+							</span>\t\t\t\t\t\t\t\t\t\t\t<span
+								class="col-xs-4 float-right alinezones"
+								style="padding-left: 1em; padding-right: 0.5em;">\t\t\t\t\t\t\t\t\t\t\t\t
+								<h6 id="segundalineaCAMBIARALARMA"></h6>\t\t\t\t\t\t\t\t\t\t\t
+							</span>\t\t\t\t\t\t\t\t\t\t
+						</div>
+						\t\t\t\t\t\t\t\t\t
+					</div>
+					\t\t\t\t\t\t\t\t\t
+					<div class="status_icons">
+						\t\t\t\t\t\t\t\t\t\t<i class="dsc-icon icon-check"
+							id="ready_iconCAMBIARALARMA" title="Lista"></i>\t\t\t\t\t\t\t\t\t\t<i
+							class="dsc-icon icon-armed" id="armed_iconCAMBIARALARMA"
+							title="Armada"></i>\t\t\t\t\t\t\t\t\t\t<i
+							class="dsc-icon icon-trouble" id="trouble_iconCAMBIARALARMA"
+							title="Pendiente"></i> \t\t\t\t\t\t\t\t\t\t<i
+							class="dsc-icon icon-ac" id="ac_iconCAMBIARALARMA"
+							title="Desarmada"></i>\t\t\t\t\t\t\t\t\t
+					</div>
+					\t\t\t\t\t\t\t\t
+				</div>
+				\t\t\t\t\t\t\t\t
+				<div class="row" id="buttons_area">
+					\t\t\t\t\t\t\t\t\t
+					<div class="bordecolumna" id="columnaizquierdaCAMBIARALARMA">
+						\t\t\t\t\t\t\t\t\t
+						<p></p>
+						\t\t\t\t\t\t\t\t\t\t
+						<div class="centrarbonotesalarma">
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn_f"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button keypad_button_control"
+								onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-fuego')">
+								\t\t\t\t\t\t\t\t\t\t\t\t<i class="dsc-icon icon-flame"
+									title="Fuego"></i>\t\t\t\t\t\t\t\t\t\t\t
+							</button>
+							\t\t\t\t\t\t\t\t\t\t
+						</div>
+						\t\t\t\t\t\t\t\t\t\t
+						<p></p>
+						\t\t\t\t\t\t\t\t\t\t
+						<div class="centrarbonotesalarma">
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn_a"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button keypad_button_control"
+								onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-policia')">
+								\t\t\t\t\t\t\t\t\t\t\t\t<i class="dsc-icon icon-alert"
+									title="Alerta"></i>\t\t\t\t\t\t\t\t\t\t\t
+							</button>
+							\t\t\t\t\t\t\t\t\t\t
+						</div>
+						\t\t\t\t\t\t\t\t\t\t
+						<p></p>
+						\t\t\t\t\t\t\t\t\t\t
+						<div class="centrarbonotesalarma">
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn_p"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button keypad_button_control"
+								onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-medico')">
+								\t\t\t\t\t\t\t\t\t\t\t\t<i class="dsc-icon icon-thief"
+									title="Panico"></i>\t\t\t\t\t\t\t\t\t\t\t
+							</button>
+							\t\t\t\t\t\t\t\t\t\t
+						</div>
+						\t\t\t\t\t\t\t\t\t
+					</div>
+					\t\t\t\t\t\t\t\t\t
+					<div class="bordecolumna" id="columnaderechaCAMBIARALARMA">
+						\t\t\t\t\t\t\t\t\t
+						<p></p>
+						\t\t\t\t\t\t\t\t\t\t
+						<div class="centrarbonotesalarma">
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn_sCAMBIARALARMA"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button keypad_button_control"
+								onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-armarzona')">
+								\t\t\t\t\t\t\t\t\t\t\t\t<i class="dsc-icon icon-stay_away "
+									title="Armar en Casa"></i>\t\t\t\t\t\t\t\t\t\t\t
+							</button>
+							\t\t\t\t\t\t\t\t\t\t
+						</div>
+						\t\t\t\t\t\t\t\t\t\t
+						<p></p>
+						\t\t\t\t\t\t\t\t\t\t
+						<div class="centrarbonotesalarma">
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn_wCAMBIARALARMA"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button keypad_button_control"
+								onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-armartotal')">
+								\t\t\t\t\t\t\t\t\t\t\t\t<i class="dsc-icon icon-stay_empty"
+									title="Armar Completa"></i>\t\t\t\t\t\t\t\t\t\t\t
+							</button>
+							\t\t\t\t\t\t\t\t\t\t
+						</div>
+						\t\t\t\t\t\t\t\t\t\t
+						<p></p>
+						\t\t\t\t\t\t\t\t\t\t
+						<div class="centrarbonotesalarma">
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn_cCAMBIARALARMA"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button keypad_button_control"
+								onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-campana')">
+								\t\t\t\t\t\t\t\t\t\t\t\t<i class="dsc-icon icon-bell"></i>\t\t\t\t\t\t\t\t\t\t\t
+							</button>
+							\t\t\t\t\t\t\t\t\t\t
+						</div>
+						\t\t\t\t\t\t\t\t\t
+					</div>
+					\t\t\t\t\t\t\t\t
+					<p></p>
+					\t\t \t\t\t\t\t\t\t\t\t
+					<div class="bordeteclado"
+						id="tecladoCAMBIARALARMA">
+						\t\t\t\t\t\t\t\t\t\t
+						<div class="keypad_button_row">
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn_1"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button"
+								onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-1')">1</button>
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn_2"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button"
+								onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-2')">2</button>
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn_3"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button"
+								onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-3')">3</button>
+							\t\t\t\t\t\t\t\t\t\t
+						</div>
+						\t\t\t\t\t\t\t\t\t\t
+						<div class="keypad_button_row">
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn_4"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button"
+								onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-4')">4</button>
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn_5"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button"
+								onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-5')">5</button>
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn_6"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button"
+								onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-6')">6</button>
+							\t\t\t\t\t\t\t\t\t\t
+						</div>
+						\t\t\t\t\t\t\t\t\t\t
+						<div class="keypad_button_row">
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn_7"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button"
+								onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-7')">7</button>
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn_8"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button"
+								onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-8')">8</button>
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn_9"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button"
+								onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-9')">9</button>
+							\t\t\t\t\t\t\t\t\t\t
+						</div>
+						\t\t\t\t\t\t\t\t\t\t
+						<div class="keypad_button_row">
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn_*"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button"
+								onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-*')">*</button>
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn_0"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button"
+								onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-0')">0</button>
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn_#"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button"
+								onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','particion','CAMBIARALARMA','alarm-#')">#</button>
+							\t\t\t\t\t\t\t\t\t\t
+						</div>
+						\t\t\t\t\t\t\t\t\t
+					</div>
+					\t\t\t\t\t\t\t\t
+				</div>
+				\t\t\t\t\t\t\t\t
+				<div class="row rowzonas" id="zones_listCAMBIARALARMA">
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_1_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9> Zone 01</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_2_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9> Zone 02 </h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_3_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9> Zone 03 </h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_4_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9> Zone 04 </h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_5_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9> Zone 05 </h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_6_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 06</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_7_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 07</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_8_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 08</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_9_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 09</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_10_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 10</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_11_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 11</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_12_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 12</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_13_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 13</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_14_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 14</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_15_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 15</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_16_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 16</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_17_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 17</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_18_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 18</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_19_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 19</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_20_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 20</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_21_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 21</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_22_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 22</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_23_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 23</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_24_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 24</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_25_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 25</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_26_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 26</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_27_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 27</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_28_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 28</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_29_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 29</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_30_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 30</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_31_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 31</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_32_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 32</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_33_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 33</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_34_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 34</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_35_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 35</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_36_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 36</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_37_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 37</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_38_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 38</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_39_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 39</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_40_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 40</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_41_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 41</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_42_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 42</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_43_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 43</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_44_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 44</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_45_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 45</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_46_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 46</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_47_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 47</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_48_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 48</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_49_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 49</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_50_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 50</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_51_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 51</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_52_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 52</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_53_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 53</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_54_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 54</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_55_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 55</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_56_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 56</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_57_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 57</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_58_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 58</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_59_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 59</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_60_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 60</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_61_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 61</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_62_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 62</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_63_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 63</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_64_CAMBIARALARMA">
+						<i class="far fa-circle"></i>
+						<h9>Zone 64</h9>
+					</div>
+					\t\t\t\t\t\t\t\t
+				</div>
+				\t\t\t\t\t\t\t
+			</div>
+			\t\t\t\t\t\t
+		</div>
+		\t\t\t\t\t
+	</div>
+	\t\t\t\t
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- esto es la alarma original -->
+		<div class="col-lg-6 mb-4">
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+					<h6 class="m-0 font-weight-bold text-primary">Alarma
+						CAMBIARALARMA</h6>
+				</div>
+				<div class="card-body">
+
+
+					<div class="col-xs-12">
+
+						<div id="lcd_container">
+							<div class="virtual_lcd">
+								<div id="first_line">&nbsp;</div>
+								<div id="second_line">&nbsp;</div>
+							</div>
+							<div class="status_icons">
+								<i class="dsc-icon icon-check" id="ready_iconCAMBIARALARMA"
+									title="Lista"></i> <i class="dsc-icon icon-armed"
+									id="armed_iconCAMBIARALARMA" title="Armada"></i> <i
+									class="dsc-icon icon-trouble" id="trouble_iconCAMBIARALARMA"
+									title="Problema en el Sistema"></i> <i class="dsc-icon icon-ac"
+									id="ac_iconCAMBIARALARMA" title="Alarma Activada"></i>
+							</div>
+						</div>
+
+
+						<div class="col-xs-12" id="buttons_area">
+
+							<div id="left_buttons">
+								<!-- 										<div class="keypad_button_row"> -->
+								<!-- 											<button type="button" -->
+								<!-- 												class="btn btn-outline-dark keypad_button keypad_button_small"> -->
+								<!-- 												<i class="fas fa-chevron-left"></i> -->
+								<!-- 											</button> -->
+								<!-- 											<button type="button" -->
+								<!-- 												class="btn btn-outline-dark keypad_button keypad_button_small"> -->
+								<!-- 												<i class="fas fa-chevron-right"></i> -->
+								<!-- 											</button> -->
+								<!-- 										</div> -->
+								<!-- 										<p></p> -->
+								<div class="centrarbonotesalarma">
+									<button type="button" id="btn_f"
+										class="btn btn-outline-dark keypad_button keypad_button_control"
+										onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonfuego','CAMBIARALARMA','fuego')">
+										<i class="dsc-icon icon-flame" title="Fuego"></i>
+									</button>
+								</div>
+								<p></p>
+								<div class="centrarbonotesalarma">
+									<button type="button" id="btn_a"
+										class="btn btn-outline-dark keypad_button keypad_button_control"
+										onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonpolicia','CAMBIARALARMA','policia')">
+										<i class="dsc-icon icon-alert" title="Alerta"></i>
+									</button>
+								</div>
+								<p></p>
+								<div class="centrarbonotesalarma">
+									<button type="button" id="btn_p"
+										class="btn btn-outline-dark keypad_button keypad_button_control"
+										onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonmedico','CAMBIARALARMA','medico')">
+										<i class="dsc-icon icon-thief" title="Panico"></i>
+									</button>
+								</div>
+								<!-- 										<p></p> -->
+								<!-- 										<div> -->
+								<!-- 											<i class="fas fa-lightbulb" id="backlight_icon" -->
+								<!-- 												title="Backlight"></i> -->
+								<!-- 										</div> -->
+							</div>
+
+							<div id="keypad_container">
+								<div class="keypad_button_row">
+									<button type="button" id="btn_1"
+										class="btn btn-outline-dark keypad_button"
+										onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','1')">1</button>
+									<button type="button" id="btn_2"
+										class="btn btn-outline-dark keypad_button"
+										onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','2')">2</button>
+									<button type="button" id="btn_3"
+										class="btn btn-outline-dark keypad_button"
+										onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','3')">3</button>
+								</div>
+								<div class="keypad_button_row">
+									<button type="button" id="btn_4"
+										class="btn btn-outline-dark keypad_button"
+										onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','4')">4</button>
+									<button type="button" id="btn_5"
+										class="btn btn-outline-dark keypad_button"
+										onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','5')">5</button>
+									<button type="button" id="btn_6"
+										class="btn btn-outline-dark keypad_button"
+										onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','6')">6</button>
+								</div>
+								<div class="keypad_button_row">
+									<button type="button" id="btn_7"
+										class="btn btn-outline-dark keypad_button"
+										onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','7')">7</button>
+									<button type="button" id="btn_8"
+										class="btn btn-outline-dark keypad_button"
+										onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','8')">8</button>
+									<button type="button" id="btn_9"
+										class="btn btn-outline-dark keypad_button"
+										onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','9')">9</button>
+								</div>
+								<div class="keypad_button_row">
+									<button type="button" id="btn_*"
+										class="btn btn-outline-dark keypad_button"
+										onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','*')">*</button>
+									<button type="button" id="btn_0"
+										class="btn btn-outline-dark keypad_button"
+										onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','0')">0</button>
+									<button type="button" id="btn_#"
+										class="btn btn-outline-dark keypad_button"
+										onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','#')">#</button>
+								</div>
+							</div>
+
+							<div id="right_buttons">
+								<div class="centrarbonotesalarma">
+									<button type="button" id="btn_sCAMBIARALARMA"
+										class="btn btn-outline-dark keypad_button keypad_button_control"
+										onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonarmadozona','CAMBIARALARMA','armarzona')">
+										<i class="dsc-icon icon-stay_away " title="Armar en Casa"></i>
+									</button>
+								</div>
+								<p></p>
+								<div class="centrarbonotesalarma">
+									<button type="button" id="btn_wCAMBIARALARMA"
+										class="btn btn-outline-dark keypad_button keypad_button_control"
+										onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonarmadocompleto','CAMBIARALARMA','armartotal')">
+										<i class="dsc-icon icon-stay_empty" title="Armar Completa"></i>
+									</button>
+								</div>
+								<p></p>
+								<div class="centrarbonotesalarma">
+									<button type="button" id="btn_cCAMBIARALARMA"
+										class="btn btn-outline-dark keypad_button keypad_button_control"
+										onclick="Connecttotal('HOSTALARMA','PORTALARMA','USERALARMA','PASSALARMA','TOPICOALARMA','botonteclado','CAMBIARALARMA','*')">
+										<i class="dsc-icon icon-bell"></i>
+									</button>
+								</div>
+								<!-- 										<p></p> -->
+								<!-- 										<div class="centrarbonotesalarma"> -->
+								<!-- 											<button type="button" -->
+								<!-- 												class="btn btn-outline-dark keypad_button keypad_button_control"> -->
+								<!-- 												<i class="dsc-icon icon-refresh"></i> -->
+								<!-- 											</button> -->
+								<!-- 										</div> -->
+								<!-- 										<p></p> -->
+								<!-- 										<div class="centrarbonotesalarma"> -->
+								<!-- 											<button type="button" -->
+								<!-- 												class="btn btn-outline-dark keypad_button keypad_button_control"> -->
+								<!-- 												<i class="dsc-icon icon-exit"></i> -->
+								<!-- 											</button> -->
+								<!-- 										</div> -->
+							</div>
+						</div>
+					</div>
+
+					<!-- 	<div class="col-xs-12"> -->
+					<!-- 		<p> </p> -->
+					<!--       <div class="row" id="regular_icons"> -->
+					<!--         <div class="zone inline_container"> -->
+					<!--           <i class="far fa-circle" id="fire_iconCAMBIARALARMA"></i> Fire -->
+					<!--         </div> -->
+					<!--         <div class="zone inline_container"> -->
+					<!--           <i class="far fa-circle" id="memory_iconCAMBIARALARMA"></i> Memory -->
+					<!--         </div> -->
+					<!--         <div class="zone inline_container"> -->
+					<!--           <i class="far fa-circle" id="bypass_iconCAMBIARALARMA"></i> Bypass -->
+					<!--         </div> -->
+					<!--         <div class="zone inline_container"> -->
+					<!--           <i class="far fa-circle" id="program_iconCAMBIARALARMA"></i> Program -->
+					<!--         </div> -->
+					<!--         <div class="zone inline_container"> -->
+					<!--           <i class="far fa-circle" id="pgm_iconCAMBIARALARMA"></i> PGM -->
+					<!--         </div> -->
+					<!--       </div> -->
+					<!--       <div class="row" id="zones_list"> -->
+
+					<!--       </div> -->
+
+					<!--     </div> -->
+
+				</div>
+			</div>
+		</div>
+
+
+
+		<!-- aca finaliza la larma original -->
+
+		<div class="card-body">
+			<div>
+				<span class="font-weight-bold">Estado del Switch</span> <span
+					id="spanestadoCAMBIARSONOFF" value="online"
+					class="float-right font-weight">online</span>
+			</div>
+
+			<h6 class="text-lefth font-weight-bold">Cambiar modo del Switch</h6>
+			<div class="float-lefth">
+				<button type="button" id="boton1PS3S1P120190323"
+					onclick="EnviarSonoff('mqtt.coiaca.com','1883','mqttusr','mqttpwd','PS3S1P120190323/swcmd','switchone','PS3S1P120190323','boton1PS3S1P120190323')"
+					class="btn btn-primary btn-sm btn-block">Apagado</button>
+			</div>
+			<input type="hidden" name="sonoffpower" id="sonoffpower1">
+			<p></p>
+			<button type="submit" class="btn btn-primary btn-sm btn-block"
+				onclick="EnviarSonoffSimulatePushbutton('mqtt.coiaca.com','1883','mqttusr','mqttpwd','PS3S1P120190323/swcmd','switchone','PS3S1P120190323')">Simulated
+				push button</button>
+			<p></p>
 			<h4 id="sonoffname" class="small font-weight-bold">
-				Timer<span class="float-right">0</span>
+				Timer<span id="span1PS3S1P120190323" class="float-right">0</span>
 			</h4>
 			<div class="progress mb-4">
-				<div class="progress-bar" id="sonofftimer" role="progressbar"
-					aria-valuemin="0" aria-valuemax="60" style="width: 50%;"></div>
+				<div class="progress-bar" id="sonofftimer1PS3S1P120190323"
+					role="progressbar" aria-valuemin="0" aria-valuemax="60"
+					style="width: 0%;"></div>
+			</div>
+			<p></p>
+			<b>
+
+				<h6 class="text-lefth font-weight-bold">Cambiar Funcion de
+					Encendido/Apagado automatico</h6>
+				<form role="form" action="/home/settimerString/PS3S1P120190323"
+					method="get" enctype="multipart/form-data">
+					<button type="submit" class="btn btn-lg float-lefth"
+						style="background: transparent; border: transparent;">
+						<i class="fas fa-stopwatch" title="Set Timer String"></i>
+					</button>
+				</form>
+
+			</b>
+		</div>
+
+
+
+
+
+
+
+
+
+		////////////////////////////
+
+
+		<div class="col-lg-6 mb-4">
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+					<h6 class="m-0 font-weight-bold text-primary">Sonoff
+						PS3S1P120190323</h6>
+				</div>
+				<div class="card-body">
+					<h4 id="sonoffname" class="small font-weight-bold">
+						Timer<span class="float-right">0</span>
+					</h4>
+					<div class="progress mb-4">
+						<div class="progress-bar" id="sonofftimer" role="progressbar"
+							aria-valuemin="0" aria-valuemax="60" style="width: 50%;"></div>
+					</div>
+					<p></p>
+					<b> Status Power
+						<div class="float-right">
+							<input id="sonoffpowerPS3S1P120190323" type="checkbox"
+								data-toggle="toggle" data-style="slow"
+								onchange="EnviarSonoff('mqtt.coiaca.com','8080','mqttusr','mqttpwd','RConfig/PS3S1P120190323','switchone','PS3S1P120190323')">
+						</div>
+					</b> <input type="hidden" name="sonoffpower" id="sonoffpower1" />
+					<p></p>
+					<button type="submit" class="btn btn-primary btn-sm float-left"
+						onclick="EnviarSonoffSimulatePushbutton('mqtt.coiaca.com','8080','mqttusr','mqttpwd','RConfig/PS3S1P120190323','switchone','PS3S1P120190323')">Simulated
+						push button</button>
+					<form role="form" action="/home/settimerString/PS3S1P120190323"
+						method="get" enctype="multipart/form-data">
+						<button type="submit" class="btn btn-lg float-right"
+							style="background: transparent; border: transparent;">
+							<i class="fas fa-stopwatch" title="Set Timer String"></i>
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+
+		<div class=\"card-body\">
+			<form role=\ "form\" action=\
+				"/home/pushbutton/CAMBIARSONOFF\" method=\ "post\" id=\
+				"pushCAMBIARSONOFF\" enctype=\"multipart/form-data\">
+				<h4 id=\ "sonoffname\" class=\"smallfont-weight-bold\">
+					Timer<span class=\"float-right\">0</span>
+				</h4>
+				<div class=\"progressmb-4\">
+					<div class=\ "progress-bar\" id=\ "sonofftimer\" role=\
+						"progressbar\"	aria-valuemin=\ "0\" aria-valuemax=\ "60\" style="""width: 50%;\">
+					</div>
+				</div>
+				<p></p>
+				<b> Status Power
+					<div class=\"float-right\">
+						<input id=\ "sonoffpowerCAMBIARSONOFF\" type=\
+							"checkbox\"	data-toggle=\ "toggle\" data-style=\
+							"slow\" onclick=\"EnviarSonoff('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARSONOFF')\">
+					</div>
+				</b><input type=\ "hidden\" name=\ "sonoffpower\" id=\ "sonoffpower1\" />
+				<p></p>
+			</form>
+			<form role=\ "form\" action=\
+				"/home/settimerString/CAMBIARSONOFF\" method=\ "get\" enctype=\"multipart/form-data\">
+				<button type=\ "submit\" class=\"btnbtn-primarybtn-sm\">
+					<i class=\ "fal fa-stopwatch\" title=\ "Set TimerString\"></i>
+				</button>
+			</form>
+
+		</div>
+
+
+
+		<div class=\"card-body\">
+			<h4 id=\ "sonoffname\" class=\ "smallfont-weight-bold\">
+				Timer<span class=\"float-right\">0</span>
+			</h4>
+			<div class=\ "progressmb-4\">
+				<div class=\ "progress-bar\" id=\ "sonofftimer\" role=\
+					"progressbar\"	aria-valuemin=\ "0\" aria-valuemax=\ "60\" style="""width: 50%;\">
+				</div>
 			</div>
 			<p></p>
 			<b> Status Power
-				<div class="float-right">
-					<input id="sonoffpowerPS3S1P120190323" type="checkbox"
-						data-toggle="toggle" data-style="slow"
-						onchange="EnviarSonoff('mqtt.coiaca.com','8080','mqttusr','mqttpwd','RConfig/PS3S1P120190323','switchone','PS3S1P120190323')">
+				<div class=\"float-right\">
+					<input id=\ "sonoffpowerCAMBIARSONOFF\" type=\
+						"checkbox\"	data-toggle=\ "toggle\" data-style=\
+						"slow\" onchange=\"EnviarSonoff('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARSONOFF')\">
 				</div>
-			</b>
-			<input type="hidden" name="sonoffpower" id="sonoffpower1" />
+			</b><input type=\ "hidden\" name=\ "sonoffpower\" id=\ "sonoffpower1\" />
 			<p></p>
-			<button type="submit" class="btn btn-primary btn-sm float-left"
-				onclick="EnviarSonoffSimulatePushbutton('mqtt.coiaca.com','8080','mqttusr','mqttpwd','RConfig/PS3S1P120190323','switchone','PS3S1P120190323')">Simulated
+			<button type=\ "submit\" class=\ "btn btn-primary btn-sm
+				float-left\" onclick=\"EnviarSonoffSimulatePushbutton('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARSONOFF')\">Simulated
 				push button</button>
-			<form role="form"
-				action="/home/settimerString/PS3S1P120190323"
-				method="get" enctype="multipart/form-data">
-				<button type="submit" class="btn btn-lg float-right"
-					style="background: transparent; border: transparent;">
-					<i class="fas fa-stopwatch" title="Set Timer String"></i>
+			<form role=\ "form\" action=\
+				"/home/settimerString/CAMBIARSONOFF\" method=\ "get\" enctype=\"multipart/form-data\">
+				<button type=\ "submit\" class=\ "btn btn-lg float-right\" style=""
+					"background: transparent;  border:transparent;\">
+					<i class=\ "fas fa-stopwatch\"  title=\ "Set TimerString\"></i>
 				</button>
 			</form>
 		</div>
-	</div>
-</div>
 
 
 
-<div class=\"card-body\">
-	<form role=\ "form\" action=\
-		"/home/pushbutton/CAMBIARSONOFF\" method=\ "post\" id=\
-		"pushCAMBIARSONOFF\" enctype=\"multipart/form-data\">
-		<h4 id=\ "sonoffname\" class=\"smallfont-weight-bold\">
-			Timer<span class=\"float-right\">0</span>
-		</h4>
-		<div class=\"progressmb-4\">
-			<div class=\ "progress-bar\" id=\ "sonofftimer\" role=\
-				"progressbar\"	aria-valuemin=\ "0\" aria-valuemax=\ "60\" style="""width: 50%;\">
+
+		<?xml version="1.0" encoding="UTF-8"?>
+		<S:Envelope xmlns:S="http://www.w3.org/2003/05/soap-envelope">
+			<S:Header>
+				<wsa:Action xmlns:wsa="http://www.w3.org/2005/08/addressing">http://gsma.com/ES3/PlatformManagementCallBack/ES3-DeleteISDP</wsa:Action>
+				<wsa:MessageID xmlns:wsa="http://www.w3.org/2005/08/addressing">gemalto-smdp/a30bac57-e3cd-423c-b1a3-adada8fa7961?MessageDate=2019-01-25T23:16:23Z</wsa:MessageID>
+				<wsa:RelatesTo xmlns:wsa="http://www.w3.org/2005/08/addressing">http://190.247.133.76:8080/DPvdfpoc</wsa:RelatesTo>
+				<wsa:From xmlns:wsa="http://www.w3.org/2005/08/addressing">
+					<wsa:Address>https://dctwebvlp63-vip.gemalto.com:17903/ES3/ES3SmSrService</wsa:Address>
+				</wsa:From>
+				<wsa:To xmlns:wsa="http://www.w3.org/2005/08/addressing">http://190.247.133.76:8080/DPvdfpoc?EntityId=1.3.6.1.4.1.50201</wsa:To>
+			</S:Header>
+			<S:Body>
+				<rps3:ES3-DeleteISDPResponse
+					xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+					xmlns:rps3="http://namespaces.gsma.org/esim-messaging/3"
+					xmlns:wsa="http://www.w3.org/2005/08/addressing">
+					<rps3:ProcessingStart>2019-01-25T23:16:19Z</rps3:ProcessingStart>
+					<rps3:ProcessingEnd>2019-01-25T23:16:23Z</rps3:ProcessingEnd>
+					<rps3:FunctionExecutionStatus>
+						<rps3:Status>FAILED</rps3:Status>
+						<rps3:StatusCodeData>
+							<rps3:Subject>8.4</rps3:Subject>
+							<rps3:Reason>5.1</rps3:Reason>
+							<rps3:SubjectIdentifier>ISD-R=A0000005591010FFFFFFFF8900000100</rps3:SubjectIdentifier>
+							<rps3:Message>'0400':DeleteISDP, The use case was failed at 'profile disabling' step. Detail: Delivery Status failed. DS code was [709]</rps3:Message>
+						</rps3:StatusCodeData>
+					</rps3:FunctionExecutionStatus>
+				</rps3:ES3-DeleteISDPResponse>
+			</S:Body>
+		</S:Envelope>
+
+
+
+		<?xml version="1.0" encoding="UTF-8"?>
+		<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+			<soap:Header>
+				<ns2:From xmlns="http://namespaces.gsma.org/esim-messaging/3"
+					xmlns:ns2="http://www.w3.org/2005/08/addressing"
+					xmlns:ns3="http://www.w3.org/2000/09/xmldsig#">
+					<ns2:Address>http://190.247.133.76:8080/DPvdfpoc?EntityId=1.3.6.1.4.1.50201</ns2:Address>
+				</ns2:From>
+				<ns2:To xmlns="http://namespaces.gsma.org/esim-messaging/3"
+					xmlns:ns2="http://www.w3.org/2005/08/addressing"
+					xmlns:ns3="http://www.w3.org/2000/09/xmldsig#">https://dctwebvlp63-vip.gemalto.com:17903/ES3/ES3SmSrService</ns2:To>
+				<ns2:MessageID xmlns="http://namespaces.gsma.org/esim-messaging/3"
+					xmlns:ns2="http://www.w3.org/2005/08/addressing"
+					xmlns:ns3="http://www.w3.org/2000/09/xmldsig#">http://190.247.133.76:8080/DPvdfpoc?MessageDate=2019-01-25T23:16:18Z</ns2:MessageID>
+				<ns2:Action xmlns="http://namespaces.gsma.org/esim-messaging/3"
+					xmlns:ns2="http://www.w3.org/2005/08/addressing"
+					xmlns:ns3="http://www.w3.org/2000/09/xmldsig#">http://gsma.com/ES3/PlatformManagement/ES3-DeleteISDP</ns2:Action>
+				<ns2:ReplyTo xmlns="http://namespaces.gsma.org/esim-messaging/3"
+					xmlns:ns2="http://www.w3.org/2005/08/addressing"
+					xmlns:ns3="http://www.w3.org/2000/09/xmldsig#">
+					<ns2:Address>http://190.247.133.76:8080/DPvdfpoc/es3</ns2:Address>
+				</ns2:ReplyTo>
+				<wsse:Security
+					xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+					<wsse:UsernameToken
+						xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+						wsu:Id="921105694">
+						<wsse:Username>es3caller@VALIDDPLAB</wsse:Username>
+						<wsse:Password
+							Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">awV70BQK645xgEt32okl518rZ</wsse:Password>
+						<wsse:Nonce
+							EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">GTgjQA==</wsse:Nonce>
+						<wsu:Created>2019-01-25T23:16:25Z</wsu:Created>
+					</wsse:UsernameToken>
+					<wsu:Timestamp
+						xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+						<wsu:Created>2019-01-25T23:16:25Z</wsu:Created>
+						<wsu:Expires>2019-01-25T23:21:25Z</wsu:Expires>
+					</wsu:Timestamp>
+				</wsse:Security>
+			</soap:Header>
+			<soap:Body>
+				<ES3-DeleteISDPRequest
+					xmlns="http://namespaces.gsma.org/esim-messaging/3"
+					xmlns:ns2="http://www.w3.org/2005/08/addressing"
+					xmlns:ns3="http://www.w3.org/2000/09/xmldsig#">
+				<FunctionCallIdentifier>EAA7D73E89DD54D06FEBC0BB9180C94C</FunctionCallIdentifier>
+				<ValidityPeriod>10000</ValidityPeriod> <Eid>89033023312150000000000308808531</Eid>
+				<Iccid>8942306000042528709</Iccid></ES3-DeleteISDPRequest>
+			</soap:Body>
+		</soap:Envelope>
+
+
+
+
+		<div class=\"card-body\">
+			<b> Estado del Switch 1
+				<div class=\"float-right\">
+					<button type=\ "button\" id=\ "boton1CAMBIARSONOFF\" onclick=\
+						"EnviarSonoff('HOSTSONOFF','PORTSONOFF','USERSONOFF','PASSSONOFF','TOPICSONOFF','switchone','CAMBIARSONOFF','boton1CAMBIARSONOFF')\" class=\"btnbtn-primary\">Apagado</button>
+				</div>
+			</b><input type=\ "hidden\" name=\ "sonoffpower\" id=\ "sonoffpower1\" />
+			<p></p>
+			<button type=\ "submit\" class=\ "btn btn-primary btn-sm
+				float-left\" onclick=\"EnviarSonoffSimulatePushbutton('HOSTSONOFF','PORTSONOFF','USERSONOFF','PASSSONOFF','TOPICSONOFF','switchone','CAMBIARSONOFF')\">Simulated
+				push button</button>
+			<p></p>
+
+			<h4 id=\ "sonoffname\" class=\"smallfont-weight-bold\">
+				Timer<span id=\ "span1CAMBIARSONOFF\" class=\"float-right\">0</span>
+			</h4>
+			<div class=\"progressmb-4\">
+				<div class=\ "progress-bar\" id=\
+					"sonofftimer1CAMBIARSONOFF\" role=\ "progressbar\"	aria-valuemin=\
+					"0\" aria-valuemax=\ "60\" style="""width: 50%;\"></div>
 			</div>
-		</div>
-		<p></p>
-		<b> Status Power
-			<div class=\"float-right\">
-				<input id=\ "sonoffpowerCAMBIARSONOFF\" type=\
-					"checkbox\"	data-toggle=\ "toggle\" data-style=\ "slow\" onclick=\"EnviarSonoff('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARSONOFF')\">
+			<p></p>
+			<form role=\ "form\" action=\
+				"/home/settimerString/oneCAMBIARSONOFF\" method=\ "get\" enctype=\"multipart/form-data\">
+				<button type=\ "submit\" class=\ "btn btn-lg float-right\" style=""
+					"background:transparent;  border:transparent;\">
+					<i class=\ "fas fa-stopwatch\" title=\ "SetTimerString\"></i>
+				</button>
+			</form>
+
+			<b> Estado del Switch 2
+				<div class=\"float-right\">
+					<button type=\ "button\" id=\ "boton2CAMBIARSONOFF\" onclick=\
+						"EnviarSonoff('HOSTSONOFF','PORTSONOFF','USERSONOFF','PASSSONOFF','TOPICSONOFF','switchtwo','CAMBIARSONOFF','boton2CAMBIARSONOFF')\" class=\"btnbtn-primary\">Apagado</button>
+				</div>
+			</b><input type=\ "hidden\" name=\ "sonoffpower\" id=\ "sonoffpower2\" />
+			<p></p>
+			<button type=\ "submit\" class=\ "btn btn-primary btn-sm
+				float-left\" onclick=\"EnviarSonoffSimulatePushbutton('HOSTSONOFF','PORTSONOFF','USERSONOFF','PASSSONOFF','TOPICSONOFF','switchtwo','CAMBIARSONOFF')\">Simulated
+				push button</button>
+			<p></p>
+
+			<h4 id=\ "sonoffname\" class=\"smallfont-weight-bold\">
+				Timer<span id=\ "span2CAMBIARSONOFF\" class=\"float-right\">0</span>
+			</h4>
+			<div class=\"progressmb-4\">
+				<div class=\ "progress-bar\" id=\
+					"sonofftimer2CAMBIARSONOFF\" role=\ "progressbar\"	aria-valuemin=\
+					"0\" aria-valuemax=\ "60\" style="""width: 50%;\"></div>
 			</div>
-		</b><input type=\ "hidden\" name=\ "sonoffpower\" id=\ "sonoffpower1\" />
-		<p></p>
-	</form>
-	<form role=\ "form\" action=\
-		"/home/settimerString/CAMBIARSONOFF\" method=\
-		"get\" enctype=\"multipart/form-data\">
-		<button type=\ "submit\" class=\ "btnbtn-primarybtn-sm\"><i class=\"fal fa-stopwatch\" title=\"Set Timer String\"></i></button>
-	</form>
-
-</div>
-
-
-
-<div class=\"card-body\"> <h4 id=\"sonoffname\" class=\"small font-weight-bold\">Timer<span class=\"float-right\">0</span></h4><div class=\"progres smb-4\">	<div class=\ "progress-bar\" id=\ "sonofftimer\" role=\"progressbar\"	aria-valuemin=\ "0\" aria-valuemax=\ "60\" style="""width: 50%;\">	</div></div><p></p>	<b> Status Power<div class=\"float-right\">	<input id=\ "sonoffpowerCAMBIARSONOFF\" type=\"checkbox\"	data-toggle=\ "toggle\" data-style=\ "slow\" onchange=\"EnviarSonoff('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARSONOFF')\"></div></b><input type=\ "hidden\" name=\ "sonoffpower\" id=\ "sonoffpower1\" />	<p></p>	<button type=\ "submit\" class=\"btn btn-primary btn-sm float-left\" onclick=\"EnviarSonoffSimulatePushbutton('mqtt.coiaca.com','8080','mqttusr','mqttpwd','CAMBIARSONOFF')\">Simulated push button</button><form role=\ "form\" action=\"/home/settimerString/CAMBIARSONOFF\" method=\"get\" enctype=\"multipart/form-data\"><button type=\"submit\" class=\"btn btn-lg float-right\" style=\"background: transparent;  border: transparent;\"><i class=\"fas fa-stopwatch\"  title=\"Set Timer String\"></i></button>	</form></div>
-
-
-
-
-<?xml version="1.0" encoding="UTF-8"?>
-<S:Envelope xmlns:S="http://www.w3.org/2003/05/soap-envelope">
-	<S:Header>
-		<wsa:Action xmlns:wsa="http://www.w3.org/2005/08/addressing">http://gsma.com/ES3/PlatformManagementCallBack/ES3-DeleteISDP</wsa:Action>
-		<wsa:MessageID xmlns:wsa="http://www.w3.org/2005/08/addressing">gemalto-smdp/a30bac57-e3cd-423c-b1a3-adada8fa7961?MessageDate=2019-01-25T23:16:23Z</wsa:MessageID>
-		<wsa:RelatesTo xmlns:wsa="http://www.w3.org/2005/08/addressing">http://190.247.133.76:8080/DPvdfpoc</wsa:RelatesTo>
-		<wsa:From xmlns:wsa="http://www.w3.org/2005/08/addressing">
-			<wsa:Address>https://dctwebvlp63-vip.gemalto.com:17903/ES3/ES3SmSrService</wsa:Address>
-		</wsa:From>
-		<wsa:To xmlns:wsa="http://www.w3.org/2005/08/addressing">http://190.247.133.76:8080/DPvdfpoc?EntityId=1.3.6.1.4.1.50201</wsa:To>
-	</S:Header>
-	<S:Body>
-		<rps3:ES3-DeleteISDPResponse
-			xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
-			xmlns:rps3="http://namespaces.gsma.org/esim-messaging/3"
-			xmlns:wsa="http://www.w3.org/2005/08/addressing">
-			<rps3:ProcessingStart>2019-01-25T23:16:19Z</rps3:ProcessingStart>
-			<rps3:ProcessingEnd>2019-01-25T23:16:23Z</rps3:ProcessingEnd>
-			<rps3:FunctionExecutionStatus>
-				<rps3:Status>FAILED</rps3:Status>
-				<rps3:StatusCodeData>
-					<rps3:Subject>8.4</rps3:Subject>
-					<rps3:Reason>5.1</rps3:Reason>
-					<rps3:SubjectIdentifier>ISD-R=A0000005591010FFFFFFFF8900000100</rps3:SubjectIdentifier>
-					<rps3:Message>'0400':DeleteISDP, The use case was failed at 'profile disabling' step. Detail: Delivery Status failed. DS code was [709]</rps3:Message>
-				</rps3:StatusCodeData>
-			</rps3:FunctionExecutionStatus>
-		</rps3:ES3-DeleteISDPResponse>
-	</S:Body>
-</S:Envelope>
-
-
-
-<?xml version="1.0" encoding="UTF-8"?>
-<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
-	<soap:Header>
-		<ns2:From xmlns="http://namespaces.gsma.org/esim-messaging/3"
-			xmlns:ns2="http://www.w3.org/2005/08/addressing"
-			xmlns:ns3="http://www.w3.org/2000/09/xmldsig#">
-			<ns2:Address>http://190.247.133.76:8080/DPvdfpoc?EntityId=1.3.6.1.4.1.50201</ns2:Address>
-		</ns2:From>
-		<ns2:To xmlns="http://namespaces.gsma.org/esim-messaging/3"
-			xmlns:ns2="http://www.w3.org/2005/08/addressing"
-			xmlns:ns3="http://www.w3.org/2000/09/xmldsig#">https://dctwebvlp63-vip.gemalto.com:17903/ES3/ES3SmSrService</ns2:To>
-		<ns2:MessageID xmlns="http://namespaces.gsma.org/esim-messaging/3"
-			xmlns:ns2="http://www.w3.org/2005/08/addressing"
-			xmlns:ns3="http://www.w3.org/2000/09/xmldsig#">http://190.247.133.76:8080/DPvdfpoc?MessageDate=2019-01-25T23:16:18Z</ns2:MessageID>
-		<ns2:Action xmlns="http://namespaces.gsma.org/esim-messaging/3"
-			xmlns:ns2="http://www.w3.org/2005/08/addressing"
-			xmlns:ns3="http://www.w3.org/2000/09/xmldsig#">http://gsma.com/ES3/PlatformManagement/ES3-DeleteISDP</ns2:Action>
-		<ns2:ReplyTo xmlns="http://namespaces.gsma.org/esim-messaging/3"
-			xmlns:ns2="http://www.w3.org/2005/08/addressing"
-			xmlns:ns3="http://www.w3.org/2000/09/xmldsig#">
-			<ns2:Address>http://190.247.133.76:8080/DPvdfpoc/es3</ns2:Address>
-		</ns2:ReplyTo>
-		<wsse:Security
-			xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
-			<wsse:UsernameToken
-				xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
-				wsu:Id="921105694">
-				<wsse:Username>es3caller@VALIDDPLAB</wsse:Username>
-				<wsse:Password
-					Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">awV70BQK645xgEt32okl518rZ</wsse:Password>
-				<wsse:Nonce
-					EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">GTgjQA==</wsse:Nonce>
-				<wsu:Created>2019-01-25T23:16:25Z</wsu:Created>
-			</wsse:UsernameToken>
-			<wsu:Timestamp
-				xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
-				<wsu:Created>2019-01-25T23:16:25Z</wsu:Created>
-				<wsu:Expires>2019-01-25T23:21:25Z</wsu:Expires>
-			</wsu:Timestamp>
-		</wsse:Security>
-	</soap:Header>
-	<soap:Body>
-		<ES3-DeleteISDPRequest
-			xmlns="http://namespaces.gsma.org/esim-messaging/3"
-			xmlns:ns2="http://www.w3.org/2005/08/addressing"
-			xmlns:ns3="http://www.w3.org/2000/09/xmldsig#">
-		<FunctionCallIdentifier>EAA7D73E89DD54D06FEBC0BB9180C94C</FunctionCallIdentifier>
-		<ValidityPeriod>10000</ValidityPeriod>
-		<Eid>89033023312150000000000308808531</Eid>
-		<Iccid>8942306000042528709</Iccid></ES3-DeleteISDPRequest>
-	</soap:Body>
-</soap:Envelope>
-
-
-
-
-<div class=\"card-body\">
-	<b> Estado del Switch 1
-		<div class=\"float-right\">
-			<button type=\ "button\" id=\ "boton1CAMBIARSONOFF\" onclick=\
-				"EnviarSonoff('HOSTSONOFF','PORTSONOFF','USERSONOFF','PASSSONOFF','TOPICSONOFF','switchone','CAMBIARSONOFF','boton1CAMBIARSONOFF')\" class=\
-				"btnbtn-primary\">Apagado</button>
+			<p></p>
+			<form role=\ "form\" action=\
+				"/home/settimerString/twoCAMBIARSONOFF\" method=\ "get\" enctype=\"multipart/form-data\">
+				<button type=\ "submit\" class=\ "btn btn-lg float-right\" style=""
+					"background:transparent;  border:transparent;\">
+					<i class=\ "fas fa-stopwatch\" title=\ "SetTimerString\"></i>
+				</button>
+			</form>
 		</div>
-	</b><input type=\ "hidden\" name=\ "sonoffpower\" id=\ "sonoffpower1\" />
-	<p></p>
-	<button type=\ "submit\" class=\ "btn btn-primary btn-sm
-		float-left\" onclick=\"EnviarSonoffSimulatePushbutton('HOSTSONOFF','PORTSONOFF','USERSONOFF','PASSSONOFF','TOPICSONOFF','switchone','CAMBIARSONOFF')\">Simulated
-		push button</button>
-	<p> </p>
-	
-	<h4 id=\ "sonoffname\" class=\ "smallfont-weight-bold\">
-		Timer<span id=\ "span1CAMBIARSONOFF\" class=\"float-right\">0</span>
-	</h4>
-	<div class=\ "progressmb-4\">
-		<div class=\ "progress-bar\" id=\ "sonofftimer1CAMBIARSONOFF\" role=\
-			"progressbar\"	aria-valuemin=\ "0\" aria-valuemax=\ "60\" style="""width: 50%;\">
-		</div>
-	</div>
-	<p></p>
-	<form role=\ "form\" action=\
-		"/home/settimerString/oneCAMBIARSONOFF\" method=\
-		"get\" enctype=\"multipart/form-data\">
-		<button type=\ "submit\" class=\ "btn btn-lg float-right\" style=""
-			"background: transparent;  border:transparent;\">
-			<i class=\ "fas fa-stopwatch\" title=\ "Set TimerString\"></i>
-		</button>
-	</form>
-	
-		<b> Estado del Switch 2
-		<div class=\"float-right\">
-			<button type=\ "button\" id=\ "boton2CAMBIARSONOFF\" onclick=\
-				"EnviarSonoff('HOSTSONOFF','PORTSONOFF','USERSONOFF','PASSSONOFF','TOPICSONOFF','switchtwo','CAMBIARSONOFF','boton2CAMBIARSONOFF')\" class=\
-				"btnbtn-primary\">Apagado</button>
-		</div>
-	</b><input type=\ "hidden\" name=\ "sonoffpower\" id=\ "sonoffpower2\" />
-	<p></p>
-	<button type=\ "submit\" class=\ "btn btn-primary btn-sm
-		float-left\" onclick=\"EnviarSonoffSimulatePushbutton('HOSTSONOFF','PORTSONOFF','USERSONOFF','PASSSONOFF','TOPICSONOFF','switchtwo','CAMBIARSONOFF')\">Simulated
-		push button</button>
-	<p> </p>
-	
-	<h4 id=\ "sonoffname\" class=\ "smallfont-weight-bold\">
-		Timer<span id=\ "span2CAMBIARSONOFF\" class=\"float-right\">0</span>
-	</h4>
-	<div class=\ "progressmb-4\">
-		<div class=\ "progress-bar\" id=\ "sonofftimer2CAMBIARSONOFF\" role=\
-			"progressbar\"	aria-valuemin=\ "0\" aria-valuemax=\ "60\" style="""width: 50%;\">
-		</div>
-	</div>
-	<p></p>
-	<form role=\ "form\" action=\
-		"/home/settimerString/twoCAMBIARSONOFF\" method=\
-		"get\" enctype=\"multipart/form-data\">
-		<button type=\ "submit\" class=\ "btn btn-lg float-right\" style=""
-			"background: transparent;  border:transparent;\">
-			<i class=\ "fas fa-stopwatch\" title=\ "Set TimerString\"></i>
-		</button>
-	</form>
-</div>
-
-
-
-
-
-
-
-
-
-

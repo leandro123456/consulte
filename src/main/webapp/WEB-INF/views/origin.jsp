@@ -44,12 +44,11 @@
 <script type="text/javascript">
 function getParameterByName(name) {
 	var locacion = location.search;
-	console.log("NOM2: "+ location.search);
-    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-    results = regex.exec(location.search);
-    console.log("NOM3: "+ results);
-    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	var texto=locacion.replace("?"+name+"=","");
+	while(texto.includes("+")){
+		texto=texto.replace("+"," ");
+	}
+    return texto;
 }	
 </script>
 
@@ -57,14 +56,10 @@ function getParameterByName(name) {
 		<jsp:include page="header.jsp" />
 		<div class="container-fluid">
 			<c:if test="${param.msg != null}">
-				 	<input type="hidden" id ="mensaje1" value="Usuario o Contraseña Incorrectos, intentalo nuevamente">
 					<script type="text/javascript">
-					console.log("NOM21: "+ location.search);
 					var mens = getParameterByName('msg');
-					console.log("parametro: "+mens);
-						var x= document.getElementById('mensaje1').value;
 						swal({
-							  title: x,
+							  title: mens,
 							  icon: "success",
 							  timer: 5000,
 							  closeOnClickOutside: false,
