@@ -2,7 +2,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" style="background: #224A85;">
 <head>
 
   <meta charset="utf-8">
@@ -11,14 +11,14 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Editar Usuario</title>
-
+  <title>cDash</title>
+	<link rel='shortcut icon' href='<c:url value="/resources/images/favicon.ico" />' type="image/x-icon"/>
   <!-- Custom fonts for this template-->
   <link rel="stylesheet" type="text/css" href='<c:url value="/resources/vendor/fontawesome-free/css/all.min.css"/>'>
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/sb-admin-2.css"/>'>
+  <link rel="stylesheet" type="text/css" href='<c:url value="/resources/mqttResources/sb-admin-2.css"/>'>
 
 </head>
 
@@ -33,8 +33,8 @@
 		</c:if>
         <!-- Nested Row within Card Body -->
         <div class="row">
-          <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-          <div class="col-lg-7">
+<!--           <div class="col-lg-5 d-none d-lg-block bg-register-image"></div> -->
+          <div class="col-lg-12">
             <div class="p-5">
               <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">Editar Datos de Usuario</h1>
