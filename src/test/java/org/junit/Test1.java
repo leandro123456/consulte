@@ -14,7 +14,7 @@ import com.lgg.nticxs.web.model.DeviceDefaultConfiguration;
 public class Test1 {
 	
 	
-	//@Test
+	@Test
 	public void testSendMQTT() {
 		String timerstringsonoff= "monday-wednesday-friday&12:45&on&All&@monday-wednesday-friday&23:52&off&All&@";
 		//String timerstringvalue=SimpleTimerString.maketimerStringFormat(timerstringsonoff);
@@ -22,21 +22,21 @@ public class Test1 {
 		String port= "1883";
 		//RConfig/
 //		String topic="PS3S1P120190323/swcmd";
-		String topic= "RConfig/PS3S1P120190323";
+		String topic= "RMgmt/PSWS10000000001";
 		String user="mqttusr";
 		String pass="mqttpwd";
 //		String message ="\"pwd\":\"mqttpwd\", \"command\":\"switchAction\",\"SW1\":\"ON\"";
-		String message ="{'pwd':'mqttpwd', 'command':'switchAction','param1':'SW1','param2':'turnOn'}";
+		String message ="{'pwd':'mqttpwd', 'command':'switchAction','param1':'SW1','param2':'turnOff'}";
 //		String message = "{\"pwd\":\"mqttpwd\", \"command\":\"simulateButtonPush\",\"param1\":\"BTN1\"}";
 //		String message = "\"pwd\":\"mqttpwd\", \"command\":\"switchAction\",\"param1\":\"SW1\",\"param2\":\"turnOn\"";
 //		String message = "{\"pwd\":\"mqttpwd\", \"command\":\"getStatus\"}";
 		
 		//{"pwd":"coiaca", "command":"switchAction","param1":"SW1","param2":"turnOff"}
 	   	 JSONObject json = new JSONObject();
-	   	 json.put("pwd", "coiaca");
-	   	 json.put("command", "switchAction");
-	   	 json.put("param1", "SW1");
-	   	 json.put("param2", "turnOff");
+//	   	 json.put("SW1", "ON");
+	   	 json.put("command", "simulateButtonPush");
+	   	 json.put("param1", "PB1");
+	   	 json.put("pwd", "mqttpwd");
 //	   	 json.put("SW1", "OFF");
 	   	 System.out.println("el json: "+ json);
 	   	SimpleTimerString tim = new SimpleTimerString(timerstringsonoff);

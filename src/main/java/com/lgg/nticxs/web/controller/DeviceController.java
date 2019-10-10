@@ -1,22 +1,16 @@
 package com.lgg.nticxs.web.controller;
 
 import java.util.ArrayList;
-import java.util.Base64;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.lgg.nticxs.web.DAO.DeviceDAO;
 import com.lgg.nticxs.web.DAO.DeviceDefaultConfigurationDAO;
@@ -24,12 +18,9 @@ import com.lgg.nticxs.web.DAO.UserDAO;
 import com.lgg.nticxs.web.dbcommands.MongoCommands;
 import com.lgg.nticxs.web.model.Device;
 import com.lgg.nticxs.web.model.DeviceConfiguration;
-import com.lgg.nticxs.web.model.DeviceDefaultConfiguration;
 import com.lgg.nticxs.web.model.User;
-import com.lgg.nticxs.web.model.Vista;
 import com.lgg.nticxs.web.model.simple.SimpleDefaultConfiguration;
 import com.lgg.nticxs.web.model.simple.SimpleDevice;
-import com.lgg.nticxs.web.model.simple.SimpleTimerString;
 import com.lgg.nticxs.web.utils.ManagementDevice;
 
 @Controller
@@ -230,47 +221,6 @@ public class DeviceController {
 		return "origin";
 	}
 
-
-	@GetMapping("home/configuraciondefault/{tipodevice}/{serial}")
-	@ResponseBody
-	public String getRunningOperations(Model model, @PathVariable String tipodevice
-			, @PathVariable String serial) {
-		System.out.println("Llego a la peticion de ajax");
-		JSONObject json = new JSONObject();
-		DeviceDefaultConfigurationDAO devdefdao= new DeviceDefaultConfigurationDAO();
-		DeviceDefaultConfiguration dev = null;
-		if(tipodevice.equals("alarma"))
-			dev = devdefdao.retrieveByName("defaultalarma");
-		else
-			dev = devdefdao.retrieveByName("default");
-		json.put("iphostescuchar", dev.getIphostescuchar());
-		json.put("portescuchar", dev.getPortescuchar());
-		json.put("userescuchar", dev.getUserescuchar());
-		json.put("iphostescucharremote", dev.getIphostescucharremote());
-		json.put("portescucharremote", dev.getPortescucharremote());
-		json.put("userescucharremote", dev.getUserescucharremote());
-		
-		HashMap<String, String> topicos= establecerTopicosDefault(serial,dev.getTopicescuchar(),dev.getTopicescribir()
-				,dev.getTopicescucharremote(),dev.getTopicescribirremote());
-		json.put("topicescuchar",topicos.get("escuchar"));
-		json.put("topicescribir", topicos.get("escribir"));
-		json.put("topicescucharremote", topicos.get("escucharremoto"));
-		json.put("topicescribirremote", topicos.get("escribirremoto"));
-
-		return json.toString();
-
-	}
-	   
-
-	private HashMap<String, String> establecerTopicosDefault(String serial, String topicescuchar, String topicescribir,
-			String topicescucharremote, String topicescribirremote) {
-		HashMap<String, String> result = new HashMap<String, String>();
-		result.put("escuchar", topicescuchar.replace("serial", serial));
-		result.put("escribir", topicescribir.replace("serial", serial));
-		result.put("escucharremoto", topicescucharremote.replace("serial", serial));
-		result.put("escribirremoto", topicescribirremote.replace("serial", serial));	
-		return result;
-	}
 
 	private void CargarDevices(Model model, HttpServletRequest request) {
 		String nombre = request.getUserPrincipal().getName();
