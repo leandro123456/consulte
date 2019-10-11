@@ -192,7 +192,9 @@
 
       function Connecttotal(swith,serial,message1){ 
     	  //Nueva version
-    	  var partition=document.getElementById("particiones"+serial);;
+    	  var textpart= "particiones"+serial;
+    	  console.log("particiones elem: "+document.getElementById(textpart).innerHTML );
+    	  var partition=document.getElementById(textpart).innerHTML;
     	  var urlsendInformation = $(location).attr('pathname') + "/sendCommand/alarma/"+serial+"/"+message1+"/"+partition;
   			$.ajax({ url : urlsendInformation,
   			contentType: "application/json",

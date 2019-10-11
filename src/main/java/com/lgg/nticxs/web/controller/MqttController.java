@@ -92,7 +92,7 @@ public class MqttController {
 			else
 				conf=device.getDeviceconfiguration().get(1);
 		try {
-			IMqttClient publisher = new MqttClient("tcp://"+conf.getIphostescuchar()+":"+conf.getPortescuchar(),publisherId);
+			IMqttClient publisher = new MqttClient("ws://"+conf.getIphostescuchar()+":"+conf.getPortescuchar(),publisherId);
 			
 			MqttConnectOptions options = new MqttConnectOptions();
 			options.setAutomaticReconnect(true);
@@ -100,12 +100,13 @@ public class MqttController {
 			options.setConnectionTimeout(10);
 			options.setUserName(conf.getUserescuchar());
 			options.setPassword(conf.getPassescuchar().toCharArray());
-			publisher.connect(options);
+			
 			if ( !publisher.isConnected()) {
+				publisher.connect(options);
 	           	System.out.println("fallo la conexion");
-	           	return "fallo la conexion";
+	           	//return "fallo la conexion";
 	        }else {
-	        	System.out.println("conecto a :" + publisher);
+	        	System.out.println("ya esta conectado :" + publisher);
 	        }
 			JSONObject message = ArmarMensajeSonoff(mensaje, swith,conf.getPassescuchar());
 	        MqttMessage msg = makemqttmessageJson(message);
@@ -171,6 +172,7 @@ public class MqttController {
 	
 
 	private String EnviarMensajeAlarma(String serial, String mensaje, String particion) {
+		System.out.println("LLEGO al envio de la alarma, particion: " + particion);
 		String publisherId = UUID.randomUUID().toString();
 		Device device = devado.retrieveBySerialNumber(serial);
 		if(device!= null){
@@ -180,25 +182,25 @@ public class MqttController {
 			else
 				conf=device.getDeviceconfiguration().get(1);
 		try {
-			IMqttClient publisher = new MqttClient("tcp://"+conf.getIphostescuchar()+":"+conf.getPortescuchar(),publisherId);
+			IMqttClient publisher = new MqttClient("ws://"+conf.getIphostescuchar()+":"+conf.getPortescuchar(),publisherId);
 			
 			MqttConnectOptions options = new MqttConnectOptions();
 			options.setAutomaticReconnect(true);
 			options.setCleanSession(true);
 			options.setConnectionTimeout(10);
 			options.setUserName(conf.getUserescuchar());
-			options.setPassword(conf.getPassescuchar().toCharArray());
-			publisher.connect(options);
+			options.setPassword(conf.getPassescuchar().toCharArray());			
 			if ( !publisher.isConnected()) {
-	           	System.out.println("fallo la conexion");
-	           	return "fallo la conexion";
+	           	System.out.println("no estaba conectada");
+	           	publisher.connect(options);
+	           	//return "fallo la conexion";
 	        }else {
-	        	System.out.println("conecto a :" + publisher);
+	        	System.out.println("ya esta conectado a :" + publisher);
 	        }
 			String message = ArmarMensajeAlarma(mensaje, particion);
 	        MqttMessage msg = makemqttmessageString(message);
 	      //  msg.setQos(0);
-	        msg.setRetained(true);
+	        //msg.setRetained(true);
 	        publisher.publish(conf.getTopicescribir(),msg); 	
 		} catch (Exception e) {
 			System.out.println("mensaje: "+ e.getMessage());
