@@ -116,7 +116,7 @@ function onMessageArrivedAlarma(message) {
 		var numparticion = topico.substring(topico.search("Partition")).replace("Partition","");
 		var numdisplay = document.getElementById("particiones"+iddevice).innerHTML;
 		console.log("este es el numero de particion en el display: "+ numdisplay +"; num de particion: "+ numparticion);
-		if(numdisplay == numparticion){
+		if(numdisplay=="" || numdisplay == numparticion){
 			//como el display apunta a la particion correcta veo el estado
 			if(contenido=="disarmed"){
 				document.getElementById("ac_icon"+iddevice).style.color = "yellow";

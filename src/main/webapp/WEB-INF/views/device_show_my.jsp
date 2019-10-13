@@ -30,7 +30,14 @@
 <script src='<c:url value="/resources/js/sb-admin-2.js" />'></script>
 <script src='<c:url value="https://unpkg.com/sweetalert/dist/sweetalert.min.js"/>'></script>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6SSYQD4466"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-6SSYQD4466');
+</script>
 
 </head>
 

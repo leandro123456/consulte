@@ -14,7 +14,7 @@ import com.lgg.nticxs.web.model.DeviceDefaultConfiguration;
 public class Test1 {
 	
 	
-	@Test
+	//@Test
 	public void testSendMQTT() {
 		String timerstringsonoff= "monday-wednesday-friday&12:45&on&All&@monday-wednesday-friday&23:52&off&All&@";
 		//String timerstringvalue=SimpleTimerString.maketimerStringFormat(timerstringsonoff);

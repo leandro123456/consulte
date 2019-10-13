@@ -187,7 +187,7 @@ public class MqttController {
 			MqttConnectOptions options = new MqttConnectOptions();
 			options.setAutomaticReconnect(true);
 			options.setCleanSession(true);
-			options.setConnectionTimeout(10);
+			options.setConnectionTimeout(5);
 			options.setUserName(conf.getUserescuchar());
 			options.setPassword(conf.getPassescuchar().toCharArray());			
 			if ( !publisher.isConnected()) {
@@ -197,9 +197,10 @@ public class MqttController {
 	        }else {
 	        	System.out.println("ya esta conectado a :" + publisher);
 	        }
+			System.out.println("ESTE ES EL MENSAJE: "+mensaje);
 			String message = ArmarMensajeAlarma(mensaje, particion);
 	        MqttMessage msg = makemqttmessageString(message);
-	      //  msg.setQos(0);
+	        msg.setQos(0);
 	        //msg.setRetained(true);
 	        publisher.publish(conf.getTopicescribir(),msg); 	
 		} catch (Exception e) {
@@ -216,8 +217,10 @@ public class MqttController {
     	String result="";
     	if(mensaje.contains("armarzona"))
     		result=particion+"S";
-    	if(mensaje.contains("armartotal"))
-    			result=particion+"A"; 	
+    	else if(mensaje.contains("armartotal"))
+    			result=particion+"A"; 
+    	else
+    		result=mensaje.replace("alarm-", "");
 		return result;
 	}
 
