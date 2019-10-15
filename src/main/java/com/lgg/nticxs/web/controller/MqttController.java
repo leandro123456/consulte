@@ -202,7 +202,9 @@ public class MqttController {
 	        MqttMessage msg = makemqttmessageString(message);
 	        msg.setQos(0);
 	        //msg.setRetained(true);
-	        publisher.publish(conf.getTopicescribir(),msg); 	
+	        publisher.publish(conf.getTopicescribir(),msg); 
+	        publisher.disconnect();
+	        publisher.close();
 		} catch (Exception e) {
 			System.out.println("mensaje: "+ e.getMessage());
 			e.printStackTrace();
