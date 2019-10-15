@@ -182,20 +182,21 @@ public class MqttController {
 			else
 				conf=device.getDeviceconfiguration().get(1);
 		try {
-			IMqttClient publisher = new MqttClient("ws://"+conf.getIphostescuchar()+":"+conf.getPortescuchar(),publisherId);
 			
+			IMqttClient publisher = new MqttClient("ws://"+conf.getIphostescuchar()+":"+conf.getPortescuchar(),publisherId);
+						
 			MqttConnectOptions options = new MqttConnectOptions();
 			options.setAutomaticReconnect(true);
 			options.setCleanSession(true);
-			options.setConnectionTimeout(5);
+			options.setConnectionTimeout(15);
 			options.setUserName(conf.getUserescuchar());
 			options.setPassword(conf.getPassescuchar().toCharArray());			
 			if ( !publisher.isConnected()) {
-	           	System.out.println("no estaba conectada");
+	           	System.out.println("+++++NO estaba conectada");
 	           	publisher.connect(options);
 	           	//return "fallo la conexion";
 	        }else {
-	        	System.out.println("ya esta conectado a :" + publisher);
+	        	System.out.println("YA esta conectado a :" + publisher);
 	        }
 			System.out.println("ESTE ES EL MENSAJE: "+mensaje);
 			String message = ArmarMensajeAlarma(mensaje, particion);
@@ -203,6 +204,7 @@ public class MqttController {
 	        msg.setQos(0);
 	        //msg.setRetained(true);
 	        publisher.publish(conf.getTopicescribir(),msg); 
+	        System.out.println("esta es la URL: "+ publisher.getServerURI());
 	        publisher.disconnect();
 	        publisher.close();
 		} catch (Exception e) {
