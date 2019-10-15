@@ -9,6 +9,7 @@
 <meta name="author" content="">
 	<link rel="stylesheet" type="text/css" href='<c:url value="/resources/mqttResources/style.css" />'>
 	<link rel="stylesheet" type="text/css" href='<c:url value="/resources/mqttResources/c3.min.css" />'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.min.js" type="text/javascript"></script>     
 	<script src='<c:url value="/resources/vendor/jquery/jquery.js" />'></script>
 	<script src='<c:url value="/resources/vendor/jquery/jquery.min.js" />'></script>
