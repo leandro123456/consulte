@@ -131,34 +131,44 @@ function onMessageArrivedAlarma(message) {
 				document.getElementById("trouble_icon"+iddevice).style.color = "grey";
 				
 				var spanStatus = document.getElementById("second_line"+iddevice);
-				spanStatus.firstChild.data = contenido;
+				spanStatus.firstChild.data = "Armed in Home";
 			}else if(contenido =="armed_away"){
 				document.getElementById("armed_icon"+iddevice).style.color = "green";
 				document.getElementById("trouble_icon"+iddevice).style.color = "grey";
 				document.getElementById("ac_icon"+iddevice).style.color = "grey";
 				
 				var spanStatus = document.getElementById("second_line"+iddevice);
-				spanStatus.firstChild.data = contenido;
+				spanStatus.firstChild.data = "Armed Away";
 			}else if(contenido =="pending"){
 				document.getElementById("trouble_icon"+iddevice).style.color = "yellow";
 				document.getElementById("armed_icon"+iddevice).style.color = "grey";
 				document.getElementById("ac_icon"+iddevice).style.color = "grey";
 				
 				var spanStatus = document.getElementById("second_line"+iddevice);
-				spanStatus.firstChild.data = contenido;
+				spanStatus.firstChild.data = "Pending";
 			}else if (contenido == "triggered"){			
 				document.getElementById("trouble_icon"+iddevice).style.color = "red";
 				document.getElementById("armed_icon"+iddevice).style.color = "red";
 				document.getElementById("ac_icon"+iddevice).style.color = "red";
 				
 				var spanStatus = document.getElementById("second_line"+iddevice);
-				spanStatus.firstChild.data = contenido;
+				spanStatus.firstChild.data = "Triggered";
 			}else{
 				//como no lo reconoce lo muestra en el segundo display
 				var spanStatus = document.getElementById("second_line"+iddevice);
 				spanStatus.firstChild.data = contenido;
 			}
 		}
+	}
+	else if(topico.includes("Zone")){
+		console.log("llego informacion de una zona: " +topico+"; "+contenido);
+		var zona= topico.substring(topico.search("/Zone")).replace("/Zone","");
+		var serial= topico.substring(0,topico.search("/Zone")); 
+		if(contenido == "1")
+			document.getElementById("zone_"+zona+"_"+serial).style.color = "#224A85"; 
+		else if (contenido =="0")
+			document.getElementById("zone_"+zona+"_"+serial).style.color = "transparent";
+		
 	}
 }
 /** comportamiento cuando recibe un mensaje*/
