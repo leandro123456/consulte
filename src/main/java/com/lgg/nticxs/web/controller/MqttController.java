@@ -186,9 +186,9 @@ public class MqttController {
 			IMqttClient publisher = new MqttClient("ws://"+conf.getIphostescuchar()+":"+conf.getPortescuchar(),publisherId);
 						
 			MqttConnectOptions options = new MqttConnectOptions();
-			options.setAutomaticReconnect(true);
-			options.setCleanSession(true);
-			options.setConnectionTimeout(15);
+			options.setAutomaticReconnect(false);
+			options.setCleanSession(false);
+			options.setConnectionTimeout(25);
 			options.setUserName(conf.getUserescuchar());
 			options.setPassword(conf.getPassescuchar().toCharArray());			
 			if ( !publisher.isConnected()) {
