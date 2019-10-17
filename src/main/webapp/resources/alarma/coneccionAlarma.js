@@ -164,18 +164,24 @@ function onMessageArrivedAlarma(message) {
 		console.log("llego informacion de una zona: " +topico+"; "+contenido);
 		var zona= topico.substring(topico.search("/Zone")).replace("/Zone","");
 		var serial= topico.substring(0,topico.search("/Zone")); 
-//		if(){
-//			
-//		}else{
-			if(contenido == "1")
-				document.getElementById("zone_"+zona+"_"+serial).style.color = "blue"; 
-			else if (contenido =="0")
-				document.getElementById("zone_"+zona+"_"+serial).style.color = "#858796";
-//		}
+		if(cument.getElementById("zone_"+zona+"_"+serial).style.display=="none"){
+			console.log("esperar para pintar el boton de esta zona")
+			
+		}else{
+			pintarBotonDeZona(contenido,zona,serial);
+		}
 		
 	}
 }
 /** comportamiento cuando recibe un mensaje*/
+
+function pintarBotonDeZona(contenido,zona,serial){
+	if(contenido == "1")
+		document.getElementById("zone_"+zona+"_"+serial).style.color = "blue"; 
+	else if (contenido =="0")
+		document.getElementById("zone_"+zona+"_"+serial).style.color = "#858796";
+}
+
 
 function cargarZonas(serialZonas){
 	for (i = 0; i < serialZonas.length; i++) { 
