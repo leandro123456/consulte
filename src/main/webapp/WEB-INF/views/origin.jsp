@@ -493,7 +493,7 @@ $("#serialnumber").blur(function() {
 		console.log("dispositivos alarma: "+ ${cantidadAlarma})
 		if(${cantidadAlarma}!=0)
 		startConnectAlarma("${hostalarma}","${puertoalarma}",${sslalarma},"${usuarioalarma}","${passalarma}",${topicosalarmas});
-		cargarZonas("${alarmaZonas}");
+// 		cargarZonas("${alarmaZonas}");
 	});
 </script>
 

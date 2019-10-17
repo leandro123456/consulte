@@ -164,16 +164,36 @@ function onMessageArrivedAlarma(message) {
 		console.log("llego informacion de una zona: " +topico+"; "+contenido);
 		var zona= topico.substring(topico.search("/Zone")).replace("/Zone","");
 		var serial= topico.substring(0,topico.search("/Zone")); 
-		if(contenido == "1")
-			document.getElementById("zone_"+zona+"_"+serial).style.color = "blue"; 
-		else if (contenido =="0")
-			document.getElementById("zone_"+zona+"_"+serial).style.color = "#858796";
+		if(){
+			
+		}else{
+			if(contenido == "1")
+				document.getElementById("zone_"+zona+"_"+serial).style.color = "blue"; 
+			else if (contenido =="0")
+				document.getElementById("zone_"+zona+"_"+serial).style.color = "#858796";
+		}
 		
 	}
 }
 /** comportamiento cuando recibe un mensaje*/
 
 function cargarZonas(serialZonas){
+	for (i = 0; i < serialZonas.length; i++) { 
+		var serial= serialZonas[i];  
+		var urlsendInformation = $(location).attr('pathname') + "/obtainzone/"+serial;
+			$.ajax({ url : urlsendInformation,
+				contentType: "application/json",
+				dataType: 'json',
+				success: function(data){
+					var maximo= data.maximo;
+					for(j=0; j<maximo; j++){
+						
+					}
+				}});
+			
+		}
+	
+
 	
 }
 
