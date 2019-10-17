@@ -165,15 +165,17 @@ function onMessageArrivedAlarma(message) {
 		var zona= topico.substring(topico.search("/Zone")).replace("/Zone","");
 		var serial= topico.substring(0,topico.search("/Zone")); 
 		if(contenido == "1")
-			document.getElementById("zone_"+zona+"_"+serial).style.color = "#224A85"; 
+			document.getElementById("zone_"+zona+"_"+serial).style.color = "blue"; 
 		else if (contenido =="0")
-			document.getElementById("zone_"+zona+"_"+serial).style.color = "transparent";
+			document.getElementById("zone_"+zona+"_"+serial).style.color = "#858796";
 		
 	}
 }
 /** comportamiento cuando recibe un mensaje*/
 
-
+function cargarZonas(serialZonas){
+	
+}
 
 
 // Called after form input is processed
