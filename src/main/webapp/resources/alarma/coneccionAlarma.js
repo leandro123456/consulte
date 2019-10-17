@@ -164,14 +164,14 @@ function onMessageArrivedAlarma(message) {
 		console.log("llego informacion de una zona: " +topico+"; "+contenido);
 		var zona= topico.substring(topico.search("/Zone")).replace("/Zone","");
 		var serial= topico.substring(0,topico.search("/Zone")); 
-		if(){
-			
-		}else{
+//		if(){
+//			
+//		}else{
 			if(contenido == "1")
 				document.getElementById("zone_"+zona+"_"+serial).style.color = "blue"; 
 			else if (contenido =="0")
 				document.getElementById("zone_"+zona+"_"+serial).style.color = "#858796";
-		}
+//		}
 		
 	}
 }

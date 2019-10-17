@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link type="text/css" rel="stylesheet" href="resources/loginresources/css/main.css">
 	
-	<script type="text/javascript"> <!-- FEDERICO le meti este script para que cambie la imagen de fondo y que no sea sismpre la misma. Si, me copÃ© -->
+	<script type="text/javascript"> <!-- FEDERICO le meti este script para que cambie la imagen de fondo y que no sea sismpre la misma. Si, me copé -->
 		if (document.getElementById) { window.onload = swap };
 		function swap() {
 		var numimages=4;
@@ -50,7 +50,7 @@
 				</ul>
 			</nav>
 				<c:if test="${param.error != null}">
-				 	<input type="hidden" id ="mensaje1" value="Usuario o ContraseÃ±a Incorrectos, intentalo nuevamente">
+				 	<input type="hidden" id ="mensaje1" value="Usuario o Contraseña Incorrectos, intentalo nuevamente">
 					<script type="text/javascript">
 						var x= document.getElementById('mensaje1').value;
 						swal({
@@ -65,7 +65,7 @@
 				</c:if>
 			
 				<c:if test="${param.logout != null}">
-				 	<input type="hidden" id ="mensaje" value="La sesiÃ³n ha sido cerrada correctamente.">
+				 	<input type="hidden" id ="mensaje" value="La sesión ha sido cerrada correctamente.">
 					<script type="text/javascript">
 						var x= document.getElementById('mensaje').value;
 						swal({
@@ -80,7 +80,7 @@
 				</c:if>
 
                     <c:if test="${param.logout != null}">
-                        <p class="logout">La sesiÃ³n ha sido cerrada correctamente.</p>
+                        <p class="logout">La sesión ha sido cerrada correctamente.</p>
                     </c:if>
                     
 		<!-- Banner -->
@@ -88,7 +88,7 @@
 				<div class="inner">
 					<header>
 						<p><img src="resources/loginresources/css/images/logo.png" alt=""/></p>
-						<h2 style="color:#FFFFFF; text-align:left !important;">Controla <br/>tus dispositivos</h2>   <!-- FEDERICO cambie de h1 a h2 y agreguÃ© style -->		
+						<h2 style="color:#FFFFFF; text-align:left !important;">Controla <br/>tus dispositivos</h2>   <!-- FEDERICO cambie de h1 a h2 y agregué style -->		
 						<!-- <p>Aliquam libero augue varius non odio nec faucibus congue<br />felis quisque a diam rutrum tempus massa accumsan faucibus purus.</p> -->
 					</header>
 
@@ -106,11 +106,11 @@
 			                      <input id = "userName" name="user"  type="text" class="form-control form-control-user" aria-describedby="emailHelp" placeholder="Email">
 			                    </div>
 			                    <div class="form-group">
-			                      <input type="password" class="form-control form-control-user"  name="password" id = "userPassword"  placeholder="ContraseÃ±a">
+			                      <input type="password" class="form-control form-control-user"  name="password" id = "userPassword"  placeholder="Contraseña">
 			                    </div>
 			                    <div class="form-group">
 			                      <div class="custom-control custom-checkbox small">
-			                        <input checked type="checkbox" name="remember-me" class="custom-control-input" id="customCheck"> <!-- FEDERICO agreguÃ© el CHECKED -->
+			                        <input checked type="checkbox" name="remember-me" class="custom-control-input" id="customCheck"> <!-- FEDERICO agregué el CHECKED -->
 			                        <label class="custom-control-label" for="customCheck">Recordar</label>
 			                      </div>
 			                    </div>
@@ -120,7 +120,7 @@
 			                  </form>
 			                  <hr>
 			                  <div class="text-center">
-			                    <a class="small" href="<c:url value='/forgot'/>" id="forgot">Â¿OlvidÃ³ su contraseÃ±a?</a>
+			                    <a class="small" href="<c:url value='/forgot'/>" id="forgot">¿Olvidó su contraseña?</a>
 			                  </div>
 			                  <div class="text-center">
 			                    <a class="small" href="<c:url value='/signup'/>" id="signup">Crear una cuenta</a>
@@ -141,7 +141,7 @@
 			</section>
 
 		<!-- Main -->
-			<div id="main" class="main-home"> <!-- FEDERICO agreguÃ© el clase main-home -->
+			<div id="main" class="main-home"> <!-- FEDERICO agregué el clase main-home -->
 
 				<!-- Section -->
 					<section class="wrapper style1">
@@ -155,8 +155,8 @@
 									</div>
 									<div class="col col2">
 										<h3>Aplicaciones</h3>
-										<p>Las aplicaciones para dispositivos conectados a internet son amplias. MÃºltiples categorÃ­as han sido sugeridas, pero la mayorÃ­a estÃ¡ de acuerdo en separar las aplicaciones en tres principales ramas de uso: consumidores, empresarial, e infraestructura.22â€‹23â€‹ George Osborne, ex miembro del gabinete encargado de finanzas, propone que la IoT es la prÃ³xima etapa en la revoluciÃ³n de la informaciÃ³n, refiriÃ©ndose a la interconectividad de todo: desde el transporte urbano hasta dispositivos mÃ©dicos, pasando por electrodomÃ©sticos.</p>
-										<p>La capacidad de conectar dispositivos embebidos con capacidades limitadas de CPU, memoria y energÃ­a significa que IoT puede tener aplicaciones en casi cualquier Ã¡rea.25â€‹ Estos sistemas podrÃ­an encargarse de recolectar informaciÃ³n en diferentes entornos: desde ecosistemas naturales hasta edificios y fÃ¡bricas, 26â€‹ por lo que podrÃ­an utilizarse para monitoreo ambiental y planeamiento urbanÃ­stico.27â€‹. </p>
+										<p>Las aplicaciones para dispositivos conectados a internet son amplias. Múltiples categorías han sido sugeridas, pero la mayoría está de acuerdo en separar las aplicaciones en tres principales ramas de uso: consumidores, empresarial, e infraestructura. George Osborne, ex miembro del gabinete encargado de finanzas, propone que la IoT es la próxima etapa en la revolución de la información, refiriéndose a la interconectividad de todo: desde el transporte urbano hasta dispositivos médicos, pasando por electrodomésticos.</p>
+										<p>La capacidad de conectar dispositivos embebidos con capacidades limitadas de CPU, memoria y energía significa que IoT puede tener aplicaciones en casi cualquier área.Estos sistemas podrían encargarse de recolectar información en diferentes entornos: desde ecosistemas naturales hasta edificios y fábricas, por lo que podrían utilizarse para monitoreo ambiental y planeamiento urbanístico. </p>
 										<a href="#" class="button">Learn More</a>
 									</div>
 								</div>
@@ -169,8 +169,8 @@
 							<div class="flex flex-2">
 								<div class="col col2">
 									<h3>Aplicaciones de consumo</h3>
-									<p>Un porcentaje creciente de los dispositivos IoT son creados para el consumo. Algunos ejemplos de aplicaciones de consumo incluyen: automÃ³viles conectados, entretenimiento, automatizaciÃ³n del hogar, tecnologÃ­a vestible, salud conectada y electrodomÃ©sticos como lavadoras, secadoras, aspiradoras robÃ³ticas, purificadores de aire, hornos, refrigeradores que utilizan Wi-Fi para seguimiento remoto</p>
-									<p>Algunas aplicaciones de consumo han sido criticadas por su falta de redundancia y su inconsistencia. Estas crÃ­ticas dieron lugar a una parodia conocida como "Internet of Shit" ('internet de las porquerÃ­as')37â€‹ Varias compaÃ±Ã­as han sido criticadas por apresurarse a incursionar en IoT, creando asÃ­ dispositivos de valor cuestionable,38â€‹ ademÃ¡s de no establecer ni implementar estÃ¡ndares de seguridad bien preparados. </p>
+									<p>Un porcentaje creciente de los dispositivos IoT son creados para el consumo. Algunos ejemplos de aplicaciones de consumo incluyen: automóviles conectados, entretenimiento, automatización del hogar, tecnología vestible, salud conectada y electrodomésticos como lavadoras, secadoras, aspiradoras robóticas, purificadores de aire, hornos, refrigeradores que utilizan Wi-Fi para seguimiento remoto</p>
+									<p>Algunas aplicaciones de consumo han sido criticadas por su falta de redundancia y su inconsistencia. Estas críticas dieron lugar a una parodia conocida como "Internet of Shit" ('internet de las porquerías') Varias compañías han sido criticadas por apresurarse a incursionar en IoT, creando así dispositivos de valor cuestionable además de no establecer ni implementar estándares de seguridad bien preparados. </p>
 									<a href="#" class="button">Learn More</a>
 								</div>
 								<div class="col col1 first">
@@ -187,29 +187,29 @@
 						<div class="inner">
 							<header class="align-center">
 								<h2>Empresarial</h2>
-								<p>El tÃ©rmino "IoT empresarial" (EIoT, por sus siglas en inglÃ©s) se usa para referirse a todos los dispositivos en el ambiente de los negocios y corporativo. Para 2019, se estima que EIoT comprenderÃ¡ cerca de un 40% o 9.1 millardos de dispositivos.</p>
+								<p>El término "IoT empresarial" (EIoT, por sus siglas en inglés) se usa para referirse a todos los dispositivos en el ambiente de los negocios y corporativo. Para 2019, se estima que EIoT comprenderá cerca de un 40% o 9.1 millardos de dispositivos.</p>
 							</header>
 							<div class="flex flex-3">
 								<div class="col align-center">
 									<div class="image round fit">
 										<img src="resources/loginresources/css/images/pic03.jpg" alt="" />
 									</div>
-									<p>Los medios utilizan el internet de las cosas principalmente para mercadeo y estudiar los hÃ¡bitos de los consumidores. Estos dispositivos recolectan informaciÃ³n Ãºtil sobre millones de individuos mediante segmentaciÃ³n por comportamiento.</p>
-									<a href="#" class="button">Learn More</a>
+									<p>Los medios utilizan el internet de las cosas principalmente para mercadeo y estudiar los hábitos de los consumidores. Estos dispositivos recolectan información útil sobre millones de individuos mediante segmentación por comportamiento. </p>
+									<a href="#" class="button">Leer Mas</a>
 								</div>
 								<div class="col align-center">
 									<div class="image round fit">
 										<img src="resources/loginresources/css/images/pic05.jpg" alt="" />
 									</div>
-									<p>Al hacer uso de los perfiles construidos durante el proceso de segmentaciÃ³n, los productores de medios presentan al consumidor publicidad en pantalla alineada con sus hÃ¡bitos conocidos en el lugar y momento adecuados para maximizar su efecto. </p>
-									<a href="#" class="button">Learn More</a>
+									<p>Al hacer uso de los perfiles construidos durante el proceso de segmentacion, los productores de medios presentan al consumidor publicidad en pantalla alineada con sus habitos conocidos en el lugar y momento adecuados para maximizar su efecto.</p>
+									<a href="#" class="button">Leer Mas</a>
 								</div>
 								<div class="col align-center">
 									<div class="image round fit">
 										<img src="resources/loginresources/css/images/pic04.jpg" alt="" />
 									</div>
-									<p>Sed congue elit malesuada nibh, a varius odio vehicula aliquet. Aliquam consequat, nunc quis sollicitudin aliquet. </p>
-									<a href="#" class="button">Learn More</a>
+									<p>Se recolecta más información haciendo un seguimiento de cómo los consumidores interactúan con el contenido.</p>
+									<a href="#" class="button">Leer Mas</a>
 								</div>
 							</div>
 						</div>
@@ -218,7 +218,7 @@
 			</div>
 
 		<!-- Footer -->
-			<footer id="footer" class="footer-home"> <!-- FEDERICO agreguÃ© el clase footer-home -->
+			<footer id="footer" class="footer-home"> <!-- FEDERICO agregué el clase footer-home -->
 				<div class="copyright">
 					<ul class="icons">
 						<li><a href="https://www.facebook.com/cdashiot/" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
