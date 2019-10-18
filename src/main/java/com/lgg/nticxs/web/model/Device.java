@@ -29,7 +29,7 @@ public class Device extends MongoDBObject{
 	private String timerString;
 	private DeviceNotification lastnotification;
 	private Integer particiones;
-	private String mayorZonaInformada;
+	private Integer mayorZonaInformada;
 	private List<DeviceAlarm> alarms;
 	private Boolean usedefaultbrocker;
 	private List<DeviceConfiguration> deviceconfiguration;
@@ -205,11 +205,11 @@ public class Device extends MongoDBObject{
 		this.particiones = particiones;
 	}
 
-	public String getMayorZonaInformada() {
+	public Integer getMayorZonaInformada() {
 		return mayorZonaInformada;
 	}
 
-	public void setMayorZonaInformada(String mayorZonaInformada) {
+	public void setMayorZonaInformada(Integer mayorZonaInformada) {
 		this.mayorZonaInformada = mayorZonaInformada;
 	}
 	

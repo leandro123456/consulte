@@ -163,17 +163,29 @@ function onMessageArrivedAlarma(message) {
 	else if(topico.includes("Zone")){
 		console.log("llego informacion de una zona: " +topico+"; "+contenido);
 		var zona= topico.substring(topico.search("/Zone")).replace("/Zone","");
-		var serial= topico.substring(0,topico.search("/Zone")); 
-		if(cument.getElementById("zone_"+zona+"_"+serial).style.display=="none"){
-			console.log("esperar para pintar el boton de esta zona")
-			
-		}else{
-			pintarBotonDeZona(contenido,zona,serial);
-		}
-		
+		var serial= topico.substring(0,topico.search("/Zone"));
+		var maxZonaActualizada = maximaZona(serial, zona);
+		pintarBotonDeZona(contenido,zona,serial);
 	}
 }
-/** comportamiento cuando recibe un mensaje*/
+
+
+//verifica si la zona recibida es mayor al maximo re
+function maximaZona(serial, zona){
+	var urlsendInformation = $(location).attr('pathname') + "/obtainzone/"+serial+"/zona"+zona;
+	$.ajax({ url : urlsendInformation,
+		contentType: "application/json",
+		dataType: 'json',
+		success: function(data){
+			var maximo= data.maximo;
+			if(data.fueactualizado){
+				for(var j=data.inicio; j<data.fin; j++){
+					document.getElementById("zone_"+j+"_"+serial).style.display = 'inline';
+				}
+			}
+			return maximo;
+		}});
+}
 
 function pintarBotonDeZona(contenido,zona,serial){
 	if(contenido == "1")
@@ -186,16 +198,7 @@ function pintarBotonDeZona(contenido,zona,serial){
 function cargarZonas(serialZonas){
 	for (i = 0; i < serialZonas.length; i++) { 
 		var serial= serialZonas[i];  
-		var urlsendInformation = $(location).attr('pathname') + "/obtainzone/"+serial;
-			$.ajax({ url : urlsendInformation,
-				contentType: "application/json",
-				dataType: 'json',
-				success: function(data){
-					var maximo= data.maximo;
-					for(j=0; j<maximo; j++){
-						
-					}
-				}});
+		
 			
 		}
 	

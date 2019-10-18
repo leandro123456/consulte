@@ -235,6 +235,30 @@ public class MqttController {
 	  	 return message;
 	  	 
 	  }	
+	
+	
+	/****            zona de la alarmas            ****/
+	
+	@GetMapping("home/obtainzone/{serial}/zona/{zona}")
+	@ResponseBody
+	public String ActulizarZonasAlarma(Model model, @PathVariable String serial, @PathVariable String zona) {
+		Device device = devado.retrieveBySerialNumber(serial);
+		if(device.getMayorZonaInformada()<Integer.parseInt(zona)) {
+			device.setMayorZonaInformada(Integer.parseInt(zona));
+			devado.update(device);
+			
+		}
+		String result="";
+		if(tipo.equals("alarma")){
+			result =EnviarMensajeAlarma(serial, message,swith);
+		}
+		else{
+			result =EnviarMensajeSonoff(serial,message,swith);
+		}
+		JSONObject json = new JSONObject();
+		json.put("result", result);
+		return json.toString();
+	}
 
 	
 }
