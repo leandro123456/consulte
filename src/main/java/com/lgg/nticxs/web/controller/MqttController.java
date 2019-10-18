@@ -238,25 +238,31 @@ public class MqttController {
 	
 	
 	/****            zona de la alarmas            ****/
+	@GetMapping("home/obtainmaxzone/{serial}")
+	@ResponseBody
+	public String ObtenerMaximaZonaAlarma(Model model, @PathVariable String serial) {
+		Device device = devado.retrieveBySerialNumber(serial);
+		Integer result = device.getMayorZonaInformada();
+		JSONObject json = new JSONObject();
+		json.put("result", result);
+		return json.toString();
+	}
+	
 	
 	@GetMapping("home/obtainzone/{serial}/zona/{zona}")
 	@ResponseBody
 	public String ActulizarZonasAlarma(Model model, @PathVariable String serial, @PathVariable String zona) {
+		JSONObject json = new JSONObject();
 		Device device = devado.retrieveBySerialNumber(serial);
 		if(device.getMayorZonaInformada()<Integer.parseInt(zona)) {
+			json.put("inicio", device.getMayorZonaInformada());
+			json.put("fin",zona);
+			json.put("fueactualizado", true);
 			device.setMayorZonaInformada(Integer.parseInt(zona));
 			devado.update(device);
 			
-		}
-		String result="";
-		if(tipo.equals("alarma")){
-			result =EnviarMensajeAlarma(serial, message,swith);
-		}
-		else{
-			result =EnviarMensajeSonoff(serial,message,swith);
-		}
-		JSONObject json = new JSONObject();
-		json.put("result", result);
+		}else
+			json.put("fueactualizado", false);
 		return json.toString();
 	}
 

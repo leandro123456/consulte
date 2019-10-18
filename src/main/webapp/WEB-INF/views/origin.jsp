@@ -486,26 +486,21 @@ $("#serialnumber").blur(function() {
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		console.log("dispositivos: "+ ${cantidadSensores});
-		if(${cantidadSensores}!=0){
-			startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr","mqttpwd",${topicos});
-		}
-		console.log("dispositivos alarma: "+ ${cantidadAlarma})
-		if(${cantidadAlarma}!=0)
-		startConnectAlarma("${hostalarma}","${puertoalarma}",${sslalarma},"${usuarioalarma}","${passalarma}",${topicosalarmas});
-// 		cargarZonas("${alarmaZonas}");
+		cargarZonas(${alarmaSerial});
+		setTimeout(iniciaConexion, 5000);
 	});
 </script>
 
 <script type="text/javascript">
-	function modificarTamanoAlarma(){
-		 var w = window.outerWidth;
-		  var h = window.outerHeight;
-		  var txt = "Window size: width=" + w + ", height=" + h;
-		  if(w<980 ){
-			  console.log("la pantalla se redujo" + txt);
-		  }
-	} 
+function iniciaConexion(){
+	console.log("dispositivos: "+ ${cantidadSensores});
+	if(${cantidadSensores}!=0){
+		startConnectSonoff("mqtt.coiaca.com", 8080, false, "mqttusr","mqttpwd",${topicos});
+	}
+	console.log("dispositivos alarma: "+ ${cantidadAlarma})
+	if(${cantidadAlarma}!=0)
+	startConnectAlarma("${hostalarma}","${puertoalarma}",${sslalarma},"${usuarioalarma}","${passalarma}",${topicosalarmas});
+}
 </script>
 
 

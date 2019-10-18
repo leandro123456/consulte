@@ -164,7 +164,7 @@ function onMessageArrivedAlarma(message) {
 		console.log("llego informacion de una zona: " +topico+"; "+contenido);
 		var zona= topico.substring(topico.search("/Zone")).replace("/Zone","");
 		var serial= topico.substring(0,topico.search("/Zone"));
-		var maxZonaActualizada = maximaZona(serial, zona);
+		maximaZona(serial, zona);
 		pintarBotonDeZona(contenido,zona,serial);
 	}
 }
@@ -177,16 +177,15 @@ function maximaZona(serial, zona){
 		contentType: "application/json",
 		dataType: 'json',
 		success: function(data){
-			var maximo= data.maximo;
 			if(data.fueactualizado){
-				for(var j=data.inicio; j<data.fin; j++){
+				for(var j=data.inicio+1; j<data.fin+1; j++){
 					document.getElementById("zone_"+j+"_"+serial).style.display = 'inline';
 				}
 			}
-			return maximo;
 		}});
 }
 
+//funcion para pintar las zonas si tienen alarma
 function pintarBotonDeZona(contenido,zona,serial){
 	if(contenido == "1")
 		document.getElementById("zone_"+zona+"_"+serial).style.color = "blue"; 
@@ -195,17 +194,29 @@ function pintarBotonDeZona(contenido,zona,serial){
 }
 
 
-function cargarZonas(serialZonas){
-	for (i = 0; i < serialZonas.length; i++) { 
-		var serial= serialZonas[i];  
-		
-			
-		}
-	
 
-	
+
+//caraga de zonas al inicio
+function cargarZonas(serialZonas){
+	var seriales = serialZonas;
+	console.log("estos son los serials: "+ seriales +" ;cantidad: "+ seriales.length);
+	seriales.forEach(cargazonaEfectiva);
 }
 
+function cargazonaEfectiva(item, index){
+	var urlsendInformation = $(location).attr('pathname') + "/obtainmaxzone/"+item;
+	$.ajax({ url : urlsendInformation,
+		contentType: "application/json",
+		dataType: 'json',
+		success: function(data){
+			var maximo= data.result;
+			console.log("obtuvo las zonas: "+ maximo);
+				for(var j=1; j<maximo+1; j++){
+					
+					document.getElementById("zone_"+j+"_"+item).style.display = 'inline';
+			}
+		}});
+}
 
 // Called after form input is processed
 function startConnect45(host,port,ssl,user,pass,fileouput, topico) {

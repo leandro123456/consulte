@@ -127,6 +127,7 @@ public class HomeController {
         model.addAttribute("usuarioalarma", "mqttusr");
         model.addAttribute("passalarma", "mqttpwd");
         model.addAttribute("topicosalarmas", topicosdeAlarma);
+        model.addAttribute("alarmaSerial", obtenerSerialAlarmas(user.getDeviceserialnumber()));
         
         //fin de alarmas
    		return new ModelAndView("origin", model);
@@ -139,6 +140,18 @@ public class HomeController {
 
 
 	
+	private List<String> obtenerSerialAlarmas(List<String> deviceserialnumber) {
+		List<String> result = new ArrayList<>();
+		for (String serial: deviceserialnumber){
+			Device device = devicedao.retrieveBySerialNumber(serial);
+			if(device.getTipo().equals(Device.ALARMA))
+				result.add("'"+serial+"'");
+		}
+		return result;
+	}
+
+
+
 	@PostMapping("validate")
 	public String validateMail(Model model,@RequestParam(name="code") String code,
 			@RequestParam(name="user") String user) {
