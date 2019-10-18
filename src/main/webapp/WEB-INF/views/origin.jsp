@@ -487,7 +487,7 @@ $("#serialnumber").blur(function() {
 <script type="text/javascript">
 	$(document).ready(function() {
 		cargarZonas(${alarmaSerial});
-		setTimeout(iniciaConexion, 5000);
+		setTimeout(iniciaConexion, 2000);
 	});
 </script>
 
