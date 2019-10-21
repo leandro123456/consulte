@@ -1,5 +1,8 @@
 package com.lgg.nticxs.web.controller;
 
+import java.net.HttpURLConnection;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -173,48 +176,67 @@ public class MqttController {
 
 	private String EnviarMensajeAlarma(String serial, String mensaje, String particion) {
 		System.out.println("LLEGO al envio de la alarma, particion: " + particion);
-		String publisherId = UUID.randomUUID().toString();
-		Device device = devado.retrieveBySerialNumber(serial);
-		if(device!= null){
-			DeviceConfiguration conf = null;
-			if(device.getUsedefaultbrocker())
-				conf=device.getDeviceconfiguration().get(0);
-			else
-				conf=device.getDeviceconfiguration().get(1);
+		
 		try {
-			
-			IMqttClient publisher = new MqttClient("ws://"+conf.getIphostescuchar()+":"+conf.getPortescuchar(),publisherId);
-						
-			MqttConnectOptions options = new MqttConnectOptions();
-			options.setAutomaticReconnect(false);
-			options.setCleanSession(false);
-			options.setConnectionTimeout(25);
-			options.setUserName(conf.getUserescuchar());
-			options.setPassword(conf.getPassescuchar().toCharArray());			
-			if ( !publisher.isConnected()) {
-	           	System.out.println("+++++NO estaba conectada");
-	           	publisher.connect(options);
-	           	//return "fallo la conexion";
-	        }else {
-	        	System.out.println("YA esta conectado a :" + publisher);
-	        }
-			System.out.println("ESTE ES EL MENSAJE: "+mensaje);
-			String message = ArmarMensajeAlarma(mensaje, particion);
-	        MqttMessage msg = makemqttmessageString(message);
-	        msg.setQos(0);
-	        //msg.setRetained(true);
-	        publisher.publish(conf.getTopicescribir(),msg); 
-	        System.out.println("esta es la URL: "+ publisher.getServerURI());
-	        publisher.disconnect();
-	        publisher.close();
+			if(mensaje.contains("alarm-"))
+				mensaje=mensaje.replace("alarm-", "");
+			if(mensaje.contains("armarzona"))
+				mensaje=particion+"S";
+			if(mensaje.contains("armartotal"))
+				mensaje=particion+"A";
+			URL url = new URL("http://localhost:8080/envio/"+serial+"/"+mensaje);
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			con.setRequestMethod("GET");
+			int status = con.getResponseCode();
+			System.out.println("RESPUESTA: "+ status);
+			return "EXITO";
 		} catch (Exception e) {
-			System.out.println("mensaje: "+ e.getMessage());
 			e.printStackTrace();
-			return "ERROR CATCH: "+e.getMessage();
-		}	
-		return "envio exitoso";
+			return "FALLO!";
 		}
-		return "error - device null";	
+		
+//		String publisherId = UUID.randomUUID().toString();
+//		Device device = devado.retrieveBySerialNumber(serial);
+//		if(device!= null){
+//			DeviceConfiguration conf = null;
+//			if(device.getUsedefaultbrocker())
+//				conf=device.getDeviceconfiguration().get(0);
+//			else
+//				conf=device.getDeviceconfiguration().get(1);
+//		try {
+//			
+//			IMqttClient publisher = new MqttClient("ws://"+conf.getIphostescuchar()+":"+conf.getPortescuchar(),publisherId);
+//						
+//			MqttConnectOptions options = new MqttConnectOptions();
+//			options.setAutomaticReconnect(false);
+//			options.setCleanSession(false);
+//			options.setConnectionTimeout(25);
+//			options.setUserName(conf.getUserescuchar());
+//			options.setPassword(conf.getPassescuchar().toCharArray());			
+//			if ( !publisher.isConnected()) {
+//	           	System.out.println("+++++NO estaba conectada");
+//	           	publisher.connect(options);
+//	           	//return "fallo la conexion";
+//	        }else {
+//	        	System.out.println("YA esta conectado a :" + publisher);
+//	        }
+//			System.out.println("ESTE ES EL MENSAJE: "+mensaje);
+//			String message = ArmarMensajeAlarma(mensaje, particion);
+//	        MqttMessage msg = makemqttmessageString(message);
+//	        msg.setQos(0);
+//	        //msg.setRetained(true);
+//	        publisher.publish(conf.getTopicescribir(),msg); 
+//	        System.out.println("esta es la URL: "+ publisher.getServerURI());
+//	        publisher.disconnect();
+//	        publisher.close();
+//		} catch (Exception e) {
+//			System.out.println("mensaje: "+ e.getMessage());
+//			e.printStackTrace();
+//			return "ERROR CATCH: "+e.getMessage();
+//		}	
+//		return "envio exitoso";
+//		}
+//		return "error - device null";	
 	}
 	
     private String ArmarMensajeAlarma(String mensaje, String particion) {
