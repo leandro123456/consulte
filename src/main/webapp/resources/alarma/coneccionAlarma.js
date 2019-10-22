@@ -168,7 +168,7 @@ function onMessageArrivedAlarma(message) {
 }
 
 
-//verifica si la zona recibida es mayor al maximo re
+//verifica si la zona recibida es mayor al maximo que ya existe
 function maximaZona(serial, zona){
 	var urlsendInformation = $(location).attr('pathname') + "/obtainzone/"+serial+"/zona"+zona;
 	$.ajax({ url : urlsendInformation,
@@ -176,7 +176,10 @@ function maximaZona(serial, zona){
 		dataType: 'json',
 		success: function(data){
 			if(data.fueactualizado){
-				for(var j=data.inicio+1; j<data.fin+1; j++){
+				console.log("inicio: "+data.inicio+1);
+				console.log("fin: "+data.fin);
+				for(var j=data.inicio+1; j<=data.fin; j++){
+					console.log("boton: "+ "zone_"+j+"_"+serial);
 					document.getElementById("zone_"+j+"_"+serial).style.display = 'inline';
 				}
 			}

@@ -277,7 +277,8 @@ public class MqttController {
 	public String ActulizarZonasAlarma(Model model, @PathVariable String serial, @PathVariable String zona) {
 		JSONObject json = new JSONObject();
 		Device device = devado.retrieveBySerialNumber(serial);
-		if(device.getMayorZonaInformada()<Integer.parseInt(zona.replace("zona", ""))) {
+		zona=zona.replace("zona", "");
+		if(device.getMayorZonaInformada()<Integer.parseInt(zona)) {
 			json.put("inicio", device.getMayorZonaInformada());
 			json.put("fin",zona);
 			json.put("fueactualizado", true);
