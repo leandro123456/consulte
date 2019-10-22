@@ -43,6 +43,8 @@ function Connecttotal(swith,serial,message1){
          },
 		success: function(data){
 			console.log(data.result);
+			if(data.result== "")
+				activo.style.color = "red";
 			var texto= "btn-"+message1.replace("alarm-","")+serial;
 			var activo = document.getElementById(texto);
 			if(message1.includes("armarzona")){

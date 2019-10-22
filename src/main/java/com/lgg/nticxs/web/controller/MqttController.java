@@ -187,12 +187,13 @@ public class MqttController {
 			URL url = new URL("http://localhost:8080/envio/"+serial+"/"+mensaje);
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 			con.setRequestMethod("GET");
-			int status = con.getResponseCode();
-			System.out.println("RESPUESTA: "+ status);
-			return "EXITO";
+			int cod_status = con.getResponseCode();
+			String status = con.getResponseMessage();
+			System.out.println("RESPUESTA: "+ status+": "+cod_status);
+			return status;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "FALLO!";
+			return "fallo_envio";
 		}
 		
 //		String publisherId = UUID.randomUUID().toString();
@@ -271,12 +272,12 @@ public class MqttController {
 	}
 	
 	
-	@GetMapping("home/obtainzone/{serial}/zona/{zona}")
+	@GetMapping("home/obtainzone/{serial}/{zona}")
 	@ResponseBody
 	public String ActulizarZonasAlarma(Model model, @PathVariable String serial, @PathVariable String zona) {
 		JSONObject json = new JSONObject();
 		Device device = devado.retrieveBySerialNumber(serial);
-		if(device.getMayorZonaInformada()<Integer.parseInt(zona)) {
+		if(device.getMayorZonaInformada()<Integer.parseInt(zona.replace("zona", ""))) {
 			json.put("inicio", device.getMayorZonaInformada());
 			json.put("fin",zona);
 			json.put("fueactualizado", true);
