@@ -173,8 +173,8 @@
 	margin-left: 1em;
 	}
 	
-	h6.imgsignal{
-	background-image: url("imgsignal/withoutsignal.png");
+	img.imgsignal{
+	background-image: url("imgsignal/withoutsignal.jpg");
 	}
 	
 	span.signaldef{
