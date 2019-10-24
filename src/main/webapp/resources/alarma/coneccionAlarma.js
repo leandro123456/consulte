@@ -165,8 +165,16 @@ function onMessageArrivedAlarma(message) {
 		maximaZona(serial, zona);
 		pintarBotonDeZona(contenido,zona,serial);
 	}
+	else if(topico.includes("keepAlive")){
+		console.log("emnsaje de keepAlive: "+ contenido);
+		//obtenerIconoNivelSeñal(contenido);
+	}
 }
 
+//analizar la señal y elegir icono
+function obtenerIconoNivelSeñal(informacion){
+	
+}
 
 //verifica si la zona recibida es mayor al maximo que ya existe
 function maximaZona(serial, zona){
