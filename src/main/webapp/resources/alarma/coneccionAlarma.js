@@ -102,11 +102,9 @@ function onMessageArrivedAlarma(message) {
 		informarstatus45(message.destinationName, message.payloadString)
 	}
 	if (topico.includes("activePartition")){
-		console.log("particion activa!!!!!!!!!!!!!!!!!!!!!"+ message.payloadString);
 		iddevice = topico.substring(0,topico.search("/activePartition"));
-		console.log("particion activa!!!!!!!!!!!!!!!!!!!!!"+ iddevice);
 		 var numparticion = document.getElementById("particiones"+iddevice);
-		 console.log("particion activa!!!!!!!!!!!!!!!!!!!!!"+ numparticion);
+		 console.log("Particion activa-> iddevice: "+iddevice+"; particion: "+ numparticion);
 		 numparticion.innerHTML = message.payloadString;
 	}
 	else if(topico.includes("Partition")){
@@ -167,13 +165,26 @@ function onMessageArrivedAlarma(message) {
 	}
 	else if(topico.includes("keepAlive")){
 		console.log("emnsaje de keepAlive: "+ contenido);
-		//obtenerIconoNivelSeñal(contenido);
+		obtenerIconoNivelSeñal(contenido);
 	}
 }
 
 //analizar la señal y elegir icono
 function obtenerIconoNivelSeñal(informacion){
-	
+	var obj = JSON.parse(informacion);
+	var serialId=obj.deviceID;
+	var valor=obj.dBm *(-1);
+	if(valor>90)
+		document.getElementById('img_signal_'+serialId).src='resources/mqttResources/imgsignal/WS.png';
+	if(valor>75 && valor<91)
+		document.getElementById('img_signal_'+serialId).src='resources/mqttResources/imgsignal/1b.png';
+	else if(valor>60 && valor<76)
+		document.getElementById('img_signal_'+serialId).src='resources/mqttResources/imgsignal/2b.png';
+	else if(valor>45 && valor<61)
+		document.getElementById('img_signal_'+serialId).src='resources/mqttResources/imgsignal/3b.png';
+	else if(valor<46)
+		document.getElementById('img_signal_'+serialId).src='resources/mqttResources/imgsignal/4b.png';
+
 }
 
 //verifica si la zona recibida es mayor al maximo que ya existe
