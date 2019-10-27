@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lgg.nticxs.web.DAO.DeviceDAO;
@@ -289,6 +290,25 @@ public class MqttController {
 			json.put("fueactualizado", false);
 		return json.toString();
 	}
+
+	
+//	@PostMapping("home/parsingmessage/{serial}")
+//	@ResponseBody
+//	public String ParsearMensaje(Model model, @PathVariable String serial, @PathVariable String zona) {
+//		JSONObject json = new JSONObject();
+//		Device device = devado.retrieveBySerialNumber(serial);
+//		zona=zona.replace("zona", "");
+//		if(device.getMayorZonaInformada()<Integer.parseInt(zona)) {
+//			json.put("inicio", device.getMayorZonaInformada());
+//			json.put("fin",zona);
+//			json.put("fueactualizado", true);
+//			device.setMayorZonaInformada(Integer.parseInt(zona));
+//			devado.update(device);
+//			
+//		}else
+//			json.put("fueactualizado", false);
+//		return json.toString();
+//	}
 
 	
 }

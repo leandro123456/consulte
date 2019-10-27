@@ -123,8 +123,14 @@ function animatevar (id,spanid, val){
 
 /** comportamiento cuando recibe un mensaje*/
 function onMessageArrivedSonoff(message) {
-	console.log("en ESTE CASO NO DEBERIA SER TOMADA COMO NOTIFICACION: "+ message.destinationName.includes("/cmd"));
+	console.log("en ESTE CASO NO DEBERIA SER TOMADA COMO NOTIFICACION: "+ message.destinationName.includes("cmd"));
 	console.log("LLEGO UN MENSAJE: "+message.destinationName+"; contenido: "+  message.payloadString);
+	
+	
+	if(message.destinationName.includes("/state")){
+		console.log("********************************************* ESTE ES EL STATUS");
+		obtenerIconoNivelSeñal(message.payloadString);
+	}
 	
 	var inputAll= message.payloadString;	
 	var dataObj = null;
@@ -179,7 +185,25 @@ function onMessageArrivedSonoff(message) {
 
 /** comportamiento cuando recibe un mensaje*/
 
+//analizar la señal y elegir icono
+function obtenerIconoNivelSeñal(informacion){
+	console.log("llego la informacion: "+informacion);
+	var obj = JSON.parse(informacion);
+	var serialId=obj.deviceId;
+	var valor=obj.dBm *(-1);
+	console.log("**************************** llego a la signal: "+ valor + "serial: "+ serialId); //img_signal_PSWS10000000001
+	if(valor>90)
+		document.getElementById('img_signal_'+serialId).src='resources/mqttResources/imgsignal/WSb.png';
+	if(valor>75 && valor<91)
+		document.getElementById('img_signal_'+serialId).src='resources/mqttResources/imgsignal/1bb.png';
+	else if(valor>60 && valor<76)
+		document.getElementById('img_signal_'+serialId).src='resources/mqttResources/imgsignal/2bb.png';
+	else if(valor>45 && valor<61)
+		document.getElementById('img_signal_'+serialId).src='resources/mqttResources/imgsignal/3bb.png';
+	else if(valor<46)
+		document.getElementById('img_signal_'+serialId).src='resources/mqttResources/imgsignal/4bb.png';
 
+}
 
 
 // Called after form input is processed
