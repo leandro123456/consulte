@@ -130,6 +130,8 @@ function onMessageArrivedSonoff(message) {
 	if(message.destinationName.includes("/state")){
 		console.log("********************************************* ESTE ES EL STATUS");
 		obtenerIconoNivelSeñal(message.payloadString);
+	}else{
+		console.log("***********************************  NO TIENE STATE");
 	}
 	
 	var inputAll= message.payloadString;	
