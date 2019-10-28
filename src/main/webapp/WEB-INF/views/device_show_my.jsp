@@ -118,9 +118,9 @@
 	                      </c:choose>
 	                      </td>
 	                      <td>
-	                      	<a style="padding-right: 1em;" href="/home/info/${devices.serial}">
-					          <i class="fa fa-edit" aria-hidden="true"></i>
-					        </a>
+<%-- 	                      	<a style="padding-right: 1em;" href="/home/info/${devices.serial}"> --%>
+<!-- 					          <i class="fa fa-edit" aria-hidden="true"></i> -->
+<!-- 					        </a> -->
 					        <a href="#" data-whatever="${devices.serial}" data-toggle="modal" data-target="#deleteModal">
 	                      	 <i class="fa fa-trash" aria-hidden="true"></i>
 	                      	</a>

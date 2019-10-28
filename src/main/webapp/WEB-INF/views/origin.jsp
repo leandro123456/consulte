@@ -52,6 +52,13 @@
 
 <body id="page-top">
 <script type="text/javascript">
+	$(document).ready(function() {
+		cargarZonas(${alarmaSerial});
+		setTimeout(iniciaConexion, 2000);
+	});
+</script>
+
+<script type="text/javascript">
 function getParameterByName(name) {
 	var locacion = location.search;
 	var texto=locacion.replace("?"+name+"=","");
@@ -477,19 +484,13 @@ function getParameterByName(name) {
 
 
 <script type="text/javascript">
-//Evento asociado a terminar de escribir el Serial
 $("#serialnumber").blur(function() {
 	var valorSerial = document.getElementById("serialnumber").value;
       evaluarNumeroDeSerie(valorSerial);
     });
 </script>
 
-<script type="text/javascript">
-	$(document).ready(function() {
-		cargarZonas(${alarmaSerial});
-		setTimeout(iniciaConexion, 2000);
-	});
-</script>
+
 
 <script type="text/javascript">
 function iniciaConexion(){

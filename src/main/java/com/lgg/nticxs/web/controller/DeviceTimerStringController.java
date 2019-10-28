@@ -65,18 +65,23 @@ public class DeviceTimerStringController {
 			model.addAttribute("msg1", "la combinacion de dias es incorrecta");
 			return "timerstringedit";
 		}
-		device.setTimerString(message);
-		devicedao.update(device);
-		DeviceConfiguration conf = null;
-		if(device.getUsedefaultbrocker()) 
-			conf = device.getDeviceconfiguration().get(0);
-		else
-			conf = device.getDeviceconfiguration().get(1);
-		JSONObject json = new JSONObject();
-	   	json.put("pwd", "mqttmng");
-	   	json.put("command", "timerString");
-	   	json.put("value",message);
-		SimpleTimerString.sendmessageMQTT(json, conf.getIphostescuchar(), conf.getPortescuchar(), conf.getTopicescribir(), conf.getUserescuchar(), conf.getPassescuchar());
+		else{
+			device.setTimerString(message);
+			devicedao.update(device);
+			model.addAttribute("msg", "actualizacion exitosa del encendido/apagado automatico");
+		}
+		//no envio el comando al device, lo guardo en la base
+//		DeviceConfiguration conf = null;
+//		if(device.getUsedefaultbrocker()) 
+//			conf = device.getDeviceconfiguration().get(0);
+//		else
+//			conf = device.getDeviceconfiguration().get(1);
+//		JSONObject json = new JSONObject();
+//	   	json.put("pwd", "mqttmng");
+//	   	json.put("command", "timerString");
+//	   	json.put("value",message);
+//		SimpleTimerString.sendmessageMQTT(json, conf.getIphostescuchar(), conf.getPortescuchar(), conf.getTopicescribir(), conf.getUserescuchar(), conf.getPassescuchar());
+		
 		return "origin";
 	}
 	

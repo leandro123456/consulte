@@ -98,7 +98,8 @@ public class ManagementDevice {
 					user=userescucharremote;
 					pass=passescucharremote;
 				}
-				SimpleTimerString.sendtimerString(timerstringvalue,host,port,topic,user,pass);
+				//no envio el TimerString - lo guardo en base y evaluo desde otro modulo
+				//SimpleTimerString.sendtimerString(timerstringvalue,host,port,topic,user,pass);
 				//vista sonoff
 				String vistasonoff ="";
 				System.out.println("cantidad de sonoff recibido: " + cantidadswiths);
