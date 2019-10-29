@@ -165,12 +165,12 @@ function onMessageArrivedAlarma(message) {
 	}
 	else if(topico.includes("keepAlive")){
 		console.log("emnsaje de keepAlive: "+ contenido);
-		obtenerIconoNivelSeñalAlarma(contenido);
+		obtenerIconoNivelSAlarma(contenido);
 	}
 }
 
 //analizar la señal y elegir icono
-function obtenerIconoNivelSeñalAlarma(informacion){
+function obtenerIconoNivelSAlarma(informacion){
 	var obj = JSON.parse(informacion);
 	var serialId=obj.deviceID;
 	var valor=obj.dBm *(-1);

@@ -129,7 +129,7 @@ function onMessageArrivedSonoff(message) {
 	
 	if(message.destinationName.includes("/state")){
 		console.log("********************************************* ESTE ES EL STATUS");
-		obtenerIconoNivelSeñal(message.payloadString);
+		obtenerIconoNivelS(message.payloadString);
 	}else{
 		console.log("***********************************  NO TIENE STATE");
 	}
@@ -188,7 +188,7 @@ function onMessageArrivedSonoff(message) {
 /** comportamiento cuando recibe un mensaje*/
 
 //analizar la señal y elegir icono
-function obtenerIconoNivelSeñal(informacion){
+function obtenerIconoNivelS(informacion){
 	console.log("llego la informacion: "+informacion);
 	var obj = JSON.parse(informacion);
 	var serialId=obj.deviceId;
