@@ -30,6 +30,7 @@ public class Device extends MongoDBObject{
 	private DeviceNotification lastnotification;
 	private Integer particiones;
 	private Integer mayorZonaInformada;
+	private Map<String,String> zonasObtenidas;
 	private List<DeviceAlarm> alarms;
 	private Boolean usedefaultbrocker;
 	private List<DeviceConfiguration> deviceconfiguration;
@@ -111,6 +112,8 @@ public class Device extends MongoDBObject{
 		this.delete = delete;
 	}
 
+
+
 	public String getRole() {
 		return role;
 	}
@@ -135,7 +138,13 @@ public class Device extends MongoDBObject{
 		this.description = description;
 	}
 
+	public Map<String, String> getZonasObtenidas() {
+		return zonasObtenidas;
+	}
 
+	public void setZonasObtenidas(Map<String, String> zonasObtenidas) {
+		this.zonasObtenidas = zonasObtenidas;
+	}
 
 	public Map<String, String> getVista() {
 		return vista;

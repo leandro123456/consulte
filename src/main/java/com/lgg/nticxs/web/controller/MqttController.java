@@ -4,6 +4,7 @@ import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import org.eclipse.paho.client.mqttv3.IMqttClient;
@@ -273,12 +274,26 @@ public class MqttController {
 	}
 	
 	
-	@GetMapping("home/obtainzone/{serial}/{zona}")
+	@GetMapping("home/obtainzone/{serial}/{zona}/{contenido}")
 	@ResponseBody
-	public String ActulizarZonasAlarma(Model model, @PathVariable String serial, @PathVariable String zona) {
+	public String ActulizarZonasAlarma(Model model, @PathVariable String serial,
+			@PathVariable String zona, @PathVariable String contenido) {
 		JSONObject json = new JSONObject();
 		Device device = devado.retrieveBySerialNumber(serial);
 		zona=zona.replace("zona", "");
+		if(device.getZonasObtenidas()==null){
+			device.setZonasObtenidas(new HashMap<>());
+			devado.update(device);
+		}
+		if(device.getZonasObtenidas().containsKey(zona))
+			device.getZonasObtenidas().remove(zona);
+		device.getZonasObtenidas().put(zona, contenido);
+		devado.update(device);
+		
+		for (Map.Entry<String, String> entry : device.getZonasObtenidas()) {
+		    System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue());
+		}
+		
 		if(device.getMayorZonaInformada()<Integer.parseInt(zona)) {
 			json.put("inicio", device.getMayorZonaInformada());
 			json.put("fin",zona);

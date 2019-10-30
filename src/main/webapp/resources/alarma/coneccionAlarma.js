@@ -75,16 +75,16 @@ function informarstatus45(topicorecibido, mensajerecibido){
 	var iddevice = topicorecibido.replace("/Status","");
 	if(mensajerecibido =="online"){
 		updateEstado45("spanestado"+iddevice, "online","statussonoff");
-		if(document.getElementById("ready_icon"+iddevice)!= null)
-			document.getElementById("ready_icon"+iddevice).style.color = "green"
+		//if(document.getElementById("ready_icon"+iddevice)!= null)
+			//document.getElementById("ready_icon"+iddevice).style.color = "green"
 	}if(mensajerecibido =="offline"){
 		updateEstado45("spanestado"+iddevice, "offline", "statussonoff");
-		if(document.getElementById("ready_icon"+iddevice)!= null)
-			document.getElementById("ready_icon"+iddevice).style.color = "red"
+		//if(document.getElementById("ready_icon"+iddevice)!= null)
+			//document.getElementById("ready_icon"+iddevice).style.color = "red"
 	}if(mensajerecibido =="disconnected"){
 		updateEstado45("spanestado"+iddevice, "online", "statussonoff");
-		if(document.getElementById("ready_icon"+iddevice)!= null)
-			document.getElementById("ready_icon"+iddevice).style.color = "yellow"
+		//if(document.getElementById("ready_icon"+iddevice)!= null)
+			//document.getElementById("ready_icon"+iddevice).style.color = "yellow"
 	}if(mensajerecibido !="disconnected" && mensajerecibido !="online" && mensajerecibido !="offline"){
 		console.log("el mensaje que se recibio es invalido: "+ mensajerecibido);
 	}
@@ -118,35 +118,35 @@ function onMessageArrivedAlarma(message) {
 				document.getElementById("ac_icon"+iddevice).style.color = "grey";
 				document.getElementById("armed_icon"+iddevice).style.color = "grey";
 				document.getElementById("trouble_icon"+iddevice).style.color = "grey";
-				
+				document.getElementById("virtual_lcd_"+iddevice).style.backgroundColor = "blue";
 				var spanStatus = document.getElementById("second_line"+iddevice);
 				spanStatus.firstChild.data = "Disarmed";
 			}else if(contenido == "armed_home"){
 				document.getElementById("armed_icon"+iddevice).style.color = "green";
 				document.getElementById("ac_icon"+iddevice).style.color = "grey";
 				document.getElementById("trouble_icon"+iddevice).style.color = "grey";
-				
+				document.getElementById("virtual_lcd_"+iddevice).style.backgroundColor = "blue";
 				var spanStatus = document.getElementById("second_line"+iddevice);
-				spanStatus.firstChild.data = "Armed in Home";
+				spanStatus.firstChild.data = "Armed Home";
 			}else if(contenido =="armed_away"){
 				document.getElementById("armed_icon"+iddevice).style.color = "green";
 				document.getElementById("trouble_icon"+iddevice).style.color = "grey";
 				document.getElementById("ac_icon"+iddevice).style.color = "grey";
-				
+				document.getElementById("virtual_lcd_"+iddevice).style.backgroundColor = "blue";
 				var spanStatus = document.getElementById("second_line"+iddevice);
 				spanStatus.firstChild.data = "Armed Away";
 			}else if(contenido =="pending"){
 				document.getElementById("trouble_icon"+iddevice).style.color = "grey";
 				document.getElementById("armed_icon"+iddevice).style.color = "yellow";
 				document.getElementById("ac_icon"+iddevice).style.color = "grey";
-				
+				document.getElementById("virtual_lcd_"+iddevice).style.backgroundColor = "blue";
 				var spanStatus = document.getElementById("second_line"+iddevice);
 				spanStatus.firstChild.data = "Pending";
 			}else if (contenido == "triggered"){			
 				document.getElementById("trouble_icon"+iddevice).style.color = "red";
 				document.getElementById("armed_icon"+iddevice).style.color = "red";
 				document.getElementById("ac_icon"+iddevice).style.color = "red";
-				
+				document.getElementById("virtual_lcd_"+iddevice).style.backgroundColor = "red";
 				var spanStatus = document.getElementById("second_line"+iddevice);
 				spanStatus.firstChild.data = "Triggered";
 			}else{
@@ -160,8 +160,9 @@ function onMessageArrivedAlarma(message) {
 		console.log("llego informacion de una zona: " +topico+"; "+contenido);
 		var zona= topico.substring(topico.search("/Zone")).replace("/Zone","");
 		var serial= topico.substring(0,topico.search("/Zone"));
-		maximaZona(serial, zona);
+		maximaZona(serial, zona,contenido);
 		pintarBotonDeZona(contenido,zona,serial);
+		
 	}
 	else if(topico.includes("keepAlive")){
 		console.log("emnsaje de keepAlive: "+ contenido);
@@ -188,8 +189,8 @@ function obtenerIconoNivelSAlarma(informacion){
 }
 
 //verifica si la zona recibida es mayor al maximo que ya existe
-function maximaZona(serial, zona){
-	var urlsendInformation = $(location).attr('pathname') + "/obtainzone/"+serial+"/zona"+zona;
+function maximaZona(serial, zona,contenido){
+	var urlsendInformation = $(location).attr('pathname') + "/obtainzone/"+serial+"/"+zona+"/"+contenido;
 	$.ajax({ url : urlsendInformation,
 		contentType: "application/json",
 		dataType: 'json',
@@ -235,6 +236,11 @@ function cargazonaEfectiva(item, index){
 					
 					document.getElementById("zone_"+j+"_"+item).style.display = 'inline';
 			}
+			var todaszonasapagadas = data.zonasapagadas;
+			if(todaszonasapagadas)
+				document.getElementById("ready_icon"+item).style.color = "green";
+			else
+				document.getElementById("ready_icon"+item).style.color = "grey";
 		}});
 }
 

@@ -1,5 +1,639 @@
 
+<div class="col-lg-4 mb-4">
+	\t
+	<div class="card shadow mb-4">
+		\t\t
+		<div class="card-header py-3">
+			\t\t\t
+			<h6 class="m-0 font-weight-bold text-primary">Alarma
+				CAMBIARALARMA</h6>
+			\t\t
+		</div>
+		\t\t
+		<div class="card-body">
+			\t\t\t\t\t\t\t
+			<div class="row">
+				\t\t\t\t\t\t\t\t
+				<div id="lcd_container">
+					\t\t\t\t\t\t\t\t\t
+					<div class="virtual_lcd">
+						\t\t\t\t\t\t\t\t\t\t
+						<div class="row">
+							<span class="col-xs-8 signaldef">
+								<h6>
+									<small class="alinearspanstatus"></small>
+								</h6>
+							</span> <span class="col-xs-2">
+								<h6>
+									<small id="spanestadoCAMBIARALARMA">desconocido</small>
+								</h6>
+							</span> <span class="col-xs-4 signaldef2">
+								<h6>
+									<img id="img_signal_CAMBIARALARMA" class="imgsignal"
+										src="resources/mqttResources/imgsignal/QS.png" />
+								</h6>
+							</span>
+						</div>
+						\t\t\t\t\t\t\t\t\t\t
+						<div id="first_lineCAMBIARALARMA" class="row">
+							\t\t\t\t\t\t\t\t\t\t\t<span class="col-xs-4 alinedisplay"
+								style="padding-left: 1em; padding-right: 0.5em;">\t\t\t\t\t\t\t\t\t\t\t\t
+								<h6 class="alinearspanstatus">Particion:</h6>\t\t\t\t\t\t\t\t\t\t\t
+							</span>\t\t\t\t\t\t\t\t\t\t\t<span
+								class="col-xs-4 float-right alinezones">\t\t\t\t\t\t\t\t\t\t\t\t
+								<h6 id="particionesCAMBIARALARMA"></h6>\t\t\t\t\t\t\t\t\t\t\t
+							</span>\t\t\t\t\t\t\t\t\t\t
+						</div>
+						\t\t\t\t\t\t\t\t\t\t
+						<div id="second_lineCAMBIARALARMA" class="row"
+							style="padding-left: 1em; padding-right: 0.5em;">
+							\t\t\t\t\t\t\t\t\t\t\t<span class="col-xs-4 alinedisplay"
+								style="padding-left: 1em; padding-right: 0.5em;">\t\t\t\t\t\t\t\t\t\t\t\t
+								<h6 class="alinearspanstatus"></h6>\t\t\t\t\t\t\t\t\t\t\t
+							</span>\t\t\t\t\t\t\t\t\t\t\t<span
+								class="col-xs-4 float-right alinezones"
+								style="padding-left: 1em; padding-right: 0.5em;">\t\t\t\t\t\t\t\t\t\t\t\t
+								<h6 id="segundalineaCAMBIARALARMA"></h6>\t\t\t\t\t\t\t\t\t\t\t
+							</span>\t\t\t\t\t\t\t\t\t\t
+						</div>
+						\t\t\t\t\t\t\t\t\t
+					</div>
+					\t\t\t\t\t\t\t\t\t
+					<div class="status_icons">
+						\t\t\t\t\t\t\t\t\t\t<i class="dsc-icon icon-check"
+							id="ready_iconCAMBIARALARMA" title="Lista"></i>\t\t\t\t\t\t\t\t\t\t<i
+							class="dsc-icon icon-armed" id="armed_iconCAMBIARALARMA"
+							title="Armada"></i>\t\t\t\t\t\t\t\t\t\t<i
+							class="dsc-icon icon-trouble" id="trouble_iconCAMBIARALARMA"
+							title="Pendiente"></i> \t\t\t\t\t\t\t\t\t\t<i
+							class="dsc-icon icon-ac" id="ac_iconCAMBIARALARMA"
+							title="Desarmada"></i>\t\t\t\t\t\t\t\t\t
+					</div>
+					\t\t\t\t\t\t\t\t
+				</div>
+				\t\t\t\t\t\t\t\t
+				<div class="row" id="buttons_area">
+					\t\t\t\t\t\t\t\t\t
+					<div class="bordecolumna" id="columnaizquierdaCAMBIARALARMA">
+						\t\t\t\t\t\t\t\t\t
+						<p></p>
+						\t\t\t\t\t\t\t\t\t\t
+						<div class="centrarbonotesalarma">
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn-fCAMBIARALARMA"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button keypad_button_control"
+								onclick="Connecttotal('particion','CAMBIARALARMA','alarm-fuego')">
+								\t\t\t\t\t\t\t\t\t\t\t\t<i class="dsc-icon icon-flame"
+									title="Fuego"></i>\t\t\t\t\t\t\t\t\t\t\t
+							</button>
+							\t\t\t\t\t\t\t\t\t\t
+						</div>
+						\t\t\t\t\t\t\t\t\t\t
+						<p></p>
+						\t\t\t\t\t\t\t\t\t\t
+						<div class="centrarbonotesalarma">
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn-aCAMBIARALARMA"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button keypad_button_control"
+								onclick="Connecttotal('particion','CAMBIARALARMA','alarm-policia')">
+								\t\t\t\t\t\t\t\t\t\t\t\t<i class="dsc-icon icon-alert"
+									title="Alerta"></i>\t\t\t\t\t\t\t\t\t\t\t
+							</button>
+							\t\t\t\t\t\t\t\t\t\t
+						</div>
+						\t\t\t\t\t\t\t\t\t\t
+						<p></p>
+						\t\t\t\t\t\t\t\t\t\t
+						<div class="centrarbonotesalarma">
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn-pCAMBIARALARMA"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button keypad_button_control"
+								onclick="Connecttotal('particion','CAMBIARALARMA','alarm-medico')">
+								\t\t\t\t\t\t\t\t\t\t\t\t<i class="dsc-icon icon-thief"
+									title="Panico"></i>\t\t\t\t\t\t\t\t\t\t\t
+							</button>
+							\t\t\t\t\t\t\t\t\t\t
+						</div>
+						\t\t\t\t\t\t\t\t\t
+					</div>
+					\t\t\t\t\t\t\t\t\t
+					<div class="bordecolumna" id="columnaderechaCAMBIARALARMA">
+						\t\t\t\t\t\t\t\t\t
+						<p></p>
+						\t\t\t\t\t\t\t\t\t\t
+						<div class="centrarbonotesalarma">
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn-armarzonaCAMBIARALARMA"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button keypad_button_control"
+								onclick="Connecttotal('particion','CAMBIARALARMA','alarm-armarzona')">
+								\t\t\t\t\t\t\t\t\t\t\t\t<i class="dsc-icon icon-stay_away "
+									title="Armar en Casa"></i>\t\t\t\t\t\t\t\t\t\t\t
+							</button>
+							\t\t\t\t\t\t\t\t\t\t
+						</div>
+						\t\t\t\t\t\t\t\t\t\t
+						<p></p>
+						\t\t\t\t\t\t\t\t\t\t
+						<div class="centrarbonotesalarma">
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn-armartotalCAMBIARALARMA"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button keypad_button_control"
+								onclick="Connecttotal('particion','CAMBIARALARMA','alarm-armartotal')">
+								\t\t\t\t\t\t\t\t\t\t\t\t<i class="dsc-icon icon-stay_empty"
+									title="Armar Completa"></i>\t\t\t\t\t\t\t\t\t\t\t
+							</button>
+							\t\t\t\t\t\t\t\t\t\t
+						</div>
+						\t\t\t\t\t\t\t\t\t\t
+						<p></p>
+						\t\t\t\t\t\t\t\t\t\t
+						<div class="centrarbonotesalarma">
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn-campanaCAMBIARALARMA"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button keypad_button_control"
+								onclick="Connecttotal('particion','CAMBIARALARMA','alarm-campana')">
+								\t\t\t\t\t\t\t\t\t\t\t\t<i class="dsc-icon icon-bell"></i>\t\t\t\t\t\t\t\t\t\t\t
+							</button>
+							\t\t\t\t\t\t\t\t\t\t
+						</div>
+						\t\t\t\t\t\t\t\t\t
+					</div>
+					\t\t\t\t\t\t\t\t
+					<p></p>
+					\t\t \t\t\t\t\t\t\t\t\t
+					<div class="centrarbonotesalarma bordecolumna"
+						id="tecladoCAMBIARALARMA">
+						\t\t\t\t\t\t\t\t\t\t
+						<div class="keypad_button_row">
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn-1CAMBIARALARMA"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button"
+								onclick="Connecttotal('particion','CAMBIARALARMA','alarm-1')">1</button>
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn-2CAMBIARALARMA"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button"
+								onclick="Connecttotal('particion','CAMBIARALARMA','alarm-2')">2</button>
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn-3CAMBIARALARMA"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button"
+								onclick="Connecttotal('particion','CAMBIARALARMA','alarm-3')">3</button>
+							\t\t\t\t\t\t\t\t\t\t
+						</div>
+						\t\t\t\t\t\t\t\t\t\t
+						<div class="keypad_button_row">
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn-4CAMBIARALARMA"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button"
+								onclick="Connecttotal('particion','CAMBIARALARMA','alarm-4')">4</button>
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn-5CAMBIARALARMA"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button"
+								onclick="Connecttotal('particion','CAMBIARALARMA','alarm-5')">5</button>
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn-6CAMBIARALARMA"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button"
+								onclick="Connecttotal('particion','CAMBIARALARMA','alarm-6')">6</button>
+							\t\t\t\t\t\t\t\t\t\t
+						</div>
+						\t\t\t\t\t\t\t\t\t\t
+						<div class="keypad_button_row">
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn-7CAMBIARALARMA"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button"
+								onclick="Connecttotal('particion','CAMBIARALARMA','alarm-7')">7</button>
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn-8CAMBIARALARMA"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button"
+								onclick="Connecttotal('particion','CAMBIARALARMA','alarm-8')">8</button>
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn-9CAMBIARALARMA"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button"
+								onclick="Connecttotal('particion','CAMBIARALARMA','alarm-9')">9</button>
+							\t\t\t\t\t\t\t\t\t\t
+						</div>
+						\t\t\t\t\t\t\t\t\t\t
+						<div class="keypad_button_row">
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn-*CAMBIARALARMA"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button"
+								onclick="Connecttotal('particion','CAMBIARALARMA','alarm-*')">*</button>
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn-0CAMBIARALARMA"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button"
+								onclick="Connecttotal('particion','CAMBIARALARMA','alarm-0')">0</button>
+							\t\t\t\t\t\t\t\t\t\t\t
+							<button type="button" id="btn-#CAMBIARALARMA"
+								\t\t\t\t\t\t\t\t\t\t\t\tclass="btn btn-outline-dark keypad_button"
+								onclick="Connecttotal('particion','CAMBIARALARMA','alarm-#')">#</button>
+							\t\t\t\t\t\t\t\t\t\t
+						</div>
+						\t\t\t\t\t\t\t\t\t
+					</div>
+					\t\t\t\t\t\t\t\t
+				</div>
+				\t\t\t\t\t\t\t\t
+				<div class="row" id="zones_listCAMBIARALARMA">
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_1_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9> Zone 01</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" id="zone_2_CAMBIARALARMA"
+						style="display: none;">
+						<i class="fa fa-circle"></i>
+						<h9> Zone 02 </h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_3_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9> Zone 03 </h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_4_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9> Zone 04 </h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_5_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9> Zone 05 </h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_6_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 06</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_7_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 07</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_8_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 08</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_9_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 09</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_10_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 10</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_11_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 11</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_12_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 12</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_13_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 13</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_14_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 14</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_15_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 15</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_16_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 16</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_17_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 17</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_18_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 18</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_19_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 19</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_20_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 20</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_21_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 21</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_22_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 22</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_23_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 23</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_24_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 24</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_25_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 25</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_26_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 26</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_27_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 27</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_28_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 28</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_29_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 29</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_30_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 30</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_31_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 31</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_32_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 32</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_33_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 33</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_34_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 34</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_35_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 35</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_36_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 36</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_37_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 37</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_38_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 38</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_39_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 39</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_40_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 40</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_41_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 41</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_42_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 42</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_43_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 43</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_44_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 44</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_45_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 45</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_46_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 46</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_47_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 47</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_48_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 48</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_49_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 49</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_50_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 50</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_51_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 51</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_52_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 52</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_53_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 53</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_54_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 54</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_55_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 55</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_56_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 56</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_57_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 57</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_58_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 58</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_59_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 59</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_60_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 60</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_61_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 61</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_62_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 62</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_63_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 63</h9>
+					</div>
+					\t\t\t\t\t\t\t\t\t\t
+					<div class="col-xs-6 small alinezones" style="display: none;"
+						id="zone_64_CAMBIARALARMA">
+						<i class="fa fa-circle"></i>
+						<h9>Zone 64</h9>
+					</div>
+					\t\t\t\t\t\t\t\t
+				</div>
+				\t\t\t\t\t\t\t
+			</div>
+			\t\t\t\t\t\t
+		</div>
+		\t\t\t\t\t
+	</div>
+	\t\t\t\t
+</div>
 
+
+
+
+
+
+---------------------
 
 <div class="col-lg-6 mb-4">
 	\t
