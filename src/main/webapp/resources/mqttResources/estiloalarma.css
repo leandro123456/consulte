@@ -176,6 +176,7 @@
 	img.imgsignal{
     width: 1.3em;
     height: auto;
+    margin-top: -0.4em;
 	}
 	
 	span.signaldef{
