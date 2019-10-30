@@ -88,7 +88,7 @@
         padding: 2px;
         font-size: calc(0.6rem + 1vw);
         line-height: 1 !important;
-        max-width: 4.0rem;
+        max-width: 3.5rem;
       }
 
 
@@ -161,7 +161,7 @@
 	
 	div.bordecolumna{
 		border: 1px solid lightgrey;
-        padding: 7px 0px;
+        padding: 0.1em 0.3em;
         border-radius: 8px;
         background-color: whitesmoke;
         margin-bottom: 1em;
@@ -227,6 +227,10 @@
         flex: 0.7;
         max-width: 5.8rem;
         line-height: 1 !important;
+      }
+      
+      row.bordezona{
+      	    padding: 0.05em;
       }
 
       div#buttons_area {
