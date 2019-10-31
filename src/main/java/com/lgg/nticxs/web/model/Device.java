@@ -28,7 +28,7 @@ public class Device extends MongoDBObject{
 	private String role;
 	private String timerString;
 	private DeviceNotification lastnotification;
-	private Integer particiones;
+	private Map<String,String> particiones;
 	private Integer mayorZonaInformada;
 	private Map<String,String> zonasObtenidas;
 	private List<DeviceAlarm> alarms;
@@ -206,11 +206,13 @@ public class Device extends MongoDBObject{
 			return "fallo";
 	}
 
-	public Integer getParticiones() {
+
+
+	public Map<String, String> getParticiones() {
 		return particiones;
 	}
 
-	public void setParticiones(Integer particiones) {
+	public void setParticiones(Map<String, String> particiones) {
 		this.particiones = particiones;
 	}
 

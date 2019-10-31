@@ -270,6 +270,20 @@ public class MqttController {
 		Integer result = device.getMayorZonaInformada();
 		JSONObject json = new JSONObject();
 		json.put("result", result);
+		
+		if(device.getZonasObtenidas()==null){
+			device.setZonasObtenidas(new HashMap<>());
+			devado.update(device);
+		}
+		Boolean zonasapagadas = true;
+		for (Map.Entry<String, String> zonaint : device.getZonasObtenidas().entrySet()) {
+		    if(zonaint.getValue()!=null && zonaint.getValue().equals("1")){
+		    	zonasapagadas=false;
+		    	break;
+		    }
+		}
+		json.put("zonasapagadas", zonasapagadas);
+		
 		return json.toString();
 	}
 	
@@ -290,9 +304,14 @@ public class MqttController {
 		device.getZonasObtenidas().put(zona, contenido);
 		devado.update(device);
 		
-		for (Map.Entry<String, String> entry : device.getZonasObtenidas()) {
-		    System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue());
+		Boolean zonasapagadas = true;
+		for (Map.Entry<String, String> zonaint : device.getZonasObtenidas().entrySet()) {
+		    if(zonaint.getValue().equals("1")){
+		    	zonasapagadas=false;
+		    	break;
+		    }
 		}
+		json.put("zonasapagadas", zonasapagadas);
 		
 		if(device.getMayorZonaInformada()<Integer.parseInt(zona)) {
 			json.put("inicio", device.getMayorZonaInformada());
