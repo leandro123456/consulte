@@ -34,6 +34,30 @@ import com.lgg.nticxs.web.model.DeviceNotification;
 public class TestUtilities {
 	
 	//@Test
+	public void testObtenerEstadoSwith() {
+		try {
+			
+		DeviceDAO devicedao=new DeviceDAO();
+		String serialDevice="PSWS20000000001";
+		List<String> result = new ArrayList<>();
+		Device device = devicedao.retrieveBySerialNumber(serialDevice);
+		JSONObject json= new JSONObject(device.getLastnotification().getContent());
+		if(json.has("SW1") && json.getString("SW1").equals("OFF"))
+			result.add("Apagado");
+		else
+			result.add("Encendido");
+		if(json.has("SW2") && json.getString("SW2").equals("OFF"))
+			result.add("Apagado");
+		else
+			result.add("Encendido");
+		System.out.println("termino: "+ result.get(0));
+		} catch (Exception e) {
+			System.out.println("ERROR Carga estado del SWITH: "+ e.getMessage());
+		}
+		
+	}
+	
+	//@Test
 	public void testSearchDefaultConfiguration(){
 		DeviceDefaultConfigurationDAO deviceconfigdao = new DeviceDefaultConfigurationDAO();
 		DeviceDefaultConfiguration deviceConfig= deviceconfigdao.retrieveByName("default");

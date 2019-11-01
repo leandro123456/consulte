@@ -29,6 +29,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.json.JSONObject;
 
 import com.lgg.nticxs.web.DAO.DeviceDAO;
 import com.lgg.nticxs.web.DAO.VistaDAO;
@@ -486,6 +487,7 @@ public class Utils {
 						contenidototal= contenidototal.replaceAll("CAMBIARSENSOR",serialDevice);				
 					break;
 				case "sonoff":
+					List<String> estadoSwith=obtenerEstadoSwith(serialDevice); 
 					if(atributosDeLaVista[i].equals("sonoffbody")) {
 						String cuerpoSonoff= vista.getContenido().get("sonoffbody").replaceAll("CAMBIARSONOFF", serialDevice);
 						System.out.println("este es el cuuerpo del  SONOFF: "+ cuerpoSonoff);
@@ -495,10 +497,15 @@ public class Utils {
 						cuerpoSonoff=cuerpoSonoff.replaceAll("PASSSONOFF", devconfig.getPassescuchar());
 						cuerpoSonoff=cuerpoSonoff.replaceAll("TOPICSONOFF", devconfig.getTopicescribir());
 						cuerpoSonoff=cuerpoSonoff.replaceAll("TOPICREMOTESONOFF", devconfig.getTopicescribirremote());
+						if(estadoSwith!=null)
+							cuerpoSonoff=cuerpoSonoff.replaceAll("CAMBIARESTADOSWITH1", estadoSwith.get(0));
+						else
+							cuerpoSonoff=cuerpoSonoff.replaceAll("CAMBIARESTADOSWITH1", "Desconocido");
 						contenidototal= contenidototal+cuerpoSonoff;	
 						break;	
 					}
 				case "sonofftwo":
+					List<String> estadoSwith1=obtenerEstadoSwith(serialDevice); 
 					if(atributosDeLaVista[i].equals("sonoffbody")) {
 						String cuerpoSonoff= vista.getContenido().get("sonoffbody").replaceAll("CAMBIARSONOFF", serialDevice);
 						//System.out.println("este es el cuuerpo del  SONOFF: "+ cuerpoSonoff);
@@ -508,6 +515,13 @@ public class Utils {
 						cuerpoSonoff=cuerpoSonoff.replaceAll("PASSSONOFF", devconfig.getPassescuchar());
 						cuerpoSonoff=cuerpoSonoff.replaceAll("TOPICSONOFF", devconfig.getTopicescribir());
 						cuerpoSonoff=cuerpoSonoff.replaceAll("TOPICREMOTESONOFF", devconfig.getTopicescribirremote());
+						if(estadoSwith1!=null){
+							cuerpoSonoff=cuerpoSonoff.replaceAll("CAMBIARESTADOSWITH1", estadoSwith1.get(0));
+							cuerpoSonoff=cuerpoSonoff.replaceAll("CAMBIARESTADOSWITH2", estadoSwith1.get(1));
+						}else{
+							cuerpoSonoff=cuerpoSonoff.replaceAll("CAMBIARESTADOSWITH1", "Desconocido");
+							cuerpoSonoff=cuerpoSonoff.replaceAll("CAMBIARESTADOSWITH2", "Desconocido");
+						}
 						contenidototal= contenidototal+cuerpoSonoff;	
 						break;	
 					}
@@ -533,6 +547,27 @@ public class Utils {
 				inicio = vista.getInicio();
 			String vistatotal = inicio+contenidototal+vista.getFin();
 			return vistatotal;
+		}
+
+		private static List<String> obtenerEstadoSwith(String serialDevice) {
+			try{
+			List<String> result = new ArrayList<>();
+			Device device = devicedao.retrieveBySerialNumber(serialDevice);
+			JSONObject json= new JSONObject(device.getLastnotification().getContent());
+			if(json.has("SW1") && json.getString("SW1").equals("OFF"))
+				result.add("Apagado");
+			else
+				result.add("Encendido");
+			if(json.has("SW2") && json.getString("SW2").equals("OFF"))
+				result.add("Apagado");
+			else
+				result.add("Encendido");
+			return result;
+			} catch (Exception e) {
+				System.out.println("ERROR Carga estado del SWITH: "+ e.getMessage());
+				return null;
+			}
+			
 		}
 
 		public static String generarRandom() {
