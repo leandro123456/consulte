@@ -67,6 +67,10 @@
         max-width: 5rem;
       }
       
+      button.borderedondo{
+      	border-radius: 24px;
+      	color: white;
+      }
 
       button.keypad_button_small {
         width: 7.0vw;
