@@ -163,6 +163,7 @@ function onMessageArrivedSonoff(message) {
 	
 	if(!message.destinationName.includes("/swcmd") && !message.destinationName.includes("/cmd") && !message.destinationName.includes("/Status") && (!inputAll.includes("tempC") && !inputAll.includes("hum"))){
 			dataObj = JSON.parse(inputAll);
+			console.log("serial obtenido: "+ dataObj.deviceId);
 		if(dataObj.SW1 != null && dataObj.SW1=="ON"){
 			var deviceserial = "boton1"+dataObj.deviceId;
 			updateEstado(deviceserial,"yes","botonsonoff");
@@ -182,6 +183,7 @@ function onMessageArrivedSonoff(message) {
 			var deviceserial = "boton2"+dataObj.deviceId;
 			updateEstado(deviceserial,"no","botonsonoff");
 		}
+		cargarColorUnboton(dataObj.deviceId);
 	}
 }
 

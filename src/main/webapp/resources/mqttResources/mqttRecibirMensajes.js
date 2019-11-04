@@ -17,6 +17,7 @@ function EnviarSonoff(swith,serial,accion){
 	} else {
 		urlsendInformation =$(location).attr('pathname') + "/sendCommand/sonoff/"+serial+"/"+"enviaroff"+"/"+swith;
 	}
+	console.log("voy a enviar esta URL: "+ urlsendInformation);
 	$.ajax({ url : urlsendInformation,
 		contentType: "application/json",
 		dataType: 'json',

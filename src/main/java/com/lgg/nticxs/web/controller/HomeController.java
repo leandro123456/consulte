@@ -128,6 +128,7 @@ public class HomeController {
         model.addAttribute("passalarma", "mqttpwd");
         model.addAttribute("topicosalarmas", topicosdeAlarma);
         model.addAttribute("alarmaSerial", obtenerSerialAlarmas(user.getDeviceserialnumber()));
+        model.addAttribute("serialpulsador",obtenerPulsadores());
         
         //fin de alarmas
    		return new ModelAndView("origin", model);
@@ -140,6 +141,16 @@ public class HomeController {
 
 
 	
+	private Object obtenerPulsadores() {
+		List<String> result = new ArrayList<>();
+		for (String serial: deviceAsociadoSonoff){
+				result.add("'"+serial+"'");
+		}
+		return result;
+	}
+
+
+
 	private List<String> obtenerSerialAlarmas(List<String> deviceserialnumber) {
 		List<String> result = new ArrayList<>();
 		for (String serial: deviceserialnumber){

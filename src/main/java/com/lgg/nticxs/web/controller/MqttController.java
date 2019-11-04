@@ -1,28 +1,22 @@
 package com.lgg.nticxs.web.controller;
 
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
-import org.eclipse.paho.client.mqttv3.IMqttClient;
-import org.eclipse.paho.client.mqttv3.MqttClient;
-import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lgg.nticxs.web.DAO.DeviceDAO;
 import com.lgg.nticxs.web.DAO.DeviceDefaultConfigurationDAO;
 import com.lgg.nticxs.web.model.Device;
-import com.lgg.nticxs.web.model.DeviceConfiguration;
 import com.lgg.nticxs.web.model.DeviceDefaultConfiguration;
 
 @Controller
@@ -79,6 +73,7 @@ public class MqttController {
 			result =EnviarMensajeAlarma(serial, message,swith);
 		}
 		else{
+			System.out.println("llego al envio del mensaje");
 			result =EnviarMensajeSonoff(serial,message,swith);
 		}
 		JSONObject json = new JSONObject();
@@ -88,53 +83,76 @@ public class MqttController {
 
 
 	private String EnviarMensajeSonoff(String serial, String mensaje, String swith) {
-		String publisherId = UUID.randomUUID().toString();
-		Device device = devado.retrieveBySerialNumber(serial);
-		if(device!= null){
-			DeviceConfiguration conf = null;
-			if(device.getUsedefaultbrocker())
-				conf=device.getDeviceconfiguration().get(0);
-			else
-				conf=device.getDeviceconfiguration().get(1);
 		try {
-			IMqttClient publisher = new MqttClient("ws://"+conf.getIphostescuchar()+":"+conf.getPortescuchar(),publisherId);
-			
-			MqttConnectOptions options = new MqttConnectOptions();
-			options.setAutomaticReconnect(true);
-			options.setCleanSession(true);
-			options.setConnectionTimeout(10);
-			options.setUserName(conf.getUserescuchar());
-			options.setPassword(conf.getPassescuchar().toCharArray());
-			
-			if ( !publisher.isConnected()) {
-				publisher.connect(options);
-	           	System.out.println("fallo la conexion");
-	           	//return "fallo la conexion";
-	        }else {
-	        	System.out.println("ya esta conectado :" + publisher);
-	        }
-			JSONObject message = ArmarMensajeSonoff(mensaje, swith,conf.getPassescuchar());
-	        MqttMessage msg = makemqttmessageJson(message);
-	       //msg.setQos(0);
-	       //msg.setRetained(true);
-	        System.out.println("este es el Json: "+ message.toString());
-	        if(message.toString().contains("command"))
-	        	publisher.publish(conf.getTopicescribirremote(),msg);
-	        else
-	        	publisher.publish(conf.getTopicescribir(),msg);
+			JSONObject message = ArmarMensajeSonoff(mensaje, swith);
+			String messageFinal = message.toString();
+			URL url = new URL("http://localhost:8080/enviopulsador/"+serial);
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			con.setRequestMethod("POST");
+			con.setRequestProperty("Content-Type", "application/json; utf-8");
+			con.setDoOutput(true);
+			try(OutputStream os = con.getOutputStream()) {
+			    byte[] input = messageFinal.getBytes("utf-8");
+			    os.write(input, 0, input.length);           
+			}
+			int cod_status = con.getResponseCode();
+			String status = con.getResponseMessage();
+			System.out.println("RESPUESTA: "+ status+": "+cod_status);
+			return status;
 		} catch (Exception e) {
-			System.out.println("mensaje: "+ e.getMessage());
 			e.printStackTrace();
-			return "ERROR CATCH: "+e.getMessage();
-		}	
-		return "envio exitoso";
+			return "fallo_envio_pulsador";
 		}
-		return "error - device null";
+		
+
+		
+//		String publisherId = UUID.randomUUID().toString();
+//		Device device = devado.retrieveBySerialNumber(serial);
+//		if(device!= null){
+//			DeviceConfiguration conf = null;
+//			if(device.getUsedefaultbrocker())
+//				conf=device.getDeviceconfiguration().get(0);
+//			else
+//				conf=device.getDeviceconfiguration().get(1);
+//		try {
+//			IMqttClient publisher = new MqttClient("ws://"+conf.getIphostescuchar()+":"+conf.getPortescuchar(),publisherId);
+//			
+//			MqttConnectOptions options = new MqttConnectOptions();
+//			options.setAutomaticReconnect(true);
+//			options.setCleanSession(true);
+//			options.setConnectionTimeout(10);
+//			options.setUserName(conf.getUserescuchar());
+//			options.setPassword(conf.getPassescuchar().toCharArray());
+//			
+//			if ( !publisher.isConnected()) {
+//				publisher.connect(options);
+//	           	System.out.println("fallo la conexion");
+//	           	//return "fallo la conexion";
+//	        }else {
+//	        	System.out.println("ya esta conectado :" + publisher);
+//	        }
+//			
+//	        MqttMessage msg = makemqttmessageJson(message);
+//	       //msg.setQos(0);
+//	       //msg.setRetained(true);
+//	        System.out.println("este es el Json: "+ message.toString());
+//	        if(message.toString().contains("command"))
+//	        	publisher.publish(conf.getTopicescribirremote(),msg);
+//	        else
+//	        	publisher.publish(conf.getTopicescribir(),msg);
+//		} catch (Exception e) {
+//			System.out.println("mensaje: "+ e.getMessage());
+//			e.printStackTrace();
+//			return "ERROR CATCH: "+e.getMessage();
+//		}	
+//		return "envio exitoso";
+//		}
+//		return "error - device null";
 		
 	}
 
 
-	private JSONObject ArmarMensajeSonoff(String mensaje, String swith, String pass) {
+	private JSONObject ArmarMensajeSonoff(String mensaje, String swith) {
 		JSONObject result= new JSONObject();
   	  
 		switch (mensaje) {

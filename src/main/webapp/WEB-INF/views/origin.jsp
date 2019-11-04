@@ -20,7 +20,8 @@
 	<script src='<c:url value="/resources/alarma/coneccionAlarma.js" />'></script>
 <%-- 	<script src='<c:url value="/resources/mqttResources/cargarElementos.js" />'></script> --%>
 <%-- 	<script src='<c:url value="/resources/mqttResources/progreso.js" />'></script> --%>
-	<script src='<c:url value="/resources/mqttResources/cargaReloj.js" />'></script>	
+	<script src='<c:url value="/resources/mqttResources/cargaReloj.js" />'></script>
+	<script src='<c:url value="/resources/pulsador/cargaPulsadores.js" />'></script>	
 	<link href='<c:url value="/resources/mqttResources/estiloalarma.css" />' rel="stylesheet" type="text/css">
 	<!-- Alta de Device -->
 	<script src='<c:url value="/resources/deviceResources/cargarDevice.js" />'></script>
@@ -54,6 +55,9 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		cargarZonas(${alarmaSerial});
+		if(${serialpulsador}.length >0){
+			cargarColorbotones(${serialpulsador});
+		}
 		setTimeout(iniciaConexion, 2000);
 	});
 </script>
