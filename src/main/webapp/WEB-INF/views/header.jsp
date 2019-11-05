@@ -183,14 +183,14 @@
                   		Editar Usuario
                   	</a>
 				</form>
-<!--                 <a class="dropdown-item" href="#"> -->
-<!--                   <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> -->
-<!--                   Settings -->
-<!--                 </a> -->
-<!--                 <a class="dropdown-item" href="#"> -->
-<!--                   <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> -->
-<!--                   Activity Log -->
-<!--                 </a> -->
+				<c:if test="${tieneAlarma}">
+                	<form role="form" action="<c:url value="/profileuser/notificaciones"/>" method="get" enctype="multipart/form-data">
+				        <a class="dropdown-item" href="javascript:;" onclick="parentNode.submit();">
+				          <i class="fas fa-envelope-open-text fa-fw mr-2 text-gray-400"></i>
+	                  		Notificaciones
+	                  	</a>
+					</form>
+				</c:if>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/login" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

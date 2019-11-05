@@ -25,8 +25,13 @@ public class DeviceDAO extends MongoDBClient<Device>{
 		return this.retrieveByFilter(filter);
 	}
 
-	public Device retrieveBySerialNumber(String serialnumber) {
-		Bson filter = eq("serialnumber", serialnumber);
+	public Device retrieveAllByUser(String serialnumber) {
+		Bson filter = eq("user", serialnumber);
+		return this.retrieveByFilter(filter);
+	}
+	
+	public Device retrieveAllByDevice(String device) {
+		Bson filter = eq("user", device);
 		return this.retrieveByFilter(filter);
 	}
 	

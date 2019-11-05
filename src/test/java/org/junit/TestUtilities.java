@@ -19,6 +19,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.lgg.nticxs.web.DAO.DeviceDAO;
 import com.lgg.nticxs.web.DAO.DeviceDefaultConfigurationDAO;
+import com.lgg.nticxs.web.DAO.NotificacionDAO;
 import com.lgg.nticxs.web.model.User;
 import com.lgg.nticxs.web.model.Vista;
 import com.lgg.nticxs.web.model.simple.SimpleDefaultConfiguration;
@@ -29,9 +30,26 @@ import com.lgg.nticxs.web.model.DeviceAlarm;
 import com.lgg.nticxs.web.model.DeviceConfiguration;
 import com.lgg.nticxs.web.model.DeviceDefaultConfiguration;
 import com.lgg.nticxs.web.model.DeviceNotification;
+import com.lgg.nticxs.web.model.Notificacion;
 
 
 public class TestUtilities {
+	
+	@Test
+	public void testCrearNotificacion(){
+		NotificacionDAO notdao= new NotificacionDAO();
+		Notificacion not = new Notificacion();
+		JSONObject json = new JSONObject();
+		not.setDispositivo("DSC010000000002");
+		not.setUsuario("leandrogabrielguzman@gmail.com");
+		json.put("entidad", "DSC010000000002");
+		json.put("condicion", Notificacion.IGUAL);
+		json.put("constante", Notificacion.DISARMED);
+		json.put("consecuencia1", Notificacion.ENVIAR_MAIL);
+		not.setCondicion(json.toString());
+		notdao.create(not);
+		System.out.println("termino");
+	}
 	
 	//@Test
 	public void testObtenerEstadoSwith() {

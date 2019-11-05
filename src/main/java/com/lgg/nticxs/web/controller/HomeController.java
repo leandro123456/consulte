@@ -129,6 +129,7 @@ public class HomeController {
         model.addAttribute("topicosalarmas", topicosdeAlarma);
         model.addAttribute("alarmaSerial", obtenerSerialAlarmas(user.getDeviceserialnumber()));
         model.addAttribute("serialpulsador",obtenerPulsadores());
+        model.addAttribute("tieneAlarma", deviceAsociadoAlarma.size()>0);
         
         //fin de alarmas
    		return new ModelAndView("origin", model);

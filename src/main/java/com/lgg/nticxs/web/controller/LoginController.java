@@ -214,7 +214,7 @@ public class LoginController{
     
     @GetMapping("/profileuser/{userId}")
     public String editProfile(Model model, @PathVariable String userId) {
-    	System.out.println("llego al controlador de confirgracion de IPP");
+    	System.out.println("llego al controlador de configuracion usuario");
     	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     	System.out.println("Edit profile - busco el usuario: "+ authentication.getName());
         User user = userdao.retrieveByMail(authentication.getName());
@@ -252,7 +252,7 @@ public class LoginController{
     				e.printStackTrace();
     			}
     			userdao.update(user);
-    			model.addAttribute("msg", "Porceso de actualizacion de usuario Completa");
+    			model.addAttribute("msg", "Proceso de actualizacion de usuario Completa");
 
     		}else {
     			model.addAttribute("msg", "Error ... Contraseña Incorrecta. Por favor vuelva a itentarlo");
@@ -261,6 +261,34 @@ public class LoginController{
     	}
     	return "redirect:/home";
     }
+    
+    
+    @GetMapping("/profileuser/notificaciones")
+    public String editProfileNotifications(Model model) {
+    	System.out.println("llego al controlador de configuracion de Notificacione");
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    	System.out.println("Edit profile - busco el usuario: "+ authentication.getName());
+        User user = userdao.retrieveByMail(authentication.getName());
+    	model.addAttribute("user", user);
+    	return "user_edit_notications";
+    }
+    
+    
+    @PostMapping("/profileuser/notificaciones")
+    public String editProfileNotificationsResponse(Model model,
+    		@RequestParam(name="armed", required=true) String notdesarmado,
+    		@RequestParam(name="trigered", required=true) String notactivacion,
+    		@RequestParam(name="action", required=true) String action) {
+    	System.out.println("llego al controlador de configuracion de Not Response");
+    	if(action.equals("save")) {
+	    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    	System.out.println("Edit profile - busco el usuario: "+ authentication.getName());
+	        User user = userdao.retrieveByMail(authentication.getName());
+	        model.addAttribute("msg", "Proceso de actualizacion de notificaciones completa");
+    	}
+    	return "redirect:/home";
+    }
+    
 
 	private String createUser(Model model, String email, String role, String pass, String pass2, String firstName, String lastName) {
 		if(pass.equals(pass2)){
