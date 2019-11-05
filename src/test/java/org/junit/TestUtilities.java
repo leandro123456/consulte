@@ -35,20 +35,50 @@ import com.lgg.nticxs.web.model.Notificacion;
 
 public class TestUtilities {
 	
-	@Test
+	//@Test
 	public void testCrearNotificacion(){
 		NotificacionDAO notdao= new NotificacionDAO();
 		Notificacion not = new Notificacion();
 		JSONObject json = new JSONObject();
-		not.setDispositivo("DSC010000000002");
-		not.setUsuario("leandrogabrielguzman@gmail.com");
-		json.put("entidad", "DSC010000000002");
-		json.put("condicion", Notificacion.IGUAL);
-		json.put("constante", Notificacion.DISARMED);
-		json.put("consecuencia1", Notificacion.ENVIAR_MAIL);
-		not.setCondicion(json.toString());
+//		not.setDispositivo("DSC010000000005");
+//		not.setUsuario("leandrogabrielguzman@gmail.com");
+//		json.put("entidad", "DSC010000000002");
+//		json.put("condicion", Notificacion.IGUAL);
+//		json.put("constante", Notificacion.DISARMED);
+//		json.put("consecuencia1", Notificacion.ENVIAR_MAIL);
+//		not.setCondicion(json.toString());
+//		notdao.create(not);
+		
+//		JSONObject json1 = new JSONObject();
+//		not.setDispositivo("DSC010000000001");
+//		not.setUsuario("leandrogabrielguzman@gmail.com");
+//		json1.put("entidad", "DSC010000000002");
+//		json1.put("condicion", Notificacion.IGUAL);
+//		json1.put("constante", Notificacion.DISARMED);
+//		json1.put("consecuencia1", Notificacion.ENVIAR_MAIL);
+//		not.setCondicion(json1.toString());
+//		notdao.create(not);
+		
+		
+		JSONObject json2 = new JSONObject();
+		not.setDispositivo("DSC010000000005");
+		not.setUsuario("leandroguzman@gmail.com");
+		json2.put("entidad", "DSC010000000005");
+		json2.put("condicion", Notificacion.IGUAL);
+		json2.put("constante", Notificacion.DISARMED);
+		json2.put("consecuencia1", Notificacion.ENVIAR_MAIL);
+		not.setCondicion(json2.toString());
 		notdao.create(not);
+		
 		System.out.println("termino");
+	}
+	
+	//@Test
+	public void testSearchNotificaciones(){
+		NotificacionDAO notdao= new NotificacionDAO();
+		List<Notificacion> notificaciones = notdao.retrieveAllByUser("leandroguzman@gmail.com");
+		//List<Notificacion> notificaciones = notdao.retrieveAllByDevice("DSC010000000003");
+		System.out.println("cant: "+ notificaciones.size());
 	}
 	
 	//@Test

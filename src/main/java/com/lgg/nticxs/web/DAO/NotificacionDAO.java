@@ -7,7 +7,6 @@ import java.util.List;
 import org.bson.conversions.Bson;
 
 import com.lgg.nticxs.web.DAO.Mongo.MongoDBClient;
-import com.lgg.nticxs.web.model.Device;
 import com.lgg.nticxs.web.model.Notificacion;
 
 public class NotificacionDAO extends MongoDBClient<Notificacion>{
@@ -26,12 +25,12 @@ public class NotificacionDAO extends MongoDBClient<Notificacion>{
 	}
 
 	public List<Notificacion> retrieveAllByUser(String user) {
-		Bson filter = eq("serialnumber", user);
+		Bson filter = eq("usuario", user);
 		return this.retrieveListByFilter(filter);
 	}
 	
 	public List<Notificacion> retrieveAllByDevice(String serialnumber) {
-		Bson filter = eq("dispositivos", serialnumber);
+		Bson filter = eq("dispositivo", serialnumber);
 		return this.retrieveListByFilter(filter);
 	}
 	
