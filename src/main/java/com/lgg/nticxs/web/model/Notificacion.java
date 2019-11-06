@@ -25,9 +25,14 @@ public class Notificacion extends MongoDBObject{
 	static final public String ENCENDER = "enceder";
 	static final public String APAGAR = "apagar";
 	
+	//estado
+	static final public String ACTIVAR = "activar";
+	static final public String DESACTIVAR = "desactivar";
+	
 	private String dispositivo;
 	private String user;
 	private String condicion;
+	private String estado;
 	
 	
 	
@@ -50,6 +55,18 @@ public class Notificacion extends MongoDBObject{
 
 	public String getUsuario() {
 		return user;
+	}
+
+
+
+	public String getEstado() {
+		return estado;
+	}
+
+
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 

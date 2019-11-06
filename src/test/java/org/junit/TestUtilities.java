@@ -40,35 +40,40 @@ public class TestUtilities {
 		NotificacionDAO notdao= new NotificacionDAO();
 		Notificacion not = new Notificacion();
 		JSONObject json = new JSONObject();
-//		not.setDispositivo("DSC010000000005");
-//		not.setUsuario("leandrogabrielguzman@gmail.com");
-//		json.put("entidad", "DSC010000000002");
-//		json.put("condicion", Notificacion.IGUAL);
-//		json.put("constante", Notificacion.DISARMED);
-//		json.put("consecuencia1", Notificacion.ENVIAR_MAIL);
-//		not.setCondicion(json.toString());
-//		notdao.create(not);
-		
-//		JSONObject json1 = new JSONObject();
-//		not.setDispositivo("DSC010000000001");
-//		not.setUsuario("leandrogabrielguzman@gmail.com");
-//		json1.put("entidad", "DSC010000000002");
-//		json1.put("condicion", Notificacion.IGUAL);
-//		json1.put("constante", Notificacion.DISARMED);
-//		json1.put("consecuencia1", Notificacion.ENVIAR_MAIL);
-//		not.setCondicion(json1.toString());
-//		notdao.create(not);
-		
-		
-		JSONObject json2 = new JSONObject();
 		not.setDispositivo("DSC010000000005");
-		not.setUsuario("leandroguzman@gmail.com");
+		not.setUsuario("leandrogabrielguzman@gmail.com");
+		json.put("entidad", "DSC010000000002");
+		json.put("condicion", Notificacion.IGUAL);
+		json.put("constante", Notificacion.DISARMED);
+		json.put("consecuencia1", Notificacion.ENVIAR_MAIL);
+		not.setCondicion(json.toString());
+		not.setEstado(Notificacion.ACTIVAR);
+		notdao.create(not);
+		
+		
+		Notificacion not1 = new Notificacion();
+		JSONObject json1 = new JSONObject();
+		not1.setDispositivo("DSC010000000001");
+		not1.setUsuario("leandrogabrielguzman@gmail.com");
+		json1.put("entidad", "DSC010000000002");
+		json1.put("condicion", Notificacion.IGUAL);
+		json1.put("constante", Notificacion.DISARMED);
+		json1.put("consecuencia1", Notificacion.ENVIAR_MAIL);
+		not1.setCondicion(json1.toString());
+		not1.setEstado(Notificacion.DESACTIVAR);
+		notdao.create(not1);
+		
+		Notificacion not2 = new Notificacion();
+		JSONObject json2 = new JSONObject();
+		not2.setDispositivo("DSC010000000005");
+		not2.setUsuario("leandroguzman@gmail.com");
 		json2.put("entidad", "DSC010000000005");
 		json2.put("condicion", Notificacion.IGUAL);
 		json2.put("constante", Notificacion.DISARMED);
 		json2.put("consecuencia1", Notificacion.ENVIAR_MAIL);
-		not.setCondicion(json2.toString());
-		notdao.create(not);
+		not2.setCondicion(json2.toString());
+		not2.setEstado(Notificacion.ACTIVAR);
+		notdao.create(not2);
 		
 		System.out.println("termino");
 	}
@@ -76,8 +81,8 @@ public class TestUtilities {
 	//@Test
 	public void testSearchNotificaciones(){
 		NotificacionDAO notdao= new NotificacionDAO();
-		List<Notificacion> notificaciones = notdao.retrieveAllByUser("leandroguzman@gmail.com");
-		//List<Notificacion> notificaciones = notdao.retrieveAllByDevice("DSC010000000003");
+//		List<Notificacion> notificaciones = notdao.retrieveAllByUser("leandrogabrielguzman@gmail.com");
+		List<Notificacion> notificaciones = notdao.retrieveAllByDevice("DSC010000000005");
 		System.out.println("cant: "+ notificaciones.size());
 	}
 	

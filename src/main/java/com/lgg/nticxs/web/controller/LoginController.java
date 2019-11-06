@@ -276,8 +276,8 @@ public class LoginController{
     
     @PostMapping("/profileuser/notificaciones")
     public String editProfileNotificationsResponse(Model model,
-    		@RequestParam(name="armed", required=true) String notdesarmado,
-    		@RequestParam(name="trigered", required=true) String notactivacion,
+    		@RequestParam(name="armed", required=false) String notdesarmado,
+    		@RequestParam(name="trigered", required=false) String notactivacion,
     		@RequestParam(name="action", required=true) String action) {
     	System.out.println("llego al controlador de configuracion de Not Response");
     	if(action.equals("save")) {
