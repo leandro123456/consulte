@@ -204,6 +204,19 @@ public class MqttController {
 				mensaje=particion+"S";
 			if(mensaje.contains("armartotal"))
 				mensaje=particion+"A";
+			if(mensaje.contains("particion-")){
+				URL url = new URL("http://localhost:8080/envio/"+serial+"/"+"barraparticion");
+				HttpURLConnection con = (HttpURLConnection) url.openConnection();
+				con.setRequestMethod("GET");
+				int cod_status = con.getResponseCode();
+				String status = con.getResponseMessage();
+				System.out.println("RESPUESTA CAMBIO DE PARTICION: "+ status+": "+cod_status);
+				Integer part = Integer.parseInt(particion);
+				if(mensaje.contains("anterior"))
+					mensaje=(part-1)+"";
+				else if(mensaje.contains("siguiente"))
+					mensaje=(part+1)+"";
+			}
 			URL url = new URL("http://localhost:8080/envio/"+serial+"/"+mensaje);
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 			con.setRequestMethod("GET");

@@ -1,6 +1,7 @@
 package com.lgg.nticxs.web.controller;
 
 
+import org.json.JSONObject;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -15,7 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.lgg.nticxs.web.utils.EncryptorPassword;
 import com.lgg.nticxs.web.utils.Utils;
+import com.lgg.nticxs.web.DAO.NotificacionDAO;
 import com.lgg.nticxs.web.DAO.UserDAO;
+import com.lgg.nticxs.web.model.Notificacion;
 import com.lgg.nticxs.web.model.User;
 
 import nl.flotsam.xeger.Xeger;
@@ -276,19 +279,43 @@ public class LoginController{
     
     @PostMapping("/profileuser/notificaciones")
     public String editProfileNotificationsResponse(Model model,
-    		@RequestParam(name="armed", required=false) String notdesarmado,
-    		@RequestParam(name="trigered", required=false) String notactivacion,
+    		@RequestParam(name="armed", required=false) Boolean notdesarmado,
+    		@RequestParam(name="trigered", required=false) Boolean notactivacion,
     		@RequestParam(name="action", required=true) String action) {
-    	System.out.println("llego al controlador de configuracion de Not Response");
+    	System.out.println("***********llego al controlador de configuracion de Not Response");
     	if(action.equals("save")) {
 	    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-	    	System.out.println("Edit profile - busco el usuario: "+ authentication.getName());
-	        User user = userdao.retrieveByMail(authentication.getName());
+	    	System.out.println("busco el usuario: "+ authentication.getName());
+	       // User user = userdao.retrieveByMail(authentication.getName());
+	        System.out.println("notificacion de armado: "+ notdesarmado);
+	        System.out.println("notificacion de disparada: "+notactivacion);
+	        ActualizarNotificacion(notdesarmado,Notificacion.CONDICION_ARMADO,authentication.getName());
+	        ActualizarNotificacion(notactivacion,Notificacion.CONDICION_DISPARADO, authentication.getName());
 	        model.addAttribute("msg", "Proceso de actualizacion de notificaciones completa");
     	}
+    	System.out.println("--------- salio, vuelve al home");
     	return "redirect:/home";
     }
     
+
+	private void ActualizarNotificacion(Boolean notificacion, String tiponotificacion, String user) {
+//		User user1 =userdao.retrieveByMail(user);
+//		List<String> alarmasDelUsuario = user.
+
+		
+//		NotificacionDAO noticado =new NotificacionDAO();
+//		List<Notificacion> listnot = noticado.retrieveAllByUser(user);
+//		for(Notificacion not : listnot){
+			//JSONObject json = new JSONObject(not.getCondicion());
+			//json.get("condicion").equals(Notificacion.ACTIVAR);
+//			if(not.getCondicion().equals(Notificacion.CONDICION_ARMADO)){
+//				
+//			}
+//			
+//		}
+		
+	}
+
 
 	private String createUser(Model model, String email, String role, String pass, String pass2, String firstName, String lastName) {
 		if(pass.equals(pass2)){

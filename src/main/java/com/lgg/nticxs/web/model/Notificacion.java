@@ -13,6 +13,10 @@ public class Notificacion extends MongoDBObject{
 	static final public String ARMED_ALL ="armed_all";
 	static final public String TRIGERED = "trigered";
 	
+	//comparador
+	static final public String CONDICION_ARMADO="condicion_armado";
+	static final public String CONDICION_DISPARADO="condicion_disparado";
+	
 	//condicion
 	static final public String IGUAL = "igual";
 	static final public String MAYOR = "mayor";
@@ -33,6 +37,7 @@ public class Notificacion extends MongoDBObject{
 	private String user;
 	private String condicion;
 	private String estado;
+	private List<String> consecuencia;
 	
 	
 	
@@ -55,6 +60,18 @@ public class Notificacion extends MongoDBObject{
 
 	public String getUsuario() {
 		return user;
+	}
+
+
+
+	public List<String> getConsecuencia() {
+		return consecuencia;
+	}
+
+
+
+	public void setConsecuencia(List<String> consecuencia) {
+		this.consecuencia = consecuencia;
 	}
 
 

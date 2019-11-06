@@ -30,33 +30,48 @@ function Connecttotal(swith,serial,message1){
 	var textpart= "particiones"+serial;
 	console.log("particiones elem: "+document.getElementById(textpart).innerHTML );
 	var partition=document.getElementById(textpart).innerHTML;
-	var urlsendInformation = $(location).attr('pathname') + "/sendCommand/alarma/"+serial+"/"+message1+"/"+partition;
-	$.ajax({ url : urlsendInformation,
-		contentType: "application/json",
-		dataType: 'json',
-		 beforeSend:function(){ 
-             //animacion del boton
-			 var texto= "btn-"+message1.replace("alarm-","")+serial;
-			 var activo = document.getElementById(texto);
-			 console.log(texto);  
-			 activo.innerHTML = "";
-			 $("#"+texto).append('<i class="fa fa-circle-o-notch fa-spin"></i>');
-         },
-		success: function(data){
-			console.log(data.result);
-			if(data.result== "")
-				activo.style.color = "red";
-			var texto= "btn-"+message1.replace("alarm-","")+serial;
-			var activo = document.getElementById(texto);
-			if(message1.includes("armarzona")){
-				activo.innerHTML = "";
-				$("#"+texto).append('<i class="dsc-icon icon-stay_away"></i>');
-			}
-			else if(message1.includes("armartotal")){
-				activo.innerHTML = "";
-				$("#"+texto).append('<i class="dsc-icon icon-stay_empty"></i>');
-			}
-			else
-				activo.innerHTML = message1.replace("alarm-","");
-		}});	  
+	var enviarcomando=true;
+	if(swith=="changep"){
+		console.log("cambio de particion");
+		if(partition =="1" && message1=="particion-anterior"){
+			document.getElementById("partant"+serial).disabled = true;
+			setTimeout(function(){ 
+				document.getElementById("partant"+serial).disabled = false; 
+				}, 1000);
+			enviarcomando=false;
+		}
+	}
+	if(enviarcomando){
+		var urlsendInformation = $(location).attr('pathname') + "/sendCommand/alarma/"+serial+"/"+message1+"/"+partition;
+		$.ajax({ url : urlsendInformation,
+			contentType: "application/json",
+			dataType: 'json',
+			 beforeSend:function(){ 
+	             //animacion del boton
+				 var texto= "btn-"+message1.replace("alarm-","")+serial;
+				 var activo = document.getElementById(texto);
+				 console.log("texto "+texto);
+				 if(activo!=null){
+				 activo.innerHTML = "";
+				 $("#"+texto).append('<i class="fa fa-circle-o-notch fa-spin"></i>');
+				 }			
+	         },
+			success: function(data){
+				console.log(data.result);
+				if(data.result== "")
+					activo.style.color = "red";
+				var texto= "btn-"+message1.replace("alarm-","")+serial;
+				var activo = document.getElementById(texto);
+				if(message1.includes("armarzona")){
+					activo.innerHTML = "";
+					$("#"+texto).append('<i class="dsc-icon icon-stay_away"></i>');
+				}
+				else if(message1.includes("armartotal")){
+					activo.innerHTML = "";
+					$("#"+texto).append('<i class="dsc-icon icon-stay_empty"></i>');
+				}
+				else
+					activo.innerHTML = message1.replace("alarm-","");
+			}});
+	}	  
 }

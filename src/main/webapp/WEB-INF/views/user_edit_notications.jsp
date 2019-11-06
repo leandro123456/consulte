@@ -18,11 +18,17 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link rel="stylesheet" type="text/css" href='<c:url value="/resources/mqttResources/sb-admin-2.css"/>'>
+<%--   <link rel="stylesheet" type="text/css" href='<c:url value="/resources/mqttResources/sb-admin-2.css"/>'> --%>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-primary" style="background: #224A85;">
 
   <div class="container">
 
@@ -43,13 +49,21 @@
 					<tbody>
 						<tr class="tablain">
 							<td>Enviar notificaion al Armar/Desarmar la Alarma</td>
-							<td><input type="checkbox" id="armed"
-								name="armed" data-toggle="toggle"></td>
+							<td>
+								<div class="custom-control custom-switch">
+							      <input type="checkbox" class="custom-control-input" id="switch1" name="armed">
+							      <label class="custom-control-label" for="switch1"></label>
+							    </div>
+							</td>
 						</tr>
 						<tr class="tablain">
 							<td>Enviar notificacion al Disparar la Alarma</td>
-							<td><input type="checkbox" id="trigered"
-								name="trigered" data-toggle="toggle"></td>
+							<td>
+								<div class="custom-control custom-switch">
+							      <input type="checkbox" class="custom-control-input" id="switch2" name="trigered">
+							      <label class="custom-control-label" for="switch2"></label>
+							    </div>
+							</td>
 						</tr>
 					</tbody>
 				</table>
