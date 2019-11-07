@@ -106,54 +106,22 @@ function onMessageArrivedAlarma(message) {
 		 var numparticion = document.getElementById("particiones"+iddevice);
 		 console.log("Particion activa-> iddevice: "+iddevice+"; particion: "+ numparticion);
 		 numparticion.innerHTML = message.payloadString;
+		 if(message.payloadString =="1"){
+			document.getElementById("partant"+iddevice).disabled = true;
+			actualizarDisplay(iddevice, message.payloadString);
+		}
+		else{
+			document.getElementById("partant"+iddevice).disabled = false;
+			actualizarDisplay(iddevice, message.payloadString);
+		}
 	}
 	else if(topico.includes("Partition")){
 		var iddevice = topico.substring(0,topico.search("/Partition"));
 		var numparticion = topico.substring(topico.search("Partition")).replace("Partition","");
 		var numdisplay = document.getElementById("particiones"+iddevice).innerHTML;
 		console.log("este es el numero de particion en el display: "+ numdisplay +"; num de particion: "+ numparticion);
-		if(numdisplay=="" || numdisplay == numparticion){
-			//como el display apunta a la particion correcta veo el estado
-			if(contenido=="disarmed"){
-				document.getElementById("ac_icon"+iddevice).style.color = "grey";
-				document.getElementById("armed_icon"+iddevice).style.color = "grey";
-				document.getElementById("trouble_icon"+iddevice).style.color = "grey";
-				document.getElementById("virtual_lcd_"+iddevice).style.backgroundColor = "blue";
-				var spanStatus = document.getElementById("second_line"+iddevice);
-				spanStatus.firstChild.data = "Disarmed";
-			}else if(contenido == "armed_home"){
-				document.getElementById("armed_icon"+iddevice).style.color = "green";
-				document.getElementById("ac_icon"+iddevice).style.color = "grey";
-				document.getElementById("trouble_icon"+iddevice).style.color = "grey";
-				document.getElementById("virtual_lcd_"+iddevice).style.backgroundColor = "blue";
-				var spanStatus = document.getElementById("second_line"+iddevice);
-				spanStatus.firstChild.data = "Armed Home";
-			}else if(contenido =="armed_away"){
-				document.getElementById("armed_icon"+iddevice).style.color = "green";
-				document.getElementById("trouble_icon"+iddevice).style.color = "grey";
-				document.getElementById("ac_icon"+iddevice).style.color = "grey";
-				document.getElementById("virtual_lcd_"+iddevice).style.backgroundColor = "blue";
-				var spanStatus = document.getElementById("second_line"+iddevice);
-				spanStatus.firstChild.data = "Armed Away";
-			}else if(contenido =="pending"){
-				document.getElementById("trouble_icon"+iddevice).style.color = "grey";
-				document.getElementById("armed_icon"+iddevice).style.color = "yellow";
-				document.getElementById("ac_icon"+iddevice).style.color = "grey";
-				document.getElementById("virtual_lcd_"+iddevice).style.backgroundColor = "blue";
-				var spanStatus = document.getElementById("second_line"+iddevice);
-				spanStatus.firstChild.data = "Pending";
-			}else if (contenido == "triggered"){			
-				document.getElementById("trouble_icon"+iddevice).style.color = "red";
-				document.getElementById("armed_icon"+iddevice).style.color = "red";
-				document.getElementById("ac_icon"+iddevice).style.color = "red";
-				document.getElementById("virtual_lcd_"+iddevice).style.backgroundColor = "red";
-				var spanStatus = document.getElementById("second_line"+iddevice);
-				spanStatus.firstChild.data = "Triggered";
-			}else{
-				//como no lo reconoce lo muestra en el segundo display
-				var spanStatus = document.getElementById("second_line"+iddevice);
-				spanStatus.firstChild.data = contenido;
-			}
+		if(numdisplay == numparticion){
+			escribirDisplayAlarma(iddevice,contenido);
 		}
 	}
 	else if(topico.includes("Zone")){
@@ -170,14 +138,92 @@ function onMessageArrivedAlarma(message) {
 	}
 }
 
+
+//actualizar display cuando se cambia de particion
+function actualizarDisplay(iddevice, particione){
+	var urlsendInformation = $(location).attr('pathname') + "/obtainpartition/"+iddevice;
+	$.ajax({ url : urlsendInformation,
+		contentType: "application/json",
+		dataType: 'json',
+		success: function(data){
+			document.getElementById("particiones"+iddevice).innerHTML=data.particionactiva;
+			escribirDisplayAlarma(iddevice,data.contenidoparticion);
+			console.log("cambio de particion");
+			if(data.particionactiva =="1"){
+				document.getElementById("partant"+iddevice).disabled = true;
+			}
+			else{
+				document.getElementById("partant"+iddevice).disabled = false; 
+			}
+		}});
+}
+
 //cargar particiones en el display
-function cargarParticionesAlarmas(serialAlarma){
+function cargarParticionesAlarmas(serialAlarma){	
 	serialAlarma.forEach(cargaparticionEfectiva);
 }
 
 function cargaparticionEfectiva(item, index){
-	document.getElementById("particiones"+iddevice).innerHTML="";
-	
+	var urlsendInformation = $(location).attr('pathname') + "/obtainpartition/"+item;
+	$.ajax({ url : urlsendInformation,
+		contentType: "application/json",
+		dataType: 'json',
+		success: function(data){
+			document.getElementById("particiones"+item).innerHTML=data.particionactiva;
+			escribirDisplayAlarma(item,data.contenidoparticion);
+			console.log("cambio de particion");
+			if(data.particionactiva =="1"){
+				document.getElementById("partant"+item).disabled = true;
+			}
+			else{
+				document.getElementById("partant"+item).disabled = false; 
+			}
+		}});
+}
+
+
+//escribir informacion de particion activa en el display
+function escribirDisplayAlarma(iddevice,contenido){
+	if(contenido=="disarmed"){
+		document.getElementById("ac_icon"+iddevice).style.color = "grey";
+		document.getElementById("armed_icon"+iddevice).style.color = "grey";
+		document.getElementById("trouble_icon"+iddevice).style.color = "grey";
+		document.getElementById("virtual_lcd_"+iddevice).style.backgroundColor = "blue";
+		var spanStatus = document.getElementById("second_line"+iddevice);
+		spanStatus.firstChild.data = "Disarmed";
+	}else if(contenido == "armed_home"){
+		document.getElementById("armed_icon"+iddevice).style.color = "green";
+		document.getElementById("ac_icon"+iddevice).style.color = "grey";
+		document.getElementById("trouble_icon"+iddevice).style.color = "grey";
+		document.getElementById("virtual_lcd_"+iddevice).style.backgroundColor = "blue";
+		var spanStatus = document.getElementById("second_line"+iddevice);
+		spanStatus.firstChild.data = "Armed Home";
+	}else if(contenido =="armed_away"){
+		document.getElementById("armed_icon"+iddevice).style.color = "green";
+		document.getElementById("trouble_icon"+iddevice).style.color = "grey";
+		document.getElementById("ac_icon"+iddevice).style.color = "grey";
+		document.getElementById("virtual_lcd_"+iddevice).style.backgroundColor = "blue";
+		var spanStatus = document.getElementById("second_line"+iddevice);
+		spanStatus.firstChild.data = "Armed Away";
+	}else if(contenido =="pending"){
+		document.getElementById("trouble_icon"+iddevice).style.color = "grey";
+		document.getElementById("armed_icon"+iddevice).style.color = "yellow";
+		document.getElementById("ac_icon"+iddevice).style.color = "grey";
+		document.getElementById("virtual_lcd_"+iddevice).style.backgroundColor = "blue";
+		var spanStatus = document.getElementById("second_line"+iddevice);
+		spanStatus.firstChild.data = "Pending";
+	}else if (contenido == "triggered"){			
+		document.getElementById("trouble_icon"+iddevice).style.color = "red";
+		document.getElementById("armed_icon"+iddevice).style.color = "red";
+		document.getElementById("ac_icon"+iddevice).style.color = "red";
+		document.getElementById("virtual_lcd_"+iddevice).style.backgroundColor = "red";
+		var spanStatus = document.getElementById("second_line"+iddevice);
+		spanStatus.firstChild.data = "Triggered";
+	}else{
+		//como no lo reconoce lo muestra en el segundo display
+		var spanStatus = document.getElementById("second_line"+iddevice);
+		spanStatus.firstChild.data = contenido;
+	}
 }
 
 //analizar la señal y elegir icono

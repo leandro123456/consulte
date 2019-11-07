@@ -31,16 +31,6 @@ function Connecttotal(swith,serial,message1){
 	console.log("particiones elem: "+document.getElementById(textpart).innerHTML );
 	var partition=document.getElementById(textpart).innerHTML;
 	var enviarcomando=true;
-	if(swith=="changep"){
-		console.log("cambio de particion");
-		if(partition =="1" && message1=="particion-anterior"){
-			document.getElementById("partant"+serial).disabled = true;
-			setTimeout(function(){ 
-				document.getElementById("partant"+serial).disabled = false; 
-				}, 1000);
-			enviarcomando=false;
-		}
-	}
 	if(enviarcomando){
 		var urlsendInformation = $(location).attr('pathname') + "/sendCommand/alarma/"+serial+"/"+message1+"/"+partition;
 		$.ajax({ url : urlsendInformation,
@@ -70,8 +60,10 @@ function Connecttotal(swith,serial,message1){
 					activo.innerHTML = "";
 					$("#"+texto).append('<i class="dsc-icon icon-stay_empty"></i>');
 				}
-				else
+				else{
+					if(activo!=null)
 					activo.innerHTML = message1.replace("alarm-","");
+				}
 			}});
 	}	  
 }

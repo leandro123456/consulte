@@ -54,8 +54,8 @@
 <body id="page-top">
 <script type="text/javascript">
 	$(document).ready(function() {
-		cargarZonas(${alarmaSerial});
 		cargarParticionesAlarmas(${alarmaSerial});
+		cargarZonas(${alarmaSerial});
 		if(${serialpulsador}.length >0){
 			cargarColorbotones(${serialpulsador});
 		}

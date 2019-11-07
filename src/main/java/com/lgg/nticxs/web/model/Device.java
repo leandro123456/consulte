@@ -37,6 +37,7 @@ public class Device extends MongoDBObject{
 	private Map<String,String> vista;
 	private List<String> users;
 	private List<String> admins;
+	private String particionactiva;
 
 	
 	public Device() {
@@ -113,6 +114,14 @@ public class Device extends MongoDBObject{
 	}
 
 
+
+	public String getParticionactiva() {
+		return particionactiva;
+	}
+
+	public void setParticionactiva(String particionactiva) {
+		this.particionactiva = particionactiva;
+	}
 
 	public String getRole() {
 		return role;

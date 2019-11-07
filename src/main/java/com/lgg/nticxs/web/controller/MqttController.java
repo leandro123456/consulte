@@ -293,6 +293,29 @@ public class MqttController {
 	  }	
 	
 	
+	/****            informacion particiones activas            ****/
+	@GetMapping("home/obtainpartition/{serial}")
+	@ResponseBody
+	public String ObtenerParticionAlarma(Model model, @PathVariable String serial) {
+		JSONObject json = new JSONObject();
+		Device device = devado.retrieveBySerialNumber(serial);
+		System.out.println("llego a obtener informacion de particiones: "+device.getParticionactiva());
+		json.put("particionactiva", device.getParticionactiva());
+		if(device.getParticiones()==null){
+			device.setParticiones(new HashMap<>());
+			devado.update(device);
+		}
+		if(device.getParticiones().containsKey(device.getParticionactiva())){
+			System.out.println("----- INFORME PARTICION ACTIVA RETORNA: "+device.getParticionactiva());
+			json.put("contenidoparticion", device.getParticiones().get(device.getParticionactiva()));
+		}else{
+			json.put("contenidoparticion", "Desconocido");
+		}
+		return json.toString();
+	}
+	
+	
+	
 	/****            zona de la alarmas            ****/
 	@GetMapping("home/obtainmaxzone/{serial}")
 	@ResponseBody
