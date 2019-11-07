@@ -55,6 +55,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		cargarZonas(${alarmaSerial});
+		cargarParticionesAlarmas(${alarmaSerial});
 		if(${serialpulsador}.length >0){
 			cargarColorbotones(${serialpulsador});
 		}

@@ -170,6 +170,16 @@ function onMessageArrivedAlarma(message) {
 	}
 }
 
+//cargar particiones en el display
+function cargarParticionesAlarmas(serialAlarma){
+	serialAlarma.forEach(cargaparticionEfectiva);
+}
+
+function cargaparticionEfectiva(item, index){
+	document.getElementById("particiones"+iddevice).innerHTML="";
+	
+}
+
 //analizar la señal y elegir icono
 function obtenerIconoNivelSAlarma(informacion){
 	var obj = JSON.parse(informacion);
