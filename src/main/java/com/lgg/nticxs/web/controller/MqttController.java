@@ -294,23 +294,38 @@ public class MqttController {
 	
 	
 	/****            informacion particiones activas            ****/
-	@GetMapping("home/obtainpartition/{serial}")
+	@GetMapping("home/obtainpartition/{serial}/{particion}")
 	@ResponseBody
-	public String ObtenerParticionAlarma(Model model, @PathVariable String serial) {
+	public String ObtenerParticionAlarma(Model model, @PathVariable String serial,
+			 @PathVariable String particion) {
 		JSONObject json = new JSONObject();
 		Device device = devado.retrieveBySerialNumber(serial);
-		System.out.println("llego a obtener informacion de particiones: "+device.getParticionactiva());
-		json.put("particionactiva", device.getParticionactiva());
-		if(device.getParticiones()==null){
-			device.setParticiones(new HashMap<>());
-			devado.update(device);
-		}
-		if(device.getParticiones().containsKey(device.getParticionactiva())){
-			System.out.println("----- INFORME PARTICION ACTIVA RETORNA: "+device.getParticionactiva());
-			json.put("contenidoparticion", device.getParticiones().get(device.getParticionactiva()));
+		if(particion.equals("inicio")){
+			//esto es en la carga de la pagina
+			System.out.println("llego a obtener informacion de particiones INICIO: "+device.getParticionactiva());
+			json.put("particionactiva", device.getParticionactiva());
+			if(device.getParticiones()==null){
+				device.setParticiones(new HashMap<>());
+				devado.update(device);
+			}
+			if(device.getParticiones().containsKey(device.getParticionactiva())){
+				json.put("contenidoparticion", device.getParticiones().get(device.getParticionactiva()));
+			}else{
+				json.put("contenidoparticion", "Desconocido");
+			}
 		}else{
-			json.put("contenidoparticion", "Desconocido");
+			//Esto es cuando se ejecuta luego de la primera vez
+			if(device.getParticiones()==null){
+				device.setParticiones(new HashMap<>());
+				devado.update(device);
+			}
+			if(device.getParticiones().containsKey(particion)){
+				json.put("contenidoparticion", device.getParticiones().get(particion));
+			}else{
+				json.put("contenidoparticion", "Desconocido");
+			}
 		}
+			
 		return json.toString();
 	}
 	

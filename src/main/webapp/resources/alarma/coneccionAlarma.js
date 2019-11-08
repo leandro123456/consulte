@@ -141,14 +141,16 @@ function onMessageArrivedAlarma(message) {
 
 //actualizar display cuando se cambia de particion
 function actualizarDisplay(iddevice, particione){
-	var urlsendInformation = $(location).attr('pathname') + "/obtainpartition/"+iddevice;
+	var urlsendInformation = $(location).attr('pathname') + "/obtainpartition/"+iddevice+"/"+particione;
 	$.ajax({ url : urlsendInformation,
 		contentType: "application/json",
 		dataType: 'json',
 		success: function(data){
-			document.getElementById("particiones"+iddevice).innerHTML=data.particionactiva;
+			console.log("esta es la particion que recibo: "+ particione)
+			document.getElementById("particiones"+iddevice).innerHTML=particione;
+			console.log("actualizar display: "+ iddevice +"; particion informada: "+data.contenidoparticion)
 			escribirDisplayAlarma(iddevice,data.contenidoparticion);
-			console.log("cambio de particion");
+			console.log("cambio de particion"+ iddevice+"; cambiodeparticion: " +data.contenidoparticion);
 			if(data.particionactiva =="1"){
 				document.getElementById("partant"+iddevice).disabled = true;
 			}
@@ -164,14 +166,14 @@ function cargarParticionesAlarmas(serialAlarma){
 }
 
 function cargaparticionEfectiva(item, index){
-	var urlsendInformation = $(location).attr('pathname') + "/obtainpartition/"+item;
+	var urlsendInformation = $(location).attr('pathname') + "/obtainpartition/"+item+"/inicio";
 	$.ajax({ url : urlsendInformation,
 		contentType: "application/json",
 		dataType: 'json',
 		success: function(data){
 			document.getElementById("particiones"+item).innerHTML=data.particionactiva;
 			escribirDisplayAlarma(item,data.contenidoparticion);
-			console.log("cambio de particion");
+			console.log("cambio de particion" + item+"; cambiodeparticion: " +data.contenidoparticion);
 			if(data.particionactiva =="1"){
 				document.getElementById("partant"+item).disabled = true;
 			}
