@@ -106,7 +106,7 @@ function onMessageArrivedAlarma(message) {
 		 var numparticion = document.getElementById("particiones"+iddevice);
 		 console.log("Particion activa-> iddevice: "+iddevice+"; particion: "+ numparticion);
 		 numparticion.innerHTML = message.payloadString;
-		 if(message.payloadString =="1"){
+		 if(contenido =="1"){
 			document.getElementById("partant"+iddevice).disabled = true;
 			actualizarDisplay(iddevice, message.payloadString);
 		}
@@ -151,12 +151,12 @@ function actualizarDisplay(iddevice, particione){
 			console.log("actualizar display: "+ iddevice +"; particion informada: "+data.contenidoparticion)
 			escribirDisplayAlarma(iddevice,data.contenidoparticion);
 			console.log("cambio de particion"+ iddevice+"; cambiodeparticion: " +data.contenidoparticion);
-			if(data.particionactiva =="1"){
-				document.getElementById("partant"+iddevice).disabled = true;
-			}
-			else{
-				document.getElementById("partant"+iddevice).disabled = false; 
-			}
+//			if(data.particionactiva =="1"){
+//				document.getElementById("partant"+iddevice).disabled = true;
+//			}
+//			else{
+//				document.getElementById("partant"+iddevice).disabled = false; 
+//			}
 		}});
 }
 
