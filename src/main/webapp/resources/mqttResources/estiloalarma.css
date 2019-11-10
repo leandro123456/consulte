@@ -125,7 +125,7 @@
       }
 
       div.keypad_button_row {
-        margin: 12px 10px;
+        margin: 0.2em 0.15em 0.2em 0.15em;
         text-align: center;
         white-space: nowrap;
       }
@@ -168,9 +168,17 @@
 	text-align: center;
 	}
 	
+	div.bordeprimercolumna{
+		border: 1px solid lightgrey;
+        border-radius: 8px;
+        background-color: whitesmoke;
+        margin-bottom: 1em;
+	}
+	
+	
 	div.bordecolumna{
 		border: 1px solid lightgrey;
-        padding: 0.1em 0.3em;
+/*         padding: 0.1em 0.3em; */
         border-radius: 8px;
         background-color: whitesmoke;
         margin-bottom: 1em;
