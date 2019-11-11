@@ -140,6 +140,43 @@ function getParameterByName(name) {
 	</div>
 
 	<jsp:include page="footer.jsp" />
+	
+	
+	
+	
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyAUrwGTRCz98u4Tg38iWtKKx-zJEKKH78M",
+    authDomain: "cdash-1274d.firebaseapp.com",
+    databaseURL: "https://cdash-1274d.firebaseio.com",
+    projectId: "cdash-1274d",
+    storageBucket: "cdash-1274d.appspot.com",
+    messagingSenderId: "368274022300",
+    appId: "1:368274022300:web:95be4383f5eef61b0ff259"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+
+<script type="text/javascript">
+firebase.messaging().requestPermission()
+.then(function(token) {
+ console.log('Recibido permiso.');
+ // En el parámetro "token" tienes el código para poder enviar las notificaciones
+})
+.catch(function(err) {
+ console.log('No se ha obtenido permiso', err);
+});
+</script>
+
 </body>
 
 
