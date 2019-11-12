@@ -121,7 +121,7 @@ public class HomeController {
         List<String> topicosdeAlarma=obtenerTopicosDeTodosLosEndpoints(user.getDeviceserialnumber(),Device.ALARMA);
         System.out.println("cantidad de topicos a subscribirme alarma: "+ topicosdeAlarma.size());
         model.addAttribute("cantidadAlarma", topicosdeAlarma.size());
-        model.addAttribute("hostalarma", "mqtt.coiaca.com");
+        model.addAttribute("hostalarma", "mqtttest.qliq.com.ar");
         model.addAttribute("puertoalarma", "8081");
         model.addAttribute("sslalarma", true);
         model.addAttribute("usuarioalarma", "mqttusr");
