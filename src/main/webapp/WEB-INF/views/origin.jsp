@@ -144,7 +144,7 @@ function getParameterByName(name) {
 	
 	
 	
-	<!-- The core Firebase JS SDK is always required and must be listed first -->
+<!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
 
 <!-- TODO: Add SDKs for Firebase products that you want to use
@@ -163,15 +163,6 @@ function getParameterByName(name) {
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-
- firebase.messaging().requestPermission()
-.then(function(token) {
- console.log('Recibido permiso.');
- // En el parámetro "token" tienes el código para poder enviar las notificaciones
-})
-.catch(function(err) {
- console.log('No se ha obtenido permiso', err);
-});
 </script>
 
 </body>
