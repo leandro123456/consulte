@@ -163,11 +163,8 @@ function getParameterByName(name) {
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-</script>
 
-
-<script type="text/javascript">
-firebase.messaging().requestPermission()
+ firebase.messaging().requestPermission()
 .then(function(token) {
  console.log('Recibido permiso.');
  // En el parámetro "token" tienes el código para poder enviar las notificaciones
