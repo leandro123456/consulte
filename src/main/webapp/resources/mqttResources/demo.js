@@ -16,7 +16,7 @@ function startConnectSonoff(host,port,ssl,user,pass, topicos) {
       		onFailure: onConnectionLostSonoff,
       		keepAliveInterval: 10,
       		userName: user,
-      		useSSL: false,
+      		useSSL: true,
       		password: pass	
       	});
 	  }

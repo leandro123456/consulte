@@ -122,8 +122,8 @@ public class HomeController {
         System.out.println("cantidad de topicos a subscribirme alarma: "+ topicosdeAlarma.size());
         model.addAttribute("cantidadAlarma", topicosdeAlarma.size());
         model.addAttribute("hostalarma", "mqtt.coiaca.com");
-        model.addAttribute("puertoalarma", "8080");
-        model.addAttribute("sslalarma", false);
+        model.addAttribute("puertoalarma", "8081");
+        model.addAttribute("sslalarma", true);
         model.addAttribute("usuarioalarma", "mqttusr");
         model.addAttribute("passalarma", "mqttpwd");
         model.addAttribute("topicosalarmas", topicosdeAlarma);

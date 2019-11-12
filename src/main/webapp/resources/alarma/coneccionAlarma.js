@@ -20,7 +20,7 @@ function startConnectAlarma(host,port,ssl,user,pass,topicos) {
       		onFailure: onConnectionLostAlarma,
       		keepAliveInterval: 10,
       		userName: user,
-      		useSSL: false,
+      		useSSL: true,
       		password: pass	
       	});
     	console.log("salio de la evauacion de la coneccion");
