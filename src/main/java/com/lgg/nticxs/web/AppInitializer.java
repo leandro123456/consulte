@@ -47,7 +47,7 @@ public class AppInitializer extends SpringBootServletInitializer{
 	@Bean
 	public WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> setConfiguration() {
 		return factory -> {
-			factory.setPort(80);
+			factory.setPort(443);
 			
 			
 			Ssl ssl = new Ssl();
