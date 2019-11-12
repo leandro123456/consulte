@@ -538,7 +538,7 @@ $("#serialnumber").blur(function() {
 function iniciaConexion(){
 	console.log("dispositivos: "+ ${cantidadSensores});
 	if(${cantidadSensores}!=0){
-		startConnectSonoff("mqtt.coiaca.com", 8081, false, "mqttusr","mqttpwd",${topicos});
+		startConnectSonoff("mqtttest.qliq.com.ar", 8081, false, "mqttusr","mqttpwd",${topicos});
 	}
 	console.log("dispositivos alarma: "+ ${cantidadAlarma})
 	if(${cantidadAlarma}!=0)
