@@ -1,8 +1,5 @@
 package com.lgg.nticxs.web;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,8 +10,8 @@ import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.SessionAttributes;
+
+import org.springframework.boot.web.server.Ssl;
 
 import com.lgg.nticxs.web.DAO.UserDAO;
 
@@ -51,6 +48,17 @@ public class AppInitializer extends SpringBootServletInitializer{
 	public WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> setConfiguration() {
 		return factory -> {
 			factory.setPort(80);
+			
+			
+			Ssl ssl = new Ssl();
+	    	ssl.setKeyStore("/etc/letsencrypt/live/cdash.space/keystore.p12");
+	    	ssl.setKeyStorePassword("cleoscinc");
+	    	ssl.setKeyAlias("tomcat");
+	    	factory.setSsl(ssl);
+	    	//ssl.setKeyStore("KEYSTORE_TLS"); // por ejemplo /etc/certificates/server12_keystore.jks
+	    	//ssl.setKeyStorePassword("KEYSTORE_TLS_PASSPHRASE"); // por ejemplo: YjZutw6V57F8WyOVU6lo
+	    	//ssl.setKeyAlias("KEYSTORE_TLS_KEY_ALIAS"); //por ejemplo: 1
+	    	//factory.setSsl(ssl);
 		};
 	}
 	
