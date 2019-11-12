@@ -60,6 +60,7 @@
 			cargarColorbotones(${serialpulsador});
 		}
 		setTimeout(iniciaConexion, 2000);
+		requestPermission();
 	});
 </script>
 
@@ -163,6 +164,28 @@ function getParameterByName(name) {
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+</script>
+
+
+<script type="text/javascript">
+function requestPermission() {
+    console.log('Requesting permission...');
+    // [START request_permission]
+    Notification.requestPermission().then((permission) => {
+      if (permission === 'granted') {
+        console.log('Notification permission granted.');
+        // TODO(developer): Retrieve an Instance ID token for use with FCM.
+        // [START_EXCLUDE]
+        // In many cases once an app has been granted notification permission,
+        // it should update its UI reflecting this.
+        resetUI();
+        // [END_EXCLUDE]
+      } else {
+        console.log('Unable to get permission to notify.');
+      }
+    });
+    // [END request_permission]
+  }
 </script>
 
 </body>
