@@ -539,8 +539,10 @@ public class Utils {
 				}
 			}
 			String inicio="";
-			if(tipoDeVista.equals("sonoff") || tipoDeVista.equals("sonofftwo"))
+			if(tipoDeVista.equals("sonoff") || tipoDeVista.equals("sonofftwo")){
 				inicio= vista.getInicio().replaceAll("CAMBIARSONOFF", serialDevice);
+				inicio= vista.getInicio().replaceAll("NOMBRESONOFF", device.getName());
+			}
 			else if (tipoDeVista.equals("temperatura_horizontal") || tipoDeVista.equals("temperatura_reloj"))
 				inicio= vista.getInicio().replaceAll("CAMBIARSENSOR", serialDevice);
 				else

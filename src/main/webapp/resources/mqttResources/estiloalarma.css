@@ -214,6 +214,10 @@
 	margin-left: 1em;
 	}
 	
+	h6.subtitulo {
+    font-size: small;
+    color: gray !important;
+	}
 
       div#left_buttons,
       div#right_buttons,
