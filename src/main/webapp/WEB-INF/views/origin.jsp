@@ -142,12 +142,12 @@ function getParameterByName(name) {
 
 	<jsp:include page="footer.jsp" />
 	
-	
+<div id="token"></div>	
 	
 	
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
-
+<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-messaging.js"></script>
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
 
@@ -196,13 +196,14 @@ const messaging = firebase.messaging();
 messaging.usePublicVapidKey('BDKEV8dGaExs2CjrNlkVYZ3L6AuHCCSNt4ELNRSkPHZZnztf1Lf082Q8QmNut7VzTICNaGrjxSp58En2f6jNmbE');
   
 function resetUI() {
-    clearMessages();
+//    clearMessages();
     showToken('loading...');
     // [START get_token]
     // Get Instance ID token. Initially this makes a network call, once retrieved
     // subsequent calls to getToken will return from cache.
     messaging.getToken().then((currentToken) => {
       if (currentToken) {
+	console.log("se obtubo el token: "+ currentToken);
         sendTokenToServer(currentToken);
         updateUIForPushEnabled(currentToken);
       } else {
