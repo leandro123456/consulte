@@ -606,12 +606,12 @@ public class Utils {
 			Session session = Session.getInstance(props,
 					new javax.mail.Authenticator() {
 				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication("cdash.service@gmail.com", "cinylean12");
+					return new PasswordAuthentication("iot@qliq.com.ar", "nMvJRVdqb0DXlgpPVJnr");
 				}
 			});
 			MimeMessage message = new MimeMessage(session);
 			try {
-				message.setFrom(new InternetAddress("cleoscinc"));
+				message.setFrom(new InternetAddress("cDash"));
 				message.setRecipients(Message.RecipientType.TO,
 						InternetAddress.parse(destino));
 				message.setSubject("[cDash]: Activacion de Cuenta");
@@ -619,7 +619,7 @@ public class Utils {
 				System.out.println("esto es previo al error");
 				Transport transport = session.getTransport("smtp");
 				System.out.println("este es el error");
-				transport.connect("smtp.gmail.com", "cdash.service@gmail.com", "cinylean12");
+				transport.connect("smtp.gmail.com","iot@cdash.space", "nMvJRVdqb0DXlgpPVJnr");
 		        transport.sendMessage(message, message.getAllRecipients());
 		        transport.close();
 				

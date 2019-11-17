@@ -47,18 +47,15 @@ public class AppInitializer extends SpringBootServletInitializer{
 	@Bean
 	public WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> setConfiguration() {
 		return factory -> {
-			factory.setPort(443);
-			
-			
-			Ssl ssl = new Ssl();
-	    	ssl.setKeyStore("/etc/letsencrypt/live/cdash.space/keystore.p12");
-	    	ssl.setKeyStorePassword("cleoscinc");
-	    	ssl.setKeyAlias("tomcat");
-	    	factory.setSsl(ssl);
-	    	//ssl.setKeyStore("KEYSTORE_TLS"); // por ejemplo /etc/certificates/server12_keystore.jks
-	    	//ssl.setKeyStorePassword("KEYSTORE_TLS_PASSPHRASE"); // por ejemplo: YjZutw6V57F8WyOVU6lo
-	    	//ssl.setKeyAlias("KEYSTORE_TLS_KEY_ALIAS"); //por ejemplo: 1
-	    	//factory.setSsl(ssl);
+//			factory.setPort(443);
+//			Ssl ssl = new Ssl();
+//	    	ssl.setKeyStore("/etc/letsencrypt/live/cdash.space/keystore.p12");
+//	    	ssl.setKeyStorePassword("cleoscinc");
+//	    	ssl.setKeyAlias("tomcat");
+//	    	factory.setSsl(ssl);
+	    	
+	    	//para pruebas en local
+	    	factory.setPort(80);
 		};
 	}
 	

@@ -141,7 +141,7 @@ public class TestUtilities {
 		String pie = "<br/> <br/> <footer><p> 2019 - cDash</p></footer></BODY></HTML>";
 		 
 		String formulario = String.format("%s%s%s%s", cabecera, body, "<br/> <br/>", pie);		
-		Utils.sendMail(formulario, "leandrogguzman@hotmail.com");
+		Utils.sendMail(formulario, "leandrogabrielguzman@icloud.com");
 		System.out.println("termino");
 	}
 	

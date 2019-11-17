@@ -164,6 +164,19 @@
          background-color: #d9dcdf;
          border: 2px solid #898e94; 
        } 
+       
+   	div.bordecolumna1{
+		border: 1px solid lightgrey;
+		border-radius: 8px;
+		background-color: whitesmoke;
+		margin-bottom: 1em;
+		margin-left: 0.2em;
+	}
+
+
+	div.espaciarcolumna{
+		padding-left: 0.4em;
+	}
 
 	div.centrarbonotesalarma{
 	text-align: center;
@@ -253,6 +266,16 @@
       
       div.bordezona{
       	    padding: 0.05em;
+      }
+      
+      div.bordegeneral{
+      	margin-left: -0.2em;
+      }
+      
+      button.tamanoboton1 {
+    	height: 2em;
+   		margin: 0em 0.2em 0em 0em;
+   		width: 3em !important;
       }
 
       div#buttons_area {

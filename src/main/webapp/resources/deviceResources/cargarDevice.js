@@ -61,6 +61,8 @@ function evaluarNumeroDeSerie(valorSerial){
         }
         document.getElementById('modelodevice').disabled = true;
         document.getElementById("tipodevice").disabled = true;
+        if(document.getElementById("tipodevice") != null)
+			document.getElementById("tipodevice1").value = document.getElementById("tipodevice").value;
 	}
 	
 
@@ -112,12 +114,13 @@ function evaluarNumeroDeSerie(valorSerial){
 	function siguienteAnimacion(){
 		if(document.getElementById("infoGeneral").style.display=="inline"){
 			document.getElementById("botonAnterior").style.display="inline";
-			document.getElementById("botonSiguiente").style.display="inline";
+			document.getElementById("botonSiguiente").style.display="none";
 			document.getElementById("infoDeducidaCoiaca").style.display="inline";
 			document.getElementById("infoGeneral").style.display="none";
 			document.getElementById("infoPropiaVista").style.display="none";
 			document.getElementById("infoAvanzada").style.display="none";
 			document.getElementById("infoFinal").style.display="none";
+			document.getElementById("botonfinalizar").style.display="inline";
 		}
 		else if(document.getElementById("infoDeducidaCoiaca").style.display=="inline"){
 			document.getElementById("botonAnterior").style.display="inline";

@@ -293,9 +293,9 @@ function resetUI() {
 						<b>Tipo</b> 
 						<select id="tipodevice" class="form-control">
 							<option value="none">Seleccione uno</option>
-							<option value="termometro">Termometro</option>
-							<option value="alarma">Alarma</option>
-							<option value="sonoff">Sonoff</option>
+							<option value="termometro">Awarer</option>
+							<option value="alarma">Bridge</option>
+							<option value="sonoff">Power Stooge</option>
 						</select>
 					</div>
 					<p></p>	

@@ -13,10 +13,10 @@ import com.lgg.nticxs.web.DAO.UserDAO;
 
 public class MyUserDetailsService implements UserDetailsService {
     private static List<UserObject> users = new ArrayList();
-    private static UserDAO userdao = new UserDAO();
+//    private static 
 
     public MyUserDetailsService() {
-    	
+    	UserDAO userdao = new UserDAO();
     	List<com.lgg.nticxs.web.model.User> usuarios = userdao.retrieveAllUsers();
     	System.out.println("cantidad de Usuarios encontrados: "+ usuarios.size());
     	for(com.lgg.nticxs.web.model.User us : usuarios)

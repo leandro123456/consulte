@@ -67,8 +67,6 @@ public class HomeController {
                     .map(c -> c.getName() + "=" + c.getValue()).collect(Collectors.joining(", ")));
         	
         	for (Cookie coo: cookies){
-            	System.out.println("cookies HOME: "+ coo.getName());
-            	System.out.println("cookie valor HOME :"+ coo.getValue());
                 UserDAO userdao = new UserDAO();
                 System.out.println("HOME CONTROLLER - busco el usuario: "+ authentication.getName());
                 User user = userdao.retrieveByMail(authentication.getName());
