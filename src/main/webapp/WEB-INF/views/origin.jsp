@@ -151,7 +151,7 @@ function getParameterByName(name) {
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
 
-<script>
+<script type="text/javascript">
   // Your web app's Firebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyAUrwGTRCz98u4Tg38iWtKKx-zJEKKH78M",
@@ -164,70 +164,78 @@ function getParameterByName(name) {
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+
+  
+  	const messaging = firebase.messaging();
+	//[END get_messaging_object]
+	//[START set_public_vapid_key]
+	//Add the public key generated from the console here.
+	messaging.usePublicVapidKey('BDKEV8dGaExs2CjrNlkVYZ3L6AuHCCSNt4ELNRSkPHZZnztf1Lf082Q8QmNut7VzTICNaGrjxSp58En2f6jNmbE');
+  
+	messaging.requestPermission().then(function(){
+		console.log("obtuvo el permiso")});
+	
+
+	function requestPermission() {
+	    console.log('Requesting permission...');
+	    // [START request_permission]
+	    Notification.requestPermission().then((permission) => {
+	      if (permission === 'granted') {
+	        console.log('Notification permission granted.');
+	        // TODO(developer): Retrieve an Instance ID token for use with FCM.
+	        // [START_EXCLUDE]
+	        // In many cases once an app has been granted notification permission,
+	        // it should update its UI reflecting this.
+	        messaging.resetUI();
+	        // [END_EXCLUDE]
+	      } else {
+	        console.log('Unable to get permission to notify.');
+	      }
+	    });
+	    // [END request_permission]
+	  }
+	  
+
+	function resetUI() {
+	//    clearMessages();
+	    showToken('loading...');
+	    // [START get_token]
+	    // Get Instance ID token. Initially this makes a network call, once retrieved
+	    // subsequent calls to getToken will return from cache.
+	    messaging.getToken().then((currentToken) => {
+	      if (currentToken) {
+			console.log("se obtubo el token: ");
+			console.log("se obtuvo TOKEN: "+ currentToken):
+	        sendTokenToServer(currentToken);
+	        updateUIForPushEnabled(currentToken);
+	      } else {
+	        // Show permission request.
+	        console.log('No Instance ID token available. Request permission to generate one.');
+	        // Show permission UI.
+	        updateUIForPushPermissionRequired();
+	        setTokenSentToServer(false);
+	      }
+	    }).catch((err) => {
+	      console.log('An error occurred while retrieving token. ', err);
+	      showToken('Error retrieving Instance ID token. ', err);
+	      setTokenSentToServer(false);
+	    });
+	    // [END get_token]
+	  }
+	  function showToken(currentToken) {
+	    // Show token in console and UI.
+	    const tokenElement = document.querySelector('#token');
+	    tokenElement.textContent = currentToken;
+	  }
+  
+  
 </script>
 
 
-<script type="text/javascript">
-function requestPermission() {
-    console.log('Requesting permission...');
-    // [START request_permission]
-    Notification.requestPermission().then((permission) => {
-      if (permission === 'granted') {
-        console.log('Notification permission granted.');
-        // TODO(developer): Retrieve an Instance ID token for use with FCM.
-        // [START_EXCLUDE]
-        // In many cases once an app has been granted notification permission,
-        // it should update its UI reflecting this.
-        resetUI();
-        // [END_EXCLUDE]
-      } else {
-        console.log('Unable to get permission to notify.');
-      }
-    });
-    // [END request_permission]
-  }
-  
-  
-  
-const messaging = firebase.messaging();
-// [END get_messaging_object]
-// [START set_public_vapid_key]
-// Add the public key generated from the console here.
-messaging.usePublicVapidKey('BDKEV8dGaExs2CjrNlkVYZ3L6AuHCCSNt4ELNRSkPHZZnztf1Lf082Q8QmNut7VzTICNaGrjxSp58En2f6jNmbE');
-  
-function resetUI() {
-//    clearMessages();
-    showToken('loading...');
-    // [START get_token]
-    // Get Instance ID token. Initially this makes a network call, once retrieved
-    // subsequent calls to getToken will return from cache.
-    messaging.getToken().then((currentToken) => {
-      if (currentToken) {
-	console.log("se obtubo el token: "+ currentToken);
-        sendTokenToServer(currentToken);
-        updateUIForPushEnabled(currentToken);
-      } else {
-        // Show permission request.
-        console.log('No Instance ID token available. Request permission to generate one.');
-        // Show permission UI.
-        updateUIForPushPermissionRequired();
-        setTokenSentToServer(false);
-      }
-    }).catch((err) => {
-      console.log('An error occurred while retrieving token. ', err);
-      showToken('Error retrieving Instance ID token. ', err);
-      setTokenSentToServer(false);
-    });
-    // [END get_token]
-  }
-  function showToken(currentToken) {
-    // Show token in console and UI.
-    const tokenElement = document.querySelector('#token');
-    tokenElement.textContent = currentToken;
-  }
-  
-  
-</script>
+
+
+
+
 
 </body>
 
