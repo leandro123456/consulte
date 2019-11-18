@@ -60,7 +60,9 @@
 			cargarColorbotones(${serialpulsador});
 		}
 		setTimeout(iniciaConexion, 2000);
-		requestPermission();
+//		requestPermission();
+
+
 	});
 </script>
 
@@ -142,7 +144,7 @@ function getParameterByName(name) {
 
 	<jsp:include page="footer.jsp" />
 	
-<div id="token"></div>	
+<div id="token" style="display: none;"></div>	
 	
 	
 <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -151,8 +153,8 @@ function getParameterByName(name) {
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
 
-<script type="text/javascript">
-  // Your web app's Firebase configuration
+<script>
+ // Your web app's Firebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyAUrwGTRCz98u4Tg38iWtKKx-zJEKKH78M",
     authDomain: "cdash-1274d.firebaseapp.com",
@@ -165,15 +167,20 @@ function getParameterByName(name) {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
-  
-  	const messaging = firebase.messaging();
+
+   	const messaging = firebase.messaging();
+
+const tokenDivId = 'token_div';
+  const permissionDivId = 'permission_div';
 	//[END get_messaging_object]
 	//[START set_public_vapid_key]
 	//Add the public key generated from the console here.
 	messaging.usePublicVapidKey('BDKEV8dGaExs2CjrNlkVYZ3L6AuHCCSNt4ELNRSkPHZZnztf1Lf082Q8QmNut7VzTICNaGrjxSp58En2f6jNmbE');
   
 	messaging.requestPermission().then(function(){
-		console.log("obtuvo el permiso")});
+		console.log("obtuvo el permiso");
+		requestPermission();	
+	});
 	
 
 	function requestPermission() {
@@ -186,7 +193,7 @@ function getParameterByName(name) {
 	        // [START_EXCLUDE]
 	        // In many cases once an app has been granted notification permission,
 	        // it should update its UI reflecting this.
-	        messaging.resetUI();
+	        resetUI();
 	        // [END_EXCLUDE]
 	      } else {
 	        console.log('Unable to get permission to notify.');
@@ -202,10 +209,12 @@ function getParameterByName(name) {
 	    // [START get_token]
 	    // Get Instance ID token. Initially this makes a network call, once retrieved
 	    // subsequent calls to getToken will return from cache.
+	
+		console.log("este es el token: "+ messaging.getToken());
 	    messaging.getToken().then((currentToken) => {
 	      if (currentToken) {
 			console.log("se obtubo el token: ");
-			console.log("se obtuvo TOKEN: "+ currentToken):
+//			console.log("se obtuvo TOKEN: "+ currentToken):
 	        sendTokenToServer(currentToken);
 	        updateUIForPushEnabled(currentToken);
 	      } else {
@@ -224,9 +233,31 @@ function getParameterByName(name) {
 	  }
 	  function showToken(currentToken) {
 	    // Show token in console and UI.
+		console.log("va a mostrar el token");
 	    const tokenElement = document.querySelector('#token');
 	    tokenElement.textContent = currentToken;
 	  }
+
+function setTokenSentToServer(sent) {
+    window.localStorage.setItem('sentToServer', sent ? '1' : '0');
+  }
+
+  // Clear the messages element of all children.
+  function clearMessages() {
+    const messagesElement = document.querySelector('#messages');
+    while (messagesElement.hasChildNodes()) {
+      messagesElement.removeChild(messagesElement.lastChild);
+    }
+  }
+  function updateUIForPushEnabled(currentToken) {
+    showHideDiv(tokenDivId, true);
+    showHideDiv(permissionDivId, false);
+    showToken(currentToken);
+  }
+  function updateUIForPushPermissionRequired() {
+    showHideDiv(tokenDivId, false);
+    showHideDiv(permissionDivId, true);
+  }
   
   
 </script>
