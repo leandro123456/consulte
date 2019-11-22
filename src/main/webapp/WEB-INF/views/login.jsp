@@ -5,11 +5,11 @@
 <head>
     <title>cDash - Control for your IoT devices</title>
     <link rel='shortcut icon' href='<c:url value="/resources/images/favicon.ico" />' type="image/x-icon"/>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html;  charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link type="text/css" rel="stylesheet" href="resources/loginresources/css/main.css">
 	
-	<script type="text/javascript"> <!-- FEDERICO le meti este script para que cambie la imagen de fondo y que no sea sismpre la misma. Si, me copé -->
+	<script type="text/javascript"> <!-- FEDERICO le meti este script para que cambie la imagen de fondo y que no sea sismpre la misma. Si, me copï¿½ -->
 		if (document.getElementById) { window.onload = swap };
 		function swap() {
 		var numimages=4;
@@ -50,7 +50,7 @@
 				</ul>
 			</nav>
 				<c:if test="${param.error != null}">
-				 	<input type="hidden" id ="mensaje1" value="Usuario o Contraseña Incorrectos, intentalo nuevamente">
+				 	<input type="hidden" id ="mensaje1" value="Usuario o Contrase&ntildea Incorrectos, intentalo nuevamente">
 					<script type="text/javascript">
 						var x= document.getElementById('mensaje1').value;
 						swal({
@@ -65,7 +65,7 @@
 				</c:if>
 			
 				<c:if test="${param.logout != null}">
-				 	<input type="hidden" id ="mensaje" value="La sesión ha sido cerrada correctamente.">
+				 	<input type="hidden" id ="mensaje" value="La sesi&oacuten ha sido cerrada correctamente.">
 					<script type="text/javascript">
 						var x= document.getElementById('mensaje').value;
 						swal({
@@ -80,7 +80,7 @@
 				</c:if>
 
                     <c:if test="${param.logout != null}">
-                        <p class="logout">La sesión ha sido cerrada correctamente.</p>
+                        <p class="logout">La sesi&oacuten ha sido cerrada correctamente.</p>
                     </c:if>
                     
 		<!-- Banner -->
@@ -88,7 +88,7 @@
 				<div class="inner">
 					<header>
 						<p><img src="resources/loginresources/css/images/logo.png" alt=""/></p>
-						<h2 style="color:#FFFFFF; text-align:left !important;">Controla <br/>tus dispositivos</h2>   <!-- FEDERICO cambie de h1 a h2 y agregué style -->		
+						<h2 style="color:#FFFFFF; text-align:left !important;">Controla <br/>tus dispositivos</h2>   <!-- FEDERICO cambie de h1 a h2 y agreguï¿½ style -->		
 						<!-- <p>Aliquam libero augue varius non odio nec faucibus congue<br />felis quisque a diam rutrum tempus massa accumsan faucibus purus.</p> -->
 					</header>
 
@@ -106,11 +106,11 @@
 			                      <input id = "userName" name="user"  type="text" class="form-control form-control-user" aria-describedby="emailHelp" placeholder="Email">
 			                    </div>
 			                    <div class="form-group">
-			                      <input type="password" class="form-control form-control-user"  name="password" id = "userPassword"  placeholder="Contraseña">
+			                      <input type="password" class="form-control form-control-user"  name="password" id = "userPassword"  placeholder="Contraseï¿½a">
 			                    </div>
 			                    <div class="form-group">
 			                      <div class="custom-control custom-checkbox small">
-			                        <input checked type="checkbox" name="remember-me" class="custom-control-input" id="customCheck"> <!-- FEDERICO agregué el CHECKED -->
+			                        <input checked type="checkbox" name="remember-me" class="custom-control-input" id="customCheck"> <!-- FEDERICO agreguï¿½ el CHECKED -->
 			                        <label class="custom-control-label" for="customCheck">Recordar</label>
 			                      </div>
 			                    </div>
@@ -120,7 +120,7 @@
 			                  </form>
 			                  <hr>
 			                  <div class="text-center">
-			                    <a class="small" href="<c:url value='/forgot'/>" id="forgot">¿Olvidó su contraseña?</a>
+			                    <a class="small" href="<c:url value='/forgot'/>" id="forgot">&iquestOlvid&oacute su contrase&ntildea?</a>
 			                  </div>
 			                  <div class="text-center">
 			                    <a class="small" href="<c:url value='/signup'/>" id="signup">Crear una cuenta</a>
@@ -141,7 +141,7 @@
 			</section>
 
 		<!-- Main -->
-			<div id="main" class="main-home"> <!-- FEDERICO agregué el clase main-home -->
+			<div id="main" class="main-home"> <!-- FEDERICO agreguï¿½ el clase main-home -->
 
 				<!-- Section -->
 					<section class="wrapper style1">
@@ -150,14 +150,16 @@
 								<div class="flex flex-2">
 									<div class="col col1">
 										<div class="image round fit">
-											<a href="generic.html" class="link"><img src="resources/loginresources/css/images/pic01.jpg" alt="" /></a>
+											<img src="resources/loginresources/css/images/home1.jpg" alt="" />
 										</div>
 									</div>
 									<div class="col col2">
-										<h3>Aplicaciones</h3>
-										<p>Las aplicaciones para dispositivos conectados a internet son amplias. Múltiples categorías han sido sugeridas, pero la mayoría está de acuerdo en separar las aplicaciones en tres principales ramas de uso: consumidores, empresarial, e infraestructura. George Osborne, ex miembro del gabinete encargado de finanzas, propone que la IoT es la próxima etapa en la revolución de la información, refiriéndose a la interconectividad de todo: desde el transporte urbano hasta dispositivos médicos, pasando por electrodomésticos.</p>
-										<p>La capacidad de conectar dispositivos embebidos con capacidades limitadas de CPU, memoria y energía significa que IoT puede tener aplicaciones en casi cualquier área.Estos sistemas podrían encargarse de recolectar información en diferentes entornos: desde ecosistemas naturales hasta edificios y fábricas, por lo que podrían utilizarse para monitoreo ambiental y planeamiento urbanístico. </p>
-										<a href="#" class="button">Learn More</a>
+										<h3>Todos tus dispositivos IoT en un s&oacutelo lugar</h3>
+										<p>Desde una simple luminaria hasta un sistema complejo de seguridad. cDash permite controlar uno o m&uacuteltiples dispositivos IoT en una &uacutenica aplicaci&oacuten, a la que podr&aacutes acceder con cualquier dispositivo: PC, Tablet o m&oacutevil.</p>
+										<p>Adem&aacutes, podr&aacutes compartir el uso con quien quieras de forma segura y tambi&eacuten programar acciones que se desencadenan en funci&oacuten del estado que reporten tus dispositivos. Por ejemplo, si la luz de la sala est&aacute encendida y la temperatura supera los 25 grados, enciende el ventilador</p>
+										<p>Todo esto de manera muy f&aacutecil. Si a&uacuten no tienen tu cuenta cDash, crea una, agrega un dispositivo al panel y toma el control.</p>
+										<a href="#" class="button">Ingresar</a>
+										<a href="<c:url value='/signup'/>" class="button">Crear Cuenta</a>
 									</div>
 								</div>
 						</div>
@@ -168,57 +170,24 @@
 						<div class="inner">
 							<div class="flex flex-2">
 								<div class="col col2">
-									<h3>Aplicaciones de consumo</h3>
-									<p>Un porcentaje creciente de los dispositivos IoT son creados para el consumo. Algunos ejemplos de aplicaciones de consumo incluyen: automóviles conectados, entretenimiento, automatización del hogar, tecnología vestible, salud conectada y electrodomésticos como lavadoras, secadoras, aspiradoras robóticas, purificadores de aire, hornos, refrigeradores que utilizan Wi-Fi para seguimiento remoto</p>
-									<p>Algunas aplicaciones de consumo han sido criticadas por su falta de redundancia y su inconsistencia. Estas críticas dieron lugar a una parodia conocida como "Internet of Shit" ('internet de las porquerías') Varias compañías han sido criticadas por apresurarse a incursionar en IoT, creando así dispositivos de valor cuestionable además de no establecer ni implementar estándares de seguridad bien preparados. </p>
-									<a href="#" class="button">Learn More</a>
+									<h3>Makers</h3>
+									<p>Tu proyecto est&aacute listo y ahora necesitas una aplicaci&oacuten para controlarlo. Ya sea para un cliente puntual o para tenga muchos usuarios, si utilizas el protocolo MQTT, podr&aacutes integrarlo a cDash y despreocuparte por el desarrollo de una aplicaci&oacuten para controlarlo.</p>
+									<p>Creamos el widget necesario para tu proyecto de acuerdo con tu especificaci&oacuten, y podr&aacutes despreoc&uacutepate de la aplicaci&oacuten y aprovechar el entorno cDash para que tus proyectos puedan interactuar con otros productos ya integrados.</p>
+									<p>El costo para puede ser m&aacutes bajo de lo que imaginas y hasta gratis. No dejes de contactarnos.</p>
+									<a href="https://coiaca.com/index.php/contact/" class="button">Contacto</a>
 								</div>
 								<div class="col col1 first">
 									<div class="image round fit">
-										<a href="generic.html" class="link"><img src="resources/loginresources/css/images/pic02.jpg" alt="" /></a>
+										<img src="resources/loginresources/css/images/home2.jpg" alt="" />
 									</div>
 								</div>
 							</div>
 						</div>
 					</section>
-
-				<!-- Section -->
-					<section class="wrapper style1">
-						<div class="inner">
-							<header class="align-center">
-								<h2>Empresarial</h2>
-								<p>El término "IoT empresarial" (EIoT, por sus siglas en inglés) se usa para referirse a todos los dispositivos en el ambiente de los negocios y corporativo. Para 2019, se estima que EIoT comprenderá cerca de un 40% o 9.1 millardos de dispositivos.</p>
-							</header>
-							<div class="flex flex-3">
-								<div class="col align-center">
-									<div class="image round fit">
-										<img src="resources/loginresources/css/images/pic03.jpg" alt="" />
-									</div>
-									<p>Los medios utilizan el internet de las cosas principalmente para mercadeo y estudiar los hábitos de los consumidores. Estos dispositivos recolectan información útil sobre millones de individuos mediante segmentación por comportamiento. </p>
-									<a href="#" class="button">Leer Mas</a>
-								</div>
-								<div class="col align-center">
-									<div class="image round fit">
-										<img src="resources/loginresources/css/images/pic05.jpg" alt="" />
-									</div>
-									<p>Al hacer uso de los perfiles construidos durante el proceso de segmentacion, los productores de medios presentan al consumidor publicidad en pantalla alineada con sus habitos conocidos en el lugar y momento adecuados para maximizar su efecto.</p>
-									<a href="#" class="button">Leer Mas</a>
-								</div>
-								<div class="col align-center">
-									<div class="image round fit">
-										<img src="resources/loginresources/css/images/pic04.jpg" alt="" />
-									</div>
-									<p>Se recolecta más información haciendo un seguimiento de cómo los consumidores interactúan con el contenido.</p>
-									<a href="#" class="button">Leer Mas</a>
-								</div>
-							</div>
-						</div>
-					</section>
-
 			</div>
 
 		<!-- Footer -->
-			<footer id="footer" class="footer-home"> <!-- FEDERICO agregué el clase footer-home -->
+			<footer id="footer" class="footer-home"> <!-- FEDERICO agreguï¿½ el clase footer-home -->
 				<div class="copyright">
 					<ul class="icons">
 						<li><a href="https://www.facebook.com/cdashiot/" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
