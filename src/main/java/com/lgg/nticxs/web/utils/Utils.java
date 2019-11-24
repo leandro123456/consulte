@@ -528,6 +528,7 @@ public class Utils {
 				case "alarma":
 					System.out.println("llego al armado de la alarmas");
 					contenidototal= vista.getContenido().get("alarmabody").replaceAll("CAMBIARALARMA", serialDevice);
+					contenidototal=contenidototal.replaceAll("NOMBREALARMA", device.getName());
 					contenidototal=contenidototal.replaceAll("HOSTALARMA", devconfig.getIphostescuchar());
 					contenidototal=contenidototal.replaceAll("PORTALARMA", devconfig.getPortescuchar());
 					contenidototal=contenidototal.replaceAll("USERALARMA", devconfig.getUserescuchar());

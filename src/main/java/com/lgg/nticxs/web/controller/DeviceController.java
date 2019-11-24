@@ -3,6 +3,7 @@ package com.lgg.nticxs.web.controller;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,7 +57,9 @@ public class DeviceController {
 		CargarDevices(model, request);
 		Device device = devicedao.retrieveBySerialNumber(deviceserial);
 		String nombredelejecutor = request.getUserPrincipal().getName();
-		if(device.getUserowner().equals(nombredelejecutor)){
+		String propietario= new String(Base64.getDecoder().decode(device.getUserowner()));
+		System.out.println("PROPPIETARIO: "+ propietario);
+		if(propietario.equals(nombredelejecutor)){
 		try {
 			MongoCommands.Delete(COLLECTION_DEVICE, "serialnumber", deviceserial);
 			for(User user: userdao.retrieveAllUsers()) {

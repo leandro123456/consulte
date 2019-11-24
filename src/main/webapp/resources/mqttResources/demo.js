@@ -170,6 +170,7 @@ function onMessageArrivedSonoff(message) {
 			var barraho= "sonofftimer1"+dataObj.deviceId;
 			var barranum= "span1"+dataObj.deviceId;
 			animatevar(barraho,barranum,dataObj.PB1TTO);
+			agregarcontador("boton1"+dataObj.deviceId,dataObj.PB1TTO);
 		}if(dataObj.SW1 != null && dataObj.SW1=="OFF"){
 			var deviceserial = "boton1"+dataObj.deviceId;
 			updateEstado(deviceserial,"no","botonsonoff");
@@ -179,6 +180,7 @@ function onMessageArrivedSonoff(message) {
 			var barraho= "sonofftimer2"+dataObj.deviceId;
 			var barranum= "span2"+dataObj.deviceId;
 			animatevar(barraho,barranum,dataObj.PB2TTO);
+			agregarcontador("boton1"+dataObj.deviceId,dataObj.PB1TTO);
 		}if(dataObj.SW2 != null && dataObj.SW2=="OFF"){
 			var deviceserial = "boton2"+dataObj.deviceId;
 			updateEstado(deviceserial,"no","botonsonoff");
@@ -188,6 +190,20 @@ function onMessageArrivedSonoff(message) {
 }
 
 /** comportamiento cuando recibe un mensaje*/
+
+//agregar el contador en el boton
+function agregarcontador(boton,valor){
+	console.log("contador del boton: " +boton+"; "+ valor);
+	if(valor!=0){
+//		document.getElementById(boton).style.width = ("Encendido ("+valor+")"));
+		var span = document.getElementById(boton);
+		if(span.textContent!= 1){
+			span.innerHTML = '';
+			span.appendChild(document.createTextNode("Encendido ("+valor+")"));
+		}	
+	}
+}
+
 
 //analizar la señal y elegir icono
 function obtenerIconoNivelS(informacion){
