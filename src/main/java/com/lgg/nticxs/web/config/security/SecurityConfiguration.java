@@ -31,6 +31,7 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
 import com.lgg.nticxs.web.DAO.UserDAO;
 import com.lgg.nticxs.web.config.security.cookies.MySimpleUrlAuthenticationSuccessHandler;
 import com.lgg.nticxs.web.config.security.cookies.MyUserDetailsService;
+import com.lgg.nticxs.web.utils.Settings;
 
 
 @Configuration
@@ -57,6 +58,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
+		if(Settings.getInstance().isTLSenable()) {
+		http
+		.requiresChannel().anyRequest().requiresSecure();
+		}
+		
 		http
 		.authorizeRequests()
 		.antMatchers("/anonymous*").anonymous()
