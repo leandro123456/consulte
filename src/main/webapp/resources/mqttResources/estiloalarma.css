@@ -153,6 +153,11 @@
         flex: 0;
         color: grey;
       }
+      
+      div.tituloalineado{
+      	text-align: center;
+      	font-size: medium;
+      }
 
       div.status_icons i {
         display: block;
@@ -225,6 +230,7 @@
 	 
 	div.alinezones{
 	margin-left: 0.8em;
+	font-size: small;
 	}
 	
 	div.alinedisplay{
@@ -269,7 +275,9 @@
       }
       
       div.bordezona{
-      	    padding: 0.05em;
+    	border: 1px solid lightgrey;
+    	border-radius: 8px;
+    	background-color: whitesmoke;
       }
       
       div.bordegeneral{
