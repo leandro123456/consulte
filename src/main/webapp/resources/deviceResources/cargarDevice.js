@@ -38,6 +38,7 @@ function evaluarNumeroDeSerie(valorSerial){
         	document.getElementById("cantidadswiths").disabled = true;    
         	enableType("sonoff");
         	obtenerConfiguracion("sonoff",serial);
+        	document.getElementById("cantidadswiths1").value = "one";
         }if(serial.includes("PSWS2")){ 
         	document.getElementById('modelodevice').value = 'PSWS2';
         	document.getElementById("serialnumber").value = "PSWS2";
@@ -46,6 +47,7 @@ function evaluarNumeroDeSerie(valorSerial){
         	document.getElementById("cantidadswiths").disabled = true;
         	enableType("sonoff");
         	obtenerConfiguracion("sonoff",serial);
+        	document.getElementById("cantidadswiths1").value = "two";
         }if(serial.includes("DSC01")){ 
         	document.getElementById('modelodevice').value = 'BRDSC';
         	document.getElementById('tipodevice').value = 'alarma';
@@ -58,6 +60,7 @@ function evaluarNumeroDeSerie(valorSerial){
         	document.getElementById("cantidadswiths").disabled = true;
         	enableType("sonoff");
         	obtenerConfiguracion("sonoff",serial);
+        	document.getElementById("cantidadswiths1").value = "one";
         }
         document.getElementById('modelodevice').disabled = true;
         document.getElementById("tipodevice").disabled = true;
