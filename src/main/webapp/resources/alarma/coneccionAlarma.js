@@ -75,16 +75,10 @@ function informarstatus45(topicorecibido, mensajerecibido){
 	var iddevice = topicorecibido.replace("/Status","");
 	if(mensajerecibido =="online"){
 		updateEstado45("spanestado"+iddevice, "online","statussonoff");
-		//if(document.getElementById("ready_icon"+iddevice)!= null)
-			//document.getElementById("ready_icon"+iddevice).style.color = "green"
 	}if(mensajerecibido =="offline"){
 		updateEstado45("spanestado"+iddevice, "offline", "statussonoff");
-		//if(document.getElementById("ready_icon"+iddevice)!= null)
-			//document.getElementById("ready_icon"+iddevice).style.color = "red"
 	}if(mensajerecibido =="disconnected"){
 		updateEstado45("spanestado"+iddevice, "online", "statussonoff");
-		//if(document.getElementById("ready_icon"+iddevice)!= null)
-			//document.getElementById("ready_icon"+iddevice).style.color = "yellow"
 	}if(mensajerecibido !="disconnected" && mensajerecibido !="online" && mensajerecibido !="offline"){
 		console.log("el mensaje que se recibio es invalido: "+ mensajerecibido);
 	}
@@ -151,12 +145,6 @@ function actualizarDisplay(iddevice, particione){
 			console.log("actualizar display: "+ iddevice +"; particion informada: "+data.contenidoparticion)
 			escribirDisplayAlarma(iddevice,data.contenidoparticion);
 			console.log("cambio de particion"+ iddevice+"; cambiodeparticion: " +data.contenidoparticion);
-//			if(data.particionactiva =="1"){
-//				document.getElementById("partant"+iddevice).disabled = true;
-//			}
-//			else{
-//				document.getElementById("partant"+iddevice).disabled = false; 
-//			}
 		}});
 }
 
@@ -187,40 +175,47 @@ function cargaparticionEfectiva(item, index){
 //escribir informacion de particion activa en el display
 function escribirDisplayAlarma(iddevice,contenido){
 	if(contenido=="disarmed"){
-		document.getElementById("ac_icon"+iddevice).style.color = "grey";
+//		document.getElementById("ac_icon"+iddevice).style.color = "grey";
 		document.getElementById("armed_icon"+iddevice).style.color = "grey";
 		document.getElementById("trouble_icon"+iddevice).style.color = "grey";
 		document.getElementById("virtual_lcd_"+iddevice).style.backgroundColor = "blue";
 		var spanStatus = document.getElementById("second_line"+iddevice);
 		spanStatus.firstChild.data = "Disarmed";
 	}else if(contenido == "armed_home"){
-		document.getElementById("armed_icon"+iddevice).style.color = "green";
-		document.getElementById("ac_icon"+iddevice).style.color = "grey";
+		document.getElementById("armed_icon"+iddevice).style.color = "red";
+//		document.getElementById("ac_icon"+iddevice).style.color = "grey";
 		document.getElementById("trouble_icon"+iddevice).style.color = "grey";
 		document.getElementById("virtual_lcd_"+iddevice).style.backgroundColor = "blue";
 		var spanStatus = document.getElementById("second_line"+iddevice);
 		spanStatus.firstChild.data = "Armed Home";
 	}else if(contenido =="armed_away"){
-		document.getElementById("armed_icon"+iddevice).style.color = "green";
+		document.getElementById("armed_icon"+iddevice).style.color = "red";
 		document.getElementById("trouble_icon"+iddevice).style.color = "grey";
-		document.getElementById("ac_icon"+iddevice).style.color = "grey";
+//		document.getElementById("ac_icon"+iddevice).style.color = "grey";
 		document.getElementById("virtual_lcd_"+iddevice).style.backgroundColor = "blue";
 		var spanStatus = document.getElementById("second_line"+iddevice);
 		spanStatus.firstChild.data = "Armed Away";
 	}else if(contenido =="pending"){
 		document.getElementById("trouble_icon"+iddevice).style.color = "grey";
 		document.getElementById("armed_icon"+iddevice).style.color = "yellow";
-		document.getElementById("ac_icon"+iddevice).style.color = "grey";
+//		document.getElementById("ac_icon"+iddevice).style.color = "grey";
 		document.getElementById("virtual_lcd_"+iddevice).style.backgroundColor = "blue";
 		var spanStatus = document.getElementById("second_line"+iddevice);
 		spanStatus.firstChild.data = "Pending";
 	}else if (contenido == "triggered"){			
 		document.getElementById("trouble_icon"+iddevice).style.color = "red";
 		document.getElementById("armed_icon"+iddevice).style.color = "red";
-		document.getElementById("ac_icon"+iddevice).style.color = "red";
+//		document.getElementById("ac_icon"+iddevice).style.color = "red";
 		document.getElementById("virtual_lcd_"+iddevice).style.backgroundColor = "red";
 		var spanStatus = document.getElementById("second_line"+iddevice);
 		spanStatus.firstChild.data = "Triggered";
+	}else if (contenido == "trouble"){			
+		document.getElementById("trouble_icon"+iddevice).style.color = "yellow";
+		document.getElementById("armed_icon"+iddevice).style.color = "grey";
+//		document.getElementById("ac_icon"+iddevice).style.color = "grey";
+		document.getElementById("virtual_lcd_"+iddevice).style.backgroundColor = "grey";
+		var spanStatus = document.getElementById("second_line"+iddevice);
+		spanStatus.firstChild.data = "Trouble";
 	}else{
 		//como no lo reconoce lo muestra en el segundo display
 		var spanStatus = document.getElementById("second_line"+iddevice);
