@@ -18,10 +18,12 @@ import com.lgg.nticxs.web.DAO.DeviceDAO;
 import com.lgg.nticxs.web.DAO.DeviceDefaultConfigurationDAO;
 import com.lgg.nticxs.web.model.Device;
 import com.lgg.nticxs.web.model.DeviceDefaultConfiguration;
+import com.lgg.nticxs.web.utils.Settings;
 
 @Controller
 public class MqttController {
 	DeviceDAO devado= new DeviceDAO();
+	private static final String URI_BACKEND=Settings.getInstance().getURIBackend();
 
 	@GetMapping("home/configuraciondefault/{tipodevice}/{serial}")
 	@ResponseBody
@@ -86,7 +88,7 @@ public class MqttController {
 		try {
 			JSONObject message = ArmarMensajeSonoff(mensaje, swith);
 			String messageFinal = message.toString();
-			URL url = new URL("http://localhost:8080/enviopulsador/"+serial);
+			URL url = new URL(URI_BACKEND+"/enviopulsador/"+serial);
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 			con.setRequestMethod("POST");
 			con.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -103,51 +105,6 @@ public class MqttController {
 			e.printStackTrace();
 			return "fallo_envio_pulsador";
 		}
-		
-
-		
-//		String publisherId = UUID.randomUUID().toString();
-//		Device device = devado.retrieveBySerialNumber(serial);
-//		if(device!= null){
-//			DeviceConfiguration conf = null;
-//			if(device.getUsedefaultbrocker())
-//				conf=device.getDeviceconfiguration().get(0);
-//			else
-//				conf=device.getDeviceconfiguration().get(1);
-//		try {
-//			IMqttClient publisher = new MqttClient("ws://"+conf.getIphostescuchar()+":"+conf.getPortescuchar(),publisherId);
-//			
-//			MqttConnectOptions options = new MqttConnectOptions();
-//			options.setAutomaticReconnect(true);
-//			options.setCleanSession(true);
-//			options.setConnectionTimeout(10);
-//			options.setUserName(conf.getUserescuchar());
-//			options.setPassword(conf.getPassescuchar().toCharArray());
-//			
-//			if ( !publisher.isConnected()) {
-//				publisher.connect(options);
-//	           	System.out.println("fallo la conexion");
-//	           	//return "fallo la conexion";
-//	        }else {
-//	        	System.out.println("ya esta conectado :" + publisher);
-//	        }
-//			
-//	        MqttMessage msg = makemqttmessageJson(message);
-//	       //msg.setQos(0);
-//	       //msg.setRetained(true);
-//	        System.out.println("este es el Json: "+ message.toString());
-//	        if(message.toString().contains("command"))
-//	        	publisher.publish(conf.getTopicescribirremote(),msg);
-//	        else
-//	        	publisher.publish(conf.getTopicescribir(),msg);
-//		} catch (Exception e) {
-//			System.out.println("mensaje: "+ e.getMessage());
-//			e.printStackTrace();
-//			return "ERROR CATCH: "+e.getMessage();
-//		}	
-//		return "envio exitoso";
-//		}
-//		return "error - device null";
 		
 	}
 
@@ -205,7 +162,8 @@ public class MqttController {
 			if(mensaje.contains("armartotal"))
 				mensaje=particion+"A";
 			if(mensaje.contains("particion-")){
-				URL url = new URL("http://localhost:8080/envio/"+serial+"/"+"barraparticion");
+				System.out.println("busco esta uri: "+ URI_BACKEND+"/envio/"+serial+"/"+"barraparticion");
+				URL url = new URL(URI_BACKEND+"/envio/"+serial+"/"+"barraparticion");
 				HttpURLConnection con = (HttpURLConnection) url.openConnection();
 				con.setRequestMethod("GET");
 				int cod_status = con.getResponseCode();
@@ -217,7 +175,7 @@ public class MqttController {
 				else if(mensaje.contains("siguiente"))
 					mensaje=(part+1)+"";
 			}
-			URL url = new URL("http://localhost:8080/envio/"+serial+"/"+mensaje);
+			URL url = new URL(URI_BACKEND+"/envio/"+serial+"/"+mensaje);
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 			con.setRequestMethod("GET");
 			int cod_status = con.getResponseCode();
@@ -228,60 +186,7 @@ public class MqttController {
 			e.printStackTrace();
 			return "fallo_envio";
 		}
-		
-//		String publisherId = UUID.randomUUID().toString();
-//		Device device = devado.retrieveBySerialNumber(serial);
-//		if(device!= null){
-//			DeviceConfiguration conf = null;
-//			if(device.getUsedefaultbrocker())
-//				conf=device.getDeviceconfiguration().get(0);
-//			else
-//				conf=device.getDeviceconfiguration().get(1);
-//		try {
-//			
-//			IMqttClient publisher = new MqttClient("ws://"+conf.getIphostescuchar()+":"+conf.getPortescuchar(),publisherId);
-//						
-//			MqttConnectOptions options = new MqttConnectOptions();
-//			options.setAutomaticReconnect(false);
-//			options.setCleanSession(false);
-//			options.setConnectionTimeout(25);
-//			options.setUserName(conf.getUserescuchar());
-//			options.setPassword(conf.getPassescuchar().toCharArray());			
-//			if ( !publisher.isConnected()) {
-//	           	System.out.println("+++++NO estaba conectada");
-//	           	publisher.connect(options);
-//	           	//return "fallo la conexion";
-//	        }else {
-//	        	System.out.println("YA esta conectado a :" + publisher);
-//	        }
-//			System.out.println("ESTE ES EL MENSAJE: "+mensaje);
-//			String message = ArmarMensajeAlarma(mensaje, particion);
-//	        MqttMessage msg = makemqttmessageString(message);
-//	        msg.setQos(0);
-//	        //msg.setRetained(true);
-//	        publisher.publish(conf.getTopicescribir(),msg); 
-//	        System.out.println("esta es la URL: "+ publisher.getServerURI());
-//	        publisher.disconnect();
-//	        publisher.close();
-//		} catch (Exception e) {
-//			System.out.println("mensaje: "+ e.getMessage());
-//			e.printStackTrace();
-//			return "ERROR CATCH: "+e.getMessage();
-//		}	
-//		return "envio exitoso";
-//		}
-//		return "error - device null";	
-	}
 	
-    private String ArmarMensajeAlarma(String mensaje, String particion) {
-    	String result="";
-    	if(mensaje.contains("armarzona"))
-    		result=particion+"S";
-    	else if(mensaje.contains("armartotal"))
-    			result=particion+"A"; 
-    	else
-    		result=mensaje.replace("alarm-", "");
-		return result;
 	}
 
 
@@ -393,25 +298,5 @@ public class MqttController {
 			json.put("fueactualizado", false);
 		return json.toString();
 	}
-
-	
-//	@PostMapping("home/parsingmessage/{serial}")
-//	@ResponseBody
-//	public String ParsearMensaje(Model model, @PathVariable String serial, @PathVariable String zona) {
-//		JSONObject json = new JSONObject();
-//		Device device = devado.retrieveBySerialNumber(serial);
-//		zona=zona.replace("zona", "");
-//		if(device.getMayorZonaInformada()<Integer.parseInt(zona)) {
-//			json.put("inicio", device.getMayorZonaInformada());
-//			json.put("fin",zona);
-//			json.put("fueactualizado", true);
-//			device.setMayorZonaInformada(Integer.parseInt(zona));
-//			devado.update(device);
-//			
-//		}else
-//			json.put("fueactualizado", false);
-//		return json.toString();
-//	}
-
 	
 }

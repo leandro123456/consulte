@@ -106,7 +106,7 @@
 			                      <input id = "userName" name="user"  type="text" class="form-control form-control-user" aria-describedby="emailHelp" placeholder="Email">
 			                    </div>
 			                    <div class="form-group">
-			                      <input type="password" class="form-control form-control-user"  name="password" id = "userPassword"  placeholder="Contrase�a">
+			                      <input type="password" class="form-control form-control-user"  name="password" id = "userPassword"  placeholder="Password">
 			                    </div>
 			                    <div class="form-group">
 			                      <div class="custom-control custom-checkbox small">

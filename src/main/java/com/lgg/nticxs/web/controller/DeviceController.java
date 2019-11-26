@@ -1,6 +1,9 @@
 package com.lgg.nticxs.web.controller;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +25,7 @@ import com.lgg.nticxs.web.model.User;
 import com.lgg.nticxs.web.model.simple.SimpleDefaultConfiguration;
 import com.lgg.nticxs.web.model.simple.SimpleDevice;
 import com.lgg.nticxs.web.utils.ManagementDevice;
+import com.lgg.nticxs.web.utils.Settings;
 
 @Controller
 public class DeviceController {
@@ -29,6 +33,7 @@ public class DeviceController {
 	private DeviceDAO devicedao = new DeviceDAO();
 	private DeviceDefaultConfigurationDAO deviceconfigdao = new DeviceDefaultConfigurationDAO();
 	private static final String COLLECTION_DEVICE="DEVICE";
+	private static final String URI_BACKEND=Settings.getInstance().getURIBackend();
 	
 	
 	@GetMapping("home/componentmyown")
@@ -52,7 +57,9 @@ public class DeviceController {
 		CargarDevices(model, request);
 		Device device = devicedao.retrieveBySerialNumber(deviceserial);
 		String nombredelejecutor = request.getUserPrincipal().getName();
-		if(device.getUserowner().equals(nombredelejecutor)){
+		String propietario= new String(Base64.getDecoder().decode(device.getUserowner()));
+		System.out.println("PROPPIETARIO: "+ propietario);
+		if(propietario.equals(nombredelejecutor)){
 		try {
 			MongoCommands.Delete(COLLECTION_DEVICE, "serialnumber", deviceserial);
 			for(User user: userdao.retrieveAllUsers()) {
@@ -211,6 +218,7 @@ public class DeviceController {
 					//propio de la GUI Vistas
 					timerstringsonoff, cantidadswiths, tipovistatermometro, humedadtermometro,
 					tempctermometro,sensacionctermometro, tempftermometro,sensacionftermometro);
+			enviarUpateTobakend(serialnumber);
 			model.addAttribute("msg", "Se creo exitosamente el dispositivo");
 		}else{
 			System.out.println("TIPO DE DEVICE NO es NULL: "+tipodevice);
@@ -221,6 +229,20 @@ public class DeviceController {
 		return "origin";
 	}
 
+
+	private void enviarUpateTobakend(String serial) {
+		try {
+			URL url = new URL(URI_BACKEND+"/nuevodevice/"+serial);
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			con.setRequestMethod("GET");
+			int cod_status = con.getResponseCode();
+			String status = con.getResponseMessage();
+			System.out.println("RESPUESTA: "+ status+": "+cod_status);
+		} catch (Exception e) {
+			System.out.println("ERROR en envio de mensaje a backend");
+			e.printStackTrace();
+		}	
+	}
 
 	private void CargarDevices(Model model, HttpServletRequest request) {
 		String nombre = request.getUserPrincipal().getName();
@@ -235,70 +257,4 @@ public class DeviceController {
 		}
 		model.addAttribute("devices", devices);
 	}
-	
-	
-//	@PostMapping("home/create/{deviceserial}")
-//	public String createDevice(Model model, @PathVariable String deviceserial,HttpServletRequest request,			
-//			@RequestParam(name="serialnumber", required=true) String serialnumber,
-//			@RequestParam(name="namedevice", required=false) String namedevice,
-//			@RequestParam(name="descriptiondevice", required=false) String descriptiondevice,
-//			@RequestParam(name="tipodevice", required=false) String tipodevice,
-//			
-//			//vista sonoff
-//			@RequestParam(name="timerstringsonoff", required=false) String timerstringsonoff,
-//			@RequestParam(name="cantidadswiths", required=false) String cantidadswiths,
-//			
-//			//termometro
-//			@RequestParam(name="tipovistatermometro", required=false) String tipovistatermometro,
-//			@RequestParam(name="humedadtermometro", required=false) String humedadtermometro,
-//			@RequestParam(name="tempctermometro", required=false) String tempctermometro,
-//			@RequestParam(name="sensacionctermometro", required=false) String sensacionctermometro,
-//			@RequestParam(name="tempftermometro", required=false) String tempftermometro,
-//			@RequestParam(name="sensacionftermometro", required=false) String sensacionftermometro,
-//			
-//			//configuracion de topicos
-//			@RequestParam(name="defaultconfiguration", required=true) Boolean defaultconfiguration,
-//			@RequestParam(name="iphostescuchar", required=false) String iphostescuchar,
-//			@RequestParam(name="portescuchar", required=false) String portescuchar,
-//			@RequestParam(name="topiclisten", required=false) String topiclisten,
-//			@RequestParam(name="userescuchar", required=false) String userescuchar,
-//			@RequestParam(name="passescuchar", required=false) String passescuchar,
-//			@RequestParam(name="iphostescribir", required=false) String iphostescribir,
-//			@RequestParam(name="portescribir", required=false) String portescribir,
-//			@RequestParam(name="topicwrite", required=false) String topicwrite,
-//			@RequestParam(name="userescribir", required=false) String userescribir,
-//			@RequestParam(name="passescribir", required=false) String passescribir,
-//			@RequestParam(name="iphostescucharremote", required=false) String iphostescucharremote,
-//			@RequestParam(name="portescucharremote", required=false) String portescucharremote,
-//			@RequestParam(name="topiclistenremote", required=false) String topiclistenremote,
-//			@RequestParam(name="userescucharremote", required=false) String userescucharremote,
-//			@RequestParam(name="passescucharremote", required=false) String passescucharremote,
-//			@RequestParam(name="iphostescribirremote", required=false) String iphostescribirremote,
-//			@RequestParam(name="portescribirremote", required=false) String portescribirremote,
-//			@RequestParam(name="topicwriteremote", required=false) String topicwriteremote,
-//			@RequestParam(name="userescribirremote", required=false) String userescribirremote,
-//			@RequestParam(name="passescribirremote", required=false) String passescribirremote
-//			) {
-//		
-//		if(devicedao.retrieveBySerialNumber(deviceserial) ==null){
-//			
-//			ManagementDevice.createDevice(
-//					request,deviceserial, namedevice, descriptiondevice, tipodevice, 
-//					//propoio configuracion
-//					defaultconfiguration,
-//					iphostescuchar, portescuchar, topiclisten, userescuchar,passescuchar,
-//					iphostescribir, portescribir, topicwrite, userescribir, passescribir,
-//					iphostescucharremote, portescucharremote, topiclistenremote, userescucharremote, passescucharremote,
-//					iphostescribirremote, portescribirremote, topicwriteremote,userescribirremote,passescribirremote,
-//					//propio de la GUI Vistas
-//					timerstringsonoff, cantidadswiths, tipovistatermometro, humedadtermometro,
-//					tempctermometro,sensacionctermometro, tempftermometro,sensacionftermometro);
-//		}else{
-//			
-//			ManagementDevice.updateDevice(request,deviceserial);
-//		}
-//		return "redirect:/home";
-//	}
-	
-
 }

@@ -186,6 +186,27 @@ public class ManagementDevice {
 		else 
 			deviceConfig=devdefdao.retrieveByName("defaultalarma");
 		
+		if(userescuchar.equals("") &&  userescucharremote.equals("") && iphostescuchar.equals("")
+				&& topiclisten.equals("") && topicwrite.equals("")) {
+			System.out.println("------ Va ausar confirguracion por default");
+			dconfirguration.setName("default");
+			dconfirguration.setUserescuchar(deviceConfig.getUserescuchar());
+			dconfirguration.setPassescuchar(deviceConfig.getPassescuchar());
+			dconfirguration.setUserescucharremote(deviceConfig.getUserescucharremote());
+			dconfirguration.setPassescucharremote(deviceConfig.getPassescucharremote());
+			dconfirguration.setIphostescuchar(deviceConfig.getIphostescuchar());
+			dconfirguration.setIphostescucharremote(deviceConfig.getIphostescucharremote());				
+			dconfirguration.setPortescuchar(deviceConfig.getPortescuchar());
+			dconfirguration.setPortescucharremote(deviceConfig.getPortescucharremote());
+			dconfirguration.setTopicescribir(deviceConfig.getTopicescribir().replace("serial", device.getSerialnumber()));
+			dconfirguration.setTopicescribirremote(deviceConfig.getTopicescribirremote().replace("serial", device.getSerialnumber()));
+			dconfirguration.setTopicescuchar(deviceConfig.getTopicescuchar().replace("serial", device.getSerialnumber()));
+			dconfirguration.setTopicescucharremote(deviceConfig.getTopicescribirremote().replace("serial", device.getSerialnumber()));
+			dconfirguration.setUsesslescuchar(deviceConfig.getUsesslescuchar());
+			dconfirguration.setUsesslescucharremote(deviceConfig.getUsesslescucharremote());
+			return dconfirguration;
+		}
+		
 		if(deviceConfig.getUserescuchar().equals(userescuchar)) {
 			dconfirguration.setPassescuchar(deviceConfig.getPassescuchar());
 			dconfirguration.setName("default");
@@ -203,10 +224,10 @@ public class ManagementDevice {
 		dconfirguration.setIphostescucharremote(iphostescucharremote);				
 		dconfirguration.setPortescuchar(portescuchar);
 		dconfirguration.setPortescucharremote(portescucharremote);
-		dconfirguration.setTopicescribir(topicwrite);
-		dconfirguration.setTopicescribirremote(topicwriteremote);
-		dconfirguration.setTopicescuchar(topiclisten);
-		dconfirguration.setTopicescucharremote(topiclistenremote);
+		dconfirguration.setTopicescribir(topicwrite.replace("serial", device.getSerialnumber()));
+		dconfirguration.setTopicescribirremote(topicwriteremote.replace("serial", device.getSerialnumber()));
+		dconfirguration.setTopicescuchar(topiclisten.replace("serial", device.getSerialnumber()));
+		dconfirguration.setTopicescucharremote(topiclistenremote.replace("serial", device.getSerialnumber()));
 		dconfirguration.setUserescuchar(userescuchar);
 		dconfirguration.setUserescucharremote(userescucharremote);
 		dconfirguration.setUsesslescuchar(false);

@@ -1,5 +1,6 @@
 package com.lgg.nticxs.web;
 
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +15,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.boot.web.server.Ssl;
 
 import com.lgg.nticxs.web.DAO.UserDAO;
+import com.lgg.nticxs.web.utils.Settings;
 
 
 @SpringBootApplication
@@ -47,15 +49,17 @@ public class AppInitializer extends SpringBootServletInitializer{
 	@Bean
 	public WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> setConfiguration() {
 		return factory -> {
+			if(Settings.getInstance().isTLSenable()) {
 			factory.setPort(443);
-//			Ssl ssl = new Ssl();
-//	    	ssl.setKeyStore("/etc/letsencrypt/live/cdash.space/keystore.p12");
-//	    	ssl.setKeyStorePassword("cleoscinc");
-//	    	ssl.setKeyAlias("tomcat");
-//	    	factory.setSsl(ssl);
-	    	
-	    	//para pruebas en local
+			Ssl ssl = new Ssl();
+	    	ssl.setKeyStore("/etc/letsencrypt/live/cdash.space/keystore.p12");
+	    	ssl.setKeyStorePassword("cleoscinc");
+	    	ssl.setKeyAlias("tomcat");
+	    	factory.setSsl(ssl);
+			}
+			else {
 	    	factory.setPort(80);
+			}
 		};
 	}
 	
