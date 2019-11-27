@@ -3,7 +3,9 @@ package com.lgg.nticxs.web.controller;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.paho.client.mqttv3.MqttMessage;
@@ -258,6 +260,33 @@ public class MqttController {
 		}
 		json.put("zonasapagadas", zonasapagadas);
 		
+		List<String> listazonasencendidas= new ArrayList<>();
+		if(!zonasapagadas){
+			for (Map.Entry<String, String> zonaint : device.getZonasObtenidas().entrySet()) {
+			    if(zonaint.getValue()!=null && zonaint.getValue().equals("1")){
+			    	listazonasencendidas.add(zonaint.getKey());
+			    }
+			}
+		}
+		
+		json.put("listazonasencendidas", listazonasencendidas);
+		return json.toString();
+	}
+	
+	
+	@GetMapping("home/updatetildezone/{serial}")
+	@ResponseBody
+	public String ActualizarZonaAlarma(Model model, @PathVariable String serial) {
+		Device device = devado.retrieveBySerialNumber(serial);
+		Boolean zonasapagadas = true;
+		JSONObject json = new JSONObject();
+		for (Map.Entry<String, String> zonaint : device.getZonasObtenidas().entrySet()) {
+		    if(zonaint.getValue()!=null && zonaint.getValue().equals("1")){
+		    	zonasapagadas=false;
+		    	break;
+		    }
+		}
+		json.put("zonasapagadas", zonasapagadas);
 		return json.toString();
 	}
 	

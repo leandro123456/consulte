@@ -261,13 +261,6 @@ function setTokenSentToServer(sent) {
   
   
 </script>
-
-
-
-
-
-
-
 </body>
 
 

@@ -124,7 +124,7 @@ function onMessageArrivedAlarma(message) {
 		var serial= topico.substring(0,topico.search("/Zone"));
 		maximaZona(serial, zona,contenido);
 		pintarBotonDeZona(contenido,zona,serial);
-		
+		ActualizarTildeZona(serial);
 	}
 	else if(topico.includes("keepAlive")){
 		console.log("emnsaje de keepAlive: "+ contenido);
@@ -267,7 +267,26 @@ function pintarBotonDeZona(contenido,zona,serial){
 		document.getElementById("izone_"+zona+"_"+serial).style.color = "#858796";
 }
 
+//pone en verde el tilde si todas la zonas estan apagadas
+function actualizarTilde(serial, color){
+	document.getElementById("ready_icon"+serial).style.color = color;
+}
 
+function ActualizarTildeZona(serial){
+	var urlsendInformation = $(location).attr('pathname') + "/updatetildezone/"+serial;
+	$.ajax({ url : urlsendInformation,
+		contentType: "application/json",
+		dataType: 'json',
+		success: function(data){
+			var todaszonasapagadas = data.zonasapagadas;
+			if(todaszonasapagadas){
+				setTimeout(actualizarTilde(serial,"green"),1000);
+			}
+			else{
+				setTimeout(actualizarTilde(serial,"grey"),1000);
+			}
+		}});
+}
 
 
 //caraga de zonas al inicio
@@ -286,14 +305,19 @@ function cargazonaEfectiva(item, index){
 			var maximo= data.result;
 			console.log("obtuvo las zonas: "+ maximo);
 				for(var j=1; j<maximo+1; j++){
-					
 					document.getElementById("zone_"+j+"_"+item).style.display = 'inline';
 			}
 			var todaszonasapagadas = data.zonasapagadas;
-			if(todaszonasapagadas)
-				document.getElementById("ready_icon"+item).style.color = "green";
-			else
-				document.getElementById("ready_icon"+item).style.color = "grey";
+			if(todaszonasapagadas){
+				actualizarTilde(item,"green");
+			}
+			else{
+				actualizarTilde(item,"grey");
+				//cargar todos los botones de color
+				for(var k=0; k<data.listazonasencendidas.length; k++){
+					pintarBotonDeZona("1",data.listazonasencendidas[k],item);
+				}
+			}
 		}});
 }
 
