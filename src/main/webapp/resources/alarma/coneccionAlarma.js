@@ -262,9 +262,9 @@ function maximaZona(serial, zona,contenido){
 //funcion para pintar las zonas si tienen alarma
 function pintarBotonDeZona(contenido,zona,serial){
 	if(contenido == "1")
-		document.getElementById("zone_"+zona+"_"+serial).style.color = "blue"; 
+		document.getElementById("izone_"+zona+"_"+serial).style.color = "blue"; 
 	else if (contenido =="0")
-		document.getElementById("zone_"+zona+"_"+serial).style.color = "#858796";
+		document.getElementById("izone_"+zona+"_"+serial).style.color = "#858796";
 }
 
 
