@@ -187,7 +187,7 @@ function getParameterByName(name) {
 		console.log(token);
 	})
 	.catch(function(err){
-		console.log('Ocurrio un problema.')
+		console.log('Ocurrio un problema: '+err)
 	})
 
 	
