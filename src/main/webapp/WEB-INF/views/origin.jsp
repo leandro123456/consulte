@@ -153,6 +153,10 @@ function getParameterByName(name) {
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
 
+
+
+
+
 <script>
  // Your web app's Firebase configuration
   var firebaseConfig = {
@@ -166,6 +170,20 @@ function getParameterByName(name) {
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+  
+  
+  
+  if ('serviceWorker' in navigator) {
+	   window.addEventListener('load', function() {
+	     navigator.serviceWorker.register('/firebase-messaging-sw.js').then(function(registration) {
+	       // Si es exitoso
+	       console.log('SW registrado correctamente');
+	     }, function(err) {
+	       // Si falla
+	       console.log('SW fallo', err);
+	     });
+	   });
+	 }
 
 
   const messaging = firebase.messaging();
