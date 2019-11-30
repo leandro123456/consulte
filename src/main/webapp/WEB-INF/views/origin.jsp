@@ -179,6 +179,7 @@ function getParameterByName(name) {
 	messaging.requestPermission()
 	.then(function(){
 		console.log("obtuvo el permiso");
+		console.log("MENSAJE: "+ messaging.getToken());
 		return messaging.getToken();
 		//requestPermission();	
 	})
@@ -189,6 +190,10 @@ function getParameterByName(name) {
 		console.log('Ocurrio un problema.')
 	})
 
+	
+	messaging.onMessage(function(payload){
+		console.log('onMenssage: ',payload);
+	});
 </script>
 </body>
 
