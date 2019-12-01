@@ -22,7 +22,7 @@
 <%-- 	<script src='<c:url value="/resources/mqttResources/progreso.js" />'></script> --%>
 	<script src='<c:url value="/resources/mqttResources/cargaReloj.js" />'></script>
 	<script src='<c:url value="/resources/pulsador/cargaPulsadores.js" />'></script>
-	<script src='<c:url value="/resources/firebase-messaging-sw.js" />'></script>	
+	<script src='<c:url value="/resources/firebase.js" />'></script>	
 	<link href='<c:url value="/resources/mqttResources/estiloalarma.css" />' rel="stylesheet" type="text/css">
 	<!-- Alta de Device -->
 	<script src='<c:url value="/resources/deviceResources/cargarDevice.js" />'></script>
