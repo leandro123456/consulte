@@ -150,7 +150,6 @@ function getParameterByName(name) {
 	
  <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-app.js"></script>
  <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-messaging.js"></script>
-    <!-- For an optimal experience using Cloud Messaging, also add the Firebase SDK for Analytics. -->
  <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-analytics.js"></script>
 
 
@@ -168,7 +167,13 @@ function getParameterByName(name) {
     appId: "1:368274022300:web:95be4383f5eef61b0ff259"
   };
   // Initialize Firebase
-          firebase.initializeApp(firebaseConfig);
+        firebase.initializeApp(firebaseConfig);
+  
+        navigator.serviceWorker.register('/firebase-messaging-sw.js').then(registration => {
+        	  firebase.messaging().useServiceWorker(registration);
+        	  console.log("Este codigo lo agregue ahora")
+        	})
+  
         const messaging = firebase.messaging();
         messaging
             .requestPermission()
