@@ -155,7 +155,7 @@ function getParameterByName(name) {
 
 
 
-<script>
+<script type="text/javascript">
  // Your web app's Firebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyAUrwGTRCz98u4Tg38iWtKKx-zJEKKH78M",
@@ -180,7 +180,7 @@ function getParameterByName(name) {
             .then(function () {
                 //MsgElem.innerHTML = "Notification permission granted." 
                 console.log("Notification permission granted.");
-                
+                console.log("Token: "+ messaging.getToken());
                 // get the token in the form of promise
                 return messaging.getToken()
             })
