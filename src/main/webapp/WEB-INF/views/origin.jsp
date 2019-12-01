@@ -147,12 +147,10 @@ function getParameterByName(name) {
 <div id="token" style="display: none;"></div>	
 	
 	
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-messaging.js"></script>
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-
+ <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-app.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-messaging.js"></script>
+    <!-- For an optimal experience using Cloud Messaging, also add the Firebase SDK for Analytics. -->
+ <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-analytics.js"></script>
 
 
 
@@ -169,49 +167,33 @@ function getParameterByName(name) {
     appId: "1:368274022300:web:95be4383f5eef61b0ff259"
   };
   // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  
-  
-  
-  if ('serviceWorker' in navigator) {
-	   window.addEventListener('load', function() {
-	     navigator.serviceWorker.register('/firebase-messaging-sw.js').then(function(registration) {
-	       // Si es exitoso
-	       console.log('SW registrado correctamente');
-	     }, function(err) {
-	       // Si falla
-	       console.log('SW fallo', err);
-	     });
-	   });
-	 }
-
-
-  const messaging = firebase.messaging();
-  const tokenDivId = 'token_div';
-  const permissionDivId = 'permission_div';
-	//[END get_messaging_object]
-	//[START set_public_vapid_key]
-	//Add the public key generated from the console here.
-	messaging.usePublicVapidKey('BDKEV8dGaExs2CjrNlkVYZ3L6AuHCCSNt4ELNRSkPHZZnztf1Lf082Q8QmNut7VzTICNaGrjxSp58En2f6jNmbE');
-  
-	messaging.requestPermission()
-	.then(function(){
-		console.log("obtuvo el permiso");
-		console.log("MENSAJE: "+ messaging.getToken());
-		return messaging.getToken();
-		//requestPermission();	
-	})
-	.then(function(token){
-		console.log(token);
-	})
-	.catch(function(err){
-		console.log('Ocurrio un problema: '+err)
-	})
-
-	
-	messaging.onMessage(function(payload){
-		console.log('onMenssage: ',payload);
-	});
+          firebase.initializeApp(config);
+        const messaging = firebase.messaging();
+        messaging
+            .requestPermission()
+            .then(function () {
+                MsgElem.innerHTML = "Notification permission granted." 
+                console.log("Notification permission granted.");
+                
+                // get the token in the form of promise
+                return messaging.getToken()
+            })
+            .then(function(token) {
+                TokenElem.innerHTML = "token is : " + token
+            })
+            .catch(function (err) {
+                ErrElem.innerHTML =  ErrElem.innerHTML + "; " + err
+                console.log("Unable to get permission to notify.", err);
+            });
+        messaging.onMessage(function(payload) {
+            console.log("Message received. ", payload);
+            NotisElem.innerHTML = NotisElem.innerHTML + JSON.stringify(payload);
+            //kenng - foreground notifications
+            const {title, ...options} = payload.notification;
+            navigator.serviceWorker.ready.then(registration => {
+                registration.showNotification(title, options);
+            });
+        });
 </script>
 </body>
 
