@@ -167,7 +167,7 @@ function getParameterByName(name) {
     appId: "1:368274022300:web:95be4383f5eef61b0ff259"
   };
   // Initialize Firebase
-          firebase.initializeApp(config);
+          firebase.initializeApp(firebaseConfig);
         const messaging = firebase.messaging();
         messaging
             .requestPermission()
