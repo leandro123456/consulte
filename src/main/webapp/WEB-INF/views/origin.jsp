@@ -148,8 +148,8 @@ function getParameterByName(name) {
 <div id="token" style="display: none;"></div>	
 	
 	
+ <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-app.js"></script>
  <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-messaging.js"></script>
- <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
  
 
 
