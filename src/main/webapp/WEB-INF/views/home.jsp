@@ -400,7 +400,11 @@
     <script src='<c:url value="/resources/assets/js/modernizr.js" />'></script>
     <script src='<c:url value="/resources/assets/js/main.js" />'></script>
 
-
+ <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-app.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-messaging.js"></script>
+    <!-- For an optimal experience using Cloud Messaging, also add the Firebase SDK for Analytics. -->
+ <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-analytics.js"></script>
+ 
 <script>
  // Your web app's Firebase configuration
   var firebaseConfig = {
