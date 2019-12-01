@@ -190,7 +190,7 @@ function getParameterByName(name) {
             })
             .catch(function (err) {
                 //ErrElem.innerHTML =  ErrElem.innerHTML + "; " + err
-                console.log("Unable to get permission to notify.", err);
+                console.log("Unable to get permission to notify."+ err);
             });
         messaging.onMessage(function(payload) {
             console.log("Message received. ", payload);
