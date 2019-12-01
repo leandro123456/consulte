@@ -21,7 +21,8 @@
 <%-- 	<script src='<c:url value="/resources/mqttResources/cargarElementos.js" />'></script> --%>
 <%-- 	<script src='<c:url value="/resources/mqttResources/progreso.js" />'></script> --%>
 	<script src='<c:url value="/resources/mqttResources/cargaReloj.js" />'></script>
-	<script src='<c:url value="/resources/pulsador/cargaPulsadores.js" />'></script>	
+	<script src='<c:url value="/resources/pulsador/cargaPulsadores.js" />'></script>
+	<script src='<c:url value="/resources/firebase-messaging-sw.js" />'></script>	
 	<link href='<c:url value="/resources/mqttResources/estiloalarma.css" />' rel="stylesheet" type="text/css">
 	<!-- Alta de Device -->
 	<script src='<c:url value="/resources/deviceResources/cargarDevice.js" />'></script>
@@ -172,22 +173,23 @@ function getParameterByName(name) {
         messaging
             .requestPermission()
             .then(function () {
-                MsgElem.innerHTML = "Notification permission granted." 
+                //MsgElem.innerHTML = "Notification permission granted." 
                 console.log("Notification permission granted.");
                 
                 // get the token in the form of promise
                 return messaging.getToken()
             })
             .then(function(token) {
-                TokenElem.innerHTML = "token is : " + token
+                //TokenElem.innerHTML = "token is : " + token
+                console.log("token is : " + token);
             })
             .catch(function (err) {
-                ErrElem.innerHTML =  ErrElem.innerHTML + "; " + err
+                //ErrElem.innerHTML =  ErrElem.innerHTML + "; " + err
                 console.log("Unable to get permission to notify.", err);
             });
         messaging.onMessage(function(payload) {
             console.log("Message received. ", payload);
-            NotisElem.innerHTML = NotisElem.innerHTML + JSON.stringify(payload);
+            //NotisElem.innerHTML = NotisElem.innerHTML + JSON.stringify(payload);
             //kenng - foreground notifications
             const {title, ...options} = payload.notification;
             navigator.serviceWorker.ready.then(registration => {
