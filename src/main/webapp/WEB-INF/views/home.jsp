@@ -399,6 +399,49 @@
     <script src='<c:url value="/resources/assets/js/plugins.js" />'></script>
     <script src='<c:url value="/resources/assets/js/modernizr.js" />'></script>
     <script src='<c:url value="/resources/assets/js/main.js" />'></script>
+
+
+<script>
+ // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyAUrwGTRCz98u4Tg38iWtKKx-zJEKKH78M",
+    authDomain: "cdash-1274d.firebaseapp.com",
+    databaseURL: "https://cdash-1274d.firebaseio.com",
+    projectId: "cdash-1274d",
+    storageBucket: "cdash-1274d.appspot.com",
+    messagingSenderId: "368274022300",
+    appId: "1:368274022300:web:95be4383f5eef61b0ff259"
+  };
+  // Initialize Firebase
+          firebase.initializeApp(firebaseConfig);
+        const messaging = firebase.messaging();
+        messaging
+            .requestPermission()
+            .then(function () {
+                //MsgElem.innerHTML = "Notification permission granted." 
+                console.log("Notification permission granted.");
+                
+                // get the token in the form of promise
+                return messaging.getToken()
+            })
+            .then(function(token) {
+                //TokenElem.innerHTML = "token is : " + token
+                console.log("token is : " + token);
+            })
+            .catch(function (err) {
+                //ErrElem.innerHTML =  ErrElem.innerHTML + "; " + err
+                console.log("Unable to get permission to notify.", err);
+            });
+        messaging.onMessage(function(payload) {
+            console.log("Message received. ", payload);
+            //NotisElem.innerHTML = NotisElem.innerHTML + JSON.stringify(payload);
+            //kenng - foreground notifications
+            const {title, ...options} = payload.notification;
+            navigator.serviceWorker.ready.then(registration => {
+                registration.showNotification(title, options);
+            });
+        });
+</script>
 </body>
 <jsp:include page="footer.jsp" /> 
  
