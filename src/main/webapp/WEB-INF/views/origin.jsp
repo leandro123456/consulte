@@ -148,59 +148,46 @@ function getParameterByName(name) {
 <div id="token" style="display: none;"></div>	
 	
 	
- <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-app.js"></script>
  <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-messaging.js"></script>
- <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-analytics.js"></script>
-
-
+ <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+ 
 
 
 <script type="text/javascript">
- // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyAUrwGTRCz98u4Tg38iWtKKx-zJEKKH78M",
-    authDomain: "cdash-1274d.firebaseapp.com",
-    databaseURL: "https://cdash-1274d.firebaseio.com",
-    projectId: "cdash-1274d",
-    storageBucket: "cdash-1274d.appspot.com",
-    messagingSenderId: "368274022300",
-    appId: "1:368274022300:web:95be4383f5eef61b0ff259"
-  };
-  // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
+// Your web app's Firebase configuration
+var firebaseConfig = {
+  apiKey: "AIzaSyAUrwGTRCz98u4Tg38iWtKKx-zJEKKH78M",
+  authDomain: "cdash-1274d.firebaseapp.com",
+  databaseURL: "https://cdash-1274d.firebaseio.com",
+  projectId: "cdash-1274d",
+  storageBucket: "cdash-1274d.appspot.com",
+  messagingSenderId: "368274022300",
+  appId: "1:368274022300:web:95be4383f5eef61b0ff259"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
   
-        navigator.serviceWorker.register('/firebase-messaging-sw.js').then(registration => {
-        	  firebase.messaging().useServiceWorker(registration);
-        	  console.log("Este codigo lo agregue ahora")
-        	})
-  
-        const messaging = firebase.messaging();
-        messaging
-            .requestPermission()
-            .then(function () {
-                //MsgElem.innerHTML = "Notification permission granted." 
-                console.log("Notification permission granted.");
-                console.log("Token: "+ messaging.getToken());
-                // get the token in the form of promise
-                return messaging.getToken()
-            })
-            .then(function(token) {
-                //TokenElem.innerHTML = "token is : " + token
-                console.log("token is : " + token);
-            })
-            .catch(function (err) {
-                //ErrElem.innerHTML =  ErrElem.innerHTML + "; " + err
-                console.log("Unable to get permission to notify."+ err);
-            });
-        messaging.onMessage(function(payload) {
-            console.log("Message received. ", payload);
-            //NotisElem.innerHTML = NotisElem.innerHTML + JSON.stringify(payload);
-            //kenng - foreground notifications
-            const {title, ...options} = payload.notification;
-            navigator.serviceWorker.ready.then(registration => {
-                registration.showNotification(title, options);
-            });
+    const messaging = firebase.messaging();
+    messaging
+        .requestPermission()
+        .then(function () {
+            console.log("Notification permission granted.");
+            console.log("Token: "+ messaging.getToken());
+            return messaging.getToken()
+        })
+        .then(function(token) {
+            console.log("token is : " + token);
+        })
+        .catch(function (err) {
+            console.log("Unable to get permission to notify."+ err);
         });
+    messaging.onMessage(function(payload) {
+        console.log("Message received. ", payload);
+        const {title, ...options} = payload.notification;
+        navigator.serviceWorker.ready.then(registration => {
+            registration.showNotification(title, options);
+        });
+    });
 </script>
 </body>
 
