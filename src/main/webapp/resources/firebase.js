@@ -1,3 +1,6 @@
+//import "https://www.gstatic.com/firebasejs/7.2.1/firebase-app.js";
+//import "https://www.gstatic.com/firebasejs/7.2.1/firebase-messaging.js";
+
 const applicationServerPublicKey = 'BDKEV8dGaExs2CjrNlkVYZ3L6AuHCCSNt4ELNRSkPHZZnztf1Lf082Q8QmNut7VzTICNaGrjxSp58En2f6jNmbE';
 
 
