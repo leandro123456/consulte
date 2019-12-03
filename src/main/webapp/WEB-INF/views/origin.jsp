@@ -47,7 +47,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-6SSYQD4466');
 </script>
 </head>
@@ -151,44 +150,6 @@ function getParameterByName(name) {
  <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-app.js"></script>
  <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-messaging.js"></script>
  
-
-
-<script type="text/javascript">
-// Your web app's Firebase configuration
-var firebaseConfig = {
-  apiKey: "AIzaSyAUrwGTRCz98u4Tg38iWtKKx-zJEKKH78M",
-  authDomain: "cdash-1274d.firebaseapp.com",
-  databaseURL: "https://cdash-1274d.firebaseio.com",
-  projectId: "cdash-1274d",
-  storageBucket: "cdash-1274d.appspot.com",
-  messagingSenderId: "368274022300",
-  appId: "1:368274022300:web:95be4383f5eef61b0ff259"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-  
-    const messaging = firebase.messaging();
-    messaging
-        .requestPermission()
-        .then(function () {
-            console.log("Notification permission granted.");
-            console.log("Token: "+ messaging.getToken());
-            return messaging.getToken()
-        })
-        .then(function(token) {
-            console.log("token is : " + token);
-        })
-        .catch(function (err) {
-            console.log("Unable to get permission to notify."+ err);
-        });
-    messaging.onMessage(function(payload) {
-        console.log("Message received. ", payload);
-        const {title, ...options} = payload.notification;
-        navigator.serviceWorker.ready.then(registration => {
-            registration.showNotification(title, options);
-        });
-    });
-</script>
 </body>
 
 
