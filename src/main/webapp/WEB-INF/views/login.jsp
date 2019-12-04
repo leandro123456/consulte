@@ -28,6 +28,9 @@
 
   gtag('config', 'G-6SSYQD4466');
 </script>
+
+<script charset="UTF-8" src="//cdn.sendpulse.com/js/push/6466aa85eaa270244c20454713387e50_1.js" async></script>
+
   	
 </head>
 
