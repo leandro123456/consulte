@@ -147,8 +147,8 @@ function getParameterByName(name) {
 <div id="token" style="display: none;"></div>	
 	
 	
- <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-app.js"></script>
- <script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-messaging.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-messaging.js"></script>
  
  
  
@@ -157,20 +157,19 @@ function getParameterByName(name) {
  
  
  
- if ('serviceWorker' in navigator && 'PushManager' in window) {
-	  console.log('Service Worker and Push is supported-+-');
-	  navigator.serviceWorker.register('https://www.cdash.space/resources/firebase-messaging-sw.js')
-	  .then(function(swReg) {
-	    console.log('Service Worker is registered'+ swReg);
-	    swRegistration = swReg;
-	  })
-	  .catch(function(error) {
-	    console.log('Service Worker Error'+ error);
-	  });
-	} else {
-	  console.log('Push messaging is not supported');
-	  
-	}
+//  if ('serviceWorker' in navigator && 'PushManager' in window) {
+// 	  console.log('Service Worker and Push is supported-+-');
+// 	  navigator.serviceWorker.register('https://www.cdash.space/firebase-messaging-sw.js')
+// 	  .then(function(swReg) {
+// 	    console.log('Service Worker is registered'+ swReg);
+// 	    swRegistration = swReg;
+// 	  })
+// 	  .catch(function(error) {
+// 	    console.log('Service Worker Error'+ error);
+// 	  });
+// 	} else {
+// 	  console.log('Push messaging is not supported');
+// 	}
 
 
 
@@ -204,7 +203,8 @@ firebase.initializeApp(firebaseConfig);
    messaging.onMessage(function(payload) {
        console.log("Message received. ", payload);
        const {title, ...options} = payload.notification;
-       navigator.serviceWorker.ready.then(registration => {
+       navigator.serviceWorker.register('https://www.cdash.space/request/firebase-messaging-sw.js').ready
+       .then(registration => {
            registration.showNotification(title, options);
        });
    });
