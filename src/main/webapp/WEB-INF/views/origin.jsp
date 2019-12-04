@@ -157,19 +157,19 @@ function getParameterByName(name) {
  
  
  
-//  if ('serviceWorker' in navigator && 'PushManager' in window) {
-// 	  console.log('Service Worker and Push is supported-+-');
-// 	  navigator.serviceWorker.register('https://www.cdash.space/firebase-messaging-sw.js')
-// 	  .then(function(swReg) {
-// 	    console.log('Service Worker is registered'+ swReg);
-// 	    swRegistration = swReg;
-// 	  })
-// 	  .catch(function(error) {
-// 	    console.log('Service Worker Error'+ error);
-// 	  });
-// 	} else {
-// 	  console.log('Push messaging is not supported');
-// 	}
+ if ('serviceWorker' in navigator && 'PushManager' in window) {
+	  console.log('Service Worker and Push is supported-+-');
+	  navigator.serviceWorker.register('https://www.cdash.space/firebase-messaging-sw.js')
+	  .then(function(swReg) {
+	    console.log('Service Worker is registered'+ swReg);
+	    swRegistration = swReg;
+	  })
+	  .catch(function(error) {
+	    console.log('Service Worker Error'+ error);
+	  });
+	} else {
+	  console.log('Push messaging is not supported');
+	}
 
 
 
@@ -185,7 +185,11 @@ var firebaseConfig = {
 };
 //Initialize Firebase
 firebase.initializeApp(firebaseConfig);
- 
+navigator.serviceWorker.register('https://www.cdash.space/firebase-messaging-sw.js')
+.then(function(swReg) {
+  console.log('Service Worker is registered'+ swReg);
+  swRegistration = swReg;
+})
    const messaging = firebase.messaging();
    messaging
        .requestPermission()
@@ -203,7 +207,7 @@ firebase.initializeApp(firebaseConfig);
    messaging.onMessage(function(payload) {
        console.log("Message received. ", payload);
        const {title, ...options} = payload.notification;
-       navigator.serviceWorker.register('https://www.cdash.space/request/firebase-messaging-sw.js').ready
+       swRegistration.ready
        .then(registration => {
            registration.showNotification(title, options);
        });
