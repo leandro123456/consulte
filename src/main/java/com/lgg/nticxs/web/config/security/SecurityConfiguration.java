@@ -59,6 +59,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		if(Settings.getInstance().isTLSenable()) {
+			System.out.println("usa tls!!");
 		http
 		.requiresChannel().anyRequest().requiresSecure();
 		}
@@ -66,7 +67,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http
 		.authorizeRequests()
 		.antMatchers("/anonymous*").anonymous()
-		.antMatchers("/","/login*","/signup","forgot-password").permitAll()
+		.antMatchers("/","/login*","/signup","forgot-password","/sp-push-worker-fb.js").permitAll()
 //		.anyRequest().authenticated()
      
 		.and()
