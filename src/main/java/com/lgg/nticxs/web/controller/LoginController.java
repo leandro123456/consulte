@@ -45,6 +45,12 @@ public class LoginController{
         return "redirect:/home";
     }
 
+	@GetMapping("/sp-push-worker-fb.js")
+    public String redirectpuslse(
+    		Model model,HttpServletRequest request, HttpServletResponse response) {   
+        return "sp-push-worker-fb.js";
+    }
+	
 		
 	@GetMapping("/login")
 	public ModelAndView logini(
