@@ -42,7 +42,7 @@ public class LoginController{
 	@GetMapping("/")
     public String redirect(
     		Model model,HttpServletRequest request, HttpServletResponse response) {   
-        return "redirect:/home";
+        return "login";
     }
 
 		
