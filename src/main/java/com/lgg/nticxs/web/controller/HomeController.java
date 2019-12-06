@@ -136,7 +136,7 @@ public class HomeController {
         model.addAttribute("tieneAlarma", deviceAsociadoAlarma.size()>0);
         
         //fin de alarmas
-   		return new ModelAndView("origin.jsp", model);
+   		return new ModelAndView("origin", model);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("ERROR en el inicio de la sesion - AFUERA");

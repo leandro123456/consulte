@@ -24,5 +24,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
         servlet.setLoadOnStartup(1);
         servlet.addMapping("/");
         servlet.setMultipartConfig(ctx.getBean(MultipartConfigElement.class));
+        servlet.setAsyncSupported(true);
+        
     }
 }
