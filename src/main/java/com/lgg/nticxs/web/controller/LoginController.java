@@ -51,6 +51,12 @@ public class LoginController{
         return "sp-push-worker-fb.js";
     }
 	
+	@GetMapping("/sp-push-worker-fb")
+    public String redirectpuslse1(
+    		Model model,HttpServletRequest request, HttpServletResponse response) {   
+        return "sp-push-worker-fb.js";
+    }
+	
 		
 	@GetMapping("/login")
 	public ModelAndView logini(

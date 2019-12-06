@@ -60,35 +60,6 @@ public class HomeController {
 			return new ModelAndView("/login", model); 
 		}
 		else {
-			try {
-				System.out.println("INFO-SESSION: "+ request.getAuthType());
-				System.out.println("INFO-SESSION: "+ request.getCharacterEncoding());
-				System.out.println("INFO-SESSION: "+ request.getContentLength());
-				System.out.println("INFO-SESSION: "+ request.getContentLengthLong());
-				System.out.println("INFO-SESSION: "+ request.getContentType());
-				System.out.println("INFO-SESSION: "+ request.getContextPath());
-				System.out.println("INFO-SESSION: "+ request.getLocalAddr());
-				System.out.println("INFO-SESSION: "+ request.getLocalName());
-				System.out.println("INFO-SESSION: "+ request.getLocalPort());
-				System.out.println("INFO-SESSION: "+ request.getMethod());
-				System.out.println("INFO-SESSION: "+ request.getPathInfo());
-				System.out.println("INFO-SESSION: "+ request.getPathTranslated());
-				System.out.println("INFO-SESSION: "+ request.getProtocol());
-				System.out.println("INFO-SESSION: "+ request.getQueryString());
-				System.out.println("INFO-SESSION: "+ request.getRemoteAddr());
-				System.out.println("INFO-SESSION: "+ request.getRemoteHost());
-				System.out.println("INFO-SESSION: "+ request.getRemotePort());
-				System.out.println("INFO-SESSION: "+ request.getRemoteUser());
-				System.out.println("INFO-SESSION: "+ request.getRequestedSessionId());
-				System.out.println("INFO-SESSION: "+ request.getRequestURI());
-				System.out.println("INFO-SESSION: "+ request.getScheme());
-				System.out.println("INFO-SESSION: "+ request.getServerName());
-				System.out.println("INFO-SESSION: "+ request.getServerPort());
-				System.out.println("INFO-SESSION: "+ request.getServletPath());
-				System.out.println("INFO-SESSION: "+ request.getAsyncContext());
-			} catch (Exception e) {
-				System.out.println("fallo printiando algo");
-			}
 			
 		if(request.getUserPrincipal() ==null){
 				return new ModelAndView("/login", model);

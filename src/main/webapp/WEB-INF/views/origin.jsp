@@ -219,11 +219,11 @@ function getParameterByName(name) {
  
  // //Initialize Firebase
 // firebase.initializeApp(firebaseConfig);
-navigator.serviceWorker.register('https://www.cdash.space/sp-push-worker-fb.js')
-.then(function(swReg) {
-  console.log('Service Worker is registered'+ swReg);
-  swRegistration = swReg;
-})
+// navigator.serviceWorker.register('https://www.cdash.space/sp-push-worker-fb.js')
+// .then(function(swReg) {
+//   console.log('Service Worker is registered'+ swReg);
+//   swRegistration = swReg;
+// })
  
  </script>
  
