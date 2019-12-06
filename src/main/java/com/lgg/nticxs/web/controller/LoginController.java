@@ -72,7 +72,7 @@ public class LoginController{
 //			model.addAttribute("incorrectcredentials", true);}
 //		if(incorrecttoken) {model.addAttribute("incorrecttoken", true);}
 		
-		return new ModelAndView("login", model);
+		return new ModelAndView("login.jsp", model);
 	}
     
     @GetMapping("/register")
