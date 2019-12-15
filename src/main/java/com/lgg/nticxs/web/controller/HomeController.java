@@ -136,11 +136,11 @@ public class HomeController {
         model.addAttribute("tieneAlarma", deviceAsociadoAlarma.size()>0);
         
         //fin de alarmas
-   		return new ModelAndView("origin", model);
+   		return new ModelAndView("origin.jsp", model);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("ERROR en el inicio de la sesion - AFUERA");
-			return new ModelAndView("logoutsession", model);
+			return new ModelAndView("logoutsession.jsp", model);
 		}
 	}
 
@@ -201,7 +201,7 @@ public class HomeController {
 	@GetMapping("validate")
 		public String validateMailMalo(Model model){
 			model.addAttribute("msg1", "The entered code is incorrect, try again");
-			return "validate";
+			return "validate.jsp";
 	}
 		
 

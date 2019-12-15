@@ -68,7 +68,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.authorizeRequests()
 		.antMatchers("/anonymous*").anonymous()
 
-		.antMatchers("/","/home","/login*","/signup","forgot-password","/sp-push-worker-fb","/sp-push-worker-fb.js").permitAll()
+		.antMatchers("/","/home","/login*","/signup","forgot-password").permitAll()
 //		.anyRequest().authenticated()
      
 		.and()

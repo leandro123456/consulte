@@ -44,18 +44,6 @@ public class LoginController{
     		Model model,HttpServletRequest request, HttpServletResponse response) {   
         return "redirect:/home";
     }
-
-	@GetMapping("/sp-push-worker-fb.js")
-    public String redirectpuslse(
-    		Model model,HttpServletRequest request, HttpServletResponse response) {   
-        return "sp-push-worker-fb.js";
-    }
-	
-	@GetMapping("/sp-push-worker-fb")
-    public String redirectpuslse1(
-    		Model model,HttpServletRequest request, HttpServletResponse response) {   
-        return "sp-push-worker-fb.js";
-    }
 	
 	
 	@GetMapping("/firebase-messaging-sw.js")
@@ -79,17 +67,17 @@ public class LoginController{
 //			model.addAttribute("incorrectcredentials", true);}
 //		if(incorrecttoken) {model.addAttribute("incorrecttoken", true);}
 		
-		return new ModelAndView("login", model);
+		return new ModelAndView("login.jsp", model);
 	}
     
     @GetMapping("/register")
     public String signupRegister(Model model) {
-        return "register";
+        return "register.jsp";
     }
     
     @GetMapping("/forgot-password")
     public String forgot(Model model) {
-    	return "forgot-password";
+    	return "forgot-password.jsp";
     }
     
     @PostMapping("/forgotpass")
@@ -124,7 +112,7 @@ public class LoginController{
     
     @GetMapping("/signup")
     public String signup(Model model) {
-        return "register";
+        return "register.jsp";
     }
     
     @PostMapping("/signup")
@@ -154,17 +142,17 @@ public class LoginController{
     			returnValue = createUser(model, email, role,pass, pass2,firsName,lastName);
     		return returnValue;
     	} 
-    	return "login";
+    	return "login.jsp";
     }
 
 	@GetMapping("/signupPass")
     public String signupPass(Model model) {
-        return "twoAuthentication";//"signup2"
+        return "twoAuthentication.jsp";//"signup2"
     }
         
     @GetMapping("/signupPass2")
     public String signupPass2(Model model) {
-        return "signup2";
+        return "signup2.jsp";
     }
     
 
@@ -197,11 +185,11 @@ public class LoginController{
     public String twoAuthentication(Model model, @RequestParam("pass") String pass) {
     	if(pass.equals("KFsck32/dF$5sd8")){
 			System.out.println("el pass fue bueno");
-			return "signup2";
+			return "signup2.jsp";
 		}
 		else{
 			model.addAttribute("msg1", "Error ... contraseña incorrecta");
-			return "login";
+			return "login.jsp";
 		}
     	
     }
@@ -231,7 +219,7 @@ public class LoginController{
             }
         model.addAttribute("msg1", "Error ... el usuario ingresado no existe, verifiquelo e intente nuevamente");
         System.out.println("SE BORRO EL CONTEXTO jjjjjj");
-        return new ModelAndView("login", model);
+        return new ModelAndView("login.jsp", model);
     }
     
     @GetMapping("/profileuser/{userId}")
@@ -243,7 +231,7 @@ public class LoginController{
     	
     	//User user= userdao.retrieveById(userId);
     	model.addAttribute("user", user);
-    	return "user_edit_profile";
+    	return "user_edit_profile.jsp";
     }
     
     @PostMapping("/profileuser/{userId}")
@@ -292,7 +280,7 @@ public class LoginController{
     	System.out.println("Edit profile - busco el usuario: "+ authentication.getName());
         User user = userdao.retrieveByMail(authentication.getName());
     	model.addAttribute("user", user);
-    	return "user_edit_notications";
+    	return "user_edit_notications.jsp";
     }
     
     
