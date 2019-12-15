@@ -182,17 +182,15 @@ public class HomeController {
 			System.out.println("entro en el if");
 			usuario.setCuenta_iniciada(true);
 			userdao.update(usuario);
-			System.out.println("termino de esperar+++++++++++++++++++++++++");
 			return "redirect:/home";
 		}else {
 			System.out.println("entro en el else");
 			model.addAttribute("user", user);
 			model.addAttribute("msg1", "The entered code is incorrect, try again");
-			return "validate";
+			return "validate.jsp";
 		}
 		
 		} catch (Exception e) {
-			System.out.println("ES UNA VERGA!!!!!!!!!!!!!!!1111");
 			e.printStackTrace();
 			return null;
 		}

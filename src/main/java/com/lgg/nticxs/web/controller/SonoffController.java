@@ -60,7 +60,7 @@ public class SonoffController {
 		json.put("SW1", action);
 		System.out.println("el json: "+json);
 		SimpleTimerString.sendmessageMQTT(json, serverUri, port, topic, userName, password);
-		return "origin";
+		return "origin.jsp";
 	}
 
 	
@@ -88,22 +88,7 @@ public class SonoffController {
 		}else {
 			
 		}
-		return "origin";
-	}
-
-
-	private void CargarDevices(Model model, HttpServletRequest request) {
-		String nombre = request.getUserPrincipal().getName();
-		User user = userdao.retrieveByMail(nombre);
-		model.addAttribute("user", user);
-		String name = request.getUserPrincipal().getName();
-		User usuario = userdao.retrieveByMail(name);
-		List<SimpleDevice> devices = new ArrayList<>();
-		for(String namedevice : usuario.getDeviceserialnumber()) {
-			Device device = devicedao.retrieveBySerialNumber(namedevice);
-			devices.add(new SimpleDevice(device));
-		}
-		model.addAttribute("devices", devices);
+		return "origin.jsp";
 	}
 
 }

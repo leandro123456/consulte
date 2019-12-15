@@ -28,14 +28,14 @@ public class DeviceDebugController {
 	@GetMapping("home/listdebugmyown")
 	public String showMyComponents1(HttpServletRequest request,Model model) {
 		CargarDevices(model, request);
-		return "device_show_debug_list";
+		return "device_show_debug_list.jsp";
 	}
 	
 	
 	@GetMapping("home/debugview/{deviceserial}")
 	public String moreInfoDevice1(Model model, @PathVariable String deviceserial, HttpServletRequest request) {
 		cargarDeviceDebug(model,deviceserial,request);
-		return "device_debug";
+		return "device_debug.jsp";
 	}
 
 	@PostMapping("home/debugview/{deviceserial}/save")
@@ -97,7 +97,7 @@ public class DeviceDebugController {
 			
 		cargarDeviceDebug(model,deviceserial,request);
 		model.addAttribute("msg", "actualizo correctamente");
-		return "device_debug";
+		return "device_debug.jsp";
 	}
 
 	@PostMapping("home/debugview/{deviceserial}/defaultconfiguration")
@@ -110,7 +110,7 @@ public class DeviceDebugController {
 		
 		cargarDeviceDebug(model,deviceserial,request);
 		model.addAttribute("msg", "actualizo correctamente");
-		return "device_debug";
+		return "device_debug.jsp";
 	}
 	
 	
@@ -125,7 +125,7 @@ public class DeviceDebugController {
 		}
 		System.out.println("compartido: "+devices);
 		model.addAttribute("devices", devices);
-		return "device_show_debug_list";
+		return "device_show_debug_list.jsp";
 	}
 
 	private void CargarDevices(Model model, HttpServletRequest request) {

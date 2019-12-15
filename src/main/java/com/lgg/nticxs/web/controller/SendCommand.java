@@ -20,7 +20,7 @@ public class SendCommand {
 //			cards.add(card);
 //		}
 //		model.addAttribute("cards", cards);
-		return "send_command";
+		return "send_command.jsp";
 	}
 	
 	@PostMapping("home/send/command")
@@ -29,6 +29,6 @@ public class SendCommand {
     		@RequestParam(name="kic", required=false) String kic, @RequestParam(name="kid", required=false) String kid) {
 //		String fileName = null;
 		model.addAttribute("msg1", "metodo post");
-        return "send_command";
+        return "send_command.jsp";
 	}
 }

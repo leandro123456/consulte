@@ -39,13 +39,13 @@ public class DeviceController {
 	@GetMapping("home/componentmyown")
 	public String showMyComponents(HttpServletRequest request,Model model) {
 		CargarDevices(model, request);
-		return "device_show_my";
+		return "device_show_my.jsp";
 	}
 	
 	@PostMapping("home/componentmyown")
 	public String showMyComponentsPost(HttpServletRequest request,Model model) {
 		CargarDevices(model, request);
-		return "device_show_my";
+		return "device_show_my.jsp";
 	}
 	
 	
@@ -85,7 +85,7 @@ public class DeviceController {
 			model.addAttribute("msg", "Como usted no es el dueño del dispositivo, unicamente se ha quitado su relacion con el mismo");
 		}
 				
-		return "device_show_my";
+		return "device_show_my.jsp";
 	}
 	
 	@GetMapping("home/info/{deviceserial}")
@@ -110,7 +110,7 @@ public class DeviceController {
 		model.addAttribute("user", user);
 		System.out.println("id del usuario: "+ user.getId());
 		System.out.println("device: "+ device.getSerialnumber());
-		return "device_more_info";
+		return "device_more_info.jsp";
 	}
 	
 	
@@ -125,7 +125,7 @@ public class DeviceController {
 		}
 		System.out.println("compartido: "+devices);
 		model.addAttribute("devices", devices);
-		return "device_show_my";
+		return "device_show_my.jsp";
 	}
 	
 	@GetMapping("home/newdevice")
@@ -142,7 +142,7 @@ public class DeviceController {
 		System.out.println("configuacion defautl alarma: "+ confi2.getName());
 		//model.addAttribute("configdeflocal", confi);
 		//model.addAttribute("configdef", confi2);
-		return "device_new";
+		return "device_new.jsp";
 	}
 	
 	
@@ -226,7 +226,7 @@ public class DeviceController {
 			ManagementDevice.updateDevice(request,serialnumber);
 			model.addAttribute("msg", "El dispositivo ya estaba creado, usted fue agregado como usuario Administrador");
 		}
-		return "origin";
+		return "origin.jsp";
 	}
 
 

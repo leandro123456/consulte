@@ -35,7 +35,7 @@ public class DeviceTimerStringController {
 		Device device= devicedao.retrieveBySerialNumber(serialnumber);
 		List<SimpleTimerString> timerstringconfig = SimpleTimerString.obtainTimerString(device.getTimerString());
 		model.addAttribute("timerstringconfig", timerstringconfig);
-		return "device_timerString";
+		return "device_timerString.jsp";
 	}
 
 	@GetMapping("home/settimerString/{deviceserial}")
@@ -53,7 +53,7 @@ public class DeviceTimerStringController {
 			}
 		}else
 			System.out.println("el device es null");
-		return "timerstringedit";
+		return "timerstringedit.jsp";
 	}
 	
 	@PostMapping("home/settimerString/{deviceserial}")
@@ -63,7 +63,7 @@ public class DeviceTimerStringController {
 		String message = SimpleTimerString.maketimerStringFormat(timerstringsonoff);
 		if(message.contains("fallo")) {
 			model.addAttribute("msg1", "la combinacion de dias es incorrecta");
-			return "timerstringedit";
+			return "timerstringedit.jsp";
 		}
 		else{
 			device.setTimerString(message);
@@ -82,7 +82,7 @@ public class DeviceTimerStringController {
 //	   	json.put("value",message);
 //		SimpleTimerString.sendmessageMQTT(json, conf.getIphostescuchar(), conf.getPortescuchar(), conf.getTopicescribir(), conf.getUserescuchar(), conf.getPassescuchar());
 		
-		return "origin";
+		return "origin.jsp";
 	}
 	
 }

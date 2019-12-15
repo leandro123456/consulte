@@ -13,6 +13,6 @@ public class SendCommandController {
 
     @GetMapping("home/send-command")
     public String search(Model model) {
-        return "send_command";
+        return "send_command.jsp";
     }
 }

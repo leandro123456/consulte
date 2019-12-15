@@ -362,7 +362,7 @@ public class LoginController{
 				
 		} else {
 			model.addAttribute("msg1", "Error ... Contraseña Incorrecta. Por favor vuelva a itentarlo");
-			return "register";
+			return "register.jsp";
 		}
 	}
 

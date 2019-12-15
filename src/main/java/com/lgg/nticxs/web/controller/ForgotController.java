@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ForgotController {
 	@GetMapping("/forgot")
     public String pageForgot(Model model) {
-		return "forgot-password";	
+		return "forgot-password.jsp";	
 	}
 
 }
