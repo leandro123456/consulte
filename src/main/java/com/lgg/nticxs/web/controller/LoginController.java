@@ -57,6 +57,13 @@ public class LoginController{
         return "sp-push-worker-fb.js";
     }
 	
+	
+	@GetMapping("/firebase-messaging-sw.js")
+	public String redirectfirebase(
+    		Model model,HttpServletRequest request, HttpServletResponse response) {   
+        return "firebase-messaging-sw.js";
+    }
+	
 		
 	@GetMapping("/login")
 	public ModelAndView logini(

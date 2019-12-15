@@ -41,8 +41,9 @@
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 <script src='<c:url value="https://unpkg.com/sweetalert/dist/sweetalert.min.js"/>'></script>
 <!-- boton check -->
+<script src='<c:url value="/resources/firebase-messaging-sw.js" />'></script>
+<script src='<c:url value="/resources/firebase-messaging-ws.js" />'></script>
 
-<script charset="UTF-8" src="//cdn.sendpulse.com/js/push/6466aa85eaa270244c20454713387e50_1.js" async></script>
 
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6SSYQD4466"></script>
@@ -152,11 +153,26 @@ function getParameterByName(name) {
 	
  <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
  <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-messaging.js"></script>
+ <!--  <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-app.js"></script> -->
  
  
  
  
  <script type="text/javascript">
+ 
+   // Your web app's Firebase configuration
+   var firebaseConfig = {
+     apiKey: "AIzaSyAUrwGTRCz98u4Tg38iWtKKx-zJEKKH78M",
+     authDomain: "cdash-1274d.firebaseapp.com",
+     databaseURL: "https://cdash-1274d.firebaseio.com",
+     projectId: "cdash-1274d",
+     storageBucket: "cdash-1274d.appspot.com",
+     messagingSenderId: "368274022300",
+     appId: "1:368274022300:web:95be4383f5eef61b0ff259"
+   };
+   // Initialize Firebase
+   firebase.initializeApp(firebaseConfig);
+
  
  
  
@@ -193,28 +209,28 @@ function getParameterByName(name) {
 //   console.log('Service Worker is registered'+ swReg);
 //   swRegistration = swReg;
 // })
-//    const messaging = firebase.messaging();
-//    messaging
-//        .requestPermission()
-//        .then(function () {
-//            console.log("Notification permission granted.");
-//            console.log("Token: "+ messaging.getToken());
-//            return messaging.getToken()
-//        })
-//        .then(function(token) {
-//            console.log("token is : " + token);
-//        })
-//        .catch(function (err) {
-//            console.log("Unable to get permission to notify."+ err);
-//        });
-//    messaging.onMessage(function(payload) {
-//        console.log("Message received. ", payload);
-//        const {title, ...options} = payload.notification;
-//        swRegistration.ready
-//        .then(registration => {
-//            registration.showNotification(title, options);
-//        });
-//    });
+   const messaging = firebase.messaging();
+   messaging
+       .requestPermission()
+       .then(function () {
+           console.log("Notification permission granted.");
+           console.log("Token: "+ messaging.getToken());
+           return messaging.getToken()
+       })
+       .then(function(token) {
+           console.log("token is : " + token);
+       })
+       .catch(function (err) {
+           console.log("Unable to get permission to notify."+ err);
+       });
+   messaging.onMessage(function(payload) {
+       console.log("Message received. ", payload);
+       const {title, ...options} = payload.notification;
+       swRegistration.ready
+       .then(registration => {
+           registration.showNotification(title, options);
+       });
+   });
  
  
  // //Initialize Firebase
