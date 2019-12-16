@@ -49,7 +49,7 @@ public class HomeController {
 		try {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			if(authentication==null) {
-				return new ModelAndView("/login", model);
+				return new ModelAndView("login.jsp", model);
 			}
 			@SuppressWarnings("unchecked")
 			Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) authentication.getAuthorities();
@@ -60,11 +60,11 @@ public class HomeController {
 	
 		if(request == null ){
 			System.out.println("SESION NO INICIADA!!");
-			return new ModelAndView("/login", model); 
+			return new ModelAndView("login.jsp", model); 
 		}
 		else{
 			if(request.getUserPrincipal()==null){
-				return new ModelAndView("/login", model);
+				return new ModelAndView("login.jsp", model);
 			}
 		}	
 		
@@ -95,7 +95,7 @@ public class HomeController {
 			System.out.println("cuenta no iniciada validarla con el mensaje enviado por mail");
 			model.addAttribute("user", user.getFirstname());
 			model.addAttribute("useremail", user.getEmail());
-			return new ModelAndView("validate", model);
+			return new ModelAndView("validate.jsp", model);
 		}
 		clasificarSerialUsuario(user.getDeviceserialnumber());
 		model.addAttribute("sonoffcantidad", deviceAsociadoSonoff.size());
