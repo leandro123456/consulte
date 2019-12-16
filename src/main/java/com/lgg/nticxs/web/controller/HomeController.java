@@ -48,6 +48,9 @@ public class HomeController {
 		String role= "";
 		try {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			if(authentication==null) {
+				return new ModelAndView("/login", model);
+			}
 			@SuppressWarnings("unchecked")
 			Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) authentication.getAuthorities();
 		    for (GrantedAuthority grantedAuthority : authorities) {
@@ -55,13 +58,12 @@ public class HomeController {
 		    	model.addAttribute("role", role);
 		    }
 	
-		if(request == null ){//|| request.getUserPrincipal() ==null){
+		if(request == null ){
 			System.out.println("SESION NO INICIADA!!");
 			return new ModelAndView("/login", model); 
 		}
-		else {
-			
-		if(request.getUserPrincipal() ==null){
+		else{
+			if(request.getUserPrincipal()==null){
 				return new ModelAndView("/login", model);
 			}
 		}	
