@@ -68,12 +68,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.authorizeRequests()
 		.antMatchers("/anonymous*").anonymous()
 
-		.antMatchers("/","/login*","/signup","/forgot-password").permitAll()
+		.antMatchers("/","/login*","/signup","forgot-password").permitAll()
 //		.anyRequest().authenticated()
      
 		.and()
 		.formLogin()
-		.loginPage("/login")
+		.loginPage("login")
 //		.loginProcessingUrl("/login")
 		.successHandler(successHandler())
 //		.failureUrl("/login")
