@@ -145,7 +145,7 @@ public class LoginController{
     	if (email.contains("@")) {   		
     		if(alumnoIsActive(email)){
     			model.addAttribute("msg1", "Error ... la direccion de mail ya existe, seleccione otra diferente");
-    			return "register";
+    			return "register.jsp";
     		}
     		else    				
     			returnValue = createUser(model, email, role,pass, pass2,firsName,lastName);
@@ -363,10 +363,10 @@ public class LoginController{
 					String formulario = String.format("%s%s%s%s", cabecera, body, "<br/> <br/>", pie);
 					Utils.sendMail(formulario, email);
 					model.addAttribute("msg2", "Su usuario se creo exitosamente. Se le envio un mail para finalizar el proceso de activacion. Por favor, verifique su cuenta de correo");
-					return "login";
+					return "login.jsp";
 				}else{
 					model.addAttribute("msg1", "Error ... El usuario solicitado ya exite... si olvido la contraseña recuperela en con su email");
-					return "register";
+					return "register.jsp";
 				}
 				
 		} else {
