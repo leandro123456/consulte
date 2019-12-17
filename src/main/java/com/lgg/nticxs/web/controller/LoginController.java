@@ -52,6 +52,15 @@ public class LoginController{
         return "firebase-messaging-sw.js";
     }
 	
+	@GetMapping("login")
+	public ModelAndView logini1(
+			 ModelMap model
+			) {
+		System.out.println("llego al LOGIN nuevo");
+		return new ModelAndView("login.jsp", model);
+	}
+    
+	
 		
 	@GetMapping("/login")
 	public ModelAndView logini(
