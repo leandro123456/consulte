@@ -62,22 +62,22 @@ public class LoginController{
     
 	
 		
-//	@GetMapping("/login")
-//	public ModelAndView logini(
-////			@RequestParam(value="incorrectcredentials", required=false) boolean incorrectcredentials,
-////			@RequestParam(value="incorrecttoken", required=false) boolean incorrecttoken,
-//			 ModelMap model
-////			,HttpServletRequest request, HttpServletResponse response
-//			) {
-//		System.out.println("llego al LOGIN");
-//    	
-////		if(incorrectcredentials) {
-////			model.addAttribute("msg1", "Error ... el usuario o la contraseña son incorrectas. Por favor verifiquelo e intente nuevamente");
-////			model.addAttribute("incorrectcredentials", true);}
-////		if(incorrecttoken) {model.addAttribute("incorrecttoken", true);}
-//		
-//		return new ModelAndView("login.jsp", model);
-//	}
+	@GetMapping("/login")
+	public ModelAndView logini(
+//			@RequestParam(value="incorrectcredentials", required=false) boolean incorrectcredentials,
+//			@RequestParam(value="incorrecttoken", required=false) boolean incorrecttoken,
+			 ModelMap model
+//			,HttpServletRequest request, HttpServletResponse response
+			) {
+		System.out.println("llego al LOGIN");
+    	
+//		if(incorrectcredentials) {
+//			model.addAttribute("msg1", "Error ... el usuario o la contraseña son incorrectas. Por favor verifiquelo e intente nuevamente");
+//			model.addAttribute("incorrectcredentials", true);}
+//		if(incorrecttoken) {model.addAttribute("incorrecttoken", true);}
+		
+		return new ModelAndView("login.jsp", model);
+	}
     
     @GetMapping("/register")
     public String signupRegister(Model model) {
