@@ -225,11 +225,12 @@ function getParameterByName(name) {
        });
    messaging.onMessage(function(payload) {
        console.log("Message received. ", payload);
-       const {title, ...options} = payload.notification;
-       swRegistration.ready
-       .then(registration => {
-           registration.showNotification(title, options);
-       });
+       const notificationTitle = 'Background Message Title';
+ 	   const notificationOptions = {
+ 	    body: 'Background Message body.'
+ 	  };
+ 	  return self.registration.showNotification(notificationTitle,
+ 	      notificationOptions);
    });
  
  
