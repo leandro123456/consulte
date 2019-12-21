@@ -64,7 +64,7 @@
 			cargarColorbotones(${serialpulsador});
 		}
 		setTimeout(iniciaConexion, 2000);
-//		requestPermission();
+		//requestPermission();
 
 
 	});
@@ -224,23 +224,69 @@ function getParameterByName(name) {
            console.log("Unable to get permission to notify."+ err);
        });
    messaging.onMessage(function(payload) {
-       console.log("Message received. ", payload);
-       const notificationTitle = 'Background Message Title';
- 	   const notificationOptions = {
- 	    body: 'Background Message body.'
- 	  };
- 	  return self.registration.showNotification(notificationTitle,
- 	      notificationOptions);
+        console.log("Message received. ", payload);
+      
+        sendNotification();
+  const notificationTitle = 'Background Message Title';
+  const notificationOptions = {
+    body: 'Background Message body.',
+    icon: '/firebase-logo.png'
+  };
+alert("titulo: "+notificationTitle);
+var notificacion= extraerNotificacion(payload);
+       alert(notificacion.title + "/n"+notificacion.body);
    });
  
+
+ </script>
+ <script type="text/javascript">
+        function extraerNotificacion(payload){
+        var t = payload;
+        console.log(t); 
+        var n = payload.indexOf('{"notification":{');
+         var texto= payload.substring(n, payload.lenght);
+         console.log("parcial: "+ texto);
+         //obj = JSON.parse(payload);
+         
+ }
+	 
+ function requestPermission() {
+	    console.log('Requesting permission...');
+	    // [START request_permission]
+	    Notification.requestPermission().
+	    then((permission) => {
+	      if (permission === 'granted') {
+	        console.log('Notification permission granted.');
+	        console.log("Token del boton: "+ messaging.getToken());
+	        return messaging.getToken()
+	      } else {
+	          console.log('Unable to get permission to notify.');
+	        }
+	      })
+	      .then(function(token) {
+           console.log("token del boton : " + token);
+       });
+	      // [END request_permission]
+	    }
  
- // //Initialize Firebase
-// firebase.initializeApp(firebaseConfig);
-// navigator.serviceWorker.register('https://www.cdash.space/sp-push-worker-fb.js')
-// .then(function(swReg) {
-//   console.log('Service Worker is registered'+ swReg);
-//   swRegistration = swReg;
-// })
+ 
+ function sendNotification() {
+	  const img = "/images/jason-leung-HM6TMmevbZQ-unsplash.jpg";
+	  const text = "Take a look at this brand new t-shirt!";
+	  const title = "New Product Available";
+	  const options = {
+	    body: text,
+	    icon: "/images/jason-leung-HM6TMmevbZQ-unsplash.jpg",
+	    vibrate: [200, 100, 200],
+	    tag: "new-product",
+	    image: img,
+	    badge: "https://spyna.it/icons/android-icon-192x192.png",
+	    actions: [{ action: "Detail", title: "View", icon: "https://via.placeholder.com/128/ff0000" }]
+	  };
+	  navigator.serviceWorker.ready.then(function(serviceWorker) {
+	    serviceWorker.showNotification(title, options);
+	  });
+	}
  
  </script>
  
