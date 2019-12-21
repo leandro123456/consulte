@@ -1,10 +1,10 @@
 //'use strict';
-console.log("encontro el Service Worker");
+//console.log("encontro el Service Worker");
+//
+importScripts('https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/7.6.1/firebase-messaging.js');
 
-importScripts('https://www.gstatic.com/firebasejs/3.5.2/firebase-app.js');
-importScripts('https://www.gstatic.com/firebasejs/3.5.2/firebase-messaging.js');
-
-// Your web app's Firebase configuration
+//Your web app's Firebase configuration
 var firebaseConfig = {
   apiKey: "AIzaSyAUrwGTRCz98u4Tg38iWtKKx-zJEKKH78M",
   authDomain: "cdash-1274d.firebaseapp.com",
@@ -17,10 +17,11 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+
 const messaging = firebase.messaging();
 
 messaging.setBackgroundMessageHandler(function(payload) {
-	  console.log('[firebase-messaging-sw.js] Received background message********* ', payload);
+	  console.log('[firebase-messaging-sw.js] Received background message nivel VIEW++++++++++++++ ', payload);
 	  // Customize notification here
 	  const notificationTitle = 'Background Message Title';
 	  const notificationOptions = {

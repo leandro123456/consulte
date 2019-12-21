@@ -1,8 +1,8 @@
 //'use strict';
 //console.log("encontro el Service Worker");
 //
-importScripts('https://www.gstatic.com/firebasejs/3.5.2/firebase-app.js');
-importScripts('https://www.gstatic.com/firebasejs/3.5.2/firebase-messaging.js');
+importScripts('https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/7.6.1/firebase-messaging.js');
 
 //Your web app's Firebase configuration
 var firebaseConfig = {
@@ -21,7 +21,7 @@ firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
 
 messaging.setBackgroundMessageHandler(function(payload) {
-	  console.log('[firebase-messaging-sw.js] Received background message++++++++++++++ ', payload);
+	  console.log('[firebase-messaging-sw.js] Received background message nivel webapps++++++++++++++ ', payload);
 	  // Customize notification here
 	  const notificationTitle = 'Background Message Title';
 	  const notificationOptions = {
