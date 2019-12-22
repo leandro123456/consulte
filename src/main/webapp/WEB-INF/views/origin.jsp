@@ -173,123 +173,79 @@ function getParameterByName(name) {
    // Initialize Firebase
    firebase.initializeApp(firebaseConfig);
 
- 
- 
- 
-//  if ('serviceWorker' in navigator && 'PushManager' in window) {
-// 	  console.log('Service Worker and Push is supported-+-');
-// 	  navigator.serviceWorker.register('https://www.cdash.space/firebase-messaging-sw.js')
-// 	  .then(function(swReg) {
-// 	    console.log('Service Worker is registered'+ swReg);
-// 	    swRegistration = swReg;
-// 	  })
-// 	  .catch(function(error) {
-// 	    console.log('Service Worker Error'+ error);
-// 	  });
-// 	} else {
-// 	  console.log('Push messaging is not supported');
-// 	}
-
-
-
-// //Your web app's Firebase configuration
-// var firebaseConfig = {
-//  apiKey: "AIzaSyAUrwGTRCz98u4Tg38iWtKKx-zJEKKH78M",
-//  authDomain: "cdash-1274d.firebaseapp.com",
-//  databaseURL: "https://cdash-1274d.firebaseio.com",
-//  projectId: "cdash-1274d",
-//  storageBucket: "cdash-1274d.appspot.com",
-//  messagingSenderId: "368274022300",
-//  appId: "1:368274022300:web:95be4383f5eef61b0ff259"
-// };
-// //Initialize Firebase
-// firebase.initializeApp(firebaseConfig);
-// navigator.serviceWorker.register('https://www.cdash.space/firebase-messaging-sw.js')
-// .then(function(swReg) {
-//   console.log('Service Worker is registered'+ swReg);
-//   swRegistration = swReg;
-// })
    const messaging = firebase.messaging();
    messaging
        .requestPermission()
        .then(function () {
            console.log("Notification permission granted.");
-           console.log("Token: "+ messaging.getToken());
            return messaging.getToken()
        })
        .then(function(token) {
            console.log("token is : " + token);
+           enviarToken(token);
        })
        .catch(function (err) {
            console.log("Unable to get permission to notify."+ err);
        });
    messaging.onMessage(function(payload) {
-        console.log("Message received. ", payload);
-      
-        sendNotification();
-  const notificationTitle = 'Background Message Title';
-  const notificationOptions = {
-    body: 'Background Message body.',
-    icon: '/firebase-logo.png'
-  };
-alert("titulo: "+notificationTitle);
-var notificacion= extraerNotificacion(payload);
-       alert(notificacion.title + "/n"+notificacion.body);
-   });
- 
+//console.log("respuesta: "+ payload.notification.title);
+//console.log("respuesta: "+ payload.notification.body);
+//console.log("respuesta: "+ payload.notification.icon);
+
+swal({
+  title: payload.notification.title,
+  text: payload.notification.body,
+  timer: 3000,
+  buttons: false,
+  });
+});
+
+
+// Callback fired if Instance ID token is updated.
+messaging.onTokenRefresh(() => {
+  messaging.getToken().then((refreshedToken) => {
+    console.log('Token refreshed.');
+    setTokenSentToServer(false);
+    sendTokenToServer(refreshedToken);
+  }).catch((err) => {
+    console.log('Unable to retrieve refreshed token ', err);
+    showToken('Unable to retrieve refreshed token ', err);
+  });
+});
+
 
  </script>
  <script type="text/javascript">
-        function extraerNotificacion(payload){
-        var t = payload;
-        console.log(t); 
-        var n = payload.indexOf('{"notification":{');
-         var texto= payload.substring(n, payload.lenght);
-         console.log("parcial: "+ texto);
-         //obj = JSON.parse(payload);
          
- }
-	 
  function requestPermission() {
-	    console.log('Requesting permission...');
-	    // [START request_permission]
-	    Notification.requestPermission().
-	    then((permission) => {
-	      if (permission === 'granted') {
-	        console.log('Notification permission granted.');
-	        console.log("Token del boton: "+ messaging.getToken());
-	        return messaging.getToken()
-	      } else {
-	          console.log('Unable to get permission to notify.');
-	        }
-	      })
-	      .then(function(token) {
+            console.log('Requesting permission...');
+            Notification.requestPermission().
+            then((permission) => {
+              if (permission === 'granted') {
+                console.log('Notification permission granted.');
+                console.log("Token del boton: "+ messaging.getToken());
+                return messaging.getToken()
+              } else {
+                  console.log('Unable to get permission to notify.');
+                }
+              })
+              .then(function(token) {
            console.log("token del boton : " + token);
        });
-	      // [END request_permission]
-	    }
+    } 
  
- 
- function sendNotification() {
-	  const img = "/images/jason-leung-HM6TMmevbZQ-unsplash.jpg";
-	  const text = "Take a look at this brand new t-shirt!";
-	  const title = "New Product Available";
-	  const options = {
-	    body: text,
-	    icon: "/images/jason-leung-HM6TMmevbZQ-unsplash.jpg",
-	    vibrate: [200, 100, 200],
-	    tag: "new-product",
-	    image: img,
-	    badge: "https://spyna.it/icons/android-icon-192x192.png",
-	    actions: [{ action: "Detail", title: "View", icon: "https://via.placeholder.com/128/ff0000" }]
-	  };
-	  navigator.serviceWorker.ready.then(function(serviceWorker) {
-	    serviceWorker.showNotification(title, options);
-	  });
-	}
- 
- </script>
- 
+ function enviarToken(token){
+	 var urlsendInformation = $(location).attr('pathname') + "/enviartoken";
+		$.ajax({ url : urlsendInformation,
+			contentType: "application/json",
+			dataType: 'json',
+			type: "POST",
+			data:{
+				jsonData: token
+			}
+	});
+ }
+ </script> 
 </body>
 
 
