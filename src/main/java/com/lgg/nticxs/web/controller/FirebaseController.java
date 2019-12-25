@@ -11,8 +11,9 @@ public class FirebaseController {
 	
 	@RequestMapping(value = "home/enviartoken" , method = RequestMethod.POST)
 	public void actualizarToken(@RequestBody String jsonString) {
-		JSONObject message = new JSONObject(jsonString);
-		System.out.println(message.toString());
+		System.out.println("este elemento se envio: "+jsonString);
+		//JSONObject message = new JSONObject(jsonString);
+		//System.out.println(message.toString());
 	}
 
 }

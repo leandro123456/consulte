@@ -241,7 +241,7 @@ messaging.onTokenRefresh(() => {
 			dataType: 'json',
 			type: "POST",
 			data:{
-				jsonData: token
+				jsonData:token
 			}
 	});
  }
