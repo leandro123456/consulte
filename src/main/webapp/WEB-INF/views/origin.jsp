@@ -242,7 +242,10 @@ messaging.onTokenRefresh(() => {
 			type: "POST",
 			data:{
 				jsonData:token
-			}
+			},
+			success: function(data){
+				console.log("exitoso");
+			}			
 	});
  }
  </script> 
