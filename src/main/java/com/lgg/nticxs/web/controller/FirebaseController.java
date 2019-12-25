@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class FirebaseController {
 	
 	@RequestMapping(value = "home/enviartoken/{token}")
-	public void actualizarToken(@PathVariable String jsonString) {
-		System.out.println("este elemento se envio: "+jsonString);
+	public void actualizarToken(@PathVariable String token) {
+		System.out.println("este elemento se envio: "+token);
 		//JSONObject message = new JSONObject(jsonString);
 		//System.out.println(message.toString());
 	}
