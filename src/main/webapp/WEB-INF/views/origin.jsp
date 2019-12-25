@@ -235,14 +235,10 @@ messaging.onTokenRefresh(() => {
     } 
  
  function enviarToken(token){
-	 var urlsendInformation = $(location).attr('pathname') + "/enviartoken";
+	 var urlsendInformation = $(location).attr('pathname') + "/enviartoken"+token;
 		$.ajax({ url : urlsendInformation,
 			contentType: "application/json",
 			dataType: 'json',
-			type: "POST",
-			data:{
-				jsonData:token
-			},
 			success: function(data){
 				console.log("exitoso");
 			}			
