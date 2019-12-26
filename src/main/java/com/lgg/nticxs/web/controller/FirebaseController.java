@@ -16,34 +16,35 @@ import com.lgg.nticxs.web.model.User;
 
 @Controller
 public class FirebaseController {
-	
+
 	@GetMapping(value = "home/enviartoken/{token}/{username}")
 	@ResponseBody
 	public String actualizarToken(@PathVariable String token,@PathVariable String username) {
+		System.out.println("username: "+ username);
 		UserDAO userdao=new UserDAO();
-			User user = userdao.retrieveByMail(username);
-			if(user!= null) {
-				if(user.getFirebasetoken()==null) {
-					ArrayList<String> tokens= new ArrayList<String>();
-					tokens.add(token);
-					user.setFirebasetoken(tokens);
-					userdao.update(user);
-					return "creacion de token y actualizacion de los valores";
-				}else {
-					System.out.println("la lista de firebase token es distinta de null");
-					if(!user.getFirebasetoken().contains(token)) {
-						user.getFirebasetoken().add(token);
-						userdao.update(user);
-						System.out.println("se agrego token");
-						return "se agrego token";
-					}else {
-						System.out.println("ya tenia el token");
-						return "ya tenia el token";
-					}
-				}
+		User user = userdao.retrieveByMail(username);
+		if(user!= null) {
+			if(user.getFirebasetoken()==null) {
+				ArrayList<String> tokens= new ArrayList<String>();
+				tokens.add(token);
+				user.setFirebasetoken(tokens);
+				userdao.update(user);
+				return "creacion de token y actualizacion de los valores";
 			}else {
-				System.out.println("el usuario es null");
-				return "el usuario es null";
+				System.out.println("la lista de firebase token es distinta de null");
+				if(!user.getFirebasetoken().contains(token)) {
+					user.getFirebasetoken().add(token);
+					userdao.update(user);
+					System.out.println("se agrego token");
+					return "se agrego token";
+				}else {
+					System.out.println("ya tenia el token");
+					return "ya tenia el token";
+				}
 			}
+		}else {
+			System.out.println("el usuario es null");
+			return "el usuario es null";
+		}
 	}
 }
