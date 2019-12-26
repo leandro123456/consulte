@@ -1,5 +1,9 @@
 package com.lgg.nticxs.web.controller;
 
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,17 +11,39 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lgg.nticxs.web.DAO.UserDAO;
+import com.lgg.nticxs.web.model.User;
+
 @Controller
 public class FirebaseController {
 	
 	@GetMapping(value = "home/enviartoken/{token}")
 	@ResponseBody
-	public String actualizarToken(@PathVariable String token) {
-		System.out.println("este elemento se envio: "+token);
-		//JSONObject message = new JSONObject(jsonString);
-		//System.out.println(message.toString());
-		return "exitoso";
-		
+	public String actualizarToken(HttpServletRequest request,@PathVariable String token) {
+		UserDAO userdao=new UserDAO();
+		if(request == null && request.getUserPrincipal()==null){
+			String nombre = request.getUserPrincipal().getName();
+			User user = userdao.retrieveByMail(nombre);
+			if(user!= null) {
+				if(user.getFirebasetoken()==null) {
+					ArrayList<String> tokens= new ArrayList<String>();
+					tokens.add(token);
+					user.setFirebasetoken(tokens);
+					userdao.update(user);
+					return "creacion de token y actualizacion de los valores";
+				}else {
+					if(!user.getFirebasetoken().contains(token)) {
+						user.getFirebasetoken().add(token);
+						userdao.update(user);
+						return "se agrego token";
+					}else
+						return "ya tenia el token";
+				}
+			}else {
+				return "el usuario es null";
+			}
+		}else {
+			return "el valor de http es null";
+		}
 	}
-
 }
