@@ -64,7 +64,7 @@
 			cargarColorbotones(${serialpulsador});
 		}
 		setTimeout(iniciaConexion, 2000);
-		//requestPermission();
+		requestPermission();
 
 
 	});
