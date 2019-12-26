@@ -64,7 +64,7 @@
 			cargarColorbotones(${serialpulsador});
 		}
 		setTimeout(iniciaConexion, 2000);
-		requestPermission();
+		//requestPermission();
 
 
 	});
@@ -127,18 +127,18 @@ function getParameterByName(name) {
 				</c:if>	
 
 			
-			
-			<div class="row" id="cargadora">
-				<c:forEach items="${vistas}" var="vista">
-	                ${vista}
-	          </c:forEach>
-			</div>
-			<div class="fixed">
-				<a href="/home/newdeviceb" data-toggle="modal" data-target="#createDeviceModal"> 
-					<i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
-				</a>
-			</div>
+	<button onclick="pedirPermiso()">Notificaciones</button>	
+		<div class="row" id="cargadora">
+			<c:forEach items="${vistas}" var="vista">
+                ${vista}
+          </c:forEach>
 		</div>
+		<div class="fixed">
+			<a href="/home/newdeviceb" data-toggle="modal" data-target="#createDeviceModal"> 
+				<i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
+			</a>
+		</div>
+	</div>
 	</div>
 	<div class="visible">
 		<a class="scroll-to-top rounded" href="#page-top"> <i
@@ -217,10 +217,9 @@ messaging.onTokenRefresh(() => {
  </script>
  <script type="text/javascript">
          
- function requestPermission() {
+ function pedirPermiso() {
             console.log('Requesting permission...');
-            Notification.requestPermission().
-            then((permission) => {
+            Notification.requestPermission().then((permission) => {
               if (permission === 'granted') {
                 console.log('Notification permission granted.');
                 console.log("Token del boton: "+ messaging.getToken());
@@ -246,6 +245,10 @@ messaging.onTokenRefresh(() => {
 			}			
 	});
  }
+ 
+ 
+ 
+ 
  </script> 
 </body>
 
