@@ -235,7 +235,7 @@ messaging.onTokenRefresh(() => {
     } 
  
  function enviarToken(token){
-	 var urlsendInformation = $(location).attr('pathname') + "/enviartoken/"+token;
+	 var urlsendInformation = $(location).attr('pathname') + "/enviartoken/"+token+"/"+'${pageContext.request.userPrincipal.name}';
 		$.ajax({ url : urlsendInformation,
 			contentType: "application/json",
 			dataType: 'json',

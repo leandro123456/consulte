@@ -17,13 +17,11 @@ import com.lgg.nticxs.web.model.User;
 @Controller
 public class FirebaseController {
 	
-	@GetMapping(value = "home/enviartoken/{token}")
+	@GetMapping(value = "home/enviartoken/{token}/{username}")
 	@ResponseBody
-	public String actualizarToken(HttpServletRequest request,@PathVariable String token) {
+	public String actualizarToken(@PathVariable String token,@PathVariable String username) {
 		UserDAO userdao=new UserDAO();
-		if(request == null && request.getUserPrincipal()==null){
-			String nombre = request.getUserPrincipal().getName();
-			User user = userdao.retrieveByMail(nombre);
+			User user = userdao.retrieveByMail(username);
 			if(user!= null) {
 				if(user.getFirebasetoken()==null) {
 					ArrayList<String> tokens= new ArrayList<String>();
@@ -47,9 +45,5 @@ public class FirebaseController {
 				System.out.println("el usuario es null");
 				return "el usuario es null";
 			}
-		}else {
-			System.out.println("el valor de http es null");
-			return "el valor de http es null";
-		}
 	}
 }
