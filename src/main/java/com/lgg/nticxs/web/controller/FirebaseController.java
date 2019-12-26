@@ -1,6 +1,7 @@
 package com.lgg.nticxs.web.controller;
 
 import java.util.ArrayList;
+import java.util.Base64;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,9 +21,11 @@ public class FirebaseController {
 	@GetMapping(value = "home/enviartoken/{token}/{username}")
 	@ResponseBody
 	public String actualizarToken(@PathVariable String token,@PathVariable String username) {
+		String nombre= new String(Base64.getDecoder().decode(username.getBytes()));
 		System.out.println("username: "+ username);
+		System.out.println("decodificado: "+ nombre);
 		UserDAO userdao=new UserDAO();
-		User user = userdao.retrieveByMail(username);
+		User user = userdao.retrieveByMail(nombre);
 		if(user!= null) {
 			if(user.getFirebasetoken()==null) {
 				ArrayList<String> tokens= new ArrayList<String>();

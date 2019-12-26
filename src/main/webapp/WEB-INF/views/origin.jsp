@@ -236,7 +236,8 @@ messaging.onTokenRefresh(() => {
  
  function enviarToken(token){
 	 console.log("username encontrado: "+ '${pageContext.request.userPrincipal.name}')
-	 var urlsendInformation = $(location).attr('pathname') + "/enviartoken/"+token+"/"+'${pageContext.request.userPrincipal.name}';
+	 var enc = window.btoa('${pageContext.request.userPrincipal.name}');
+	 var urlsendInformation = $(location).attr('pathname') + "/enviartoken/"+token+"/"+enc;
 		$.ajax({ url : urlsendInformation,
 			contentType: "application/json",
 			dataType: 'json',
