@@ -32,17 +32,23 @@ public class FirebaseController {
 					userdao.update(user);
 					return "creacion de token y actualizacion de los valores";
 				}else {
+					System.out.println("la lista de firebase token es distinta de null");
 					if(!user.getFirebasetoken().contains(token)) {
 						user.getFirebasetoken().add(token);
 						userdao.update(user);
+						System.out.println("se agrego token");
 						return "se agrego token";
-					}else
+					}else {
+						System.out.println("ya tenia el token");
 						return "ya tenia el token";
+					}
 				}
 			}else {
+				System.out.println("el usuario es null");
 				return "el usuario es null";
 			}
 		}else {
+			System.out.println("el valor de http es null");
 			return "el valor de http es null";
 		}
 	}
