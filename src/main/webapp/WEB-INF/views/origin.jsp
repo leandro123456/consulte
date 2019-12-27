@@ -216,22 +216,76 @@ messaging.onTokenRefresh(() => {
 
  </script>
  <script type="text/javascript">
+ 
+ 
+ 
+ <script>
+ document.getElementById('my-button').addEventListener('click', function () {
+
+     function onShowNotification () {
+         console.log('notification is shown!');
+     }
+
+     function onCloseNotification () {
+         console.log('notification is closed!');
+     }
+
+     function onClickNotification () {
+         console.log('notification was clicked!');
+     }
+
+     function onErrorNotification () {
+         console.error('Error showing notification. You may need to request permission.');
+     }
+
+     function onPermissionGranted () {
+         console.log('Permission has been granted by the user');
+         doNotification();
+     }
+
+     function onPermissionDenied () {
+         console.warn('Permission has been denied by the user');
+     }
+
+     function pedirPermiso () {
+         var myNotification = new Notify('Yo dawg!', {
+             body: 'This is an awesome notification',
+             tag: 'My unique id',
+             notifyShow: onShowNotification,
+             notifyClose: onCloseNotification,
+             notifyClick: onClickNotification,
+             notifyError: onErrorNotification,
+             timeout: 4
+         });
+
+         myNotification.show();
+     }
+
+     if (!Notify.needsPermission) {
+         doNotification();
+     } else if (Notify.isSupported()) {
+         Notify.requestPermission(onPermissionGranted, onPermissionDenied);
+     }
+
+ }, false);
+
+ 
          
- function pedirPermiso() {
-            console.log('Requesting permission...');
-            Notification.requestPermission().then((permission) => {
-              if (permission === 'granted') {
-                console.log('Notification permission granted.');
-                console.log("Token del boton: "+ messaging.getToken());
-                return messaging.getToken()
-              } else {
-                  console.log('Unable to get permission to notify.');
-                }
-              })
-              .then(function(token) {
-           console.log("token del boton : " + token);
-       });
-    } 
+//  function pedirPermiso() {
+//             console.log('Requesting permission...');
+//             Notification.requestPermission().then((permission) => {
+//               if (permission === 'granted') {
+//                 console.log('Notification permission granted.');
+//                 console.log("Token del boton: "+ messaging.getToken());
+//                 return messaging.getToken()
+//               } else {
+//                   console.log('Unable to get permission to notify.');
+//                 }
+//               })
+//               .then(function(token) {
+//            console.log("token del boton : " + token);
+//        });
+//     } 
  
  function enviarToken(token){
 	 console.log("username encontrado: "+ '${pageContext.request.userPrincipal.name}')
