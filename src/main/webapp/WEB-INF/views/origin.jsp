@@ -217,10 +217,7 @@ messaging.onTokenRefresh(() => {
  </script>
  <script type="text/javascript">
  
- 
- 
- <script>
- document.getElementById('my-button').addEventListener('click', function () {
+ 	document.getElementById('my-button').addEventListener('click', function () {
 
      function onShowNotification () {
          console.log('notification is shown!');
