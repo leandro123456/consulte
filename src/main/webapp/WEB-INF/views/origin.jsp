@@ -127,7 +127,7 @@ function getParameterByName(name) {
 				</c:if>	
 
 			
-	<button onclick="pedirPermiso()">Notificaciones</button>	
+	<button id="my-button">Notificaciones</button>	
 		<div class="row" id="cargadora">
 			<c:forEach items="${vistas}" var="vista">
                 ${vista}
