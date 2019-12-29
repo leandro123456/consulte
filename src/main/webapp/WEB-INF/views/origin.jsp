@@ -246,6 +246,7 @@ messaging.onTokenRefresh(() => {
      }
 
      function pedirPermiso () {
+    	 console.log("entro a pedir permiso");
          var myNotification = new Notify('Yo dawg!', {
              body: 'This is an awesome notification',
              tag: 'My unique id',
@@ -255,14 +256,8 @@ messaging.onTokenRefresh(() => {
              notifyError: onErrorNotification,
              timeout: 4
          });
-
+		alert("llego");
          myNotification.show();
-     }
-
-     if (!Notify.needsPermission) {
-         doNotification();
-     } else if (Notify.isSupported()) {
-         Notify.requestPermission(onPermissionGranted, onPermissionDenied);
      }
 
  }, false);
