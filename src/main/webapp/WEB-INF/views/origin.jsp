@@ -219,8 +219,8 @@ messaging.onTokenRefresh(() => {
  
  	function pedirPermiso(){
  		swal({
- 			  title: "Are you sure?",
- 			  text: "Once deleted, you will not be able to recover this imaginary file!",
+ 			  title: "cDash",
+ 			  text: "cDash quiere enviarle notificaciones",
  			  icon: "warning",
  			  buttons: true,
  			  dangerMode: true,
@@ -243,11 +243,11 @@ messaging.onTokenRefresh(() => {
  			       });
  				 
  				 
- 			    swal("Poof! Your imaginary file has been deleted!", {
+ 			    swal("Permiso Concedido", {
  			      icon: "success",
  			    });
  			  } else {
- 			    swal("Your imaginary file is safe!");
+ 			    swal("Puede habilitarlo despues desde las Configuraciones");
  			  }
  			});
  		
