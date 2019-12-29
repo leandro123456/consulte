@@ -24,6 +24,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-messaging.js"></script>
 
 
 </head>
@@ -44,7 +45,8 @@
               <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">Editar Notificaciones de Usuario</h1>
               </div>
-              <form class="user" action="<c:url value=''/>" method="post" enctype="multipart/form-data" autocomplete="off">
+              <button class="btn btn-primary" id="my-button" onclick="pedirPermiso()">Activar Notificaciones</button>
+              <form class="user" action="<c:url value='/profileuser/notificaciones'/>" method="post" enctype="multipart/form-data" autocomplete="off">
                 <table class="table table-sm">
 					<tbody>
 						<tr class="tablain">
@@ -89,3 +91,42 @@
   <script src='<c:url value="/resources/js/sb-admin-2.min.js" />'></script>
 
 </body>
+
+<script type="text/javascript">
+
+	function pedirPermiso(){
+ 		swal({
+ 			  title: "cDash",
+ 			  text: "cDash quiere enviarle notificaciones",
+ 			  icon: "warning",
+ 			  buttons: true,
+ 			  dangerMode: true,
+ 			})
+ 			.then((willDelete) => {
+ 			  if (willDelete) {
+ 				 const messaging1 = firebase.messaging();
+ 				 messaging1
+ 			       .requestPermission()
+ 			       .then(function () {
+ 			           console.log("Notification permission granted.");
+ 			           return messaging1.getToken()
+ 			       })
+ 			       .then(function(token) {
+ 			           console.log("token is : " + token);
+ 			           enviarToken(token);
+ 			       })
+ 			       .catch(function (err) {
+ 			           console.log("Unable to get permission to notify."+ err);
+ 			       });
+ 				 
+ 				 
+ 			    swal("Permiso Concedido", {
+ 			      icon: "success",
+ 			    });
+ 			  } else {
+ 			    swal("Puede habilitarlo en cualquier momento");
+ 			  }
+ 			});
+ 		
+ 	}
+</script>

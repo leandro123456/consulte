@@ -125,9 +125,7 @@ function getParameterByName(name) {
 						setTimeout('window.location.href = "/home";', 5000);
 					</script>
 				</c:if>	
-
-			
-	<button id="my-button" onclick="pedirPermiso()">Notificaciones</button>	
+	
 		<div class="row" id="cargadora">
 			<c:forEach items="${vistas}" var="vista">
                 ${vista}
@@ -217,105 +215,6 @@ messaging.onTokenRefresh(() => {
  </script>
  <script type="text/javascript">
  
- 	function pedirPermiso(){
- 		swal({
- 			  title: "cDash",
- 			  text: "cDash quiere enviarle notificaciones",
- 			  icon: "warning",
- 			  buttons: true,
- 			  dangerMode: true,
- 			})
- 			.then((willDelete) => {
- 			  if (willDelete) {
- 				 const messaging1 = firebase.messaging();
- 				 messaging1
- 			       .requestPermission()
- 			       .then(function () {
- 			           console.log("Notification permission granted.");
- 			           return messaging1.getToken()
- 			       })
- 			       .then(function(token) {
- 			           console.log("token is : " + token);
- 			           enviarToken(token);
- 			       })
- 			       .catch(function (err) {
- 			           console.log("Unable to get permission to notify."+ err);
- 			       });
- 				 
- 				 
- 			    swal("Permiso Concedido", {
- 			      icon: "success",
- 			    });
- 			  } else {
- 			    swal("Puede habilitarlo despues desde las Configuraciones");
- 			  }
- 			});
- 		
- 	}
- 
- 	document.getElementById('my-button').addEventListener('click', function () {
-
-     function onShowNotification () {
-    	 
-         console.log('notification is shown!');
-     }
-
-     function onCloseNotification () {
-         console.log('notification is closed!');
-     }
-
-     function onClickNotification () {
-         console.log('notification was clicked!');
-     }
-
-     function onErrorNotification () {
-         console.error('Error showing notification. You may need to request permission.');
-     }
-
-     function onPermissionGranted () {
-         console.log('Permission has been granted by the user');
-         doNotification();
-     }
-
-     function onPermissionDenied () {
-         console.warn('Permission has been denied by the user');
-     }
-
-     function pedirPermiso1 () {
-    	 console.log("entro a pedir permiso");
-         var myNotification = new Notify('Yo dawg!', {
-             body: 'This is an awesome notification',
-             tag: 'My unique id',
-             notifyShow: onShowNotification,
-             notifyClose: onCloseNotification,
-             notifyClick: onClickNotification,
-             notifyError: onErrorNotification,
-             timeout: 4
-         });
-		alert("llego");
-         myNotification.show();
-     }
-
- }, false);
-
- 
-         
-//  function pedirPermiso() {
-//             console.log('Requesting permission...');
-//             Notification.requestPermission().then((permission) => {
-//               if (permission === 'granted') {
-//                 console.log('Notification permission granted.');
-//                 console.log("Token del boton: "+ messaging.getToken());
-//                 return messaging.getToken()
-//               } else {
-//                   console.log('Unable to get permission to notify.');
-//                 }
-//               })
-//               .then(function(token) {
-//            console.log("token del boton : " + token);
-//        });
-//     } 
- 
  function enviarToken(token){
 	 console.log("username encontrado: "+ '${pageContext.request.userPrincipal.name}')
 	 var enc = window.btoa('${pageContext.request.userPrincipal.name}');
@@ -328,10 +227,7 @@ messaging.onTokenRefresh(() => {
 			}			
 	});
  }
- 
- 
- 
- 
+
  </script> 
 </body>
 

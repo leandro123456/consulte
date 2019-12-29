@@ -281,56 +281,6 @@ public class LoginController{
     	return "redirect:/home";
     }
     
-    
-    @GetMapping("/profileuser/notificaciones")
-    public String editProfileNotifications(Model model) {
-    	System.out.println("llego al controlador de configuracion de Notificacione");
-    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    	System.out.println("Edit profile - busco el usuario: "+ authentication.getName());
-        User user = userdao.retrieveByMail(authentication.getName());
-    	model.addAttribute("user", user);
-    	return "user_edit_notications.jsp";
-    }
-    
-    
-    @PostMapping("/profileuser/notificaciones")
-    public String editProfileNotificationsResponse(Model model,
-    		@RequestParam(name="armed", required=false) Boolean notdesarmado,
-    		@RequestParam(name="trigered", required=false) Boolean notactivacion,
-    		@RequestParam(name="action", required=true) String action) {
-    	System.out.println("***********llego al controlador de configuracion de Not Response");
-    	if(action.equals("save")) {
-	    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-	    	System.out.println("busco el usuario: "+ authentication.getName());
-	       // User user = userdao.retrieveByMail(authentication.getName());
-	        System.out.println("notificacion de armado: "+ notdesarmado);
-	        System.out.println("notificacion de disparada: "+notactivacion);
-	        ActualizarNotificacion(notdesarmado,Notificacion.CONDICION_ARMADO,authentication.getName());
-	        ActualizarNotificacion(notactivacion,Notificacion.CONDICION_DISPARADO, authentication.getName());
-	        model.addAttribute("msg", "Proceso de actualizacion de notificaciones completa");
-    	}
-    	System.out.println("--------- salio, vuelve al home");
-    	return "redirect:/home";
-    }
-    
-
-	private void ActualizarNotificacion(Boolean notificacion, String tiponotificacion, String user) {
-//		User user1 =userdao.retrieveByMail(user);
-//		List<String> alarmasDelUsuario = user.
-
-		
-//		NotificacionDAO noticado =new NotificacionDAO();
-//		List<Notificacion> listnot = noticado.retrieveAllByUser(user);
-//		for(Notificacion not : listnot){
-			//JSONObject json = new JSONObject(not.getCondicion());
-			//json.get("condicion").equals(Notificacion.ACTIVAR);
-//			if(not.getCondicion().equals(Notificacion.CONDICION_ARMADO)){
-//				
-//			}
-//			
-//		}
-		
-	}
 
 
 	private String createUser(Model model, String email, String role, String pass, String pass2, String firstName, String lastName) {

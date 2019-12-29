@@ -1,10 +1,9 @@
 package com.lgg.nticxs.web.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
-import org.bson.codecs.pojo.annotations.BsonProperty;
-import org.bson.types.ObjectId;
+import java.util.Map;
 
 import com.lgg.nticxs.web.DAO.Mongo.MongoDBObject;
 
@@ -27,6 +26,7 @@ public class User extends MongoDBObject{
 	private String role;
 	private List<String> deviceserialnumber;
 	private String cookie;
+	private Map<String,Boolean> notificaciones;
 	private List<String> firebasetoken;
 	
 	public String getEmail() {
@@ -141,6 +141,18 @@ public class User extends MongoDBObject{
 
 	public void setFirebasetoken(List<String> firebasetoken) {
 		this.firebasetoken = firebasetoken;
+	}
+
+
+	public Map<String, Boolean> getNotificaciones() {
+		if(notificaciones == null)
+			notificaciones=new HashMap<String, Boolean>();
+		return notificaciones;
+	}
+
+
+	public void setNotificaciones(Map<String, Boolean> notificaciones) {
+		this.notificaciones = notificaciones;
 	}
 
 	
