@@ -106,7 +106,7 @@ public class FirebaseController {
 	        model.addAttribute("msg", "Proceso de actualizacion de notificaciones completa");
     	}
     	System.out.println("--------- salio, vuelve al home");
-    	return "home.jsp";
+    	return "redirect:/home";
     }
     
     

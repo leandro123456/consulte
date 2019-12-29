@@ -94,6 +94,18 @@
 </body>
 
 <script type="text/javascript">
+/ Your web app's Firebase configuration
+var firebaseConfig = {
+  apiKey: "AIzaSyAUrwGTRCz98u4Tg38iWtKKx-zJEKKH78M",
+  authDomain: "cdash-1274d.firebaseapp.com",
+  databaseURL: "https://cdash-1274d.firebaseio.com",
+  projectId: "cdash-1274d",
+  storageBucket: "cdash-1274d.appspot.com",
+  messagingSenderId: "368274022300",
+  appId: "1:368274022300:web:95be4383f5eef61b0ff259"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
 	function pedirPermiso(){
  		swal({
