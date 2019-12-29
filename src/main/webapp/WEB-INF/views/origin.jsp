@@ -127,7 +127,7 @@ function getParameterByName(name) {
 				</c:if>	
 
 			
-	<button id="my-button">Notificaciones</button>	
+	<button id="my-button" onclick="pedirPermiso()">Notificaciones</button>	
 		<div class="row" id="cargadora">
 			<c:forEach items="${vistas}" var="vista">
                 ${vista}
@@ -217,6 +217,42 @@ messaging.onTokenRefresh(() => {
  </script>
  <script type="text/javascript">
  
+ 	function pedirPermiso(){
+ 		swal({
+ 			  title: "Are you sure?",
+ 			  text: "Once deleted, you will not be able to recover this imaginary file!",
+ 			  icon: "warning",
+ 			  buttons: true,
+ 			  dangerMode: true,
+ 			})
+ 			.then((willDelete) => {
+ 			  if (willDelete) {
+ 				 const messaging1 = firebase.messaging();
+ 				 messaging1
+ 			       .requestPermission()
+ 			       .then(function () {
+ 			           console.log("Notification permission granted.");
+ 			           return messaging1.getToken()
+ 			       })
+ 			       .then(function(token) {
+ 			           console.log("token is : " + token);
+ 			           enviarToken(token);
+ 			       })
+ 			       .catch(function (err) {
+ 			           console.log("Unable to get permission to notify."+ err);
+ 			       });
+ 				 
+ 				 
+ 			    swal("Poof! Your imaginary file has been deleted!", {
+ 			      icon: "success",
+ 			    });
+ 			  } else {
+ 			    swal("Your imaginary file is safe!");
+ 			  }
+ 			});
+ 		
+ 	}
+ 
  	document.getElementById('my-button').addEventListener('click', function () {
 
      function onShowNotification () {
@@ -245,7 +281,7 @@ messaging.onTokenRefresh(() => {
          console.warn('Permission has been denied by the user');
      }
 
-     function pedirPermiso () {
+     function pedirPermiso1 () {
     	 console.log("entro a pedir permiso");
          var myNotification = new Notify('Yo dawg!', {
              body: 'This is an awesome notification',
