@@ -220,6 +220,7 @@ messaging.onTokenRefresh(() => {
  	document.getElementById('my-button').addEventListener('click', function () {
 
      function onShowNotification () {
+    	 
          console.log('notification is shown!');
      }
 
