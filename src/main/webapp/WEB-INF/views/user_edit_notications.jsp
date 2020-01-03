@@ -16,21 +16,37 @@
   <!-- Custom fonts for this template-->
   <link rel="stylesheet" type="text/css" href='<c:url value="/resources/vendor/fontawesome-free/css/all.min.css"/>'>
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-  <!-- Custom styles for this template-->
-<%--   <link rel="stylesheet" type="text/css" href='<c:url value="/resources/mqttResources/sb-admin-2.css"/>'> --%>
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  
+  
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href='<c:url value="/resources/pushnotifications/bootstrap-switch.css" />'>
+  
+  <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-messaging.js"></script>
   <script src='<c:url value="https://unpkg.com/sweetalert/dist/sweetalert.min.js"/>'></script>
+  
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 
 </head>
 
 <body class="bg-gradient-primary" style="background: #224A85;">
+
+<script type="text/javascript">
+// 	$(document).ready(function() {
+// 		activarboton("armar",${armar});
+// 		activarboton("disparar",${disparar});
+// 	});
+</script>
+
 
   <div class="container">
 
@@ -54,7 +70,7 @@
 							<td>Enviar notificaion al Armar/Desarmar la Alarma</td>
 							<td>
 								<div class="custom-control custom-switch">
-							      <input type="checkbox" class="custom-control-input" id="switch1" name="armed">
+							      <input type="checkbox" checked data-on-color="primary" class="custom-control-input" id="armar" name="armed">
 							      <label class="custom-control-label" for="switch1"></label>
 							    </div>
 							</td>
@@ -63,7 +79,7 @@
 							<td>Enviar notificacion al Disparar la Alarma</td>
 							<td>
 								<div class="custom-control custom-switch">
-							      <input type="checkbox" class="custom-control-input" id="switch2" name="trigered">
+							      <input type="checkbox" class="custom-control-input" id="disparar" name="trigered">
 							      <label class="custom-control-label" for="switch2"></label>
 							    </div>
 							</td>
@@ -94,7 +110,6 @@
 </body>
 
 <script type="text/javascript">
-/ Your web app's Firebase configuration
 var firebaseConfig = {
   apiKey: "AIzaSyAUrwGTRCz98u4Tg38iWtKKx-zJEKKH78M",
   authDomain: "cdash-1274d.firebaseapp.com",
@@ -143,3 +158,23 @@ firebase.initializeApp(firebaseConfig);
  		
  	}
 </script>
+
+
+<script type="text/javascript">
+	function activarboton(nombre,valor){
+		if(nombre=="armar"){
+			if(valor==null || valor==false)
+				document.getElementById("armar").checked = false;
+			else
+				document.getElementById("armar").checked = true;
+		}
+		else{
+			if(valor==null || valor==false)
+				document.getElementById("disparar").checked = false;
+			else
+				document.getElementById("disparar").checked = true;
+		}
+		
+	}
+</script>
+

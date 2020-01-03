@@ -75,6 +75,8 @@ public class FirebaseController {
     	System.out.println("Edit profile - busco el usuario: "+ authentication.getName());
         User user = userdao.retrieveByMail(authentication.getName());
     	model.addAttribute("user", user);
+    	model.addAttribute("armar", user.getNotificaciones().get(Notificacion.CONDICION_ARMADO));
+    	model.addAttribute("disparar", user.getNotificaciones().get(Notificacion.CONDICION_DISPARADO));
     	return "user_edit_notications.jsp";
     }
     
