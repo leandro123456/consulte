@@ -106,7 +106,8 @@ public class FirebaseController {
 	        if(notactivacion != null)
 	        	ActualizarNotificacion(notactivacion,Notificacion.CONDICION_DISPARADO, authentication.getName());
 	        model.addAttribute("msg", "Proceso de actualizacion de notificaciones completa");
-    	}
+    	}else
+    		System.out.println("NO ES SABE");
     	System.out.println("--------- salio, vuelve al home");
     	return "redirect:/home";
     }
