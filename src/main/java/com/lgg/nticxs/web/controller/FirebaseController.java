@@ -103,8 +103,13 @@ public class FirebaseController {
 	        System.out.println("notificacion de disparada: "+notactivacion);
 	        if(notdesarmado!= null)
 	        	ActualizarNotificacion(notdesarmado,Notificacion.CONDICION_ARMADO,authentication.getName());
+	        else{
+	        	ActualizarNotificacion(false,Notificacion.CONDICION_ARMADO,authentication.getName());
+	        }
 	        if(notactivacion != null)
 	        	ActualizarNotificacion(notactivacion,Notificacion.CONDICION_DISPARADO, authentication.getName());
+	        else
+	        	ActualizarNotificacion(false,Notificacion.CONDICION_DISPARADO, authentication.getName());
 	        model.addAttribute("msg", "Proceso de actualizacion de notificaciones completa");
     	}else
     		System.out.println("NO ES SABE");

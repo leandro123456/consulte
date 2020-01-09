@@ -17,8 +17,8 @@
   <link rel="stylesheet" type="text/css" href="/resources/vendor/fontawesome-free/css/all.min.css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-  <!-- Custom styles for this template-->
-
+  <!-- Custom styles for checkbox-->
+<link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/checkbox.css" />'>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -54,23 +54,26 @@
                 <h1 class="h4 text-gray-900 mb-4">Editar Notificaciones de Usuario</h1>
               </div>
               <button class="btn btn-primary" id="my-button" onclick="pedirPermiso()">Activar Notificaciones</button>
+              <p> </p>
               <form class="user" action="<c:url value='/profileuser/notificaciones'/>" method="post" enctype="multipart/form-data" autocomplete="off">
                 <table class="table table-sm">
 					<tbody>
 						<tr class="tablain">
 							<td>Enviar notificaion al Armar/Desarmar la Alarma</td>
 							<td>
-								<div class="custom-control custom-switch">
-							      <input data-toggle="toggle" type="checkbox" data-on-color="primary" id="armar" name="armed">
-							    </div>
+								<label class="containercb">
+							      <input data-toggle="toggle" type="checkbox" style="display:none;" id="armar" name="armed">
+							      <span class="checkmark"></span>
+							    </label>
 							</td>
 						</tr>
 						<tr class="tablain">
 							<td>Enviar notificacion al Disparar la Alarma</td>
 							<td>
-								<div class="custom-control custom-switch">
-							      <input data-toggle="toggle" type="checkbox" data-on-color="primary" id="disparar" name="trigered">
-							    </div>
+								<label class="containercb">
+							      <input data-toggle="toggle" type="checkbox" style="display:none;" id="disparar" name="trigered">
+							      <span class="checkmark"></span>
+							    </label>
 							</td>
 						</tr>
 					</tbody>
@@ -160,6 +163,6 @@ firebase.initializeApp(firebaseConfig);
 				document.getElementById("disparar").checked = true;
 		}
 		
-// 	}
+	}
 </script>
 
