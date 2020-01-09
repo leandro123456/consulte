@@ -12,53 +12,20 @@
   <meta name="author" content="">
 
   <title>cDash</title>
-	<link rel='shortcut icon' href='<c:url value="/resources/images/favicon.ico" />' type="image/x-icon"/>
+	<link rel="shortcut icon" href="/resources/images/favicon.ico" type="image/x-icon">
   <!-- Custom fonts for this template-->
-<%--   <link rel="stylesheet" type="text/css" href='<c:url value="/resources/vendor/fontawesome-free/css/all.min.css"/>'> --%>
+  <link rel="stylesheet" type="text/css" href="/resources/vendor/fontawesome-free/css/all.min.css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-  
-  
-<!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> -->
-<!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
-<!--   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> -->
-<!--   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> -->
-  
-  
-  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href='<c:url value="/resources/pushnotifications/bootstrap-switch.css" />'>
-  
-  <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+
+  <!-- Custom styles for this template-->
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-messaging.js"></script>
-  <script src='<c:url value="https://unpkg.com/sweetalert/dist/sweetalert.min.js"/>'></script>
-  
-  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-
-
-
-<%-- <link rel="stylesheet" type="text/css" 	href='<c:url value="/resources/mqttResources/style.css" />'> --%>
-<%-- <link rel="stylesheet" type="text/css" 	href='<c:url value="/resources/mqttResources/c3.min.css" />'> --%>
-<link href='<c:url value="/resources/mqttResources/all.min.css" />' rel="stylesheet" type="text/css">
-<!-- <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"> -->
-<link href='<c:url value="/resources/mqttResources/sb-admin-2.min.css" />' rel="stylesheet">
-<!-- <link rel="stylesheet" -->
-<!-- 	href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" -->
-<!-- 	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" -->
-<!-- 	crossorigin="anonymous"> -->
-
-	<script src='<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js" />'></script>
-	<script src='<c:url value="/resources/vendor/jquery-easing/jquery.easing.min.js" />'></script>
-	<script src='<c:url value="/resources/js/sb-admin-2.min.js" />'></script>
-	<script src='<c:url value="/resources/vendor/datatables/jquery.dataTables.min.js" />'></script>
-	<script src='<c:url value="/resources/vendor/datatables/jquery.dataTables.min.js" />'></script>
-	<script src='<c:url value="/resources/vendor/datatables/dataTables.bootstrap4.min.js" />'></script>
-
-
-
-
-
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
 
@@ -94,8 +61,7 @@
 							<td>Enviar notificaion al Armar/Desarmar la Alarma</td>
 							<td>
 								<div class="custom-control custom-switch">
-							      <input data-toggle="toggle" type="checkbox" checked data-on-color="primary" class="custom-control-input" id="armar" name="armed">
-							      <label class="custom-control-label" for="switch1"></label>
+							      <input data-toggle="toggle" type="checkbox" data-on-color="primary" id="armar" name="armed">
 							    </div>
 							</td>
 						</tr>
@@ -103,8 +69,7 @@
 							<td>Enviar notificacion al Disparar la Alarma</td>
 							<td>
 								<div class="custom-control custom-switch">
-							      <input type="checkbox" class="custom-control-input" id="disparar" name="trigered">
-							      <label class="custom-control-label" for="switch2"></label>
+							      <input data-toggle="toggle" type="checkbox" data-on-color="primary" id="disparar" name="trigered">
 							    </div>
 							</td>
 						</tr>
@@ -121,14 +86,10 @@
 
   </div>
 
-  <!-- Bootstrap core JavaScript-->
+
   <script src='<c:url value="/resources/vendor/jquery/jquery.min.js" />'></script>
- <script src='<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js" />'></script>
-
-  <!-- Core plugin JavaScript-->
+  <script src='<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js" />'></script>
   <script src='<c:url value="/resources/vendor/jquery-easing/jquery.easing.min.js" />'></script>
-
-  <!-- Custom scripts for all pages-->
   <script src='<c:url value="/resources/js/sb-admin-2.min.js" />'></script>
 
 </body>
@@ -199,6 +160,6 @@ firebase.initializeApp(firebaseConfig);
 				document.getElementById("disparar").checked = true;
 		}
 		
-	}
+// 	}
 </script>
 
