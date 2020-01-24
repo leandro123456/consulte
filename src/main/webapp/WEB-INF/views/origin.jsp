@@ -66,6 +66,7 @@
 		setTimeout(iniciaConexion, 2000);
 		//requestPermission();
 
+		
 
 	});
 </script>
@@ -130,6 +131,8 @@ function getParameterByName(name) {
 			<c:forEach items="${vistas}" var="vista">
                 ${vista}
           </c:forEach>
+          
+          
 		</div>
 		<div class="fixed">
 			<a href="/home/newdeviceb" data-toggle="modal" data-target="#createDeviceModal"> 
