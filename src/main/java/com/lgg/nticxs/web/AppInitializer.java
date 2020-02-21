@@ -52,9 +52,10 @@ public class AppInitializer extends SpringBootServletInitializer{
 			if(Settings.getInstance().isTLSenable()) {
 			factory.setPort(443);
 			Ssl ssl = new Ssl();
-	    	ssl.setKeyStore("/etc/letsencrypt/live/cdash.space/keystore.p12");
+	    	ssl.setKeyStore("/etc/letsencrypt/live/cdash.space-0002/keystore.p12");
 	    	ssl.setKeyStorePassword("cleoscinc");
 	    	ssl.setKeyAlias("tomcat");
+		ssl.setKeyStoreType("PKCS12");
 	    	factory.setSsl(ssl);
 			}
 			else {
