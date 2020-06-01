@@ -41,6 +41,7 @@ public class HomeController {
 	private List<String> deviceAsociadoTermomtro = new ArrayList<>();
 	private List<String> deviceAsociadoSonoff = new ArrayList<>();
 	private List<String> topicosdeAlarma = new ArrayList<>();
+	private List<String> deviceAsociadoDoorman = new ArrayList<>();
 
 	
 	@RequestMapping("/home")
@@ -86,7 +87,6 @@ public class HomeController {
                 }
             }
         	System.out.println("creo cookie asociada al usuario");
-        //	Cookie nuevac = new Cookie(Base64.getEncoder().encode(authentication.getName().getBytes()), value);
 		}	    
  
 		String nombre = request.getUserPrincipal().getName();
@@ -114,20 +114,24 @@ public class HomeController {
 		aux =Utils.vistas(Base64.getEncoder().encodeToString(user.getEmail().getBytes()),deviceAsociadoAlarma,Device.ALARMA);
 		for(String vista1 : aux)
 			vistas.add(vista1);
+		aux = Utils.vistas(Base64.getEncoder().encodeToString(user.getEmail().getBytes()), deviceAsociadoDoorman, Device.DOORMAN);
+		for(String vista1: aux) {
+			System.out.println("Esta es la llamada del doorman");
+			vistas.add(vista1);
+		}
+		
 		System.out.println("cantidad de vistas a mostrar !!!!!: "+ vistas.size());
 		model.addAttribute("user", user);
 		model.addAttribute("vistas",vistas);
         List<String> topicos=obtenerTopicosDeTodosLosEndpoints(user.getDeviceserialnumber(),"noalarma");
-        System.out.println("Topicos comunes: "+topicos.size());
         model.addAttribute("cantidadSensores", topicos.size());
         model.addAttribute("topicos", topicos);
-        System.out.println("cantidad de topicos a subscribirme local: "+ topicos.size());
         
         //para las alarmas
         List<String> topicosdeAlarma=obtenerTopicosDeTodosLosEndpoints(user.getDeviceserialnumber(),Device.ALARMA);
         System.out.println("cantidad de topicos a subscribirme alarma: "+ topicosdeAlarma.size());
         model.addAttribute("cantidadAlarma", topicosdeAlarma.size());
-        model.addAttribute("hostalarma", "mqtttest.qliq.com.ar");
+        model.addAttribute("hostalarma", "mqtt.coiaca.com");
         model.addAttribute("puertoalarma", "8081");
         model.addAttribute("sslalarma", true);
         model.addAttribute("usuarioalarma", "mqttusr");
@@ -177,6 +181,7 @@ public class HomeController {
 		System.out.println("este es el codigo que busca: "+ code);
 		try {
 			System.out.println("entro en el TRY");
+			UserDAO userdao = new UserDAO();
 		User usuario = userdao.retrieveByMail(user);
 		System.out.println("ES IGUAL: "+ usuario.getPassCuenta().equals(code));
 		System.out.println("el usuario es null: "+ usuario);
@@ -212,17 +217,26 @@ public class HomeController {
 		deviceAsociadoAlarma = new ArrayList<>();
 		deviceAsociadoSonoff = new ArrayList<>();
 		deviceAsociadoTermomtro = new ArrayList<>();
+		deviceAsociadoDoorman = new ArrayList<>();
 		for(String serial: deviceserialnumbers) {
 			Device device = devicedao.retrieveBySerialNumber(serial);
 			System.out.println("tipo del DEVICE en clasificarUsuario: "+ device.getTipo());
-			if(device.getTipo().equals(Device.ALARMA))
-				deviceAsociadoAlarma.add(serial);
-			else if (device.getTipo().equals(Device.SONOFF))
-				deviceAsociadoSonoff.add(serial);
-			else if (device.getTipo().equals(Device.TERMOMETRO))
-				deviceAsociadoTermomtro.add(serial);
-			else
-				System.out.println("error tipo no reconocido: "+ device.getTipo());
+				if(device.getTipo()!=null) {
+					if(device.getTipo().equals(Device.ALARMA))
+						deviceAsociadoAlarma.add(serial);
+					else if (device.getTipo().equals(Device.SONOFF))
+						deviceAsociadoSonoff.add(serial);
+					else if (device.getTipo().equals(Device.TERMOMETRO))
+						deviceAsociadoTermomtro.add(serial);
+					else if (device.getTipo().equals(Device.DOORMAN)) {
+						System.out.println("ESTE ES EL SERIAL: "+ serial);
+						deviceAsociadoDoorman.add(serial);
+					}
+					else
+						System.out.println("error tipo no reconocido: "+ device.getTipo());
+				}else {
+					
+				}
 			}
 		}
 
@@ -232,7 +246,10 @@ public class HomeController {
 		for(String serial: devicesnumber){
 			System.out.println("llego a la carga de los topicos: "+serial);
 			Device device=devicedao.retrieveBySerialNumber(serial);
-			if(tipoSolicitado.equals(Device.ALARMA) && device.getTipo().equals(Device.ALARMA)) {
+			if(device.getTipo().equals(Device.DOORMAN)) {
+				
+			}
+			else if(tipoSolicitado.equals(Device.ALARMA) && device.getTipo().equals(Device.ALARMA)) {
 					if(device.getUsedefaultbrocker()){
 						topicos.add("'"+device.getDeviceconfiguration().get(0).getTopicescuchar()+"'");
 					}
@@ -241,7 +258,7 @@ public class HomeController {
 					}
 
 			}
-			if(!tipoSolicitado.equals(Device.ALARMA) && !device.getTipo().equals(Device.ALARMA)) {
+			else if(!tipoSolicitado.equals(Device.ALARMA) && !device.getTipo().equals(Device.ALARMA)) {
 					if(device.getUsedefaultbrocker()){
 						topicos.add("'"+device.getDeviceconfiguration().get(0).getTopicescuchar()+"'");
 						System.out.println("VA A AGREGAR ESTE TOPICO LOCAL: "+ device.getDeviceconfiguration().get(0).getTopicescuchar());

@@ -19,8 +19,6 @@ function evaluarNumeroDeSerie(valorSerial){
 	}
 }
 
-
-
 //funcion para escribir en el campo serial el id y tambien grisar el tipo de dispositivo
 	function evaluarSerial(serial){
 		console.log("va a evaluar el serial: "+ serial);
@@ -99,21 +97,53 @@ function evaluarNumeroDeSerie(valorSerial){
         }
         
 	}
-	
-//funcion para mostrar los modelos de coiaca
-//function seleccionModelo(){
-//	var seleccion=document.getElementById('marcadevice');
-//    var valuetype = seleccion.options[seleccion.selectedIndex].value;
-//    if(valuetype == "coiaca"){
-//    	document.getElementById('selectormodelo').style.display = 'inline';
-//    	document.getElementById('modelodevice').style.display = 'inline';
-//    }else{
-//    	document.getElementById('selectormodelo').style.display = 'none';
-//    	document.getElementById('modelodevice').style.display = 'none';
-//    }
-//}
 
-//Evento asociado a la carga de la ventana Modal
+	
+	/**
+	 * ANIMACIONES para carga de Software
+	 */
+	function siguienteAnimacionSoft(){
+		if(document.getElementById("infoGeneralSoft").style.display=="inline"){
+			document.getElementById("infoGeneralSoft").style.display="none";
+			document.getElementById("infoFinalSoft").style.display="inline";
+			
+			document.getElementById("botonAnteriorsof").style.display="inline";
+			document.getElementById("botonSiguientesof").style.display="none";
+			document.getElementById("botonfinalizarsof").style.display="inline";
+			document.getElementById("botoncancelarsof").style.display="inline";
+		}
+		
+	}
+	
+	function anteriorAnimacionSoft(){
+//		if(document.getElementById("infoGeneralSoft").style.display=="inline"){
+//			document.getElementById("infoDeducidaCoiaca").style.display="none";
+//			document.getElementById("infoGeneral1").style.display="inline";
+//			document.getElementById("infoGeneral").style.display="none";
+//			document.getElementById("infoPropiaVista").style.display="none";
+//			document.getElementById("infoAvanzada").style.display="none";
+//			document.getElementById("botonAnterior").style.display="none";
+//			document.getElementById("botonSiguiente").style.display="none";
+//			document.getElementById("infoGeneralSoft").style.display="none"
+//		}
+//		else 
+			if(document.getElementById("infoFinalSoft").style.display=="inline"){		
+			document.getElementById("infoGeneralSoft").style.display="inline";
+			document.getElementById("infoFinalSoft").style.display="none";
+			
+			document.getElementById("botonSiguientesof").style.display="inline";
+			document.getElementById("botonAnteriorsof").style.display="none";
+			document.getElementById("botonfinalizarsof").style.display="none";
+			document.getElementById("botoncancelarsof").style.display="none";
+		}
+
+	}
+
+	
+	/**
+	 * Animaciones para Carga de Hardware
+	 */
+
 	function siguienteAnimacion(){
 		if(document.getElementById("infoGeneral").style.display=="inline"){
 			document.getElementById("botonAnterior").style.display="inline";
@@ -209,54 +239,55 @@ function evaluarNumeroDeSerie(valorSerial){
 				document.getElementById("passescucharremote1").value = document.getElementById("passescucharremote").value;
 			if(document.getElementById("topicwriteremote") != null)
 				document.getElementById("topicwriteremote1").value = document.getElementById("topicwriteremote").value;
+		}
+	}
 
+	function anteriorAnimacion(){
+		if(document.getElementById("infoGeneral").style.display=="inline"){
+			document.getElementById("infoDeducidaCoiaca").style.display="none";
+			document.getElementById("infoGeneral").style.display="none";
+			document.getElementById("infoPropiaVista").style.display="none";
+			document.getElementById("infoAvanzada").style.display="none";
+			document.getElementById("botonAnterior").style.display="none";
+			document.getElementById("botonSiguiente").style.display="none";
+			document.getElementById("infoGeneralSoft").style.display="none"
+		}
+		else if(document.getElementById("infoDeducidaCoiaca").style.display=="inline"){
+			document.getElementById("botonAnterior").style.display="inline";
+			document.getElementById("infoPropiaVista").style.display="none";
+			document.getElementById("infoDeducidaCoiaca").style.display="none";
+			document.getElementById("infoAvanzada").style.display="none";
+			document.getElementById("infoGeneral").style.display="inline";
+			document.getElementById("botonfinalizar").style.display="none";
+		}
+		else if(document.getElementById("infoPropiaVista").style.display=="inline"){
+			document.getElementById("infoAvanzada").style.display="none";
+			document.getElementById("infoDeducidaCoiaca").style.display="inline";
+			document.getElementById("infoPropiaVista").style.display="none";
+			document.getElementById("infoGeneral").style.display="none";
+		}
+		else if(document.getElementById("infoAvanzada").style.display=="inline"){
+			document.getElementById("infoDeducidaCoiaca").style.display="none";
+			document.getElementById("infoAvanzada").style.display="none";
+			document.getElementById("infoPropiaVista").style.display="inline";
+			document.getElementById("infoGeneral").style.display="none";
+		}
+		else if(document.getElementById("infoFinal").style.display=="inline"){
+			document.getElementById("botonSiguiente").style.display="inline";
+			document.getElementById("infoDeducidaCoiaca").style.display="none";
+			document.getElementById("infoFinal").style.display="none";
+			document.getElementById("infoAvanzada").style.display="inline";
+			document.getElementById("infoPropiaVista").style.display="none";
+			document.getElementById("infoGeneral").style.display="none";
+			document.getElementById("botonfinalizar").style.display="none";
+			document.getElementById("botoncancelar").style.display="none";
 		}
 
 	}
 
-//Evento asociado a la carga de la ventana Modal para regresar
-function anteriorAnimacion(){
-	if(document.getElementById("infoGeneral").style.display=="inline"){
-		document.getElementById("infoDeducidaCoiaca").style.display="inline";
-		document.getElementById("infoGeneral").style.display="none";
-		document.getElementById("infoPropiaVista").style.display="none";
-		document.getElementById("infoAvanzada").style.display="none";
-	}
-	else if(document.getElementById("infoDeducidaCoiaca").style.display=="inline"){
-		document.getElementById("botonAnterior").style.display="none";
-		document.getElementById("infoPropiaVista").style.display="none";
-		document.getElementById("infoDeducidaCoiaca").style.display="none";
-		document.getElementById("infoAvanzada").style.display="none";
-		document.getElementById("infoGeneral").style.display="inline";
-	}
-	else if(document.getElementById("infoPropiaVista").style.display=="inline"){
-		document.getElementById("infoAvanzada").style.display="none";
-		document.getElementById("infoDeducidaCoiaca").style.display="inline";
-		document.getElementById("infoPropiaVista").style.display="none";
-		document.getElementById("infoGeneral").style.display="none";
-	}
-	else if(document.getElementById("infoAvanzada").style.display=="inline"){
-		document.getElementById("infoDeducidaCoiaca").style.display="none";
-		document.getElementById("infoAvanzada").style.display="none";
-		document.getElementById("infoPropiaVista").style.display="inline";
-		document.getElementById("infoGeneral").style.display="none";
-	}
-	else if(document.getElementById("infoFinal").style.display=="inline"){
-		document.getElementById("botonSiguiente").style.display="inline";
-		document.getElementById("infoDeducidaCoiaca").style.display="none";
-		document.getElementById("infoFinal").style.display="none";
-		document.getElementById("infoAvanzada").style.display="inline";
-		document.getElementById("infoPropiaVista").style.display="none";
-		document.getElementById("infoGeneral").style.display="none";
-		document.getElementById("botonfinalizar").style.display="none";
-		document.getElementById("botoncancelar").style.display="none";
-	}
-		
-}
 
-
-//Evento asociado a la confirmacion de los datos de la creacion de Dispositivo
-$('#ModalConfirm').on('show.bs.modal', function (event) {
+	//Evento asociado a la confirmacion de los datos de la creacion de Dispositivo
+	$('#ModalConfirm').on('show.bs.modal', function (event) {
 	  		  var button = $(event.relatedTarget)
 		  	  var recipient = button.data('whatever') 
 	  		  var serial=document.getElementById('serialnumber').value;

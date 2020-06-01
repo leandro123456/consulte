@@ -150,7 +150,19 @@ public class DeviceController {
 	
 	@PostMapping("home/create")
 	public String createDeviceNew(Model model,HttpServletRequest request,			
-			@RequestParam(name="serialnumber", required=true) String serialnumber,
+			//software
+			@RequestParam(name="calle", required=false) String calle,
+			@RequestParam(name="numero", required=false) String numero,
+			@RequestParam(name="depto", required=false) String depto,
+			@RequestParam(name="piso", required=false) String piso,
+			@RequestParam(name="localidad", required=false) String localidad,
+			@RequestParam(name="codpostal", required=false) String codpostal,
+			@RequestParam(name="provincia", required=false) String provincia,
+			@RequestParam(name="pais", required=false) String pais,
+			@RequestParam(name="tipodireccion", required=false) String tipodireccion,
+			
+			//hardware
+			@RequestParam(name="serialnumber", required=false) String serialnumber,
 			@RequestParam(name="namedevice", required=false) String namedevice,
 			@RequestParam(name="descriptiondevice", required=false) String descriptiondevice,
 			@RequestParam(name="tipodevice", required=false) String tipodevice,
@@ -181,6 +193,11 @@ public class DeviceController {
 			@RequestParam(name="passescucharremote", required=false) String passescucharremote,
 			@RequestParam(name="topicwriteremote", required=false) String topicwriteremote
 			) {
+		System.out.println("inicio: "+calle);
+		System.out.println(localidad);
+		System.out.println(codpostal);
+		System.out.println(tipodireccion);
+		System.out.println("------------------------------------------------------------------------");
 		System.out.println("PARAMETROS DE ENTRADA serialnumber: "+ serialnumber);
 		System.out.println("PARAMETROS DE ENTRADA namedevice: "+ namedevice);
 		System.out.println("PARAMETROS DE ENTRADA descriptiondevice: "+ descriptiondevice);
@@ -206,7 +223,16 @@ public class DeviceController {
 		System.out.println("PARAMETROS DE ENTRADA passescucharremote: "+ passescucharremote);
 		System.out.println("PARAMETROS DE ENTRADA topicwriteremote: "+topicwriteremote );
 		System.out.println("ES NULL SERIAL: "+ devicedao.retrieveBySerialNumber(serialnumber) ==null);
-		if(devicedao.retrieveBySerialNumber(serialnumber) ==null){
+		
+		boolean esDoorman= isDoorman(calle,localidad, tipodireccion);
+		System.out.println("----------------- ES DORMAN: "+ esDoorman);
+		if(esDoorman) {
+			String serialDoorman= crearSerial(calle,numero,depto,piso,localidad, codpostal,provincia);
+			ManagementDevice.createDeviceDoorman(request,calle,numero,depto,piso,localidad, 
+					codpostal,provincia,pais,serialDoorman,tipodireccion);
+			model.addAttribute("msg", "Se creo exitosamente el dispositivo");
+		}
+		if(!esDoorman && devicedao.retrieveBySerialNumber(serialnumber) ==null){
 			ManagementDevice.createDevice(
 					request,serialnumber, namedevice, descriptiondevice, tipodevice, 
 					//propoio configuracion
@@ -220,7 +246,7 @@ public class DeviceController {
 					tempctermometro,sensacionctermometro, tempftermometro,sensacionftermometro);
 			enviarUpateTobakend(serialnumber);
 			model.addAttribute("msg", "Se creo exitosamente el dispositivo");
-		}else{
+		}else if (!esDoorman && devicedao.retrieveBySerialNumber(serialnumber) !=null){
 			System.out.println("TIPO DE DEVICE NO es NULL: "+tipodevice);
 			System.out.println("TIPO DE TERMOMETRO NO es NULL: "+tipovistatermometro);
 			ManagementDevice.updateDevice(request,serialnumber);
@@ -229,6 +255,33 @@ public class DeviceController {
 		return "origin.jsp";
 	}
 
+
+	private String crearSerial(String calle,String numero,String depto, String piso,
+			String localidad, String codpostal,String provincia) {
+		String result="";
+		if(calle!=null && !calle.equals(""))
+			result=result+calle;
+		if(numero!=null && !numero.equals(""))
+			result=result+numero;
+		
+		//quitar caracteres raros
+		result= result.replaceAll(" ", "");
+		result = result.replaceAll("\t", "");
+		result = result.replaceAll("º", "");
+		result = result.replaceAll(",", "");
+		result = result.replace(".", "");
+		result = result.replace(";", "");
+				
+		result=result.toLowerCase();
+		
+		return result;
+	}
+
+	private boolean isDoorman(String direccion, String localidad, String codpostal) {
+		if(direccion!=null && localidad!=null && codpostal!=null)
+			return true;
+		return false;
+	}
 
 	private void enviarUpateTobakend(String serial) {
 		try {

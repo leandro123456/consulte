@@ -8,8 +8,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
 import com.lgg.nticxs.web.DAO.UserDAO;
+
 
 public class MyUserDetailsService implements UserDetailsService {
     private static List<UserObject> users = new ArrayList();
@@ -25,7 +25,13 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<UserObject> user = users.stream()
+    	UserDAO userdao = new UserDAO();
+    	List<com.lgg.nticxs.web.model.User> userlist= userdao.retrieveAllUsers();
+    	for (com.lgg.nticxs.web.model.User use:userlist) {
+			UserObject userObject= new UserObject(use.getEmail(), new String(use.getPassword()), use.getRole());
+			users.add(userObject);
+		}
+    	Optional<UserObject> user = users.stream()
                                          .filter(u -> u.name.equals(username))
                                          .findAny();
         if (!user.isPresent()) {

@@ -1,6 +1,9 @@
 package com.lgg.nticxs.web.utils;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -11,16 +14,20 @@ import java.security.NoSuchProviderException;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 import java.util.TimeZone;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+import javax.imageio.ImageIO;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -29,8 +36,15 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.commons.io.FileUtils;
 import org.json.JSONObject;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.lgg.nticxs.web.DAO.DeviceDAO;
 import com.lgg.nticxs.web.DAO.VistaDAO;
 import com.lgg.nticxs.web.model.Device;
@@ -438,6 +452,7 @@ public class Utils {
 			for(int i=0; i<listaSerial.size(); i++){
 				String deviceserial= listaSerial.get(i);
 				Device device = devicedao.retrieveBySerialNumber(deviceserial);
+				System.out.println("Este es el serial: "+ deviceserial +"; tipo: "+tipo);
 				String valor = (String) device.getVista().get(nombreUsuario);
 				String[] a = valor.split(";");
 				String vistatotal = armarVista(a,a[0],deviceserial);
@@ -451,12 +466,28 @@ public class Utils {
 			String contenidototal="";
 			Device device=devicedao.retrieveBySerialNumber(serialDevice);
 			DeviceConfiguration devconfig = null;
-			if(device.getUsedefaultbrocker())
-				devconfig=device.getDeviceconfiguration().get(0);
-			else
-				devconfig=device.getDeviceconfiguration().get(1);
+			System.out.println("serial Device: "+ serialDevice);
+			System.out.println("es vacio: "+ device.getDeviceconfiguration().isEmpty());
+			System.out.println("tipo de Device: "+ tipoDeVista);
+			System.out.println("------------------------------------------------------------");
+
+			if(!device.getDeviceconfiguration().isEmpty()) {
+				if(device.getUsedefaultbrocker())
+					devconfig=device.getDeviceconfiguration().get(0);
+				else
+					devconfig=device.getDeviceconfiguration().get(1);
+			}
+			if(tipoDeVista.equals("doorman")) {
+				System.out.println("llego a doorman!!!!!!!!!!!!!!!!!!!!!!!!");
+				contenidototal = vista.getContenido().get("body").replaceAll("DOORMANTIPO",device.getTipodireccion());
+				contenidototal = contenidototal.replaceAll("DOORMANTITULO",device.getCalle() +" "+device.getNumero());
+				contenidototal = contenidototal.replaceAll("DOORMANIMAGEN",Utils.generarImagenEnBase64(device.getUridoorman()));
+				contenidototal = contenidototal.replaceAll("DOORMANURI",device.getSerialnumber());
+			}
+			
 			for(int i=1;i<atributosDeLaVista.length;i++) {
 				switch (tipoDeVista) {
+				
 				case "temperatura_reloj":
 					if(atributosDeLaVista[i].equals("Hum"))
 						contenidototal= contenidototal+vista.getContenido().get("Hum");
@@ -490,7 +521,6 @@ public class Utils {
 					List<String> estadoSwith=obtenerEstadoSwith(serialDevice); 
 					if(atributosDeLaVista[i].equals("sonoffbody")) {
 						String cuerpoSonoff= vista.getContenido().get("sonoffbody").replaceAll("CAMBIARSONOFF", serialDevice);
-						System.out.println("este es el cuuerpo del  SONOFF: "+ cuerpoSonoff);
 						cuerpoSonoff=cuerpoSonoff.replaceAll("HOSTSONOFF", devconfig.getIphostescuchar());
 						cuerpoSonoff=cuerpoSonoff.replaceAll("PORTSONOFF", devconfig.getPortescuchar());
 						cuerpoSonoff=cuerpoSonoff.replaceAll("USERSONOFF", devconfig.getUserescuchar());
@@ -508,7 +538,6 @@ public class Utils {
 					List<String> estadoSwith1=obtenerEstadoSwith(serialDevice); 
 					if(atributosDeLaVista[i].equals("sonoffbody")) {
 						String cuerpoSonoff= vista.getContenido().get("sonoffbody").replaceAll("CAMBIARSONOFF", serialDevice);
-						//System.out.println("este es el cuuerpo del  SONOFF: "+ cuerpoSonoff);
 						cuerpoSonoff=cuerpoSonoff.replaceAll("HOSTSONOFF", devconfig.getIphostescuchar());
 						cuerpoSonoff=cuerpoSonoff.replaceAll("PORTSONOFF", devconfig.getPortescuchar());
 						cuerpoSonoff=cuerpoSonoff.replaceAll("USERSONOFF", devconfig.getUserescuchar());
@@ -526,7 +555,6 @@ public class Utils {
 						break;	
 					}
 				case "alarma":
-					System.out.println("llego al armado de la alarmas");
 					contenidototal= vista.getContenido().get("alarmabody").replaceAll("CAMBIARALARMA", serialDevice);
 					contenidototal=contenidototal.replaceAll("NOMBREALARMA", device.getName());
 					contenidototal=contenidototal.replaceAll("HOSTALARMA", devconfig.getIphostescuchar());
@@ -534,6 +562,8 @@ public class Utils {
 					contenidototal=contenidototal.replaceAll("USERALARMA", devconfig.getUserescuchar());
 					contenidototal=contenidototal.replaceAll("PASSALARMA", devconfig.getPassescuchar());
 					contenidototal=contenidototal.replaceAll("TOPICOALARMA", devconfig.getTopicescribir());
+					break;
+				
 				default:
 					System.out.println("ERROR VISTA NO ENCONTRADA");
 					break;
@@ -633,6 +663,79 @@ public class Utils {
 				throw new RuntimeException(e);
 			}
 			return "home";
+		}
+
+		public static byte[] qrImagen(String uridoorman) {
+			try {
+	            String qrCodeData = "www.chillyfacts.com";
+	            String filePath = "/home/steven/Desktop/chillyfacts.png";
+	            String charset = "UTF-8"; // or "ISO-8859-1"
+	            Map < EncodeHintType, ErrorCorrectionLevel > hintMap = new HashMap < EncodeHintType, ErrorCorrectionLevel > ();
+	            hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+	            BitMatrix matrix = new MultiFormatWriter().encode(
+	                new String(qrCodeData.getBytes(charset), charset),
+	                BarcodeFormat.QR_CODE, 200, 200, hintMap);
+
+	            BufferedImage imagen = MatrixToImageWriter.toBufferedImage(matrix);
+	            byte[] imageBytes = ((DataBufferByte) imagen.getData().getDataBuffer()).getData();
+	            System.out.println("QR Code image created successfully!");
+	            return  imageBytes;
+	        } catch (Exception e) {
+	            System.err.println(e);
+	        }
+			return null;
+		}
+
+		//Metodo para generar imagen a partir de QR
+		@SuppressWarnings("deprecation")
+		public static String generarImagenEnBase64(String uridoorman) {
+			
+			try {
+				String infoImagen = new String(Base64.getDecoder().decode(uridoorman.getBytes()));
+	            String filePath = "/tmp/"+uridoorman+".jpg";
+	            String charset = "UTF-8";
+	            Map < EncodeHintType, ErrorCorrectionLevel > hintMap = new HashMap < EncodeHintType, ErrorCorrectionLevel > ();
+	            hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+	            BitMatrix matrix = new MultiFormatWriter().encode(
+	                new String(infoImagen.getBytes(charset), charset),
+	                BarcodeFormat.QR_CODE, 200, 200, hintMap);
+	            MatrixToImageWriter.writeToFile(matrix, filePath.substring(filePath
+	                .lastIndexOf('.') + 1), new File(filePath));
+			} catch (Exception e) {
+				System.out.println("Error en la creacion de la imagen");
+				e.printStackTrace();
+			}
+            
+			try {
+				String inputFilePath = "/tmp/"+uridoorman+".jpg";
+		        File inputFile = new File(inputFilePath);
+		        byte[] fileContent = FileUtils.readFileToByteArray(inputFile);
+		        String encodedString = Base64.getEncoder().encodeToString(fileContent);
+//		        System.out.println("ESTA ES LA IMAGEN: "+ encodedString);
+		        return encodedString;
+			} catch (Exception e) {
+				System.out.println("Error en la generacion de la Imagen como QR");
+				e.printStackTrace();
+			}
+			return null;
+			
+			
+			
+			//Fallo esta version
+//			try {
+//				String uri = new String(Base64.getDecoder().decode(uridoorman.getBytes()));				
+//				ByteArrayOutputStream out = new ByteArrayOutputStream();
+//	            //Generar QR Code
+//	            BitMatrix matrix1 = new MultiFormatWriter().encode(uri,
+//	            		BarcodeFormat.QR_CODE, 250, 250);
+//				MatrixToImageWriter.writeToStream(matrix1, "png", out);
+//				return Base64.getEncoder().encodeToString(out.toByteArray());
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//				return null;
+//			}
+			
+			
 		}
 		
 		

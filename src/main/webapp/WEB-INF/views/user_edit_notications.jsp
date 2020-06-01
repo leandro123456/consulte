@@ -54,7 +54,9 @@
               <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">Editar Notificaciones de Usuario</h1>
               </div>
-              <button class="btn btn-primary" id="my-button" onclick="pedirPermiso()">Activar Notificaciones</button>
+              <button class="btn btn-primary" id="my-button" onclick="pedirPermiso()">Activar Notificaciones Cloud</button>
+              <p> </p>      
+              <button class="btn btn-primary" id="my-button" onclick="activarMail()">Activar Notificaciones por Mail</button>
               <p> </p>
               <form class="user" action="<c:url value='/profileuser/notificaciones'/>" method="post" enctype="multipart/form-data" autocomplete="off">
                 <table class="table table-sm">
@@ -99,6 +101,43 @@
 </body>
 
 <script type="text/javascript">
+function activarMail(){		
+		//Adaptacion
+			swal({
+	 			  title: "cDash",
+	 			  text: "cDash quiere enviarle notificaciones via Mail",
+	 			  icon: "warning",
+	 			  buttons: true,
+	 			  dangerMode: true,
+	 			})
+	 			.then((willDelete) => {
+	 			  if (willDelete) {
+	 				 var enc = window.btoa('${pageContext.request.userPrincipal.name}');
+	 				 var urlsendInformation = $(location).attr('pathname') + "/activarnotificacionviamail/"+enc;
+	 					$.ajax({ url : urlsendInformation,
+	 						contentType: "application/json",
+	 						dataType: 'json',
+	 						success: function(data){
+	 							if (data.status=="exitoso"){
+	 				 			    swal("Permiso Concedido", {
+	 					 			      icon: "success",
+	 					 			    });
+	 							}
+	 							else{
+	 				 			    swal("Error en el Proceso", {
+	 					 			      icon: "error",
+	 					 			    });
+	 							}
+	 						}			
+	 				});		 				 
+	 			  } else {
+	 			    swal("Puede habilitarlo en cualquier momento");
+	 			  }
+	 			});
+}
+</script>
+
+<script type="text/javascript">
 var firebaseConfig = {
   apiKey: "AIzaSyAUrwGTRCz98u4Tg38iWtKKx-zJEKKH78M",
   authDomain: "cdash-1274d.firebaseapp.com",
@@ -114,7 +153,7 @@ firebase.initializeApp(firebaseConfig);
 	function pedirPermiso(){
  		swal({
  			  title: "cDash",
- 			  text: "cDash quiere enviarle notificaciones",
+ 			  text: "cDash quiere enviarle notificaciones a su Dispositivo",
  			  icon: "warning",
  			  buttons: true,
  			  dangerMode: true,

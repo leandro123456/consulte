@@ -1,9 +1,31 @@
 package org.junit;
 
+import static org.junit.Assert.assertTrue;
+
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+
+import org.apache.commons.io.FileUtils;
 import org.json.JSONObject;
+import org.springframework.util.FileCopyUtils;
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.Writer;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.lgg.nticxs.web.DAO.DeviceDefaultConfigurationDAO;
 import com.lgg.nticxs.web.DAO.VistaDAO;
 import com.lgg.nticxs.web.model.Vista;
@@ -13,6 +35,116 @@ import com.lgg.nticxs.web.model.DeviceDefaultConfiguration;
 
 public class Test1 {
 	
+	//@Test
+	public void testParseBase64() {
+		String file = "http://localhost:8080/doorman/bGVhbmRyb2dhYnJpZWxn896992221dXptYW5AZ21haWwuY29t";
+		String propietario = Base64.getEncoder().encodeToString(file.getBytes());
+		System.out.println("valor: "+ propietario);
+		
+		String fin = new String(Base64.getDecoder().decode(propietario.getBytes()));
+		System.out.println("resultado: "+ fin);
+		
+	}
+	
+	
+   //@Test
+    public void fileToBase64StringConversion() {
+    	try {
+
+    	String inputFilePath = "/home/steven/Desktop/qrt.jpg";
+        String outputFilePath = "qrtFinal.jpg";
+        // load file from /src/test/resources
+        ClassLoader classLoader = getClass().getClassLoader();
+//        File inputFile = new File(classLoader
+//          .getResource(inputFilePath)
+//          .getFile());
+        File inputFile = new File(inputFilePath);
+ 
+        byte[] fileContent = FileUtils.readFileToByteArray(inputFile);
+        String encodedString = Base64
+          .getEncoder()
+          .encodeToString(fileContent);
+ 
+        
+        System.out.println("imagenQR: "+ encodedString);
+        // create output file
+        String salida=inputFile.getParentFile().getAbsolutePath() + "/"+ outputFilePath;
+        System.out.println(salida);
+        File outputFile = new File(salida);
+ 
+        // decode the string and write to file
+        byte[] decodedBytes = Base64
+          .getDecoder()
+          .decode(encodedString);
+        FileUtils.writeByteArrayToFile(outputFile, decodedBytes);
+ 
+        assertTrue(FileUtils.contentEquals(inputFile, outputFile));
+    	} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
+	
+	//@Test
+	public void testCrearQRCode() {
+		try {
+            String qrCodeData = "www.chillyfacts.com";
+            String filePath = "/home/steven/Desktop/prueba.jpg";
+            String charset = "UTF-8"; // or "ISO-8859-1"
+            Map < EncodeHintType, ErrorCorrectionLevel > hintMap = new HashMap < EncodeHintType, ErrorCorrectionLevel > ();
+            hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+            BitMatrix matrix = new MultiFormatWriter().encode(
+                new String(qrCodeData.getBytes(charset), charset),
+                BarcodeFormat.QR_CODE, 200, 200, hintMap);
+            MatrixToImageWriter.writeToFile(matrix, filePath.substring(filePath
+                .lastIndexOf('.') + 1), new File(filePath));
+            
+            
+            //segunda Forma de genrar la imagen
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            //Generar Segundo QR Code
+            BitMatrix matrix1 = new MultiFormatWriter().encode(qrCodeData,
+            		BarcodeFormat.QR_CODE, 250, 250);
+			MatrixToImageWriter.writeToStream(matrix1, "png", out);
+			Base64.getEncoder().encodeToString(out.toByteArray());
+            
+            
+//            BufferedImage imagen = MatrixToImageWriter.toBufferedImage(matrix);
+//            File file = new File("downloaded.jpg");
+//            ImageIO.write(imagen, "jpg", file);
+////            DataBufferByte d = new DataBufferByte("");
+//            byte[] imageBytes = ((DataBufferByte) imagen.getData().getDataBuffer()).getData();
+            
+            System.out.println("QR Code image created successfully!");
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+	}
+	
+	//@Test
+	public void testCrearQR() {
+	    	try {
+	    		String datos= "casa";
+		    	int ancho= 500;
+		    	int altura=500;
+		        BitMatrix matrix;
+		        Writer escritor = new QRCodeWriter();
+		        matrix = escritor.encode(datos, BarcodeFormat.QR_CODE, ancho, altura);
+		        
+		        BufferedImage imagen = new BufferedImage(ancho, altura, BufferedImage.TYPE_INT_RGB);
+		        
+		        for(int y = 0; y < altura; y++) {
+		            for(int x = 0; x < ancho; x++) {
+		                int grayValue = (matrix.get(x, y) ? 0 : 1) & 0xff;
+		                imagen.setRGB(x, y, (grayValue == 0 ? 0 : 0xFFFFFF));
+		            }
+		        }
+		        System.out.println("imagen: "+ imagen.toString());
+		  		        
+		        
+			} catch (Exception e) {
+				e.printStackTrace();
+			}        
+	}
 	
 	//@Test
 	public void testSendMQTT() {

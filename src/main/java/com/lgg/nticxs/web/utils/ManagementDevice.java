@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.web.util.UriComponents;
 
 import com.lgg.nticxs.web.DAO.DeviceDAO;
 import com.lgg.nticxs.web.DAO.DeviceDefaultConfigurationDAO;
@@ -19,7 +21,9 @@ import com.lgg.nticxs.web.model.Vista;
 import com.lgg.nticxs.web.model.simple.SimpleTimerString;
 
 public class ManagementDevice {
+	private final static String URI= Settings.getInstance().getURIBackend();
 
+	@SuppressWarnings("unused")
 	public static void createDevice(HttpServletRequest request, String deviceserial,
 			String namedevice, String descriptiondevice, String tipodevice, 
 			String iphostescuchar, String portescuchar, String topiclisten, 
@@ -70,6 +74,7 @@ public class ManagementDevice {
 				String alarmavista = Vista.ALARMA+";alarmabody";
 				vista.put(Base64.getEncoder().encodeToString(name.getBytes()), alarmavista);
 				device.setVista(vista);
+				device.setParticionactiva("1");
 				System.out.println("es una alarma");
 				break;
 			case "sonoff":
@@ -232,9 +237,48 @@ public class ManagementDevice {
 		dconfirguration.setUserescucharremote(userescucharremote);
 		dconfirguration.setUsesslescuchar(false);
 		dconfirguration.setUsesslescucharremote(false);
-		System.out.println("PASO EL ESTABLECIMIENTO DE LOS LOS VALORES DE CONFIGURACIONS");
+		System.out.println("PASO EL ESTABLECIMIENTO DE LOS LOS VALORES DE CONFIGURATIONS");
 
 		return dconfirguration;
+	}
+
+
+	public static void createDeviceDoorman(HttpServletRequest request,String calle,
+			String numero, String depto,String piso,String localidad, String codpostal,
+			String provincia,String pais, String serialDoorman,	String tipodireccion) {
+		DeviceDAO devicedao = new DeviceDAO();
+		Device device= new Device();
+		
+		String name = request.getUserPrincipal().getName();
+		System.out.println("nombre del dueño del dispositivo: "+ name);
+		String propietario = Base64.getEncoder().encodeToString(name.getBytes());
+		device.setUserowner(propietario);
+		Random num = new Random();
+		System.out.println("numero random: "+ num.toString());
+		int numf= num.nextInt();
+		String codusuario=propietario.substring(0, propietario.length()/2)+numf+propietario.substring(propietario.length()/2,propietario.length());
+		device.setSerialnumber(serialDoorman+ numf);
+		device.setCalle(calle);
+		device.setNumero(numero);
+		device.setDepto(depto);
+		device.setPiso(piso);
+		device.setLocalidad(localidad);
+		device.setCodpostal(codpostal);
+		device.setProvincia(provincia);
+		device.setPais(pais);
+		device.setTipodireccion(tipodireccion);
+		String uricodificada1= URI+"/doorman/"+codusuario;
+		String uricodificada = Base64.getEncoder().encodeToString(uricodificada1.getBytes());
+		device.setUridoorman(uricodificada);
+		device.setCodigouri(codusuario);
+		device.getVista().put(propietario, "doorman");
+		device.setTipo(Device.DOORMAN); 
+		devicedao.create(device);
+		
+		UserDAO userdao= new UserDAO();
+		User user = userdao.retrieveByMail(name);
+		user.getDeviceserialnumber().add(serialDoorman+numf);
+		userdao.update(user);
 	}
 
 

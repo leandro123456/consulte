@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.bson.codecs.pojo.annotations.BsonProperty;
-
 import com.lgg.nticxs.web.DAO.Mongo.MongoDBObject;
 
 
@@ -16,6 +14,7 @@ public class Device extends MongoDBObject{
 	static final public String TERMOMETRO = "termometro";
 	static final public String SONOFF = "sonoff";
 	static final public String ALARMA = "alarma";
+	static final public String DOORMAN = "doorman";
 	
 	private String name;
 	private String userowner;
@@ -38,6 +37,18 @@ public class Device extends MongoDBObject{
 	private List<String> users;
 	private List<String> admins;
 	private String particionactiva;
+	private String calle;
+	private String numero;
+	private String depto;
+	private String piso;
+	private String localidad;
+	private String codpostal;
+	private String provincia;
+	private String pais;
+	private String tipodireccion;
+	private String codigouri;
+	private String uridoorman;
+	
 
 	
 	public Device() {
@@ -48,9 +59,34 @@ public class Device extends MongoDBObject{
 		admins = new ArrayList<>();
 		vista = new HashMap<String,String>();
 	}
+	
+
+	public void setLocalidad(String localidad) {
+		this.localidad = localidad;
+	}
+
+	public void setCodpostal(String codpostal) {
+		this.codpostal = codpostal;
+	}
+
+	public void setTipodireccion(String tipodireccion) {
+		this.tipodireccion = tipodireccion;
+	}
 
 	public String getUserowner() {
 		return userowner;
+	}
+
+	public String getLocalidad() {
+		return localidad;
+	}
+
+	public String getCodpostal() {
+		return codpostal;
+	}
+
+	public String getTipodireccion() {
+		return tipodireccion;
 	}
 
 	public void setUserowner(String userowner) {
@@ -68,6 +104,86 @@ public class Device extends MongoDBObject{
 	public List<DeviceConfiguration> getDeviceconfiguration() {
 		return deviceconfiguration;
 	}
+
+	public String getCalle() {
+		return calle;
+	}
+
+
+	public String getCodigouri() {
+		return codigouri;
+	}
+
+
+	public void setCodigouri(String codigouri) {
+		this.codigouri = codigouri;
+	}
+
+
+	public void setCalle(String calle) {
+		this.calle = calle;
+	}
+
+
+	public String getNumero() {
+		return numero;
+	}
+
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+
+	public String getDepto() {
+		return depto;
+	}
+
+
+	public void setDepto(String depto) {
+		this.depto = depto;
+	}
+
+
+	public String getPiso() {
+		return piso;
+	}
+
+
+	public void setPiso(String piso) {
+		this.piso = piso;
+	}
+
+
+	public String getProvincia() {
+		return provincia;
+	}
+
+
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
+
+
+	public String getPais() {
+		return pais;
+	}
+
+
+	public void setPais(String pais) {
+		this.pais = pais;
+	}
+
+
+	public String getUridoorman() {
+		return uridoorman;
+	}
+
+
+	public void setUridoorman(String uridoorman) {
+		this.uridoorman = uridoorman;
+	}
+
 
 	public void setDeviceconfiguration(List<DeviceConfiguration> deviceconfiguration) {
 		this.deviceconfiguration = deviceconfiguration;

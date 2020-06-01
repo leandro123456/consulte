@@ -272,7 +272,7 @@ public abstract class MongoDBClient<T extends MongoDBObject> extends MongoDBProp
 	@SuppressWarnings("unchecked")
 	private Document parseToDocumentUpdate(T object) {
 		DBObject dbObject = this.morphiaMapper.toDBObject(object);
-		System.out.println("este es el eelemntoooooo: "+ dbObject);
+//		System.out.println("este es el eelemntoooooo: "+ dbObject);
 		Document documentObject = new Document(dbObject.toMap());
 		if (documentObject.containsKey("className")) documentObject.remove("className");
 		if (documentObject.containsKey("id")) documentObject.remove("id");

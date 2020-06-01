@@ -27,7 +27,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		UserDAO userdao = new UserDAO();
 		String name = authentication.getName();
 		String password = authentication.getCredentials().toString();
-
 		User user = userdao.retrieveByMail(name);
 		if(user != null){
 			try {

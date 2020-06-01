@@ -18,11 +18,9 @@
 	<script src='<c:url value="/resources/mqttResources/mqttRecibirMensajes.js" />'></script>
 	<script src='<c:url value="/resources/mqttResources/demo.js" />'></script>
 	<script src='<c:url value="/resources/alarma/coneccionAlarma.js" />'></script>
-<%-- 	<script src='<c:url value="/resources/mqttResources/cargarElementos.js" />'></script> --%>
-<%-- 	<script src='<c:url value="/resources/mqttResources/progreso.js" />'></script> --%>
+	<script src='<c:url value="/resources/pulsador/descargaImagenes.js" />'></script>
 	<script src='<c:url value="/resources/mqttResources/cargaReloj.js" />'></script>
 	<script src='<c:url value="/resources/pulsador/cargaPulsadores.js" />'></script>
-<%-- 	<script src='<c:url value="/resources/firebase.js" />'></script>	 --%>
 	<link href='<c:url value="/resources/mqttResources/estiloalarma.css" />' rel="stylesheet" type="text/css">
 	<!-- Alta de Device -->
 	<script src='<c:url value="/resources/deviceResources/cargarDevice.js" />'></script>
@@ -70,6 +68,7 @@
 
 	});
 </script>
+
 
 <script type="text/javascript">
 function getParameterByName(name) {
@@ -128,11 +127,10 @@ function getParameterByName(name) {
 				</c:if>	
 	
 		<div class="row" id="cargadora">
+<!-- 		modificacion -->
 			<c:forEach items="${vistas}" var="vista">
                 ${vista}
           </c:forEach>
-          
-          
 		</div>
 		<div class="fixed">
 			<a href="/home/newdeviceb" data-toggle="modal" data-target="#createDeviceModal"> 
@@ -153,12 +151,8 @@ function getParameterByName(name) {
 	
 	
  <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
- <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-messaging.js"></script>
- <!--  <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-app.js"></script> -->
- 
- 
- 
- 
+ <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-messaging.js"></script> 
+  
  <script type="text/javascript">
  
    // Your web app's Firebase configuration
@@ -189,17 +183,13 @@ function getParameterByName(name) {
            console.log("Unable to get permission to notify."+ err);
        });
    messaging.onMessage(function(payload) {
-//console.log("respuesta: "+ payload.notification.title);
-//console.log("respuesta: "+ payload.notification.body);
-//console.log("respuesta: "+ payload.notification.icon);
-
-swal({
-  title: payload.notification.title,
-  text: payload.notification.body,
-  timer: 3000,
-  buttons: false,
-  });
-});
+		swal({
+		  title: payload.notification.title,
+		  text: payload.notification.body,
+		  timer: 3000,
+		  buttons: false,
+		  });
+		});
 
 
 // Callback fired if Instance ID token is updated.
@@ -217,7 +207,6 @@ messaging.onTokenRefresh(() => {
 
  </script>
  <script type="text/javascript">
- 
  function enviarToken(token){
 	 console.log("username encontrado: "+ '${pageContext.request.userPrincipal.name}')
 	 var enc = window.btoa('${pageContext.request.userPrincipal.name}');
@@ -230,14 +219,20 @@ messaging.onTokenRefresh(() => {
 			}			
 	});
  }
-
  </script> 
 </body>
 
 
-
-
-
+<script src='<c:url value="/resources/js/jquery.qrcode.min.js" />'></script>
+<script type="text/javascript">
+//jQuery("#demo").qrcode("url o algo de texto");
+jQuery("#demo").qrcode({
+ id: "mycanvas",
+ width: 128,
+ height: 128,
+ text: "http://ourcodeworld.com"
+});
+</script>
 
 
 <!-- script alarama -->
@@ -246,7 +241,29 @@ messaging.onTokenRefresh(() => {
 
 
 <!-- Crear device con Modal -->
-  <div class="modal fade" id="createDeviceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+<div class="modal fade" id="createDeviceModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+    	<div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nuevo dispositivo</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          	<span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        	<div id="infoGeneral1" style="display:inline">
+<!-- 				<button data-dismiss="modal" class="btn btn-primary btn-lg btn-block" data-toggle="modal" href="#modalSoftware">Crear Dispositivo Software</button> -->
+<!-- 				<p></p> -->
+				<button data-dismiss="modal" data-toggle="modal"class="btn btn-primary btn-lg btn-block" href="#modalHardware">Crear Dispositivo Hardware</button>
+				<p></p>
+			</div>
+		</div>
+    </div>
+  </div>
+</div>
+	
+  <div class="modal fade" id="modalSoftware" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -257,16 +274,124 @@ messaging.onTokenRefresh(() => {
         </div>
         <form role="form" action="<c:url value="home/create"/>" method="post">
         	<div class="modal-body">
+					<div id="infoGeneralSoft" style="display:inline">
+						<b>Alta Protero Virtal</b> 
+						<p></p>
+						<div class="row">
+  							<div class="col-md-6">
+								<b>Calle</b> 
+								<input name="calle" id="calle" class="form-control" required>
+								<p></p>
+								<b>Piso</b> 
+								<input name="piso" id="piso" class="form-control" >
+								<p></p>
+								<b>Pais</b> 
+								<select id="pais" name="pais" class="form-control">
+									<option value="none">Seleccione uno</option>
+									  <script>
+									  	var sel = document.getElementById('pais');
+									  	var state = new Array("Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antarctica", "Antigua_and_Barbuda",
+									  			"Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados",
+									  			"Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia_and_Herzegovina", "Botswana",
+									  			"Brazil", "Brunei", "Bulgaria", "Burkina_Faso", "Burma", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape_Verde",
+									  			"Central_African_Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo_Democratic_Republic",
+									  			"Congo_Republic_of_the", "Costa_Rica", "Cote_dIvoire", "Croatia", "Cuba", "Cyprus", "Czech_Republic", "Denmark",
+									  			"Djibouti", "Dominica", "Dominican_Republic", "East Timor", "Ecuador", "Egypt", "El_Salvador", "Equatorial_Guinea",
+									  			"Eritrea", "Estonia", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana",
+									  			"Greece", "Greenland", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hong_Kong",
+									  			"Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan",
+									  			"Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea_North", "Korea_South", "Kuwait", "Kyrgyzstan", "Laos", "Latvia",
+									  			"Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macedonia", "Madagascar",
+									  			"Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall_Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia",
+									  			"Moldova", "Mongolia", "Morocco", "Monaco", "Mozambique", "Namibia", "Nauru", "Nepal", "Netherlands", "New_Zealand",
+									  			"Nicaragua", "Niger", "Nigeria", "Norway", "Oman", "Pakistan", "Panama", "Papua_New_Guinea", "Paraguay", "Peru",
+									  			"Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Samoa", "San_Marino", " Sao_Tome",
+									  			"Saudi_Arabia", "Senegal", "Serbia_and_Montenegro", "Seychelles", "Sierra_Leone", "Singapore", "Slovakia", "Slovenia",
+									  			"Solomon_Islands", "Somalia", "South_Africa", "Spain", "Sri_Lanka", "Sudan", "Suriname", "Swaziland", "Sweden",
+									  			"Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad_and_Tobago",
+									  			"Tunisia", "Turkey", "Turkmenistan", "Uganda", "Ukraine", "United_Arab_Emirates", "United_Kingdom", "United_States",
+									  			"Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe");
+									  	
+										 for(var hi=0; hi<state.length; hi++){
+											    var sel = document.getElementById("pais");
+											    var option = document.createElement("option");
+											    option.text = state[hi];
+											    option.value = state[hi]; 
+											    sel.add(option);
+											  }	
+									  </script>
+								</select>
+								<p></p>
+								<b>Localidad</b> 
+								<input name="localidad" id="localidad" class="form-control" >
+							</div>
+							<div class="col-md-6">
+								<b>Numero</b> 
+								<input name="numero" id="numero" class="form-control" required>
+								<p></p>
+								<b>Depto</b> 
+								<input name="depto" id="depto" class="form-control">
+								<p></p>
+								<b>Provincia</b> 
+								<input name="provincia" id="provincia" class="form-control" >
+								<p></p>
+								<b>Codigo Postal</b> 
+								<input name="codpostal" id="codpostal" class="form-control" >
+							</div>
+							<p></p>
+							<div class="col-md-12">
+								<b>Tipo de Direccion</b> 
+								<select id="tipodireccion" name="tipodireccion" class="form-control">
+									<option value="none">Seleccione uno</option>
+									<option value="casa">Casa</option>
+									<option value="trabajo">Trabajo</option>
+									<option value="otro">Otro</option>
+								</select>
+								<p></p>
+							</div>
+						</div>
+					</div>
+					<div id="infoFinalSoft" style="display:none">
+						<h5>La configuración está lista. Precione Agregar Dispositivo para terminar.</h5>
+						<p></p>
+					</div>
+					<div class="btn-group">
+	          			<button id="botonAnteriorsof" style="display:none" class="btn btn-secondary" onclick="anteriorAnimacionSoft()" type="button">Volver</button>
+	          			<button id="botonSiguientesof" class="btn btn-primary" onclick="siguienteAnimacionSoft()" type="button">Continuar</button>
+	          		</div>
+        	</div>
+	        <div class="modal-footer">
+	          	<button type="button" style="display:none" id="botoncancelarsof" class="btn btn-secondary"  data-dismiss="modal">Cancelar</button> 	
+	          	<button type="submit" style="display:none" id="botonfinalizarsof" class="btn btn-primary">Agregar Dispositivo</button>
+	        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="modal fade" id="modalHardware" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nuevo dispositivo</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          	<span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <form role="form" action="<c:url value="home/create"/>" method="post">
+        	<div class="modal-body">
+
         		<div id="infoGeneral" style="display:inline">
 <!-- 					<h3>Informacion General</h3> -->
 					<b>Nombre del dispositivo</b> 
-					<input name="namedevice" id="namedevice" class="form-control" required>
+					<input name="namedevice" id="namedevice" class="form-control">
 					<p></p>
 					<b>Descripción</b> 
-					<input name="descriptiondevice" id="descriptiondevice" class="form-control" required>
+					<input name="descriptiondevice" id="descriptiondevice" class="form-control" >
 					<p></p>
 					<b>Numero de Serie</b> 
-					<input name="serialnumber" id="serialnumber" class="form-control" required>
+					<input name="serialnumber" id="serialnumber" class="form-control" >
 					<p></p>
 				</div>
 				<div id="infoDeducidaCoiaca" style="display:none">
@@ -335,7 +460,7 @@ messaging.onTokenRefresh(() => {
 						<div class="panel-heading">
 							<p> </p>
 							<h6 class="panel-title">Parametros del Timer String</h6>
-						</div>
+						</div>style="display:none"
 						<div class="panel-body">
 							<table name="timerstringsonoff" class="table table-sm" id="dataTable">
 									<tr>
@@ -448,9 +573,7 @@ messaging.onTokenRefresh(() => {
 					</div>
 					<div id="infoFinal" style="display:none">
 						<h5>La configuración está lista. Precione Agregar Dispositivo para terminar.</h5>
-					</div>
-					
-				
+					</div>				
 				<div class="btn-group">
           			<button id="botonAnterior" style="display:none" class="btn btn-secondary" onclick="anteriorAnimacion()" type="button">Volver</button>
           			<button id="botonSiguiente" class="btn btn-primary" onclick="siguienteAnimacion()" type="button">Continuar</button>
@@ -593,14 +716,12 @@ $("#serialnumber").blur(function() {
 function iniciaConexion(){
 	console.log("dispositivos: "+ ${cantidadSensores});
 	if(${cantidadSensores}!=0){
-		startConnectSonoff("mqtttest.qliq.com.ar", 8081, false, "mqttusr","mqttpwd",${topicos});
+		startConnectSonoff("mqtt.coiaca.com", 8081, false, "mqttusr","mqttpwd",${topicos});
 	}
 	console.log("dispositivos alarma: "+ ${cantidadAlarma})
 	if(${cantidadAlarma}!=0)
 	startConnectAlarma("${hostalarma}","${puertoalarma}",${sslalarma},"${usuarioalarma}","${passalarma}",${topicosalarmas});
 }
 </script>
-
-
 
 

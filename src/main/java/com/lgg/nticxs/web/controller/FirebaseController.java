@@ -26,6 +26,30 @@ public class FirebaseController {
 	private UserDAO userdao = new UserDAO();
 	
 	/**
+	 * @apiNote Este metodo se usa para activar las notificacines por Mail
+	 */
+	@GetMapping(value = "/profileuser/notificaciones/activarnotificacionviamail/{username}")
+	@ResponseBody
+	public String actualizarMail(@PathVariable String username) {
+		JSONObject json = new JSONObject();
+		try {
+			String nombre= new String(Base64.getDecoder().decode(username.getBytes()));
+			System.out.println("username: "+ nombre);
+			UserDAO userdao=new UserDAO();
+			User user = userdao.retrieveByMail(nombre);
+			user.getNotificaciones().put(Notificacion.ENVIAR_MAIL, true);
+			userdao.update(user);
+			json.put("status", "exitoso");
+			return json.toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+			json.put("status", "fallido");
+			return json.toString();
+		}
+		
+	}
+	
+	/**
 	 * 
 	 * @apiNote Este metodo se usa para actulizar los tokens usados por Firebase
 	 * @param token
