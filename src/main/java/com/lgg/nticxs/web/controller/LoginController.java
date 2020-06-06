@@ -308,7 +308,15 @@ public class LoginController{
 					user.setPassCuenta(ran);
 					userdao.create(user);
 					String cabecera = "<HTML><BODY><br/> <br/>";
-					String body= "<h1>Su cuenta ha sido creada. </h1> <br/> <h3>Para activarla, inicie sesion en http://cdash.space e ingrese el siguiente código:</h3> <br/> <h3>"+ran+"</h3>";
+					String body= "<h3>Hola,</h3>"
+							+ "<h3>Hemos creado tu cuenta en cDash.</h3>"
+							+ "<h3>Para activarla, por favor inicia sesión en https://cdash.space con la dirección de correo electrónico que utilizaste para crear la cuenta y tu contraseña. Cuando lo hagas, se te pedirá por única vez que ingreses un código.</h3>"
+							+ "<br/><h3>"+ran+"</h3>"
+							+ "<br><h3>A partir de ese momento podrás hacer uso de la aplicación y configurar tus dispositivos.</h3>"
+							+ "<h3>Para agregar un dispositivo, deberás tocar el signo + que se encuentra en la parte superior derecha de la pantalla.</h3>"
+							+ "<br/><h3>Podrás usar la aplicación iniciando sesión en cualquier computadora o dispositivos móviles, como tablets o smartphones. Recibirás notificaciones en todos los dispositivos en los que inicies sesión. Recuerda cerrar sesión si usas dispositivos públicos o prestados para evitar que otros puedan acceder a tu cuenta.</h3>"
+							+ "<br/><h3>Este correo electrónico se envía de forma automática. No lo contestes. Si tienes dudas, ponte en contacto con el equipo de soporte escribiendo a support@coiaca.com.</h3>"
+							+ "<br/><h3>Saludos cordiales.</h3>";
 					String pie = "";//"<br/> <br/> <footer><p> 2019 - cDash</p></footer></BODY></HTML>";
 					String formulario = String.format("%s%s%s%s", cabecera, body, "<br/> <br/>", pie);
 					Utils.sendMail(formulario, email);

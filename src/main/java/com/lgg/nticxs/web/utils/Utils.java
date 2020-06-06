@@ -645,7 +645,7 @@ public class Utils {
 				message.setFrom(new InternetAddress("cDash"));
 				message.setRecipients(Message.RecipientType.TO,
 						InternetAddress.parse(destino));
-				message.setSubject("[cDash]: Activacion de Cuenta");
+				message.setSubject("Bienvenido a cDash. Por favor, activá tu cuenta.");
 				message.setText(Mensaje,"ISO-8859-1","html");
 				System.out.println("esto es previo al error");
 				Transport transport = session.getTransport("smtp");
