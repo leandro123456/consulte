@@ -1,6 +1,7 @@
 package com.lgg.nticxs.web;
 
 
+import org.apache.catalina.connector.Connector;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -34,11 +35,15 @@ public class AppInitializer extends SpringBootServletInitializer{
 		SpringApplication.run(AppInitializer.class, args);
 	}
 	
-//	@Override
-//    public void onStartup(ServletContext sc) throws ServletException {
-//        sc.getSessionCookieConfig().setHttpOnly(true);        
-//        sc.getSessionCookieConfig().setSecure(true);        
-//    }
+//	@Bean
+	private Connector redirectConnector() {
+		  Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
+		  connector.setScheme("http");
+		  connector.setPort(80);
+		  connector.setSecure(false);
+		  connector.setRedirectPort(443);
+		  return connector;
+		}
 
 	@Bean
 	public UserDAO userDao() {
