@@ -310,7 +310,7 @@ public class LoginController{
 					String cabecera = "<HTML><BODY><br/> <br/>";
 					String body= "<h3>Hola,</h3>"
 							+ "<h3>Hemos creado tu cuenta en cDash.</h3>"
-							+ "<h3>Para activarla, por favor inicia sesión en https://cdash.space con la dirección de correo electrónico que utilizaste para crear la cuenta y tu contraseña. Cuando lo hagas, se te pedirá por única vez que ingreses un código.</h3>"
+							+ "<h3>Para activarla, por favor inicia sesión en <a href=\"https://cdash.space\">https://cdash.space</a> https://cdash.space con la dirección de correo electrónico que utilizaste para crear la cuenta y tu contraseña. Cuando lo hagas, se te pedirá por única vez que ingreses el siguiente código:</h3>"
 							+ "<br/><h3>"+ran+"</h3>"
 							+ "<br><h3>A partir de ese momento podrás hacer uso de la aplicación y configurar tus dispositivos.</h3>"
 							+ "<h3>Para agregar un dispositivo, deberás tocar el signo + que se encuentra en la parte superior derecha de la pantalla.</h3>"

@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html;  charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link type="text/css" rel="stylesheet" href="resources/loginresources/css/main.css">
-	
+	<script data-ad-client="ca-pub-9090543026082195" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	<script type="text/javascript"> <!-- FEDERICO le meti este script para que cambie la imagen de fondo y que no sea sismpre la misma. Si, me cop� -->
 		if (document.getElementById) { window.onload = swap };
 		function swap() {
@@ -36,20 +36,39 @@
   <script src='<c:url value="https://unpkg.com/sweetalert/dist/sweetalert.min.js"/>'></script>
 
 <!-- Header -->
-			<header id="header" class="alt">
-			<img src="resources/loginresources/css/images/logo.png" alt="" width=50 height=auto />
-				<div class="logo"><a href="login">cDash <span>- Control for your IoT devices</span></a></div>
+<!-- 			<header id="header" class="alt"> -->
+<!-- 			<img src="resources/loginresources/css/images/logo.png" alt="" width=50 height=auto /> -->
+<!-- 				<div class="logo"><a href="login">cDash <span>- Control for your IoT devices</span></a></div> -->
+<!-- 			</header> -->
+
+<!-- 			<nav id="menu"> -->
+<!-- 				<ul class="links"> -->
+<!-- 					<li><a href="index.html">Inicio</a></li> -->
+<!-- 					<li><a href="#">Ayuda</a></li> -->
+<!-- 					<li><a href="generic.html">Generic</a></li>
+<!-- 					<li><a href="elements.html">Elements</a></li> --> -->
+<!-- 				</ul> -->
+<!-- 			</nav> -->
+
+<!-- Header -->
+			<header id="header">
+<!-- 				<img src="resources/loginresources/css/images/logo.png" alt="" width=50 height=auto /> -->
+				<div class="logo"><a href="login">cDash<span> - Control for your IoT devices</span></a></div>
+				<a href="#menu">Menu</a>
 			</header>
 
-<!-- Nav -->
+		<!-- Nav -->
 			<nav id="menu">
 				<ul class="links">
-					<li><a href="index.html">Inicio</a></li>
-					<li><a href="#">Ayuda</a></li>
-					<!-- <li><a href="generic.html">Generic</a></li>
-					<li><a href="elements.html">Elements</a></li> -->
+					<li><a href="/home">Inicio</a></li>
+					<li><a href="/signup">Crear Cuenta</a></li>
+					<li><a href="/ayuda">Ayuda</a></li>
+					<li><a href="/Hfaq">Preguntas Frecuentes</a></li>
 				</ul>
 			</nav>
+
+			
+			
 				<c:if test="${param.error != null}">
 				 	<input type="hidden" id ="mensaje1" value="Usuario o Contrase&ntildea Incorrectos, intentalo nuevamente">
 					<script type="text/javascript">
@@ -161,6 +180,7 @@
 										<p>Todo esto de manera muy f&aacutecil. Si a&uacuten no tienen tu cuenta cDash, crea una, agrega un dispositivo al panel y toma el control.</p>
 										<a href="#" class="button">Ingresar</a>
 										<a href="<c:url value='/signup'/>" class="button">Crear Cuenta</a>
+										<a style="background-color:#000000"href="/ayuda" class="button">Ayuda</a>
 									</div>
 								</div>
 						</div>
@@ -192,9 +212,9 @@
 				<div class="copyright">
 					<ul class="icons">
 						<li><a href="https://www.facebook.com/cdashiot/" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="#" class="icon fa-snapchat"><span class="label">Snapchat</span></a></li>
+<!-- 						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li> -->
+<!-- 						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li> -->
+<!-- 						<li><a href="#" class="icon fa-snapchat"><span class="label">Snapchat</span></a></li> -->
 					</ul>
 					<p>&copy; cDash. All rights reserved. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Unsplash</a>.</p>
 				</div>

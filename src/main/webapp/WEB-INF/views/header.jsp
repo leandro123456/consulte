@@ -56,8 +56,17 @@
           </div>
         </div>
       </li>
+      
+            <!-- Nav Item - Utilities Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="<c:url value='/ayuda' />"  aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="far fa-question-circle"></i>
+          <span>Ayuda</span>
+          
+        </a>
+      </li>
 
-      <!-- Nav Item - Utilities Collapse Menu -->
+<!--       Nav Item - Utilities Collapse Menu -->
 <!--       <li class="nav-item"> -->
 <!--         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities"> -->
 <!--           <i class="fas fa-fw fa-wrench"></i> -->
@@ -65,9 +74,9 @@
 <!--         </a> -->
 <!--         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar"> -->
 <!--           <div class="bg-white py-2 collapse-inner rounded"> -->
-<!--             <h6 class="collapse-header">Debug Utilities:</h6> -->
-<%--             <a class="collapse-item" href="<c:url value='/home/listdebugmyown' />">My own</a> --%>
-<%--             <a class="collapse-item" href="<c:url value='/home/listdebugshared' />">Shared with me</a> --%>
+<!--             <h6 class="collapse-header">Soporte</h6> -->
+<%--             <a class="collapse-item" href="<c:url value='/Hfaq' />">Preguntas Frecuentes</a> --%>
+<%--             <a class="collapse-item" href="<c:url value='/ayuda' />">Ayuda</a> --%>
 <!--           </div> -->
 <!--         </div> -->
 <!--       </li> -->
@@ -100,11 +109,11 @@
           <ul class="navbar-nav ml-auto">
 
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-<!--             <li class="nav-item dropdown no-arrow d-sm-none"> -->
-<!--               <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
-<!--                 <i class="fas fa-search fa-fw"></i> -->
-<!--               </a> -->
-<!--             </li> -->
+            <li class="nav-item dropdown no-arrow d-sm-none">
+              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-search fa-fw"></i>
+              </a>
+            </li>
 
             <!-- Nav Item - Alerts -->
 <!--             <li class="nav-item dropdown no-arrow mx-1"> -->
