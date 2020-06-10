@@ -53,7 +53,7 @@
 <!-- Header -->
 			<header id="header">
 <!-- 				<img src="resources/loginresources/css/images/logo.png" alt="" width=50 height=auto /> -->
-				<div class="logo"><a href="login">cDash<span> - Control for your IoT devices</span></a></div>
+				<div class="logo"><a href="/home">cDash<span> - Control for your IoT devices</span></a></div>
 				<a href="#menu">Menu</a>
 			</header>
 
