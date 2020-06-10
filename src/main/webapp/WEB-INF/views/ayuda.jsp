@@ -3,7 +3,7 @@
 <%@taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <head>
-	<title>cDash - Control for your IoT devices</title>
+	<title>cDash - Ayuda</title>
 	<link rel='shortcut icon' href='<c:url value="/resources/images/favicon.ico" />' type="image/x-icon"/>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />   
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -24,7 +24,7 @@
 
 		<!-- Header -->
 			<header id="header">
-				<div class="logo"><a href="login">cDash<span> - Control for your IoT devices</span></a></div>
+				<div class="logo"><a href="/home">cDash<span> - Control for your IoT devices</span></a></div>
 				<a href="#menu">Menu</a>
 			</header>
 

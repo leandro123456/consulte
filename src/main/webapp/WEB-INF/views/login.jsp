@@ -46,7 +46,7 @@
 <!-- 					<li><a href="index.html">Inicio</a></li> -->
 <!-- 					<li><a href="#">Ayuda</a></li> -->
 <!-- 					<li><a href="generic.html">Generic</a></li>
-<!-- 					<li><a href="elements.html">Elements</a></li> --> -->
+<!-- 					<li><a href="elements.html">Elements</a></li> -->
 <!-- 				</ul> -->
 <!-- 			</nav> -->
 
@@ -208,15 +208,15 @@
 			</div>
 
 		<!-- Footer -->
-			<footer id="footer" class="footer-home"> <!-- FEDERICO agregu� el clase footer-home -->
+			<footer id="footer">
 				<div class="copyright">
 					<ul class="icons">
-						<li><a href="https://www.facebook.com/cdashiot/" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-<!-- 						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li> -->
-<!-- 						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li> -->
-<!-- 						<li><a href="#" class="icon fa-snapchat"><span class="label">Snapchat</span></a></li> -->
+						<!-- <li><a target="_blank" href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li> -->
+						<li><a target="_blank" href="https://www.facebook.com/cdashiot/" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<!-- <li><a target="_blank" href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a target="_blank" href="#" class="icon fa-snapchat"><span class="label">Snapchat</span></a></li> -->
 					</ul>
-					<p>&copy; cDash. All rights reserved. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Unsplash</a>.</p>
+					<p>&copy; Untitled. All rights reserved. Design: <a target="_blank" href="https://templated.co">TEMPLATED</a>. Images: <a target="_blank" href="https://unsplash.com">Unsplash</a>.</p>
 				</div>
 			</footer>
 

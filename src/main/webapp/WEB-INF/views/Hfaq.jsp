@@ -3,7 +3,7 @@
 <%@taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <head>
-	<title>cDash - Ayuda - Preguntas Frecuentes</title>
+	<title>cDash - Preguntas Frecuentes</title>
 	<link rel='shortcut icon' href='<c:url value="/resources/images/favicon.ico" />' type="image/x-icon"/>
     <meta http-equiv="Content-Type" content="text/html;  charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
