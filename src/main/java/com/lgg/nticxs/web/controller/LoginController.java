@@ -25,6 +25,7 @@ import nl.flotsam.xeger.Xeger;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -306,6 +307,7 @@ public class LoginController{
 					user.setEmail(email);
 					String ran= Utils.generarRandom();
 					user.setPassCuenta(ran);
+					user.setFechaCreacion(Utils.getFechaYHora());
 					userdao.create(user);
 					String cabecera = "<HTML><BODY><br/> <br/>";
 					String body= "<h3>Hola,</h3>"

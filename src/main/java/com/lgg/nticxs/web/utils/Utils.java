@@ -13,6 +13,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Calendar;
@@ -24,6 +26,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 import java.util.TimeZone;
+import java.util.regex.Pattern;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -422,6 +425,8 @@ public class Utils {
 			return iccidOk;
 		}
 		
+		
+		
 		public static String fechaActual() {
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(new Date());
@@ -736,6 +741,12 @@ public class Utils {
 //			}
 			
 			
+		}
+
+		public static String getFechaYHora() {
+			String fecha = ZonedDateTime.now().format(DateTimeFormatter.ISO_INSTANT);
+			String[] vector = fecha.split(Pattern.quote("."));
+			return vector[0]+"Z";
 		}
 		
 		

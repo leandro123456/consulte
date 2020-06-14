@@ -69,7 +69,6 @@ public class HomeController {
 			}
 		}	
 		
-		System.out.println("copie informacion de las cookies... home");
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
         	System.out.println(Arrays.stream(cookies)
@@ -97,6 +96,8 @@ public class HomeController {
 			model.addAttribute("useremail", user.getEmail());
 			return new ModelAndView("validate.jsp", model);
 		}
+		user.setFechaUltimoIngrego(Utils.getFechaYHora());
+		userdao.update(user);
 		clasificarSerialUsuario(user.getDeviceserialnumber());
 		model.addAttribute("sonoffcantidad", deviceAsociadoSonoff.size());
 		for(int i=0; i<deviceAsociadoSonoff.size();i++) {
