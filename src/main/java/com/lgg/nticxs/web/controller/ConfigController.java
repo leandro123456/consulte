@@ -58,4 +58,14 @@ public class ConfigController {
         return "Hsignup.jsp";
     }
 	
+	/******************************************************************************/
+	
+	
+	@GetMapping("/ayudaalarma")
+	public String redirectayudaalarma(
+    		Model model,HttpServletRequest request, HttpServletResponse response) {   
+        return "ayuda.jsp";
+    }
+	
+	
 }
