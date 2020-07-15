@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class ConfigController {
+public class AyudaPagesController {
 
 	@GetMapping("/robots.txt")
 	public String redirectRobots(
@@ -61,10 +61,10 @@ public class ConfigController {
 	/******************************************************************************/
 	
 	
-	@GetMapping("/ayudaalarma")
+	@GetMapping("home/ayudaalarma")
 	public String redirectayudaalarma(
     		Model model,HttpServletRequest request, HttpServletResponse response) {   
-        return "ayuda.jsp";
+        return "redirect:/Hadd";
     }
 	
 	

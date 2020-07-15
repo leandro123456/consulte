@@ -54,9 +54,9 @@
           <div class="col-lg-12">
             <div class="p-5">
               <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Editar Notificaciones de Usuario</h1>
+                <h1 class="h4 text-gray-900 mb-4">Configuración de Notificaciones</h1>
               </div>
-              <button class="btn btn-primary" id="my-button" onclick="pedirPermiso()">Activar Notificaciones Cloud</button>
+              <button class="btn btn-primary" id="my-button" onclick="pedirPermiso()">Activar Notificaciones Push</button>
               <p> </p>      
 <!--               <button class="btn btn-primary" id="my-button" onclick="activarMail()">Activar Notificaciones por Mail</button> -->
               <p> </p>
@@ -66,8 +66,8 @@
                 	<thead>
                         <tr>
                           <th scope="col"></th>
-                          <th scope="col">Notificar via Cloud</th>
-                          <th scope="col">Notificar via Mail</th>
+                          <th scope="col">Notificaciones Push</th>
+                          <th scope="col">Notificaciones por email</th>
                         </tr>
                     </thead>
 					<tbody>
