@@ -62,7 +62,6 @@
         <a class="nav-link collapsed" href="<c:url value='/ayuda' />"  aria-expanded="true" aria-controls="collapseUtilities">
           <i class="far fa-question-circle"></i>
           <span>Ayuda</span>
-          
         </a>
       </li>
 

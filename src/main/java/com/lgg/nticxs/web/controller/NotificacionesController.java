@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lgg.nticxs.web.DAO.UserDAO;
 import com.lgg.nticxs.web.model.Notificacion;
@@ -55,5 +56,21 @@ public class NotificacionesController {
 	    	System.out.println("Termino de actualizar al usuario");
 	    	return "redirect:/home";
 	   }
+	   
+		@GetMapping(value = "home/notificacionesalarma/{deviceid}/{notactualizar}/{status}")
+		@ResponseBody
+		public String actualizarNotificacionEnUnDispositivo(@PathVariable String deviceid,
+				@PathVariable String notactualizar,@PathVariable String status) {
+			System.out.println("device: "+ deviceid);
+			System.out.println("Notificacion a actualizar: "+ notactualizar);
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    	System.out.println("Edit profile - busco el usuario: "+ authentication.getName());
+	        UserDAO userdao = new UserDAO();
+	    	User user = userdao.retrieveByMail(authentication.getName());
+	    	user.getNotificaciones().put(notactualizar+"-"+deviceid, Boolean.parseBoolean(status));
+	    	userdao.update(user);
+	    	System.out.println("Termino de actualizar al usuario");
+			return "ok";
+		}
 
 }

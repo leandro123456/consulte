@@ -53,15 +53,24 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="p-5">
-              <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Configuración de Notificaciones</h1>
+              <div class="row">
+              	<div class="col-md-12">
+<!--               		<img alt="" src="/resources/loginresources/css/images/logoBig.png" style="width:5em;display: block;margin: auto;"> -->
+       				<h2 style="text-align: center;">Configuración de Notificaciones</h2>
+       			</div>
               </div>
-              <button class="btn btn-primary" id="my-button" onclick="pedirPermiso()">Activar Notificaciones Push</button>
-              <p> </p>      
-<!--               <button class="btn btn-primary" id="my-button" onclick="activarMail()">Activar Notificaciones por Mail</button> -->
+             <div class="row">
+             	<div class="col-md-1">
+               		<a class="nav-link collapsed" href="/home" aria-expanded="true" aria-controls="collapseUtilities" style="color:#224A85;font-size: 2em; margin-top: -0.6em;">
+		         		<i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
+		       		</a>
+		       	</div>
+		       	<div class="col-md-11" style="text-align: -webkit-left;margin-left: -1.5em;">
+               		<h5>Volver</h5>
+               	</div>
+             </div>
               <p> </p>
-              <form class="user" action="<c:url value='/notificacionesalarma'/>" method="post" enctype="multipart/form-data" autocomplete="off">
-                <input type="hidden" name="serial" id="serial" value=${serial}/>
+              <input type="hidden" name="serial" id="serial" value=${serial}/>
                 <table class="table table-sm">
                 	<thead>
                         <tr>
@@ -75,13 +84,13 @@
 							<td>Enviar notificaion al Armar/Desarmar la Alarma</td>
 							<td>
 								<label class="containercb">
-							      <input data-toggle="toggle" type="checkbox" style="display:none;" id="armarcloud" name="armarcloud">
+							      <input data-toggle="toggle" type="checkbox" style="display:none;" onclick="pedirPermiso('armarcloud')" id="armarcloud" name="armarcloud">
 							      <span class="checkmark"></span>
 							    </label>
 							</td>
 							<td>
 								<label class="containercb">
-							      <input data-toggle="toggle" type="checkbox" style="display:none;" id="armedmail" name="armedmail">
+							      <input data-toggle="toggle" type="checkbox" style="display:none;"onclick="actualizarEstadoNotificacion('armedmail')" id="armedmail" name="armedmail">
 							      <span class="checkmark"></span>
 							    </label>
 							</td>
@@ -90,23 +99,21 @@
 							<td>Enviar notificacion al Disparar la Alarma</td>
 							<td>
 								<label class="containercb">
-							      <input data-toggle="toggle" type="checkbox" style="display:none;" id="dispararcloud" name="dispararcloud">
+							      <input data-toggle="toggle" type="checkbox" style="display:none;"onclick="pedirPermiso('dispararcloud')" id="dispararcloud" name="dispararcloud">
 							      <span class="checkmark"></span>
 							    </label>
 							</td>
 							<td>
 								<label class="containercb">
-							      <input data-toggle="toggle" type="checkbox" style="display:none;" id="dispararmail" name="dispararmail">
+							      <input data-toggle="toggle" type="checkbox" style="display:none;" onclick="actualizarEstadoNotificacion('dispararmail')" id="dispararmail" name="dispararmail">
 							      <span class="checkmark"></span>
 							    </label>
 							</td>
 						</tr>
 					</tbody>
 				</table>
-				<p></p>
-                <button class="btn btn-primary btn-user btn-block" name="action" value="save" type="submit" id="sign">Actualizar Notificaciones</button>
-<!--               	<button class="btn btn-default btn-user btn-block" name="action" value="cancel" type="submit" id="sign">Cancelar</button> -->
-              </form> 
+				
+<!--               </form>  -->
             </div>
           </div>
         </div>
@@ -173,7 +180,36 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-	function pedirPermiso(){
+	function pedirPermiso(campoejecutado){
+		
+		var armado=document.getElementById("armarcloud");
+		var disparado=document.getElementById("dispararcloud");
+		console.log("dsadsad valor: "+ campoejecutado);
+		console.log("valor: "+campoejecutado == "armarcloud"+"; "+campoejecutado == "dispararcloud");
+		
+		if(campoejecutado == "armarcloud"){
+			console.log("Entro en 1");
+			var urlsendInformation = $(location).attr('pathname')+"/condicion_armado/"+armado.checked;
+				$.ajax({ url : urlsendInformation,
+					contentType: "application/json",
+					dataType: 'json',
+					success: function(data){
+					}			
+			});
+		} 
+		if(campoejecutado == "dispararcloud"){
+			console.log("Entro en 2");
+			var urlsendInformation = $(location).attr('pathname')+"/condicion_disparado/"+disparado.checked;
+			$.ajax({ url : urlsendInformation,
+				contentType: "application/json",
+				dataType: 'json',
+				success: function(data){
+				}			
+		});
+		} 	
+		if((campoejecutado == "armarcloud" && armado.checked == true && disparado.checked == false)||
+		   (campoejecutado == "dispararcloud" && armado.checked == false && disparado.checked == true))
+		{
  		swal({
  			  title: "cDash",
  			  text: "cDash quiere enviarle notificaciones a su Dispositivo",
@@ -206,8 +242,35 @@ firebase.initializeApp(firebaseConfig);
  			    swal("Puede habilitarlo en cualquier momento");
  			  }
  			});
- 		
+		}	
  	}
+</script>
+
+<script type="text/javascript">
+	function actualizarEstadoNotificacion(campoejecutado){
+		var armado=document.getElementById(campoejecutado);
+		console.log("llego a actualizar los mails: "+ campoejecutado);
+		if(campoejecutado == "armedmail"){
+			var urlsendInformation2 = $(location).attr('pathname') + "/condicion_armado_mail/"+armado.checked;
+			$.ajax({ url : urlsendInformation2,
+				contentType: "application/json",
+				dataType: 'json',
+				success: function(data){
+				}			
+		});
+		} 
+		if(campoejecutado == "dispararmail"){
+			console.log("entro disparar mail: "+armado.checked)
+			var urlsendInformation2 = $(location).attr('pathname') + "/condicion_disparado_mail/"+armado.checked;
+			$.ajax({ url : urlsendInformation2,
+				contentType: "application/json",
+				dataType: 'json',
+				success: function(data){
+				}			
+		});
+		} 
+	}
+
 </script>
 
  <script type="text/javascript">
