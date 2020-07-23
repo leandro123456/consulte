@@ -19,8 +19,8 @@
 
   <!-- Custom styles for checkbox-->
 <link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/checkbox.css" />'>
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href='<c:url value="/resources/mqttResources/sb-admin-2.css" />'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -65,13 +65,14 @@
 		         		<i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
 		       		</a>
 		       	</div>
-		       	<div class="col-md-11" style="text-align: -webkit-left;margin-left: -1.5em;">
-               		<h5>Volver</h5>
-               	</div>
+<!-- 		       	<div class="col-md-11" style="text-align: -webkit-left;margin-left: -1.5em;"> -->
+<!--                		<h5>Volver</h5> -->
+<!--                	</div> -->
              </div>
               <p> </p>
               <input type="hidden" name="serial" id="serial" value=${serial}/>
-                <table class="table table-sm">
+              <div class="table-responsive">
+                <table class="table" width="100%" cellspacing="0">
                 	<thead>
                         <tr>
                           <th scope="col"></th>
@@ -112,6 +113,7 @@
 						</tr>
 					</tbody>
 				</table>
+				</div>
 				
 <!--               </form>  -->
             </div>
