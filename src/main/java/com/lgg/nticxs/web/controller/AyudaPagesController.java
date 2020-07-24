@@ -58,13 +58,19 @@ public class AyudaPagesController {
         return "Hsignup.jsp";
     }
 	
+	@GetMapping("/HBRDSC01")
+	public String HBRDSC01(
+    		Model model,HttpServletRequest request, HttpServletResponse response) {   
+        return "HBRDSC01.jsp";
+    }
+	
 	/******************************************************************************/
 	
 	
 	@GetMapping("home/ayudaalarma")
 	public String redirectayudaalarma(
     		Model model,HttpServletRequest request, HttpServletResponse response) {   
-        return "redirect:/Hadd";
+        return "redirect:/HBRDSC01";
     }
 	
 	
