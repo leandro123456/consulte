@@ -315,6 +315,10 @@ public class MqttController {
 		    }
 		}
 		json.put("zonasapagadas", zonasapagadas);
+		if(device.getMayorZonaInformada()==null) {
+			device.setMayorZonaInformada(0);
+			devado.update(device);
+		}
 		
 		if(device.getMayorZonaInformada()<Integer.parseInt(zona)) {
 			json.put("inicio", device.getMayorZonaInformada());

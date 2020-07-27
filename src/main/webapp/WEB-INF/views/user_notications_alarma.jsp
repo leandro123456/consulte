@@ -38,6 +38,8 @@
 		activarboton("armedmail",${armedmail});
 		activarboton("dispararcloud",${dispararcloud});
 		activarboton("dispararmail",${dispararmail});
+		activarboton("signalwifi",${signalwifi});
+		activarboton("signalwifimail",${signalwifimail});
 	});
 </script>
 
@@ -111,12 +113,25 @@
 							    </label>
 							</td>
 						</tr>
+						<tr class="tablain">
+							<td>Enviar notificacion cuando la se&ntildeal WIFI es baja</td>
+							<td>
+								<label class="containercb">
+							      <input data-toggle="toggle" type="checkbox" style="display:none;"onclick="pedirPermiso('signalwifi')" id="signalwifi" name="signalwifi">
+							      <span class="checkmark"></span>
+							    </label>
+							</td>
+							<td>
+								<label class="containercb">
+							      <input data-toggle="toggle" type="checkbox" style="display:none;" onclick="actualizarEstadoNotificacion('signalwifimail')" id="signalwifimail" name="signalwifimail">
+							      <span class="checkmark"></span>
+							    </label>
+							</td>
+						</tr>
 					</tbody>
 				</table>
-				</div>
-				
-<!--               </form>  -->
-            </div>
+			</div>
+           </div>
           </div>
         </div>
       </div>
@@ -132,42 +147,6 @@
 
 </body>
 
-<script type="text/javascript">
-function activarMail(){		
-		//Adaptacion
-			swal({
-	 			  title: "cDash",
-	 			  text: "cDash quiere enviarle notificaciones via Mail",
-	 			  icon: "warning",
-	 			  buttons: true,
-	 			  dangerMode: true,
-	 			})
-	 			.then((willDelete) => {
-	 			  if (willDelete) {
-	 				 var enc = window.btoa('${pageContext.request.userPrincipal.name}');
-	 				 var urlsendInformation = $(location).attr('pathname') + "/activarnotificacionviamail/"+enc;
-	 					$.ajax({ url : urlsendInformation,
-	 						contentType: "application/json",
-	 						dataType: 'json',
-	 						success: function(data){
-	 							if (data.status=="exitoso"){
-	 				 			    swal("Permiso Concedido", {
-	 					 			      icon: "success",
-	 					 			    });
-	 							}
-	 							else{
-	 				 			    swal("Error en el Proceso", {
-	 					 			      icon: "error",
-	 					 			    });
-	 							}
-	 						}			
-	 				});		 				 
-	 			  } else {
-	 			    swal("Puede habilitarlo en cualquier momento");
-	 			  }
-	 			});
-}
-</script>
 
 <script type="text/javascript">
 var firebaseConfig = {
@@ -186,11 +165,12 @@ firebase.initializeApp(firebaseConfig);
 		
 		var armado=document.getElementById("armarcloud");
 		var disparado=document.getElementById("dispararcloud");
-		console.log("dsadsad valor: "+ campoejecutado);
-		console.log("valor: "+campoejecutado == "armarcloud"+"; "+campoejecutado == "dispararcloud");
+		var signalwifi= document.getElementById("signalwifi");
+// 		console.log("dsadsad valor: "+ campoejecutado);
+// 		console.log("valor: "+campoejecutado == "armarcloud"+"; "+campoejecutado == "dispararcloud");
 		
 		if(campoejecutado == "armarcloud"){
-			console.log("Entro en 1");
+// 			console.log("Entro en 1");
 			var urlsendInformation = $(location).attr('pathname')+"/condicion_armado/"+armado.checked;
 				$.ajax({ url : urlsendInformation,
 					contentType: "application/json",
@@ -200,7 +180,7 @@ firebase.initializeApp(firebaseConfig);
 			});
 		} 
 		if(campoejecutado == "dispararcloud"){
-			console.log("Entro en 2");
+// 			console.log("Entro en 2");
 			var urlsendInformation = $(location).attr('pathname')+"/condicion_disparado/"+disparado.checked;
 			$.ajax({ url : urlsendInformation,
 				contentType: "application/json",
@@ -208,9 +188,20 @@ firebase.initializeApp(firebaseConfig);
 				success: function(data){
 				}			
 		});
-		} 	
-		if((campoejecutado == "armarcloud" && armado.checked == true && disparado.checked == false)||
-		   (campoejecutado == "dispararcloud" && armado.checked == false && disparado.checked == true))
+		}
+		if(campoejecutado == "signalwifi"){
+// 			console.log("Entro en 3");
+			var urlsendInformation = $(location).attr('pathname')+"/condicion_bajasignalwifi/"+signalwifi.checked;
+			$.ajax({ url : urlsendInformation,
+				contentType: "application/json",
+				dataType: 'json',
+				success: function(data){
+				}			
+		});
+		} 
+		if((campoejecutado == "armarcloud" && armado.checked == true && disparado.checked == false && signalwifi.checked == false)||
+		   (campoejecutado == "dispararcloud" && armado.checked == false && disparado.checked == true && signalwifi.checked == false) ||
+		   (campoejecutado == "signalwifi" && armado.checked == false && disparado.checked == false && signalwifi.checked == true))
 		{
  		swal({
  			  title: "cDash",
@@ -251,7 +242,7 @@ firebase.initializeApp(firebaseConfig);
 <script type="text/javascript">
 	function actualizarEstadoNotificacion(campoejecutado){
 		var armado=document.getElementById(campoejecutado);
-		console.log("llego a actualizar los mails: "+ campoejecutado);
+// 		console.log("llego a actualizar los mails: "+ campoejecutado);
 		if(campoejecutado == "armedmail"){
 			var urlsendInformation2 = $(location).attr('pathname') + "/condicion_armado_mail/"+armado.checked;
 			$.ajax({ url : urlsendInformation2,
@@ -262,8 +253,18 @@ firebase.initializeApp(firebaseConfig);
 		});
 		} 
 		if(campoejecutado == "dispararmail"){
-			console.log("entro disparar mail: "+armado.checked)
+// 			console.log("entro disparar mail: "+armado.checked)
 			var urlsendInformation2 = $(location).attr('pathname') + "/condicion_disparado_mail/"+armado.checked;
+			$.ajax({ url : urlsendInformation2,
+				contentType: "application/json",
+				dataType: 'json',
+				success: function(data){
+				}			
+		});
+		} 
+		if(campoejecutado == "signalwifimail"){
+// 			console.log("entro disparar mail: "+armado.checked)
+			var urlsendInformation2 = $(location).attr('pathname') + "/condicion_bajasignalwifi_mail/"+armado.checked;
 			$.ajax({ url : urlsendInformation2,
 				contentType: "application/json",
 				dataType: 'json',
@@ -316,6 +317,18 @@ firebase.initializeApp(firebaseConfig);
 				document.getElementById("dispararmail").checked = false;
 			else
 				document.getElementById("dispararmail").checked = true;
+		}else if(nombre=="signalwifi"){
+			console.log("entro a la signal del WIFI: "+ nombre+": "+valor);
+			if(valor==null || valor==false)
+				document.getElementById("signalwifi").checked = false;
+			else
+				document.getElementById("signalwifi").checked = true;
+		}else if(nombre=="signalwifimail"){
+			console.log("entro a la signal del WIFI -MAIL : "+ nombre +": "+valor);
+			if(valor==null || valor==false)
+				document.getElementById("signalwifimail").checked = false;
+			else
+				document.getElementById("signalwifimail").checked = true;
 		}
 		
 	}

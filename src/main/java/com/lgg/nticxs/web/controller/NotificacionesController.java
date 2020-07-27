@@ -29,6 +29,8 @@ public class NotificacionesController {
 	    	model.addAttribute("dispararcloud", user.getNotificaciones().get(Notificacion.CONDICION_DISPARADO+"-"+serial));
 	    	model.addAttribute("armedmail", user.getNotificaciones().get(Notificacion.CONDICION_ARMADO_MAIL+"-"+serial));
 	    	model.addAttribute("dispararmail", user.getNotificaciones().get(Notificacion.CONDICION_DISPARADO_MAIL+"-"+serial));
+	    	model.addAttribute("signalwifi", user.getNotificaciones().get(Notificacion.CONDICION_BAJASIGNALWIFI+"-"+serial));
+	    	model.addAttribute("signalwifimail", user.getNotificaciones().get(Notificacion.CONDICION_BAJASIGNALWIFI_MAIL+"-"+serial));
 	    	model.addAttribute("serial", serial);
 	    	return "user_notications_alarma.jsp";
 	    }

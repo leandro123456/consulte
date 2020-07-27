@@ -90,6 +90,48 @@ public class FirebaseController {
 	}
 	
 	
+	/**
+	 * 
+	 * @apiNote Este metodo se usa para actulizar los tokens usados por Firebase
+	 * @param token
+	 * @param username
+	 * @return
+	 */
+	@GetMapping(value = "home/notificacionesalarma/{serial}/enviartoken/{token}/{username}")
+	@ResponseBody
+	public String actualizardToken(@PathVariable String token,@PathVariable String username) {
+		String nombre= new String(Base64.getDecoder().decode(username.getBytes()));
+		System.out.println("username: "+ username);
+		System.out.println("decodificado: "+ nombre);
+		UserDAO userdao=new UserDAO();
+		User user = userdao.retrieveByMail(nombre);
+		if(user!= null) {
+			if(user.getFirebasetoken()==null) {
+				ArrayList<String> tokens= new ArrayList<String>();
+				tokens.add(token);
+				user.setFirebasetoken(tokens);
+				userdao.update(user);
+				return "creacion de token y actualizacion de los valores";
+			}else {
+				System.out.println("la lista de firebase token es distinta de null");
+				if(!user.getFirebasetoken().contains(token)) {
+					user.getFirebasetoken().add(token);
+					userdao.update(user);
+					System.out.println("se agrego token");
+					return "se agrego token";
+				}else {
+					System.out.println("ya tenia el token");
+					return "ya tenia el token";
+				}
+			}
+		}else {
+			System.out.println("el usuario es null");
+			return "el usuario es null";
+		}
+	}
+	
+	
+	
 	
 	/**
 	 * 
