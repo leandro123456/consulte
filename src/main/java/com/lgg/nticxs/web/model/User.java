@@ -31,6 +31,7 @@ public class User extends MongoDBObject{
 	private String fechaCreacion;
 	private String fechaUltimoIngrego;
 	private Integer ingresosSinLogin;
+	private List<DeviceNotification> notificacionSignalWifi;
 	
 	public String getEmail() {
 		return email;
@@ -46,7 +47,18 @@ public class User extends MongoDBObject{
 		this.setDelete(false);
 	}
 	
-	
+
+
+	public List<DeviceNotification> getNotificacionSignalWifi() {
+		return notificacionSignalWifi;
+	}
+
+
+	public void setNotificacionSignalWifi(List<DeviceNotification> notificacionSignalWifi) {
+		this.notificacionSignalWifi = notificacionSignalWifi;
+	}
+
+
 	public String getFechaCreacion() {
 		return fechaCreacion;
 	}

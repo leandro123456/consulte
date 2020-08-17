@@ -40,6 +40,7 @@
 		activarboton("dispararmail",${dispararmail});
 		activarboton("signalwifi",${signalwifi});
 		activarboton("signalwifimail",${signalwifimail});
+		activarseleccion("esperanotifwifi",${esperanotifwifi});
 	});
 </script>
 
@@ -80,6 +81,7 @@
                           <th scope="col"></th>
                           <th scope="col">Notificaciones Push</th>
                           <th scope="col">Notificaciones por email</th>
+                          <th scope="col">Frecuencia de Notificaci&oacuten(Hs)</th>
                         </tr>
                     </thead>
 					<tbody>
@@ -97,6 +99,7 @@
 							      <span class="checkmark"></span>
 							    </label>
 							</td>
+							<td>Instantanea</td>
 						</tr>
 						<tr class="tablain">
 							<td>Enviar notificacion al Disparar la Alarma</td>
@@ -112,6 +115,7 @@
 							      <span class="checkmark"></span>
 							    </label>
 							</td>
+							<td>Instantanea</td>
 						</tr>
 						<tr class="tablain">
 							<td>Enviar notificacion cuando la se&ntildeal WIFI es baja</td>
@@ -126,6 +130,35 @@
 							      <input data-toggle="toggle" type="checkbox" style="display:none;" onclick="actualizarEstadoNotificacion('signalwifimail')" id="signalwifimail" name="signalwifimail">
 							      <span class="checkmark"></span>
 							    </label>
+							</td>
+							<td>
+								<select id="hora" class="form-control" onchange="actualizarHoraNotificacionWifi()" id="hora">
+									<option value="0">0</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+									<option value="13">13</option>
+									<option value="14">14</option>
+									<option value="15">15</option>
+									<option value="16">16</option>
+									<option value="17">17</option>
+									<option value="18">18</option>
+									<option value="19">19</option>
+									<option value="20">20</option>
+									<option value="21">21</option>
+									<option value="22">22</option>
+									<option value="23">23</option>
+									<option value="24">24</option>
+								</select>
 							</td>
 						</tr>
 					</tbody>
@@ -293,6 +326,11 @@ firebase.initializeApp(firebaseConfig);
 
  </script> 
 
+<script type="text/javascript">
+	function activarseleccion(nombre,valor){
+		document.getElementById('hora').value=valor;
+	}
+</script>
 
 <script type="text/javascript">
 	function activarboton(nombre,valor){
@@ -331,6 +369,21 @@ firebase.initializeApp(firebaseConfig);
 				document.getElementById("signalwifimail").checked = true;
 		}
 		
+	}
+</script>
+<script type="text/javascript">
+	function actualizarHoraNotificacionWifi(){
+		var horaRegistrada = document.getElementById("hora").value;
+		console.log("username encontrado: "+ '${pageContext.request.userPrincipal.name}')
+		 var enc = window.btoa('${pageContext.request.userPrincipal.name}');
+		 var urlsendInformation = $(location).attr('pathname') + "/actualizarhoranotificacionwifi/"+horaRegistrada;
+			$.ajax({ url : urlsendInformation,
+				contentType: "application/json",
+				dataType: 'json',
+				success: function(data){
+					console.log("exitoso");
+				}			
+		});
 	}
 </script>
 
