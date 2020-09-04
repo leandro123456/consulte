@@ -7,44 +7,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
+<title>cDash</title>
+
+	<link rel='shortcut icon' href='<c:url value="/resources/images/favicon.ico" />' type="image/x-icon"/>
 	<link rel="stylesheet" type="text/css" href='<c:url value="/resources/mqttResources/style.css" />'>
 	<link rel="stylesheet" type="text/css" href='<c:url value="/resources/mqttResources/c3.min.css" />'>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.min.js" type="text/javascript"></script>     
-	<script src='<c:url value="/resources/vendor/jquery/jquery.js" />'></script>
-	<script src='<c:url value="/resources/vendor/jquery/jquery.min.js" />'></script>
+	<link href='<c:url value="/resources/mqttResources/all.min.css" />' rel="stylesheet" type="text/css">
+	<link href='<c:url value="/resources/mqttResources/sb-admin-2.css" />' rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 	<script src='<c:url value="/resources/mqttResources/d3.v3.min.js" />'></script>
 	<script src='<c:url value="/resources/mqttResources/c3.min.js" />'></script>
+	<script src='<c:url value="/resources/vendor/jquery/jquery.js" />'></script>
+	<script src='<c:url value="https://unpkg.com/sweetalert/dist/sweetalert.min.js"/>'></script>
+	
+	<script src='<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.js" />'></script>
 	<script src='<c:url value="/resources/mqttResources/mqttRecibirMensajes.js" />'></script>
-	<script src='<c:url value="/resources/mqttResources/demo.js" />'></script>
 	<script src='<c:url value="/resources/alarma/coneccionAlarma.js" />'></script>
+	<script src='<c:url value="/resources/mqttResources/demo.js" />'></script>	
 	<script src='<c:url value="/resources/pulsador/descargaImagenes.js" />'></script>
 	<script src='<c:url value="/resources/mqttResources/cargaReloj.js" />'></script>
 	<script src='<c:url value="/resources/pulsador/cargaPulsadores.js" />'></script>
 	<link href='<c:url value="/resources/mqttResources/estiloalarma.css" />' rel="stylesheet" type="text/css">
-	<!-- Alta de Device -->
 	<script src='<c:url value="/resources/deviceResources/cargarDevice.js" />'></script>
-  	<!-- esto para el reloj del timerString -->
-<link rel="stylesheet" type="text/css" href='<c:url value="/resources/reloj/dist/bootstrap-clockpicker.min.css" />'>
-  
-  <title>cDash</title>
-  <link rel='shortcut icon' href='<c:url value="/resources/images/favicon.ico" />' type="image/x-icon"/>
-  
-  <link href='<c:url value="/resources/mqttResources/all.min.css" />' rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-  <link href='<c:url value="/resources/mqttResources/sb-admin-2.css" />' rel="stylesheet">
-<!--   boton check -->
-<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-<script src='<c:url value="https://unpkg.com/sweetalert/dist/sweetalert.min.js"/>'></script>
-<!-- boton check -->
-<script src='<c:url value="/resources/firebase-messaging-sw.js" />'></script>
-<script src='<c:url value="/resources/firebase-messaging-ws.js" />'></script>
-
-
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6SSYQD4466"></script>
+	<link rel="stylesheet" type="text/css" href='<c:url value="/resources/reloj/dist/bootstrap-clockpicker.min.css" />'> 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.min.js" type="text/javascript"></script>    
+	<script src='<c:url value="/resources/firebase-messaging-sw.js" />'></script>
+	<script src='<c:url value="/resources/firebase-messaging-ws.js" />'></script>
+	
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -63,9 +54,6 @@
 		}
 		setTimeout(iniciaConexion, 2000);
 		//requestPermission();
-
-		
-
 	});
 </script>
 
@@ -97,20 +85,6 @@ function getParameterByName(name) {
 						setTimeout('window.location.href = "/home";', 2000);
 					</script>
 				</c:if>
-			<c:if test="${not empty msg}">
-				 	<input type="hidden" id ="mensaje" value="${msg}">
-					<script type="text/javascript">
-						var x= document.getElementById('mensaje').value;
-						swal({
-							  title: x,
-							  icon: "success",
-							  timer: 5000,
-							  closeOnClickOutside: false,
-							  buttons: false,
-							});
-						setTimeout('window.location.href = "/home";', 5000);
-					</script>
-				</c:if>
 				<c:if test="${not empty msg1}">
 				 	<input type="hidden" id ="mensaje1" value="${msg1}">
 					<script type="text/javascript">
@@ -127,11 +101,11 @@ function getParameterByName(name) {
 				</c:if>	
 	
 		<div class="row" id="cargadora">
-<!-- 		modificacion -->
 			<c:forEach items="${vistas}" var="vista">
                 ${vista}
-          </c:forEach>
+          	</c:forEach>
 		</div>
+		
 		<div class="fixed">
 			<a href="/home/newdeviceb" data-toggle="modal" data-target="#createDeviceModal"> 
 				<i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
@@ -139,6 +113,7 @@ function getParameterByName(name) {
 		</div>
 	</div>
 	</div>
+	
 	<div class="visible">
 		<a class="scroll-to-top rounded" href="#page-top"> <i
 			class="fas fa-angle-up"></i>
@@ -147,14 +122,11 @@ function getParameterByName(name) {
 
 	<jsp:include page="footer.jsp" />
 	
-<div id="token" style="display: none;"></div>	
-	
-	
- <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
- <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-messaging.js"></script> 
-  
- <script type="text/javascript">
+	<div id="token" style="display: none;"></div>	
  
+ <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-messaging.js"></script>  
+ <script type="text/javascript">
    // Your web app's Firebase configuration
    var firebaseConfig = {
      apiKey: "AIzaSyAUrwGTRCz98u4Tg38iWtKKx-zJEKKH78M",
@@ -167,7 +139,6 @@ function getParameterByName(name) {
    };
    // Initialize Firebase
    firebase.initializeApp(firebaseConfig);
-
    const messaging = firebase.messaging();
    messaging
        .requestPermission()
@@ -203,9 +174,8 @@ messaging.onTokenRefresh(() => {
     showToken('Unable to retrieve refreshed token ', err);
   });
 });
-
-
  </script>
+ 
  <script type="text/javascript">
  function enviarToken(token){
 	 console.log("username encontrado: "+ '${pageContext.request.userPrincipal.name}')
@@ -383,15 +353,14 @@ jQuery("#demo").qrcode({
         	<div class="modal-body">
 
         		<div id="infoGeneral" style="display:inline">
-<!-- 					<h3>Informacion General</h3> -->
+					<b>Numero de Serie</b> 
+					<input name="serialnumber" id="serialnumber" class="form-control" >
+					<p></p>
 					<b>Nombre del dispositivo</b> 
 					<input name="namedevice" id="namedevice" class="form-control">
 					<p></p>
 					<b>Descripción</b> 
 					<input name="descriptiondevice" id="descriptiondevice" class="form-control" >
-					<p></p>
-					<b>Numero de Serie</b> 
-					<input name="serialnumber" id="serialnumber" class="form-control" >
 					<p></p>
 				</div>
 				<div id="infoDeducidaCoiaca" style="display:none">
@@ -582,18 +551,15 @@ jQuery("#demo").qrcode({
         <div class="modal-footer">
           	<button style="display:none" id="botoncancelar" type="button" class="btn btn-secondary"  data-dismiss="modal">Cancelar</button>
           	<input type="hidden" name="tipodevice" id="tipodevice1" />
-          	
 <!--           	informacion de las vistas SONOFF-->
 			<input type="hidden" name="timerstringsonoff" id="timerstringsonoff1" />
 			<input type="hidden" name="cantidadswiths" id="cantidadswiths1" />
-			
 			<input type="hidden" name="tipovistatermometro" id="tipovistatermometro1" />
 			<input type="hidden" name="humedadtermometro" id="humedadtermometro1" />
 			<input type="hidden" name="tempctermometro" id="tempctermometro1" />
 			<input type="hidden" name="sensacionctermometro" id="sensacionctermometro1" />
 			<input type="hidden" name="tempftermometro" id="tempftermometro1" />
 			<input type="hidden" name="sensacionftermometro" id="sensacionftermometro1" />
-
 <!-- 				informacion de configuracion -->
 			<input type="hidden" name="iphostescuchar" id="iphostescuchar1" />
 			<input type="hidden" name="portescuchar" id="portescuchar1" />
@@ -627,7 +593,6 @@ jQuery("#demo").qrcode({
 					</button>
 				</div>
 				<div class="modal-body mx-3">
-
 					<div class="md-form mb-5">
 						<form id="timerString">
 							<div class="container">
@@ -687,9 +652,7 @@ jQuery("#demo").qrcode({
 									</div>
 								</div>
 							</div>
-
 						</form>
-
 					</div>
 				</div>
 				<div class="modal-footer d-flex justify-content-center">

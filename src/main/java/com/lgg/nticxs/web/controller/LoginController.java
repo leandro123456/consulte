@@ -2,8 +2,10 @@ package com.lgg.nticxs.web.controller;
 
 
 import org.json.JSONObject;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +13,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lgg.nticxs.web.utils.EncryptorPassword;
@@ -36,14 +40,16 @@ import javax.servlet.http.HttpSession;
 
 
 @Controller
-public class LoginController{
+//@RestController
+//@RequestMapping(value="/cDash")
+public class LoginController implements LogoutSuccessHandler{
 	private UserDAO userdao  = new UserDAO();
 	
 
 	@GetMapping("/")
     public String redirect(
     		Model model,HttpServletRequest request, HttpServletResponse response) {   
-        return "redirect:/home";
+        return "redirect: home";
     }
 	
 	
@@ -61,25 +67,7 @@ public class LoginController{
 		return new ModelAndView("login.jsp", model);
 	}
     
-	
-		
-//	@GetMapping("/login")
-//	public ModelAndView logini(
-////			@RequestParam(value="incorrectcredentials", required=false) boolean incorrectcredentials,
-////			@RequestParam(value="incorrecttoken", required=false) boolean incorrecttoken,
-//			 ModelMap model
-////			,HttpServletRequest request, HttpServletResponse response
-//			) {
-//		System.out.println("llego al LOGIN");
-//    	
-////		if(incorrectcredentials) {
-////			model.addAttribute("msg1", "Error ... el usuario o la contraseña son incorrectas. Por favor verifiquelo e intente nuevamente");
-////			model.addAttribute("incorrectcredentials", true);}
-////		if(incorrecttoken) {model.addAttribute("incorrecttoken", true);}
-//		
-//		return new ModelAndView("login.jsp", model);
-//	}
-    
+	   
     @GetMapping("/register")
     public String signupRegister(Model model) {
         return "register.jsp";
@@ -227,6 +215,13 @@ public class LoginController{
             	cookie.setMaxAge(0);
             	response.addCookie(cookie);
             }
+            try {
+            	request.logout();
+            	onLogoutSuccess(request, response, auth);
+			} catch (Exception e) {
+				System.out.println("=============== ERROR ===============");
+				e.printStackTrace();
+			}
         model.addAttribute("msg1", "Error ... el usuario ingresado no existe, verifiquelo e intente nuevamente");
         System.out.println("SE BORRO EL CONTEXTO jjjjjj");
         return new ModelAndView("login.jsp", model);
@@ -349,5 +344,18 @@ public class LoginController{
 			}
 		}
 		return false;
+	}
+
+
+	@Override
+	public void onLogoutSuccess(HttpServletRequest arg0, HttpServletResponse response, Authentication authentication)
+			throws IOException, ServletException {
+		if(authentication != null) {
+			System.out.println(authentication.getName());
+		}
+		//perform other required operation		
+		response.setStatus(HttpStatus.OK.value());
+		response.getWriter().flush();
+		
 	}
 }

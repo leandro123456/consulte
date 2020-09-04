@@ -9,18 +9,18 @@
 <link rel="stylesheet" type="text/css" href='<c:url value="/resources/mqttResources/style.css" />'>
 <link rel="stylesheet" type="text/css" href='<c:url value="/resources/mqttResources/c3.min.css" />'>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.min.js" type="text/javascript"></script>     
-<script src='<c:url value="/resources/vendor/jquery/jquery.js" />'></script>
-<script src='<c:url value="/resources/vendor/jquery/jquery.min.js" />'></script>
-<script src='<c:url value="/resources/mqttResources/d3.v3.min.js" />'></script>
-<script src='<c:url value="/resources/mqttResources/c3.min.js" />'></script>
-<script src='<c:url value="/resources/mqttResources/demo.js" />'></script>
-<script src='<c:url value="/resources/mqttResources/cargarElementos.js" />'></script>
-<script src='<c:url value="/resources/mqttResources/progreso.js" />'></script>
-<script src='<c:url value="/resources/mqttResources/cargaReloj.js" />'></script>	
+<script src='<c:url value="resources/vendor/jquery/jquery.js" />'></script>
+<script src='<c:url value="resources/vendor/jquery/jquery.min.js" />'></script>
+<script src='<c:url value="resources/mqttResources/d3.v3.min.js" />'></script>
+<script src='<c:url value="resources/mqttResources/c3.min.js" />'></script>
+<script src='<c:url value="resources/mqttResources/demo.js" />'></script>
+<script src='<c:url value="resources/mqttResources/cargarElementos.js" />'></script>
+<script src='<c:url value="resources/mqttResources/progreso.js" />'></script>
+<script src='<c:url value="resources/mqttResources/cargaReloj.js" />'></script>	
   <title>Devices - Dashboard</title>
-<link href='<c:url value="/resources/mqttResources/all.min.css" />' rel="stylesheet" type="text/css">
+<link href='<c:url value="resources/mqttResources/all.min.css" />' rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-<link href='<c:url value="/resources/mqttResources/sb-admin-2.min.css" />' rel="stylesheet">
+<link href='<c:url value="resources/mqttResources/sb-admin-2.min.css" />' rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
 

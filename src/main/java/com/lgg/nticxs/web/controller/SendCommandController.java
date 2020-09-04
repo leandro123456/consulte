@@ -5,9 +5,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
-/**
- * Created by movasim on 05/12/16.
- */
 @Controller
 public class SendCommandController {
 

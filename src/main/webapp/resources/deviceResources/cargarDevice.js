@@ -3,21 +3,7 @@
  */
 
 //Evento para evaluar el contenido del Serial
-function evaluarNumeroDeSerie(valorSerial){
-	if(valorSerial.includes("WTHUSB") || valorSerial.includes("PSWS1") ||
-			valorSerial.includes("PSWS2") ||valorSerial.includes("DSC01") ||
-			valorSerial.includes("PS3S1")){
-		console.log("se encontro dispositivo de coiaca")
-		document.getElementById('marcadevice').value = 'coiaca';
-		document.getElementById("marcadevice").disabled = true;
-		evaluarSerial(valorSerial);
-		
-	}else{
-		document.getElementById('marcadevice').value = 'otro';
-		document.getElementById("marcadevice").disabled = true;
-		document.getElementById('selectormodelo').style.display = 'none';
-	}
-}
+
 
 //funcion para escribir en el campo serial el id y tambien grisar el tipo de dispositivo
 	function evaluarSerial(serial){

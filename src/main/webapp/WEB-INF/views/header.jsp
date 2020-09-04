@@ -2,15 +2,14 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
-<link rel='shortcut icon' href='<c:url value="/resources/images/favicon.ico" />' type="image/x-icon"/>
-
-<link rel="stylesheet" type="text/css" href='<c:url value="/resources/cdash_logo/logo.css" />'>
+<link href='<c:url value="/resources/images/favicon.ico" />'  rel='shortcut icon'  type="image/x-icon"/>
+<link href='<c:url value="/resources/cdash_logo/logo.css" />' rel="stylesheet"     type="text/css" />
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
       
-		<form role="form" action="<c:url value="/home"/>" method="get" enctype="multipart/form-data">
+		<form role="form" action="<c:url value="home"/>" method="get" enctype="multipart/form-data">
 		      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="javascript:;" onclick="parentNode.submit();">
 <!-- 		        <div class="sidebar-brand-icon"> -->
 				<div class="logodash">
@@ -51,7 +50,7 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Dispositivos</h6>
-            <a class="collapse-item" href="<c:url value='/home/componentmyown' />">Mis Dispositivos</a>
+            <a class="collapse-item" href="<c:url value='home/componentmyown' />">Mis Dispositivos</a>
 <%--             <a class="collapse-item" href="<c:url value='/home/componentshared' />">Shared with me</a> --%>
           </div>
         </div>
@@ -59,7 +58,7 @@
       
             <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="<c:url value='/ayuda' />"  aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link collapsed" href="<c:url value='ayuda' />"  aria-expanded="true" aria-controls="collapseUtilities">
           <i class="far fa-question-circle"></i>
           <span>Ayuda</span>
         </a>
@@ -114,93 +113,21 @@
               </a>
             </li>
 
-            <!-- Nav Item - Alerts -->
-<!--             <li class="nav-item dropdown no-arrow mx-1"> -->
-<!--               <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
-<!--                 <i class="fas fa-bell fa-fw"></i> -->
-                <!-- Counter - Alerts SE MUESTRA CUANDO TIENE MENSAJES-->
-<!--                 <span class="badge badge-danger badge-counter">3+</span> -->
-<!--               </a> -->
-              <!-- Dropdown - Alerts -->
-<!--               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown"> -->
-<!--                 <h6 class="dropdown-header"> -->
-<!--                   Alerts Center -->
-<!--                 </h6>               -->
-<!--                 <a class="dropdown-item d-flex align-items-center" href="#"> -->
-<!--                   <div class="mr-3"> -->
-<!--                     <div class="icon-circle bg-warning"> -->
-<!--                       <i class="fas fa-exclamation-triangle text-white"></i> -->
-<!--                     </div> -->
-<!--                   </div> -->
-<!--                   <div> -->
-<!--                     <div class="small text-gray-500">December 2, 2019</div> -->
-<!--                     Spending Alert: We've noticed unusually high spending for your account. -->
-<!--                   </div> -->
-<!--                 </a> -->
-<!--                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a> -->
-<!--               </div> -->
-<!--             </li> -->
-
-            <!-- Nav Item - Messages -->
-<!--             <li class="nav-item dropdown no-arrow mx-1"> -->
-<!--               <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
-<!--                 <i class="fas fa-envelope fa-fw"></i> -->
-                <!-- Counter - Messages SE MUETRA CUAND TIENE MENSAJES-->
-<!--                 <span class="badge badge-danger badge-counter">7</span> -->
-<!--               </a> -->
-<!--               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown"> -->
-<!--                 <h6 class="dropdown-header"> -->
-<!--                   Message Center -->
-<!--                 </h6> -->
-                
-                
-                
-<!--         esto ya estaba comentada -->
-<!--                 <a class="dropdown-item d-flex align-items-center" href="#"> -->
-<!--                   <div class="dropdown-list-image mr-3"> -->
-<!--                     <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt=""> -->
-<!--                     <div class="status-indicator bg-success"></div> -->
-<!--                   </div> -->
-<!--                   <div class="font-weight-bold"> -->
-<!--                     <div class="text-truncate">Hi there! I am wondering if you can help me with a problem I've been having.</div> -->
-<!--                     <div class="small text-gray-500">Emily Fowler · 58m</div> -->
-<!--                   </div> -->
-<!--                 </a> -->
-<!--         esto ya estaba comentada -->
-		
-
-<!--                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a> -->
-<!--               </div> -->
-<!--             </li> -->
-
-<!--             <div class="topbar-divider d-none d-sm-block"></div> -->
-
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-<%-- esta ya estaba comentada                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">"${usuario.firstname}"</span> --%>
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">${user.firstname}</span>
-                <img class="img-profile rounded-circle" src="/resources/css/img/usuario.jpeg">
+                <img class="img-profile rounded-circle" src="/cDash/resources/css/img/usuario.jpeg">
               </a>
-<!--               Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">                
-                <form role="form" action="<c:url value="/profileuser/userid"/>" method="get" enctype="multipart/form-data">
-<%-- esta ya estaba comentada 			       ${user.id} --%>
+                <form role="form" action="<c:url value="profileuser/userid"/>" method="get" enctype="multipart/form-data">
 			        <a class="dropdown-item" href="javascript:;" onclick="parentNode.submit();">
 			          <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   		Editar Usuario
                   	</a>
 				</form>
-<%-- 				<c:if test="${tieneAlarma}"> --%>
-<%--                 	<form role="form" action="<c:url value="/profileuser/notificaciones"/>" method="get" enctype="multipart/form-data"> --%>
-<!-- 				        <a class="dropdown-item" href="javascript:;" onclick="parentNode.submit();"> -->
-<!-- 				          <i class="fas fa-envelope-open-text fa-fw mr-2 text-gray-400"></i> -->
-<!-- 	                  		Notificaciones -->
-<!-- 	                  	</a> -->
-<!-- 					</form> -->
-<%-- 				</c:if> --%>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/login" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="login" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Salir
                 </a>

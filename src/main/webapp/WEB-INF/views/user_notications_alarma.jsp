@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html lang="es" style="background: #224A85;">
 <head>
-
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,22 +11,24 @@
   <meta name="author" content="">
 
   <title>cDash</title>
-	<link rel="shortcut icon" href="/resources/images/favicon.ico" type="image/x-icon">
-  <!-- Custom fonts for this template-->
-  <link rel="stylesheet" type="text/css" href="/resources/vendor/fontawesome-free/css/all.min.css">
+  
+  <link href='<c:url value="/resources/images/favicon.ico" />' rel="shortcut icon" type="image/x-icon">
+  <link href='<c:url value="/resources/vendor/fontawesome-free/css/all.min.css" />' rel="stylesheet" type="text/css" >
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-  <!-- Custom styles for checkbox-->
-<link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/checkbox.css" />'>
-<link rel="stylesheet" href='<c:url value="/resources/mqttResources/sb-admin-2.css" />'>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link href='<c:url value="/resources/css/checkbox.css" />' rel="stylesheet" type="text/css" >
+  <link href='<c:url value="/resources/mqttResources/sb-admin-2.css" />' rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-messaging.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+  <script src='<c:url value="/resources/vendor/jquery/jquery.min.js" />'></script>
+  <script src='<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js" />'></script>
+  <script src='<c:url value="/resources/vendor/jquery-easing/jquery.easing.min.js" />'></script>
+  <script src='<c:url value="/resources/js/sb-admin-2.min.js" />'></script>
 </head>
 
 <body class="bg-gradient-primary" style="background: #224A85;">
@@ -58,19 +59,15 @@
             <div class="p-5">
               <div class="row">
               	<div class="col-md-12">
-<!--               		<img alt="" src="/resources/loginresources/css/images/logoBig.png" style="width:5em;display: block;margin: auto;"> -->
        				<h2 style="text-align: center;">Configuración de Notificaciones</h2>
        			</div>
               </div>
              <div class="row">
              	<div class="col-md-1">
-               		<a class="nav-link collapsed" href="/home" aria-expanded="true" aria-controls="collapseUtilities" style="color:#224A85;font-size: 2em; margin-top: -0.6em;">
+               		<a class="nav-link collapsed" href="/" aria-expanded="true" aria-controls="collapseUtilities" style="color:#224A85;font-size: 2em; margin-top: -0.6em;">
 		         		<i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
 		       		</a>
 		       	</div>
-<!-- 		       	<div class="col-md-11" style="text-align: -webkit-left;margin-left: -1.5em;"> -->
-<!--                		<h5>Volver</h5> -->
-<!--                	</div> -->
              </div>
               <p> </p>
               <input type="hidden" name="serial" id="serial" value=${serial}/>
@@ -133,30 +130,8 @@
 							</td>
 							<td>
 								<select id="hora" class="form-control" onchange="actualizarHoraNotificacionWifi()" id="hora">
-									<option value="0">0</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
 									<option value="6">6</option>
-									<option value="7">7</option>
-									<option value="8">8</option>
-									<option value="9">9</option>
-									<option value="10">10</option>
-									<option value="11">11</option>
 									<option value="12">12</option>
-									<option value="13">13</option>
-									<option value="14">14</option>
-									<option value="15">15</option>
-									<option value="16">16</option>
-									<option value="17">17</option>
-									<option value="18">18</option>
-									<option value="19">19</option>
-									<option value="20">20</option>
-									<option value="21">21</option>
-									<option value="22">22</option>
-									<option value="23">23</option>
 									<option value="24">24</option>
 								</select>
 							</td>
@@ -171,13 +146,6 @@
     </div>
 
   </div>
-
-
-  <script src='<c:url value="/resources/vendor/jquery/jquery.min.js" />'></script>
-  <script src='<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js" />'></script>
-  <script src='<c:url value="/resources/vendor/jquery-easing/jquery.easing.min.js" />'></script>
-  <script src='<c:url value="/resources/js/sb-admin-2.min.js" />'></script>
-
 </body>
 
 
@@ -199,11 +167,8 @@ firebase.initializeApp(firebaseConfig);
 		var armado=document.getElementById("armarcloud");
 		var disparado=document.getElementById("dispararcloud");
 		var signalwifi= document.getElementById("signalwifi");
-// 		console.log("dsadsad valor: "+ campoejecutado);
-// 		console.log("valor: "+campoejecutado == "armarcloud"+"; "+campoejecutado == "dispararcloud");
-		
+	
 		if(campoejecutado == "armarcloud"){
-// 			console.log("Entro en 1");
 			var urlsendInformation = $(location).attr('pathname')+"/condicion_armado/"+armado.checked;
 				$.ajax({ url : urlsendInformation,
 					contentType: "application/json",
@@ -213,7 +178,6 @@ firebase.initializeApp(firebaseConfig);
 			});
 		} 
 		if(campoejecutado == "dispararcloud"){
-// 			console.log("Entro en 2");
 			var urlsendInformation = $(location).attr('pathname')+"/condicion_disparado/"+disparado.checked;
 			$.ajax({ url : urlsendInformation,
 				contentType: "application/json",
@@ -223,7 +187,6 @@ firebase.initializeApp(firebaseConfig);
 		});
 		}
 		if(campoejecutado == "signalwifi"){
-// 			console.log("Entro en 3");
 			var urlsendInformation = $(location).attr('pathname')+"/condicion_bajasignalwifi/"+signalwifi.checked;
 			$.ajax({ url : urlsendInformation,
 				contentType: "application/json",
@@ -275,7 +238,6 @@ firebase.initializeApp(firebaseConfig);
 <script type="text/javascript">
 	function actualizarEstadoNotificacion(campoejecutado){
 		var armado=document.getElementById(campoejecutado);
-// 		console.log("llego a actualizar los mails: "+ campoejecutado);
 		if(campoejecutado == "armedmail"){
 			var urlsendInformation2 = $(location).attr('pathname') + "/condicion_armado_mail/"+armado.checked;
 			$.ajax({ url : urlsendInformation2,
@@ -286,7 +248,6 @@ firebase.initializeApp(firebaseConfig);
 		});
 		} 
 		if(campoejecutado == "dispararmail"){
-// 			console.log("entro disparar mail: "+armado.checked)
 			var urlsendInformation2 = $(location).attr('pathname') + "/condicion_disparado_mail/"+armado.checked;
 			$.ajax({ url : urlsendInformation2,
 				contentType: "application/json",
@@ -296,7 +257,6 @@ firebase.initializeApp(firebaseConfig);
 		});
 		} 
 		if(campoejecutado == "signalwifimail"){
-// 			console.log("entro disparar mail: "+armado.checked)
 			var urlsendInformation2 = $(location).attr('pathname') + "/condicion_bajasignalwifi_mail/"+armado.checked;
 			$.ajax({ url : urlsendInformation2,
 				contentType: "application/json",
@@ -304,13 +264,11 @@ firebase.initializeApp(firebaseConfig);
 				success: function(data){
 				}			
 		});
-		} 
-	}
-
+	 } 
+  }
 </script>
 
  <script type="text/javascript">
- 
  function enviarToken(token){
 	 console.log("username encontrado: "+ '${pageContext.request.userPrincipal.name}')
 	 var enc = window.btoa('${pageContext.request.userPrincipal.name}');
@@ -323,7 +281,6 @@ firebase.initializeApp(firebaseConfig);
 			}			
 	});
  }
-
  </script> 
 
 <script type="text/javascript">
@@ -356,13 +313,11 @@ firebase.initializeApp(firebaseConfig);
 			else
 				document.getElementById("dispararmail").checked = true;
 		}else if(nombre=="signalwifi"){
-			console.log("entro a la signal del WIFI: "+ nombre+": "+valor);
 			if(valor==null || valor==false)
 				document.getElementById("signalwifi").checked = false;
 			else
 				document.getElementById("signalwifi").checked = true;
 		}else if(nombre=="signalwifimail"){
-			console.log("entro a la signal del WIFI -MAIL : "+ nombre +": "+valor);
 			if(valor==null || valor==false)
 				document.getElementById("signalwifimail").checked = false;
 			else

@@ -351,11 +351,11 @@
 /*       esto es del archivo */
 @font-face {
   font-family: 'dsc_icons';
-  src:  url('/resources/fontsalarma/dsc_icons.eot?o9xp94');
-  src:  url('/resources/fontsalarma/dsc_icons.eot?o9xp94#iefix') format('embedded-opentype'),
-    url('/resources/fontsalarma/dsc_icons.ttf?o9xp94') format('truetype'),
-    url('/resources/fontsalarma/dsc_icons.woff?o9xp94') format('woff'),
-    url('/resources/fontsalarma/dsc_icons.svg?o9xp94#dsc_icons') format('svg');
+  src:  url('fontsalarma/dsc_icons.eot?o9xp94');
+  src:  url('fontsalarma/dsc_icons.eot?o9xp94#iefix') format('embedded-opentype'),
+    	url('fontsalarma/dsc_icons.ttf?o9xp94') format('truetype'),
+    	url('fontsalarma/dsc_icons.woff?o9xp94') format('woff'),
+    	url('fontsalarma/dsc_icons.svg?o9xp94#dsc_icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }

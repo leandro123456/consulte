@@ -35,35 +35,19 @@
 <body>
   <script src='<c:url value="https://unpkg.com/sweetalert/dist/sweetalert.min.js"/>'></script>
 
-<!-- Header -->
-<!-- 			<header id="header" class="alt"> -->
-<!-- 			<img src="resources/loginresources/css/images/logo.png" alt="" width=50 height=auto /> -->
-<!-- 				<div class="logo"><a href="login">cDash <span>- Control for your IoT devices</span></a></div> -->
-<!-- 			</header> -->
-
-<!-- 			<nav id="menu"> -->
-<!-- 				<ul class="links"> -->
-<!-- 					<li><a href="index.html">Inicio</a></li> -->
-<!-- 					<li><a href="#">Ayuda</a></li> -->
-<!-- 					<li><a href="generic.html">Generic</a></li>
-<!-- 					<li><a href="elements.html">Elements</a></li> -->
-<!-- 				</ul> -->
-<!-- 			</nav> -->
-
-<!-- Header -->
 			<header id="header">
 <!-- 				<img src="resources/loginresources/css/images/logo.png" alt="" width=50 height=auto /> -->
-				<div class="logo"><a href="/home">cDash<span> - Control for your IoT devices</span></a></div>
+				<div class="logo"><a href="home">cDash<span> - Control for your IoT devices</span></a></div>
 				<a href="#menu">Menu</a>
 			</header>
 
 		<!-- Nav -->
 			<nav id="menu">
 				<ul class="links">
-					<li><a href="/home">Inicio</a></li>
-					<li><a href="/signup">Crear Cuenta</a></li>
-					<li><a href="/ayuda">Ayuda</a></li>
-					<li><a href="/Hfaq">Preguntas Frecuentes</a></li>
+					<li><a href="home">Inicio</a></li>
+					<li><a href="signup">Crear Cuenta</a></li>
+					<li><a href="ayuda">Ayuda</a></li>
+					<li><a href="Hfaq">Preguntas Frecuentes</a></li>
 				</ul>
 			</nav>
 

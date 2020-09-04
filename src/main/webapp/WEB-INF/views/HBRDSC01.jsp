@@ -27,17 +27,17 @@
 
 		<!-- Header -->
 			<header id="header">
-				<div class="logo"><a href="/home">cDash<span> - Control for your IoT devices</span></a></div>
+				<div class="logo"><a href="home">cDash<span> - Control for your IoT devices</span></a></div>
 				<a href="#menu">Menu</a>
 			</header>
 
 		<!-- Nav -->
 			<nav id="menu">
 				<ul class="links">
-					<li><a href="/home">Inicio</a></li>
-					<li><a href="/signup">Crear Cuenta</a></li>
-					<li><a href="/ayuda">Ayuda</a	></li>
-					<li><a href="/Hfaq">Preguntas Frecuentes</a></li>
+					<li><a href="home">Inicio</a></li>
+					<li><a href="signup">Crear Cuenta</a></li>
+					<li><a href="ayuda">Ayuda</a	></li>
+					<li><a href="Hfaq">Preguntas Frecuentes</a></li>
 				</ul>
 			</nav>
 

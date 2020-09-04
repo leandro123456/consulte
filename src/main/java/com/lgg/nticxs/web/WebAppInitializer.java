@@ -21,8 +21,9 @@ public class WebAppInitializer implements WebApplicationInitializer {
 
         Dynamic servlet = container.addServlet("dispatcherWeb", new DispatcherServlet(ctx));
 
-        servlet.setLoadOnStartup(1);
-        servlet.addMapping("/");
+//        servlet.setLoadOnStartup(1);
+//        servlet.addMapping("/");	
+        servlet.addMapping("/cDash");
         servlet.setMultipartConfig(ctx.getBean(MultipartConfigElement.class));
         servlet.setAsyncSupported(true);
         

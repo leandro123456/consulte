@@ -205,13 +205,13 @@ public class Test1 {
 //		deviceconfiguration.setPortescuchar("8080");
 //		deviceconfiguration.setTopicescuchar("serial/state");
 //		deviceconfiguration.setPassescuchar("Sanbenit0");
-//		deviceconfiguration.setUserescuchar("movasim");
+//		deviceconfiguration.setUserescuchar("a");
 //		deviceconfiguration.setUsesslescuchar(false);
 		deviceconfiguration.setIphostescuchar("gw001.iotek.space");
 		deviceconfiguration.setPortescuchar("8080");
 		deviceconfiguration.setTopicescuchar("serial/state");
 		deviceconfiguration.setPassescuchar("Sanbenit0");
-		deviceconfiguration.setUserescuchar("movasim");
+		deviceconfiguration.setUserescuchar("a");
 		deviceconfiguration.setUsesslescuchar(false);
 		deviceconfiguration.setTopicescribir("serial/swcmd");
 		
