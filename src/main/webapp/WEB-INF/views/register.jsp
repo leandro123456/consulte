@@ -85,10 +85,10 @@
 			                </div>
 			                <div class="form-group row">
 			                  <div class="col-sm-6 mb-3 mb-sm-0">
-			                    <input type="password" class="form-control form-control-user" id="password" name="newPass" placeholder="Contrase&ntildea">
+			                    <input type="password" class="form-control form-control-user" id="password" name="newPass" placeholder="Contraseña">
 			                  </div>
 			                  <div class="col-sm-6">
-			                    <input type="password" class="form-control form-control-user" id="confirmNewPassword" name="newPass2" placeholder="Repetir Contrase&ntildea">
+			                    <input type="password" class="form-control form-control-user" id="confirmNewPassword" name="newPass2" placeholder="Repetir Contraseña">
 			                  </div>
 			                </div>
 			                <button class="btn btn-primary btn-user btn-block" type="submit" id="sign">Crear cuenta</button>

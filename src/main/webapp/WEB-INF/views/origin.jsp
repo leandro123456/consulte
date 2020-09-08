@@ -82,7 +82,7 @@ function getParameterByName(name) {
 							  closeOnClickOutside: false,
 							  buttons: false,
 							});
-						setTimeout('window.location.href = "/home";', 2000);
+						setTimeout('window.location.href = "/";', 5000);
 					</script>
 				</c:if>
 				<c:if test="${not empty msg1}">
@@ -96,7 +96,7 @@ function getParameterByName(name) {
 							  closeOnClickOutside: false,
 							  buttons: false,
 							});
-						setTimeout('window.location.href = "/home";', 5000);
+						setTimeout('window.location.href = "/";', 5000);
 					</script>
 				</c:if>	
 	
@@ -354,13 +354,13 @@ jQuery("#demo").qrcode({
 
         		<div id="infoGeneral" style="display:inline">
 					<b>Numero de Serie</b> 
-					<input name="serialnumber" id="serialnumber" class="form-control" >
+					<input name="serialnumber" id="serialnumber" class="form-control" placeholder="DSC010000000999">
 					<p></p>
 					<b>Nombre del dispositivo</b> 
-					<input name="namedevice" id="namedevice" class="form-control">
+					<input name="namedevice" id="namedevice" class="form-control" placeholder="Mi dispositivo">
 					<p></p>
 					<b>Descripción</b> 
-					<input name="descriptiondevice" id="descriptiondevice" class="form-control" >
+					<input name="descriptiondevice" id="descriptiondevice" class="form-control" placeholder="Mi descripción">
 					<p></p>
 				</div>
 				<div id="infoDeducidaCoiaca" style="display:none">

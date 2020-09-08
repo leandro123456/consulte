@@ -46,15 +46,15 @@
 				<ul class="links">
 					<li><a href="home">Inicio</a></li>
 					<li><a href="signup">Crear Cuenta</a></li>
-					<li><a href="ayuda">Ayuda</a></li>
-					<li><a href="Hfaq">Preguntas Frecuentes</a></li>
+					<li><a href="/ayuda.html">Ayuda</a></li>
+					<li><a href="/Hfaq.html">Preguntas Frecuentes</a></li>
 				</ul>
 			</nav>
 
 			
 			
 				<c:if test="${param.error != null}">
-				 	<input type="hidden" id ="mensaje1" value="Usuario o Contrase&ntildea Incorrectos, intentalo nuevamente">
+				 	<input type="hidden" id ="mensaje1" value="Usuario o Contrasea Incorrectos, intentalo nuevamente">
 					<script type="text/javascript">
 						var x= document.getElementById('mensaje1').value;
 						swal({
@@ -64,7 +64,7 @@
 							  closeOnClickOutside: false,
 							  buttons: false,
 							});
-						setTimeout('window.location.href = "/login";', 2000);
+						setTimeout('window.location.href = "/";', 2000);
 					</script>
 				</c:if>
 			
@@ -79,7 +79,7 @@
 							  closeOnClickOutside: false,
 							  buttons: false,
 							});
-						setTimeout('window.location.href = "/login";', 2000);
+						setTimeout('window.location.href = "/";', 2000);
 					</script>
 				</c:if>
 

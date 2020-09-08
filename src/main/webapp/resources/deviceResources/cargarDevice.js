@@ -1,13 +1,27 @@
-/**
- * Esta clase tiene las animaciones para la carga de los Devices
- */
 
 //Evento para evaluar el contenido del Serial
+function evaluarNumeroDeSerie(valorSerial){
+	if(valorSerial.includes("WTHUSB") || valorSerial.includes("PSWS1") ||
+			valorSerial.includes("PSWS2") ||valorSerial.includes("DSC01") ||
+			valorSerial.includes("PS3S1")){
+		console.log("se encontro dispositivo de coiaca")
+		document.getElementById('marcadevice').value = 'coiaca';
+		document.getElementById("marcadevice").disabled = true;
+		evaluarSerial(valorSerial);
+		
+	}else{
+		document.getElementById('marcadevice').value = 'otro';
+		document.getElementById("marcadevice").disabled = true;
+		document.getElementById('selectormodelo').style.display = 'none';
+	}
+}
+
 
 
 //funcion para escribir en el campo serial el id y tambien grisar el tipo de dispositivo
 	function evaluarSerial(serial){
 		console.log("va a evaluar el serial: "+ serial);
+		document.getElementById('marcadevice').value = 'coiaca';
         if(serial.includes("WTHUSB")){ 
         	document.getElementById('modelodevice').value = 'WTHUSB';
         	document.getElementById('tipodevice').value = 'termometro';
@@ -48,6 +62,7 @@
         }
         document.getElementById('modelodevice').disabled = true;
         document.getElementById("tipodevice").disabled = true;
+        document.getElementById('marcadevice').disabled = true;
         if(document.getElementById("tipodevice") != null)
 			document.getElementById("tipodevice1").value = document.getElementById("tipodevice").value;
 	}
@@ -140,6 +155,8 @@
 			document.getElementById("infoAvanzada").style.display="none";
 			document.getElementById("infoFinal").style.display="none";
 			document.getElementById("botonfinalizar").style.display="inline";
+
+			evaluarSerial(document.getElementById("serialnumber").value);
 		}
 		else if(document.getElementById("infoDeducidaCoiaca").style.display=="inline"){
 			document.getElementById("botonAnterior").style.display="inline";
@@ -229,6 +246,7 @@
 	}
 
 	function anteriorAnimacion(){
+		alert("anterior Animacion");
 		if(document.getElementById("infoGeneral").style.display=="inline"){
 			document.getElementById("infoDeducidaCoiaca").style.display="none";
 			document.getElementById("infoGeneral").style.display="none";
@@ -245,6 +263,8 @@
 			document.getElementById("infoAvanzada").style.display="none";
 			document.getElementById("infoGeneral").style.display="inline";
 			document.getElementById("botonfinalizar").style.display="none";
+			document.getElementById("botonSiguiente").style.display="inline";
+			
 		}
 		else if(document.getElementById("infoPropiaVista").style.display=="inline"){
 			document.getElementById("infoAvanzada").style.display="none";
@@ -274,6 +294,7 @@
 
 	//Evento asociado a la confirmacion de los datos de la creacion de Dispositivo
 	$('#ModalConfirm').on('show.bs.modal', function (event) {
+		alert("Modal de Confirmacion"+ document.getElementById("tipodevice"));
 	  		  var button = $(event.relatedTarget)
 		  	  var recipient = button.data('whatever') 
 	  		  var serial=document.getElementById('serialnumber').value;

@@ -187,44 +187,47 @@ public class LoginController implements LogoutSuccessHandler{
 		}
 		else{
 			model.addAttribute("msg1", "Error ... contraseña incorrecta");
-			return "login.jsp";
+			return "redirect: /";
 		}
     	
     }
 
     
     @GetMapping("/logoutsession")
-    public ModelAndView logout(HttpServletRequest request, HttpServletResponse response,
+    public String logout(HttpServletRequest request, HttpServletResponse response,
     		ModelMap model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){
-        	System.out.println("la autenticacion no es null entonces la borro");
-            new SecurityContextLogoutHandler().logout(request, response, auth);
-        }
+        try {
+        	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            if (auth != null){
+            	System.out.println("la autenticacion no es null entonces la borro");
+                new SecurityContextLogoutHandler().logout(request, response, auth);
+            }
 
-        System.out.println("VA A SALIR!!!");
-        HttpSession session= request.getSession(false);
-        SecurityContextHolder.clearContext();
-             session= request.getSession(false);
-            if(session != null) {
-                session.invalidate();
-            }
-            System.out.println("CANTIDAD DE COOKIES: "+ request.getCookies().length);
-            for(Cookie cookie : request.getCookies()) {
-                System.out.println("tiempo de vida de la cookie: "+ cookie.getMaxAge());
-            	cookie.setMaxAge(0);
-            	response.addCookie(cookie);
-            }
-            try {
-            	request.logout();
-            	onLogoutSuccess(request, response, auth);
-			} catch (Exception e) {
-				System.out.println("=============== ERROR ===============");
-				e.printStackTrace();
-			}
-        model.addAttribute("msg1", "Error ... el usuario ingresado no existe, verifiquelo e intente nuevamente");
-        System.out.println("SE BORRO EL CONTEXTO jjjjjj");
-        return new ModelAndView("login.jsp", model);
+            System.out.println("VA A SALIR!!!");
+            HttpSession session= request.getSession(false);
+            SecurityContextHolder.clearContext();
+                 session= request.getSession(false);
+                if(session != null) {
+                    session.invalidate();
+                }
+                System.out.println("CANTIDAD DE COOKIES: "+ request.getCookies().length);
+                for(Cookie cookie : request.getCookies()) {
+                	cookie.setMaxAge(0);
+                	response.addCookie(cookie);
+                }
+//                try {
+//                	request.logout();
+//                	onLogoutSuccess(request, response, auth);
+//    			} catch (Exception e) {
+//    				System.out.println("=============== ERROR ===============");
+//    				e.printStackTrace();
+//    				return "login.jsp";
+//    			}
+            //model.addAttribute("msg1", "Error ... el usuario ingresado no existe, verifiquelo e intente nuevamente");
+            return "redirect: login";
+		} catch (Exception e) {
+			return "login.jsp";
+		}
     }
     
     @GetMapping("/profileuser/{userId}")

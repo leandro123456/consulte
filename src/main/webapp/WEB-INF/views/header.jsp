@@ -58,7 +58,7 @@
       
             <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="<c:url value='ayuda' />"  aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link collapsed" href="<c:url value='../ayuda.html' />"  aria-expanded="true" aria-controls="collapseUtilities">
           <i class="far fa-question-circle"></i>
           <span>Ayuda</span>
         </a>

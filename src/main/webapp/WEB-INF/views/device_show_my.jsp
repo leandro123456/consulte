@@ -104,7 +104,7 @@
       
             <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="<c:url value='/ayuda' />"  aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link collapsed" href="<c:url value='../ayuda.html' />"  aria-expanded="true" aria-controls="collapseUtilities">
           <i class="far fa-question-circle"></i>
           <span>Ayuda</span>
         </a>
@@ -297,7 +297,7 @@
 	  	$('#deleteModal').on('show.bs.modal', function (event) {
 	  		  var button = $(event.relatedTarget)
 		  	  var recipient = button.data('whatever') 
-	  		  var action= "home/remove/"+recipient;
+	  		  var action= "remove/"+recipient;
 	  		  document.getElementById("form_id").action = action;
 	  	})
   	</script>

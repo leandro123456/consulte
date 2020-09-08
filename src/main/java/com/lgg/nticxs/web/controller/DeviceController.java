@@ -32,7 +32,7 @@ public class DeviceController {
 	private UserDAO userdao = new UserDAO();
 	private DeviceDAO devicedao = new DeviceDAO();
 	private DeviceDefaultConfigurationDAO deviceconfigdao = new DeviceDefaultConfigurationDAO();
-	private static final String COLLECTION_DEVICE="DEVICE";
+	private static final String COLLECTION_DEVICE="Device";
 	private static final String URI_BACKEND=Settings.getInstance().getURIBackend();
 	
 	
@@ -49,7 +49,6 @@ public class DeviceController {
 	}
 	
 	
-
 	@PostMapping("home/remove/{deviceserial}")
 	public String removeDevice(Model model, @PathVariable String deviceserial,HttpServletRequest request) {
 		System.out.println("llego al remove!!");
@@ -58,8 +57,10 @@ public class DeviceController {
 		Device device = devicedao.retrieveBySerialNumber(deviceserial);
 		String nombredelejecutor = request.getUserPrincipal().getName();
 		String propietario= new String(Base64.getDecoder().decode(device.getUserowner()));
+		System.out.println("nombre del ejecutor: "+ nombredelejecutor);
 		System.out.println("PROPPIETARIO: "+ propietario);
 		if(propietario.equals(nombredelejecutor)){
+			System.out.println("el ejecutor es el propietario");
 		try {
 			MongoCommands.Delete(COLLECTION_DEVICE, "serialnumber", deviceserial);
 			for(User user: userdao.retrieveAllUsers()) {
@@ -85,7 +86,7 @@ public class DeviceController {
 			model.addAttribute("msg", "Como usted no es el dueño del dispositivo, unicamente se ha quitado su relacion con el mismo");
 		}
 				
-		return "device_show_my.jsp";
+		return "redirect: /cDash/home/componentmyown";
 	}
 	
 	@GetMapping("home/info/{deviceserial}")
@@ -252,7 +253,7 @@ public class DeviceController {
 			ManagementDevice.updateDevice(request,serialnumber);
 			model.addAttribute("msg", "El dispositivo ya estaba creado, usted fue agregado como usuario Administrador");
 		}
-		return "origin.jsp";
+		return "redirect: /";
 	}
 
 
