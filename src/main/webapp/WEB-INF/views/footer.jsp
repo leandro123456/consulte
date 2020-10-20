@@ -2,8 +2,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
    
     <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
+        <div class="my-auto">
+          <div class="copyright text-center my-auto" style="font-size: small;color: gainsboro;">
             <span>Powered by CleoCinc</span>
           </div>
         </div>
@@ -12,7 +12,4 @@
     <!-- End of Content Wrapper -->
   </div>
 
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
 

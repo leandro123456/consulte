@@ -2,7 +2,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
-<html lang="es" style="background: #224A85;">
+<html lang="es">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,12 +12,15 @@
 
   <title>cDash</title>
   
-  <link href='<c:url value="/resources/images/favicon.ico" />' rel="shortcut icon" type="image/x-icon">
-  <link href='<c:url value="/resources/vendor/fontawesome-free/css/all.min.css" />' rel="stylesheet" type="text/css" >
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-  <link href='<c:url value="/resources/css/checkbox.css" />' rel="stylesheet" type="text/css" >
-  <link href='<c:url value="/resources/mqttResources/sb-admin-2.css" />' rel="stylesheet">
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  	<link href='<c:url value="/resources/css/checkbox.css" />' rel="stylesheet" type="text/css" >
+  	<link rel='shortcut icon' href='<c:url value="/resources/images/favicon.ico" />' type="image/x-icon"/>
+	<link rel="stylesheet" type="text/css" href='<c:url value="/resources/mqttResources/style.css" />'>
+	<link rel="stylesheet" type="text/css" href='<c:url value="/resources/mqttResources/c3.css" />'>
+	<link rel="stylesheet" type="text/css" href='<c:url value="/resources/mqttResources/all.min.css" />'>
+	<link rel="stylesheet" href='<c:url value="/resources/mqttResources/sb-admin-2.css" />'>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -31,9 +34,9 @@
   <script src='<c:url value="/resources/js/sb-admin-2.min.js" />'></script>
 </head>
 
-<body class="bg-gradient-primary" style="background: #224A85;">
+<body id="page-top">
 
-<script type="text/javascript">
+	<script type="text/javascript">
 	$(document).ready(function() {
 		activarboton("armarcloud",${armarcloud});
 		activarboton("armedmail",${armedmail});
@@ -43,110 +46,111 @@
 		activarboton("signalwifimail",${signalwifimail});
 		activarseleccion("esperanotifwifi",${esperanotifwifi});
 	});
-</script>
+	</script>
 
 
-  <div class="container">
+	<div class="container">
 
-    <div class="card o-hidden border-0 shadow-lg my-5">
-      <div class="card-body p-0">
-      	<c:if test="${not empty msg1}">
-			<div class="alert alert-warning">${msg1}</div>
-		</c:if>
-        <!-- Nested Row within Card Body -->
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="p-5">
-              <div class="row">
-              	<div class="col-md-12">
-       				<h2 style="text-align: center;">Configuración de Notificaciones</h2>
-       			</div>
-              </div>
-             <div class="row">
-             	<div class="col-md-1">
-               		<a class="nav-link collapsed" href="/" aria-expanded="true" aria-controls="collapseUtilities" style="color:#224A85;font-size: 2em; margin-top: -0.6em;">
-		         		<i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
-		       		</a>
-		       	</div>
-             </div>
-              <p> </p>
-              <input type="hidden" name="serial" id="serial" value=${serial}/>
-              <div class="table-responsive">
-                <table class="table" width="100%" cellspacing="0">
-                	<thead>
-                        <tr>
-                          <th scope="col"></th>
-                          <th scope="col">Notificaciones Push</th>
-                          <th scope="col">Notificaciones por email</th>
-                          <th scope="col">Frecuencia de Notificaci&oacuten(Hs)</th>
-                        </tr>
-                    </thead>
-					<tbody>
-						<tr class="tablain">
-							<td>Enviar notificaion al Armar/Desarmar la Alarma</td>
-							<td>
-								<label class="containercb">
-							      <input data-toggle="toggle" type="checkbox" style="display:none;" onclick="pedirPermiso('armarcloud')" id="armarcloud" name="armarcloud">
-							      <span class="checkmark"></span>
-							    </label>
-							</td>
-							<td>
-								<label class="containercb">
-							      <input data-toggle="toggle" type="checkbox" style="display:none;"onclick="actualizarEstadoNotificacion('armedmail')" id="armedmail" name="armedmail">
-							      <span class="checkmark"></span>
-							    </label>
-							</td>
-							<td>Instantanea</td>
-						</tr>
-						<tr class="tablain">
-							<td>Enviar notificacion al Disparar la Alarma</td>
-							<td>
-								<label class="containercb">
-							      <input data-toggle="toggle" type="checkbox" style="display:none;"onclick="pedirPermiso('dispararcloud')" id="dispararcloud" name="dispararcloud">
-							      <span class="checkmark"></span>
-							    </label>
-							</td>
-							<td>
-								<label class="containercb">
-							      <input data-toggle="toggle" type="checkbox" style="display:none;" onclick="actualizarEstadoNotificacion('dispararmail')" id="dispararmail" name="dispararmail">
-							      <span class="checkmark"></span>
-							    </label>
-							</td>
-							<td>Instantanea</td>
-						</tr>
-						<tr class="tablain">
-							<td>Enviar notificacion cuando la se&ntildeal WIFI es baja</td>
-							<td>
-								<label class="containercb">
-							      <input data-toggle="toggle" type="checkbox" style="display:none;"onclick="pedirPermiso('signalwifi')" id="signalwifi" name="signalwifi">
-							      <span class="checkmark"></span>
-							    </label>
-							</td>
-							<td>
-								<label class="containercb">
-							      <input data-toggle="toggle" type="checkbox" style="display:none;" onclick="actualizarEstadoNotificacion('signalwifimail')" id="signalwifimail" name="signalwifimail">
-							      <span class="checkmark"></span>
-							    </label>
-							</td>
-							<td>
-								<select id="hora" class="form-control" onchange="actualizarHoraNotificacionWifi()" id="hora">
-									<option value="6">6</option>
-									<option value="12">12</option>
-									<option value="24">24</option>
-								</select>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+		<div class="card o-hidden border-0 shadow-lg my-5">
+			<div class="card-body p-0">
+				<c:if test="${not empty msg1}">
+					<div class="alert alert-warning">${msg1}</div>
+				</c:if>
+				<!-- Nested Row within Card Body -->
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="p-5">
+							<div class="row">
+								<div class="col-md-12">
+									<h2 style="text-align: center;">Configuración de
+										Notificaciones</h2>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-1">
+									<a class="nav-link collapsed" href="/" aria-expanded="true"
+										aria-controls="collapseUtilities"
+										style="color: #224A85; font-size: 2em; margin-top: -0.6em;">
+										<i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
+									</a>
+								</div>
+							</div>
+							<p></p>
+							<input type="hidden" name="serial" id="serial" value=${serial }/>
+							<div class="table-responsive">
+								<table class="table" width="100%" cellspacing="0">
+									<thead>
+										<tr>
+											<th scope="col"></th>
+											<th scope="col">Notificaciones Push</th>
+											<th scope="col">Notificaciones por email</th>
+											<th scope="col">Frecuencia de Notificaci&oacuten(Hs)</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="tablain">
+											<td>Enviar notificaion al Armar/Desarmar la Alarma</td>
+											<td><label class="containercb"> <input
+													data-toggle="toggle" type="checkbox" style="display: none;"
+													onclick="pedirPermiso('armarcloud')" id="armarcloud"
+													name="armarcloud"> <span class="checkmark"></span>
+											</label></td>
+											<td><label class="containercb"> <input
+													data-toggle="toggle" type="checkbox" style="display: none;"
+													onclick="actualizarEstadoNotificacion('armedmail')"
+													id="armedmail" name="armedmail"> <span
+													class="checkmark"></span>
+											</label></td>
+											<td>Instantanea</td>
+										</tr>
+										<tr class="tablain">
+											<td>Enviar notificacion al Disparar la Alarma</td>
+											<td><label class="containercb"> <input
+													data-toggle="toggle" type="checkbox" style="display: none;"
+													onclick="pedirPermiso('dispararcloud')" id="dispararcloud"
+													name="dispararcloud"> <span class="checkmark"></span>
+											</label></td>
+											<td><label class="containercb"> <input
+													data-toggle="toggle" type="checkbox" style="display: none;"
+													onclick="actualizarEstadoNotificacion('dispararmail')"
+													id="dispararmail" name="dispararmail"> <span
+													class="checkmark"></span>
+											</label></td>
+											<td>Instantanea</td>
+										</tr>
+										<tr class="tablain">
+											<td>Enviar notificacion cuando la se&ntildeal WIFI es
+												baja</td>
+											<td><label class="containercb"> <input
+													data-toggle="toggle" type="checkbox" style="display: none;"
+													onclick="pedirPermiso('signalwifi')" id="signalwifi"
+													name="signalwifi"> <span class="checkmark"></span>
+											</label></td>
+											<td><label class="containercb"> <input
+													data-toggle="toggle" type="checkbox" style="display: none;"
+													onclick="actualizarEstadoNotificacion('signalwifimail')"
+													id="signalwifimail" name="signalwifimail"> <span
+													class="checkmark"></span>
+											</label></td>
+											<td><select id="hora" class="form-control"
+												onchange="actualizarHoraNotificacionWifi()" id="hora">
+													<option value="6">6</option>
+													<option value="12">12</option>
+													<option value="24">24</option>
+											</select></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-           </div>
-          </div>
-        </div>
-      </div>
-    </div>
+		</div>
 
-  </div>
+	</div>
 </body>
+<jsp:include page="footer.jsp" />
 
 
 <script type="text/javascript">

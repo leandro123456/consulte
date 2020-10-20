@@ -10,31 +10,46 @@
 <title>cDash</title>
 
 	<link rel='shortcut icon' href='<c:url value="/resources/images/favicon.ico" />' type="image/x-icon"/>
-	<link rel="stylesheet" type="text/css" href='<c:url value="/resources/mqttResources/style.css" />'>
-	<link rel="stylesheet" type="text/css" href='<c:url value="/resources/mqttResources/c3.min.css" />'>
-	<link href='<c:url value="/resources/mqttResources/all.min.css" />' rel="stylesheet" type="text/css">
-	<link href='<c:url value="/resources/mqttResources/sb-admin-2.css" />' rel="stylesheet">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+<!-- 	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'> -->
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.min.js" type="text/javascript"></script>     
+	<script src='<c:url value="/resources/vendor/jquery/jquery.js" />'></script>
+	<script src='<c:url value="/resources/vendor/jquery/jquery.min.js" />'></script>
 	<script src='<c:url value="/resources/mqttResources/d3.v3.min.js" />'></script>
 	<script src='<c:url value="/resources/mqttResources/c3.min.js" />'></script>
-	<script src='<c:url value="/resources/vendor/jquery/jquery.js" />'></script>
-	<script src='<c:url value="https://unpkg.com/sweetalert/dist/sweetalert.min.js"/>'></script>
-	
-	<script src='<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.js" />'></script>
 	<script src='<c:url value="/resources/mqttResources/mqttRecibirMensajes.js" />'></script>
+	<script src='<c:url value="/resources/mqttResources/demo.js" />'></script>
 	<script src='<c:url value="/resources/alarma/coneccionAlarma.js" />'></script>
-	<script src='<c:url value="/resources/mqttResources/demo.js" />'></script>	
 	<script src='<c:url value="/resources/pulsador/descargaImagenes.js" />'></script>
 	<script src='<c:url value="/resources/mqttResources/cargaReloj.js" />'></script>
 	<script src='<c:url value="/resources/pulsador/cargaPulsadores.js" />'></script>
-	<link href='<c:url value="/resources/mqttResources/estiloalarma.css" />' rel="stylesheet" type="text/css">
 	<script src='<c:url value="/resources/deviceResources/cargarDevice.js" />'></script>
-	<link rel="stylesheet" type="text/css" href='<c:url value="/resources/reloj/dist/bootstrap-clockpicker.min.css" />'> 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.min.js" type="text/javascript"></script>    
+	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+	<script src='<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.js" />'></script>
+	
+
+	  <!-- Google Fonts -->
+	  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+	
+	  <!-- Vendor CSS Files -->
+	  <link href="resources/mentor/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	  <link href="resources/mentor/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+	  <link href="resources/mentor/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+	  <link href="resources/mentor/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+	  <link href="resources/mentor/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+	  <link href="resources/mentor/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+	  <link href="resources/mentor/assets/vendor/aos/aos.css" rel="stylesheet">
+	  <link href="resources/mentor/miSwitch.css" rel="stylesheet">
+
+  	<!-- Template Main CSS File -->
+	<link href="resources/mentor/assets/css/style.css" rel="stylesheet">
+	<link href='<c:url value="/resources/mqttResources/estiloalarma.css" />' rel="stylesheet" type="text/css">	
+	
+	<script src='<c:url value="/resources/vendor/jquery/jquery.js" />'></script>
 	<script src='<c:url value="/resources/firebase-messaging-sw.js" />'></script>
 	<script src='<c:url value="/resources/firebase-messaging-ws.js" />'></script>
+	
 	
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -42,9 +57,6 @@
   gtag('js', new Date());
   gtag('config', 'G-6SSYQD4466');
 </script>
-</head>
-
-<body id="page-top">
 <script type="text/javascript">
 	$(document).ready(function() {
 		cargarParticionesAlarmas(${alarmaSerial});
@@ -54,6 +66,7 @@
 		}
 		setTimeout(iniciaConexion, 2000);
 		//requestPermission();
+		cambio();
 	});
 </script>
 
@@ -69,8 +82,83 @@ function getParameterByName(name) {
 }	
 </script>
 
+<script type="text/javascript">
+$("#serialnumber").blur(function() {
+	var valorSerial = document.getElementById("serialnumber").value;
+      evaluarNumeroDeSerie(valorSerial);
+    });
+</script>
+
+<script type="text/javascript">
+function iniciaConexion(){
+	console.log("dispositivos: "+ ${cantidadSensores});
+	if(${cantidadSensores}!=0){
+		startConnectSonoff("mqtt.coiaca.com", 8081, false, "mqttusr","mqttpwd",${topicos});
+	}
+	console.log("dispositivos alarma: "+ ${cantidadAlarma})
+	if(${cantidadAlarma}!=0)
+	startConnectAlarma("${hostalarma}","${puertoalarma}",${sslalarma},"${usuarioalarma}","${passalarma}",${topicosalarmas});
+}
+</script>
+<script src='<c:url value="/resources/js/jquery.qrcode.min.js" />'></script>
+<script type="text/javascript">
+//jQuery("#demo").qrcode("url o algo de texto");
+jQuery("#demo").qrcode({
+ id: "mycanvas",
+ width: 128,
+ height: 128,
+ text: "http://ourcodeworld.com"
+});
+</script>
+
+</head>
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="d-flex align-items-center" style="margin-left: 1em;margin-right: 1em;">
+
+      <h1 class="logo mr-auto">
+		<div class="logodash">
+			<img alt="" src="resources/mentor/cdash/imagen/logoBig.png">
+		</div>
+	</h1>
+
+      <nav class="nav-menu d-none d-lg-block">
+        <ul>
+          <li class="active"><a href="/">Inicio</a></li>
+
+          <li class="drop-down"><a href="">Dispositivos</a>
+            <ul>
+              <li><a href="<c:url value='/home/componentmyown'/>">Mis Dispositivos</a></li>
+            </ul>
+          </li>
+          <li class="drop-down"><a href="">Usuario</a>
+            <ul>
+              <li>
+              	<form role="form" action="<c:url value="/profileuser/userid"/>" method="get" enctype="multipart/form-data">
+			        <a class="dropdown-item" href="javascript:;" onclick="parentNode.submit();">
+			          Editar Usuario
+                  	</a>
+				</form>
+			 </li>
+            </ul>
+          </li>
+		  <li><a href="<c:url value='../ayuda.html' />">Ayuda</a></li>
+		  <li>
+		  	<a href="/login" data-toggle="modal" data-target="#logoutModal">
+		  		Salir
+		  	</a>
+		  </li>
+        </ul>
+      </nav><!-- .nav-menu -->
+      <a href="/home/newdeviceb" data-toggle="modal" data-target="#createDeviceModal" class="get-started-btn">Nuevo Dispositivo</a> 
+    </div>
+  </header>
+  
+
+
+<body>
+
 	<div id="wrapper">	
-		<jsp:include page="header.jsp" />
 		<div class="container-fluid">
 			<c:if test="${param.msg != null}">
 					<script type="text/javascript">
@@ -99,25 +187,89 @@ function getParameterByName(name) {
 						setTimeout('window.location.href = "/";', 5000);
 					</script>
 				</c:if>	
-	
+		<div class="d-flex" style="position: relative;padding: 40px 0;"> </div>
+		
+
 		<div class="row" id="cargadora">
-			<c:forEach items="${vistas}" var="vista">
+
+				<div class="col-lg-6 mb-4">
+					<div class="card shadow mb-4">
+						<div class="container">
+							<div class="row" style="margin-right: 1px !important;">
+								<div class="onoffswitch col-xs-10">
+									<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" tabindex="0" checked=""> <label class="onoffswitch-label" for="myonoffswitch"> <span class="onoffswitch-inner"></span>
+									</label>
+
+									<div class="contact">
+										<div class="info row">
+											<div class="address col-4">
+												<a href="#"><i class="icofont-ssl-security"></i></a>
+												<p>Armar</p>
+											</div>
+
+											<div class="address col-4">
+												<a href="#"><i class="icofont-unlock"></i></a>
+												<p>Parcial</p>
+											</div>
+
+											<div class="address col-4">
+												<a href="#" style=""><i class="icofont-unlocked"></i></a>
+												<p>Desarmar</p>
+											</div>
+										</div>
+										<div class="info3 row">
+											<div class="address3 col-4" style="padding: 0;">
+												<a href="#"><i class="icofont-ssl-security "></i></a>
+												<p>Armar</p>
+											</div>
+
+											<div class="address3 col-4" style="padding: 0;">
+												<a href="#"><i class="icofont-unlock"></i></a>
+												<p>Parcial</p>
+											</div>
+
+											<div class="address3 col-4" style="padding: 0;">
+												<a href="#" style=""><i class="icofont-unlocked"></i></a>
+												<p>Particiones</p>
+											</div>
+										</div>
+										
+									</div>
+								</div>
+								<div class="contact col-xs-2 contact2">
+									<div class="card-header headerAlarma" style="">
+										<h6 class="m-0 font-weight-bold text-primary">Mi Alarma</h6>
+										<h6 style="font-size: small; color: gray !important;">
+											<small>Coiaca Bridge</small>
+										</h6>
+									</div>
+
+									<div class="info2 info">
+										<div class="address2">
+											<a href="#"><i class="icofont-warning"></i></a>
+											<p>Problema</p>
+										</div>
+										<div class="address2">
+											<a href="#"><i class="icofont-cop-badge"></i></a>
+											<p>Emergencia</p>
+										</div>
+										<div class="address2">
+											<a href="#"><i class="icofont-gear-alt"></i></a>
+											<p>Configuracion</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<c:forEach items="${vistas}" var="vista">
                 ${vista}
           	</c:forEach>
 		</div>
-		
-		<div class="fixed">
-			<a href="/home/newdeviceb" data-toggle="modal" data-target="#createDeviceModal"> 
-				<i class="fa fa-plus-circle fa-3x" aria-hidden="true"></i>
-			</a>
-		</div>
 	</div>
-	</div>
-	
-	<div class="visible">
-		<a class="scroll-to-top rounded" href="#page-top"> <i
-			class="fas fa-angle-up"></i>
-		</a>
 	</div>
 
 	<jsp:include page="footer.jsp" />
@@ -192,22 +344,6 @@ messaging.onTokenRefresh(() => {
  </script> 
 </body>
 
-
-<script src='<c:url value="/resources/js/jquery.qrcode.min.js" />'></script>
-<script type="text/javascript">
-//jQuery("#demo").qrcode("url o algo de texto");
-jQuery("#demo").qrcode({
- id: "mycanvas",
- width: 128,
- height: 128,
- text: "http://ourcodeworld.com"
-});
-</script>
-
-
-<!-- script alarama -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<!-- script alarma -->
 
 
 <!-- Crear device con Modal -->
@@ -661,30 +797,65 @@ jQuery("#demo").qrcode({
 			</div>
 		</div>
 	</div>
+
+
+    <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">¿Esta seguro de Salir?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">¿Está listo para finalizar su sesión actual?</div>
+        <div class="modal-footer">
+          <form role="form" action="<c:url value="/logoutsession"/>" method="get" enctype="multipart/form-data">
+          	<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          	<a class="btn btn-primary" href="javascript:;" onclick="parentNode.submit();">Salir</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
 	
+	<script src="resources/mentor/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="resources/mentor/assets/vendor/php-email-form/validate.js"></script>
+	<script src="resources/mentor/assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+	<script src="resources/mentor/assets/vendor/counterup/counterup.min.js"></script>
+	<script src="resources/mentor/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+	<script src="resources/mentor/assets/vendor/aos/aos.js"></script>
+	<script src="resources/mentor/assets/vendor/jquery/jquery.min.js"></script>
+	<!-- Template Main JS File -->
+	<script src="resources/mentor/assets/js/main.js"></script>
+	<script src='<c:url value="/resources/mqttResources/d3.v3.min.js" />'></script>
+	<script src='<c:url value="/resources/mqttResources/c3.min.js" />'></script>
 	
-	
+	<script src="resources/mentor/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+	<script src='<c:url value="https://unpkg.com/sweetalert/dist/sweetalert.min.js"/>'></script>
+	<script src='<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.js" />'></script>
+	<script src='<c:url value="/resources/mqttResources/mqttRecibirMensajes.js" />'></script>
+	<script src='<c:url value="/resources/alarma/coneccionAlarma.js" />'></script>
+	<script src='<c:url value="/resources/mqttResources/demo.js" />'></script>	
+	<script src='<c:url value="/resources/pulsador/descargaImagenes.js" />'></script>
+	<script src='<c:url value="/resources/mqttResources/cargaReloj.js" />'></script>
+	<script src='<c:url value="/resources/pulsador/cargaPulsadores.js" />'></script>
+	<script src='<c:url value="/resources/deviceResources/cargarDevice.js" />'></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.min.js" type="text/javascript"></script>    
 
 
-<script type="text/javascript">
-$("#serialnumber").blur(function() {
-	var valorSerial = document.getElementById("serialnumber").value;
-      evaluarNumeroDeSerie(valorSerial);
-    });
-</script>
+<%-- 	<link rel="stylesheet" type="text/css" href='<c:url value="/resources/reloj/dist/bootstrap-clockpicker.min.css" />'>  --%>
+<!-- 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
+<!-- script alarama -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<!-- script alarma -->
 
 
 
-<script type="text/javascript">
-function iniciaConexion(){
-	console.log("dispositivos: "+ ${cantidadSensores});
-	if(${cantidadSensores}!=0){
-		startConnectSonoff("mqtt.coiaca.com", 8081, false, "mqttusr","mqttpwd",${topicos});
-	}
-	console.log("dispositivos alarma: "+ ${cantidadAlarma})
-	if(${cantidadAlarma}!=0)
-	startConnectAlarma("${hostalarma}","${puertoalarma}",${sslalarma},"${usuarioalarma}","${passalarma}",${topicosalarmas});
-}
-</script>
 
 
