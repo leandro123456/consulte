@@ -1249,15 +1249,16 @@ section {
 
 
 .contact2{
-	background: #224A85 !important;
-    border-radius: 10px !important;
-    text-align: -webkit-center !important;
+	background: transparent !important;
+/*     border-radius: 10px !important; */
+/*     text-align: -webkit-center !important; */
 }
 
 .contact .headerAlarma{
 	margin: 0 -0.5em 20 -0.5em;
     background: transparent !important;
     border-bottom: transparent !important;
+    padding: 0 0 !important;
 }
 
 .contact .info {
@@ -1306,23 +1307,25 @@ section {
 .contact .info2 i {
   font-size: 2em;
   color: #224A85;
-/*   float: left; */
-  width: 2em;
-  height: 2em;
-  background: azure;
+  width: 1.5em;
+  height: 1.5em;
+  background: white;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50px;
   transition: all 0.3s ease-in-out;
+  border-color: grey;
+  border-bottom-style: groove;
+  margin: auto !important;
 }
 
 .contact .info2 p {
   padding: 0 0 1.5em 0;
   margin-bottom: 0;
   font-size: 0.5em;
-  color: #fff;
-/*   text-align: center; */
+  color: black;
+  text-align: center;
 	margin-left: 0.5em;
 }
 
@@ -1354,13 +1357,14 @@ section {
 .contact .info3 i {
 	font-size: 2em;
     color: white;
-    width: 1.5em;
-    height: 1.5em;
+    width:2.3em;
+    height: 2em;
     background: black;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 1em;
+    margin: -0.2em 0 0 0 !important;
+/*     margin-top: 1em; */
     transition: all 0.3s ease-in-out;
 }
 
@@ -1430,17 +1434,23 @@ section {
   padding: inherit;
 }
 
+.contact .info2 .address2:hover i {
+  background: #224A85;
+  color: #fff;
+  padding: inherit;
+}
+
 .contact .info3 .address3:hover i {
   background: #224A85;
   color: #fff;
   padding: inherit;
-  width: 1.5em;
-  height: 1s.5em;
+  width: 2em;
+  height: 2em;
   border-radius: 1px;	
 }
 
 .contact .infozona .address3:hover i {
-  background: transparent;
+  background: black;
   color: black;
   padding: inherit;
   width: 0.5em;

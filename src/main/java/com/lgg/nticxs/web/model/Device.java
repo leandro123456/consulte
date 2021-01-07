@@ -48,6 +48,7 @@ public class Device extends MongoDBObject{
 	private String tipodireccion;
 	private String codigouri;
 	private String uridoorman;
+	private String coddesarmado;
 	
 
 	
@@ -60,6 +61,19 @@ public class Device extends MongoDBObject{
 		vista = new HashMap<String,String>();
 	}
 	
+	
+	
+	public String getCoddesarmado() {
+		return coddesarmado;
+	}
+
+
+
+	public void setCoddesarmado(String coddesarmado) {
+		this.coddesarmado = coddesarmado;
+	}
+
+
 
 	public void setLocalidad(String localidad) {
 		this.localidad = localidad;

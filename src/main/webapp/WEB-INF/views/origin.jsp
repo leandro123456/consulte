@@ -192,70 +192,221 @@ jQuery("#demo").qrcode({
 
 		<div class="row" id="cargadora">
 
+
+				
 				<div class="col-lg-6 mb-4">
 					<div class="card shadow mb-4">
 						<div class="container">
 							<div class="row" style="margin-right: 1px !important;">
 								<div class="onoffswitch col-xs-10">
-									<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" tabindex="0" checked=""> <label class="onoffswitch-label" for="myonoffswitch"> <span class="onoffswitch-inner"></span>
+									<label class="onoffswitch-label" for="myonoffswitch" style="  background: #224A85;   height: 3em;   text-align: center;"> 
+									<span style="color: white;">ARMADA</span>
 									</label>
-
 									<div class="contact">
-										<div class="info row">
-											<div class="address col-4">
-												<a href="#"><i class="icofont-ssl-security"></i></a>
+										<div class="info3 row">
+											<div class="address3 col-4">
+												<a href="#" data-toggle="modal" class="identificar_confirmacion" data-id="CAMBIARALARMA-armartotal" data-target="#confirmacion"><i class="icofont-ssl-security"></i></a>
 												<p>Armar</p>
 											</div>
-
-											<div class="address col-4">
-												<a href="#"><i class="icofont-unlock"></i></a>
+											<div class="address3 col-4">
+												<a href="#" data-toggle="modal" class="identificar_confirmacion" data-id="CAMBIARALARMA-armarparcial" data-target="#confirmacion"><i class="icofont-unlock"></i></a>
 												<p>Parcial</p>
 											</div>
-
-											<div class="address col-4">
-												<a href="#" style=""><i class="icofont-unlocked"></i></a>
+											<div class="address3 col-4">
+												<a href="#" data-toggle="modal" class="identificar_confirmacion" data-id="CAMBIARALARMA-desarmar" data-target="#confirmacion"><i class="icofont-unlocked"></i></a>
 												<p>Desarmar</p>
 											</div>
 										</div>
 										<div class="info3 row">
 											<div class="address3 col-4" style="padding: 0;">
-												<a href="#"><i class="icofont-ssl-security "></i></a>
-												<p>Armar</p>
-											</div>
-
-											<div class="address3 col-4" style="padding: 0;">
-												<a href="#"><i class="icofont-unlock"></i></a>
-												<p>Parcial</p>
-											</div>
-
-											<div class="address3 col-4" style="padding: 0;">
-												<a href="#" style=""><i class="icofont-unlocked"></i></a>
+												<a href="#" data-toggle="modal" data-target="#selecParticion"><i class="icofont-connection"></i></a>
 												<p>Particiones</p>
 											</div>
+											<div class="address3 col-4" style="padding: 0;">
+												<a href="home/notificacionesalarma/CAMBIARALARMA"><i class="icofont-briefcase-2"></i></a>
+												<p>Notificaciones</p>
+											</div>
+											<div class="address3 col-4" style="padding: 0;">
+												<a href="#"><i class="icofont-gears"></i></a>	
+												<p>Configuracion</p>
+											</div>
+										</div>    
+    										<div class="infozona col-lg-12" id="zones_listDSC010000000002" style="padding-right: 0px;padding-left: 0px;">
+											<div class="col-xl-10" style="">
+												<h6 style="font-size: 0.6em;">Zonas</h6>
+											</div>
+										<div class="infozona" style="display: grid;grid-template-columns: repeat(8, 1fr);">
+											
+											<div class="col-xs-6 small " style="display: none;" id="zone_1_CAMBIARALARMA">
+												<i id="izone_1_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 01</small></p>
+											</div>						
+											<div class="col-xs-6 small " style="display: none;" id="zone_2_CAMBIARALARMA">
+												<i id="izone_2_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 02</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_3_CAMBIARALARMA"><i id="izone_3_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 03</small></p></div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_4_CAMBIARALARMA"><i id="izone_4_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 04</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_5_CAMBIARALARMA"><i id="izone_5_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 05</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_6_CAMBIARALARMA"><i id="izone_6_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 06</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_7_CAMBIARALARMA"><i id="izone_7_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 07</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_8_CAMBIARALARMA"><i id="izone_8_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 08</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_9_CAMBIARALARMA"><i id="izone_9_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 09</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_10_CAMBIARALARMA"><i id="izone_10_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 10</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_11_CAMBIARALARMA"><i id="izone_11_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 11</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_12_CAMBIARALARMA"><i id="izone_12_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 12</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_13_CAMBIARALARMA"><i id="izone_13_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 13</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_14_CAMBIARALARMA"><i id="izone_14_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 14</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_15_CAMBIARALARMA"><i id="izone_15_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 15</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_16_CAMBIARALARMA"><i id="izone_16_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 16</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_17_CAMBIARALARMA"><i id="izone_17_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 17</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_18_CAMBIARALARMA"><i id="izone_18_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 18</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_19_CAMBIARALARMA"><i id="izone_19_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 19</small></p></div>
+    										<div class="col-xs-6 small " style="display: none;" id="zone_20_CAMBIARALARMA"><i id="izone_20_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 20</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_21_CAMBIARALARMA"><i id="izone_21_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 21</small></p></div>
+    										<div class="col-xs-6 small " style="display: none;" id="zone_22_CAMBIARALARMA"><i id="izone_22_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 22</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_23_CAMBIARALARMA"><i id="izone_23_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 23</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_24_CAMBIARALARMA"><i id="izone_24_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 24</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_25_CAMBIARALARMA"><i id="izone_25_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 25</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_26_CAMBIARALARMA"><i id="izone_26_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 26</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_27_CAMBIARALARMA"><i id="izone_27_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 27</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_28_CAMBIARALARMA"><i id="izone_28_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 28</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_29_CAMBIARALARMA"><i id="izone_29_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 29</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_30_CAMBIARALARMA"><i id="izone_30_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 30</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_31_CAMBIARALARMA"><i id="izone_31_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 31</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_32_CAMBIARALARMA"><i id="izone_32_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 32</small></p></div><div class="col-xs-6 small " style="display: none;" id="zone_33_CAMBIARALARMA"><i id="izone_33_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i><p><small> 33</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_34_CAMBIARALARMA">
+												<i id="izone_34_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 34</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_35_CAMBIARALARMA">
+												<i id="izone_35_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 35</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_36_CAMBIARALARMA">
+												<i id="izone_36_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 36</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_37_CAMBIARALARMA">
+												<i id="izone_37_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 37</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_38_CAMBIARALARMA">
+												<i id="izone_38_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 38</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_39_CAMBIARALARMA">
+												<i id="izone_39_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 39</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_40_CAMBIARALARMA">
+												<i id="izone_40_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 40</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_41_CAMBIARALARMA">
+												<i id="izone_41_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 41</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_42_CAMBIARALARMA">
+												<i id="izone_42_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 42</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_43_CAMBIARALARMA">
+												<i id="izone_43_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 43</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_44_CAMBIARALARMA">
+												<i id="izone_44_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 44</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_45_CAMBIARALARMA">
+												<i id="izone_45_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 45</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_46_CAMBIARALARMA">
+												<i id="izone_46_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 46</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_47_CAMBIARALARMA">
+												<i id="izone_47_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 47</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_48_CAMBIARALARMA">
+												<i id="izone_48_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 48</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_49_CAMBIARALARMA">
+												<i id="izone_49_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 49</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_50_CAMBIARALARMA">
+												<i id="izone_50_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 50</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_51_CAMBIARALARMA">
+												<i id="izone_51_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 51</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_52_CAMBIARALARMA">
+												<i id="izone_52_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 52</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_53_CAMBIARALARMA">
+												<i id="izone_53_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 53</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_54_CAMBIARALARMA">
+												<i id="izone_54_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 54</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_55_CAMBIARALARMA">
+												<i id="izone_55_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 55</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_56_CAMBIARALARMA">
+												<i id="izone_56_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 56</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_57_CAMBIARALARMA">
+												<i id="izone_57_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 57</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_58_CAMBIARALARMA">
+												<i id="izone_58_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 58</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_59_CAMBIARALARMA">
+												<i id="izone_59_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 59</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_60_CAMBIARALARMA">
+												<i id="izone_60_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 60</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_61_CAMBIARALARMA">
+												<i id="izone_61_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 61</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_62_CAMBIARALARMA">
+												<i id="izone_62_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 62</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_63_CAMBIARALARMA">
+												<i id="izone_63_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 63</small></p>
+											</div>
+											<div class="col-xs-6 small " style="display: none;" id="zone_64_CAMBIARALARMA">
+												<i id="izone_64_CAMBIARALARMA" class="icofont-ui-press" style="font-size: 0.5em;"></i>
+												<p><small> 64</small></p>
+											</div>
 										</div>
-										
+										</div>			
 									</div>
 								</div>
 								<div class="contact col-xs-2 contact2">
 									<div class="card-header headerAlarma" style="">
-										<h6 class="m-0 font-weight-bold text-primary">Mi Alarma</h6>
-										<h6 style="font-size: small; color: gray !important;">
+										<h6 class="m-0 font-weight-bold text-primary font-size: 0.8em !important" style="width: 6em;text-align: center;">NOMBREALARMA</h6>
+										<h6 style="font-size: small;text-align: center;">
 											<small>Coiaca Bridge</small>
 										</h6>
+    									<div class="" style="display: grid; grid-template-columns: repeat(2,50%);background: black;text-align: center;margin: 0 10 0 10;">
+											<h6 style="font-size: 0.5em;color: white;margin-top: 0.5em;">online</h6>
+										    <h6> <img id="img_signal_DSC010000000002" class="" src="resources/mqttResources/imgsignal/3b.png" style="width: 1em;margin-top: 0.5em;"></h6>
+										</div>
+										<h6 style="font-size: small;text-align: center;margin-top: 0.5em;">
+											<small>Particion</small>
+    										<small id="particionesCAMBIARALARMA">1</small>
+										</h6>
 									</div>
-
-									<div class="info2 info">
-										<div class="address2">
-											<a href="#"><i class="icofont-warning"></i></a>
-											<p>Problema</p>
-										</div>
-										<div class="address2">
-											<a href="#"><i class="icofont-cop-badge"></i></a>
-											<p>Emergencia</p>
-										</div>
-										<div class="address2">
-											<a href="#"><i class="icofont-gear-alt"></i></a>
-											<p>Configuracion</p>
+									<div class="contact">
+										<div class="info2">
+											<div class="address2">
+												<a href="#"><i class="icofont-warning"></i></a>
+												<p>Problema</p>
+											</div>
+											<div class="address2">
+												<a href="#"><i class="icofont-cop-badge"></i></a>
+												<p>Emergencia</p>
+											</div>
+											<div class="address2">
+												<a href="/BRDSC01.html"><i class="icofont-info"></i></a>
+												<p>Ayuda</p>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -263,6 +414,7 @@ jQuery("#demo").qrcode({
 						</div>
 					</div>
 				</div>
+
 
 
 				<c:forEach items="${vistas}" var="vista">
@@ -820,6 +972,56 @@ messaging.onTokenRefresh(() => {
     </div>
   </div>
 
+
+	<!--  Confirmar accion -->
+	  <div class="modal fade" id="confirmacion" tabindex="-1" role="dialog" aria-labelledby="confirmacion" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirmar Acción</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">¿Esta seguro de confirmar la acción?</div>
+        <div class="modal-footer">
+          	<input type="hidden" name="accionalarma" id="accionalarma"/>
+          	<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          	<button class="btn btn-primary" onclick="enviarComandotobackend();" data-dismiss="modal">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <script type="text/javascript">
+    $(function () {
+        $(".identificar_confirmacion").click(function () {
+            var my_id_value = $(this).data('id');
+            console.log("INFO-------------------------------------------- "+ my_id_value);
+            $("#accionalarma").val(my_id_value);
+        })
+    });
+    
+    
+    
+    
+    function enviarComandotobackend(){
+	var acalarma = document.getElementById("accionalarma").value;
+	var serial = acalarma.split("-",1);
+	var particionactivaa= document.getElementById("particionesCAMBIARALARMA").textContent;
+   	var enc = window.btoa('${pageContext.request.userPrincipal.name}');
+   	console.log("busco particion-info: "+ acalarma+"-"+particionactivaa)
+   	var urlsendInformation = $(location).attr('pathname') + "/ejecutaraccion/"+acalarma+"-"+particionactivaa;
+   		$.ajax({ url : urlsendInformation,
+   			contentType: "application/json",
+   			dataType: 'json',
+   			success: function(data){
+   				console.log("resultado despues de la ejecucion: "+ data.status);
+   			}			
+   	});
+    }
+   </script>
 
 
 	
