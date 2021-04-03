@@ -27,6 +27,20 @@
 	<script src='<c:url value="/resources/deviceResources/cargarDevice.js" />'></script>
 	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 	<script src='<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.js" />'></script>
+
+	<!-- WEBSOCKET VIA NODE -->
+	<!--<script src="http://localhost:8081/socket.io/socket.io.js"></script> -->
+	<!--<script type="text/javascript" src="/mainSocket.js"></script> -->
+	
+	
+	
+	<script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+	<!-- WEB SOCKET VIA SPRING -->
+	<script src='<c:url value="/resources/websocketspring/WebSocketSpringImp.js" />'></script>
+<%-- 	<script src='<c:url value="/resources/websocketspring/sockjs.min.js" />'></script> --%>
+<%-- 	<script src='<c:url value="/resources/websocketspring/stomp.min.js" />'></script> --%>
 	
 
 	  <!-- Google Fonts -->
@@ -59,13 +73,15 @@
 </script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		console.log("INICIO DE APLICACIONES")
+		setConnected(true);
 		cargarParticionesAlarmas(${alarmaSerial});
 		cargarZonas(${alarmaSerial});
 		if(${serialpulsador}.length >0){
 			cargarColorbotones(${serialpulsador});
 		}
 		setTimeout(iniciaConexion, 2000);
-		//requestPermission();
+		
 		cambio();
 	});
 </script>
