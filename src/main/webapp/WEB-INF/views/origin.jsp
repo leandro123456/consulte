@@ -304,7 +304,7 @@ messaging.onTokenRefresh(() => {
     	<div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Nuevo dispositivo</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-          	<span aria-hidden="true">×</span>
+          	<span aria-hidden="true">ï¿½</span>
           </button>
         </div>
         <div class="modal-body">
@@ -325,7 +325,7 @@ messaging.onTokenRefresh(() => {
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Nuevo dispositivo</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-          	<span aria-hidden="true">×</span>
+          	<span aria-hidden="true">ï¿½</span>
           </button>
         </div>
         <form role="form" action="<c:url value="home/create"/>" method="post">
@@ -408,7 +408,7 @@ messaging.onTokenRefresh(() => {
 						</div>
 					</div>
 					<div id="infoFinalSoft" style="display:none">
-						<h5>La configuración está lista. Precione Agregar Dispositivo para terminar.</h5>
+						<h5>La configuraciï¿½n estï¿½ lista. Precione Agregar Dispositivo para terminar.</h5>
 						<p></p>
 					</div>
 					<div class="btn-group">
@@ -432,7 +432,7 @@ messaging.onTokenRefresh(() => {
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Nuevo dispositivo</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-          	<span aria-hidden="true">×</span>
+          	<span aria-hidden="true">ï¿½</span>
           </button>
         </div>
         <form role="form" action="<c:url value="home/create"/>" method="post">
@@ -445,12 +445,12 @@ messaging.onTokenRefresh(() => {
 					<b>Nombre del dispositivo</b> 
 					<input name="namedevice" id="namedevice" class="form-control" placeholder="Mi dispositivo">
 					<p></p>
-					<b>Descripción</b> 
-					<input name="descriptiondevice" id="descriptiondevice" class="form-control" placeholder="Mi descripción">
+					<b>Descripciï¿½n</b> 
+					<input name="descriptiondevice" id="descriptiondevice" class="form-control" placeholder="Mi descripciï¿½n">
 					<p></p>
 				</div>
 				<div id="infoDeducidaCoiaca" style="display:none">
-					<h3>Información del dispositivo</h3>
+					<h3>Informaciï¿½n del dispositivo</h3>
 					<div>
 						<b>Marca</b> <select id="marcadevice"
 							class="form-control">
@@ -565,9 +565,9 @@ messaging.onTokenRefresh(() => {
 					</div>
 				</div>
 				<div id="infoAvanzada" style="display:none">
-					<h3>Configuración avanzada</h3>
+					<h3>Configuraciï¿½n avanzada</h3>
 						<div id="parametersConexion" onkeypress=checkPassword()>
-							<h6>Los siguientes son los parámetros con los que su equipo ha sido configurado de fábrica. No los modifique si no está seguro de lo que está haciendo.</h6>
+							<h6>Los siguientes son los parï¿½metros con los que su equipo ha sido configurado de fï¿½brica. No los modifique si no estï¿½ seguro de lo que estï¿½ haciendo.</h6>
 							<div class="form-group row ">
 								<b>URL del Broker MQTT</b> 
 									<input type="text"
@@ -580,13 +580,13 @@ messaging.onTokenRefresh(() => {
 								<b>Nombre de usuario MQTT</b> 
 									<input type="text" class="form-control form-control-user"
 									id="userescuchar" placeholder="Nombre de usuario"> 
-								<b>Contraseña MQTT</b>
+								<b>Contraseï¿½a MQTT</b>
 									<input type="password" class="form-control form-control-user"
-									id="passescuchar" placeholder="Contraseña"> 
-								<b>Repetir contraseña MQTT</b> 
+									id="passescuchar" placeholder="Contraseï¿½a"> 
+								<b>Repetir contraseï¿½a MQTT</b> 
 									<input type="password"
 									class="form-control form-control-user" id="confirpassescuchar"
-									placeholder="Confirmar Contraseña">
+									placeholder="Confirmar Contraseï¿½a">
 								<b>Prefijo de topicos de estados</b>
 									<input type="text" class="form-control form-control-user "
 									id="topiclisten" placeholder="Topico para recibir Informacion">
@@ -595,31 +595,31 @@ messaging.onTokenRefresh(() => {
 									id="topicwrite" placeholder="Topico para envio de Informacion"> 
 							</div>
 							
-							<h6>Administración Remota</h6>
+							<h6>Administraciï¿½n Remota</h6>
 							<div class="form-group row ">
-								<b>URL del Broker MQTT de Administración Remota</b> 
+								<b>URL del Broker MQTT de Administraciï¿½n Remota</b> 
 									<input type="text"
 									class="form-control form-control-user"
 									id="iphostescucharremote" placeholder="Hostname o direccion IP"> 
-								<b>Puerto del Broker MQTT de Administración Remota</b>
+								<b>Puerto del Broker MQTT de Administraciï¿½n Remota</b>
 									<input type="text" class="form-control form-control-user"
 									id="portescucharremote" placeholder="Puerto"> 
-								<b>Nombre de usuario MQTT de Administración Remota</b> 
+								<b>Nombre de usuario MQTT de Administraciï¿½n Remota</b> 
 									<input
 									type="text" class="form-control form-control-user"
 									id="userescucharremote" placeholder="Nombre de usuario"> 
-								<b>Contraseña MQTT de Administración Remota</b>
+								<b>Contraseï¿½a MQTT de Administraciï¿½n Remota</b>
 									<input type="password" class="form-control form-control-user"
-									id="passescucharremote" placeholder="Contraseña"> 
-								<b>Confirmar contraseña MQTT de Administración Remota</b> 
+									id="passescucharremote" placeholder="Contraseï¿½a"> 
+								<b>Confirmar contraseï¿½a MQTT de Administraciï¿½n Remota</b> 
 									<input type="password"
 									class="form-control form-control-user"
-									id="confirpassescucharremote" placeholder="Confirmar Contraseña">
-								<b>Topico de resultados de Administración Remota</b>
+									id="confirpassescucharremote" placeholder="Confirmar Contraseï¿½a">
+								<b>Topico de resultados de Administraciï¿½n Remota</b>
 									<input type="text"
 									class="form-control form-control-user " id="topiclistenremote"
 									placeholder="Topico para recepcion de Respuestas"> 
-								<b>Topico de comandos de Administración Remota</b>
+								<b>Topico de comandos de Administraciï¿½n Remota</b>
 									<input type="text"
 									class="form-control form-control-user " id="topicwriteremote"
 									placeholder="Topico para envio de Comando de Configuracion"> 
@@ -627,7 +627,7 @@ messaging.onTokenRefresh(() => {
 						</div>
 					</div>
 					<div id="infoFinal" style="display:none">
-						<h5>La configuración está lista. Precione Agregar Dispositivo para terminar.</h5>
+						<h5>La configuraciï¿½n estï¿½ lista. Precione Agregar Dispositivo para terminar.</h5>
 					</div>				
 				<div class="btn-group">
           			<button id="botonAnterior" style="display:none" class="btn btn-secondary" onclick="anteriorAnimacion()" type="button">Volver</button>
@@ -754,12 +754,12 @@ messaging.onTokenRefresh(() => {
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">¿Esta seguro de Salir?</h5>
+          <h5 class="modal-title" id="exampleModalLabel">ï¿½Esta seguro de Salir?</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
+            <span aria-hidden="true">ï¿½</span>
           </button>
         </div>
-        <div class="modal-body">¿Está listo para finalizar su sesión actual?</div>
+        <div class="modal-body">ï¿½Estï¿½ listo para finalizar su sesiï¿½n actual?</div>
         <div class="modal-footer">
           <form role="form" action="<c:url value="/logoutsession"/>" method="get" enctype="multipart/form-data">
           	<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
@@ -772,16 +772,16 @@ messaging.onTokenRefresh(() => {
 
 
 	<!--  Confirmar accion -->
-	  <div class="modal fade" id="confirmacion" tabindex="-1" role="dialog" aria-labelledby="confirmacion" aria-hidden="true">
+	<div class="modal fade" id="confirmacion" tabindex="-1" role="dialog" aria-labelledby="confirmacion" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Confirmar Acción</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Confirmar Acciï¿½n</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
+            <span aria-hidden="true">ï¿½</span>
           </button>
         </div>
-        <div class="modal-body">¿Esta seguro de confirmar la acción?</div>
+        <div class="modal-body">ï¿½Esta seguro de confirmar la acciï¿½n?</div>
         <div class="modal-footer">
           	<input type="hidden" name="accionalarma" id="accionalarma"/>
           	<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
