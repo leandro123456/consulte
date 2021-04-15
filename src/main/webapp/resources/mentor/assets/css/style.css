@@ -1255,7 +1255,7 @@ section {
 }
 
 .contact .headerAlarma{
-	margin: 0 -0.5em 20 -0.5em;
+	margin: 0 -0.5em 0 -0.5em;
     background: transparent !important;
     border-bottom: transparent !important;
     padding: 0 0 !important;
@@ -1298,6 +1298,9 @@ section {
 	margin-left: 0.5em;
 }
 
+
+
+/* APARTADO PARA LOS BOTONES DE LA COLUMNA DE LA DERECHA */
 .contact .info2 {
   width: 100%;
   background: transparent;
@@ -1305,7 +1308,7 @@ section {
 }
 
 .contact .info2 i {
-  font-size: 2em;
+  font-size: 1.5em;
   color: #224A85;
   width: 1.5em;
   height: 1.5em;
@@ -1338,12 +1341,34 @@ section {
   color: #fff;
 }
 
-.contact .info .address2:hover i {
+/* CUANDO SE SELECCIONA */
+
+.contact .info2 .address2:hover i {
   background: #224A85;
   color: #fff;
   padding: inherit;
 }
 
+/* APARTADO PARA LOS BOTONES DE LA COLUMNA DE LA DERECHA */
+
+
+/* ICONO DE WARNING (PROBLEMA) */
+
+.contact .info2 .war i{
+	color: white ;
+/*     background: #0080007a; */
+    pointer-events: none;
+}
+
+
+/* CUANDO SE SELECCIONA */
+.contact .info2 .address4 i {
+/*   background: #224A85; */
+  color: #4e9a06;
+  padding: inherit;
+}
+
+/* ICONO DE WARNING (PROBLEMA) */
 
 
 
@@ -1376,8 +1401,6 @@ section {
 /*   text-align: center; */
 	margin-left: 0.5em;
 }
-
-
 
 .contact .infozona {
   width: 100%;
@@ -1434,12 +1457,6 @@ section {
   padding: inherit;
 }
 
-.contact .info2 .address2:hover i {
-  background: #224A85;
-  color: #fff;
-  padding: inherit;
-}
-
 .contact .info3 .address3:hover i {
   background: #224A85;
   color: #fff;
@@ -1448,6 +1465,8 @@ section {
   height: 2em;
   border-radius: 1px;	
 }
+
+
 
 .contact .infozona .address3:hover i {
   background: black;
