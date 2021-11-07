@@ -14,6 +14,7 @@ public class Device extends MongoDBObject{
 	static final public String TERMOMETRO = "termometro";
 	static final public String SONOFF = "sonoff";
 	static final public String ALARMA = "alarma";
+	static final public String ALARMAV2 = "alarmav2";
 	static final public String DOORMAN = "doorman";
 	
 	private String name;

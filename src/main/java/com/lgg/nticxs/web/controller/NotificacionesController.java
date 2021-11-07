@@ -143,4 +143,18 @@ public class NotificacionesController {
 	    	System.out.println("Termino de actualizar al usuario");
 			return "ok";
 		}
+		
+		
+		
+	   @GetMapping("home/configuracionalarma/{serial}")
+	    public String editProfileConfigurations(Model model,@PathVariable String serial) {
+	    	System.out.println("llego al controlador de Configuraciones");
+	    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    	System.out.println("Edit profile - busco el usuario: "+ authentication.getName());
+	        UserDAO userdao = new UserDAO();
+	    	User user = userdao.retrieveByMail(authentication.getName());
+	    	model.addAttribute("user", user);
+	    	model.addAttribute("serial", serial);
+	    	return "user_configurations_alarma.jsp";
+	    }
 }

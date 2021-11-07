@@ -76,7 +76,7 @@ function ProcesarAlarma(message){
 		ActualizarTildeZona(serial);
 	}
 	else if(topico.includes("keepAlive")){
-		console.log("emnsaje de keepAlive: "+ contenido);
+		console.log("Mensaje de keepAlive: "+ contenido);
 		obtenerIconoNivelSAlarma(contenido);
 	}
 }
@@ -99,10 +99,16 @@ function actualizarDisplay(iddevice, particione){
 
 //cargar particiones en el display
 function cargarParticionesAlarmas(serialAlarma){	
-	serialAlarma.forEach(cargaparticionEfectiva);
+	 if(serialAlarma.includes("-")){
+		 var res = serialAlarma.split("-");
+		  for (i = 0; i < res.length; i++) {
+			  	cargaparticionEfectiva(res[i]);
+			}
+	 }else
+		 cargaparticionEfectiva(serialAlarma);
 }
 
-function cargaparticionEfectiva(item, index){
+function cargaparticionEfectiva(item){
 	var urlsendInformation = $(location).attr('pathname') + "/obtainpartition/"+item+"/inicio";
 	$.ajax({ url : urlsendInformation,
 		contentType: "application/json",
@@ -238,14 +244,18 @@ function ActualizarTildeZona(serial){
 }
 
 
-//caraga de zonas al inicio
 function cargarZonas(serialZonas){
-	var seriales = serialZonas;
-	console.log("estos son los serials: "+ seriales +" ;cantidad: "+ seriales.length);
-	seriales.forEach(cargazonaEfectiva);
+	if(serialZonas.includes("-")){
+		  var res = serialZonas.split("-");
+		  for (i = 0; i < res.length; i++) {
+			  cargazonaEfectiva(res[i])
+			}
+	  }else{
+		  cargazonaEfectiva(serialZonas)
+	  }
 }
 
-function cargazonaEfectiva(item, index){
+function cargazonaEfectiva(item){
 	var urlsendInformation = $(location).attr('pathname') + "/obtainmaxzone/"+item;
 	$.ajax({ url : urlsendInformation,
 		contentType: "application/json",

@@ -73,25 +73,30 @@
   gtag('js', new Date());
   gtag('config', 'G-6SSYQD4466');
 </script>
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		console.log("INICIO DE APLICACIONES")
 // 		setConnected(true);
-		
-// 		cargarParticionesAlarmas(${alarmaSerial});
-// 		cargarZonas(${alarmaSerial});
-		
-		cargarParticionesAlarmasV2(${alarmaSerial});
-		cargarZonasV2(${alarmaSerial});
-		
-		if(${serialpulsador}.length >0){
-			cargarColorbotones(${serialpulsador});
-		}
+		var urlsendStart = $(location).attr('pathname') + "/tiposdeVista";
+   		$.ajax({ url : urlsendStart,
+   			contentType: "application/json",
+   			dataType: 'json',
+   			success: function(data){
+   				if(data.success){
+  			 		cargarParticionesAlarmas(data.alarmav1);
+  			 		cargarZonas(data.alarmav1);  					
+  			 		cargarParticionesAlarmasV2(data.alarmav2);
+  					cargarZonasV2(data.alarmav2);
+  					cargarColorbotones(data.otros);
+   				}
+   			}			
+   		});
+			
 		setTimeout(iniciaConexion, 2000);
 // 		cambio();
 	});
 </script>
-
 
 <script type="text/javascript">
 function getParameterByName(name) {
@@ -114,13 +119,10 @@ $("#serialnumber").blur(function() {
 <script type="text/javascript">
 function iniciaConexion(){
 	console.log("dispositivos: "+ ${cantidadSensores});
-// 	if(${cantidadSensores}!=0){
-// 		startConnectSonoff("mqtt.coiaca.com", 8081, false, "mqttusr","mqttpwd",${topicos});
-// 	}
-	console.log("dispositivos alarma: "+ ${cantidadAlarma})
+	console.log("dispositivos alarma: "+ ${cantidadAlarma});
+	console.log("topicos: "+ ${topicosalarmas});
 	if(${cantidadAlarma}!=0){
 	startConnectAlarma("${hostalarma}","${puertoalarma}",${sslalarma},"${usuarioalarma}","${passalarma}",${topicosalarmas});
-	
 	}
 }
 </script>
@@ -180,7 +182,7 @@ jQuery("#demo").qrcode({
   
 
 
-<body>
+	<body>
 
 	<div id="wrapper">	
 		<div class="container-fluid">
@@ -319,111 +321,7 @@ messaging.onTokenRefresh(() => {
   </div>
 </div>
 	
-  <div class="modal fade" id="modalSoftware" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Nuevo dispositivo</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-          	<span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <form role="form" action="<c:url value="home/create"/>" method="post">
-        	<div class="modal-body">
-					<div id="infoGeneralSoft" style="display:inline">
-						<b>Alta Protero Virtal</b> 
-						<p></p>
-						<div class="row">
-  							<div class="col-md-6">
-								<b>Calle</b> 
-								<input name="calle" id="calle" class="form-control" required>
-								<p></p>
-								<b>Piso</b> 
-								<input name="piso" id="piso" class="form-control" >
-								<p></p>
-								<b>Pais</b> 
-								<select id="pais" name="pais" class="form-control">
-									<option value="none">Seleccione uno</option>
-									  <script>
-									  	var sel = document.getElementById('pais');
-									  	var state = new Array("Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antarctica", "Antigua_and_Barbuda",
-									  			"Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados",
-									  			"Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia_and_Herzegovina", "Botswana",
-									  			"Brazil", "Brunei", "Bulgaria", "Burkina_Faso", "Burma", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape_Verde",
-									  			"Central_African_Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo_Democratic_Republic",
-									  			"Congo_Republic_of_the", "Costa_Rica", "Cote_dIvoire", "Croatia", "Cuba", "Cyprus", "Czech_Republic", "Denmark",
-									  			"Djibouti", "Dominica", "Dominican_Republic", "East Timor", "Ecuador", "Egypt", "El_Salvador", "Equatorial_Guinea",
-									  			"Eritrea", "Estonia", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana",
-									  			"Greece", "Greenland", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hong_Kong",
-									  			"Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan",
-									  			"Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea_North", "Korea_South", "Kuwait", "Kyrgyzstan", "Laos", "Latvia",
-									  			"Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macedonia", "Madagascar",
-									  			"Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall_Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia",
-									  			"Moldova", "Mongolia", "Morocco", "Monaco", "Mozambique", "Namibia", "Nauru", "Nepal", "Netherlands", "New_Zealand",
-									  			"Nicaragua", "Niger", "Nigeria", "Norway", "Oman", "Pakistan", "Panama", "Papua_New_Guinea", "Paraguay", "Peru",
-									  			"Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Samoa", "San_Marino", " Sao_Tome",
-									  			"Saudi_Arabia", "Senegal", "Serbia_and_Montenegro", "Seychelles", "Sierra_Leone", "Singapore", "Slovakia", "Slovenia",
-									  			"Solomon_Islands", "Somalia", "South_Africa", "Spain", "Sri_Lanka", "Sudan", "Suriname", "Swaziland", "Sweden",
-									  			"Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad_and_Tobago",
-									  			"Tunisia", "Turkey", "Turkmenistan", "Uganda", "Ukraine", "United_Arab_Emirates", "United_Kingdom", "United_States",
-									  			"Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe");
-									  	
-										 for(var hi=0; hi<state.length; hi++){
-											    var sel = document.getElementById("pais");
-											    var option = document.createElement("option");
-											    option.text = state[hi];
-											    option.value = state[hi]; 
-											    sel.add(option);
-											  }	
-									  </script>
-								</select>
-								<p></p>
-								<b>Localidad</b> 
-								<input name="localidad" id="localidad" class="form-control" >
-							</div>
-							<div class="col-md-6">
-								<b>Numero</b> 
-								<input name="numero" id="numero" class="form-control" required>
-								<p></p>
-								<b>Depto</b> 
-								<input name="depto" id="depto" class="form-control">
-								<p></p>
-								<b>Provincia</b> 
-								<input name="provincia" id="provincia" class="form-control" >
-								<p></p>
-								<b>Codigo Postal</b> 
-								<input name="codpostal" id="codpostal" class="form-control" >
-							</div>
-							<p></p>
-							<div class="col-md-12">
-								<b>Tipo de Direccion</b> 
-								<select id="tipodireccion" name="tipodireccion" class="form-control">
-									<option value="none">Seleccione uno</option>
-									<option value="casa">Casa</option>
-									<option value="trabajo">Trabajo</option>
-									<option value="otro">Otro</option>
-								</select>
-								<p></p>
-							</div>
-						</div>
-					</div>
-					<div id="infoFinalSoft" style="display:none">
-						<h5>La configuración está lista. Precione Agregar Dispositivo para terminar.</h5>
-						<p></p>
-					</div>
-					<div class="btn-group">
-	          			<button id="botonAnteriorsof" style="display:none" class="btn btn-secondary" onclick="anteriorAnimacionSoft()" type="button">Volver</button>
-	          			<button id="botonSiguientesof" class="btn btn-primary" onclick="siguienteAnimacionSoft()" type="button">Continuar</button>
-	          		</div>
-        	</div>
-	        <div class="modal-footer">
-	          	<button type="button" style="display:none" id="botoncancelarsof" class="btn btn-secondary"  data-dismiss="modal">Cancelar</button> 	
-	          	<button type="submit" style="display:none" id="botonfinalizarsof" class="btn btn-primary">Agregar Dispositivo</button>
-	        </div>
-        </form>
-      </div>
-    </div>
-  </div>
+  
   
   
   <div class="modal fade" id="modalHardware" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -667,7 +565,221 @@ messaging.onTokenRefresh(() => {
   </div>
 
 
-	<div class="modal fade" id="modalTimerString" tabindex="-1"
+	
+	<!--  Confirmar accion -->
+	<div class="modal fade" id="confirmacion" tabindex="-1" role="dialog" aria-labelledby="confirmacion" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirmar Acción</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">¿Esta seguro de confirmar la acción?</div>
+        <div class="modal-footer">
+          	<input type="hidden" name="accionalarma" id="accionalarma"/>
+          	<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          	<button class="btn btn-primary" onclick="enviarComandotobackendV2(accionalarma.value);" data-dismiss="modal">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <script type="text/javascript">
+    $(function () {
+        $(".identificar_confirmacion").click(function () {
+            var my_id_value = $(this).data('id');
+            $("#accionalarma").val(my_id_value);
+        })
+    });
+   </script>
+   
+   
+   
+  <!-- Particiones Seleccion -->
+  	<div class="modal fade" id="confir_particion" tabindex="-1" role="dialog" aria-labelledby="confir_particion" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Partition Selection</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+	        <div class="col-md-12">
+				<b>Partitions</b> 
+				<p> </p>
+				<select id="numparticion" name="numparticion" class="form-control">
+					<option value="none">Select</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+				</select>
+				<p></p>
+			</div>      
+        </div>
+        <div class="modal-footer">
+          	<input type="hidden" name="serial" id="serial"/>
+          	<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          	<button class="btn btn-primary" onclick="cambiarParticion(serial.value,numparticion.value);" data-dismiss="modal">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <script type="text/javascript">
+    $(function () {
+        $(".identificar_particion").click(function () {
+            var my_value = $(this).data('id');
+            $("#serial").val(my_value);
+        })
+    });
+   </script>
+
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">¿Esta seguro de Salir?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">¿Está listo para finalizar su sesión actual?</div>
+        <div class="modal-footer">
+          <form role="form" action="<c:url value="/logoutsession"/>" method="get" enctype="multipart/form-data">
+          	<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          	<a class="btn btn-primary" href="javascript:;" onclick="parentNode.submit();">Salir</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+<div class="modal fade" id="modalSoftware" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nuevo dispositivo</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          	<span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <form role="form" action="<c:url value="home/create"/>" method="post">
+        	<div class="modal-body">
+					<div id="infoGeneralSoft" style="display:inline">
+						<b>Alta Protero Virtal</b> 
+						<p></p>
+						<div class="row">
+  							<div class="col-md-6">
+								<b>Calle</b> 
+								<input name="calle" id="calle" class="form-control" required>
+								<p></p>
+								<b>Piso</b> 
+								<input name="piso" id="piso" class="form-control" >
+								<p></p>
+								<b>Pais</b> 
+								<select id="pais" name="pais" class="form-control">
+									<option value="none">Seleccione uno</option>
+									  <script>
+									  	var sel = document.getElementById('pais');
+									  	var state = new Array("Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antarctica", "Antigua_and_Barbuda",
+									  			"Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados",
+									  			"Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia_and_Herzegovina", "Botswana",
+									  			"Brazil", "Brunei", "Bulgaria", "Burkina_Faso", "Burma", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape_Verde",
+									  			"Central_African_Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo_Democratic_Republic",
+									  			"Congo_Republic_of_the", "Costa_Rica", "Cote_dIvoire", "Croatia", "Cuba", "Cyprus", "Czech_Republic", "Denmark",
+									  			"Djibouti", "Dominica", "Dominican_Republic", "East Timor", "Ecuador", "Egypt", "El_Salvador", "Equatorial_Guinea",
+									  			"Eritrea", "Estonia", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana",
+									  			"Greece", "Greenland", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hong_Kong",
+									  			"Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan",
+									  			"Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea_North", "Korea_South", "Kuwait", "Kyrgyzstan", "Laos", "Latvia",
+									  			"Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macedonia", "Madagascar",
+									  			"Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall_Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia",
+									  			"Moldova", "Mongolia", "Morocco", "Monaco", "Mozambique", "Namibia", "Nauru", "Nepal", "Netherlands", "New_Zealand",
+									  			"Nicaragua", "Niger", "Nigeria", "Norway", "Oman", "Pakistan", "Panama", "Papua_New_Guinea", "Paraguay", "Peru",
+									  			"Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Samoa", "San_Marino", " Sao_Tome",
+									  			"Saudi_Arabia", "Senegal", "Serbia_and_Montenegro", "Seychelles", "Sierra_Leone", "Singapore", "Slovakia", "Slovenia",
+									  			"Solomon_Islands", "Somalia", "South_Africa", "Spain", "Sri_Lanka", "Sudan", "Suriname", "Swaziland", "Sweden",
+									  			"Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad_and_Tobago",
+									  			"Tunisia", "Turkey", "Turkmenistan", "Uganda", "Ukraine", "United_Arab_Emirates", "United_Kingdom", "United_States",
+									  			"Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe");
+									  	
+										 for(var hi=0; hi<state.length; hi++){
+											    var sel = document.getElementById("pais");
+											    var option = document.createElement("option");
+											    option.text = state[hi];
+											    option.value = state[hi]; 
+											    sel.add(option);
+											  }	
+									  </script>
+								</select>
+								<p></p>
+								<b>Localidad</b> 
+								<input name="localidad" id="localidad" class="form-control" >
+							</div>
+							<div class="col-md-6">
+								<b>Numero</b> 
+								<input name="numero" id="numero" class="form-control" required>
+								<p></p>
+								<b>Depto</b> 
+								<input name="depto" id="depto" class="form-control">
+								<p></p>
+								<b>Provincia</b> 
+								<input name="provincia" id="provincia" class="form-control" >
+								<p></p>
+								<b>Codigo Postal</b> 
+								<input name="codpostal" id="codpostal" class="form-control" >
+							</div>
+							<p></p>
+							<div class="col-md-12">
+								<b>Tipo de Direccion</b> 
+								<select id="tipodireccion" name="tipodireccion" class="form-control">
+									<option value="none">Seleccione uno</option>
+									<option value="casa">Casa</option>
+									<option value="trabajo">Trabajo</option>
+									<option value="otro">Otro</option>
+								</select>
+								<p></p>
+							</div>
+						</div>
+					</div>
+					<div id="infoFinalSoft" style="display:none">
+						<h5>La configuración está lista. Precione Agregar Dispositivo para terminar.</h5>
+						<p></p>
+					</div>
+					<div class="btn-group">
+	          			<button id="botonAnteriorsof" style="display:none" class="btn btn-secondary" onclick="anteriorAnimacionSoft()" type="button">Volver</button>
+	          			<button id="botonSiguientesof" class="btn btn-primary" onclick="siguienteAnimacionSoft()" type="button">Continuar</button>
+	          		</div>
+        	</div>
+	        <div class="modal-footer">
+	          	<button type="button" style="display:none" id="botoncancelarsof" class="btn btn-secondary"  data-dismiss="modal">Cancelar</button> 	
+	          	<button type="submit" style="display:none" id="botonfinalizarsof" class="btn btn-primary">Agregar Dispositivo</button>
+	        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="modal fade" id="modalTimerString" tabindex="-1"
 		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -747,61 +859,8 @@ messaging.onTokenRefresh(() => {
 			</div>
 		</div>
 	</div>
-
-
-    <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">¿Esta seguro de Salir?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">¿Está listo para finalizar su sesión actual?</div>
-        <div class="modal-footer">
-          <form role="form" action="<c:url value="/logoutsession"/>" method="get" enctype="multipart/form-data">
-          	<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          	<a class="btn btn-primary" href="javascript:;" onclick="parentNode.submit();">Salir</a>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-	<!--  Confirmar accion -->
-	  <div class="modal fade" id="confirmacion" tabindex="-1" role="dialog" aria-labelledby="confirmacion" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Confirmar Acción</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">¿Esta seguro de confirmar la acción?</div>
-        <div class="modal-footer">
-          	<input type="hidden" name="accionalarma" id="accionalarma"/>
-          	<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          	<button class="btn btn-primary" onclick="enviarComandotobackendV2(${accionalarma});" data-dismiss="modal">Aceptar</button>
-        </div>
-      </div>
-    </div>
-  </div>
   
   
-  <script type="text/javascript">
-    $(function () {
-        $(".identificar_confirmacion").click(function () {
-            var my_id_value = $(this).data('id');
-            console.log("INFO-------------------------------------------- "+ my_id_value);
-            $("#accionalarma").val(my_id_value);
-        })
-    });
-   </script>
-
 
 	
 	<script src="resources/mentor/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

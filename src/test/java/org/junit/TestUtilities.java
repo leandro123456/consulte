@@ -36,6 +36,104 @@ import com.lgg.nticxs.web.model.Notificacion;
 public class TestUtilities {
 	
 	//@Test
+	public void testSearhUsuario() {
+		UserDAO userdao=new UserDAO();
+		JSONObject json = new JSONObject();
+		try {
+			String nombre = "leandrogabrielguzman@gmail.com";
+			String topico="DSC010000000002/activePartition";
+			User user = userdao.retrieveByMail(nombre);
+			String serial=topico.split("/")[0];
+			if(user.getDeviceserialnumber().containsKey(serial)) {
+				json.put("conocido",true);
+				System.out.println(json.toString());
+			}else {	
+				json.put("conocido", false); 
+				System.out.println(json.toString()); 
+				}		
+		} catch (Exception e) {
+			json.put("conocido", false);
+			System.out.println(json.toString());
+	}}
+	
+	//@Test
+	public void testSearchAllviews() {
+		UserDAO userdao=new UserDAO();
+		DeviceDAO devicedao= new DeviceDAO();
+		JSONObject json = new JSONObject();
+		try {
+			String nombre = "leandrogabrielguzman@gmail.com";
+			String usuarioSolicitante= new String(Base64.getEncoder().encode(nombre.getBytes()));
+			System.out.println("usuarioSolicitante: "+ usuarioSolicitante);
+			User user = userdao.retrieveByMail(nombre);
+			Map<String,String> serials=user.getDeviceserialnumber();
+			String alarma="";
+			String alarmav2="";
+			String otros="";
+			serials.forEach((serial,v) -> {
+				Device device= devicedao.retrieveBySerialNumber(serial);
+				if(device!=null) {
+					String vista=device.getVista().get(usuarioSolicitante);
+					vista= vista.split(";")[0];
+					if(vista.equals("alarmav2")) {
+						if(alarmav2.equals(""))	alarmav2.concat(serial);
+						else	alarmav2.concat("-"+serial);
+					}else if(vista.equals("alarma")) {
+						if(alarma.equals(""))	alarma.concat(serial);
+						else	alarma.concat("-"+serial);
+					}
+					else {
+						if(otros.equals(""))	otros.concat(serial);
+						else	otros.concat("-"+serial);
+					}
+				}
+			});
+			json.put("alarmav1", alarma);
+			json.put("alarmav2", alarmav2);
+			json.put("otros", otros);
+			json.put("fallo", false);
+			System.out.println(json.toString());
+		} catch (Exception e) {
+			json.put("alarmav1","");
+			json.put("alarmav2", "");
+			json.put("otros", "");
+			json.put("fallo", true);
+			System.out.println(json.toString());
+		}
+	}
+	
+	
+	//@Test
+	public void searchTest() {
+		String val= "DSC010000000002-desarmar-1";
+		String[] a= val.split("-");
+		System.out.println(a.length);
+		for(int i=0 ; i<a.length; i++) {
+			System.out.println(a[i]);
+		}
+	}
+	
+	//@Test
+	public void searchUserInView() {
+		String username =Base64.getEncoder().encodeToString("leandrogabrielguzman@gmail.com".getBytes());
+		DeviceDAO devdao= new DeviceDAO();
+		Device device= devdao.retrieveBySerialNumber("DSC010000000002");
+		
+		if (device.getUserowner().equals(username))
+			System.out.println(true+" owner");
+		for(String useradmin: device.getAdmins()){
+			if(useradmin.equals(username))
+				System.out.println(true+" admin");
+		}
+		for(String useronly: device.getUsers()){
+			if(useronly.equals(username))
+				System.out.println(true+" user");
+		}
+		System.out.println(false+"");
+	}
+	
+	
+	//@Test
 	public void testCrearNotificacion(){
 		NotificacionDAO notdao= new NotificacionDAO();
 		Notificacion not = new Notificacion();
@@ -192,9 +290,9 @@ public class TestUtilities {
 		user.setEmail("leandrogabrielguzman@gmail.com");
 		user.setFirstname("leo");
 		user.setDelete(false);
-		List<String> listadeequipos = new ArrayList<>();
-		listadeequipos.add("1122122");
-		listadeequipos.add("dsdasdsd");
+		Map<String,String> listadeequipos = new HashMap<>();
+		listadeequipos.put("1122122","");
+		listadeequipos.put("dsdasdsd","");
 		user.setDeviceserialnumber(listadeequipos);
 		user.setLastname("sapo");
 		user.setPassCuenta("pass");
@@ -257,10 +355,10 @@ public class TestUtilities {
 		UserDAO userdao = new UserDAO();
 		User user = userdao.retrieveByMail("jaha@gmail.com");
 		System.out.println("encontro la papa: "+ user);
-
-		for(String deviceserial : user.getDeviceserialnumber()){
-			System.out.println("serialnumber: "+ deviceserial);
-			Device device = devicedao.retrieveBySerialNumber(deviceserial);
+		Map<String,String> serials=user.getDeviceserialnumber();
+		serials.forEach((serial,v) -> {
+			System.out.println("serialnumber: "+ serial);
+			Device device = devicedao.retrieveBySerialNumber(serial);
 			String valor = (String) device.getVista().get("jaha@gmail.com");
 			System.out.println(valor);
 			String[] a = valor.split(";");
@@ -276,7 +374,7 @@ public class TestUtilities {
 			}
 			String vistatotal = vista.getInicio()+contenidototal+vista.getFin();
 			System.out.println(vistatotal);
-		}
+		});
 	}
 	
 
@@ -333,8 +431,8 @@ public class TestUtilities {
 			
 			UserDAO userdao = new UserDAO();
 			User user =userdao.retrieveByMail("t@tes");
-			if(user != null && !user.getDeviceserialnumber().contains(device.getSerialnumber())){
-			user.getDeviceserialnumber().add(device.getSerialnumber());
+			if(user != null && !user.getDeviceserialnumber().containsKey(device.getSerialnumber())){
+			user.getDeviceserialnumber().put(device.getSerialnumber(),"");
 			userdao.update(user);
 			}
 		} catch (Exception e) {

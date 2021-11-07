@@ -3,20 +3,16 @@ package org.junit;
 import static org.junit.Assert.assertTrue;
 
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import javax.imageio.ImageIO;
-import javax.swing.JFrame;
 
 import org.apache.commons.io.FileUtils;
 import org.json.JSONObject;
-import org.springframework.util.FileCopyUtils;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -26,14 +22,65 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import com.lgg.nticxs.web.DAO.DeviceDAO;
 import com.lgg.nticxs.web.DAO.DeviceDefaultConfigurationDAO;
+import com.lgg.nticxs.web.DAO.UserDAO;
 import com.lgg.nticxs.web.DAO.VistaDAO;
 import com.lgg.nticxs.web.model.Vista;
 import com.lgg.nticxs.web.model.simple.SimpleTimerString;
+import com.lgg.nticxs.web.model.Device;
 import com.lgg.nticxs.web.model.DeviceDefaultConfiguration;
+import com.lgg.nticxs.web.model.User;
 
 
 public class Test1 {
+	
+	//@Test
+	public void testSearchAllviews() {
+		UserDAO userdao=new UserDAO();
+		DeviceDAO devicedao= new DeviceDAO();
+		JSONObject json = new JSONObject();
+		try {
+			String nombre = "leandrogabrielguzman@gmail.com";
+			String usuarioSolicitante= new String(Base64.getEncoder().encode(nombre.getBytes()));
+			System.out.println("usuarioSolicitante: "+ usuarioSolicitante);
+			User user = userdao.retrieveByMail(nombre);
+			Map<String, String> serials=user.getDeviceserialnumber();
+			String alarma="";
+			String alarmav2="";
+			String otros="";
+			serials.forEach((serial,v) -> {
+				Device device= devicedao.retrieveBySerialNumber(serial);
+				if(device!=null) {
+					String vista=device.getVista().get(usuarioSolicitante);
+					vista= vista.split(";")[0];
+					if(vista.equals("alarmav2")) {
+						if(alarmav2.equals(""))	alarmav2.concat(serial);
+						else	alarmav2.concat("-"+serial);
+					}else if(vista.equals("alarma")) {
+						if(alarma.equals(""))	alarma.concat(serial);
+						else	alarma.concat("-"+serial);
+					}
+					else {
+						if(otros.equals(""))	otros.concat(serial);
+						else	otros.concat("-"+serial);
+					}
+				}
+			});
+			json.put("alarmav1", alarma);
+			json.put("alarmav2", alarmav2);
+			json.put("otros", otros);
+			json.put("fallo", false);
+			System.out.println(json.toString());
+		} catch (Exception e) {
+			json.put("alarmav1","");
+			json.put("alarmav2", "");
+			json.put("otros", "");
+			json.put("fallo", true);
+			System.out.println(json.toString());
+			e.printStackTrace();
+		}
+	}
 	
 	//@Test
 	public void testParseBase64() {
@@ -43,7 +90,14 @@ public class Test1 {
 		
 		String fin = new String(Base64.getDecoder().decode(propietario.getBytes()));
 		System.out.println("resultado: "+ fin);
-		
+	}
+	
+	//@Test
+	public void testChar() {
+		String value="1234";
+		char[]a=value.toCharArray();
+		for(int i=0; i<a.length;i++)
+			System.out.println(a[i]);
 	}
 	
 	

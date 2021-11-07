@@ -2,6 +2,7 @@ package com.lgg.nticxs.web.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -119,10 +120,11 @@ public class DeviceDebugController {
 		String name = request.getUserPrincipal().getName();
 		User usuario = userdao.retrieveByMail(name);
 		List<SimpleDevice> devices = new ArrayList<>();
-		for(String namedevice : usuario.getDeviceserialnumber()) {
-			Device device = devicedao.retrieveBySerialNumber(namedevice);
+		Map<String,String> serials=usuario.getDeviceserialnumber();
+		serials.forEach((serial,v) -> {
+			Device device = devicedao.retrieveBySerialNumber(serial);
 			devices.add(new SimpleDevice(device));
-		}
+		});
 		System.out.println("compartido: "+devices);
 		model.addAttribute("devices", devices);
 		return "device_show_debug_list.jsp";
@@ -135,10 +137,11 @@ public class DeviceDebugController {
 		String name = request.getUserPrincipal().getName();
 		User usuario = userdao.retrieveByMail(name);
 		List<SimpleDevice> devices = new ArrayList<>();
-		for(String namedevice : usuario.getDeviceserialnumber()) {
-			Device device = devicedao.retrieveBySerialNumber(namedevice);
+		Map<String,String> serials=usuario.getDeviceserialnumber();
+		serials.forEach((serial,v) -> {
+			Device device = devicedao.retrieveBySerialNumber(serial);
 			devices.add(new SimpleDevice(device));
-		}
+		});
 		model.addAttribute("devices", devices);
 	}
 	

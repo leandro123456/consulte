@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.Cookie;
@@ -38,6 +39,7 @@ public class HomeController {
 	UserDAO userdao = new UserDAO();
 	private DeviceDAO devicedao = new DeviceDAO();
 	private List<String> deviceAsociadoAlarma = new ArrayList<>();
+	private List<String> deviceAsociadoAlarmaV2 = new ArrayList<>();
 	private List<String> deviceAsociadoTermomtro = new ArrayList<>();
 	private List<String> deviceAsociadoSonoff = new ArrayList<>();
 	private List<String> topicosdeAlarma = new ArrayList<>();
@@ -115,6 +117,9 @@ public class HomeController {
 		aux =Utils.vistas(Base64.getEncoder().encodeToString(user.getEmail().getBytes()),deviceAsociadoAlarma,Device.ALARMA);
 		for(String vista1 : aux)
 			vistas.add(vista1);
+		aux =Utils.vistas(Base64.getEncoder().encodeToString(user.getEmail().getBytes()),deviceAsociadoAlarmaV2,Device.ALARMAV2);
+		for(String vista1 : aux)
+			vistas.add(vista1);
 		aux = Utils.vistas(Base64.getEncoder().encodeToString(user.getEmail().getBytes()), deviceAsociadoDoorman, Device.DOORMAN);
 		for(String vista1: aux) {
 			System.out.println("Esta es la llamada del doorman");
@@ -138,8 +143,8 @@ public class HomeController {
         model.addAttribute("usuarioalarma", "mqttusr");
         model.addAttribute("passalarma", "mqttpwd");
         model.addAttribute("topicosalarmas", topicosdeAlarma);
-        model.addAttribute("alarmaSerial", obtenerSerialAlarmas(user.getDeviceserialnumber()));
-        model.addAttribute("serialpulsador",obtenerPulsadores());
+       // model.addAttribute("alarmaSerial", obtenerSerialAlarmas(user.getDeviceserialnumber()));
+        //model.addAttribute("serialpulsador",obtenerPulsadores());
         model.addAttribute("tieneAlarma", deviceAsociadoAlarma.size()>0);
         
         //fin de alarmas
@@ -213,18 +218,21 @@ public class HomeController {
 
 
 	
-	private void clasificarSerialUsuario(List<String> deviceserialnumbers) {
+	private void clasificarSerialUsuario(Map<String, String> deviceserialnumbers) {
 		System.out.println("cantidad de elementos: "+ deviceserialnumbers.size());
 		deviceAsociadoAlarma = new ArrayList<>();
+		deviceAsociadoAlarmaV2 = new ArrayList<>();
 		deviceAsociadoSonoff = new ArrayList<>();
 		deviceAsociadoTermomtro = new ArrayList<>();
 		deviceAsociadoDoorman = new ArrayList<>();
-		for(String serial: deviceserialnumbers) {
+		deviceserialnumbers.forEach((serial,v) -> {
 			Device device = devicedao.retrieveBySerialNumber(serial);
 			System.out.println("tipo del DEVICE en clasificarUsuario: "+ device.getTipo());
 				if(device.getTipo()!=null) {
 					if(device.getTipo().equals(Device.ALARMA))
 						deviceAsociadoAlarma.add(serial);
+					else if(device.getTipo().equals(Device.ALARMAV2))
+						deviceAsociadoAlarmaV2.add(serial);
 					else if (device.getTipo().equals(Device.SONOFF))
 						deviceAsociadoSonoff.add(serial);
 					else if (device.getTipo().equals(Device.TERMOMETRO))
@@ -238,19 +246,20 @@ public class HomeController {
 				}else {
 					
 				}
-			}
+			});
 		}
 
 
-	private List<String> obtenerTopicosDeTodosLosEndpoints(List<String> devicesnumber, String tipoSolicitado) {
+	private List<String> obtenerTopicosDeTodosLosEndpoints(Map<String,String> devicesnumber, String tipoSolicitado) {
 		List<String> topicos = new ArrayList<>(); 
-		for(String serial: devicesnumber){
+		devicesnumber.forEach((serial,v) -> {
 			System.out.println("llego a la carga de los topicos: "+serial);
 			Device device=devicedao.retrieveBySerialNumber(serial);
 			if(device.getTipo().equals(Device.DOORMAN)) {
 				
 			}
-			else if(tipoSolicitado.equals(Device.ALARMA) && device.getTipo().equals(Device.ALARMA)) {
+			else if((tipoSolicitado.equals(Device.ALARMA) || tipoSolicitado.equals(Device.ALARMAV2)) &&
+					(device.getTipo().equals(Device.ALARMA) || device.getTipo().equals(Device.ALARMAV2))) {
 					if(device.getUsedefaultbrocker()){
 						topicos.add("'"+device.getDeviceconfiguration().get(0).getTopicescuchar()+"'");
 					}
@@ -259,7 +268,8 @@ public class HomeController {
 					}
 
 			}
-			else if(!tipoSolicitado.equals(Device.ALARMA) && !device.getTipo().equals(Device.ALARMA)) {
+			else if((!tipoSolicitado.equals(Device.ALARMA) || !tipoSolicitado.equals(Device.ALARMAV2)) && 
+					(!device.getTipo().equals(Device.ALARMA) || !device.getTipo().equals(Device.ALARMAV2))) {
 					if(device.getUsedefaultbrocker()){
 						topicos.add("'"+device.getDeviceconfiguration().get(0).getTopicescuchar()+"'");
 						System.out.println("VA A AGREGAR ESTE TOPICO LOCAL: "+ device.getDeviceconfiguration().get(0).getTopicescuchar());
@@ -269,7 +279,7 @@ public class HomeController {
 						System.out.println("VA A AGREGAR TOPICO NO LOCAL: " +device.getDeviceconfiguration().get(1).getTopicescuchar());
 					}
 				}
-		}
+		});
 		
 		return topicos;
 	}

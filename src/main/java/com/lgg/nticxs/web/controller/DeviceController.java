@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -64,11 +65,8 @@ public class DeviceController {
 		try {
 			MongoCommands.Delete(COLLECTION_DEVICE, "serialnumber", deviceserial);
 			for(User user: userdao.retrieveAllUsers()) {
-				int index = user.getDeviceserialnumber().indexOf(deviceserial);
-				if (index != -1) {
-					user.getDeviceserialnumber().remove(index);
-					userdao.update(user);
-				}
+				user.getDeviceserialnumber().remove(deviceserial);
+				userdao.update(user);
 			}
 			model.addAttribute("msg", "Borrado exitoso");
 		} catch (Exception e) {
@@ -120,10 +118,11 @@ public class DeviceController {
 		String name = request.getUserPrincipal().getName();
 		User usuario = userdao.retrieveByMail(name);
 		List<SimpleDevice> devices = new ArrayList<>();
-		for(String namedevice : usuario.getDeviceserialnumber()) {
-			Device device = devicedao.retrieveBySerialNumber(namedevice);
+		Map<String,String> serials=usuario.getDeviceserialnumber();
+		serials.forEach((serial,v) -> {
+			Device device = devicedao.retrieveBySerialNumber(serial);
 			devices.add(new SimpleDevice(device));
-		}
+		});
 		System.out.println("compartido: "+devices);
 		model.addAttribute("devices", devices);
 		return "device_show_my.jsp";
@@ -150,7 +149,8 @@ public class DeviceController {
 	
 	
 	@PostMapping("home/create")
-	public String createDeviceNew(Model model,HttpServletRequest request,			
+	public String createDeviceNew(Model model,HttpServletRequest request,
+			@RequestParam(name="password", required=true) String password,
 			//software
 			@RequestParam(name="calle", required=false) String calle,
 			@RequestParam(name="numero", required=false) String numero,
@@ -199,6 +199,7 @@ public class DeviceController {
 		System.out.println(codpostal);
 		System.out.println(tipodireccion);
 		System.out.println("------------------------------------------------------------------------");
+		System.out.println("PARAMETROS DE ENTRADA serialnumber: "+ password);
 		System.out.println("PARAMETROS DE ENTRADA serialnumber: "+ serialnumber);
 		System.out.println("PARAMETROS DE ENTRADA namedevice: "+ namedevice);
 		System.out.println("PARAMETROS DE ENTRADA descriptiondevice: "+ descriptiondevice);
@@ -229,13 +230,13 @@ public class DeviceController {
 		System.out.println("----------------- ES DORMAN: "+ esDoorman);
 		if(esDoorman) {
 			String serialDoorman= crearSerial(calle,numero,depto,piso,localidad, codpostal,provincia);
-			ManagementDevice.createDeviceDoorman(request,calle,numero,depto,piso,localidad, 
+			ManagementDevice.createDeviceDoorman(request,password,calle,numero,depto,piso,localidad, 
 					codpostal,provincia,pais,serialDoorman,tipodireccion);
 			model.addAttribute("msg", "Se creo exitosamente el dispositivo");
 		}
 		if(!esDoorman && devicedao.retrieveBySerialNumber(serialnumber) ==null){
 			ManagementDevice.createDevice(
-					request,serialnumber, namedevice, descriptiondevice, tipodevice, 
+					request,serialnumber, namedevice,password, descriptiondevice, tipodevice, 
 					//propoio configuracion
 					iphostescuchar, portescuchar, 
 					topiclisten, userescuchar,passescuchar,
@@ -250,7 +251,7 @@ public class DeviceController {
 		}else if (!esDoorman && devicedao.retrieveBySerialNumber(serialnumber) !=null){
 			System.out.println("TIPO DE DEVICE NO es NULL: "+tipodevice);
 			System.out.println("TIPO DE TERMOMETRO NO es NULL: "+tipovistatermometro);
-			ManagementDevice.updateDevice(request,serialnumber);
+			ManagementDevice.updateDevice(request,serialnumber,password);
 			model.addAttribute("msg", "El dispositivo ya estaba creado, usted fue agregado como usuario Administrador");
 		}
 		return "redirect: /";
@@ -305,10 +306,11 @@ public class DeviceController {
 		String name = request.getUserPrincipal().getName();
 		User usuario = userdao.retrieveByMail(name);
 		List<SimpleDevice> devices = new ArrayList<>();
-		for(String namedevice : usuario.getDeviceserialnumber()) {
-			Device device = devicedao.retrieveBySerialNumber(namedevice);
+		Map<String,String> serials=usuario.getDeviceserialnumber();
+		serials.forEach((serial,v) -> {
+			Device device = devicedao.retrieveBySerialNumber(serial);
 			devices.add(new SimpleDevice(device));
-		}
+		});
 		model.addAttribute("devices", devices);
 	}
 }

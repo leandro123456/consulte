@@ -27,20 +27,19 @@ public class DashboardController {
 	public String downloadDocument(@PathVariable String usermail)throws IOException {
 		System.out.println("empezo");
 		User user = userdao.retrieveByMail(usermail);
-        List<String> mymap;
         JSONObject json = new JSONObject();
         System.out.println("llego a dashboard document");
         System.out.println("user.getDeviceserialnumber()"+ user.getDeviceserialnumber().size());
-   		for(String deviceserial : user.getDeviceserialnumber()){
+        user.getDeviceserialnumber().forEach((deviceserial,v) -> {
 			System.out.println("serialnumber: "+ deviceserial);
 			Device device = devicedao.retrieveBySerialNumber(deviceserial);
 			if(device!= null){
-				mymap = new ArrayList<>();
+				List<String> mymap = new ArrayList<>();
 				mymap.add(device.getUserRole(usermail));
 				mymap.add((String) device.getVista().get(usermail));
 				json.put(deviceserial, mymap);
 			}
-		}
+		});
    		json.put("deviceserial", user.getDeviceserialnumber());
 		System.out.println("salio");
         return json.toString();

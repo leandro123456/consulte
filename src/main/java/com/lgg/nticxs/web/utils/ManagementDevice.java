@@ -25,7 +25,7 @@ public class ManagementDevice {
 
 	@SuppressWarnings("unused")
 	public static void createDevice(HttpServletRequest request, String deviceserial,
-			String namedevice, String descriptiondevice, String tipodevice, 
+			String namedevice, String password,String descriptiondevice, String tipodevice, 
 			String iphostescuchar, String portescuchar, String topiclisten, 
 			String userescuchar, String passescuchar, String topicwrite,
 			String iphostescucharremote, String portescucharremote, 
@@ -131,12 +131,12 @@ public class ManagementDevice {
 		}
 		
 		User user = userdao.retrieveByMail(name);
-		user.getDeviceserialnumber().add(deviceserial);
+		user.getDeviceserialnumber().put(deviceserial,password);
 		userdao.update(user);
 	}
 
 
-	public static void updateDevice(HttpServletRequest request, String deviceserial) {
+	public static void updateDevice(HttpServletRequest request, String deviceserial, String password) {
 		UserDAO userdao = new UserDAO();
 		DeviceDAO devicedao = new DeviceDAO();
 		//actualizo el usuario en el dispositivo
@@ -152,7 +152,7 @@ public class ManagementDevice {
 		devicedao.update(device);
 		//actualizo el usuario
 		User user1 = userdao.retrieveByMail(administrador);
-		user1.getDeviceserialnumber().add(deviceserial);
+		user1.getDeviceserialnumber().put(deviceserial,password);
 		userdao.update(user1);
 		System.out.println("Actualizo el dispositivo agregando un nuevo admin");
 		System.out.println("El dispositivo, ya existe usted se agrego como administrador, pero no como propietario del producto");
@@ -243,7 +243,7 @@ public class ManagementDevice {
 	}
 
 
-	public static void createDeviceDoorman(HttpServletRequest request,String calle,
+	public static void createDeviceDoorman(HttpServletRequest request,String password,String calle,
 			String numero, String depto,String piso,String localidad, String codpostal,
 			String provincia,String pais, String serialDoorman,	String tipodireccion) {
 		DeviceDAO devicedao = new DeviceDAO();
@@ -277,7 +277,7 @@ public class ManagementDevice {
 		
 		UserDAO userdao= new UserDAO();
 		User user = userdao.retrieveByMail(name);
-		user.getDeviceserialnumber().add(serialDoorman+numf);
+		user.getDeviceserialnumber().put(serialDoorman+numf,password);
 		userdao.update(user);
 	}
 

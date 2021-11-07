@@ -3,79 +3,113 @@
    function enviarComandotobackendV2(acalarma){
 	//var acalarma = document.getElementById("accionalarma").value;
 	var serial = acalarma.split("-",1);
-	console.log("Nombre de la particion: "+ "particion"+serial);
 	var particionactivaa= document.getElementById("particion"+serial).textContent;
    	var enc = window.btoa('${pageContext.request.userPrincipal.name}');
-   	console.log("busco particion-info: "+ acalarma+"-"+particionactivaa)
    	var urlsendInformation = $(location).attr('pathname') + "/ejecutaraccion/"+acalarma+"-"+particionactivaa;
    		$.ajax({ url : urlsendInformation,
    			contentType: "application/json",
    			dataType: 'json',
    			success: function(data){
-   				console.log("resultado despues de la ejecucion: "+ data.status);
+   				if(data.fallo){
+   				var x= data.status;
+				swal({
+					  title: x,
+					  icon: "error",
+					  timer: 2000,
+					  closeOnClickOutside: false,
+					  buttons: false,
+					});
+   				}
    			}			
    	});
    }
 
+   
+   
+   function cambiarParticion(serial,numparticion){
+	   	var urlsendInformation = $(location).attr('pathname') + "/changepartition/"+serial+"/"+numparticion;
+	   		$.ajax({ url : urlsendInformation,
+	   			contentType: "application/json",
+	   			dataType: 'json',
+	   			success: function(data){
+	   				if(data.fallo){
+	   				var x= data.status;
+					swal({
+						  title: x,
+						  icon: "error",
+						  timer: 2000,
+						  closeOnClickOutside: false,
+						  buttons: false,
+						});
+	   				}
+	   			}			
+	   	});
+	   }
 
+   
+   function updatepasswordV2(pass,confirmpass){
+	   	var urlsendInformation = $(location).attr('pathname') + "/updatepass/"+pass+"/"+confirmpass;
+	   		$.ajax({ url : urlsendInformation,
+	   			contentType: "application/json",
+	   			dataType: 'json',
+	   			success: function(data){
+	   				if(data.fallo){
+	   				var x= data.status;
+					swal({
+						  title: x,
+						  icon: "error",
+						  timer: 2000,
+						  closeOnClickOutside: false,
+						  buttons: false,
+						});
+	   				}else{
+		   				var x= data.status;
+						swal({
+							  title: x,
+							  icon: "success",
+							  timer: 2000,
+							  closeOnClickOutside: false,
+							  buttons: false,
+							});
+	   				}
+	   			}			
+	   	});
+	   }
 
+   
 
 /** comportamiento cuando recibe un mensaje*/
-function ProcesarAlarmaV2(message) {
-	console.log("ALARMA V2: "+message.destinationName+"; contenido: "+  message.payloadString);
-	var contenido= message.payloadString;
-	var topico = message.destinationName;
-	var dataObj = null;
-	if(message.destinationName.includes("/Status")){
-		informarstatusAlarma(message.destinationName, message.payloadString)
-	}
-	else if (topico.includes("activePartition")){
-		iddevice = topico.substring(0,topico.search("/activePartition"));
-		 var numparticion = document.getElementById("particion"+iddevice);
-		 numparticion.innerHTML = message.payloadString;
-		 console.log("Particion activa-> iddevice: "+iddevice+"; particion: "+ numparticion);
-	}
-	else if(topico.includes("Partition")){
-		var iddevice = topico.substring(0,topico.search("/Partition"));
-		var numparticion = topico.substring(topico.search("Partition")).replace("Partition","");
-		var numdisplay = document.getElementById("particion"+iddevice).innerHTML;
-		console.log("este es el numero de particion en el display: "+ numdisplay +"; num de particion: "+ numparticion);
-		if(numdisplay == numparticion){
-			escribirDisplayAlarmaV2(iddevice,contenido);
-		}
-	}
-	else if(topico.includes("Zone")){
-		var zona= topico.substring(topico.search("/Zone")).replace("/Zone","");
-		var serial= topico.substring(0,topico.search("/Zone"));
-		maximaZonaV2(serial, zona,contenido);
-		pintarBotonDeZonaV2(contenido,zona,serial);
-		HabilitarBotonActivarAlarma(serial);
-	}
-	else if(topico.includes("keepAlive")){
-		console.log("emnsaje de keepAlive: "+ contenido);
-		obtenerIconoNivelSAlarmaV2(contenido);
+function ProcesarAlarmaV2(data) {
+	var serial= data.serial;
+	var accion = data.accion;
+	switch(accion){
+		case "Status":
+			document.getElementById("status"+serial).firstChild.data = data.status;
+			break;
+		case "activePartition":
+			document.getElementById("particion"+serial).innerHTML = data.activo;
+			escribirDisplayAlarmaV2(serial,data.statuspartition);
+			break;
+		case "Zone":
+			maximaZonaV2(serial, data.numzone,data.zone);
+			pintarBotonDeZonaV2(serial,data.numzone,data.zone);
+			HabilitarBotonActivarAlarma(serial);
+			break;
+		case "keepAlive":
+			obtenerIconoNivelSAlarmaV2(serial,data.dBm);
+			break;
+		case "Partition":
+			var numdisplay = document.getElementById("particion"+serial).innerHTML;
+			console.log("este es el numero de particion en el display: "+ numdisplay +"; num de particion: "+ data.numpartition);
+			if(numdisplay == data.numpartition){
+				escribirDisplayAlarmaV2(serial,data.statuspartition);
+			}else{
+				escribirDisplayAlarmaV2(serial,"Unknown");
+			}
+			break;		
 	}
 }
 
-
-/**
- * 
- * @param iddevice
- * @param particione
- * @function evaluar status del dispositivo que esta reportando
- * @returns
- */
-//
-function informarstatusAlarma(topicorecibido, mensajerecibido){
-	var iddevice = topicorecibido.replace("/Status","");
-	if(mensajerecibido !="disconnected" && mensajerecibido !="online" && mensajerecibido !="offline"){
-		console.log("el mensaje que se recibio es invalido: "+ mensajerecibido);
-	}else{
-		var id= "status"+iddevice;
-		var spanStatus = document.getElementById(id);
-		spanStatus.firstChild.data = mensajerecibido;
-	}
-}
 
 
 
@@ -107,8 +141,9 @@ function escribirDisplayAlarmaV2(iddevice,contenido){
 	}else if (contenido == "trouble"){			
 		spanStatus.firstChild.data = "Trouble";
 		labelStatus.style.backgroundColor = "yellow";
-	}else{
-		labelStatus.firstChild.data = contenido;
+	}else {
+		spanStatus.firstChild.data = "Unknown";
+		labelStatus.style.backgroundColor = "grey";
 	}
 }
 
@@ -147,7 +182,7 @@ function maximaZonaV2(serial, zona,contenido){
  * @function Pinta las zonas si tienen alarma
  * @returns
  */
-function pintarBotonDeZonaV2(contenido,zona,serial){
+function pintarBotonDeZonaV2(serial,zona,contenido){
 	if(contenido == "1")
 		document.getElementById("izone_"+zona+"_"+serial).style.color = "blue"; 
 	else if (contenido =="0")
@@ -186,20 +221,18 @@ function HabilitarBotonActivarAlarma(serial){
  * @funtion analizar la señal y elegir icono
  * @returns
  */
-function obtenerIconoNivelSAlarmaV2(informacion){
-	var obj = JSON.parse(informacion);
-	var serialId=obj.deviceID;
-	var valor=obj.dBm *(-1);
+function obtenerIconoNivelSAlarmaV2(serial,calidad){
+	var valor=calidad *(-1);
 	if(valor>90)
-		document.getElementById('img_signal_'+serialId).src='resources/mqttResources/imgsignal/WS.png';
+		document.getElementById('img_signal_'+serial).src='resources/mqttResources/imgsignal/WS.png';
 	if(valor>75 && valor<91)
-		document.getElementById('img_signal_'+serialId).src='resources/mqttResources/imgsignal/1b.png';
+		document.getElementById('img_signal_'+serial).src='resources/mqttResources/imgsignal/1b.png';
 	else if(valor>60 && valor<76)
-		document.getElementById('img_signal_'+serialId).src='resources/mqttResources/imgsignal/2b.png';
+		document.getElementById('img_signal_'+serial).src='resources/mqttResources/imgsignal/2b.png';
 	else if(valor>45 && valor<61)
-		document.getElementById('img_signal_'+serialId).src='resources/mqttResources/imgsignal/3b.png';
+		document.getElementById('img_signal_'+serial).src='resources/mqttResources/imgsignal/3b.png';
 	else if(valor<46)
-		document.getElementById('img_signal_'+serialId).src='resources/mqttResources/imgsignal/4b.png';
+		document.getElementById('img_signal_'+serial).src='resources/mqttResources/imgsignal/4b.png';
 
 }
 
@@ -220,35 +253,41 @@ function obtenerIconoNivelSAlarmaV2(informacion){
  * @function carga de zonas al inicio
  * @returns
  */
+
 function cargarZonasV2(serialZonas){
-	var seriales = serialZonas;
-	console.log("estos son los serials: "+ seriales +" ;cantidad: "+ seriales.length);
-	seriales.forEach(cargazonaEfectivaV2);
+	if(serialZonas.includes("-")){
+		  var res = serialZonas.split("-");
+		  for (i = 0; i < res.length; i++) {
+			  cargazonaEfectivaV2(res[i])
+			}
+	  }else{
+		  cargazonaEfectivaV2(serialZonas)
+	  }
 }
 
-function cargazonaEfectivaV2(item, index){
-	var urlsendInformation = $(location).attr('pathname') + "/obtainmaxzone/"+item;
-	$.ajax({ url : urlsendInformation,
-		contentType: "application/json",
-		dataType: 'json',
-		success: function(data){
-			var maximo= data.result;
-			console.log("obtuvo las zonas: "+ maximo);
-				for(var j=1; j<maximo+1; j++){
-					document.getElementById("zone_"+j+"_"+item).style.display = 'inline';
-			}
-			var todaszonasapagadas = data.zonasapagadas;
-			if(todaszonasapagadas){
-				document.getElementById("ready_icon"+item).style.color = "green";
-			}
-			else{
-				document.getElementById("ready_icon"+item).style.color = "grey";
-				for(var k=0; k<data.listazonasencendidas.length; k++){
-					pintarBotonDeZonaV2("1",data.listazonasencendidas[k],item);
-				}
-			}
-		}});
-}
+function  cargazonaEfectivaV2(item){
+			var urlsendInformation = $(location).attr('pathname') + "/obtainmaxzone/"+item;
+			$.ajax({ url : urlsendInformation,
+				contentType: "application/json",
+				dataType: 'json',
+				success: function(data){
+					var maximo= data.result;
+					console.log("obtuvo las zonas: "+ maximo);
+					for(var j=1; j<maximo+1; j++){
+						document.getElementById("zone_"+j+"_"+item).style.display = 'inline';
+					}
+					var todaszonasapagadas = data.zonasapagadas;
+					if(todaszonasapagadas){
+						document.getElementById("ready_icon"+item).style.color = "green";
+					}
+					else{
+						document.getElementById("ready_icon"+item).style.color = "grey";
+						for(var k=0; k<data.listazonasencendidas.length; k++){
+							pintarBotonDeZonaV2(item,data.listazonasencendidas[k],"1");
+						}
+					}
+				}});
+		}
 
 
 
@@ -257,19 +296,27 @@ function cargazonaEfectivaV2(item, index){
  * @param serialAlarma
  * @returns
  */
+//cargar particiones en el display
 function cargarParticionesAlarmasV2(serialAlarma){	
-	serialAlarma.forEach(cargaparticionEfectivaV2);
+	 if(serialAlarma.includes("-")){
+		 var res = serialAlarma.split("-");
+		  for (i = 0; i < res.length; i++) {
+			  cargaparticionEfectivaV2(res[i]);
+			}
+	 }else
+		 cargaparticionEfectivaV2(serialAlarma);
 }
 
-function cargaparticionEfectivaV2(item, index){
-	var urlsendInformation = $(location).attr('pathname') + "/obtainpartition/"+item+"/inicio";
-	$.ajax({ url : urlsendInformation,
-		contentType: "application/json",
-		dataType: 'json',
-		success: function(data){
-			var numparticion = document.getElementById("particion"+item);
-			numparticion.innerHTML = data.particionactiva;
-			console.log("cambio de particion" + item+"; cambiodeparticion: " +data.contenidoparticion);
-		}});
+function cargaparticionEfectivaV2(item){
+			var urlsendInformation = $(location).attr('pathname') + "/obtainpartition/"+item+"/inicio";
+			$.ajax({ url : urlsendInformation,
+				contentType: "application/json",
+				dataType: 'json',
+				success: function(data){
+					var numparticion = document.getElementById("particion"+item);
+					numparticion.innerHTML = data.particionactiva;
+					escribirDisplayAlarmaV2(item,data.contenidoparticion);
+					console.log("cambio de particion" + item+"; cambiodeparticion: " +data.contenidoparticion);
+				}});
 }
 

@@ -456,6 +456,7 @@ public class Utils {
 			System.out.println("lista de dispositivos que necesito mostrar: "+ listaSerial.size() +" "+tipo);
 			for(int i=0; i<listaSerial.size(); i++){
 				String deviceserial= listaSerial.get(i);
+				System.out.println("SERIAL DEL DEVICE!!!!"+ deviceserial);
 				Device device = devicedao.retrieveBySerialNumber(deviceserial);
 				System.out.println("Este es el serial: "+ deviceserial +"; tipo: "+tipo);
 				String valor = (String) device.getVista().get(nombreUsuario);
@@ -471,7 +472,7 @@ public class Utils {
 			String contenidototal="";
 			Device device=devicedao.retrieveBySerialNumber(serialDevice);
 			DeviceConfiguration devconfig = null;
-			System.out.println("serial Device: "+ serialDevice);
+			System.out.println("serial Device===================: "+ serialDevice);
 			System.out.println("es vacio: "+ device.getDeviceconfiguration().isEmpty());
 			System.out.println("tipo de Device: "+ tipoDeVista);
 			System.out.println("------------------------------------------------------------");
@@ -560,6 +561,15 @@ public class Utils {
 						break;	
 					}
 				case "alarma":
+					contenidototal= vista.getContenido().get("alarmabody").replaceAll("CAMBIARALARMA", serialDevice);
+					contenidototal=contenidototal.replaceAll("NOMBREALARMA", device.getName());
+					contenidototal=contenidototal.replaceAll("HOSTALARMA", devconfig.getIphostescuchar());
+					contenidototal=contenidototal.replaceAll("PORTALARMA", devconfig.getPortescuchar());
+					contenidototal=contenidototal.replaceAll("USERALARMA", devconfig.getUserescuchar());
+					contenidototal=contenidototal.replaceAll("PASSALARMA", devconfig.getPassescuchar());
+					contenidototal=contenidototal.replaceAll("TOPICOALARMA", devconfig.getTopicescribir());
+					break;
+				case "alarmav2":
 					contenidototal= vista.getContenido().get("alarmabody").replaceAll("CAMBIARALARMA", serialDevice);
 					contenidototal=contenidototal.replaceAll("NOMBREALARMA", device.getName());
 					contenidototal=contenidototal.replaceAll("HOSTALARMA", devconfig.getIphostescuchar());
