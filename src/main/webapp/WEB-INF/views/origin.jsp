@@ -306,7 +306,7 @@ messaging.onTokenRefresh(() => {
     	<div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Nuevo dispositivo</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-          	<span aria-hidden="true">×</span>
+          	<span aria-hidden="true">ï¿½</span>
           </button>
         </div>
         <div class="modal-body">
@@ -321,7 +321,115 @@ messaging.onTokenRefresh(() => {
   </div>
 </div>
 	
+<<<<<<< HEAD
   
+=======
+  <div class="modal fade" id="modalSoftware" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nuevo dispositivo</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          	<span aria-hidden="true">ï¿½</span>
+          </button>
+        </div>
+        <form role="form" action="<c:url value="home/create"/>" method="post">
+        	<div class="modal-body">
+					<div id="infoGeneralSoft" style="display:inline">
+						<b>Alta Protero Virtal</b> 
+						<p></p>
+						<div class="row">
+  							<div class="col-md-6">
+								<b>Calle</b> 
+								<input name="calle" id="calle" class="form-control" required>
+								<p></p>
+								<b>Piso</b> 
+								<input name="piso" id="piso" class="form-control" >
+								<p></p>
+								<b>Pais</b> 
+								<select id="pais" name="pais" class="form-control">
+									<option value="none">Seleccione uno</option>
+									  <script>
+									  	var sel = document.getElementById('pais');
+									  	var state = new Array("Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antarctica", "Antigua_and_Barbuda",
+									  			"Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados",
+									  			"Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia_and_Herzegovina", "Botswana",
+									  			"Brazil", "Brunei", "Bulgaria", "Burkina_Faso", "Burma", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape_Verde",
+									  			"Central_African_Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo_Democratic_Republic",
+									  			"Congo_Republic_of_the", "Costa_Rica", "Cote_dIvoire", "Croatia", "Cuba", "Cyprus", "Czech_Republic", "Denmark",
+									  			"Djibouti", "Dominica", "Dominican_Republic", "East Timor", "Ecuador", "Egypt", "El_Salvador", "Equatorial_Guinea",
+									  			"Eritrea", "Estonia", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana",
+									  			"Greece", "Greenland", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hong_Kong",
+									  			"Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan",
+									  			"Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea_North", "Korea_South", "Kuwait", "Kyrgyzstan", "Laos", "Latvia",
+									  			"Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macedonia", "Madagascar",
+									  			"Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall_Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia",
+									  			"Moldova", "Mongolia", "Morocco", "Monaco", "Mozambique", "Namibia", "Nauru", "Nepal", "Netherlands", "New_Zealand",
+									  			"Nicaragua", "Niger", "Nigeria", "Norway", "Oman", "Pakistan", "Panama", "Papua_New_Guinea", "Paraguay", "Peru",
+									  			"Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Samoa", "San_Marino", " Sao_Tome",
+									  			"Saudi_Arabia", "Senegal", "Serbia_and_Montenegro", "Seychelles", "Sierra_Leone", "Singapore", "Slovakia", "Slovenia",
+									  			"Solomon_Islands", "Somalia", "South_Africa", "Spain", "Sri_Lanka", "Sudan", "Suriname", "Swaziland", "Sweden",
+									  			"Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad_and_Tobago",
+									  			"Tunisia", "Turkey", "Turkmenistan", "Uganda", "Ukraine", "United_Arab_Emirates", "United_Kingdom", "United_States",
+									  			"Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe");
+									  	
+										 for(var hi=0; hi<state.length; hi++){
+											    var sel = document.getElementById("pais");
+											    var option = document.createElement("option");
+											    option.text = state[hi];
+											    option.value = state[hi]; 
+											    sel.add(option);
+											  }	
+									  </script>
+								</select>
+								<p></p>
+								<b>Localidad</b> 
+								<input name="localidad" id="localidad" class="form-control" >
+							</div>
+							<div class="col-md-6">
+								<b>Numero</b> 
+								<input name="numero" id="numero" class="form-control" required>
+								<p></p>
+								<b>Depto</b> 
+								<input name="depto" id="depto" class="form-control">
+								<p></p>
+								<b>Provincia</b> 
+								<input name="provincia" id="provincia" class="form-control" >
+								<p></p>
+								<b>Codigo Postal</b> 
+								<input name="codpostal" id="codpostal" class="form-control" >
+							</div>
+							<p></p>
+							<div class="col-md-12">
+								<b>Tipo de Direccion</b> 
+								<select id="tipodireccion" name="tipodireccion" class="form-control">
+									<option value="none">Seleccione uno</option>
+									<option value="casa">Casa</option>
+									<option value="trabajo">Trabajo</option>
+									<option value="otro">Otro</option>
+								</select>
+								<p></p>
+							</div>
+						</div>
+					</div>
+					<div id="infoFinalSoft" style="display:none">
+						<h5>La configuraciï¿½n estï¿½ lista. Precione Agregar Dispositivo para terminar.</h5>
+						<p></p>
+					</div>
+					<div class="btn-group">
+	          			<button id="botonAnteriorsof" style="display:none" class="btn btn-secondary" onclick="anteriorAnimacionSoft()" type="button">Volver</button>
+	          			<button id="botonSiguientesof" class="btn btn-primary" onclick="siguienteAnimacionSoft()" type="button">Continuar</button>
+	          		</div>
+        	</div>
+	        <div class="modal-footer">
+	          	<button type="button" style="display:none" id="botoncancelarsof" class="btn btn-secondary"  data-dismiss="modal">Cancelar</button> 	
+	          	<button type="submit" style="display:none" id="botonfinalizarsof" class="btn btn-primary">Agregar Dispositivo</button>
+	        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+>>>>>>> e075b56b6fa002af0d16e561a70f03d9be8d54b7
   
   
   <div class="modal fade" id="modalHardware" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -330,7 +438,7 @@ messaging.onTokenRefresh(() => {
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Nuevo dispositivo</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-          	<span aria-hidden="true">×</span>
+          	<span aria-hidden="true">ï¿½</span>
           </button>
         </div>
         <form role="form" action="<c:url value="home/create"/>" method="post">
@@ -343,12 +451,12 @@ messaging.onTokenRefresh(() => {
 					<b>Nombre del dispositivo</b> 
 					<input name="namedevice" id="namedevice" class="form-control" placeholder="Mi dispositivo">
 					<p></p>
-					<b>Descripción</b> 
-					<input name="descriptiondevice" id="descriptiondevice" class="form-control" placeholder="Mi descripción">
+					<b>Descripciï¿½n</b> 
+					<input name="descriptiondevice" id="descriptiondevice" class="form-control" placeholder="Mi descripciï¿½n">
 					<p></p>
 				</div>
 				<div id="infoDeducidaCoiaca" style="display:none">
-					<h3>Información del dispositivo</h3>
+					<h3>Informaciï¿½n del dispositivo</h3>
 					<div>
 						<b>Marca</b> <select id="marcadevice"
 							class="form-control">
@@ -463,9 +571,9 @@ messaging.onTokenRefresh(() => {
 					</div>
 				</div>
 				<div id="infoAvanzada" style="display:none">
-					<h3>Configuración avanzada</h3>
+					<h3>Configuraciï¿½n avanzada</h3>
 						<div id="parametersConexion" onkeypress=checkPassword()>
-							<h6>Los siguientes son los parámetros con los que su equipo ha sido configurado de fábrica. No los modifique si no está seguro de lo que está haciendo.</h6>
+							<h6>Los siguientes son los parï¿½metros con los que su equipo ha sido configurado de fï¿½brica. No los modifique si no estï¿½ seguro de lo que estï¿½ haciendo.</h6>
 							<div class="form-group row ">
 								<b>URL del Broker MQTT</b> 
 									<input type="text"
@@ -478,13 +586,13 @@ messaging.onTokenRefresh(() => {
 								<b>Nombre de usuario MQTT</b> 
 									<input type="text" class="form-control form-control-user"
 									id="userescuchar" placeholder="Nombre de usuario"> 
-								<b>Contraseña MQTT</b>
+								<b>Contraseï¿½a MQTT</b>
 									<input type="password" class="form-control form-control-user"
-									id="passescuchar" placeholder="Contraseña"> 
-								<b>Repetir contraseña MQTT</b> 
+									id="passescuchar" placeholder="Contraseï¿½a"> 
+								<b>Repetir contraseï¿½a MQTT</b> 
 									<input type="password"
 									class="form-control form-control-user" id="confirpassescuchar"
-									placeholder="Confirmar Contraseña">
+									placeholder="Confirmar Contraseï¿½a">
 								<b>Prefijo de topicos de estados</b>
 									<input type="text" class="form-control form-control-user "
 									id="topiclisten" placeholder="Topico para recibir Informacion">
@@ -493,31 +601,31 @@ messaging.onTokenRefresh(() => {
 									id="topicwrite" placeholder="Topico para envio de Informacion"> 
 							</div>
 							
-							<h6>Administración Remota</h6>
+							<h6>Administraciï¿½n Remota</h6>
 							<div class="form-group row ">
-								<b>URL del Broker MQTT de Administración Remota</b> 
+								<b>URL del Broker MQTT de Administraciï¿½n Remota</b> 
 									<input type="text"
 									class="form-control form-control-user"
 									id="iphostescucharremote" placeholder="Hostname o direccion IP"> 
-								<b>Puerto del Broker MQTT de Administración Remota</b>
+								<b>Puerto del Broker MQTT de Administraciï¿½n Remota</b>
 									<input type="text" class="form-control form-control-user"
 									id="portescucharremote" placeholder="Puerto"> 
-								<b>Nombre de usuario MQTT de Administración Remota</b> 
+								<b>Nombre de usuario MQTT de Administraciï¿½n Remota</b> 
 									<input
 									type="text" class="form-control form-control-user"
 									id="userescucharremote" placeholder="Nombre de usuario"> 
-								<b>Contraseña MQTT de Administración Remota</b>
+								<b>Contraseï¿½a MQTT de Administraciï¿½n Remota</b>
 									<input type="password" class="form-control form-control-user"
-									id="passescucharremote" placeholder="Contraseña"> 
-								<b>Confirmar contraseña MQTT de Administración Remota</b> 
+									id="passescucharremote" placeholder="Contraseï¿½a"> 
+								<b>Confirmar contraseï¿½a MQTT de Administraciï¿½n Remota</b> 
 									<input type="password"
 									class="form-control form-control-user"
-									id="confirpassescucharremote" placeholder="Confirmar Contraseña">
-								<b>Topico de resultados de Administración Remota</b>
+									id="confirpassescucharremote" placeholder="Confirmar Contraseï¿½a">
+								<b>Topico de resultados de Administraciï¿½n Remota</b>
 									<input type="text"
 									class="form-control form-control-user " id="topiclistenremote"
 									placeholder="Topico para recepcion de Respuestas"> 
-								<b>Topico de comandos de Administración Remota</b>
+								<b>Topico de comandos de Administraciï¿½n Remota</b>
 									<input type="text"
 									class="form-control form-control-user " id="topicwriteremote"
 									placeholder="Topico para envio de Comando de Configuracion"> 
@@ -525,7 +633,7 @@ messaging.onTokenRefresh(() => {
 						</div>
 					</div>
 					<div id="infoFinal" style="display:none">
-						<h5>La configuración está lista. Precione Agregar Dispositivo para terminar.</h5>
+						<h5>La configuraciï¿½n estï¿½ lista. Precione Agregar Dispositivo para terminar.</h5>
 					</div>				
 				<div class="btn-group">
           			<button id="botonAnterior" style="display:none" class="btn btn-secondary" onclick="anteriorAnimacion()" type="button">Volver</button>
@@ -859,6 +967,52 @@ messaging.onTokenRefresh(() => {
 			</div>
 		</div>
 	</div>
+<<<<<<< HEAD
+=======
+
+
+    <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">ï¿½Esta seguro de Salir?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">ï¿½</span>
+          </button>
+        </div>
+        <div class="modal-body">ï¿½Estï¿½ listo para finalizar su sesiï¿½n actual?</div>
+        <div class="modal-footer">
+          <form role="form" action="<c:url value="/logoutsession"/>" method="get" enctype="multipart/form-data">
+          	<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          	<a class="btn btn-primary" href="javascript:;" onclick="parentNode.submit();">Salir</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+	<!--  Confirmar accion -->
+	<div class="modal fade" id="confirmacion" tabindex="-1" role="dialog" aria-labelledby="confirmacion" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirmar Acciï¿½n</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">ï¿½</span>
+          </button>
+        </div>
+        <div class="modal-body">ï¿½Esta seguro de confirmar la acciï¿½n?</div>
+        <div class="modal-footer">
+          	<input type="hidden" name="accionalarma" id="accionalarma"/>
+          	<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          	<button class="btn btn-primary" onclick="enviarComandotobackendV2(${accionalarma});" data-dismiss="modal">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+>>>>>>> e075b56b6fa002af0d16e561a70f03d9be8d54b7
   
   
 
